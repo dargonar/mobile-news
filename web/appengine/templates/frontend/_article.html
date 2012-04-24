@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  
+<!-- Mirrored from www.lanacion.com.ar/m1/1466707-quien-es-la-misteriosa-amiga-del-rey-juan-carlos by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 20 Apr 2012 15:21:41 GMT -->
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{article.title}}</title>
+    <link rel="stylesheet" type="text/css" href="/css/demo.css">
+  </head>
+  <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid1466707">
+
+  {% include 'frontend/_header.html' %}
+
+<section id="contenedor" class="tamano1">
+
+  <div class="nota">
+    <section id="encabezado" class="floatFix">
+      <h1>{{article.title}}</h1>
+            <p>{{article.excerpt}}</p><span>{{article.published.strftime('%d.%m.%Y | %H:%M')}}</span></section>
+            <section id="cuerpo">
+              {% if article.image %} 
+              <br/>
+              <figure><img src="{{article.image}}"></figure>
+              {% endif %}
+              
+              {{article.content}}
+
+          </body>
+</html>

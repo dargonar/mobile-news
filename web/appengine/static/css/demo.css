@@ -1,0 +1,337 @@
+	html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+header, nav, article, aside, footer, section, origen, tablero, mapa, video, object, embed, slide, figure, figcaption {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+header, nav, article, aside, footer, div, section, origen, tablero, mapa, video, object, embed, slide, figure, figcaption {
+	display:block;
+}
+
+body {
+	line-height: 1;
+	color: black;
+	background: white;
+}
+ol, ul {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup  in the markupin the markupin the markup in the markupin the markup */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+
+/* floatFix */
+*+html .floatFix, *+html ul {display:inline-block;}
+*+html .floatFix, *+html ul {display:block;}
+* html .floatFix, * html ul {height:1%}
+.floatFix:after, ul:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+
+
+a {color:#335577;text-decoration:none;}
+
+/*header*/
+header section.cabezal {width:100%;}
+.fondoLogo {width:100%;background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 43%, #f0f0f0 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(43%,#ffffff), color-stop(100%,#f0f0f0)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #ffffff 43%,#f0f0f0 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #ffffff 43%,#f0f0f0 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #ffffff 43%,#f0f0f0 100%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, #ffffff 43%,#f0f0f0 100%); /* W3C */}
+
+section.cabezal .logo {float:left;width:50%;padding:10px 0 7px 10px;}
+section.cabezal .logo a img {width:75px;height:22px;}
+section.clima {float:right;width:115px;padding-top:11px;margin-right:10px;}
+section.clima a b {color:#335577 !important;}
+section.clima img {float:left;margin-right:4px;width:26px;height:26px;}
+section.clima span {float:left;color:#32A9D3;font:bold 16px Arial,sans-serif;padding-top:4px;}
+section.clima span b {color:#656565;}
+section.clima span b.ciudad {font-size:12px;font-weight:normal;}
+section.clima span#pr_temperatura {padding-top:0; float:none;}
+
+section.cabezal .fondoNav {border-top:1px solid #c2c2c2;border-bottom:1px solid #c2c2c2;width:100%;position:relative;}
+section.cabezal .fondoNav #troncal a.secciones {display:block;height:28px;float:left;width:145px;display:block;font:18px Arial,sans-serif;color:#fff;padding-top:9px;padding-left:10px;text-decoration:none;background:#32A9D3;}
+section.cabezal .fondoNav #troncal a.secciones b {display:block;float:left;background:url("../../../../_ui/touch/imgs/layout/flecha-down.png") no-repeat right 6px;width:122px;}
+section.cabezal .fondoNav #troncal a.seccionesClick b {background:url("../../../../_ui/touch/imgs/layout/flecha-up.png") transparent no-repeat right 6px;width:122px;}
+
+section.cabezal .fondoNav aside.transito a {width:85px;float:right;display:block;text-decoration:none;color:#335577;padding-top:9px;margin-right:10px;}
+section.cabezal .fondoNav aside a b {display:block;float:left;font:normal 18px Arial,sans-serif;}
+section.cabezal .fondoNav aside a img {float:left;padding:6px 0 0 5px;width:10px;height:12px;}
+
+/*desplegable*/
+.desplegable {width:100%;font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;position:absolute;top:40px;clear:both;z-index:1000;}
+.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;margin:0 10px 10px 10px;width:40%;border-right:1px solid #c2c2c2;}
+.desplegable .columnaDos, .desplegable .servicios .columnaDos {float:left;margin:0 10px 10px 10px;width:45%;}
+.desplegable .columnaUno a, .desplegable .columnaDos a, .desplegable .servicios .columnaUno a, .desplegable .servicios .ColumnaDos a {text-decoration:none;color:#335577;padding:10px 0;display:block;}
+.desplegable .servicios .columnaUno {border-right:0;}
+.desplegable .servicios {background:#f6f5f5;border-top:1px solid #c2c2c2;}
+.desplegable .servicios span {display:block;font:bold 14px Arial,sans-serif;color:#32A9D3;padding:10px 0 3px 10px;}
+#troncal nav.desplegable {display:block;}
+#troncal nav.ocultar {display:none;}
+/*#troncal:hover nav.desplegable {display:block;}*/
+
+/* ultimo momento */
+#ultimoMomentoResponsive {padding:10px 12px 10px 12px; display:none;}
+#ultimoMomentoResponsive a:hover {text-decoration:none!important;}
+#ultimoMomentoResponsive article {background:#ecebeb;padding:7px 12px;font:bold 14px/20px 'Arial', 'Sans-Serif';}
+#ultimoMomentoResponsive article h2 {color:#9c2829;}
+#ultimoMomentoResponsive article a span {float:left;color:#5a5a5a;cursor:default;}
+#ultimoMomentoResponsive article a h2:hover {color:#b94849;}
+#ultimoMomentoResponsive article a h2 i {font-family:'TheSansSemi', 'Arial';}
+
+/*banner*/
+section#contenedor {width:100%;}
+section.banner {margin:auto;margin-top:7px;margin-bottom:7px; text-align:center;}
+
+/*footer*/
+footer .pie {background: #e7e7e7; /* Old browsers */
+background: -moz-linear-gradient(top, #e7e7e7 0%, #f3f3f3 19%, #f5f5f5 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7e7e7), color-stop(19%,#f3f3f3), color-stop(100%,#f5f5f5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #e7e7e7 0%,#f3f3f3 19%,#f5f5f5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #e7e7e7 0%,#f3f3f3 19%,#f5f5f5 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #e7e7e7 0%,#f3f3f3 19%,#f5f5f5 100%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7e7e7', endColorstr='#f5f5f5',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, #e7e7e7 0%,#f3f3f3 19%,#f5f5f5 100%); /* W3C */
+font:normal 14px Arial,sans-serif;padding:0 10px;border-bottom:1px solid #c2c2c2;}
+footer .pie .herramientasTexto {height:27px;border-bottom:1px solid #ccc;padding-top:12px;padding-bottom:4px;color:#585858;}
+footer .pie .herramientasTexto b {display:block;float:left;font-weight:normal;padding-top:3px;}
+footer .pie .herramientasTexto a.tam1 {font:bold 14px/20px Arial,sans-serif;padding:0 20px;}
+footer .pie .herramientasTexto a.tam2 {font:bold 18px/20px Arial,sans-serif;padding:0 20px;}
+footer .pie .herramientasTexto a.tam3 {font:bold 22px/20px Arial,sans-serif;padding:0 20px;}
+
+footer .pie .clasica {display:block;color:#335577;text-decoration:none;height:27px;padding-top:12px;}
+footer .ayuda {display:block;height:10px;font:12px Arial,sans-serif;color:#335577;text-decoration:none;padding:10px 10px 6px 10px;}
+footer span {display:block;color:#797979;margin-top:5px;font:normal 10px Arial,sans-serif;padding:0 10px 8px 10px;}
+
+section#informacion.faqs {margin:20px 0;}
+section#informacion.faqs p {font:normal 15px/20px Arial,sans-serif;color:#333333;margin:10px;}
+section#informacion.faqs .preguntas {margin-bottom:20px;}
+section#informacion.faqs .respuestas {margin-bottom:25px;}
+section#informacion.faqs .preguntas b {display:block;margin-bottom:10px;}
+
+
+/*herramientas*/
+#herramientas {width:100%;border-bottom:1px solid #c2c2c2;padding:3px 0 12px 0;}
+#herramientas a {display:block;float:left;margin:10px 7px 0 10px!important;}
+#herramientas a img {width:87px;height:49px;}
+
+/*tamano 1*/
+#contenedor.tamano1 section#apertura article.nota a.info h1 {font:bold 17px/21px Arial,sans-serif;}
+#contenedor.tamano1 section#apertura article.nota a.info p {font:14px/18px Arial,sans-serif;}
+#contenedor.tamano1 section#informacion article a.info .tema, section#espectaculos article a.info .tema {font:normal 13px/17px Arial,sans-serif;}
+#contenedor.tamano1 section#informacion article a.info h1, section#espectaculos article a.info h1 {font:bold 15px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#topico {font:normal 15px Arial,sans-serif;}
+#contenedor.tamano1 section#opinion a div h1 {font:bold 14px/18px Arial,sans-serif;}
+#contenedor.tamano1 section#opinion a div span {font:normal 12px Arial,sans-serif;}
+#contenedor.tamano1 section#entretenimiento .techo span {font:12px Arial,sans-serif;}
+#contenedor.tamano1 section#entretenimiento .techo b {font:bold 14px Arial,sans-serif;}
+#contenedor.tamano1 section#entretenimiento .cajaHoroscopo .signo b {font:bold 15px Arial,sans-serif;}
+#contenedor.tamano1 section#entretenimiento .cajaHoroscopo .signo p {font:normal 14px/18px Arial,sans-serif;}
+#contenedor.tamano1 section#entretenimiento a.cine b, section#entretenimiento a.teatro b {font:bold 14px Arial,sans-serif;}
+
+#contenedor.tamano1 section#encabezado h2 {font:normal 13px/17px Arial,sans-serif;}
+#contenedor.tamano1 section#encabezado h1 {font:bold 19px/25px Arial,sans-serif;}
+#contenedor.tamano1 section#encabezado p {font:15px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#encabezado p.autor span {font-size:14px!important;}
+#contenedor.tamano1 section#encabezado span {font:normal 12px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo p {font:normal 15px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo h2 {font:bold 14px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo figure figcaption, figure.destacada figcaption {font:normal 14px/18px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo .archivos-relacionados {font:normal 15px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo aside#relacionadas .techo {font:bold 14px/20px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo article a.info span {font:normal 12px/18px Arial,sans-serif;}
+#contenedor.tamano1 section#cuerpo section#ultimas article a.info h1 {font:bold 15px/20px Arial,sans-serif;}
+
+
+/*tamano 2*/
+#contenedor.tamano2 section#apertura article.nota a.info h1 {font:bold 21px/26px Arial,sans-serif;}
+#contenedor.tamano2 section#apertura article.nota a.info p {font:18px/22px Arial,sans-serif;}
+#contenedor.tamano2 section#informacion article a.info .tema, #contenedor.tamano2 section#espectaculos article a.info .tema {font:normal 15px/19px Arial,sans-serif;}
+#contenedor.tamano2 section#informacion article a.info h1, #contenedor.tamano2 section#espectaculos article a.info h1 {font:bold 19px/25px Arial,sans-serif;}
+#contenedor.tamano2 section#topico {font:normal 19px Arial,sans-serif;}
+#contenedor.tamano2 section#opinion a div h1 {font:bold 18px/22px Arial,sans-serif;}
+#contenedor.tamano2 section#opinion a div span {font:normal 16px Arial,sans-serif;}
+#contenedor.tamano2 section#entretenimiento .techo span {font:16px Arial,sans-serif;}
+#contenedor.tamano2 section#entretenimiento .techo b {font:bold 18px Arial,sans-serif;}
+#contenedor.tamano2 section#entretenimiento .cajaHoroscopo .signo b {font:bold 19px Arial,sans-serif;}
+#contenedor.tamano2 section#entretenimiento .cajaHoroscopo .signo p {font:normal 18px/22px Arial,sans-serif;}
+#contenedor.tamano2 section#entretenimiento a.cine b, #contenedor.tamano2 section#entretenimiento a.teatro b {font:bold 18px Arial,sans-serif;}
+
+#contenedor.tamano2 section#encabezado h2 {font:normal 17px/21px Arial,sans-serif;}
+#contenedor.tamano2 section#encabezado h1 {font:bold 23px/28px Arial,sans-serif;}
+#contenedor.tamano2 section#encabezado p {font:19px/24px Arial,sans-serif;}
+#contenedor.tamano2 section#encabezado p.autor span {font-size:18px!important;}
+#contenedor.tamano2 section#encabezado span {font:normal 16px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo p {font:normal 19px/24px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo h2 {font:bold 18px/25px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo figure figcaption, #contenedor.tamano2 figure.destacada figcaption {font:normal 16px/21px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo .archivos-relacionados {font:normal 19px/24px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo aside#relacionadas .techo {font:bold 18px/24px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo article a.info span {font:normal 16px/20px Arial,sans-serif;}
+#contenedor.tamano2 section#cuerpo section#ultimas article a.info h1 {font:bold 19px/24px Arial,sans-serif;}
+
+
+/*tamano 3*/
+#contenedor.tamano3 section#apertura article.nota a.info h1 {font:bold 25px/29px Arial,sans-serif;}
+#contenedor.tamano3 section#apertura article.nota a.info p {font:21px/25px Arial,sans-serif;}
+#contenedor.tamano3 section#informacion article a.info .tema, #contenedor.tamano3 section#espectaculos article a.info .tema {font:normal 17px/21px Arial,sans-serif;}
+#contenedor.tamano3 section#informacion article a.info h1, #contenedor.tamano3 section#espectaculos article a.info h1 {font:bold 23px/30px Arial,sans-serif;}
+#contenedor.tamano3 section#topico {font:normal 23px Arial,sans-serif;}
+#contenedor.tamano3 section#opinion a div h1 {font:bold 22px/26px Arial,sans-serif;}
+#contenedor.tamano3 section#opinion a div span {font:normal 20px Arial,sans-serif;}
+#contenedor.tamano3 section#entretenimiento .techo span {font:17px Arial,sans-serif;}
+#contenedor.tamano3 section#entretenimiento .techo b {font:bold 19px Arial,sans-serif;}
+#contenedor.tamano3 section#entretenimiento .cajaHoroscopo .signo b {font:bold 23px Arial,sans-serif;}
+#contenedor.tamano3 section#entretenimiento .cajaHoroscopo .signo p {font:normal 22px/26px Arial,sans-serif;}
+#contenedor.tamano3 section#entretenimiento a.cine b, #contenedor.tamano3 section#entretenimiento a.teatro b {font:bold 22px Arial,sans-serif;}
+
+#contenedor.tamano3 section#encabezado h2 {font:normal 21px/25px Arial,sans-serif;}
+#contenedor.tamano3 section#encabezado h1 {font:bold 27px/32px Arial,sans-serif;}
+#contenedor.tamano3 section#encabezado p {font:23px/28px Arial,sans-serif;}
+#contenedor.tamano3 section#encabezado p.autor span {font-size:20px!important;}
+#contenedor.tamano3 section#encabezado span {font:normal 17px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo p {font:normal 23px/29px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo h2 {font:bold 22px/27px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo figure figcaption, #contenedor.tamano3 figure.destacada figcaption {font:normal 20px/25px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo .archivos-relacionados {font:normal 23px/28px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo aside#relacionadas .techo {font:bold 22px/29px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo article a.info span {font:normal 20px/24px Arial,sans-serif;}
+#contenedor.tamano3 section#cuerpo section#ultimas article a.info h1 {font:bold 23px/28px Arial,sans-serif;}
+
+section#contenedor {width:100%;}
+section.banner {margin:auto;margin-top:7px;margin-bottom:7px;}
+
+/*apertura*/
+section#apertura {width:100%;margin:20px 0 10px 0;}
+section#apertura article.nota {margin:10px;}
+section#apertura article.nota a.info {display:block;border-bottom:1px solid #c2c2c2;text-decoration:none;width:100%;padding-bottom:5px;}
+section#apertura article.nota a.info .fotoBomba, section#apertura article.nota .destacados .fotoBomba {border-bottom:none;min-height:100px;text-align:center;display:none;}
+section#apertura article.nota .destacados object {min-height:100px;margin:auto;}
+section#apertura article.nota.conFoto a.info .fotoBomba, section#apertura article.nota.conSlide .destacados .fotoBomba {display:block;}
+section#apertura article.nota .fotoBomba img, section#apertura article.nota.conPlayer .destacados object {width:100%;max-width:620px;}
+section#apertura article.nota a.info h1 {padding:5px 10px;background:#9c2929;color:#fff;display:block;}
+section#apertura article.nota a.info p {display:none;color:#333333;margin:6px 0;}
+section#apertura article.nota.conBajada a.info p {display:block;}
+section#apertura article.nota a.info p span {color:#7F7F7F; font-weight:bold;}
+section#apertura article.nota a.info p span.hora {color:#9b2825; font-weight:bold;}
+section#apertura article.nota .destacados {display:none;}
+section#apertura article.nota.conSlide .destacados, section#apertura article.nota.conSlide .destacados a, section#apertura article.nota.conPlayer .destacados, section#apertura article.nota.conPlayer .destacados a {display:block;}
+/*cobertura*/
+section#apertura article.cobertura a.info{border-bottom:none;}
+section#apertura article.cobertura:last-child a.info {border-bottom:solid 1px #dadada;padding-bottom:10px;}
+section#apertura article.cobertura a.info .tema span.pipe, section#informacion article.cobertura a.info .tema span.topico {visibility:hidden;}
+section#apertura article.cobertura:first-child a.info .tema {position:relative;height:55px;#height:60px;}
+section#apertura article.cobertura:first-child a.info .tema span.topico {height:15px!important;visibility:visible;#margin-top:-15px;float:left;background:#EFEFEF;color:#32A9D3;padding:5px 8px 5px 12px;margin-left:-9px;font-weight:bold;max-width:180px;overflow:hidden;}
+section#apertura article.cobertura:first-child a.info .tema span.fecha, section#apertura article.cobertura:first-child a.info .tema span.hora {height:16px!important;position:absolute;top:38px;#top:48;left:0px;}
+
+section#informacion {width:100%;}
+section#informacion article a.info, section#espectaculos article a.info {display:block;padding-bottom:10px;border-bottom:1px solid #c2c2c2;text-decoration:none;margin:0 10px 10px 10px;line-height:0;}
+section#informacion article a.info .contenedorImg, section#espectaculos article a.info .contenedorImg {width:84px;height:63px;overflow:hidden;float:right;border:1px solid #c2c2c2;margin-left:3%;}
+section#informacion article a.info .tema, section#espectaculos article a.info .tema {color:#7f7f7f;}
+section#informacion article a.info .tema span.hora, section#espectaculos article a.info .tema span.hora {color:#9b2825;}
+section#informacion article a.info .tema span.fecha, section#espectaculos article a.info .tema span.fecha {color:#7F7F7F;}
+section#informacion article a.info h1, section#espectaculos article a.info h1 {display:inline;color:#335577;}
+
+section#topico {width:100%;border-top:1px solid #c2c2c2;}
+section#topico a {background:url("../../../../_ui/touch/imgs/layout/bullet.gif") no-repeat 10px 7px;display:block;margin-bottom:13px;color:#335577;text-decoration:none;padding:0 10px 0 20px;}
+section#topico .techo {display:block;background:#32a9d3;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:5px 0 4px 10px;margin-bottom:12px;}
+
+a.masLeidas {display:block;font:15px Arial,sans-serif;color:#335577;text-decoration:none;border-top:2px solid #ccc;height:20px;padding-top:14px;padding-bottom:11px;padding-right:10px;}
+a.masLeidas b {display:block;float:left;padding-left:8px;}
+a.masLeidas img.ir {float:right;padding-top:4px;width:10px;height:12px;}
+a.masLeidas img.nube {width:23px;height:21px;float:left;padding-left:10px;}
+
+section#resultadosVivo {width:100%;border-top:1px solid #c2c2c2;}
+section#resultadosVivo .fuente {float:right;font:12px Arial,sans-serif;color:#767575;padding-right:3%;padding-top:4px;}
+section#resultadosVivo .techo {display:block;background:#32a9d3;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:5px 0 4px 10px;float:left;margin-bottom:5px;}
+section#resultadosVivo div.encuentro {display:block;font:12px Arial,sans-serif;margin:10px;padding-bottom:5px;border-bottom:1px solid #c2c2c2;text-decoration:none;}
+section#resultadosVivo div.encuentro .estadoEncuentro {float:left;color:#505050;width:36%;}
+section#resultadosVivo div.encuentro .estadoEncuentro b {display:block;margin-bottom:5px;}
+section#resultadosVivo div.encuentro .equipos {float:left;margin-left:25px;width:55%;}
+section#resultadosVivo div.encuentro .equipos span {display:block;margin-bottom:7px;color:#505050;font-size:14px;font-weight:bold;}
+section#resultadosVivo div.encuentro .equipos span b {color:#32a9d3;}
+section#resultadosVivo div.encuentro:last-child {border-bottom:none!important;}
+
+section#opinion {width:100%;border-top:1px solid #c2c2c2;padding-bottom:3px;background: #ffffff;}
+
+section#opinion .techo {display:block;background:#d25e37;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:5px 0 4px 10px;}
+section#opinion a {display:block;padding:6px 10px;border-bottom:1px solid #c2c2c2;text-decoration:none;}
+section#opinion a img {float:left;padding-top:3px;}
+section#opinion a div {float:left;margin-left:10px;padding-top:5px;width:78%;}
+section#opinion a div h1 {color:#335577;}
+section#opinion a div span {margin-top:4px;display:block;color:#414141;}
+section#opinion a:last-child {border-bottom:none!important;}
+
+section#espectaculos {background:#ebebeb;border-top:1px solid #c2c2c2;padding-bottom:2px;width:100%;}
+section#espectaculos .techo {display:block;background:#32a9d3;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:6px 0 4px 10px;margin-bottom:6px;}
+section#espectaculos article:last-child a {border-bottom:none!important;margin-bottom:0;}
+section#espectaculos article span {display:none;}
+
+section#entretenimiento {width:100%;background:#797979;padding-bottom:1px;}
+section#entretenimiento a.techo {text-decoration:none;padding:8px 10px 0 10px;display:block;}
+section#entretenimiento .techo span {float:right;color:#b2ebff;text-decoration:none;padding-top:3px;}
+section#entretenimiento .techo b {display:block;color:#fefe9c;width:50%;padding:1%;float:left;}
+
+
+section#entretenimiento .cajaHoroscopo {-moz-border-radius:10px;-webkit-border-radius:10px;background:#8d8b8c;margin:10px 10px 15px 10px;padding:10px;}
+section#entretenimiento .cajaHoroscopo img {float:right;width:27%;max-width:30%;padding-top:15px;}
+section#entretenimiento .cajaHoroscopo .signo {width:74%;}
+section#entretenimiento .cajaHoroscopo .signo b {color:#fefe9c;display:block;margin-bottom:5px;text-decoration:none;}
+section#entretenimiento .cajaHoroscopo .signo p {margin:5px 0;sans-serif;color:#fff;}
+section#entretenimiento .cajaHoroscopo a.ampliar {font:bold 15px Arial,sans-serif;color:#b2ebff;text-decoration:none;}
+
+section#entretenimiento a.cine {display:block;height:40px;width;100%;border-top:1px solid #b4b4b4;border-bottom:1px solid #b4b4b4;padding:5px 10px;text-decoration:none;}
+section#entretenimiento a.cine .ir, section#entretenimiento a.teatro .ir {float:right;width:10px;height:12px;padding-top:15px;}
+section#entretenimiento a.cine .icono {float:left;width:30px;height:29px;padding-top:5px;}
+section#entretenimiento a.cine b, section#entretenimiento a.teatro b {padding:13px 0 0 8px;display:block;color:#b1ebff;float:left;}
+section#entretenimiento a.teatro {display:block;height:40px;width;100%;border-bottom:1px solid #b4b4b4;padding:5px 10px 5px 13px;text-decoration:none;}
+section#entretenimiento a.teatro .icono {float:left;width:23px;height:25px;padding-top:7px;}
+section#entretenimiento a.teatro b {padding-left:12px;}
+
+/*promo mobiles*/
+section#promoMobiles {width:100%;background:#fff;margin-top:10px;}
+section#promoMobiles a.techo {text-decoration:none;padding:8px 10px 0 10px;display:block;font:bold 14px Arial,sans-serif;color:#32a9d3;}
+section#promoMobiles .techo b {display:block;color:#32a9d3;padding:1%;float:left;}
+section#promoMobiles .cajaDispositivos {-moz-border-radius:10px;-webkit-border-radius:10px;background:#f3f3f3;margin:10px 10px 15px 10px;padding:3px 10px;}
+section#promoMobiles .cajaDispositivos img {float:left;width:23px;padding-right:12px;margin-bottom:20px;}
+section#promoMobiles .cajaDispositivos .tipo {border-bottom:1px solid #C2C2C2;display:block;margin:10px 0;padding:10px 0;}
+section#promoMobiles .cajaDispositivos .tipo.last {border-bottom:none;margin-bottom:5px;}
+section#promoMobiles .cajaDispositivos .tipo b {color:#5c5c5c;display:block;margin-bottom:5px;text-decoration:none;font:bold 15px Arial,sans-serif;}
+section#promoMobiles .cajaDispositivos .tipo p {margin:5px 0;color:#7f7f7f;font:14px/18px Arial,sans-serif;width:70%;display:block;}
+section#promoMobiles .cajaDispositivos .boton {background:#D6EEF6;border:none;border-radius:4px 4px 4px 4px;color:#32A9D3;display:block;float:right;font:bold 12px/33px Arial,sans-serif;height:35px;margin:20px 0 0 15px;text-align:center;width:80px;}
+section#promoMobiles .cajaDispositivos .boton.first {margin-top:30px;}
+
+
+
