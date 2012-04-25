@@ -290,10 +290,14 @@
 		6052F96C15479FE7008D9F71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Matias Romeo (JK68ZT9K6C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matias Romeo (JK68ZT9K6C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobiPaper/MobiPaper-Prefix.pch";
 				INFOPLIST_FILE = "MobiPaper/MobiPaper-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BAA69F37-7632-4974-A88E-772FAC58073F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BAA69F37-7632-4974-A88E-772FAC58073F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -301,10 +305,14 @@
 		6052F96D15479FE7008D9F71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Matias Romeo (JK68ZT9K6C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matias Romeo (JK68ZT9K6C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobiPaper/MobiPaper-Prefix.pch";
 				INFOPLIST_FILE = "MobiPaper/MobiPaper-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BAA69F37-7632-4974-A88E-772FAC58073F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BAA69F37-7632-4974-A88E-772FAC58073F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
