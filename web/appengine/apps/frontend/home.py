@@ -9,21 +9,26 @@ from utils import MyBaseHandler, get_or_404
 class Index(MyBaseHandler):
   def get(self, **kwargs):
 
-    cats = { 'deportes'   : 2,
-             'economia'   : 2,
-             'mundo'      : 2,
-             'pais'       : 2,
-             'ciudad'     : 2}
+    cats = [ {'key': 'deportes',  'count': 3, 'desc': 'Deportes'},
+             {'key': 'economia',  'count': 3, 'desc': u'Economía'},
+             {'key': 'mundo',     'count': 3, 'desc': 'Mundo'},
+             {'key': 'pais',      'count': 3, 'desc': u'País'},
+             {'key': 'ciudad',    'count': 3, 'desc': 'Ciudad'}]
 
     catitems = []
     for cat in cats:
       catitems.append( Article
         .all()
-        .filter('category', db.Key.from_path('Category',cat))
+        .filter('category', db.Key.from_path('Category',cat['key']))
         .order('-published')
-        .fetch(cats[cat]) )
-
-    return self.render_response('frontend/_home.html', catitems=catitems)
+        .fetch(cat['count']) )
+    
+    # catitems.append( Article
+      # .all()
+      # .order('-published')
+      # .fetch(50))
+        
+    return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=(dict((cat['key'], cat['desc']) for cat in cats)) )
 
 class ViewArticle(MyBaseHandler):
   def get(self, **kwargs):

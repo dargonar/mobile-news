@@ -3,8 +3,6 @@
   <META http- equiv="Content-Type" content="text/html; charset=utf-8">
     <title>eldia.com - Diario matutino de la ciudad de La Plata</title>
     <link rel="stylesheet" type="text/css" href="/css/demo.css">
-    <!--<script type="text/javascript" src="../static/js/ver_201112131263/m1/c7-c2-c3-c9 -e3-p4-p3-c6-u9-d1-d4-n6-i5-i1-i2-cm0-cm6.js"></script>-->
-    
   </head>
   <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid10533073">
   
@@ -17,14 +15,14 @@
         {% for items in catitems %}
         {% for item in items %}
         <article class=" toi7342 nid1466728">
-          <a href="{{ url_for('frontend/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="Enlace a Canchallena" title="Enlace a Canchallena">
+          <a href="{{ url_for('frontend/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="{{item.title}}" title="{{item.title}}">
             {% if item.image %}
             <div class="contenedorImg">
               <img style="width:117px" src="{{item.image}}=s117" class="lazyLoad">
             </div>
             {% endif %}
             <div class="tema">
-              <span class="hora">{{item.published.strftime('%H:%M')}}</span>&nbsp;<span class="pipe">|</span>&nbsp;{{item.category.key().name()}}
+              <span class="hora">{{item.published.strftime('%H:%M')}}</span>&nbsp;<span class="pipe">|</span>&nbsp;{{cats_conf[item.category.key().name()]}}
             </div>
             <h1 target="_blank" rel="external" >{{item.title}}</h1>
           </a>
@@ -36,6 +34,4 @@
     </section>
 
   </body>
-
-<!-- Mirrored from www.lanacion.com.ar/m1/ by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 20 Apr 2012 15:17:30 GMT -->
 </html>

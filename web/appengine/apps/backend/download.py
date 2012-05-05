@@ -68,6 +68,8 @@ class ElDia(RequestHandler):
     # No esta, ponemos los datos basicos de rss y bajamos el resto de 'link'
     # si no puedo bajar el contenido no doy de alta el articulo
     soup = BeautifulSoup(urlopen(link))
+    title = soup.select('h1')
+    bajada = soup.select('h3#baja')
     contenido = soup.select('div#texto')
 
     if len(contenido) == 0:
@@ -76,9 +78,9 @@ class ElDia(RequestHandler):
 
     art = Article(key_name=artkey)
     art.category  = Category.get_or_insert(self.request.POST.get('category'))
-    art.title     = self.request.POST.get('title')
+    art.title     = db.Text(arg=title[0].encode_contents(), encoding='utf-8')  #self.request.POST.get('title')
     art.published = self.to_datetime(self.request.POST.get('published'))
-    art.content   = db.Text(arg=contenido[0].encode_contents(), encoding='utf-8') 
+    art.content   = db.Text(arg=(bajada[0].encode_contents()+contenido[0].encode_contents()), encoding='utf-8') 
 
     # Bajada
     bajada = soup.select('div#baja h3')
