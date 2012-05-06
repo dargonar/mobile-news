@@ -11,10 +11,11 @@ class Category(db.Model):
   name         = db.StringProperty()
 
 class Article(db.Model):
-  category     = db.ReferenceProperty(Category)
-  title        = db.StringProperty(indexed=False, multiline=True)
-  excerpt      = db.StringProperty(indexed=False, multiline=True)
-  image        = db.StringProperty(indexed=False)
-  published    = db.DateTimeProperty()
-  content      = db.TextProperty()
-  created_at   = db.DateProperty(auto_now_add=True)
+  category          = db.ReferenceProperty(Category)
+  title             = db.StringProperty(indexed=False, multiline=True)
+  excerpt           = db.StringProperty(indexed=False, multiline=True)
+  image             = db.StringProperty(indexed=False)
+  published         = db.DateTimeProperty()
+  content           = db.TextProperty()
+  rel_art_keys      = db.StringListProperty()
+  created_at        = db.DateProperty(auto_now_add=True)

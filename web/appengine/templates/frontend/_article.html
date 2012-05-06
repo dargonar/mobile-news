@@ -11,19 +11,31 @@
 
   {% include 'frontend/_header.html' %}
 
-<section id="contenedor" class="tamano1">
+    <section id="contenedor" class="tamano1">
 
-  <div class="nota">
-    <section id="encabezado" class="floatFix">
-      <h1>{{article.title}}</h1>
-            <p>{{article.excerpt}}</p><span>{{article.published.strftime('%d.%m.%Y | %H:%M')}}</span></section>
-            <section id="cuerpo">
-              {% if article.image %} 
+      <div class="nota">
+        <section id="encabezado" class="floatFix">
+          <h1>{{article.title}}</h1>
+          <p>{{article.excerpt}}</p><span>{{article.published.strftime('%d.%m.%Y | %H:%M')}}</span>
+        </section>
+        <section id="cuerpo">
+            {% if article.image %} 
+            <br/>
+            <figure><img src="{{article.image}}"></figure>
+            {% endif %}
+            
+            {{article.content}}
+            
+            {% if article.rel_art_keys|length > 0 %}
               <br/>
-              <figure><img src="{{article.image}}"></figure>
-              {% endif %}
-              
-              {{article.content}}
-
-          </body>
+              <br/>
+              Notas relacionadas
+              <br/>
+              {% for rel_art in article.rel_art_keys %}
+                {% set rel_article = rel_articles[loop.index0] %}
+                <a href="{{ url_for('frontend/article', article=rel_article.key()|string) }}" class="info floatFix" rel="external" alt="{{rel_article.title}}" title="{{rel_article.title}}">{{ rel_article.title }}</a><br/>
+              {% endfor %}
+            {% endif %}
+        </section>
+  </body>
 </html>

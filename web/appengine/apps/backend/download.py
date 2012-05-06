@@ -52,6 +52,9 @@ class ElDia(RequestHandler):
 
       taskqueue.add(url='/download/article', params=params)
 
+  def get_link_hash(self, link):
+    return hashlib.sha1(link).hexdigest()
+    
   def download_article(self, **kwargs):
     self.request.charset = 'utf-8'
 
@@ -59,7 +62,7 @@ class ElDia(RequestHandler):
     
     # Generamos sha1 con la url (unica) y vemos si ya lo teniamos
     link   = self.request.POST.get('link')
-    artkey = hashlib.sha1(link).hexdigest()
+    artkey = self.get_link_hash(link)
 
     art = Article.all(keys_only=True).filter('__key__', db.Key.from_path('Article', artkey)).get()
     if art:
@@ -69,7 +72,6 @@ class ElDia(RequestHandler):
     # si no puedo bajar el contenido no doy de alta el articulo
     soup = BeautifulSoup(urlopen(link))
     title = soup.select('h1')
-    bajada = soup.select('h3#baja')
     contenido = soup.select('div#texto')
 
     if len(contenido) == 0:
@@ -80,7 +82,7 @@ class ElDia(RequestHandler):
     art.category  = Category.get_or_insert(self.request.POST.get('category'))
     art.title     = db.Text(arg=title[0].encode_contents(), encoding='utf-8')  #self.request.POST.get('title')
     art.published = self.to_datetime(self.request.POST.get('published'))
-    art.content   = db.Text(arg=(bajada[0].encode_contents()+contenido[0].encode_contents()), encoding='utf-8') 
+    art.content   = db.Text(arg=contenido[0].encode_contents(), encoding='utf-8') 
 
     # Bajada
     bajada = soup.select('div#baja h3')
@@ -88,7 +90,7 @@ class ElDia(RequestHandler):
       bajada = soup.select('h3#baja')
     
     art.excerpt = bajada[0].text if len(bajada) else ''
-
+    
     # Imagen
     imagen = soup.select('div.ImagenesNoticia img.Foto')
     imagen = imagen[0].attrs['src'] if len(imagen) and 'src' in imagen[0].attrs else None
@@ -123,7 +125,16 @@ class ElDia(RequestHandler):
       # ------ END HACK -------- #
 
       art.image = get_serving_url(blob_key)
-
+    
+    # Noticias relacionadas
+    
+    related_keys = []
+    related_news = soup.select(u'a.VinculoTexto')
+    for alink in related_news:
+      related_keys.append(self.get_link_hash(alink.get('href')))
+    
+    art.rel_art_keys = related_keys
+      
     art.put()
   
   def to_datetime(self, str):
