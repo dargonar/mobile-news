@@ -1,0 +1,237 @@
+// !$*UTF8*$!
+{
+	1D3623240D0F684500981E51 /* MassaAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 610}}";
+			sepNavSelRange = "{319, 29}";
+			sepNavVisRange = "{0, 459}";
+		};
+	};
+	1D3623250D0F684500981E51 /* MassaAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1092}}";
+			sepNavSelRange = "{567, 0}";
+			sepNavVisRange = "{0, 1735}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* Massa */ = {
+		activeExec = 0;
+		executables = (
+			7891F5291379F5400080E57B /* Massa */,
+		);
+	};
+	28D7ACF60DDB3853001CB0EB /* MassaViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 797}}";
+			sepNavSelRange = "{813, 13}";
+			sepNavVisRange = "{0, 887}";
+		};
+	};
+	28D7ACF70DDB3853001CB0EB /* MassaViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 1625}}";
+			sepNavSelRange = "{2477, 0}";
+			sepNavVisRange = "{0, 1615}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 7891F5291379F5400080E57B /* Massa */;
+		activeSDKPreference = iphonesimulator4.2;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* Massa */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* Massa */,
+		);
+		codeSenseManager = 7891F5391379F5430080E57B /* Code sense */;
+		executables = (
+			7891F5291379F5400080E57B /* Massa */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1125,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 358134141;
+			PBXWorkspaceStateSaveDate = 358134141;
+		};
+		perUserProjectItems = {
+			781B00E51558B2A400352C42 /* PBXTextBookmark */ = 781B00E51558B2A400352C42 /* PBXTextBookmark */;
+			78AF9D9A155823E1005952D2 /* PBXTextBookmark */ = 78AF9D9A155823E1005952D2 /* PBXTextBookmark */;
+			78AF9E991558478E005952D2 /* PBXTextBookmark */ = 78AF9E991558478E005952D2 /* PBXTextBookmark */;
+			78AF9EE615584B82005952D2 /* PBXTextBookmark */ = 78AF9EE615584B82005952D2 /* PBXTextBookmark */;
+			78AF9EFF15584E16005952D2 /* PBXTextBookmark */ = 78AF9EFF15584E16005952D2 /* PBXTextBookmark */;
+			78DA0A1F1558B12000645D91 /* PBXTextBookmark */ = 78DA0A1F1558B12000645D91 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 7891F5381379F5430080E57B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 610}}";
+			sepNavSelRange = "{122, 228}";
+			sepNavVisRange = "{0, 351}";
+		};
+	};
+	32CA4F630368D1EE00C91783 /* Massa_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 610}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 179}";
+		};
+	};
+	781B00E51558B2A400352C42 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */;
+		name = "MassaViewController.m: 96";
+		rLen = 0;
+		rLoc = 2477;
+		rType = 0;
+		vrLen = 1615;
+		vrLoc = 0;
+	};
+	7883E421137AD05300DBF43A /* GradientView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 620}}";
+			sepNavSelRange = "{192, 13}";
+			sepNavVisRange = "{0, 262}";
+		};
+	};
+	7883E422137AD05300DBF43A /* GradientView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 728}}";
+			sepNavSelRange = "{897, 0}";
+			sepNavVisRange = "{126, 1227}";
+			sepNavWindowFrame = "{{38, 230}, {1055, 772}}";
+		};
+	};
+	7891F5291379F5400080E57B /* Massa */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Massa;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	7891F5381379F5430080E57B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	7891F5391379F5430080E57B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	78AF9D9A155823E1005952D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MassaAppDelegate.m */;
+		name = "MassaAppDelegate.m: 25";
+		rLen = 0;
+		rLoc = 567;
+		rType = 0;
+		vrLen = 1735;
+		vrLoc = 0;
+	};
+	78AF9DA715582534005952D2 /* SeccionesView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 820}}";
+			sepNavSelRange = "{244, 0}";
+			sepNavVisRange = "{0, 274}";
+		};
+	};
+	78AF9DA815582534005952D2 /* SeccionesView.m */ = {
+		uiCtxt = {
+			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{4245, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{4296, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{4346, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 5047}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1079, 2314}}";
+			sepNavSelRange = "{2530, 0}";
+			sepNavVisRange = "{2220, 447}";
+		};
+	};
+	78AF9E991558478E005952D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* MassaViewController.h */;
+		name = "MassaViewController.h: 28";
+		rLen = 13;
+		rLoc = 813;
+		rType = 0;
+		vrLen = 887;
+		vrLoc = 0;
+	};
+	78AF9EE615584B82005952D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 78AF9DA715582534005952D2 /* SeccionesView.h */;
+		name = "SeccionesView.h: 17";
+		rLen = 0;
+		rLoc = 244;
+		rType = 0;
+		vrLen = 274;
+		vrLoc = 0;
+	};
+	78AF9EFF15584E16005952D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 78AF9DA815582534005952D2 /* SeccionesView.m */;
+		name = "SeccionesView.m: 75";
+		rLen = 0;
+		rLoc = 1955;
+		rType = 0;
+		vrLen = 1933;
+		vrLoc = 1500;
+	};
+	78DA0A1F1558B12000645D91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */;
+		name = "MassaViewController.m: 96";
+		rLen = 0;
+		rLoc = 2477;
+		rType = 0;
+		vrLen = 1615;
+		vrLoc = 0;
+	};
+}
