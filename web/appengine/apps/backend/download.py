@@ -15,21 +15,16 @@ from google.appengine.ext import db, blobstore
 from google.appengine.api.images import get_serving_url
 
 from webapp2 import RequestHandler
-from models  import Category, Article
+from models  import Category, Article, cats as feeds
 
 class ElDia(RequestHandler):
   
-  feeds = {'deportes'   :'http://www.eldia.com.ar/rss/rss.aspx?ids=8',
-           'economia'   :'http://www.eldia.com.ar/rss/rss.aspx?ids=6',
-           'mundo'      :'http://www.eldia.com.ar/rss/rss.aspx?ids=4',
-           'pais'       :'http://www.eldia.com.ar/rss/rss.aspx?ids=3',
-           'ciudad'     :'http://www.eldia.com.ar/rss/rss.aspx?ids=1',
-           'policiales' :'http://www.eldia.com.ar/rss/rss.aspx?ids=5'
-          }
   
   def download(self, **kwargs):
-    for category in self.feeds:
-      taskqueue.add(url='/download/feed', params={'feed':self.feeds[category], 'category':category})
+    for category in feeds:
+      if category['type']!='seccion':
+        continue
+      taskqueue.add(url='/download/feed', params={'feed':category['feed'], 'category':category['key']})
 
   def download_feed(self, **kwargs):
     self.request.charset = 'utf-8'
@@ -80,7 +75,7 @@ class ElDia(RequestHandler):
 
     art = Article(key_name=artkey)
     art.category  = Category.get_or_insert(self.request.POST.get('category'))
-    art.title     = db.Text(arg=title[0].encode_contents(), encoding='utf-8')  #self.request.POST.get('title')
+    art.title     = db.Text(arg=title[0].encode_contents().encode('utf-8'), encoding='utf-8')  #self.request.POST.get('title')
     art.published = self.to_datetime(self.request.POST.get('published'))
     art.content   = db.Text(arg=contenido[0].encode_contents(), encoding='utf-8') 
 

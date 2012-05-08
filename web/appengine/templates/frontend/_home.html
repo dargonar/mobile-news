@@ -6,28 +6,42 @@
   </head>
   <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid10533073">
   
-    {% include 'frontend/_header.html' %}
+    {% if the_category %}
+      <header>
+        <section class="cabezal">
+          <div class="floatFix fondoNav">
+            <div id="troncal">
+              <a class="secciones floatFix" href="#" title="Secciones"><b>{{the_category}}</b></a>
+                <nav class="desplegable ocultar">
+                  <div class="floatFix">
+                  </div>
+                </nav>
+              </div>
+          </div>
+        </section>
+      </header>
+    {% endif %}
 
     <section id="contenedor" class="tamano1">
       <section class="banner"></section>
       <section id="apertura"></section>
       <section id="informacion">
         {% for items in catitems %}
-        {% for item in items %}
-        <article class=" toi7342 nid1466728">
-          <a href="{{ url_for('frontend/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="{{item.title}}" title="{{item.title}}">
-            {% if item.image %}
-            <div class="contenedorImg">
-              <img style="width:117px" src="{{item.image}}=s117" class="lazyLoad">
-            </div>
-            {% endif %}
-            <div class="tema">
-              <span class="hora">{{item.published.strftime('%H:%M')}}</span>&nbsp;<span class="pipe">|</span>&nbsp;{{cats_conf[item.category.key().name()]}}
-            </div>
-            <h1 target="_blank" rel="external" >{{item.title}}</h1>
-          </a>
-        </article>
-        {% endfor %}
+          {% for item in items %}
+          <article class=" toi7342 nid1466728">
+            <a href="{{ url_for('frontend/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="{{item.title}}" title="{{item.title}}">
+              {% if item.image %}
+              <div class="contenedorImg">
+                <img style="width:117px" src="{{item.image}}=s117" class="lazyLoad">
+              </div>
+              {% endif %}
+              <div class="tema">
+                <span class="hora">{{item.published.strftime('%H:%M')}}</span>&nbsp;<span class="pipe">|</span>&nbsp;{{cats_conf[item.category.key().name()]}}
+              </div>
+              <h1 target="_blank" rel="external" >{{item.title}}</h1>
+            </a>
+          </article>
+          {% endfor %}
         {% endfor %}
 
       </section>

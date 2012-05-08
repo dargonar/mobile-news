@@ -85,29 +85,32 @@ section.clima span b.ciudad {font-size:12px;font-weight:normal;}
 section.clima span#pr_temperatura {padding-top:0; float:none;}
 
 section.cabezal .fondoNav {border-top:1px solid #c2c2c2;border-bottom:1px solid #c2c2c2;width:100%;position:relative;}
-section.cabezal .fondoNav #troncal a.secciones {display:block;height:28px;float:left;width:145px;display:block;font:18px Arial,sans-serif;color:#fff;padding-top:9px;padding-left:10px;text-decoration:none;
+section.cabezal .fondoNav #troncal a.secciones {display:block;height:28px;float:left;width:auto/*145px*/;font:18px Arial,sans-serif;color:#fff;padding-top:9px;padding-left:10px;padding-right:10px;text-decoration:none;
   /*background:#32A9D3;*/
   background:#1A395E;
   /*background:url(/img/secciones_bg.gif) repeat-x;*/
   }
-section.cabezal .fondoNav #troncal a.secciones b {display:block;float:left;background:url("/img/flecha-down.png") no-repeat right 6px;width:122px;}
+/*section.cabezal .fondoNav #troncal a.secciones b {display:block;float:left;background:url("/img/flecha-down.png") no-repeat right 6px;width:122px;}
 section.cabezal .fondoNav #troncal a.seccionesClick b {background:url("/img/flecha-up.png") transparent no-repeat right 6px;width:122px;}
-
+*/
 section.cabezal .fondoNav aside.transito a {width:85px;float:right;display:block;text-decoration:none;color:#335577;padding-top:9px;margin-right:10px;}
 section.cabezal .fondoNav aside a b {display:block;float:left;font:normal 18px Arial,sans-serif;}
 section.cabezal .fondoNav aside a img {float:left;padding:6px 0 0 5px;width:10px;height:12px;}
 
 /*desplegable*/
-.desplegable {width:100%;font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;position:absolute;top:40px;clear:both;z-index:1000;}
-.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;margin:0 10px 10px 10px;width:40%;border-right:1px solid #c2c2c2;}
+.desplegable {width:100%;font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;position:absolute;/*top:40px;*/clear:both;z-index:1000;}
+.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;padding:0 10px 10px 10px;/*width:40%;border-right:1px solid #c2c2c2;*/width:100%;}
 .desplegable .columnaDos, .desplegable .servicios .columnaDos {float:left;margin:0 10px 10px 10px;width:45%;}
-.desplegable .columnaUno a, .desplegable .columnaDos a, .desplegable .servicios .columnaUno a, .desplegable .servicios .ColumnaDos a {text-decoration:none;color:#335577;padding:10px 0;display:block;}
-.desplegable .servicios .columnaUno {border-right:0;}
+.desplegable .columnaUno a, .desplegable .columnaDos a, .desplegable .servicios .columnaUno a, .desplegable .servicios .ColumnaDos a {text-decoration:none;color:#335577;padding:10px 0;display:block;text-transform:uppercase;}
+.desplegable .servicios .columnaUno {border-right:0; height:100%;}
 .desplegable .servicios {background:#f6f5f5;border-top:1px solid #c2c2c2;}
 .desplegable .servicios span {display:block;font:bold 14px Arial,sans-serif;color:#32A9D3;padding:10px 0 3px 10px;}
 #troncal nav.desplegable {display:block;}
 #troncal nav.ocultar {display:none;}
 /*#troncal:hover nav.desplegable {display:block;}*/
+
+/*.columnaX, .desplegable .servicios .columnaX {float:left;margin:0 10px 10px 10px;width:100%;}
+.columnaX a, .desplegable .servicios .columnaX  a{text-transform:uppercase;}*/
 
 /* ultimo momento */
 #ultimoMomentoResponsive {padding:10px 12px 10px 12px; display:none;}
