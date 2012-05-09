@@ -22,6 +22,8 @@
 		781B00D31558B28700352C42 /* services.png in Resources */ = {isa = PBXBuildFile; fileRef = 781B00CD1558B28700352C42 /* services.png */; };
 		781B00D41558B28700352C42 /* suplementos.png in Resources */ = {isa = PBXBuildFile; fileRef = 781B00CE1558B28700352C42 /* suplementos.png */; };
 		7883E423137AD05300DBF43A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7883E422137AD05300DBF43A /* GradientView.m */; };
+		788723F21559EC360026C4BD /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 788723F01559EC360026C4BD /* back.png */; };
+		788723F31559EC360026C4BD /* favs.addto.png in Resources */ = {isa = PBXBuildFile; fileRef = 788723F11559EC360026C4BD /* favs.addto.png */; };
 		78AF9D5B15581434005952D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D5915581434005952D2 /* Default.png */; };
 		78AF9D5C15581434005952D2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D5A15581434005952D2 /* logo.png */; };
 		78AF9D681558157D005952D2 /* logo_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D671558157D005952D2 /* logo_small.png */; };
@@ -50,6 +52,8 @@
 		781B00CE1558B28700352C42 /* suplementos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suplementos.png; sourceTree = "<group>"; };
 		7883E421137AD05300DBF43A /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		7883E422137AD05300DBF43A /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		788723F01559EC360026C4BD /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		788723F11559EC360026C4BD /* favs.addto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favs.addto.png; sourceTree = "<group>"; };
 		78AF9D5915581434005952D2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
 		78AF9D5A15581434005952D2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Assets/logo.png; sourceTree = "<group>"; };
 		78AF9D671558157D005952D2 /* logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_small.png; path = Assets/logo_small.png; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				781B00C91558B28700352C42 /* newspaper.png */,
+				788723F01559EC360026C4BD /* back.png */,
+				788723F11559EC360026C4BD /* favs.addto.png */,
 				781B00CA1558B28700352C42 /* overflowdots.png */,
 				781B00CB1558B28700352C42 /* photos_polaroid.png */,
 				781B00CC1558B28700352C42 /* profile.png */,
@@ -172,6 +178,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Diventi;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Massa" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -208,6 +217,8 @@
 				781B00D21558B28700352C42 /* profile.png in Resources */,
 				781B00D31558B28700352C42 /* services.png in Resources */,
 				781B00D41558B28700352C42 /* suplementos.png in Resources */,
+				788723F21559EC360026C4BD /* back.png in Resources */,
+				788723F31559EC360026C4BD /* favs.addto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +244,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -247,11 +259,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "BAA69F37-7632-4974-A88E-772FAC58073F";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "BAA69F37-7632-4974-A88E-772FAC58073F";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Massa_Prefix.pch;
 				INFOPLIST_FILE = "Massa-Info.plist";
 				PRODUCT_NAME = Massa;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -307,12 +323,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "BAA69F37-7632-4974-A88E-772FAC58073F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BAA69F37-7632-4974-A88E-772FAC58073F";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

@@ -27,6 +27,11 @@
 
 @property (nonatomic, retain) UITableView *seccionesView;
 
+@property (nonatomic, retain) IBOutlet UIButton  								*btnRight;
+@property (nonatomic, retain) IBOutlet UIButton  								*btnLeft;
+
+- (IBAction) btnRightClick: (id)param;
+- (IBAction) btnLeftClick: (id)param;
 - (NSURLRequest*) requestFor: (NSString*)location;
 
 @end

@@ -7,7 +7,7 @@
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
-	<string>Sergio Massa</string>
+	<string>EL DIA</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
