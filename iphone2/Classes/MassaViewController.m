@@ -7,7 +7,6 @@
 //
 
 #import "MassaViewController.h"
-#import "SeccionesView.h"
 
 #define contains(str1, str2) ([str1 rangeOfString: str2 ].location != NSNotFound)
 
@@ -18,7 +17,7 @@
 @synthesize label;
 @synthesize loading;
 @synthesize msgerror;
-@synthesize seccionesView, btnRight, btnLeft;
+@synthesize  btnRight, btnLeft, viewLoadingBack;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -64,7 +63,9 @@
 //Eventos del webview 
 - (void)webViewDidFinishLoad:(UIWebView *)theview {
   theview.hidden = NO;
+  viewLoadingBack.hidden = YES;
   loading.hidden = YES;
+  
   label.hidden=YES;
   
 //  if( contains( [self.webView.request mainDocumentURL] , @"/view"))
@@ -72,24 +73,10 @@
   
   if([ [url absoluteString] rangeOfString: @"/view" ].location != NSNotFound)
   {
-   	/*UIImage *imageBack = [UIImage imageNamed: @"back.png"];
-    UIImageView *imageViewBack = [[UIImageView alloc] initWithImage: imageBack];
-    [self.btnLeft.imageView setImage:imageBack];
-    [imageBack release];
-    [imageViewBack release];
-    
-    UIImage *imageAddFav = [UIImage imageNamed: @"favs.addto.png"];
-    UIImageView *imageViewAddFav = [[UIImageView alloc] initWithImage: imageAddFav];
-    [self.btnRight.imageView  setImage:imageAddFav];
-    [imageAddFav release];
-    [imageViewAddFav release];*/
-    
-    self.btnRight.hidden = NO;
+   	self.btnRight.hidden = NO;
     self.btnLeft.hidden = NO;
   }
   else {
-    /*[self.btnLeft.imageView setImage:nil];
-    [self.btnRight.imageView setImage:nil];*/
     self.btnRight.hidden = YES;
     self.btnLeft.hidden = YES;
   }
@@ -112,17 +99,19 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)theview {
   msgerror.hidden = YES;
- 	theview.hidden = YES;
+ 	webView.hidden = YES;
 
   loading.hidden = NO;
+  viewLoadingBack.hidden = NO;
   label.hidden   = NO;  
 }
 
 - (void)webView:(UIWebView *)theview didFailLoadWithError:(NSError *)error {
   msgerror.hidden = NO;
 
- 	theview.hidden = YES;
+ 	webView.hidden = YES;
   loading.hidden = YES;
+  viewLoadingBack.hidden = YES;
   label.hidden   = YES;  
   
 }

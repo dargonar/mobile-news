@@ -25,10 +25,9 @@
 @property (nonatomic, retain) IBOutlet UILabel  								*label;
 @property (nonatomic, retain) IBOutlet UILabel  								*msgerror;
 
-@property (nonatomic, retain) UITableView *seccionesView;
-
 @property (nonatomic, retain) IBOutlet UIButton  								*btnRight;
 @property (nonatomic, retain) IBOutlet UIButton  								*btnLeft;
+@property (nonatomic, retain) IBOutlet UIView  								  *viewLoadingBack;
 
 - (IBAction) btnRightClick: (id)param;
 - (IBAction) btnLeftClick: (id)param;
