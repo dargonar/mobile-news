@@ -178,7 +178,7 @@ section#informacion.faqs .preguntas b {display:block;margin-bottom:10px;}
 #contenedor.tamano1 section#encabezado span {font:normal 12px Arial,sans-serif;}
 
 #contenedor.tamano1 section#cuerpo {color: #777; display:block;font:normal 12px/15px Arial,sans-serif; margin-left:10px;} /*bajada*/
-#contenedor.tamano1 section#cuerpo p {font:normal 15px/20px Arial,sans-serif; color:#000;}
+#contenedor.tamano1 section#cuerpo p, #contenedor.tamano1 section#cuerpo div {font:normal 15px/20px Arial,sans-serif; color:#000;}
 #contenedor.tamano1 section#cuerpo h2 {font:bold 14px/20px Arial,sans-serif;}
 #contenedor.tamano1 section#cuerpo figure figcaption, figure.destacada figcaption {font:normal 14px/18px Arial,sans-serif;}
 #contenedor.tamano1 section#cuerpo .archivos-relacionados {font:normal 15px/20px Arial,sans-serif;}

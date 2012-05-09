@@ -34,7 +34,8 @@ class ViewArticle(MyBaseHandler):
     if len(article.rel_art_keys)>0:
       rel_articles_keys = []
       for key in article.rel_art_keys:
-        rel_articles.append( Article(key_name=key) )
+        #rel_articles.append( Article(key_name=key) )
+        rel_articles.append( db.get(db.Key.from_path('Article',key)))
     return self.render_response('frontend/_article.html', article=article, rel_articles = rel_articles)
     
 class ListSecciones(MyBaseHandler):

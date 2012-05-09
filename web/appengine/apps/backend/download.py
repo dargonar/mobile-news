@@ -75,7 +75,7 @@ class ElDia(RequestHandler):
 
     art = Article(key_name=artkey)
     art.category  = Category.get_or_insert(self.request.POST.get('category'))
-    art.title     = db.Text(arg=title[0].encode_contents().encode('utf-8'), encoding='utf-8')  #self.request.POST.get('title')
+    art.title     = db.Text(arg=title[0].encode_contents().decode('utf-8')) #, encoding='utf-8'  #self.request.POST.get('title')
     art.published = self.to_datetime(self.request.POST.get('published'))
     art.content   = db.Text(arg=contenido[0].encode_contents(), encoding='utf-8') 
 
