@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* MassaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MassaViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MassaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */; };
+		7801D469155A0AB800A29B12 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7801D468155A0AB800A29B12 /* Icon.png */; };
+		7801D472155A0E2900A29B12 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7801D471155A0E2900A29B12 /* MBProgressHUD.m */; };
 		781B00CF1558B28700352C42 /* newspaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 781B00C91558B28700352C42 /* newspaper.png */; };
 		781B00D01558B28700352C42 /* overflowdots.png in Resources */ = {isa = PBXBuildFile; fileRef = 781B00CA1558B28700352C42 /* overflowdots.png */; };
 		781B00D11558B28700352C42 /* photos_polaroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 781B00CB1558B28700352C42 /* photos_polaroid.png */; };
@@ -27,8 +29,6 @@
 		78AF9D5B15581434005952D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D5915581434005952D2 /* Default.png */; };
 		78AF9D5C15581434005952D2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D5A15581434005952D2 /* logo.png */; };
 		78AF9D681558157D005952D2 /* logo_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9D671558157D005952D2 /* logo_small.png */; };
-		78AF9DAA15582534005952D2 /* SeccionesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AF9DA815582534005952D2 /* SeccionesView.m */; };
-		78AF9DAB15582534005952D2 /* SeccionesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9DA915582534005952D2 /* SeccionesView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +44,9 @@
 		28D7ACF70DDB3853001CB0EB /* MassaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassaViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Massa_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Massa_Prefix.pch; sourceTree = "<group>"; };
+		7801D468155A0AB800A29B12 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		7801D470155A0E2900A29B12 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		7801D471155A0E2900A29B12 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		781B00C91558B28700352C42 /* newspaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newspaper.png; sourceTree = "<group>"; };
 		781B00CA1558B28700352C42 /* overflowdots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overflowdots.png; sourceTree = "<group>"; };
 		781B00CB1558B28700352C42 /* photos_polaroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos_polaroid.png; sourceTree = "<group>"; };
@@ -57,9 +60,6 @@
 		78AF9D5915581434005952D2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
 		78AF9D5A15581434005952D2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Assets/logo.png; sourceTree = "<group>"; };
 		78AF9D671558157D005952D2 /* logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_small.png; path = Assets/logo_small.png; sourceTree = "<group>"; };
-		78AF9DA715582534005952D2 /* SeccionesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeccionesView.h; sourceTree = "<group>"; };
-		78AF9DA815582534005952D2 /* SeccionesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeccionesView.m; sourceTree = "<group>"; };
-		78AF9DA915582534005952D2 /* SeccionesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SeccionesView.xib; path = Classes/SeccionesView.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Massa-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Massa-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,14 +80,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7801D470155A0E2900A29B12 /* MBProgressHUD.h */,
+				7801D471155A0E2900A29B12 /* MBProgressHUD.m */,
 				1D3623240D0F684500981E51 /* MassaAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MassaAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* MassaViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* MassaViewController.m */,
 				7883E421137AD05300DBF43A /* GradientView.h */,
 				7883E422137AD05300DBF43A /* GradientView.m */,
-				78AF9DA715582534005952D2 /* SeccionesView.h */,
-				78AF9DA815582534005952D2 /* SeccionesView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -124,6 +124,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7801D468155A0AB800A29B12 /* Icon.png */,
 				781B00C91558B28700352C42 /* newspaper.png */,
 				788723F01559EC360026C4BD /* back.png */,
 				788723F11559EC360026C4BD /* favs.addto.png */,
@@ -132,7 +133,6 @@
 				781B00CC1558B28700352C42 /* profile.png */,
 				781B00CD1558B28700352C42 /* services.png */,
 				781B00CE1558B28700352C42 /* suplementos.png */,
-				78AF9DA915582534005952D2 /* SeccionesView.xib */,
 				78AF9D671558157D005952D2 /* logo_small.png */,
 				78AF9D5915581434005952D2 /* Default.png */,
 				78AF9D5A15581434005952D2 /* logo.png */,
@@ -210,7 +210,6 @@
 				78AF9D5B15581434005952D2 /* Default.png in Resources */,
 				78AF9D5C15581434005952D2 /* logo.png in Resources */,
 				78AF9D681558157D005952D2 /* logo_small.png in Resources */,
-				78AF9DAB15582534005952D2 /* SeccionesView.xib in Resources */,
 				781B00CF1558B28700352C42 /* newspaper.png in Resources */,
 				781B00D01558B28700352C42 /* overflowdots.png in Resources */,
 				781B00D11558B28700352C42 /* photos_polaroid.png in Resources */,
@@ -219,6 +218,7 @@
 				781B00D41558B28700352C42 /* suplementos.png in Resources */,
 				788723F21559EC360026C4BD /* back.png in Resources */,
 				788723F31559EC360026C4BD /* favs.addto.png in Resources */,
+				7801D469155A0AB800A29B12 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +233,7 @@
 				1D3623260D0F684500981E51 /* MassaAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* MassaViewController.m in Sources */,
 				7883E423137AD05300DBF43A /* GradientView.m in Sources */,
-				78AF9DAA15582534005952D2 /* SeccionesView.m in Sources */,
+				7801D472155A0E2900A29B12 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,9 @@
 	};
 	1D3623250D0F684500981E51 /* MassaAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1092}}";
-			sepNavSelRange = "{567, 0}";
-			sepNavVisRange = "{0, 1735}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1066}}";
+			sepNavSelRange = "{277, 0}";
+			sepNavVisRange = "{0, 2251}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* Massa */ = {
@@ -23,15 +23,16 @@
 	28D7ACF60DDB3853001CB0EB /* MassaViewController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1303, 795}}";
-			sepNavSelRange = "{965, 77}";
-			sepNavVisRange = "{0, 1100}";
+			sepNavSelRange = "{475, 0}";
+			sepNavVisRange = "{0, 1116}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* MassaViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1303, 2158}}";
-			sepNavSelRange = "{2961, 0}";
-			sepNavVisRange = "{2431, 1858}";
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 2002}}";
+			sepNavSelRange = "{3000, 15}";
+			sepNavVisRange = "{253, 1729}";
+			sepNavWindowFrame = "{{15, 251}, {1055, 772}}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -69,23 +70,18 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 358218485;
-			PBXWorkspaceStateSaveDate = 358218485;
+			PBXPerProjectTemplateStateSaveDate = 358225986;
+			PBXWorkspaceStateSaveDate = 358225986;
 		};
 		perUserProjectItems = {
-			7801D41B1559FAF900A29B12 /* PlistBookmark */ = 7801D41B1559FAF900A29B12 /* PlistBookmark */;
-			7801D4271559FB5500A29B12 /* PlistBookmark */ = 7801D4271559FB5500A29B12 /* PlistBookmark */;
-			7801D4281559FB5500A29B12 /* PlistBookmark */ = 7801D4281559FB5500A29B12 /* PlistBookmark */;
-			7801D446155A001F00A29B12 /* PlistBookmark */ = 7801D446155A001F00A29B12 /* PlistBookmark */;
-			7801D451155A00DA00A29B12 /* PlistBookmark */ = 7801D451155A00DA00A29B12 /* PlistBookmark */;
-			788723E01559EBB00026C4BD = 788723E01559EBB00026C4BD /* PBXTextBookmark */;
-			788723F51559ECEA0026C4BD = 788723F51559ECEA0026C4BD /* PBXTextBookmark */;
-			7887242A1559F2EC0026C4BD = 7887242A1559F2EC0026C4BD /* PBXTextBookmark */;
-			7887243E1559F5520026C4BD = 7887243E1559F5520026C4BD /* PBXTextBookmark */;
-			788724591559FAE30026C4BD = 788724591559FAE30026C4BD /* PlistBookmark */;
-			7887245A1559FAE30026C4BD = 7887245A1559FAE30026C4BD /* PlistBookmark */;
-			78AF9D9A155823E1005952D2 = 78AF9D9A155823E1005952D2 /* PBXTextBookmark */;
-			78AF9EE615584B82005952D2 = 78AF9EE615584B82005952D2 /* PBXTextBookmark */;
+			7801D47D155A0FC500A29B12 /* PlistBookmark */ = 7801D47D155A0FC500A29B12 /* PlistBookmark */;
+			7801D47E155A0FC500A29B12 /* PBXTextBookmark */ = 7801D47E155A0FC500A29B12 /* PBXTextBookmark */;
+			7801D48D155A12CC00A29B12 /* PBXTextBookmark */ = 7801D48D155A12CC00A29B12 /* PBXTextBookmark */;
+			782608BB155A1B64004D519C /* PBXTextBookmark */ = 782608BB155A1B64004D519C /* PBXTextBookmark */;
+			782608CE155A1D0B004D519C /* PBXTextBookmark */ = 782608CE155A1D0B004D519C /* PBXTextBookmark */;
+			782608CF155A1D0B004D519C /* PBXTextBookmark */ = 782608CF155A1D0B004D519C /* PBXTextBookmark */;
+			782608D8155A1DEA004D519C /* PBXTextBookmark */ = 782608D8155A1DEA004D519C /* PBXTextBookmark */;
+			788723E01559EBB00026C4BD /* PBXTextBookmark */ = 788723E01559EBB00026C4BD /* PBXTextBookmark */;
 		};
 		sourceControlManager = 7891F5381379F5430080E57B /* Source Control */;
 		userBuildSettings = {
@@ -105,29 +101,21 @@
 			sepNavVisRange = "{0, 179}";
 		};
 	};
-	7801D41B1559FAF900A29B12 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775807;
+	7801D470155A0E2900A29B12 /* MBProgressHUD.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 5005}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 2700}";
+		};
 	};
-	7801D4271559FB5500A29B12 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775807;
+	7801D471155A0E2900A29B12 /* MBProgressHUD.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1303, 10673}}";
+			sepNavSelRange = "{1043, 0}";
+			sepNavVisRange = "{3, 1463}";
+		};
 	};
-	7801D4281559FB5500A29B12 /* PlistBookmark */ = {
+	7801D47D155A0FC500A29B12 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
 		fallbackIsa = PBXBookmark;
@@ -136,29 +124,67 @@
 		);
 		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
-	7801D446155A001F00A29B12 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
+	7801D47E155A0FC500A29B12 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MassaAppDelegate.m */;
+		name = "MassaAppDelegate.m: 15";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 277;
+		rType = 0;
+		vrLen = 2251;
+		vrLoc = 0;
 	};
-	7801D451155A00DA00A29B12 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
+	7801D48D155A12CC00A29B12 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7801D470155A0E2900A29B12 /* MBProgressHUD.h */;
+		name = "MBProgressHUD.h: 1";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2700;
+		vrLoc = 0;
+	};
+	782608BB155A1B64004D519C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7801D471155A0E2900A29B12 /* MBProgressHUD.m */;
+		name = "MBProgressHUD.m: 35";
+		rLen = 0;
+		rLoc = 1043;
+		rType = 0;
+		vrLen = 1463;
+		vrLoc = 3;
+	};
+	782608CE155A1D0B004D519C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */;
+		name = "MassaViewController.m: 114";
+		rLen = 15;
+		rLoc = 3000;
+		rType = 0;
+		vrLen = 1729;
+		vrLoc = 253;
+	};
+	782608CF155A1D0B004D519C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* MassaViewController.h */;
+		name = "MassaViewController.h: 30";
+		rLen = 15;
+		rLoc = 963;
+		rType = 0;
+		vrLen = 1116;
+		vrLoc = 0;
+	};
+	782608D8155A1DEA004D519C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* MassaViewController.h */;
+		name = "MassaViewController.h: 22";
+		rLen = 0;
+		rLoc = 475;
+		rType = 0;
+		vrLen = 1116;
+		vrLoc = 0;
 	};
 	7883E421137AD05300DBF43A /* GradientView.h */ = {
 		uiCtxt = {
@@ -184,59 +210,6 @@
 		rType = 0;
 		vrLen = 1359;
 		vrLoc = 0;
-	};
-	788723F51559ECEA0026C4BD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 78AF9DA815582534005952D2 /* SeccionesView.m */;
-		name = "SeccionesView.m: 26";
-		rLen = 64;
-		rLoc = 793;
-		rType = 0;
-		vrLen = 1665;
-		vrLoc = 0;
-	};
-	7887242A1559F2EC0026C4BD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF60DDB3853001CB0EB /* MassaViewController.h */;
-		name = "MassaViewController.h: 33";
-		rLen = 77;
-		rLoc = 965;
-		rType = 0;
-		vrLen = 1100;
-		vrLoc = 0;
-	};
-	7887243E1559F5520026C4BD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */;
-		name = "MassaViewController.m: 101";
-		rLen = 0;
-		rLoc = 2961;
-		rType = 0;
-		vrLen = 1858;
-		vrLoc = 2431;
-	};
-	788724591559FAE30026C4BD /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			CFBundleIdentifier,
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
-	7887245A1559FAE30026C4BD /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Massa-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/11/Documents/ymobipaper/iphone2/Massa-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
 	};
 	7891F5291379F5400080E57B /* Massa */ = {
 		isa = PBXExecutable;
@@ -283,40 +256,5 @@
 	7891F5391379F5430080E57B /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	78AF9D9A155823E1005952D2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1D3623250D0F684500981E51 /* MassaAppDelegate.m */;
-		name = "MassaAppDelegate.m: 25";
-		rLen = 0;
-		rLoc = 567;
-		rType = 0;
-		vrLen = 1735;
-		vrLoc = 0;
-	};
-	78AF9DA715582534005952D2 /* SeccionesView.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1303, 820}}";
-			sepNavSelRange = "{244, 0}";
-			sepNavVisRange = "{0, 274}";
-		};
-	};
-	78AF9DA815582534005952D2 /* SeccionesView.m */ = {
-		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{4245, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{4296, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{4346, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 5047}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1944, 2366}}";
-			sepNavSelRange = "{793, 64}";
-			sepNavVisRange = "{0, 1665}";
-		};
-	};
-	78AF9EE615584B82005952D2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 78AF9DA715582534005952D2 /* SeccionesView.h */;
-		name = "SeccionesView.h: 17";
-		rLen = 0;
-		rLoc = 244;
-		rType = 0;
-		vrLen = 274;
-		vrLoc = 0;
 	};
 }
