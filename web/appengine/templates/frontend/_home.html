@@ -3,6 +3,35 @@
   <META http- equiv="Content-Type" content="text/html; charset=utf-8">
     <title>eldia.com - Diario matutino de la ciudad de La Plata</title>
     <link rel="stylesheet" type="text/css" href="/css/demo.css">
+    <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+      function loadMore(sender){
+        var more = $(sender).attr('more_cursor');
+        if(jQuery.trim(more).length==0)
+          return false;
+        var url = $(sender).attr('href') + $(sender).attr('more_cursor');
+        $('#loading').show();
+        g_currentSearchXHR = jQuery.ajax({
+          url: url,
+          type: 'get',
+          dataType: 'json',
+          error: function(jqXHR, textStatus, errorThrown) {
+            $('#loading').hide();
+            //alert(textStatus + '|' + errorThrown);
+            return false;
+          },
+          success: function(obj) {
+            g_currentSearchXHR = null;
+            
+            $('#informacion').append(obj.html);
+            $(sender).attr('more_cursor', obj.more_cursor);
+            $('#loading').hide();
+            return false;
+          }
+        });
+        return false;
+      }
+    </script>
   </head>
   <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid10533073">
   
@@ -24,26 +53,26 @@
 
     <section id="contenedor" class="tamano1">
       <section id="informacion">
-        {% for items in catitems %}
-          {% for item in items %}
-          <article class=" toi7342 nid1466728">
-            <a href="{{ url_for('frontend/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="{{item.title}}" title="{{item.title}}">
-              {% if item.image %}
-              <div class="contenedorImg">
-                <img style="width:117px" src="{{item.image}}=s117" class="lazyLoad">
-              </div>
-              {% endif %}
-              <div class="tema">
-                <span class="hora">{{item.published.strftime('%H:%M')}}</span>&nbsp;<span class="pipe">|</span>&nbsp;{{cats_conf[item.category.key().name()]}}
-              </div>
-              <h1 target="_blank" rel="external" >{{item.title}}</h1>
-            </a>
-          </article>
-          {% endfor %}
-        {% endfor %}
-
+        {%include "frontend/_articles.html"%}
       </section>
     </section>
-
+    
+    <section id="promoMobiles">
+      <div class="floatFix cajaDispositivos">
+        {% if the_category %}
+          <a id="more_cursor" class="tipo last" title="Ver más notas" href="{{url_for('frontend/secciones/category', category=the_category_id)+'?more_cursor='}}" more_cursor="{{more_cursor}}" onclick="return loadMore(this);">
+        {% else %}
+          <a id="more_cursor" class="tipo last" title="Ver más notas" href="{{url_for('frontend/home')+'?more_cursor='}}" more_cursor="{{more_cursor}}" onclick="return loadMore(this);">
+          
+        {% endif %}
+        <center>
+            <p style="display:block;">Ver más notas</p> 
+            <p id="loading" style="display:none;"><img src="/img/loading.gif" border="0" alt="Cargando Notas" title="Cargando notas"></p>
+          </center>
+        </a>
+        
+      </div>
+    </section>
+    
   </body>
 </html>

@@ -1,4 +1,4 @@
 cron:
 - description: Baja los articulos nuevos de el dia
   url: /download/eldia
-  schedule: every 5 minutes
+  schedule: every 30 minutes

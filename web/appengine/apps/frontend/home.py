@@ -7,25 +7,61 @@ from models import Article, Category, cats
 from utils import MyBaseHandler, get_or_404
 
 class Index(MyBaseHandler):
+  page_count = 10
   def get(self, **kwargs):
-
-    catitems = []
-    for cat in cats:
-      if cat['type']!='seccion':
-        continue
-      catitems.append( Article
-        .all()
-        .filter('category', db.Key.from_path('Category',cat['key']))
-        .order('-published')
-        .fetch(cat['count']) )
+    return self.build_response(None)
+    
+    
+  def get_seccion_articles(self, **kwargs):
+    # catitems = []
+    # catitems.append( Article
+                # .all()
+                # .filter('category', db.Key.from_path('Category',kwargs['category']))
+                # .order('-published')
+                # .fetch(20) )
+    # cats_conf=(dict((cat['key'], cat['desc']) for cat in cats))
+    # return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=cats_conf, the_category=cats_conf[kwargs['category']])
+    return self.build_response(kwargs['category'])
+    
+  def build_response(self, category):
+    
+    this_cursor = self.request.GET.get('more_cursor', None)
+    
+    if this_cursor is not None and len(str(this_cursor))<1:
+      this_cursor=None
+      
+    query = Article.all()
+    
+    cats_conf=(dict((cat['key'], cat['desc']) for cat in cats))
+    
+    the_category = None
+    if category is not None:
+      _category = db.Key.from_path('Category',category)
+      query.filter('category', _category)
+      the_category = cats_conf[category]
+      
+    if this_cursor is not None:
+      query.with_cursor(this_cursor)
+    
+    catitems = query.order('-published').fetch(self.page_count)
     
     # catitems.append( Article
       # .all()
       # .order('-published')
       # .fetch(50))
-        
-    return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=(dict((cat['key'], cat['desc']) for cat in cats)), the_category=None )
-
+    more_cursor=''
+    if len(catitems) == self.page_count:
+      more_cursor = query.cursor()
+  
+    if this_cursor is not None:
+      html    = self.render_template('frontend/_articles.html', catitems=catitems, cats_conf=cats_conf)
+      return self.render_json_response({
+          'html': html,
+          'more_cursor': more_cursor})
+          
+    return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=cats_conf, the_category=the_category, the_category_id=category, this_cursor=this_cursor, more_cursor = more_cursor )
+  
+  
 class ViewArticle(MyBaseHandler):
   def get(self, **kwargs):
 
@@ -42,16 +78,16 @@ class ListSecciones(MyBaseHandler):
   def get(self, **kwargs):
     return self.render_response('frontend/_secciones.html', cats=cats)
 
-class SeccionArticles(MyBaseHandler):
-  def get(self, **kwargs):
-    catitems = []
-    catitems.append( Article
-                .all()
-                .filter('category', db.Key.from_path('Category',kwargs['category']))
-                .order('-published')
-                .fetch(20) )
-    cats_conf=(dict((cat['key'], cat['desc']) for cat in cats))
-    return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=cats_conf, the_category=cats_conf[kwargs['category']])
+# class SeccionArticles(MyBaseHandler):
+  # def get(self, **kwargs):
+    # catitems = []
+    # catitems.append( Article
+                # .all()
+                # .filter('category', db.Key.from_path('Category',kwargs['category']))
+                # .order('-published')
+                # .fetch(20) )
+    # cats_conf=(dict((cat['key'], cat['desc']) for cat in cats))
+    # return self.render_response('frontend/_home.html', catitems=catitems, cats_conf=cats_conf, the_category=cats_conf[kwargs['category']])
 
 class ListServicios(MyBaseHandler):
   def get(self, **kwargs):
