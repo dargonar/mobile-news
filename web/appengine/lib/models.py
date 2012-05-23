@@ -29,18 +29,20 @@ cats = [
           {'key': 'mujer', 'count': 3, 'desc': u'Mujer', 'feed':'http://www.eldia.com.ar/rss/rss.aspx?ids=500', 'type':'suplemento'},
           {'key': 'cubo', 'count': 3, 'desc': u'CUBO', 'feed':'http://www.eldia.com.ar/rss/rss.aspx?ids=501', 'type':'suplemento'},
           
-          {'key': 'automotores', 'count': 3, 'desc': u'Automotores', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=7', 'type':'servicio'},
-          {'key': 'alquiler_inmuebles', 'count': 3, 'desc': u'Alquiler de inmuebles', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=2', 'type':'servicio'},
-          {'key': 'venta_inmuebles', 'count': 3, 'desc': u'Compra y venta de inmuebles', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=4', 'type':'servicio'},
-          {'key': 'cupones', 'count': 3, 'desc': u'Cupones de descuento', 'feed':u'#', 'type':'servicio'},
+          {'key': 'automotores', 'count': 3, 'desc': u'Automotores', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=7', 'type':'clasificado'},
+          {'key': 'alquiler_inmuebles', 'count': 3, 'desc': u'Alquiler de inmuebles', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=2', 'type':'clasificado'},
+          {'key': 'venta_inmuebles', 'count': 3, 'desc': u'Compra y venta de inmuebles', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=4', 'type':'clasificado'},
+          {'key': 'cupones', 'count': 3, 'desc': u'Cupones de descuento', 'feed':u'#', 'type':''},
           
-          {'key': 'festejos', 'count': 3, 'desc': u'Festejos y guarderías', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=15', 'type':'servicio'},
+          {'key': 'festejos', 'count': 3, 'desc': u'Festejos y guarderías', 'feed':'http://www.eldia.com/mc/clasi_rss.aspx?idr=15', 'type':'clasificado'},
                     
           {'key': 'farmacias', 'count': 3, 'desc': u'Farmacias de turno', 'feed':'http://www.eldia.com.ar/movil/turnos.aspx?IdT=1', 'type':'servicio'},
           #{'key': 'farmacias_1', 'count': 3, 'desc': u'Farmacias de turno hasta 8:30', 'feed':'http://www.eldia.com.ar/movil/turnos.aspx?IdT=1', 'type':'servicio'},
           #{'key': 'farmacias_2', 'count': 3, 'desc': u'Farmacias de turno desde 8:30', 'feed':'http://www.eldia.com.ar/movil/turnos.aspx?IdT=2', 'type':'servicio'},
            
-          {'key': 'telefonos', 'count': 3, 'desc': u'Teléfonos útiles', 'feed':'http://www.eldia.com.ar/varios/telefonos.aspx', 'type':'servicio'}
+          {'key': 'telefonos', 'count': 3, 'desc': u'Teléfonos útiles', 'feed':'http://www.eldia.com.ar/varios/telefonos.aspx', 'type':'servicio'},
+          {'key': 'transito', 'count': 3, 'desc': u'Estado del tránsito', 'feed':'#', 'type':'servicio'},
+          {'key': 'meteorologia', 'count': 3, 'desc': u'Pronóstico meteorológico', 'feed':'#', 'type':'servicio'}
             
           
         ]

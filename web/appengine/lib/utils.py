@@ -31,6 +31,8 @@ class Jinja2Mixin(object):
 
   def setup_jinja_enviroment(self, env):
     env.globals['url_for'] = self.uri_for
+    
+    env.globals['session']     = self.session
     pass
           
   def render_response(self, _template, **context):
@@ -82,3 +84,12 @@ class MyBaseHandler(RequestHandler, Jinja2Mixin):
   @cached_property
   def config(self):
     return get_app().config
+    
+class FrontendMixin(object):
+  def do_fullversion(self):
+    self.session['fullversion']                  = True
+  def dont_fullversion(self):
+    self.session['fullversion']                  = False
+    
+class FrontendHandler(MyBaseHandler, FrontendMixin):
+  pass

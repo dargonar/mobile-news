@@ -98,8 +98,8 @@ section.cabezal .fondoNav aside a b {display:block;float:left;font:normal 18px A
 section.cabezal .fondoNav aside a img {float:left;padding:6px 0 0 5px;width:10px;height:12px;}
 
 /*desplegable*/
-.desplegable {width:100%;font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;position:absolute;/*top:40px;*/clear:both;z-index:1000;}
-.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;padding:0 10px 10px 10px;/*width:40%;border-right:1px solid #c2c2c2;*/width:100%;}
+.desplegable {font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;/*width:100%;position:absolute;*//*top:40px;*/clear:both;z-index:1000;}
+.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;padding:0 0px 10px 10px;width:60%;/*border-right:1px solid #c2c2c2;*/}
 .desplegable .columnaDos, .desplegable .servicios .columnaDos {float:left;margin:0 10px 10px 10px;width:45%;}
 .desplegable .columnaUno a, .desplegable .columnaDos a, .desplegable .servicios .columnaUno a, .desplegable .servicios .ColumnaDos a {text-decoration:none;color:#335577;padding:10px 0;display:block;text-transform:uppercase;}
 .desplegable .servicios .columnaUno {border-right:0; height:100%;}
@@ -126,7 +126,7 @@ section#contenedor {width:100%;}
 section.banner {margin:auto;margin-top:7px;margin-bottom:7px; text-align:center;}
 
 /*footer*/
-footer .pie {background: #e7e7e7; /* Old browsers */
+footer .pie {background: #000000; /* Old browsers */
 background: -moz-linear-gradient(top, #e7e7e7 0%, #f3f3f3 19%, #f5f5f5 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7e7e7), color-stop(19%,#f3f3f3), color-stop(100%,#f5f5f5)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(top, #e7e7e7 0%,#f3f3f3 19%,#f5f5f5 100%); /* Chrome10+,Safari5.1+ */
@@ -247,7 +247,7 @@ section#contenedor {width:100%;}
 section.banner {margin:auto;margin-top:7px;margin-bottom:7px;}
 
 /*apertura*/
-section#apertura {width:100%;margin:20px 0 10px 0;}
+section#apertura {width:100%;margin:20px 0 30px 0;}
 section#apertura article.nota {margin:10px;}
 section#apertura article.nota a.info {display:block;border-bottom:1px solid #c2c2c2;text-decoration:none;width:100%;padding-bottom:5px;}
 section#apertura article.nota a.info .fotoBomba, section#apertura article.nota .destacados .fotoBomba {border-bottom:none;min-height:100px;text-align:center;display:none;}
@@ -470,11 +470,20 @@ section#humor article.itemHumor {margin:10px;}
 section#humor article.itemHumor .contenedorImagen {border:1px solid #c2c2c2;border-bottom:none;min-height:100px;text-align:center;}
 section#humor article.itemHumor .contenedorImagen img {width:100%;max-width:460px;}
 
+a.alink.back {float:left;height:48px;width:48px; background:url(/img/fullversion/back.png) no-repeat 0 -8px; position:absolute;}
+a.alink.back:hover {background:url(/img/fullversion/back_gray.png) no-repeat 0 -8px;}
 
+a.alink.favs_add {float:right; top:0px;right:0px;height:48px;width:48px; background:url(/img/fullversion/favs_addto.png) no-repeat 0 -8px; position:absolute;}
+a.alink.favs_add:hover {background:url(/img/fullversion/favs_addto_gray.png) no-repeat 0 -8px; }
 
-
-
-
-
-
-
+footer {background: url(/img/fullversion/tabbar_bg.png) no-repeat center center;height:48px;width:344px;position:fixed; top:441px;}
+footer div.footer_icons {padding-left:4px;width:330px;height:48px;}
+footer div.footer_icons a{display:inline-block;}
+footer div.footer_icons a.noticias { width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -14px 0px ;}
+footer div.footer_icons a.noticias:hover, footer div.footer_icons a.noticias.active { background:url(/img/fullversion/tabbar_active.png)  no-repeat no-repeat -14px 0px ;}
+footer div.footer_icons a.secciones{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -94px 0px ;}
+footer div.footer_icons a.secciones:hover, footer div.footer_icons a.secciones.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -94px 0px ;}
+footer div.footer_icons a.clasificados{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -173px 0px ;}
+footer div.footer_icons a.clasificados:hover, footer div.footer_icons a.clasificados.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -173px 0px ;}
+footer div.footer_icons a.servicios{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -253px 0px ;}
+footer div.footer_icons a.servicios:hover, footer div.footer_icons a.servicios.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -253px 0px ;}

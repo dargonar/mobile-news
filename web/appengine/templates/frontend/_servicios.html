@@ -1,11 +1,5 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd"> <html>
-<head>
-  <META http- equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>eldia.com - Diario matutino de la ciudad de La Plata</title>
-    <link rel="stylesheet" type="text/css" href="/css/demo.css">
-  </head>
-  <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid10533073">
-  
+{% extends "frontend/_base.html"%}  
+{%block content%}    
     <header>
       <section class="cabezal">
         <nav class="desplegable">
@@ -16,7 +10,7 @@
                 <div class="columnaUno">
                   {% for cat in cats %}
                     {% if cat['type']=='servicio' %}
-                      <a href="{{ url_for('frontend/secciones/category', category=cat['key']) }}" >{{cat['desc']}}</a>
+                      <a href="#" >{{cat['desc']}}</a>
                     {% endif %}
                   {% endfor %}
               
@@ -27,5 +21,4 @@
         </nav>
       </section>
     </header>
-  </body>
-</html>
+{%endblock%}  

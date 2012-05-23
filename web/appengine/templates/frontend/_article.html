@@ -1,63 +1,47 @@
-﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<html>
-  
-<!-- Mirrored from www.lanacion.com.ar/m1/1466707-quien-es-la-misteriosa-amiga-del-rey-juan-carlos by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 20 Apr 2012 15:21:41 GMT -->
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{{article.title}}</title>
-    <link rel="stylesheet" type="text/css" href="/css/demo.css">
-  </head>
-  <body bgcolor="#ffffff" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" width="100%" class="pid1466707">
+﻿{% extends "frontend/_base.html"%}  
 
-  {% include 'frontend/_header.html' %}
+{%block navigation%}  
+  {% if session['fullversion']==True %}
+    {% set include_buttons = True %}
+    {%include "frontend/_header_fullversion.html"%}
+    <section id="apertura"></section>
+  {% endif %}
+{%endblock%}  
 
-    <section id="contenedor" class="tamano1">
-
+{%block content%}  
+    <section id="contenedor" class="tamano1" style="padding-bottom:48px;">
       <div class="nota">
         <section id="encabezado" class="floatFix">
           <h1>{{article.title}}</h1>
           <p>{{article.excerpt}}</p><span>{{article.published.strftime('%d.%m.%Y | %H:%M')}}</span>
         </section>
         <section id="cuerpo">
-            {% if article.image %} 
-            <br/>
-            <figure><img src="{{article.image}}"></figure>
-            {% endif %}
-            
-            {{article.content}}
-            
-            <!--
-            {% if article.rel_art_keys|length > 0 %}
-              <br/>
-              <br/>
-              Notas relacionadas
-              <br/>
-              {% for rel_art in article.rel_art_keys %}
-                {% set rel_article = rel_articles[loop.index0] %}
-                <a href="{{ url_for('frontend/article', article=rel_article.key()|string) }}" class="info floatFix" rel="external" alt="{{rel_article.title}}" title="{{rel_article.title}}">{{ rel_article.title }}</a><br/>
-              {% endfor %}
-            {% endif %} -->
+          {% if article.image %} 
+          <br/>
+          <figure><img src="{{article.image}}"></figure>
+          {% endif %}
+          {{article.content}}
         </section>
-        {% if article.rel_art_keys|length > 0 %}
+      {% if article.rel_art_keys|length > 0 %}
         <section class="cabezal">
-        <nav class="desplegable">
-          <div class="floatFix fondoNav">
-            <div id="troncal">
-              <div class="floatFix servicios">
-                <span>Notas relacionadas</span>
-                <div class="columnaUno">
-                  {% for rel_article in rel_articles %}
-                    {% if rel_article %}
-                    <a href="{{ url_for('frontend/article', article=rel_article.key()|string) }}" class="info floatFix" style="text-transform:none;" rel="external" alt="{{rel_article.title}}" title="{{rel_article.title}}">{{ rel_article.title }}</a>
-                    {% endif %}
-                  {% endfor %}
-              
+          <nav class="desplegable">
+            <div class="floatFix fondoNav">
+              <div id="troncal">
+                <div class="floatFix servicios">
+                  <span>Notas relacionadas</span>
+                  <div class="columnaUno">
+                    {% for rel_article in rel_articles %}
+                      {% if rel_article %}
+                      <a href="{{ url_for('frontend/article', article=rel_article.key()|string) }}" class="info floatFix" style="text-transform:none;" rel="external" alt="{{rel_article.title}}" title="{{rel_article.title}}">{{ rel_article.title }}</a>
+                      {% endif %}
+                    {% endfor %}
+                
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </nav>
-      </section>
+          </nav>
+        </section>
       {% endif %}
-  </body>
-</html>
+    </section>
+{%endblock%}  
