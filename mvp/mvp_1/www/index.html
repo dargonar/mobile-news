@@ -60,14 +60,14 @@
 			<!-- Start Navigation -->
 			<nav>
 				<ul>
-					<li><a href="#home">Bienvenidos</a></li>
-					<li><a href="#team">El equipo</a></li>
-					<li><a href="#features">Características</a></li>
+					<li><a href="#home">Inicio</a></li>
+					<!--li><a href="#team">El equipo</a></li-->
+					<li><a href="#features">¿Qué te propenemos?</a></li>
 					<!-- li><a href="#screenshots">Pantallas</a></li -->
-					<li><a href="#updates">Actualizaciones</a></li>
+					<li><a href="#updates">FAQ</a></li>
 					<!-- li><a href="#press">Press</a></li-->
 					<li><a href="#contact">Contacto</a></li>
-					<li><a href="#styles">Styles</a></li>
+					<!-- li><a href="#styles">Styles</a></li -->
 				</ul>
 				<span class="arrow"></span>
 			</nav>
@@ -89,18 +89,20 @@
 			<p>
         Ahora podés estar más cerca de tus lectores. 
         <br /><b>DiariosMóviles</b>&copy; te ofrece la edición para smartphones de tu diario. 
-        <br/>Disponible para Android, iPhone, iPad y Blackberry.
+        <br/>Disponible para Android, iPhone y Blackberry.
 			</p>
 			
 			<div class="buttons">
-				<a href="demo/demo.html" class="large_button" id="apple">
-					<span class="icon"></span>
-					<em>Ver demo para</em> iPhone
-				</a>
-				<a href="demo/demo.html" class="large_button" id="android">
+				<center>
+          <a href="demo.html" class="large_button" id="apple">
+            <span class="icon"></span>
+            <em>Ver demo para</em> iPhone
+          </a>
+				</center>
+        <!--a href="demo/demo.html" class="large_button" id="android">
 					<span class="icon"></span>
 					<em>Ver demo para</em> Android
-				</a>
+				</a-->
 			</div>
 			
 			<div class="price centered">
@@ -120,27 +122,27 @@
 
 					<div class="slide" data-effect-out="slide">
 						
-						<div class="background iphone-white">
-							<img src="images/slider/iphone-back.jpg" alt="" />
-						</div>
-						
-						<div class="foreground iphone-white">
-							<img src="images/slider/iphone-front.jpg" alt="" />
-						</div>
-						
-					</div>
-					
-					<div class="slide" data-effect-in="slide">
-						
 						<div class="background iphone-black">
 							<img src="images/slider/iphone-back.jpg" alt="" />
 						</div>
 						
 						<div class="foreground iphone-black">
-							<iframe src="http://player.vimeo.com/video/40738306?title=0&amp;byline=0&amp;portrait=0" width="230" height="345" frameborder="0"></iframe>
+							<img src="images/slider/iphone-front.jpg" alt="" />
 						</div>
 						
 					</div>
+					
+					<!-- div class="slide" data-effect-in="slide">
+						
+						<div class="background iphone-white">
+							<img src="images/slider/iphone-back.jpg" alt="" />
+						</div>
+						
+						<div class="foreground iphone-white">
+							<iframe src="http://player.vimeo.com/video/40738306?title=0&amp;byline=0&amp;portrait=0" width="230" height="345" frameborder="0"></iframe>
+						</div>
+						
+					</div -->
 				
 					<div class="slide">
 						
@@ -161,26 +163,26 @@
 						</div>
 						
 						<div class="foreground android">
-							<img src="images/slider/android-back.jpg" alt="" />
+							<img src="images/slider/android-front.jpg" alt="" />
 						</div>
 						
 					</div>
 					
-					<div class="slide">
+					<!--div class="slide">
 						
-						<div class="background ipad-black">
+						<div class="background ipad-white">
 							<iframe src="http://player.vimeo.com/video/40603475?title=0&amp;byline=0&amp;portrait=0" width="352" height="468" frameborder="0"></iframe>
 						</div>
 												
-					</div>
+					</div-->
 
-					<div class="slide">
+					<!--div class="slide">
 						
-						<div class="background ipad-white">
+            <div class="background ipad-black">
 							<img src="images/slider/ipad.jpg" alt="" />
 						</div>
 												
-					</div>
+					</div-->
 					
 				</div>
 			
@@ -480,28 +482,28 @@
 								<input type="text" name="name" id="name" value="" />
 							</p>
 							<p class="right">
-								<label for="email">Email*</label>
-								<input type="text" name="email" id="email" value="" />
+								<label for="website">Web</label>
+								<input type="text" name="website" id="website" value="" />
 							</p>
 						</div>
 					
 						<div class="row">
 							<p class="left">
-								<label for="website">Web</label>
-								<input type="text" name="website" id="website" value="" />
+								<label for="email">Email*</label>
+								<input type="text" name="email" id="email" value="" />
 							</p>
-							<p class="right">
-								<label for="telephone">Teléfono*</label>
-								<input type="text" name="telephone" id="telephone" value="" />
+              <p class="right">
+								<label for="schedule">Horario de preferencia de contacto*</label>
+								<input type="text" name="schedule" id="schedule" value="" />
 							</p>
 						</div>
             
             <div class="row">
 							<p class="left">
-								<label for="website">Horario de preferencia de contacto*</label>
-								<input type="text" name="website" id="website" value="" />
+								<label for="telephone">Teléfono*</label>
+								<input type="text" name="telephone" id="telephone" value="" />
 							</p>
-						</div>
+					 </div>
             
 						<p>
 							<label for="message" class="textarea">Comentario</label>

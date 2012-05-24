@@ -84,7 +84,7 @@ section.clima span b {color:#656565;}
 section.clima span b.ciudad {font-size:12px;font-weight:normal;}
 section.clima span#pr_temperatura {padding-top:0; float:none;}
 
-section.cabezal .fondoNav {border-top:1px solid #c2c2c2;border-bottom:1px solid #c2c2c2;width:100%;position:relative;}
+section.cabezal .fondoNav {border-top:1px solid #c2c2c2;/*border-bottom:1px solid #c2c2c2;*/width:100%;position:relative;}
 section.cabezal .fondoNav #troncal a.secciones {display:block;height:28px;float:left;width:auto/*145px*/;font:18px Arial,sans-serif;color:#fff;padding-top:9px;padding-left:10px;padding-right:10px;text-decoration:none;
   /*background:#32A9D3;*/
   background:#1A395E;
@@ -98,8 +98,8 @@ section.cabezal .fondoNav aside a b {display:block;float:left;font:normal 18px A
 section.cabezal .fondoNav aside a img {float:left;padding:6px 0 0 5px;width:10px;height:12px;}
 
 /*desplegable*/
-.desplegable {font:normal 15px Arial,sans-serif;border-bottom:1px solid #c2c2c2;background:#ffffff;/*width:100%;position:absolute;*//*top:40px;*/clear:both;z-index:1000;}
-.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left;padding:0 0px 10px 10px;width:60%;/*border-right:1px solid #c2c2c2;*/}
+.desplegable {font:normal 15px Arial,sans-serif;/*border-bottom:1px solid #c2c2c2;*/background:#ffffff;/*width:100%;position:absolute;*//*top:40px;*/clear:both;z-index:1000;}
+.desplegable .columnaUno, .desplegable .servicios .columnaUno {float:left; padding:10px 0px 20px 10px;width:300px; /*padding:0 0px 10px 10px;width:60%;*//*border-right:1px solid #c2c2c2;*/}
 .desplegable .columnaDos, .desplegable .servicios .columnaDos {float:left;margin:0 10px 10px 10px;width:45%;}
 .desplegable .columnaUno a, .desplegable .columnaDos a, .desplegable .servicios .columnaUno a, .desplegable .servicios .ColumnaDos a {text-decoration:none;color:#335577;padding:10px 0;display:block;text-transform:uppercase;}
 .desplegable .servicios .columnaUno {border-right:0; height:100%;}
@@ -247,7 +247,7 @@ section#contenedor {width:100%;}
 section.banner {margin:auto;margin-top:7px;margin-bottom:7px;}
 
 /*apertura*/
-section#apertura {width:100%;margin:20px 0 30px 0;}
+section#apertura {width:300px;margin:5px 0px 30px 0px; height:1px;}
 section#apertura article.nota {margin:10px;}
 section#apertura article.nota a.info {display:block;border-bottom:1px solid #c2c2c2;text-decoration:none;width:100%;padding-bottom:5px;}
 section#apertura article.nota a.info .fotoBomba, section#apertura article.nota .destacados .fotoBomba {border-bottom:none;min-height:100px;text-align:center;display:none;}
@@ -279,7 +279,10 @@ section#informacion article a.info h1, section#espectaculos article a.info h1 {d
 
 section#topico {width:100%;border-top:1px solid #c2c2c2;}
 section#topico a {background:url("../../../../_ui/touch/imgs/layout/bullet.gif") no-repeat 10px 7px;display:block;margin-bottom:13px;color:#335577;text-decoration:none;padding:0 10px 0 20px;}
-section#topico .techo {display:block;background:#32a9d3;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:5px 0 4px 10px;margin-bottom:12px;}
+section#topico .techo{display:block;background:#32a9d3;color:#fff;font:bold 14px Arial,sans-serif;width:50%;padding:5px 0 4px 10px;margin-bottom:12px;}
+
+.cabezal .header.techo {width:317px; margin-bottom: 0px;  height: 28px;float: left;display: block;font: 18px Arial,sans-serif;color: white;padding: 9px 0px 0px 10px;text-decoration: none;background: #32A9D3;
+}
 
 a.masLeidas {display:block;font:15px Arial,sans-serif;color:#335577;text-decoration:none;border-top:2px solid #ccc;height:20px;padding-top:14px;padding-bottom:11px;padding-right:10px;}
 a.masLeidas b {display:block;float:left;padding-left:8px;}
@@ -395,8 +398,8 @@ section#encabezado p.autor {width:100%;}
 section#encabezado p.autor span {display:inline!important;float:none!important;margin:0;}
 
 section#cuerpo {margin-top:10px;color:#333333;}
-section#cuerpo figure, figure.destacada, div.destacado {margin:10px;text-align:center;}
-section#cuerpo figure div, figure.destacada div {border:1px solid #c2c2c2;}
+section#cuerpo figure, figure.destacada, div.destacado {margin:10px 10px 10px 0px;text-align:center;}
+section#cuerpo figure div, figure.destacada div {border:1px solid #c2c2c2;margin-left: -10px;}
 section#cuerpo figure img, figure.destacada img {width:100%;max-width:460px;}
 section#cuerpo figure figcaption, figure.destacada figcaption {color:#858585;margin:5px 0;text-align:left!important;}
 section#cuerpo p {margin:10px 10px 10px 0px;} /**/

@@ -66,7 +66,7 @@ class ViewArticle(FrontendHandler):
       rel_articles_keys = []
       for key in article.rel_art_keys:
         rel_articles.append( db.get(db.Key.from_path('Article',key)))
-    self.session['page']='home'
+    #self.session['page']='home'
     return self.render_response('frontend/_article.html', article=article, rel_articles = rel_articles)
 
 class ListClasificados(FrontendHandler):
