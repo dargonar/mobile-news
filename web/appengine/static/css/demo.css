@@ -490,3 +490,5 @@ footer div.footer_icons a.clasificados{ width:77px; height:48px;background:url(/
 footer div.footer_icons a.clasificados:hover, footer div.footer_icons a.clasificados.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -173px 0px ;}
 footer div.footer_icons a.servicios{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -253px 0px ;}
 footer div.footer_icons a.servicios:hover, footer div.footer_icons a.servicios.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -253px 0px ;}
+
+div.clasificado_resaltado {background-color:#efefef; width:283px; padding:5px;}

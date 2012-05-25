@@ -3,7 +3,7 @@ import logging
 
 from google.appengine.ext import db
 
-from models import Article, Category, cats
+from models import Article, Category, cats, DiarioIVC
 from utils import FrontendHandler, get_or_404
 
 class Index(FrontendHandler):
@@ -95,3 +95,9 @@ class ListSuplementos(FrontendHandler):
 class Profile(FrontendHandler):
   def get(self, **kwargs):
     return self.render_response('frontend/_profile.html')
+
+class DiariosCsv(FrontendHandler):
+  def get(self, **kwargs):
+    query = DiarioIVC.all()
+    diarios = query.fetch(1000)
+    return self.render_response('frontend/_csv.html', diarios=diarios)

@@ -1,12 +1,30 @@
 # -*- coding: utf-8 -*-
 import logging
 import urllib
+from re import *
 
 from google.appengine.ext import db
 
 from webapp2 import abort, cached_property, RequestHandler, Response, HTTPException, uri_for as url_for, get_app
 from webapp2_extras import jinja2, sessions, json
 
+_slugify_strip_re = compile(r'[^\w\s-]')
+_slugify_hyphenate_re = compile(r'[-\s]+')
+def do_slugify(value):
+  """
+  Normalizes string, converts to lowercase, removes non-alpha characters,
+  and converts spaces to hyphens.
+  
+  From Django's "django/template/defaultfilters.py".
+  """
+  import unicodedata
+  
+  if not isinstance(value, unicode):
+      value = unicode(value)
+  value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
+  value = unicode(_slugify_strip_re.sub('', value).strip().lower())
+  return _slugify_hyphenate_re.sub('-', value)
+  
 def get_or_404(key):
   try:
       obj = db.get(key)

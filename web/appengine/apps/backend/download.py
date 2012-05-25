@@ -15,11 +15,11 @@ from google.appengine.ext import db, blobstore
 from google.appengine.api.images import get_serving_url
 
 from webapp2 import RequestHandler
-from models  import Category, Article, cats as feeds
+from models  import Category, Article, cats as feeds, DiarioIVC, Kato
+
+from utils import do_slugify
 
 class ElDia(RequestHandler):
-  
-  
   def download(self, **kwargs):
     for category in feeds:
       if category['type']!='seccion':
@@ -136,3 +136,92 @@ class ElDia(RequestHandler):
     tmp = parsedate(str)
     return datetime(tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5])
 
+# =======================================================
+# =======================================================
+class IVC(RequestHandler):
+  def download(self, **kwargs):
+    items = [
+            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=1&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'diarios_pagos'},
+            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=2&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'diarios_gratis'},
+            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=3&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_pagos'},
+            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=4&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_gratis'}
+          ]
+    for item in items:
+      taskqueue.add(url='/download/ivc/feed', params={'feed':item['url'], 'category':item['category']})
+
+  def download_feed(self, **kwargs):
+    self.request.charset = 'utf-8'
+    
+    feed = self.request.POST.get('feed')
+    category = self.request.POST.get('category')
+
+    soup = BeautifulSoup(urlopen(feed))
+    links = soup.select('table.tabla-interna td.tabla-interna a')
+    
+    for item in links:
+      params = {
+        'category'  : category,
+        'link'      : u'http://www.ivc.org.ar'+item.get('href')
+      }
+
+      taskqueue.add(url='/download/ivc/article', params=params)
+
+  def get_link_hash(self, link):
+    return hashlib.sha1(link).hexdigest()
+    
+  
+  def download_article(self, **kwargs):
+    self.request.charset = 'utf-8'
+    
+    link        = self.request.POST.get('link')
+    #link   = u'http://www.ivc.org.ar/consulta?op=c&asociado_id=78'
+    
+    soup = BeautifulSoup(urlopen(link))
+    
+    medio = DiarioIVC()
+    
+    datos_medio       = soup.select('#datos_medio td.tabla-interna')
+    
+    medio.ivc_url           = link
+    
+    medio.nombre            = datos_medio[0].text
+    medio.razon_social      = datos_medio[1].text
+    medio.domicilio         = datos_medio[2].text
+    medio.localidad         = datos_medio[3].text
+    medio.provincia         = datos_medio[4].text
+    medio.telefono          = datos_medio[5].text
+    medio.email             = datos_medio[6].text
+    medio.web               = datos_medio[7].text
+    medio.categoria         = self.request.POST.get('category')
+    
+    tipos_promedio       = soup.findAll('td', colspan="3")
+    index=0
+    # for tipo_promedio_item in tipos_promedio:
+      # m = Kato()
+      # m.url     = link
+      # m.nombre  = tipo_promedio_item.text
+      # m.index   = index
+      # index+=1
+      # m.put()
+      # continue
+    # return
+    
+    if len(tipos_promedio)>0:
+      promedio = tipos_promedio[0].parent.parent.parent.findAll('td')
+      marca = False
+      datillos = []
+      for promedio_item in promedio:
+        if marca:
+          datillos.append(promedio_item.text)
+          marca=False
+          continue
+        if promedio_item.text == 'Promedio':
+          marca=True
+      
+      index=0    
+      for tipo_promedio in tipos_promedio:
+        setattr(medio, do_slugify(tipo_promedio.text).replace('-', '_'), float(datillos[index]));
+        index+=1
+    
+    medio.put()
+  

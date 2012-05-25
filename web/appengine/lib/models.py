@@ -64,3 +64,36 @@ class Article(db.Model):
   content           = db.TextProperty()
   rel_art_keys      = db.StringListProperty()
   created_at        = db.DateProperty(auto_now_add=True)
+
+class DiarioIVC(db.Model):
+  nombre            = db.StringProperty(indexed=False)
+  razon_social      = db.StringProperty(indexed=False)
+  domicilio         = db.StringProperty(indexed=False)
+  localidad         = db.StringProperty(indexed=False)
+  provincia         = db.StringProperty(indexed=False)
+  telefono          = db.StringProperty(indexed=False)
+  email             = db.StringProperty(indexed=False)
+  web               = db.StringProperty(indexed=False)
+  promedio          = db.StringProperty(indexed=False)
+  promedio_titulo   = db.StringProperty(indexed=False)
+  categoria         = db.StringProperty(indexed=False)
+  # Circ. Neta Pagada Domingo
+  circ_neta_pagada_domingo            = db.FloatProperty(indexed=False)
+  # Circ. Neta Pagada Lunes a Domingo
+  circ_neta_pagada_lunes_a_domingo    = db.FloatProperty(indexed=False)
+  # Lunes a Viernes
+  lunes_a_viernes                     = db.FloatProperty(indexed=False)
+  # Lunes a Sabado
+  lunes_a_sabado                      = db.FloatProperty(indexed=False)
+  # Bloque
+  bloque                              = db.FloatProperty(indexed=False)
+  # Circulacion neta pagada
+  circulacion_neta_pagada             = db.FloatProperty(indexed=False)  
+  # Individualizada
+  individualizada                     = db.FloatProperty(indexed=False)
+  ivc_url           = db.StringProperty(indexed=False)
+  
+class Kato(db.Model):
+  nombre            = db.StringProperty()
+  url               = db.StringProperty()
+  index             = db.IntegerProperty()

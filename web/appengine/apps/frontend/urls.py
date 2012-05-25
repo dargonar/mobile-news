@@ -16,6 +16,7 @@ def get_rules():
       Route('/m/clasificados/automotores',          name='frontend/clasificados/automotores',       handler='apps.frontend.home.ListClasificados:automotores'),
       Route('/m/suplementos',           name='frontend/suplementos',        handler='apps.frontend.home.ListSuplementos'),
       Route('/m/perfil',                name='frontend/perfil',             handler='apps.frontend.home.Profile'),
+      Route('/diarios/csv',             name='frontend/csv',                handler='apps.frontend.home.DiariosCsv'),
     ]
     
     return rules
