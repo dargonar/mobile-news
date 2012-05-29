@@ -14,7 +14,7 @@ handlers:
   upload: static/favicon.ico
   mime_type: image/vnd.microsoft.icon
 
-- url: /(css|img|js)/(.*)
+- url: /(css|img|js|mvp_1)/(.*)
   static_files: static/\1/\2
   upload: static/(.*)
 

@@ -41,7 +41,7 @@ body {
 section #pages {
 	float: right;
 	width: 525px;
-	background: transparent url('../images/light-page_shadow.png') repeat-y top left;
+	background: transparent url('/mvp_1/images/light-page_shadow.png') repeat-y top left;
 	padding: 0px 0px 0px 50px;
 	position: relative;
 }
@@ -53,11 +53,11 @@ section #pages {
 		left: 0px;
 	}
 	section #pages .top_shadow {
-		background: transparent url('../images/light-page_shadow_top.png') no-repeat top left;
+		background: transparent url('/mvp_1/images/light-page_shadow_top.png') no-repeat top left;
 		top: 0px;
 	}
 	section #pages .bottom_shadow {
-		background: transparent url('../images/light-page_shadow_bottom.png') no-repeat top left;
+		background: transparent url('/mvp_1/images/light-page_shadow_bottom.png') no-repeat top left;
 		bottom: 0px;
 	}
 	section #pages div.page { 
@@ -116,7 +116,7 @@ header {
 			header nav span.arrow {
 				width: 24px;
 				height: 13px;
-				background: url('../images/light-nav_arrow.png') no-repeat;
+				background: url('/mvp_1/images/light-nav_arrow.png') no-repeat;
 				display: none;
 				position: absolute;
 				top: 58px;
@@ -129,7 +129,7 @@ header {
 	  -webkit-padding-end: 20px;
 	  -webkit-padding-start: 2px;
 	  -webkit-user-select: none;
-	  background-image: url(../images/select-arrow.png), 
+	  background-image: url(/mvp_1/images/select-arrow.png), 
 	  -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
 	  background-position: center right;
 	  background-repeat: no-repeat;
@@ -181,7 +181,7 @@ section { }
 			}
 		section #app_info .price {
 			clear: both;
-			background: url('../images/light-arrow.png') no-repeat top center;
+			background: url('/mvp_1/images/light-arrow.png') no-repeat top center;
 			padding-top: 50px;
 			text-align: center;
 		}
@@ -232,9 +232,9 @@ div#slider {
 		div.slide .background.iphone-white {
 			width: 380px;
 			height: 555px;
-			background: url('../images/devices/iphone-black-back.png') no-repeat;
+			background: url('/mvp_1/images/devices/iphone-black-back.png') no-repeat;
 		}
-		div.slide .background.iphone-white { background: url('../images/devices/iphone-white-back.png') no-repeat; }
+		div.slide .background.iphone-white { background: url('/mvp_1/images/devices/iphone-white-back.png') no-repeat; }
 			div.slide .background.iphone-black img,
 			div.slide .background.iphone-black iframe,
 			div.slide .background.iphone-white img,
@@ -243,9 +243,9 @@ div#slider {
 		div.slide .foreground.iphone-white {
 			width: 386px;
 			height: 597px;
-			background: url('../images/devices/iphone-black-front.png') no-repeat;
+			background: url('/mvp_1/images/devices/iphone-black-front.png') no-repeat;
 		}
-		div.slide .foreground.iphone-white { background: url('../images/devices/iphone-white-front.png') no-repeat; }
+		div.slide .foreground.iphone-white { background: url('/mvp_1/images/devices/iphone-white-front.png') no-repeat; }
 			div.slide .foreground.iphone-black img,
 			div.slide .foreground.iphone-black iframe,
 			div.slide .foreground.iphone-white img,
@@ -254,14 +254,14 @@ div#slider {
 		div.slide .background.blackberry {
 			width: 380px;
 			height: 499px;
-			background: url('../images/devices/blackberry-back.png') no-repeat;
+			background: url('/mvp_1/images/devices/blackberry-back.png') no-repeat;
 		}
 			div.slide .background.blackberry img,
 			div.slide .background.blackberry iframe { width: 206px; height: 270px; top: 72px; left: 80px; }
 		div.slide .foreground.blackberry {
 			width: 386px;
 			height: 540px;
-			background: url('../images/devices/blackberry-front.png') no-repeat;
+			background: url('/mvp_1/images/devices/blackberry-front.png') no-repeat;
 		}
 			div.slide .foreground.blackberry img,
 			div.slide .foreground.blackberry iframe { width: 224px; height: 292px; top: 80px; left: 78px; }
@@ -269,14 +269,14 @@ div#slider {
 		div.slide .background.android {
 			width: 350px;
 			height: 482px;
-			background: url('../images/devices/android-back.png') no-repeat;
+			background: url('/mvp_1/images/devices/android-back.png') no-repeat;
 		}
 			div.slide .background.android img,
 			div.slide .background.android iframe { width: 186px; height: 290px; top: 76px; left: 87px; }
 		div.slide .foreground.android {
 			width: 378px;
 			height: 538px;
-			background: url('../images/devices/android-front.png') no-repeat;
+			background: url('/mvp_1/images/devices/android-front.png') no-repeat;
 		}
 			div.slide .foreground.android img,
 			div.slide .foreground.android iframe { width: 207px; height: 325px; top: 85px; left: 90px; }		
@@ -287,13 +287,13 @@ div#slider {
 			height: 639px;
 			top: 0;
 			left: 0;
-			background: url('../images/devices/ipad-black.png') no-repeat;
+			background: url('/mvp_1/images/devices/ipad-black.png') no-repeat;
 		}
 			div.slide .ipad-black img,
 			div.slide .ipad-black iframe,
 			div.slide .ipad-white img,
 			div.slide .ipad-white iframe { width: 352px; height: 468px; top: 49px; left: 129px; }
-		div.slide .ipad-white {	background: url('../images/devices/ipad-white.png') no-repeat; }
+		div.slide .ipad-white {	background: url('/mvp_1/images/devices/ipad-white.png') no-repeat; }
 /* Slider Navigation */
 div.echo-nav {
 	position: absolute;
@@ -397,8 +397,8 @@ div.screenshot_grid {
 		width: 145px;
 	}
 	div.screenshot_grid .hover{
-		background: transparent url('../images/zoom.png') no-repeat center center;
-		background: rgba(0,0,0,0.6) url('../images/zoom.png') no-repeat center center;
+		background: transparent url('/mvp_1/images/zoom.png') no-repeat center center;
+		background: rgba(0,0,0,0.6) url('/mvp_1/images/zoom.png') no-repeat center center;
 		position: absolute;
 		top: 0px;
 		left: 0px;
@@ -609,7 +609,7 @@ h2 {
 	color: #353535;
 }
 	h2.icon {
-		background: url('../images/features_icons.png') no-repeat top left;
+		background: url('/mvp_1/images/features_icons.png') no-repeat top left;
 		height: 32px;
 		padding: 10px 0px 0px 60px;
 		font-size: 17px;
@@ -705,7 +705,7 @@ div.one_fourth  { width: 22%; }
 		width: 30px;
 		height: 35px;
 		display: block;
-		background: url('../images/button_icons.png') no-repeat	top left;
+		background: url('/mvp_1/images/button_icons.png') no-repeat	top left;
 		float: left;
 		margin-right: 12px;
 	}
@@ -960,7 +960,7 @@ ul.social {
 			height: 24px;
 			display: block;
 			text-indent: -99999px;
-			background: url('../images/light-social.png') no-repeat top left;
+			background: url('/mvp_1/images/light-social.png') no-repeat top left;
 		}
 		ul.social li.facebook a 				{ background-position: 0px 0px; }
 			ul.social li.facebook a:hover { background-position: -24px 0px; }
@@ -1064,7 +1064,7 @@ label.textarea {
 img { border: none; }
 .clear { clear: both; }
 .resize {
-   background: url("../images/resize.png") repeat scroll 0 0 transparent;
+   background: url("/mvp_1/images/resize.png") repeat scroll 0 0 transparent;
    bottom: 0;
    height: 80px;
    position: fixed;

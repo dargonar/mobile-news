@@ -5,6 +5,7 @@ config['webapp2'] = {
     'apps_installed': [
         'apps.backend',
         'apps.frontend',
+        'apps.mvp_1',
     ],
 }
 
