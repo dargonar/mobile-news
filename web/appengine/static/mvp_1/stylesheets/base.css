@@ -673,12 +673,13 @@ blockquote {
 /* Columns */
 div.column_last { margin-right: 0 !important; }
 div.full { margin-bottom: 25px; }
-div.one_half, div.one_third, div.two_third, 
+div.two_halfs, div.one_half, div.one_third, div.two_third, 
 div.three_fourth, div.one_fourth, div.two_thirds {
 	float: left;
 	margin-right: 4%;
 	margin-bottom: 25px;
 }
+div.two_halfs   { width: 96%; }
 div.one_half    { width: 48%; }
 div.one_third   { width: 30.66%; }
 div.two_thirds  { width: 65%; }
