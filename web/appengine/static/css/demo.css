@@ -473,22 +473,22 @@ section#humor article.itemHumor {margin:10px;}
 section#humor article.itemHumor .contenedorImagen {border:1px solid #c2c2c2;border-bottom:none;min-height:100px;text-align:center;}
 section#humor article.itemHumor .contenedorImagen img {width:100%;max-width:460px;}
 
-a.alink.back {float:left;height:48px;width:48px; background:url(/img/fullversion/back.png) no-repeat 0 -8px; position:absolute;}
-a.alink.back:hover {background:url(/img/fullversion/back_gray.png) no-repeat 0 -8px;}
+a.alink.back {float:left;height:40px;width:48px; background:url(/img/fullversion/fv_sprite.png) no-repeat -144px -8px; position:absolute;}
+a.alink.back:hover {background:url(/img/fullversion/fv_sprite.png) no-repeat -96px -8px;}
 
-a.alink.favs_add {float:right; top:0px;right:0px;height:48px;width:48px; background:url(/img/fullversion/favs_addto.png) no-repeat 0 -8px; position:absolute;}
-a.alink.favs_add:hover {background:url(/img/fullversion/favs_addto_gray.png) no-repeat 0 -8px; }
+a.alink.favs_add {float:right; top:0px;right:0px;height:40px;width:48px; background:url(/img/fullversion/fv_sprite.png) no-repeat -48px -8px; position:absolute;}
+a.alink.favs_add:hover {background:url(/img/fullversion/fv_sprite.png) no-repeat 0px -8px; }
 
-footer {background: url(/img/fullversion/tabbar_bg.png) no-repeat center center;height:48px;width:344px;position:fixed; top:441px;}
+footer {background: url(/img/fullversion/fv_sprite.png) no-repeat 0px -192px;height:48px;width:344px;position:fixed; top:441px;}
 footer div.footer_icons {padding-left:4px;width:330px;height:48px;}
 footer div.footer_icons a{display:inline-block;}
-footer div.footer_icons a.noticias { width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -14px 0px ;}
-footer div.footer_icons a.noticias:hover, footer div.footer_icons a.noticias.active { background:url(/img/fullversion/tabbar_active.png)  no-repeat no-repeat -14px 0px ;}
-footer div.footer_icons a.secciones{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -94px 0px ;}
-footer div.footer_icons a.secciones:hover, footer div.footer_icons a.secciones.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -94px 0px ;}
-footer div.footer_icons a.clasificados{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -173px 0px ;}
-footer div.footer_icons a.clasificados:hover, footer div.footer_icons a.clasificados.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -173px 0px ;}
-footer div.footer_icons a.servicios{ width:77px; height:48px;background:url(/img/fullversion/tabbar.png)  no-repeat -253px 0px ;}
-footer div.footer_icons a.servicios:hover, footer div.footer_icons a.servicios.active{ background:url(/img/fullversion/tabbar_active.png)  no-repeat -253px 0px ;}
+footer div.footer_icons a.noticias { width:77px; height:48px;background:url(/img/fullversion/fv_sprite.png)  no-repeat -14px -132px ;}
+footer div.footer_icons a.noticias:hover, footer div.footer_icons a.noticias.active { background:url(/img/fullversion/fv_sprite.png)  no-repeat no-repeat -14px -73px ;}
+footer div.footer_icons a.secciones{ width:77px; height:48px;background:url(/img/fullversion/fv_sprite.png)  no-repeat -94px -132px ;}
+footer div.footer_icons a.secciones:hover, footer div.footer_icons a.secciones.active{ background:url(/img/fullversion/fv_sprite.png)  no-repeat -94px -73px ;}
+footer div.footer_icons a.clasificados{ width:77px; height:48px;background:url(/img/fullversion/fv_sprite.png)  no-repeat -173px -132px ;}
+footer div.footer_icons a.clasificados:hover, footer div.footer_icons a.clasificados.active{ background:url(/img/fullversion/fv_sprite.png)  no-repeat -173px -73px ;}
+footer div.footer_icons a.servicios{ width:77px; height:48px;background:url(/img/fullversion/fv_sprite.png)  no-repeat -253px -132px ;}
+footer div.footer_icons a.servicios:hover, footer div.footer_icons a.servicios.active{ background:url(/img/fullversion/fv_sprite.png)  no-repeat -253px -73px ;}
 
 div.clasificado_resaltado {background-color:#efefef; width:283px; padding:5px;}
