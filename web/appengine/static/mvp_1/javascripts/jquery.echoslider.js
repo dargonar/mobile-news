@@ -20,6 +20,9 @@
 	    stop: false
 		};
 		
+    // Slides Attributes
+    var slides_data_title = new Array();
+    
 		// Grab our settings
 		var settings = $.extend({}, $.fn.echoSlider.defaults, options);
 		
@@ -35,6 +38,7 @@
 		  var slide = $(this);
 		  slide.hide().children("div").hide();
 		  vars.totalSlides++;
+      slides_data_title.push(slide.attr('data-title'));
 	  });
 
 		// Show initial slide
@@ -109,7 +113,7 @@
 	    var echoNav = $('<div class="echo-nav"></div>');
 	    slider.append(echoNav);
 	    for(var i = 0; i < slides.length; i++){
-	    	echoNav.append('<a href="javascript:;" class="echo-control" rel="'+ i +'">'+ (i + 1) +'</a>');            
+	    	echoNav.append('<a href="javascript:;" class="echo-control" title="'+slides_data_title[i]+'" rel="'+ i +'">'+ (i + 1) +'</a>');            
 	    }
 	    //Set initial active link
 	    $('.echo-nav a:eq('+ vars.currentSlide +')', slider).addClass('active');

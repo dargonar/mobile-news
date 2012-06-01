@@ -105,7 +105,7 @@ header {
 		}		
 			header nav ul li a{
 				color: #b5b5b5;
-				font-size: 12px;
+				font-size: 14px/*12px*//*HACK*/;
 				-webkit-transition:color 0.2s ease-in;  
 		    -moz-transition:color 0.2s ease-in;  
 		    -o-transition:color 0.2s ease-in;  
@@ -165,6 +165,7 @@ section { }
 			color: #1f1f1f;
 			display: block;
 			margin-bottom: 30px;
+      padding-left:100px;text-align:left; /* HACK */
 		}
 		section #app_info p {
 			color: #898989;
@@ -555,14 +556,23 @@ div#contact_form {
 div#contact_form .error {
 	border-color: #E01C46;
 }
+div#contact_form span.error {
+	color: #E01C46;
+  font-size: 10px;
+}
 div#contact_form .validation,
 div#contact_form .success {
-	display: none;
+	/*display: none;*/
 	font-size: 12px;
 	margin-bottom: 20px;
+  padding:20px;
 }
-	div#contact_form .validation p  { color: #e01c46; }
-	div#contact_form .success p	    { color: #65cf82; }
+  div#contact_form .validation { color:#CC0033;background-color:#EFC2C4;}
+	/*div#contact_form .validation p  { color: #e01c46; }*/
+  div#contact_form .validation  p  span{padding-left:20px;}
+	
+  div#contact_form .success { color: #4F8A10; background-color: #DFF2BF; }
+  /*div#contact_form .success p	    { color: #65cf82; }*/
 /*--------------------------------------------
 11. Footer
 ---------------------------------------------*/
@@ -961,7 +971,7 @@ ul.social {
 			height: 24px;
 			display: block;
 			text-indent: -99999px;
-			background: url('/mvp_1/images/light-social.png') no-repeat top left;
+			background: url('/mvp_1/images/light-social2.png') no-repeat top left;
 		}
 		ul.social li.facebook a 				{ background-position: 0px 0px; }
 			ul.social li.facebook a:hover { background-position: -24px 0px; }
@@ -977,6 +987,8 @@ ul.social {
 			ul.social li.rss a:hover 			{ background-position: -24px -120px; }
 		ul.social li.email a 						{ background-position: 0px -144px; }
 			ul.social li.email a:hover 		{ background-position: -24px -144px; }
+    ul.social li.goback a 						{ background-position: 0px -168px; }
+			ul.social li.goback a:hover 		{ background-position: -24px -168px; }
 div.toggle_list {
 	margin-bottom: 25px;
 }
@@ -1010,7 +1022,7 @@ div.toggle_list {
 				padding: 10px;
 				display: none;
 			}
-				div.toggle_list ul li div.content p { margin-bottom: 15px; font-size: 12px; }
+				div.toggle_list ul li div.content p { margin-bottom: 15px; font-size: 14px/*12px*/; } /*HACK*/
 				div.toggle_list ul li div.content p:last-child { margin-bottom: 0; }
 /*--------------------------------------------
 16. Forms

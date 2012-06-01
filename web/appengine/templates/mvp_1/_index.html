@@ -32,7 +32,13 @@
 	<link rel="apple-touch-icon" href="/mvp_1/images/apple-touch-icon.html">
 	<link rel="apple-touch-icon" sizes="72x72" href="/mvp_1/images/apple-touch-icon-72x72.html">
 	<link rel="apple-touch-icon" sizes="114x114" href="/mvp_1/images/apple-touch-icon-114x114.html">
-	
+	<script type="text/javascript">
+    {% if flash %}
+      $(document).ready(function() {
+         FluidNav.goTo('contact'); 
+      });
+    {% endif %}
+  </script>
 </head>
 <body>
 	<!-- Start Wrapper -->
@@ -46,7 +52,7 @@
 				<ul class="social">
 					<!-- li class="facebook"><a href="#">Facebook</a></li -->
 					<!-- li class="twitter"><a href="http://twitter.com/two2twelve">Twitter</a></li -->
-					<li class="email"><a href="#" title="info@diariosmobiles.com">Email</a></li>
+					<li class="email"><a href="mailto:info@diariosmobiles.com" title="info@diariosmobiles.com">Email</a></li>
 					<!-- li class="rss"><a href="#" title="App Updates">RSS</a></li-->
 					<!-- More Social Icons:
 					<li class="dribbble"><a href="">Dribbble</a></li>
@@ -86,7 +92,7 @@
 				<img src="/mvp_1/images/logi.png" alt="Fluid App" style="height:90px;width:auto;"/> <!-- light-logo.png -->
 			</a>
 			<!-- End Logo -->
-			<span class="tagline">Edición para smartphones.</span>
+			<span class="tagline">Edición para smartphones</span>
 			<p>
         Ahora puede estar más cerca de sus lectores. 
         <br /><b>DiariosMóviles</b>&copy; le permite ofrecer la edición de su diario para smartphones. 
@@ -96,7 +102,7 @@
 				<center>
           <a href="/demo" class="large_button" id="apple">
             <span class="icon"></span>
-            <em>Ver demo para</em> iPhone
+            <em>Ver demo en</em> iPhone
           </a>
 				</center>
         <!--a href="demo/demo.html" class="large_button" id="android">
@@ -120,14 +126,14 @@
 				
 				<div id="slider">
 
-					<div class="slide" data-effect-out="slide">
+					<div class="slide" data-effect-out="slide" data-title="iPhone">
 						
 						<div class="background iphone-black">
-							<img src="/mvp_1/images/slider/iphone-back.jpg" alt="" />
+							<img src="/mvp_1/images/slider/iphone-back.jpg" alt="iPhone" title="iPhone" />
 						</div>
 						
 						<div class="foreground iphone-black">
-							<img src="/mvp_1/images/slider/iphone-front.jpg" alt="" />
+							<img src="/mvp_1/images/slider/iphone-front.jpg" alt="iPhone" title="iPhone" />
 						</div>
 						
 					</div>
@@ -144,26 +150,26 @@
 						
 					</div -->
 				
-					<div class="slide">
+					<div class="slide" data-title="Blackberry">
 						
 						<div class="background blackberry">
-							<img src="/mvp_1/images/slider/blackberry-back.jpg" alt="" />
+							<img src="/mvp_1/images/slider/blackberry-back.jpg" alt="Blackberry" title="Blackberry" />
 						</div>
 						
 						<div class="foreground blackberry">
-							<img src="/mvp_1/images/slider/blackberry-front.jpg" alt="" />
+							<img src="/mvp_1/images/slider/blackberry-front.jpg" alt="Blackberry" title="Blackberry" />
 						</div>
 						
 					</div>
 					
-					<div class="slide">
+					<div class="slide" data-title="Android">
 						
 						<div class="background android">
-							<img src="/mvp_1/images/slider/android-back.jpg" alt="" />
+							<img src="/mvp_1/images/slider/android-back.jpg" alt="Android" title="Android" />
 						</div>
 						
 						<div class="foreground android">
-							<img src="/mvp_1/images/slider/android-front.jpg" alt="" />
+							<img src="/mvp_1/images/slider/android-front.jpg" alt="Android" title="Android" />
 						</div>
 						
 					</div>
@@ -267,13 +273,13 @@
               De esta manera puede ofrecerles a sus lectores una experiencia más rica con el uso de aplicaciones nativas y servicios personalizados. <br />
               También puede aprovechar las funcionalidades de los smartphones y generar nuevos canales de ingresos.
               <br/><br/>
-              No requiere que realice ninguna modificación en su portal digital...solo tenga su RSS disponible.
+              No requiere que realice ninguna modificación en su portal digital.
             </p>
 					</div>
 
 					<div class="one_half column_last">
 						<center>
-              <img src="/mvp_1/images/stock-illustration-18559479-cartoon-man-holding-smartphone-sign.jpg" style="max-width:240px;max-height:240px;" alt="" />
+              <img src="/mvp_1/images/mobile_man.jpg" style="padding-top:40px;max-width:240px;max-height:240px;" alt="Su diario en smartphones" title="Su diario en smartphones" />
             </center>
 					</div>
 				</div>
@@ -331,7 +337,7 @@
 						<h2 class="icon adver">Acerca anunciantes y consumidores</h2>
 						<p>Ayuda a los anunciantes a ponerse en contacto con los consumidores. 
             <br /> Los anuncios para móviles son percibidos por el 86% de los usuarios de smartphones. 
-              <br />Los teléfonos inteligentes son también un componente crítico de la publicidad tradicional ya que el 76% ha realizado una búsqueda en sus teléfonos inteligentes después de ver un anuncio en línea. 
+              <br />Los teléfonos inteligentes son también un componente crítico de la publicidad tradicional ya que el 76% ha realizado una búsqueda en sus teléfonos inteligentes después de ver un anuncio convenional (no web ni mobile). 
               <br />Hacer anuncios para móviles forma parte de una estrategia de marketing integrado que puede conducir a un mayor acercamiento a los consumidores.</p>
 					</div>
           
@@ -516,53 +522,7 @@
 				<p>Por favor complete el formulario para que lo contacte un integrante del equipo.</p>
 				
 				<div id="contact_form">
-					
-					<div class="validation">
-						<p>Upa! Por favor corrija los campos marcados...</p>
-					</div>
-
-					<div class="success">
-						<p>¡Gracias!Thanks! Pronto nos contactaremos.</p>
-					</div>
-				
-					<form action="javascript:;" method="post">
-						<div class="row">
-							<p class="left">
-								<label for="name">Nombre*</label>
-								<input type="text" name="name" id="name" value="" />
-							</p>
-							<p class="right">
-								<label for="website">Web</label>
-								<input type="text" name="website" id="website" value="" />
-							</p>
-						</div>
-					
-						<div class="row">
-							<p class="left">
-								<label for="email">Email*</label>
-								<input type="text" name="email" id="email" value="" />
-							</p>
-              <p class="right">
-								<label for="schedule">Hora preferida de contacto*</label>
-								<input type="text" name="schedule" id="schedule" value="" />
-							</p>
-						</div>
-            
-            <div class="row">
-							<p class="left">
-								<label for="telephone">Teléfono*</label>
-								<input type="text" name="telephone" id="telephone" value="" />
-							</p>
-					 </div>
-            
-						<p>
-							<label for="message" class="textarea">Comentario</label>
-							<textarea class="text" name="message" id="message"></textarea>
-						</p>
-					
-						<input type="submit" class="button white" value="Send &#x2192;" />
-					</form>
-				
+					{% include "mvp_1/_contact_form.html" %}
 				</div>
 				
 			</div>
@@ -590,8 +550,8 @@
 								<a href="javascript:;" class="toggle_link" data-open_text="+" data-close_text="-"></a>
 							</div>
 							<div class="content">
-								<p>Usted solicita un agente. Un colega de nuestro equipo se contactará con Usted y lo guiará en el proceso de registro.</p>
-                <p>Una vez en el sistema, Usted podrá administrar su cuenta, seleccionar el logo del diario, establecer sus feeds, modificar articulos, sumar clasificados y servicios desde la administración de DiariosMóviles &copy; 2012.</p>
+								<p>Luego de <a href="#contact">solicitar un agente</a>, nuestro equipo se contactará con Usted y lo guiará en el proceso de registro.</p>
+                <p>Una vez en el sistema de administración, Usted podrá administrar su cuenta, seleccionar el logo del diario, establecer sus feeds, modificar articulos, sumar clasificados y servicios.</p>
                 <p>Nosotros nos encargamos de publicar las aplicaciones en las tiendas para iPhone, Android y Blackberry. </p>
 							</div>
 						</li>
@@ -601,8 +561,9 @@
 								<a href="javascript:;" class="toggle_link" data-open_text="+" data-close_text="-"></a>
 							</div>
 							<div class="content">
-								<p>El precio es de $500 pesos argentinos por mes.</p>
-                <p>Puede consultar en caso de requerir personalización de la aplicación.</p>
+								<p>El precio es de $500 pesos argentinos por mes.<!-- (o el equivalente en pesos al 10% de su tirada promedio de lunes a domingo, el menor valor). --></p>
+                <p><a href="#contact">Consúltenos</a> si su publicación está 100% orientada al medio digital.</p>
+                <p><a href="#contact">Consúltenos</a> por modificaciones personalizadas de la aplicación.</p>
 							</div>
 						</li>
 					</ul>

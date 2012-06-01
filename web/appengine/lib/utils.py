@@ -36,6 +36,31 @@ def get_or_404(key):
 
   abort(404)
 
+class FlashBuildMixin(object):
+  def set_error(self, msg):
+    self.session.add_flash(self.build_error(msg))
+    
+  def set_ok(self, msg):
+    self.session.add_flash(self.build_ok(msg))
+    
+  def set_info(self, msg):
+    self.session.add_flash(self.build_info(msg))
+    
+  def set_warning(self, msg):
+    self.session.add_flash(self.build_warning(msg))
+  
+  def build_error(self, msg):
+    return { 'type':'error', 'message':msg }
+    
+  def build_ok(self, msg):
+    return { 'type':'success', 'message':msg }
+  
+  def build_info(self, msg):
+    return { 'type':'info', 'message':msg }
+    
+  def build_warning(self, msg):
+    return { 'type':'warning', 'message':msg }
+    
 class Jinja2Mixin(object):
   
   @cached_property
@@ -50,7 +75,12 @@ class Jinja2Mixin(object):
   def setup_jinja_enviroment(self, env):
     env.globals['url_for'] = self.uri_for
     
+    if hasattr(self.session, 'get_flashes'):
+      flashes = self.session.get_flashes()
+      env.globals['flash'] = flashes[0][0] if len(flashes) and len(flashes[0]) else None
+    
     env.globals['session']     = self.session
+    
     pass
           
   def render_response(self, _template, **context):
@@ -63,7 +93,7 @@ class Jinja2Mixin(object):
     rv = self.jinja2.render_template(_template, **context)
     return rv
       
-class MyBaseHandler(RequestHandler, Jinja2Mixin):
+class MyBaseHandler(RequestHandler, Jinja2Mixin, FlashBuildMixin):
   def dispatch(self):
     # Get a session store for this request.
     self.session_store = sessions.get_store(request=self.request)
@@ -111,3 +141,4 @@ class FrontendMixin(object):
     
 class FrontendHandler(MyBaseHandler, FrontendMixin):
   pass
+
