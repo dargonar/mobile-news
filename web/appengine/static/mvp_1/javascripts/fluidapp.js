@@ -7,7 +7,8 @@ var FluidNav = {
 				FluidNav.goTo($(this).attr("href").split("#")[1]);
 			}
 		});
-		this.goTo("home");
+		//this.goTo("home");
+    this.goTo(go_to);
 	},
 	goTo: function(page) {
 		var next_page = $("#"+page);
@@ -61,7 +62,7 @@ $(document).ready(function() {
 		easing: true,
 		pauseTime: 4500, // How long each slide will appear
 		animSpeed: 500, // Speed of slide animation 
-		manualAdvance: false, // Force manual transitions
+		manualAdvance: true, // Force manual transitions
 		pauseOnHover: true, // Pause on mouse hover
 		controlNav: true, // Show slider navigation
 		swipeNav: true // Enable touch gestures to control slider

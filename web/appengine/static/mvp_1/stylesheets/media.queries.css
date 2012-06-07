@@ -20,7 +20,12 @@
 		width: auto;
 		margin: 0 auto;
 	}
-	header {
+  
+  .container_wrapper{
+      top:50px;
+  }
+	
+  header {
 		padding: 0px 10px 0px 10px;
 		margin-bottom: 0px;
 	}
@@ -31,9 +36,10 @@
 	section #app_info {
 		text-align: center;
 		float: none;
-		width: 100%;
+		width: 320px;
 		padding: 0;
 		margin-top: 30px;
+    position:relative;
 	}
 		section #app_info a.logo img{ width: 260px; }
 		section #app_info span.tagline {
@@ -68,7 +74,7 @@
 		position: static;
 	}
 	section #pages .bottom_shadow { display: none; }
-	section #pages div.page 			{ padding-top: 20px; }
+	section #pages div.page 			{ padding-top: 20px; width: 320px;}
 	section #pages .content_box 	{ padding-top: 5px; }
 	/* Homepage Slider */
 	div#slider { width: 320px; height: 400px; margin: -30px 0px 0px 0px; }
