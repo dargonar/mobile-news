@@ -52,7 +52,7 @@ class SendMail(FrontendHandler):
     editor = self.request.POST.get('editor')
     email = self.request.POST.get('email')
     
-    sender = 'ptutino@gmail.com'
+    sender = 'info@diariosmoviles.com.ar'
     
     mail.send_mail(sender="DiariosMoviles <%s>" % sender, 
                  to       = 'pablo.tutino@gmail.com, matias.romeo@gmail.com',
