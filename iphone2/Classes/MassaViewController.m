@@ -7,6 +7,7 @@
 //
 
 #import "MassaViewController.h"
+#import "HTMLGeneratorWrapper.h"
 
 #define contains(str1, str2) ([str1 rangeOfString: str2 ].location != NSNotFound)
 
@@ -56,7 +57,23 @@
 	[tabBar setSelectedItem: [tabBar.items objectAtIndex:0]];
   //[tabBar setSelectedItem]
   
-  [webView loadRequest: [self requestFor: [urls objectAtIndex:0]]];
+  //[webView loadRequest: [self requestFor: [urls objectAtIndex:0]]];
+  //ACA VA LO NUEVO=-----
+  NSString* path_xml = [[NSBundle mainBundle] pathForResource:@"test_xml"  ofType:@"xml"];
+  
+  NSString* xml = [NSString stringWithContentsOfFile:path_xml
+                                            encoding:NSUTF8StringEncoding
+                                               error:NULL];
+  
+  NSString* path_xslt = [[NSBundle mainBundle] pathForResource:@"test_xsl"  ofType:@"xsl"];
+  
+  HTMLGeneratorWrapper *generator = [[HTMLGeneratorWrapper alloc] init];
+  NSString *html = [generator generate:xml xslt_file:path_xslt];
+  
+  [webView loadHTMLString:html baseURL:nil];
+  
+  //ACA VA LO NUEVO=-----
+  
   [super viewDidLoad];
 }
 
