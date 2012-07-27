@@ -1,11 +1,10 @@
 //
-//  XSLTParser.cpp
+//  HTMLGeneratorWrapper.m
 //  TestXSLT
 //
 //  Created by Matias on 7/24/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
 #include <libxml/xmlmemory.h>
 #include <libxml/debugXML.h>
 #include <libxml/HTMLtree.h>
@@ -18,19 +17,20 @@
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
 
-#include "HTMLGenerator.hpp"
+#import "HTMLGenerator.h"
 
-std::string HTMLGenerator::generate(const std::string& xml, const std::string& xslt_file) {
+@implementation HTMLGenerator
+- (NSString*)generate:(NSString*)xml  xslt_file:(NSString*)xslt_file {
+
+  //xmlSubstituteEntitiesDefault(1);
+	//xmlLoadExtDtdDefaultValue = 1;
   
-  xmlSubstituteEntitiesDefault(1);
-	xmlLoadExtDtdDefaultValue = 1;
-
-  xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)xslt_file.c_str());
+  xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	
-  xmlDocPtr doc = xmlParseMemory(xml.c_str(), xml.size());
-
+  xmlDocPtr doc = xmlParseMemory([xml UTF8String], [xml length]+1);
+  
   xmlDocPtr res = xsltApplyStylesheet(cur, doc, NULL);
-
+  
   xmlChar *html = 0;
   int len=0;
   
@@ -43,5 +43,6 @@ std::string HTMLGenerator::generate(const std::string& xml, const std::string& x
   xsltCleanupGlobals();
   xmlCleanupParser();
   
-  return std::string((char *)html);
+  return [NSString stringWithUTF8String:(const char*)html];
 }
+@end

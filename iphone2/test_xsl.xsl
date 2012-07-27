@@ -5,6 +5,9 @@
 <xsl:template match="/">
   <html>
   <body>
+  <img src="http://media.eldia.com/edis/20120716/fotos/DATA_ART_165573.jpg"/>
+  <img src="http://blog.entornao.com/myimages/monos.jpg"/>
+  <img src="http://peoresnada.com/pictures/h/monos_01.jpg"/>    
   <h2>My CD Collection</h2>
     <table border="1">
       <tr bgcolor="#9acd32">

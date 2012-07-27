@@ -15,56 +15,34 @@
 		2899E5220DE3E06400AC0155 /* MassaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MassaViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MassaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MassaViewController.m */; };
-		60A3367E15BF490D006C4E22 /* HTMLGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3367A15BF490D006C4E22 /* HTMLGenerator.cpp */; };
-		60A3367F15BF490D006C4E22 /* HTMLGeneratorWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60A3367D15BF490D006C4E22 /* HTMLGeneratorWrapper.mm */; };
+		6009C07115C20ACE00D09712 /* LocalSubstitutionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009C06F15C2085E00D09712 /* LocalSubstitutionCache.m */; };
+		6009C07715C222C500D09712 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6009C07615C222C500D09712 /* MobileCoreServices.framework */; };
+		602258E015BF96E900D4C02C /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 602258DF15BF96E900D4C02C /* CryptoUtil.m */; };
+		602258E515BF9C3E00D4C02C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 602258E415BF9C3E00D4C02C /* libsqlite3.dylib */; };
+		602258E815BF9D1700D4C02C /* SqliteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 602258E715BF9D1700D4C02C /* SqliteCache.m */; };
+		60A3367F15BF490D006C4E22 /* HTMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A3367D15BF490D006C4E22 /* HTMLGenerator.m */; };
 		60A3368315BF4923006C4E22 /* test_xml.xml in Resources */ = {isa = PBXBuildFile; fileRef = 60A3368115BF4923006C4E22 /* test_xml.xml */; };
 		60A3368415BF4923006C4E22 /* test_xsl.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 60A3368215BF4923006C4E22 /* test_xsl.xsl */; };
 		60A336D215BF492E006C4E22 /* attributes.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3368915BF492E006C4E22 /* attributes.c */; };
-		60A336D315BF492E006C4E22 /* attributes.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3368B15BF492E006C4E22 /* attributes.lo */; };
 		60A336D415BF492E006C4E22 /* attrvt.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3368C15BF492E006C4E22 /* attrvt.c */; };
-		60A336D515BF492E006C4E22 /* attrvt.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3368D15BF492E006C4E22 /* attrvt.lo */; };
 		60A336D615BF492E006C4E22 /* documents.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3368F15BF492E006C4E22 /* documents.c */; };
-		60A336D715BF492E006C4E22 /* documents.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3369115BF492E006C4E22 /* documents.lo */; };
 		60A336D815BF492E006C4E22 /* extensions.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3369215BF492E006C4E22 /* extensions.c */; };
-		60A336D915BF492E006C4E22 /* extensions.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3369415BF492E006C4E22 /* extensions.lo */; };
 		60A336DA15BF492E006C4E22 /* extra.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3369515BF492E006C4E22 /* extra.c */; };
-		60A336DB15BF492E006C4E22 /* extra.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3369715BF492E006C4E22 /* extra.lo */; };
 		60A336DC15BF492E006C4E22 /* functions.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3369815BF492E006C4E22 /* functions.c */; };
-		60A336DD15BF492E006C4E22 /* functions.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3369A15BF492E006C4E22 /* functions.lo */; };
 		60A336DE15BF492E006C4E22 /* imports.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3369B15BF492E006C4E22 /* imports.c */; };
-		60A336DF15BF492E006C4E22 /* imports.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A3369D15BF492E006C4E22 /* imports.lo */; };
 		60A336E015BF492E006C4E22 /* keys.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A3369E15BF492E006C4E22 /* keys.c */; };
-		60A336E115BF492E006C4E22 /* keys.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A015BF492E006C4E22 /* keys.lo */; };
-		60A336E215BF492E006C4E22 /* libxslt.3 in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A115BF492E006C4E22 /* libxslt.3 */; };
-		60A336E315BF492E006C4E22 /* libxslt.la in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A315BF492E006C4E22 /* libxslt.la */; };
-		60A336E415BF492E006C4E22 /* libxslt.syms in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A415BF492E006C4E22 /* libxslt.syms */; };
 		60A336E515BF492E006C4E22 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 60A336A515BF492E006C4E22 /* Makefile */; };
-		60A336E615BF492E006C4E22 /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A615BF492E006C4E22 /* Makefile.am */; };
-		60A336E715BF492E006C4E22 /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 60A336A715BF492E006C4E22 /* Makefile.in */; };
 		60A336E815BF492E006C4E22 /* namespaces.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336A815BF492E006C4E22 /* namespaces.c */; };
-		60A336E915BF492E006C4E22 /* namespaces.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336AA15BF492E006C4E22 /* namespaces.lo */; };
 		60A336EA15BF492E006C4E22 /* numbers.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336AB15BF492E006C4E22 /* numbers.c */; };
-		60A336EB15BF492E006C4E22 /* numbers.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336AC15BF492E006C4E22 /* numbers.lo */; };
 		60A336EC15BF492E006C4E22 /* pattern.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336AE15BF492E006C4E22 /* pattern.c */; };
-		60A336ED15BF492E006C4E22 /* pattern.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336B015BF492E006C4E22 /* pattern.lo */; };
 		60A336EE15BF492E006C4E22 /* preproc.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336B115BF492E006C4E22 /* preproc.c */; };
-		60A336EF15BF492E006C4E22 /* preproc.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336B315BF492E006C4E22 /* preproc.lo */; };
 		60A336F015BF492E006C4E22 /* security.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336B415BF492E006C4E22 /* security.c */; };
-		60A336F115BF492E006C4E22 /* security.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336B615BF492E006C4E22 /* security.lo */; };
 		60A336F215BF492E006C4E22 /* templates.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336B715BF492E006C4E22 /* templates.c */; };
-		60A336F315BF492E006C4E22 /* templates.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336B915BF492E006C4E22 /* templates.lo */; };
 		60A336F415BF492E006C4E22 /* transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336BA15BF492E006C4E22 /* transform.c */; };
-		60A336F515BF492E006C4E22 /* transform.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336BC15BF492E006C4E22 /* transform.lo */; };
 		60A336F615BF492E006C4E22 /* variables.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336BF15BF492E006C4E22 /* variables.c */; };
-		60A336F715BF492E006C4E22 /* variables.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336C115BF492E006C4E22 /* variables.lo */; };
 		60A336F815BF492E006C4E22 /* xslt.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336C315BF492E006C4E22 /* xslt.c */; };
-		60A336F915BF492E006C4E22 /* xslt.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336C515BF492E006C4E22 /* xslt.lo */; };
-		60A336FA15BF492E006C4E22 /* xsltconfig.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 60A336C715BF492E006C4E22 /* xsltconfig.h.in */; };
 		60A336FB15BF492E006C4E22 /* xsltlocale.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336CA15BF492E006C4E22 /* xsltlocale.c */; };
-		60A336FC15BF492E006C4E22 /* xsltlocale.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336CC15BF492E006C4E22 /* xsltlocale.lo */; };
 		60A336FD15BF492E006C4E22 /* xsltutils.c in Sources */ = {isa = PBXBuildFile; fileRef = 60A336CD15BF492E006C4E22 /* xsltutils.c */; };
-		60A336FE15BF492E006C4E22 /* xsltutils.lo in Resources */ = {isa = PBXBuildFile; fileRef = 60A336CF15BF492E006C4E22 /* xsltutils.lo */; };
-		60A336FF15BF492E006C4E22 /* xsltwin32config.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 60A336D115BF492E006C4E22 /* xsltwin32config.h.in */; };
 		60A3370515BF494C006C4E22 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A3370415BF494C006C4E22 /* libxml2.dylib */; };
 		7801D469155A0AB800A29B12 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7801D468155A0AB800A29B12 /* Icon.png */; };
 		7801D472155A0E2900A29B12 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7801D471155A0E2900A29B12 /* MBProgressHUD.m */; };
@@ -95,10 +73,18 @@
 		28D7ACF70DDB3853001CB0EB /* MassaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassaViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Massa_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Massa_Prefix.pch; sourceTree = "<group>"; };
-		60A3367A15BF490D006C4E22 /* HTMLGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HTMLGenerator.cpp; sourceTree = "<group>"; };
-		60A3367B15BF490D006C4E22 /* HTMLGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HTMLGenerator.hpp; sourceTree = "<group>"; };
-		60A3367C15BF490D006C4E22 /* HTMLGeneratorWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLGeneratorWrapper.h; sourceTree = "<group>"; };
-		60A3367D15BF490D006C4E22 /* HTMLGeneratorWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HTMLGeneratorWrapper.mm; sourceTree = "<group>"; };
+		6009C06E15C2085E00D09712 /* LocalSubstitutionCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSubstitutionCache.h; sourceTree = "<group>"; };
+		6009C06F15C2085E00D09712 /* LocalSubstitutionCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalSubstitutionCache.m; sourceTree = "<group>"; };
+		6009C07215C2227C00D09712 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		6009C07415C2228E00D09712 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		6009C07615C222C500D09712 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		602258DE15BF96E900D4C02C /* CryptoUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoUtil.h; sourceTree = "<group>"; };
+		602258DF15BF96E900D4C02C /* CryptoUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoUtil.m; sourceTree = "<group>"; };
+		602258E415BF9C3E00D4C02C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		602258E615BF9D1700D4C02C /* SqliteCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteCache.h; sourceTree = "<group>"; };
+		602258E715BF9D1700D4C02C /* SqliteCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteCache.m; sourceTree = "<group>"; };
+		60A3367C15BF490D006C4E22 /* HTMLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLGenerator.h; sourceTree = "<group>"; };
+		60A3367D15BF490D006C4E22 /* HTMLGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLGenerator.m; sourceTree = "<group>"; };
 		60A3368115BF4923006C4E22 /* test_xml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test_xml.xml; sourceTree = "<group>"; };
 		60A3368215BF4923006C4E22 /* test_xsl.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test_xsl.xsl; sourceTree = "<group>"; };
 		60A3368915BF492E006C4E22 /* attributes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attributes.c; sourceTree = "<group>"; };
@@ -199,6 +185,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6009C07715C222C500D09712 /* MobileCoreServices.framework in Frameworks */,
+				602258E515BF9C3E00D4C02C /* libsqlite3.dylib in Frameworks */,
 				60A3370515BF494C006C4E22 /* libxml2.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -212,7 +200,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				602258CD15BF570C00D4C02C /* HTMLGenerator */,
+				602258CD15BF570C00D4C02C /* Utils */,
 				7801D470155A0E2900A29B12 /* MBProgressHUD.h */,
 				7801D471155A0E2900A29B12 /* MBProgressHUD.m */,
 				1D3623240D0F684500981E51 /* MassaAppDelegate.h */,
@@ -236,6 +224,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6009C07615C222C500D09712 /* MobileCoreServices.framework */,
+				6009C07415C2228E00D09712 /* CoreFoundation.framework */,
+				6009C07215C2227C00D09712 /* CoreMedia.framework */,
+				602258E415BF9C3E00D4C02C /* libsqlite3.dylib */,
 				60A3370415BF494C006C4E22 /* libxml2.dylib */,
 				60A3368515BF492E006C4E22 /* libs */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -290,15 +282,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		602258CD15BF570C00D4C02C /* HTMLGenerator */ = {
+		602258CD15BF570C00D4C02C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				60A3367A15BF490D006C4E22 /* HTMLGenerator.cpp */,
-				60A3367B15BF490D006C4E22 /* HTMLGenerator.hpp */,
-				60A3367C15BF490D006C4E22 /* HTMLGeneratorWrapper.h */,
-				60A3367D15BF490D006C4E22 /* HTMLGeneratorWrapper.mm */,
+				6009C06E15C2085E00D09712 /* LocalSubstitutionCache.h */,
+				6009C06F15C2085E00D09712 /* LocalSubstitutionCache.m */,
+				602258DE15BF96E900D4C02C /* CryptoUtil.h */,
+				602258DF15BF96E900D4C02C /* CryptoUtil.m */,
+				602258E615BF9D1700D4C02C /* SqliteCache.h */,
+				602258E715BF9D1700D4C02C /* SqliteCache.m */,
+				60A3367C15BF490D006C4E22 /* HTMLGenerator.h */,
+				60A3367D15BF490D006C4E22 /* HTMLGenerator.m */,
 			);
-			name = HTMLGenerator;
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		60A3368515BF492E006C4E22 /* libs */ = {
@@ -473,32 +469,6 @@
 				7801D469155A0AB800A29B12 /* Icon.png in Resources */,
 				60A3368315BF4923006C4E22 /* test_xml.xml in Resources */,
 				60A3368415BF4923006C4E22 /* test_xsl.xsl in Resources */,
-				60A336D315BF492E006C4E22 /* attributes.lo in Resources */,
-				60A336D515BF492E006C4E22 /* attrvt.lo in Resources */,
-				60A336D715BF492E006C4E22 /* documents.lo in Resources */,
-				60A336D915BF492E006C4E22 /* extensions.lo in Resources */,
-				60A336DB15BF492E006C4E22 /* extra.lo in Resources */,
-				60A336DD15BF492E006C4E22 /* functions.lo in Resources */,
-				60A336DF15BF492E006C4E22 /* imports.lo in Resources */,
-				60A336E115BF492E006C4E22 /* keys.lo in Resources */,
-				60A336E215BF492E006C4E22 /* libxslt.3 in Resources */,
-				60A336E315BF492E006C4E22 /* libxslt.la in Resources */,
-				60A336E415BF492E006C4E22 /* libxslt.syms in Resources */,
-				60A336E615BF492E006C4E22 /* Makefile.am in Resources */,
-				60A336E715BF492E006C4E22 /* Makefile.in in Resources */,
-				60A336E915BF492E006C4E22 /* namespaces.lo in Resources */,
-				60A336EB15BF492E006C4E22 /* numbers.lo in Resources */,
-				60A336ED15BF492E006C4E22 /* pattern.lo in Resources */,
-				60A336EF15BF492E006C4E22 /* preproc.lo in Resources */,
-				60A336F115BF492E006C4E22 /* security.lo in Resources */,
-				60A336F315BF492E006C4E22 /* templates.lo in Resources */,
-				60A336F515BF492E006C4E22 /* transform.lo in Resources */,
-				60A336F715BF492E006C4E22 /* variables.lo in Resources */,
-				60A336F915BF492E006C4E22 /* xslt.lo in Resources */,
-				60A336FA15BF492E006C4E22 /* xsltconfig.h.in in Resources */,
-				60A336FC15BF492E006C4E22 /* xsltlocale.lo in Resources */,
-				60A336FE15BF492E006C4E22 /* xsltutils.lo in Resources */,
-				60A336FF15BF492E006C4E22 /* xsltwin32config.h.in in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,13 +479,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6009C07115C20ACE00D09712 /* LocalSubstitutionCache.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MassaAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* MassaViewController.m in Sources */,
 				7883E423137AD05300DBF43A /* GradientView.m in Sources */,
 				7801D472155A0E2900A29B12 /* MBProgressHUD.m in Sources */,
-				60A3367E15BF490D006C4E22 /* HTMLGenerator.cpp in Sources */,
-				60A3367F15BF490D006C4E22 /* HTMLGeneratorWrapper.mm in Sources */,
+				60A3367F15BF490D006C4E22 /* HTMLGenerator.m in Sources */,
 				60A336D215BF492E006C4E22 /* attributes.c in Sources */,
 				60A336D415BF492E006C4E22 /* attrvt.c in Sources */,
 				60A336D615BF492E006C4E22 /* documents.c in Sources */,
@@ -536,6 +506,8 @@
 				60A336F815BF492E006C4E22 /* xslt.c in Sources */,
 				60A336FB15BF492E006C4E22 /* xsltlocale.c in Sources */,
 				60A336FD15BF492E006C4E22 /* xsltutils.c in Sources */,
+				602258E015BF96E900D4C02C /* CryptoUtil.m in Sources */,
+				602258E815BF9D1700D4C02C /* SqliteCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +529,10 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Massa-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = Massa;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -576,6 +552,10 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Massa-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = Massa;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -614,6 +594,10 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Massa-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = Massa;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;

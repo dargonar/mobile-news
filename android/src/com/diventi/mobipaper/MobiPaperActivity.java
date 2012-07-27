@@ -10,17 +10,54 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.xml.sax.SAXException;
 
 public class MobiPaperActivity extends Activity {
 	
 	protected Dialog mSplashDialog;
 	protected WebView mWebView;
+	protected String mResult;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-                
+
+        try
+        {
+	        com.icl.saxon.trax.Processor processor =
+	            com.icl.saxon.trax.Processor.newInstance("xslt");
+	        
+	        org.xml.sax.InputSource xmlInputSource =
+	            new org.xml.sax.InputSource(this.getResources().openRawResource(R.raw.test_xml));
+	        org.xml.sax.InputSource xsltInputSource =
+	            new org.xml.sax.InputSource(this.getResources().openRawResource(R.raw.test_xsl));
+	     
+	        StringWriter output = new StringWriter();
+	        com.icl.saxon.trax.Result result =
+	            new com.icl.saxon.trax.Result(output);
+	     
+	        // create a new compiled stylesheet
+	        com.icl.saxon.trax.Templates templates =
+	            processor.process(xsltInputSource);
+	     
+	        // create a transformer that can be used for a single transformation
+	        com.icl.saxon.trax.Transformer trans = templates.newTransformer( );
+	        trans.transform(xmlInputSource, result);
+	        
+	        mResult = output.toString();
+        }
+        catch (Exception e)
+        {
+
+        }
+        
+        
         MyStateSaver data = (MyStateSaver) getLastNonConfigurationInstance();
         if (data != null) {
             // Show splash screen if still loading
@@ -54,7 +91,8 @@ public class MobiPaperActivity extends Activity {
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.setWebViewClient(new HelloWebViewClient());
 		mWebView.getSettings().setJavaScriptEnabled(true);
-	    mWebView.loadUrl("http://ymobipaper.appspot.com");
+		
+		mWebView.loadData(mResult, "text/html", "utf-8");
 		
 	}
     @Override

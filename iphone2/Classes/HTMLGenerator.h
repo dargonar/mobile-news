@@ -12,7 +12,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HTMLGeneratorWrapper : NSObject
+@interface HTMLGenerator : NSObject
 - (NSString*)generate:(NSString*)xml  xslt_file:(NSString*)xslt_file;
-// other wrapped methods and properties
 @end
