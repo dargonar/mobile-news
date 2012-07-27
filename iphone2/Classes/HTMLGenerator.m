@@ -22,12 +22,15 @@
 @implementation HTMLGenerator
 - (NSString*)generate:(NSString*)xml  xslt_file:(NSString*)xslt_file {
 
-  //xmlSubstituteEntitiesDefault(1);
-	//xmlLoadExtDtdDefaultValue = 1;
+  xmlSubstituteEntitiesDefault(1);
+	xmlLoadExtDtdDefaultValue = 1;
   
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	
-  xmlDocPtr doc = xmlParseMemory([xml UTF8String], [xml length]+1);
+  const char *tmp = [xml UTF8String];
+  int   len2      = strlen(tmp);
+  
+  xmlDocPtr doc = xmlParseMemory(tmp,len2);
   
   xmlDocPtr res = xsltApplyStylesheet(cur, doc, NULL);
   

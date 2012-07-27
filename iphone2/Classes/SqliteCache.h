@@ -13,7 +13,7 @@
 }
 
 + (SqliteCache *) defaultCache;
-- (NSData *) get   : (NSString*)key;
-- (void)     set   : (NSString*)key data:(NSData*)data;
-- (void)     clean : (int)hours;
+- (NSArray *) get   : (NSString*)key;
+- (void)      set   : (NSString*)key data:(NSData*)data mimetype:(NSString*)mimetype;
+- (void)      clean : (int)hours;
 @end
