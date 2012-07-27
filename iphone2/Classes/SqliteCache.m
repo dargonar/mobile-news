@@ -1,0 +1,124 @@
+//
+//  SqliteCache.m
+//  Massa
+//
+//  Created by Matias on 7/25/12.
+//  Copyright (c) 2012 Diventi. All rights reserved.
+//
+
+#import "SqliteCache.h"
+#import <sqlite3.h>
+
+@implementation SqliteCache
+
++ (SqliteCache *) defaultCache
+{
+  static SqliteCache *defaultCache = NULL;
+  @synchronized(self)
+  {
+    if(defaultCache == NULL)
+      defaultCache = [[SqliteCache alloc] init];
+  }
+  
+  return defaultCache;
+}
+
+- (id)init {
+
+  self = [super init];
+  if (!self)
+    return self;
+
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+  NSString *documentsDir = [paths objectAtIndex:0];
+  NSString *dbPath = [documentsDir stringByAppendingPathComponent:@"cache.sqlite"];
+  
+  //Always open
+  sqlite3_open([dbPath cStringUsingEncoding:NSUTF8StringEncoding], &db);
+  
+  //Create table
+  sqlite3_stmt *stm;
+  sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS cache (id VARCHAR(40) PRIMARY KEY, created_at INTEGER, content BLOB);", -1, &stm, NULL);
+  sqlite3_step(stm);
+  sqlite3_finalize(stm);
+  
+  return self;
+
+}
+
+- (void)dealloc
+{
+  assert(db!=NULL);
+  sqlite3_close(db);
+	[super dealloc];
+}
+
+
+- (NSData *)get:(NSString*)key {
+  assert(db!=NULL);
+  int err=0;
+  sqlite3_stmt *stm;
+  
+  err=sqlite3_prepare_v2(db, "SELECT content FROM cache where id = ?;", -1, &stm, NULL);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_bind_text(stm, 1, [key UTF8String], -1, SQLITE_STATIC);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_step(stm);
+  if (err != SQLITE_ROW) {
+    return nil;
+  }
+  
+  NSData *ret = [NSData dataWithBytes:sqlite3_column_blob(stm, 0) length:sqlite3_column_bytes(stm, 0)];
+  err=sqlite3_finalize(stm);
+  
+  return ret;
+}
+
+- (void)set:(NSString*)key data:(NSData *)data {
+  assert(db!=NULL);
+  int err=0;
+  sqlite3_stmt *stm;
+  
+  time_t currentTime = time(NULL);
+  
+  err=sqlite3_prepare_v2(db, "INSERT OR REPLACE INTO cache (id,created_at,content) VALUES (?,?,?);", -1, &stm, NULL);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_bind_text(stm, 1, [key UTF8String], -1, SQLITE_STATIC);
+  assert(err==SQLITE_OK);
+
+  err=sqlite3_bind_int(stm, 2, currentTime);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_bind_blob(stm, 3, [data bytes], [data length], SQLITE_STATIC);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_step(stm);
+  assert(err=SQLITE_DONE);
+  
+  err=sqlite3_finalize(stm);
+}
+
+- (void)clean:(int)hours {
+
+  assert(db!=NULL);
+  int err=0;
+  sqlite3_stmt *stm;
+  
+  int olddate = time(NULL) - hours*60*60;
+  
+  err=sqlite3_prepare_v2(db, "DELETE from cache where created_at < ?;", -1, &stm, NULL);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_bind_int(stm, 1, olddate);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_step(stm);
+  assert(err=SQLITE_DONE);
+  
+  err=sqlite3_finalize(stm);
+}
+
+@end

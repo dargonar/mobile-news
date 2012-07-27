@@ -7,6 +7,9 @@
 //
 
 #import "MassaViewController.h"
+#import "HTMLGenerator.h"
+#import "CryptoUtil.h"
+#import "SqliteCache.h"
 
 #define contains(str1, str2) ([str1 rangeOfString: str2 ].location != NSNotFound)
 
@@ -28,13 +31,15 @@
     }
     return self;
 }
-*/
+*
+ /
 
-/*
+/
+*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 }
-*/
+ */
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -56,12 +61,41 @@
 	[tabBar setSelectedItem: [tabBar.items objectAtIndex:0]];
   //[tabBar setSelectedItem]
   
-  [webView loadRequest: [self requestFor: [urls objectAtIndex:0]]];
+  //[webView loadRequest: [self requestFor: [urls objectAtIndex:0]]];
+  //ACA VA LO NUEVO=-----
+  NSString* path_xml = [[NSBundle mainBundle] pathForResource:@"test_xml"  ofType:@"xml"];
+  
+  NSString* xml = [NSString stringWithContentsOfFile:path_xml
+                                            encoding:NSUTF8StringEncoding
+                                               error:NULL];
+  
+  NSString* path_xslt = [[NSBundle mainBundle] pathForResource:@"test_xsl"  ofType:@"xsl"];
+  
+  HTMLGenerator *generator = [[HTMLGenerator alloc] init];
+  NSString *html = [generator generate:xml xslt_file:path_xslt];
+
+  //--sha1
+  NSString *key = [CryptoUtil sha1:html];
+  NSLog(@"key:%@", key);
+
+  SqliteCache *cache = [SqliteCache defaultCache];
+  
+  [cache set:key  data:[NSData dataWithBytes:[html UTF8String] length:[html length]+1]];
+  NSData *pepo = [cache get:key];
+
+  [webView loadHTMLString:[NSString stringWithUTF8String:[pepo bytes]] baseURL:nil];
+  //[pepo release];
+  
   [super viewDidLoad];
 }
 
+
 //Eventos del webview 
 - (void)webViewDidFinishLoad:(UIWebView *)theview {
+  NSLog(@"didFinish: %@; stillLoading:%@", [[webView request]URL],
+        (webView.loading?@"NO":@"YES"));
+
+  
   theview.hidden = NO;
   viewLoadingBack.hidden = YES;
   loading.hidden = YES;
