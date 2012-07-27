@@ -491,4 +491,6 @@ footer div.footer_icons a.clasificados:hover, footer div.footer_icons a.clasific
 footer div.footer_icons a.servicios{ width:77px; height:48px;background:url(/img/fullversion/fv_sprite.png)  no-repeat -253px -132px ;}
 footer div.footer_icons a.servicios:hover, footer div.footer_icons a.servicios.active{ background:url(/img/fullversion/fv_sprite.png)  no-repeat -253px -73px ;}
 
+/* de dargon */
 div.clasificado_resaltado {background-color:#efefef; width:283px; padding:5px;}
+#informacion span.hora_de_noticia { font:normal 13px/17px Arial,sans-serif;color: #707070;/*color: #7F7F7F;*/}
