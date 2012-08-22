@@ -4,7 +4,7 @@
     <a href="{{ url_for('frontend2/article', article=item.key()|string) }}" class="info floatFix" rel="external" alt="{{item.title}}" title="{{item.title}}">
       {% if item.image %}
       <div class="contenedorImg">
-        <img style="width:117px" src="{{item.image}}=s117" class="lazyLoad">
+        <img src="{{item.image}}=s117" class="lazyLoad"> <!-- style="width:117px;" -->
       </div>
       {% endif %}
       <h1 class="entry_title" target="_blank" rel="external" >{{item.title}}</h1>

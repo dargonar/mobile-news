@@ -25,6 +25,14 @@ def get_rules():
         Route('/2/m/secciones',             name='frontend2/secciones',          handler='apps.frontend.handlers.ListSecciones'),
         Route('/2/m/secciones/<category>',  name='frontend2/secciones/category', handler='apps.frontend.handlers.Index:get_seccion_articles'),
         
+      ]),
+      PathPrefixRoute('/demo/service3', [
+        Route('/3/',                        name='frontend3/home',               handler='apps.frontend.handlers2.Index'),
+        Route('/3/fullversion',             name='frontend3/home/fullversion',   handler='apps.frontend.handlers2.Index:fullversion'),
+        Route('/3/view/<article>',          name='frontend3/article',            handler='apps.frontend.handlers2.ViewArticle'),
+        Route('/3/m/secciones',             name='frontend3/secciones',          handler='apps.frontend.handlers2.ListSecciones'),
+        Route('/3/m/secciones/<category>',  name='frontend3/secciones/category', handler='apps.frontend.handlers2.Index:get_seccion_articles'),
+        
       ])
     ]
     
