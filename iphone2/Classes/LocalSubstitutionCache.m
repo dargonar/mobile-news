@@ -20,51 +20,66 @@
 
 @implementation LocalSubstitutionCache
 
-- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forRequest:(NSURLRequest *)request
-{
-	 NSLog(@"salvamos para: %@", [[request URL] path]);
-  [[SqliteCache defaultCache] set:[[request URL] path] data:[cachedResponse data]];
-}
-
 - (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request
 {
 	//
 	// Get the path for the request
 	//
 	NSString *pathString = [[request URL] absoluteString];
-	NSLog(@"requieren un: %@", pathString);
+	NSLog(@"Requieren: %@", pathString);
   
-  NSData *data = [[SqliteCache defaultCache] get:[CryptoUtil sha1:pathString]];
-  if (!data) {
-    NSLog(@"no lo tengo");
-    return [super cachedResponseForRequest:request];
+  NSData   *data     = nil;
+  NSString *mimeType = @"";
+  
+  NSArray *cache = [[SqliteCache defaultCache] get:pathString];
+  if (cache) {
+    data     = [cache objectAtIndex:0];
+    mimeType = [cache objectAtIndex:1];
+    NSLog(@"Lo tengo [mime]=%@", mimeType);
   }
+  else {
+    NSLog(@"No lo tengo, lo busco");
+    data     = [NSData dataWithContentsOfURL:[request URL]];
+    
+    if(!data)
+    {
+      NSLog(@"Error trayendo me voy con nil");
+      return nil;
+    }
 
-  // Get the UTI from the file's extension:
-  CFStringRef pathExtension = (__bridge_retained CFStringRef)[pathString pathExtension];
-  CFStringRef type = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, NULL);
-  CFRelease(pathExtension);
-  
-  // The UTI can be converted to a mime type:
-  
-  NSString *mimeType = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass(type, kUTTagClassMIMEType);
-  if (type != NULL)
-    CFRelease(type);
+    mimeType = [self mimeTypeForURL:[request URL]];
+    [[SqliteCache defaultCache] set:pathString data:data mimetype:mimeType];
+    
+    NSLog(@"-->Lo encontre [mime]=%@", mimeType);
+  }
   
 	// Create the cacheable response
 	//
 	NSURLResponse *response =
 		[[[NSURLResponse alloc]
-			initWithURL:[request URL]
-			MIMEType: mimeType
-      expectedContentLength:[data length]
-			textEncodingName:nil]
+			initWithURL           : [request URL]
+			MIMEType              :  mimeType
+      expectedContentLength : [data length]
+			textEncodingName      :  nil]
 		autorelease];
 
   NSCachedURLResponse *cachedResponse =
 		[[[NSCachedURLResponse alloc] initWithResponse:response data:data] autorelease];
 	
 	return cachedResponse;
+}
+
+-(NSString*) mimeTypeForURL: (NSURL *) url {
+
+  // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
+  // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
+  CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)[url pathExtension], NULL);
+  CFStringRef mimeType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+  CFRelease(UTI);
+  if (!mimeType) {
+    return @"application/octet-stream";
+  }
+  return [NSMakeCollectable((NSString *)mimeType) autorelease];
 }
 
 - (void)removeCachedResponseForRequest:(NSURLRequest *)request
