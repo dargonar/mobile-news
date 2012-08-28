@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE179E7715EAB540005583B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E7615EAB540005583B6 /* UIKit.framework */; };
+		CE179E7915EAB540005583B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E7815EAB540005583B6 /* Foundation.framework */; };
+		CE179E7B15EAB540005583B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E7A15EAB540005583B6 /* CoreGraphics.framework */; };
+		CE179E8115EAB540005583B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE179E7F15EAB540005583B6 /* InfoPlist.strings */; };
+		CE179E8315EAB540005583B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE179E8215EAB540005583B6 /* main.m */; };
+		CE179E8715EAB540005583B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE179E8615EAB540005583B6 /* AppDelegate.m */; };
+		CE179E8A15EAB540005583B6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE179E8815EAB540005583B6 /* MainStoryboard_iPhone.storyboard */; };
+		CE179E8D15EAB540005583B6 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE179E8B15EAB540005583B6 /* MainStoryboard_iPad.storyboard */; };
+		CE179E9015EAB540005583B6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE179E8F15EAB540005583B6 /* ViewController.m */; };
+		CE179E9815EAB541005583B6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E9715EAB541005583B6 /* SenTestingKit.framework */; };
+		CE179E9915EAB541005583B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E7615EAB540005583B6 /* UIKit.framework */; };
+		CE179E9A15EAB541005583B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE179E7815EAB540005583B6 /* Foundation.framework */; };
+		CE179EA215EAB541005583B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE179EA015EAB541005583B6 /* InfoPlist.strings */; };
+		CE179EA515EAB541005583B6 /* ElDiaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE179EA415EAB541005583B6 /* ElDiaTests.m */; };
+		CE179EAF15EAB577005583B6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EAE15EAB577005583B6 /* Icon.png */; };
+		CE179EB115EAB57F005583B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB015EAB57F005583B6 /* Default.png */; };
+		CE179EB415EAB84C005583B6 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB315EAB84C005583B6 /* bg.png */; };
+		CE179EBA15EABA8E005583B6 /* align_just_icon_48.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB515EABA8E005583B6 /* align_just_icon_48.png */; };
+		CE179EBB15EABA8E005583B6 /* br_next_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB615EABA8E005583B6 /* br_next_icon_24.png */; };
+		CE179EBC15EABA8E005583B6 /* br_next_icon_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB715EABA8E005583B6 /* br_next_icon_32.png */; };
+		CE179EBD15EABA8E005583B6 /* br_next_icon_48.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB815EABA8E005583B6 /* br_next_icon_48.png */; };
+		CE179EBE15EABA8E005583B6 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EB915EABA8E005583B6 /* refresh.png */; };
+		CE179EC215EABB8E005583B6 /* align_just_icon_16.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EBF15EABB8E005583B6 /* align_just_icon_16.png */; };
+		CE179EC315EABB8E005583B6 /* align_just_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EC015EABB8E005583B6 /* align_just_icon_24.png */; };
+		CE179EC415EABB8E005583B6 /* align_just_icon_32.png in Resources */ = {isa = PBXBuildFile; fileRef = CE179EC115EABB8E005583B6 /* align_just_icon_32.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE179E9B15EAB541005583B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE179E6915EAB540005583B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE179E7115EAB540005583B6;
+			remoteInfo = ElDia;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE179E7215EAB540005583B6 /* ElDia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElDia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE179E7615EAB540005583B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CE179E7815EAB540005583B6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE179E7A15EAB540005583B6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE179E7E15EAB540005583B6 /* ElDia-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDia-Info.plist"; sourceTree = "<group>"; };
+		CE179E8015EAB540005583B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE179E8215EAB540005583B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE179E8415EAB540005583B6 /* ElDia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ElDia-Prefix.pch"; sourceTree = "<group>"; };
+		CE179E8515EAB540005583B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CE179E8615EAB540005583B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CE179E8915EAB540005583B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		CE179E8C15EAB540005583B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		CE179E8E15EAB540005583B6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CE179E8F15EAB540005583B6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CE179E9615EAB541005583B6 /* ElDiaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElDiaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE179E9715EAB541005583B6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CE179E9F15EAB541005583B6 /* ElDiaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDiaTests-Info.plist"; sourceTree = "<group>"; };
+		CE179EA115EAB541005583B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE179EA315EAB541005583B6 /* ElDiaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElDiaTests.h; sourceTree = "<group>"; };
+		CE179EA415EAB541005583B6 /* ElDiaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElDiaTests.m; sourceTree = "<group>"; };
+		CE179EAE15EAB577005583B6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		CE179EB015EAB57F005583B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CE179EB315EAB84C005583B6 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CE179EB515EABA8E005583B6 /* align_just_icon_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = align_just_icon_48.png; sourceTree = "<group>"; };
+		CE179EB615EABA8E005583B6 /* br_next_icon_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = br_next_icon_24.png; sourceTree = "<group>"; };
+		CE179EB715EABA8E005583B6 /* br_next_icon_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = br_next_icon_32.png; sourceTree = "<group>"; };
+		CE179EB815EABA8E005583B6 /* br_next_icon_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = br_next_icon_48.png; sourceTree = "<group>"; };
+		CE179EB915EABA8E005583B6 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		CE179EBF15EABB8E005583B6 /* align_just_icon_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = align_just_icon_16.png; sourceTree = "<group>"; };
+		CE179EC015EABB8E005583B6 /* align_just_icon_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = align_just_icon_24.png; sourceTree = "<group>"; };
+		CE179EC115EABB8E005583B6 /* align_just_icon_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = align_just_icon_32.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE179E6F15EAB540005583B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179E7715EAB540005583B6 /* UIKit.framework in Frameworks */,
+				CE179E7915EAB540005583B6 /* Foundation.framework in Frameworks */,
+				CE179E7B15EAB540005583B6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE179E9215EAB541005583B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179E9815EAB541005583B6 /* SenTestingKit.framework in Frameworks */,
+				CE179E9915EAB541005583B6 /* UIKit.framework in Frameworks */,
+				CE179E9A15EAB541005583B6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE179E6715EAB540005583B6 = {
+			isa = PBXGroup;
+			children = (
+				CE179EB015EAB57F005583B6 /* Default.png */,
+				CE179EAE15EAB577005583B6 /* Icon.png */,
+				CE179E7C15EAB540005583B6 /* ElDia */,
+				CE179E9D15EAB541005583B6 /* ElDiaTests */,
+				CE179E7515EAB540005583B6 /* Frameworks */,
+				CE179E7315EAB540005583B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE179E7315EAB540005583B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE179E7215EAB540005583B6 /* ElDia.app */,
+				CE179E9615EAB541005583B6 /* ElDiaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE179E7515EAB540005583B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE179E7615EAB540005583B6 /* UIKit.framework */,
+				CE179E7815EAB540005583B6 /* Foundation.framework */,
+				CE179E7A15EAB540005583B6 /* CoreGraphics.framework */,
+				CE179E9715EAB541005583B6 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE179E7C15EAB540005583B6 /* ElDia */ = {
+			isa = PBXGroup;
+			children = (
+				CE179EB215EAB831005583B6 /* images */,
+				CE179E8515EAB540005583B6 /* AppDelegate.h */,
+				CE179E8615EAB540005583B6 /* AppDelegate.m */,
+				CE179E8815EAB540005583B6 /* MainStoryboard_iPhone.storyboard */,
+				CE179E8B15EAB540005583B6 /* MainStoryboard_iPad.storyboard */,
+				CE179E8E15EAB540005583B6 /* ViewController.h */,
+				CE179E8F15EAB540005583B6 /* ViewController.m */,
+				CE179E7D15EAB540005583B6 /* Supporting Files */,
+			);
+			path = ElDia;
+			sourceTree = "<group>";
+		};
+		CE179E7D15EAB540005583B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE179E7E15EAB540005583B6 /* ElDia-Info.plist */,
+				CE179E7F15EAB540005583B6 /* InfoPlist.strings */,
+				CE179E8215EAB540005583B6 /* main.m */,
+				CE179E8415EAB540005583B6 /* ElDia-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE179E9D15EAB541005583B6 /* ElDiaTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE179EA315EAB541005583B6 /* ElDiaTests.h */,
+				CE179EA415EAB541005583B6 /* ElDiaTests.m */,
+				CE179E9E15EAB541005583B6 /* Supporting Files */,
+			);
+			path = ElDiaTests;
+			sourceTree = "<group>";
+		};
+		CE179E9E15EAB541005583B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE179E9F15EAB541005583B6 /* ElDiaTests-Info.plist */,
+				CE179EA015EAB541005583B6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE179EB215EAB831005583B6 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CE179EBF15EABB8E005583B6 /* align_just_icon_16.png */,
+				CE179EC015EABB8E005583B6 /* align_just_icon_24.png */,
+				CE179EC115EABB8E005583B6 /* align_just_icon_32.png */,
+				CE179EB515EABA8E005583B6 /* align_just_icon_48.png */,
+				CE179EB615EABA8E005583B6 /* br_next_icon_24.png */,
+				CE179EB715EABA8E005583B6 /* br_next_icon_32.png */,
+				CE179EB815EABA8E005583B6 /* br_next_icon_48.png */,
+				CE179EB915EABA8E005583B6 /* refresh.png */,
+				CE179EB315EAB84C005583B6 /* bg.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE179E7115EAB540005583B6 /* ElDia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE179EA815EAB541005583B6 /* Build configuration list for PBXNativeTarget "ElDia" */;
+			buildPhases = (
+				CE179E6E15EAB540005583B6 /* Sources */,
+				CE179E6F15EAB540005583B6 /* Frameworks */,
+				CE179E7015EAB540005583B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ElDia;
+			productName = ElDia;
+			productReference = CE179E7215EAB540005583B6 /* ElDia.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE179E9515EAB541005583B6 /* ElDiaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE179EAB15EAB541005583B6 /* Build configuration list for PBXNativeTarget "ElDiaTests" */;
+			buildPhases = (
+				CE179E9115EAB541005583B6 /* Sources */,
+				CE179E9215EAB541005583B6 /* Frameworks */,
+				CE179E9315EAB541005583B6 /* Resources */,
+				CE179E9415EAB541005583B6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE179E9C15EAB541005583B6 /* PBXTargetDependency */,
+			);
+			name = ElDiaTests;
+			productName = ElDiaTests;
+			productReference = CE179E9615EAB541005583B6 /* ElDiaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE179E6915EAB540005583B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Lion User";
+			};
+			buildConfigurationList = CE179E6C15EAB540005583B6 /* Build configuration list for PBXProject "ElDia" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE179E6715EAB540005583B6;
+			productRefGroup = CE179E7315EAB540005583B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE179E7115EAB540005583B6 /* ElDia */,
+				CE179E9515EAB541005583B6 /* ElDiaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE179E7015EAB540005583B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179E8115EAB540005583B6 /* InfoPlist.strings in Resources */,
+				CE179E8A15EAB540005583B6 /* MainStoryboard_iPhone.storyboard in Resources */,
+				CE179E8D15EAB540005583B6 /* MainStoryboard_iPad.storyboard in Resources */,
+				CE179EAF15EAB577005583B6 /* Icon.png in Resources */,
+				CE179EB115EAB57F005583B6 /* Default.png in Resources */,
+				CE179EB415EAB84C005583B6 /* bg.png in Resources */,
+				CE179EBA15EABA8E005583B6 /* align_just_icon_48.png in Resources */,
+				CE179EBB15EABA8E005583B6 /* br_next_icon_24.png in Resources */,
+				CE179EBC15EABA8E005583B6 /* br_next_icon_32.png in Resources */,
+				CE179EBD15EABA8E005583B6 /* br_next_icon_48.png in Resources */,
+				CE179EBE15EABA8E005583B6 /* refresh.png in Resources */,
+				CE179EC215EABB8E005583B6 /* align_just_icon_16.png in Resources */,
+				CE179EC315EABB8E005583B6 /* align_just_icon_24.png in Resources */,
+				CE179EC415EABB8E005583B6 /* align_just_icon_32.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE179E9315EAB541005583B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179EA215EAB541005583B6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE179E9415EAB541005583B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE179E6E15EAB540005583B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179E8315EAB540005583B6 /* main.m in Sources */,
+				CE179E8715EAB540005583B6 /* AppDelegate.m in Sources */,
+				CE179E9015EAB540005583B6 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE179E9115EAB541005583B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE179EA515EAB541005583B6 /* ElDiaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE179E9C15EAB541005583B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE179E7115EAB540005583B6 /* ElDia */;
+			targetProxy = CE179E9B15EAB541005583B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE179E7F15EAB540005583B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE179E8015EAB540005583B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CE179E8815EAB540005583B6 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE179E8915EAB540005583B6 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		CE179E8B15EAB540005583B6 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE179E8C15EAB540005583B6 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		CE179EA015EAB541005583B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE179EA115EAB541005583B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE179EA615EAB541005583B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE179EA715EAB541005583B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE179EA915EAB541005583B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ElDia/ElDia-Prefix.pch";
+				INFOPLIST_FILE = "ElDia/ElDia-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE179EAA15EAB541005583B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ElDia/ElDia-Prefix.pch";
+				INFOPLIST_FILE = "ElDia/ElDia-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CE179EAC15EAB541005583B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ElDia.app/ElDia";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ElDia/ElDia-Prefix.pch";
+				INFOPLIST_FILE = "ElDiaTests/ElDiaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CE179EAD15EAB541005583B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ElDia.app/ElDia";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ElDia/ElDia-Prefix.pch";
+				INFOPLIST_FILE = "ElDiaTests/ElDiaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE179E6C15EAB540005583B6 /* Build configuration list for PBXProject "ElDia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE179EA615EAB541005583B6 /* Debug */,
+				CE179EA715EAB541005583B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE179EA815EAB541005583B6 /* Build configuration list for PBXNativeTarget "ElDia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE179EA915EAB541005583B6 /* Debug */,
+				CE179EAA15EAB541005583B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CE179EAB15EAB541005583B6 /* Build configuration list for PBXNativeTarget "ElDiaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE179EAC15EAB541005583B6 /* Debug */,
+				CE179EAD15EAB541005583B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE179E6915EAB540005583B6 /* Project object */;
+}
