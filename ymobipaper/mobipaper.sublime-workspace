@@ -1,0 +1,295 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"blob",
+				"blobstore"
+			],
+			[
+				"arti",
+				"Article"
+			],
+			[
+				"dow",
+				"download_article"
+			],
+			[
+				"downl",
+				"download_feed"
+			],
+			[
+				"webap",
+				"webapp2_extras"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"con",
+				"contact_user"
+			],
+			[
+				"def",
+				"defs	Method"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"",
+				"Set Syntax: Python"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/matias/Downloads/kaeppler-ignition-6344c77/README.markdown",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/lib/models.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/apps/frontend/home.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/index.yaml",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/apps/frontend/urls.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/lib/utils.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/cron.yaml",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/apps/backend/urls.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/templates/frontend/_home.html",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/templates/frontend/_article.html",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/apps/backend/download.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/templates/frontend/_header.html",
+		"/Users/matias/Documents/Dev/MobiPaper/web/test/_home.html",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/config.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/app.yaml",
+		"/Users/matias/Documents/Dev/MobiPaper/web/appengine/main.py",
+		"/Users/matias/Documents/Dev/MobiPaper/web/test/rss_parse_test.py",
+		"/Users/matias/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/matias/Documents/Dev/MobilePaper/_home.html",
+		"/Users/matias/Documents/Dev/MobilePaper/rss_parse_test.py",
+		"/private/tmp/bboo.xml",
+		"/Users/matias/Downloads/rss.xml",
+		"/Users/matias/t.xml",
+		"/Users/matias/Documents/Dev/git@git.assembla.com:xlprep/Icons/to.sh",
+		"/Users/matias/Documents/Dev/git@git.assembla.com:xlprep/NewXLPrep/NewXLPrep-Info.plist",
+		"/Users/matias/Documents/Dev/Ultraprop/src/static/css/backend.css",
+		"/Users/matias/Documents/Dev/Ultraprop/src/config.py",
+		"/Users/matias/Documents/Dev/Ultraprop/src/static/js/backend.js",
+		"/Users/matias/Library/Application Support/Sublime Text 2/Packages/User/Python.sublime-settings",
+		"/Users/matias/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/matias/Documents/Dev/Ultraprop/src/index.yaml",
+		"/Users/matias/Downloads/spartacus.gods.of.the.arena.complete.hdtv.xvid-scene/spartacus.gods.of.the.arena.pt.iii.hdtv.xvid-asap.srt",
+		"/Users/matias/Documents/Dev/Ultraprop/src/apps/frontend/property_info.py",
+		"/Users/matias/Documents/Dev/Ultraprop/src/apps/frontend/search.py",
+		"/Users/matias/Desktop/presente.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"from email.utils import parsedate",
+			"email",
+			"get_or_404",
+			"catitems",
+			"feeds",
+			"contenido",
+			"utils",
+			" = .",
+			"email",
+			"parse",
+			"import",
+			"imp",
+			"image",
+			"excerpt",
+			"xx",
+			"item.",
+			"item[",
+			"feed		",
+			"feed",
+			"name",
+			"excrept",
+			"datetime",
+			"webapp2_extras",
+			"PathPre",
+			"print",
+			"BeautifulSoup",
+			"contenido",
+			"bajada",
+			"c",
+			"1024",
+			"700",
+			"logging",
+			"render_response",
+			"template",
+			"render",
+			"()",
+			"form",
+			"Request",
+			"_original",
+			"Copiando",
+			"SAT",
+			"_original",
+			"xlpsat",
+			"CAHSEE",
+			"ALGEBRA",
+			"SAT",
+			"GMAT",
+			"EHCI",
+			"chupan",
+			"EHCI",
+			"chupan",
+			"nos",
+			"chupan",
+			"pending_invoices",
+			"chupan",
+			"chupan bien las bolas",
+			"nos",
+			"ahora",
+			"Y",
+			"tab",
+			"string_compar",
+			"config",
+			"payment_received",
+			"enabled_again",
+			"no_payment",
+			"contact_user",
+			"victoria",
+			"famili"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"CAHSEE",
+			"SAT"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"hom",
+				"web/appengine/apps/frontend/home.py"
+			],
+			[
+				"uti",
+				"web/appengine/lib/utils.py"
+			],
+			[
+				"rs",
+				"rss_parse_test.py"
+			],
+			[
+				"home",
+				"_home.html"
+			],
+			[
+				"",
+				"_grids_viewer/primos.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true
+}
