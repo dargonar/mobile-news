@@ -22,6 +22,7 @@
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
+-(void) loadNoticiaView;
 
-
+//~/Library/Application Support/iPhone Simulator/
 @end

@@ -437,7 +437,7 @@
 			
 			self.navigationController.navigationBar.alpha = hidden ? 0.0f : 1.0f;
 			self.navigationController.toolbar.alpha = hidden ? 0.0f : 1.0f;
-			
+      
 			if (animated) {
 				[UIView commitAnimations];
 			}

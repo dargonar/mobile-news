@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "PSWebView.h"
+//#import "EGOPhotoGlobal.h"
 
-@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate> /*{
-	 PSWebView 			*mainUIWebView;
-  }*/
+@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate> {
+	/*IBOutlet PSWebView 			*mainUIWebView;*/
+  }
 
 
 @property (nonatomic, retain)  IBOutlet UIView *bottomUIView;
@@ -20,5 +21,6 @@
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
 
+-(void) loadPhotoGallery: (NSURL *)_url;
 
 @end
