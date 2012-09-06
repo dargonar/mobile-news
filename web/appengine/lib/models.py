@@ -100,6 +100,11 @@ class Kato(db.Model):
   url               = db.StringProperty()
   index             = db.IntegerProperty()
   
+class ArticlesGallery(db.Model):
+  id                = db.StringProperty()
+  url               = db.StringProperty()
+  has_gallery       = db.IntegerProperty()
+  rss           = db.TextProperty()
 
 
 
