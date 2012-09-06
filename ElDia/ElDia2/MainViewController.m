@@ -57,8 +57,16 @@
   [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeMain queryString:nil xsl:MAIN_XSL_PATH _webView:mainUIWebView];
   NSLog(@"viewDidLoad END");
   
+  [self loadNoticiaView];
 }
 
+-(void) loadNoticiaView{
+  self.myNoticiaViewController= [[NoticiaViewController alloc]
+                                 initWithNibName:@"NoticiaViewController" bundle:[NSBundle mainBundle]];
+  self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  //self.myNoticiaViewController.delegate = self;
+
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -85,20 +93,21 @@
     //[self.mainUIWebView loadHTMLString:[self.mYMobiPaperLib getUrl:YMobiNavigationTypeNews queryString:[url lastPathComponent]] baseURL:nil];
     
     if (self.myNoticiaViewController == nil) {
-      
-      self.myNoticiaViewController= [[NoticiaViewController alloc]
-                                                       initWithNibName:@"NoticiaViewController" bundle:[NSBundle mainBundle]];
-      self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-      //self.myNoticiaViewController.delegate = self;
-      self.myNoticiaViewController.title = @"essta";
-
+      [self loadNoticiaView];      
     }
     
     NSLog(@"webView: ANTES de cargar Noticia");
     //webAddress.text = [url absoluteString];
-    // [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
+    
+    
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
-    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
+    
+    //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
+    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:@"1_161794" xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
+    
+    
+    //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.mainUIWebView];
+    
     NSLog(@"webView: DESPUES de cargar Noticia");
 
     return NO;

@@ -57,14 +57,14 @@
   if(cache && 1==0) {
     data     = [cache objectAtIndex:0];
     mimeType = [cache objectAtIndex:1];
-    NSLog(@"loadHTML-1 : CACHED!!");
+    //NSLog(@"loadHTML-1 : CACHED!!");
   }
   else {
     
-    NSLog(@"loadHTML-1 : NOT CACHED!!");
-    NSLog(@"getHTML-1.1 url: %@", path);
+    //NSLog(@"loadHTML-1 : NOT CACHED; url: %@", path);
     
     NSString *html = [self gethtml:path xsl:xsl];
+    //NSLog(@"loadHTML [%@]",html);
     data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
     mimeType = @"text/html";
     [[SqliteCache defaultCache] set:path data:data mimetype:mimeType];
@@ -109,11 +109,16 @@
                                    
   NSString *cleanedXML = @"";
   
+  NSLog(@"   regex: antes de chequear si es noticia abierta!");
+  
+  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
+  
+ /*
   // Por ahora limpiamos solo si la consulta es de noticia abierta.
   if (xsl==NEWS_XSL_PATH) {
       
     cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
-    //NSLog(@"searchString: '%@'", xml);
+    //NSLog(@"cleanedXML: '%@'", cleanedXML);
     //Logeamos los elementos matcheados.
     NSUInteger  line         = 0UL;
     for(NSString *matchedString in [xml componentsMatchedByRegex:regexTotal2]) {
@@ -121,13 +126,18 @@
     }
   }
   else{
+    NSLog(@"   regex: es listado PAPA!");
     cleanedXML = xml;
   }
-
+  */
+  NSLog(@"   regex: DESPUES de chequear si es noticia abierta!");
+  
   HTMLGenerator *generator = [[HTMLGenerator alloc] init];
 
   NSString *html = [generator generate:cleanedXML xslt_file:path_xslt];
-  
+  /*if (xsl==NEWS_XSL_PATH) {
+    NSLog(@" HTML: '%@'", html);
+  }*/
   return html;
 }
 @end
