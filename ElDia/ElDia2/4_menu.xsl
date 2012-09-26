@@ -16,19 +16,20 @@
         <!-- meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" / -->
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
-        <title>LISTADO PRINCIPAL</title>
+        <title>MENU</title>
       </head>
       
       <body>
-            
-        <xsl:call-template name="DestacadaEnListadoPrincipal">
-          <xsl:with-param name="Node" select="rss/channel/item[1]"/>
-        </xsl:call-template>
-        
-        <xsl:call-template name="ListadoNoticiasEnListado">
-          <xsl:with-param name="Nodes" select="rss/channel/item[position() > 1]"/>
-        </xsl:call-template>
-        
+        <div id="menu">
+          <ul>
+            <li class="open"></li>
+            <xsl:for-each select="rss/channel/item">
+              <li><a href="seccion://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>  
+            </xsl:for-each>
+            <li class="close"></li>
+          </ul>
+        </div>
+
       </body>
     </html>
   </xsl:template>
