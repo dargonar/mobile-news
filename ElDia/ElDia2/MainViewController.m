@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-#import "RegexKitLite.h"
+
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController;
@@ -43,18 +43,7 @@
   
   NSLog(@"viewDidLoad BEGIN");
   
-  /*
-  char   *searchString = " encabezado por la titular de dicha comisi&oacute;n, 123 12 1<p style='text-align: justify;'  > <strong>Fernanda Raverta</strong>; el secretario de DDHH bonaerense, <strong>Guido Carlotto</strong>, y el presidente del Equipo Argentino de Antropolog&iacute;a Forense, <strong>Luis Fonderbrider</strong>.</span></span><p style=\"text-align: justify;\"><span style=\"font-family: trebuchet ms,geneva;\"><span style=\"font-size: small;\">&ldquo;&Eacute;sta es una campa&ntilde;a que se realiza en toda Latinoam&eacute;rica, con la cual el equipo de antrop&oacute;logos forenses, a partir de las muestras de sangre que familiares de las v&iacute;ctimas han dado, pudieron identificar y devolver su identidad a personas que fueron asesinadas, para que sus familias pudieran procesar el duelo&rdquo;, explic&oacute; Raverta.</span></span><p style=\"text-align: justify;\"><span style=\"font-family: trebuchet ms,geneva;\"><span style=\"font-size: small;\">Por su parte, Carlotto valor&oacute; la posibilidad de &ldquo;trabajar en conjunto con la C&aacute;mara de Diputados y con esta nueva juventud que aflora con alegr&iacute;a, con esperanza y con la necesidad de continuar construyendo un camino de memoria, verdad y justicia&rdquo;, al tiempo que anticip&oacute; que en los pr&oacute;ximos d&iacute;as se firmar&aacute; un decreto interministerial para unificar el trabajo del Gobierno bonaerense sobre la tortura, vejaciones y malos tratos en las c&aacute;rceles. (<strong>ANDigital</strong>)</span></span>]]></news:content>";
-  NSString *subjectString = [NSString stringWithUTF8String:searchString];
-  NSString   *regexString  =@"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
-  NSUInteger  line         = 0UL;
-  NSLog(@"searchString: '%@'", subjectString);
-  NSLog(@"regexString : '%@'", regexString);
-  for(NSString *matchedString in [subjectString componentsMatchedByRegex:regexString]) {
-    NSLog(@"--)MATCHED: %lu: %lu '%@'", (u_long)++line, (u_long)[matchedString length], matchedString);
-  }
-  */
-  [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeMain queryString:nil xsl:MAIN_XSL_PATH _webView:mainUIWebView];
+  [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView];
   NSLog(@"viewDidLoad END");
   
   [self loadNoticiaView];
@@ -83,30 +72,31 @@
 // UIWebView Delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType{
-  NSLog(@"webView event");
-  //validar URL
-  if (UIWebViewNavigationTypeLinkClicked == navigationType)
+  navigationType:(UIWebViewNavigationType)navigationType{
+  
+  
+  NSURL* url = [request URL];
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_NOTICIA])
   {
-    
-    NSURL* url = [request URL];
+
     //[self.mainUIWebView loadHTMLString:[self.mYMobiPaperLib getUrl:YMobiNavigationTypeNews queryString:[url lastPathComponent]] baseURL:nil];
     
     if (self.myNoticiaViewController == nil) {
       [self loadNoticiaView];      
     }
     
-    NSLog(@"webView: ANTES de cargar Noticia");
-    //webAddress.text = [url absoluteString];
-    
-    
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
+    /*
+    NSURL* _url = [[NSURL alloc] initWithString:@"video://http://www.youtube.com/watch?v=e3fsrQmHmfA"];
+    NSLog(@"MainViewController::linkClicked 1: %@", [_url lastPathComponent]);
+    NSLog(@"MainViewController::linkClicked 2: %@", [_url host]); // OK
+    NSLog(@"MainViewController::linkClicked 3: %@", [_url pathComponents]);
+    NSLog(@"MainViewController::linkClicked 4: %@", [_url query]);
+    NSLog(@"MainViewController::linkClicked 5: %@", [_url absoluteString]);
+    NSLog(@"MainViewController::linkClicked 6: %@", [_url scheme]);*/
     
-    //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
-    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:@"1_161794" xsl:NEWS_XSL_PATH _webView:self.myNoticiaViewController.mainUIWebView];
     
-    
-    //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url lastPathComponent] xsl:NEWS_XSL_PATH _webView:self.mainUIWebView];
+    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.myNoticiaViewController.mainUIWebView];
     
     NSLog(@"webView: DESPUES de cargar Noticia");
 
@@ -115,6 +105,8 @@
   return YES;
   
 }
+
+
 
 
 @end

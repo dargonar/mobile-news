@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YoutubeViewController : UIViewController
+@interface YoutubeViewController : UIViewController<UIWebViewDelegate>
+
+@property (nonatomic, retain) IBOutlet UIWebView *mainUIWebView;
+- (IBAction) btnBackClick: (id)param;
+- (IBAction) btnShareClick: (id)param;
 
 @end

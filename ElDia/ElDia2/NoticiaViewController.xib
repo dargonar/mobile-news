@@ -305,11 +305,11 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="554873511"/>
 							<reference ref="625169015"/>
 							<reference ref="654771176"/>
-							<reference ref="196714009"/>
-							<reference ref="554873511"/>
 							<reference ref="957363476"/>
+							<reference ref="196714009"/>
 							<reference ref="641547589"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -417,7 +417,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">28</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

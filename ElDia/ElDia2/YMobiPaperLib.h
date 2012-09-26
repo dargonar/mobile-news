@@ -11,8 +11,16 @@
 #import "CryptoUtil.h"
 #import "SqliteCache.h"
 
-#define MAIN_XSL_PATH @"1_main_list"
-#define NEWS_XSL_PATH @"2_new_open"
+#define XSL_PATH_MAIN_LIST @"1_main_list"
+#define XSL_PATH_SECTION_LIST @"2_section_list"
+#define XSL_PATH_NEWS @"3_new"
+#define XSL_PATH_SECTIONS @"4_menu"
+
+#define SCHEMA_NOTICIA @"noticia"
+#define SCHEMA_VIDEO @"video"
+#define SCHEMA_AUDIO @"audio"
+#define SCHEMA_GALERIA @"galeria"
+
 
 typedef enum {
   YMobiNavigationTypeMain = 0,          //Listado principal

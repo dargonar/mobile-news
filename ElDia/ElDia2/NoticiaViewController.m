@@ -8,21 +8,102 @@
 
 #import "NoticiaViewController.h"
 #import "AppDelegate.h"
-#import "EGOPhotoGlobal.h"
+#import "RegexKitLite.h"
 
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView,bottomUIView, optionsBottomMenuUIImageView;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController;
+
+- (void)playVideo:(NSURL *)_url{
+  
+  NSString *youtube = @"http://m.youtube.com/#/watch?v=%@";
+  
+  NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, [self getYoutubeVideoId:[_url absoluteString]]]];
+  
+  if (self.myYoutubeViewController == nil) {
+    [self loadYoutubeViewController];
+  }
+  
+  NSURLRequest *req = [NSURLRequest requestWithURL:youtubeURL];
+  
+  [app_delegate.navigationController pushViewController:myYoutubeViewController animated:YES];
+  
+  [self.myYoutubeViewController.mainUIWebView loadRequest:req];
+}
+
+-(void) loadYoutubeViewController{
+  self.myYoutubeViewController= [[YoutubeViewController alloc]
+                                 initWithNibName:@"YoutubeViewController" bundle:[NSBundle mainBundle]];
+  self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  
+}
+
+
+-(NSString *)getYoutubeVideoId:(NSString*)url{
+  
+  NSString * local_url = [url stringByReplacingOccurrencesOfString:@"video://" withString:@"" ];
+  NSString *regex = @"^(?:https?://)?(?:www.)?(?:youtu.be/|youtube.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})";
+  NSArray *_ids = [local_url captureComponentsMatchedByRegex:regex];
+  NSString *ret = @"";
+  if ([_ids count]>2)
+  {
+    ret = [[NSString alloc] initWithFormat:@"%@",[_ids objectAtIndex:1]] ;
+  }
+  return ret;
+}
+ 
+- (void)playAudio:(NSURL *)_url
+{
+  NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
+  //NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/watch?v=e3fsrQmHmfA"];
+  //_moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
+  MPMoviePlayerController *aPlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
+  [self setMoviePlayer:aPlayer];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(moviePlayBackDidFinish:)
+                                               name:MPMoviePlayerPlaybackDidFinishNotification
+                                             object:_moviePlayer];
+  
+  _moviePlayer.controlStyle = MPMovieControlStyleDefault;
+  _moviePlayer.shouldAutoplay = YES;
+  [_moviePlayer prepareToPlay];
+  [self.view addSubview:_moviePlayer.view];
+  [_moviePlayer setFullscreen:YES animated:YES];
+  [_moviePlayer play];
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+  MPMoviePlayerController *player = [notification object];
+  [[NSNotificationCenter defaultCenter]
+   removeObserver:self
+   name:MPMoviePlayerPlaybackDidFinishNotification
+   object:player];
+  
+  if ([player
+       respondsToSelector:@selector(setFullscreen:animated:)])
+  {
+    [player.view removeFromSuperview];
+  }
+}
+
 
 - (IBAction) btnBackClick: (id)param{
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 - (IBAction) btnShareClick: (id)param{
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
-  [self.mainUIWebView loadHTMLString:@"<html xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:news=\"http://www.diariosmoviles.com.ar/news-rss/\">   <head>   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">   <meta name=\"viewport\" content=\"initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width\">   <link rel=\"stylesheet\" type=\"text/css\" media=\"only screen and (max-device-width: 480px)\" href=\"2.css\">   <title>XXX</title>   </head>   <body bgcolor=\"#ffffff\"><section class=\"entry_open\"><div>   <section class=\"header\"><h2></h2>   <h1>Sabella convoc&amp;#243; a Ustari</h1>   <p class=\"subheader\">El arquero suplente de Boca fue llamado para integrar la Selección y esta tarde se sumará a los entrenamientos en Ezeiza, con miras a los partidos contra Paraguay y Perú</p>   <span class=\"entry_meta\">Mon, 3 Sep 2012 12:43:37 -0300</span></section><div class=\"separator\"></div>   <section class=\"cuerpo\">El arquero de Boca Juniors, Oscar Ustari, fue convocado al seleccionado argentino por el entrenador Alejandro Sabella y esta tarde se sumará a los entrenamientos con vistas a los partidos ante Paraguay y Perú por las Eliminatorias para el Mundial de Brasil 2014.   El seleccionado argentino entrenará desde las 17, en el predio de AFA en Ezeiza, y Ustari se sumará a Maximiliano Rodríguez, Clemente Rodríguez, Rodrigo Braña (convocados del medio local), Marcos Rojo, Ezequiel Lavezzi, Hernán Barcos, Pablo Zabaleta y Pablo Guiñazú (llegados del exterior).   Los futbolistas que juegan en la Argentina no podrán integrar sus equipos en la próxima fecha del torneo Inicial de primera división, a jugarse entre el sábado y el lunes.   Mañana se sumarán a los entrenamientos Lionel Messi, Fabricio Coloccini, Angel Di María, Gonzalo Higuaín, Sergio Romero, Enzo Pérez, Ezequiel Garay, Fernando Gago, Mariano Andújar, Rodrigo Palacio, Hugo Campagnaro, Federico Fernández, José Sosa y Lucas Biglia.   Sergio Agüero también asistirá a la práctica de esta tarde pero para ser evaluado por el cuerpo médico del equipo nacional, ya que se recupera de un traumatismo en la rodilla derecha, el 19 de agosto en un partido contra el Southampton por la Premier League .   El delantero del Manchester City está descartado para el partido del próximo viernes con Paraguay, en Córdoba, y es duda para el del martes, en Lima, ante Perú</section>   </div></section></body>   </html>" baseURL:dirURL];
+  //[self playVideo:<#(NSURL *)#>];
+  return;
+  
+  NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
+  MPMoviePlayerController *player =  [[MPMoviePlayerController alloc] initWithContentURL:myURL];
+  [player prepareToPlay];
+  [player.view setFrame:self.view.bounds];  // player's frame must match parent's
+  [self.view addSubview: player.view];
+  [player play];
+  
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,23 +165,39 @@
   //validar URL
   if (UIWebViewNavigationTypeLinkClicked == navigationType)
   {
-    [self loadPhotoGallery:url];
-    return NO;
-    //NSURL* url = [request URL];
+    bool handled = NO;
+    if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
+    {
+      // Aca tenemos que lodear otra noticia!!
+      handled = YES;
+    }
+    else if ([[url scheme]isEqualToString:SCHEMA_VIDEO])
+    {
+      [self playVideo:url];
+      handled = YES;
+    }
+    else if ([[url scheme]isEqualToString:SCHEMA_AUDIO])
+    {
+      [self playAudio:url];
+      handled = YES;
+    }
+    else if ([[url scheme]isEqualToString:SCHEMA_GALERIA])
+    {
+      [self loadPhotoGallery:url];
+      handled = YES;
+    }
+    
+    if(handled == YES)
+      return NO;
+    return NO; //YES;
   }
-  //NSLog(@"NoticiaViewcontroller:shouldStartLoadWithRequest:navigationType %u", navigationType);
   return YES;
 }
 
 -(void) loadPhotoGallery:(NSURL *)url{
   
   NSLog(@" NSURL - 1: %@", [url absoluteString]);
-  /*
-  NSLog(@" NSURL - 2: %@", [url baseURL]);
-  NSLog(@" NSURL - 3: %@", [url query]);
-  NSLog(@" NSURL - 4: %@", [url path]);
-  NSLog(@" NSURL - 5: %@", [url pathComponents]);
-  */
+  
   NSString *_gallery_proto = @"gallery://";
   NSString *_url=[url absoluteString];
   
@@ -141,45 +238,96 @@
    http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f14.jpg
    http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f15.jpg
    */
-  
-  /*MyPhoto *photo = [[MyPhoto alloc] initWithImageURL:[NSURL URLWithString:@"http://a3.twimg.com/profile_images/66601193/cactus.jpg"] name:@" laksd;lkas;dlkaslkd ;a"];
-  MyPhoto *photo2 = [[MyPhoto alloc] initWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/twitter_production/profile_images/425948730/DF-Star-Logo.png"] name:@"lskdjf lksjdhfk jsdfh ksjdhf sjdhf ksjdhf ksdjfh ksdjh skdjfh skdfjh "];
-  MyPhotoSource *source = [[MyPhotoSource alloc] initWithPhotos:[NSArray arrayWithObjects:photo, photo2, photo, photo2, photo, photo2, photo, photo2, nil]];
-  
-  EGOPhotoViewController *photoController = [[EGOPhotoViewController alloc] initWithPhotoSource:source];
-  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoController];
-  
-  navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  navController.modalPresentationStyle = UIModalPresentationFullScreen;
-  [self presentModalViewController:navController animated:YES];
-  
-  [navController release];
-  [photoController release];
-  [photo release];
-  [photo2 release];
-  [source release];*/
-  
+  NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
-  for (int *i = 0; i < [_images_src count]; i++) {
-    EGOQuickPhoto *photo = [[EGOQuickPhoto alloc] initWithImageURL:[NSURL URLWithString:[_images_src objectAtIndex:i]] name:@""];
-    [_array addObject:photo];
+  //for (int *i = 0; i < [_images_src count]; i++) {
+  for (id object in _images_src) {
+    //    NSString *escapedURL = (__bridge NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)([_images_src objectAtIndex:i]), NULL,                                                                                kCFStringEncodingUTF8);
+    //NSString *escapedURL = [[NSString alloc] initWithCString:[_images_src objectAtIndex:i] encoding:NSUTF8StringEncoding];
+    NSString *escapedURL =  [[[((NSString *)object) stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
+    
+    NSLog(@"  escapedURL [%@]", escapedURL);
+    
+    NSURL *candidateURL = [NSURL URLWithString:escapedURL];
+    // WARNING > "test" is an URL according to RFCs, being just a path
+    // so you still should check scheme and all other NSURL attributes you need
+    if (candidateURL && candidateURL.scheme && candidateURL.host) {
+      // candidate is a well-formed url with:
+      //  - a scheme (like http://)
+      //  - a host (like stackoverflow.com)
+      [_array addObject:escapedURL];
+    }
+    candidateURL=nil;
     
   }
   
-  /*EGOQuickPhoto *photo = [[EGOQuickPhoto alloc] initWithImageURL:[NSURL URLWithString:@"http://a3.twimg.com/profile_images/66601193/cactus.jpg"] name:@" laksd;lkas;dlkaslkd ;a"];
-  EGOQuickPhoto *photo2 = [[EGOQuickPhoto alloc] initWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/twitter_production/profile_images/425948730/DF-Star-Logo.png"] name:@"lskdjf lksjdhfk jsdfh ksjdhf sjdhf ksjdhf ksdjfh ksdjh skdjfh skdfjh "];
-  EGOQuickPhotoSource *source = [[EGOQuickPhotoSource alloc] initWithPhotos:[NSArray arrayWithObjects:photo, photo2, photo, photo2, photo, photo2, photo, photo2, nil]];
-  */
-  EGOQuickPhotoSource *source = [[EGOQuickPhotoSource alloc] initWithPhotos:_array];
-  EGOPhotoViewController *photoController = [[EGOPhotoViewController alloc] initWithPhotoSource:source];
+  networkCaptions = [[NSArray alloc]initWithArray:_array copyItems:YES];
+  networkImages = [[NSArray alloc]initWithArray:_array copyItems:YES];
   
-  [app_delegate.navigationController  pushViewController:photoController animated:YES];
+  networkGallery = [[FGalleryViewController alloc] initWithPhotoSource:self];
+  
+  [app_delegate.navigationController  pushViewController:networkGallery animated:YES];
+  //[networkGallery release];
+  
   app_delegate.navigationController.navigationBar.hidden=NO;
-  /*[photoController release];
-  [photo release];
-  [photo2 release];
-  [source release];*/
+  
 }
+
+#pragma mark - FGalleryViewControllerDelegate Methods
+
+
+- (int)numberOfPhotosForPhotoGallery:(FGalleryViewController *)gallery
+{
+  int num;
+  num = [networkImages count];
+  return num;
+}
+
+
+- (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
+{
+	return FGalleryPhotoSourceTypeNetwork;
+}
+
+
+- (NSString*)photoGallery:(FGalleryViewController *)gallery captionForPhotoAtIndex:(NSUInteger)index
+{
+  return @"";
+  //NSString *caption;
+  //caption = [networkCaptions objectAtIndex:index];
+  //return caption;
+}
+
+/*
+- (NSString*)photoGallery:(FGalleryViewController*)gallery filePathForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
+  return [localImages objectAtIndex:index];
+}
+ */
+
+- (NSString*)photoGallery:(FGalleryViewController *)gallery urlForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
+  if(index>= [networkImages count])
+    return [networkImages objectAtIndex:0];
+  
+  if(index< 0)
+    return [networkImages objectAtIndex:([networkImages count]-1)];
+  
+  return [networkImages objectAtIndex:index];
+}
+
+- (void)handleTrashButtonTouch:(id)sender {
+  // here we could remove images from our local array storage and tell the gallery to remove that image
+  // ex:
+  //[localGallery removeImageAtIndex:[localGallery currentIndex]];
+}
+
+
+- (void)handleEditCaptionButtonTouch:(id)sender {
+  // here we could implement some code to change the caption for a stored image
+}
+
+// END
+
+
 
 - (void)viewDidUnload
 {
