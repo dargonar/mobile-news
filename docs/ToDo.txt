@@ -1,10 +1,10 @@
-Listado de noticias: Manejo de Index XML la primera vez q arbro la app y demas...
-Listado de noticias: Hay un estilo a:visited que hace que el link de la noticia quede transparente cuando entraste a la nota y volviste.
+Listado de noticias: Manejo de Index XML la primera vez q abro la app y demas...
+Listado de noticias: Hay un estilo a:visited que hace que el link de la noticia quede transparente cuando entraste a la nota y volviste. [CREO QUE LISTO]
 Listado de noticias: El loading image (background de los tags img) no se muestra mientras se cargan las imagenes.
-Nota abierta: Los titulos, quedan muy pegados al contenido de la nota.
+Nota abierta: Los titulos, quedan muy pegados al contenido de la nota. [LISTO]
 Nota abierta: Cuando la nota es corta, la lista de relacionadas queda separada del bottom de la vista (el html es demasiado corto).
 Nota abierta: Al levantar video de youtube explota cuando estoy en la vista de youtube-posta.
-Nota abierta: Capturar para ir navegando las notas.
+Nota abierta: Capturar gestos para ir navegando las notas.
 Menu: cargar las secciones cuando se llama la primera vez, en appdelegate.
 
 Todos: implementar una forma de identificar mierdas en el cache, de recuperar y borrar, y utilizar fechas.
