@@ -63,7 +63,7 @@
   <xsl:template name="DestacadaEnListadoPrincipal">
     <xsl:param name="Node" />
     <div id="nota">
-      <a href="noticia://{$Node/guid}" title="">
+      <a href="noticia://{$Node/guid}" title="principal">
         <xsl:if test="not(not($Node/media:thumbnail))" >
           <xsl:call-template name="ImagenNoticiaDestacada">
             <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
@@ -82,7 +82,7 @@
           </div>
         </div>
       </a>
-      <div class="separador"></div>
+      <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </div>
   </xsl:template>
   
@@ -124,22 +124,24 @@
             <xsl:call-template name="FormatDate">
               <xsl:with-param name="DateTime" select="$Node/pubDate"/>
             </xsl:call-template>
-          </label> | <label class="seccion"><xsl:value-of select="$Node/category" /></label><br />
+          </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text><label class="seccion"><xsl:value-of select="$Node/category" /></label><br />
           <label><xsl:value-of select="$Node/title" /></label>
         </div>
         <div class="foto img_container">
           <xsl:if test="not(not($Node/news:meta))">
             <xsl:call-template name="MediaAttach">
               <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
-              <!--xsl:with-param name="GuidTag" select="$Node/guid"/-->
             </xsl:call-template>
           </xsl:if>
           <xsl:if test="not(not($Node/media:thumbnail))">
             <img src="{$Node/media:thumbnail/@url}" />
           </xsl:if>
+          <xsl:if test="not($Node/media:thumbnail)">
+            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+          </xsl:if>
         </div>
       </a>
-      <div class="separador"></div>
+      <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </li>
   </xsl:template>
   
@@ -150,14 +152,18 @@
     <!--xsl:param name="GuidTag" /-->
     <div class="ico_container">
       <xsl:if test="$MetaTag/@has_gallery='true'">
-        <div class="ico_galeria"></div>
+        <div class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
       <xsl:if test="$MetaTag/@has_video='true'">
-        <div class="ico_video"></div>
+        <div class="ico_video"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
       <xsl:if test="$MetaTag/@has_audio='true'">
-        <div class="ico_audio"></div>
+        <div class="ico_audio"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
+      <!-- xsl:if test="$MetaTag/@has_audio='false' and $MetaTag/@has_video='false' and $MetaTag/@has_gallery='false'">
+        <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+      </xsl:if -->
+      <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
     </div>
   </xsl:template>
 
@@ -177,7 +183,6 @@
           </div>
         </xsl:when>
         <xsl:otherwise>
-          <!-- Hacer funcion para indicar que tiene la nota VIDEO AUDIO GALERIA -->
           <xsl:variable name="container_type">no_photo</xsl:variable>
           <xsl:call-template name="MediaLink">
             <xsl:with-param name="Node" select="$Node"/>
@@ -216,24 +221,29 @@
         <media:content url="http://media.eldia.com/edis/20120716/fotos_g/DATA_ART_165573.jpg" type="image/jpeg" width="600" height="404"></media:content>
       </media:group>
       -->
-    <div class="media_link {$container_type}">
-      <xsl:if test="$Node/media:content[@type='audio']">
-        <a class="ico_audio" href="audio://$Node/media:content[@type='audio'][1]/{@url}" title=""></a>
-      </xsl:if>
+    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:group/media:content or $Node/media:content[@type='video']">  
+      <div class="media_link {$container_type}">
+        
+        <xsl:if test="$Node/media:content[@type='audio']">
+          <a class="ico_audio" href="audio://$Node/media:content[@type='audio'][1]/{@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+        </xsl:if>
+        
+        <xsl:if test="$Node/media:group/media:content">
+          <xsl:variable name="gallery">
+            <xsl:for-each select="$Node/media:group/media:content">
+              <xsl:value-of select="concat(@url, ';')"/>
+            </xsl:for-each>
+          </xsl:variable>
+          <a href="galeria://{$gallery}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+        </xsl:if>
+        
+        <xsl:if test="$Node/media:content[@type='video']">
+          <a class="ico_video" href="video://$Node/media:content[@type='video'][1]/{@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
       
-      <xsl:if test="$Node/media:group/media:content">
-        <xsl:variable name="gallery">
-          <xsl:for-each select="$Node/media:group/media:content">
-            <xsl:value-of select="concat(@url, ';')"/>
-          </xsl:for-each>
-        </xsl:variable>
-        <a href="galeria://{$gallery}" title="galeria" class="ico_galeria"></a>
-      </xsl:if>
-      
-      <xsl:if test="$Node/media:content[@type='video']">
-        <a class="ico_video" href="video://$Node/media:content[@type='video'][1]/{@url}" title=""></a>
-      </xsl:if>
-    </div>
+      </div>
+    </xsl:if>
   </xsl:template>
   
   <!-- Template generador del link de las imegenes de la galeria. -->
@@ -282,12 +292,15 @@
           </xsl:call-template>
           <xsl:if test="not(not($Item/@thumbnail))">
             <xsl:if test="$Item/@thumbnail!=''">
-              <img src="{$Item/@thumbnail}"/>
+              <img src="{$Item/@thumbnail}" />
             </xsl:if>
+          </xsl:if>
+          <xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
+            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
           </xsl:if>
         </div>
       </a>
-      <div class="separador"></div>
+      <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </li>
   </xsl:template>
   
