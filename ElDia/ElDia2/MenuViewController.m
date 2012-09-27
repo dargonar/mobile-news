@@ -7,11 +7,11 @@
 //
 
 #import "MenuViewController.h"
-#import "AppDelegate.h"
-#import <QuartzCore/QuartzCore.h>
+
+
 
 @implementation MenuViewController
-@synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView;
+@synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView, mYMobiPaperLib;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -19,7 +19,9 @@
     if (self) {
         // Custom initialization
     }
-    return self;
+  
+  self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
+  return self;
 }
 
 
@@ -38,6 +40,11 @@
   [panGesture setMaximumNumberOfTouches:2];
   [panGesture setDelegate:self];
   [screenShotImageView addGestureRecognizer:panGesture];
+  
+  [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS _webView:self.webView];
+  self.webView.scrollView.bounces = NO;
+  self.webView.scrollView.bouncesZoom = NO;
+  self.webView.scrollView.alwaysBounceHorizontal = NO;
 }
 
 - (void)viewDidUnload

@@ -14,20 +14,20 @@
 
 #import "LocalSubstitutionCache.h"
 #import "SqliteCache.h"
-#import "CryptoUtil.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation LocalSubstitutionCache
 
-static BOOL _DO_CACHE = YES;
-
+static bool do_cache = YES;
 +(void)cacheOrNot:(BOOL)yes_or_not{
-  _DO_CACHE = yes_or_not;
+  do_cache = yes_or_not;
 }
+
 - (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request
 {
-  if(_DO_CACHE==NO){
+  if(do_cache==NO)
+  {
     return nil;
   }
 	//
@@ -54,7 +54,7 @@ static BOOL _DO_CACHE = YES;
       NSLog(@"Error trayendo me voy con nil");
       return nil;
     }
-
+    
     mimeType = [self mimeTypeForURL:[request URL]];
     [[SqliteCache defaultCache] set:pathString data:data mimetype:mimeType];
     
@@ -64,21 +64,21 @@ static BOOL _DO_CACHE = YES;
 	// Create the cacheable response
 	//
 	NSURLResponse *response =
-		[[[NSURLResponse alloc]
-			initWithURL           : [request URL]
-			MIMEType              :  mimeType
-      expectedContentLength : [data length]
-			textEncodingName      :  nil]
-		autorelease];
-
+  [[[NSURLResponse alloc]
+    initWithURL           : [request URL]
+    MIMEType              :  mimeType
+    expectedContentLength : [data length]
+    textEncodingName      :  nil]
+   autorelease];
+  
   NSCachedURLResponse *cachedResponse =
-		[[[NSCachedURLResponse alloc] initWithResponse:response data:data] autorelease];
+  [[[NSCachedURLResponse alloc] initWithResponse:response data:data] autorelease];
 	
 	return cachedResponse;
 }
 
 -(NSString*) mimeTypeForURL: (NSURL *) url {
-
+  
   // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
   // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
   CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)[url pathExtension], NULL);
@@ -92,7 +92,7 @@ static BOOL _DO_CACHE = YES;
 
 - (void)removeCachedResponseForRequest:(NSURLRequest *)request
 {
-
+  
 }
 
 - (void)dealloc

@@ -19,10 +19,10 @@
         <title>MENU</title>
       </head>
       
-      <body>
+      <body class="menu">
         <div id="menu">
           <ul>
-            <li class="open"></li>
+            <!--li class="open"></li-->
             <xsl:for-each select="rss/channel/item">
               <li><a href="seccion://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>  
             </xsl:for-each>

@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
+#import "YMobiPaperLib.h"
 
-@interface MenuViewController: UIViewController<UIGestureRecognizerDelegate>
+@interface MenuViewController: UIViewController<UIGestureRecognizerDelegate>{
+  YMobiPaperLib *mYMobiPaperLib;
+}
 
+@property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 @property (strong, nonatomic) IBOutlet UIImageView *screenShotImageView;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) UIImage *screenShotImage;

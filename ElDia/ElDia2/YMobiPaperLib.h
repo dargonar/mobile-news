@@ -42,4 +42,6 @@ NSArray									*urls;
 -(void)loadHtml:(NSString *)path xsl:(NSString *)xsl  _webView:(UIWebView *) _webView;
 -(NSString *)getHtml:(NSString *)path xsl:(NSString *)xsl;
 -(NSString *)getUrl:(YMobiNavigationType *)item queryString:(NSString *)queryString;
+
+-(void) removeLongPressGestureRecognizers:(UIView *)view;
 @end

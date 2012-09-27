@@ -48,7 +48,30 @@
   [self loadHtml:[self getUrl:item queryString:queryString] xsl:xsl _webView:_webView];
 }
 
+-(void) removeLongPressGestureRecognizers:(UIView *)view{
+  for (id object in view.gestureRecognizers) {
+    UIGestureRecognizer *gesture =  (UIGestureRecognizer *)object;
+    if ([gesture isKindOfClass:[UILongPressGestureRecognizer class]]) {
+      gesture.enabled=NO;
+    }
+  }
+  for (id _view in view.subviews) {
+    for (id object in ((UIView *)_view).gestureRecognizers) {
+      UIGestureRecognizer *gesture =  (UIGestureRecognizer *)object;
+      if ([gesture isKindOfClass:[UILongPressGestureRecognizer class]]) {
+        gesture.enabled=NO;
+      }
+    }
+  }
+}
+
 -(void)loadHtml:(NSString *)path xsl:(NSString *)xsl  _webView:(UIWebView *) _webView {
+  
+  //HACK aca?
+  /*
+   [self removeLongPressGestureRecognizers:_webView];
+  */
+  
   NSData   *data     = nil;
   NSString *mimeType = nil;
   

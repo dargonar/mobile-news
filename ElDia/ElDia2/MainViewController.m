@@ -46,6 +46,8 @@
   [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView];
   NSLog(@"viewDidLoad END");
   
+  [self.mYMobiPaperLib removeLongPressGestureRecognizers:self.view];
+  [self.mYMobiPaperLib removeLongPressGestureRecognizers:self.mainUIWebView];
   [self loadNoticiaView];
 }
 
@@ -58,9 +60,10 @@
 }
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+  [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+  self.myNoticiaViewController =nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -70,6 +73,8 @@
 
 
 // UIWebView Delegate
+
+
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
   navigationType:(UIWebViewNavigationType)navigationType{
