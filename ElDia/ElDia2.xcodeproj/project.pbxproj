@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE061B031614D74700C514A2 /* Icon_med.png in Resources */ = {isa = PBXBuildFile; fileRef = CE061B001614D74700C514A2 /* Icon_med.png */; };
+		CE061B041614D74700C514A2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE061B011614D74700C514A2 /* Icon.png */; };
+		CE061B051614D74700C514A2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE061B021614D74700C514A2 /* Icon@2x.png */; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
 		CE16EBF215ED5B1C00EC8210 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBF115ED5B1C00EC8210 /* CoreFoundation.framework */; };
 		CE16EBF415ED5B2C00EC8210 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBF315ED5B2C00EC8210 /* CoreMedia.framework */; };
@@ -189,6 +192,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE061B001614D74700C514A2 /* Icon_med.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_med.png; sourceTree = "<group>"; };
+		CE061B011614D74700C514A2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		CE061B021614D74700C514A2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CE16EBF115ED5B1C00EC8210 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		CE16EBF315ED5B2C00EC8210 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -565,6 +571,9 @@
 		CE7A826A15EC229F0061F481 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CE061B001614D74700C514A2 /* Icon_med.png */,
+				CE061B011614D74700C514A2 /* Icon.png */,
+				CE061B021614D74700C514A2 /* Icon@2x.png */,
 				CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */,
 				CE78798415F7FA56009AA708 /* photo-gallery-left.png */,
 				CEECA6321613D976007C8918 /* default@2x_no_pleno.jpg */,
@@ -1075,6 +1084,9 @@
 				CEECA63B1613DDC1007C8918 /* Default.png in Resources */,
 				CEECA63E1613E450007C8918 /* Icon@2x.png in Resources */,
 				CEECA63F1613E450007C8918 /* Icon.png in Resources */,
+				CE061B031614D74700C514A2 /* Icon_med.png in Resources */,
+				CE061B041614D74700C514A2 /* Icon.png in Resources */,
+				CE061B051614D74700C514A2 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
