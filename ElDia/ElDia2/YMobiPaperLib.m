@@ -20,7 +20,7 @@
             @"http://www.eldia.com.ar/rss/index.aspx",
             @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@",
               @"http://www.eldia.com.ar/rss/secciones.aspx",// NO ANDA
-              @"http://www.eldia.com.ar/rss/seccion.aspx?id=%@", //NO ANDA
+              @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@", //NO ANDA
               
             /*@"http://www.andigital.com.ar/dm_rss_mainstream.php",
             @"http://www.andigital.com.ar/dm_rss_mainstream.php?noticia_id=%@",
@@ -38,14 +38,14 @@
   if ([queryString length]>0) {
     path = [[NSString alloc] initWithFormat:path,queryString];
   }
-  NSLog(@"getUrl path:%@", path);
+  NSLog(@"YMobiPaperLib::getUrl path:%@", path);
   
   return path;
 }
 
 -(void)loadHtml:(YMobiNavigationType *)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView {
   
-  NSLog(@"loadHtml");
+  NSLog(@"YMobiPaperLib::loadHtml");
   [self loadHtml:[self getUrl:item queryString:queryString] xsl:xsl _webView:_webView];
 }
 
@@ -95,6 +95,7 @@
 
 -(NSString *)gethtml:(NSString *)path xsl:(NSString *)xsl{
   
+  //HACK: Validar error!
   NSString *xml = [NSString stringWithContentsOfURL:[NSURL URLWithString:path] encoding:NSUTF8StringEncoding error:nil];
   NSString* path_xslt = [[NSBundle mainBundle] pathForResource:xsl  ofType:@"xsl"];
 
@@ -108,8 +109,6 @@
   //  (?=/?>|\\s):                            (-) aseguramos que se trata de un tag y metemos en el tercer cualquier otro atributo del tag.
                                    
   NSString *cleanedXML = @"";
-  
-  NSLog(@"   regex: antes de chequear si es noticia abierta!");
   
   cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
   
@@ -130,7 +129,6 @@
     cleanedXML = xml;
   }
   */
-  NSLog(@"   regex: DESPUES de chequear si es noticia abierta!");
   
   HTMLGenerator *generator = [[HTMLGenerator alloc] init];
 

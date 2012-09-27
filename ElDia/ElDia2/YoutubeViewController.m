@@ -7,12 +7,17 @@
 //
 
 #import "YoutubeViewController.h"
-
-@interface YoutubeViewController ()
-
-@end
+#import "AppDelegate.h"
 
 @implementation YoutubeViewController
+
+
+- (IBAction) btnBackClick: (id)param{
+  [[app_delegate navigationController] popViewControllerAnimated:YES];
+}
+
+- (IBAction) btnShareClick: (id)param{}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

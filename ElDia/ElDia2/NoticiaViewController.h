@@ -8,19 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import "PSWebView.h"
-//#import "EGOPhotoGlobal.h"
+#import "FGalleryViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "YMobiPaperLib.h"
+#import "YoutubeViewController.h"
 
-@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate> {
-	/*IBOutlet PSWebView 			*mainUIWebView;*/
-  }
 
+@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate>  {
+	NSArray *networkCaptions;
+  NSArray *networkImages;
+	FGalleryViewController *networkGallery;
+  YoutubeViewController* myYoutubeViewController;
+}
 
-@property (nonatomic, retain)  IBOutlet UIView *bottomUIView;
-@property (nonatomic, retain)  IBOutlet PSWebView *mainUIWebView;
-@property (nonatomic, retain)  IBOutlet UIImageView *optionsBottomMenuUIImageView;
+@property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
+@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
+@property (nonatomic, retain) IBOutlet UIView *bottomUIView;
+@property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
+@property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
 
--(void) loadPhotoGallery: (NSURL *)_url;
+- (void)loadPhotoGallery: (NSURL *)_url;
+- (void)playAudio: (NSURL *)_url;
+- (void)playVideo: (NSURL *)_url;
+- (NSString *)getYoutubeVideoId:(NSString*)url;
 
 @end
