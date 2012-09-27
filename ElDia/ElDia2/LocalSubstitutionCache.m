@@ -20,8 +20,16 @@
 
 @implementation LocalSubstitutionCache
 
+static BOOL _DO_CACHE = YES;
+
++(void)cacheOrNot:(BOOL)yes_or_not{
+  _DO_CACHE = yes_or_not;
+}
 - (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request
 {
+  if(_DO_CACHE==NO){
+    return nil;
+  }
 	//
 	// Get the path for the request
 	//

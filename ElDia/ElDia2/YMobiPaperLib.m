@@ -19,9 +19,8 @@
       urls = [[NSArray alloc] initWithObjects:
             @"http://www.eldia.com.ar/rss/index.aspx",
             @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@",
-              @"http://www.eldia.com.ar/rss/secciones.aspx",// NO ANDA
-              @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@", //NO ANDA
-              
+            @"http://www.eldia.com.ar/rss/secciones.aspx",
+            @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@",
             /*@"http://www.andigital.com.ar/dm_rss_mainstream.php",
             @"http://www.andigital.com.ar/dm_rss_mainstream.php?noticia_id=%@",
             @"http://www.andigital.com.ar/dm_rss_mainstream.php?secciones=%@",
@@ -54,7 +53,7 @@
   NSString *mimeType = nil;
   
   NSArray  *cache = [[SqliteCache defaultCache] get:path];
-  if(cache && 1==0) {
+  if(cache) {
     data     = [cache objectAtIndex:0];
     mimeType = [cache objectAtIndex:1];
     //NSLog(@"loadHTML-1 : CACHED!!");

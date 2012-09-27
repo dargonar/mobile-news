@@ -218,7 +218,7 @@
       -->
     <div class="media_link {$container_type}">
       <xsl:if test="$Node/media:content[@type='audio']">
-        <a class="ico_audio" href="audio://$Node/media:content[@type='audio'][1]/{@url}" title=""></a>
+        <a class="ico_audio" href="audio://{$Node/media:content[@type='audio'][1]/@url}" title=""></a>
       </xsl:if>
       
       <xsl:if test="$Node/media:group/media:content">
@@ -231,7 +231,7 @@
       </xsl:if>
       
       <xsl:if test="$Node/media:content[@type='video']">
-        <a class="ico_video" href="video://$Node/media:content[@type='video'][1]/{@url}" title=""></a>
+        <a class="ico_video" href="video://{$Node/media:content[@type='video'][1]/@url}" title=""></a>
       </xsl:if>
     </div>
   </xsl:template>

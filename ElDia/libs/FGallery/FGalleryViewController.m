@@ -403,7 +403,7 @@
 
 - (void)next
 {
-	NSUInteger numberOfPhotos = [_photoSource numberOfPhotosForPhotoGallery:self];
+  NSUInteger numberOfPhotos = [_photoSource numberOfPhotosForPhotoGallery:self];
 	NSUInteger nextIndex = _currentIndex+1;
 	
 	// don't continue if we're out of images.
@@ -417,7 +417,9 @@
 
 - (void)previous
 {
-	NSUInteger prevIndex = _currentIndex-1;
+  if(_currentIndex==0)
+    _currentIndex = [_photoSource numberOfPhotosForPhotoGallery:self];
+  NSUInteger prevIndex = _currentIndex-1;
 	[self gotoImageByIndex:prevIndex animated:NO];
 }
 
@@ -428,8 +430,9 @@
 	NSUInteger numPhotos = [_photoSource numberOfPhotosForPhotoGallery:self];
 	
 	// constrain index within our limits
-    if( index >= numPhotos ) index = numPhotos - 1;
-	
+  //if( index >= numPhotos ) index = numPhotos - 1;
+  if( index >= numPhotos ) index = 0;
+
 	
 	if( numPhotos == 0 ) {
 		
@@ -472,21 +475,21 @@
 
 - (void)setUseThumbnailView:(BOOL)useThumbnailView
 {
+  //
+  UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back", @"") style: UIBarButtonItemStyleBordered target: nil action: nil];
+  [[self navigationItem] setBackBarButtonItem: newBackButton];
+  [newBackButton release];
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back", @"") style: UIBarButtonItemStyleBordered target: nil action: nil];
-    [[self navigationItem] setBackBarButtonItem: newBackButton];
-    [newBackButton release];
-    
-    _useThumbnailView = useThumbnailView;
-    if( self.navigationController ) {
-        if (_useThumbnailView) {
-            UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"See all", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
-            [self.navigationItem setRightBarButtonItem:btn animated:YES];
-        }
-        else {
-            [self.navigationItem setRightBarButtonItem:nil animated:NO];
-        }
-    }
+  _useThumbnailView = useThumbnailView;
+  if( self.navigationController ) {
+      if (_useThumbnailView) {
+          UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"See all", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
+          [self.navigationItem setRightBarButtonItem:btn animated:YES];
+      }
+      else {
+          [self.navigationItem setRightBarButtonItem:nil animated:NO];
+      }
+  }
 }
 
 
@@ -694,8 +697,8 @@
 
 - (void)updateButtons
 {
-	_prevButton.enabled = ( _currentIndex <= 0 ) ? NO : YES;
-	_nextButton.enabled = ( _currentIndex >= [_photoSource numberOfPhotosForPhotoGallery:self]-1 ) ? NO : YES;
+	//_prevButton.enabled = ( _currentIndex <= 0 ) ? NO : YES;
+	//_nextButton.enabled = ( _currentIndex >= [_photoSource numberOfPhotosForPhotoGallery:self]-1 ) ? NO : YES;
 }
 
 

@@ -16,4 +16,5 @@
 
 @interface LocalSubstitutionCache : NSURLCache
   
++(void)cacheOrNot:(BOOL)yes_or_not;
 @end

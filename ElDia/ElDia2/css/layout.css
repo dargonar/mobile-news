@@ -101,7 +101,7 @@ img {
 	width:auto;
 }
 
-#menu li a {
+#menu li a, #menu li a:visited  {
 	display:block;
 	font-size:18px;
 	color:#fff;
@@ -144,7 +144,8 @@ img {
   overflow:hidden;
   position:relative;
 }
-#listado li  a{
+
+#listado li  a, #listado li  a:visited{
 	display:block !important;
 	color:#333;
 	font-size:14px;
@@ -194,7 +195,7 @@ div.main_img_container, div.main_foto {
 .img_container img {
   background-color:#FFFFFF;
   /*background-image:url(../img/ajax-loader.gif) !important;*/
-  background-image:url(ajax-loader.gif) !important;
+  background-image:url(ajax_loader.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   clear:both;
@@ -210,7 +211,7 @@ div.main_img_container, div.main_foto {
 .main_img_container img {
   background-color:#FFF;
   /*background-image:url(../img/ajax-loader.gif) !important;*/
-  background-image:url(ajax-loader.gif) !important;
+  background-image:url(ajax_loader.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   width:100%;

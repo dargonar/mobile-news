@@ -9,17 +9,28 @@
 #import "NoticiaViewController.h"
 #import "AppDelegate.h"
 #import "RegexKitLite.h"
+#import "LocalSubstitutionCache.h"
 
 
 @implementation NoticiaViewController
 
 @synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController;
 
+-(NSString *)cleanUrl:(NSString*)url{
+  NSString *escapedURL =  [[[[url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"http//" withString:@"http://"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
+  return escapedURL;
+}
+
 - (void)playVideo:(NSURL *)_url{
   
-  NSString *youtube = @"http://m.youtube.com/#/watch?v=%@";
+  [LocalSubstitutionCache cacheOrNot:NO];
   
-  NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, [self getYoutubeVideoId:[_url absoluteString]]]];
+  NSString *youtube = @"http://m.youtube.com/watch?v=%@&autoplay=1";
+  //http://m.youtube.com/watch?v=PLyEQF13kx4&autoplay=1
+  
+  NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
+  NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, video_id]];
   
   if (self.myYoutubeViewController == nil) {
     [self loadYoutubeViewController];
@@ -27,8 +38,8 @@
   
   NSURLRequest *req = [NSURLRequest requestWithURL:youtubeURL];
   
-  [app_delegate.navigationController pushViewController:myYoutubeViewController animated:YES];
-  
+  //[app_delegate.navigationController pushViewController:myYoutubeViewController animated:YES];
+  [self.view addSubview:[self.myYoutubeViewController view]];
   [self.myYoutubeViewController.mainUIWebView loadRequest:req];
 }
 
@@ -39,14 +50,46 @@
   
 }
 
-
+/*
+   '%^# Match any youtube URL
+   
+   (?:https?://)?  # Optional scheme. Either http or https
+   (?:www\.)?      # Optional www subdomain
+   (?:             # Group host alternatives
+   youtu\.be/    # Either youtu.be,
+   
+   | youtube\.com  # or youtube.com
+   (?:           # Group path alternatives
+   /embed/     # Either /embed/
+   | /v/         # or /v/
+   | /watch\?v=  # or /watch\?v=
+   
+   )             # End path alternatives.
+   )               # End host alternatives.
+   ([\w-]{10,12})  # Allow 10-12 for 11 char youtube id.
+   $%x'
+   
+   Tested on 
+   http://www.youtube.com/watch?v=e3fsrQmHmfA
+   http://youtu.be/SA2iWivDJiE
+   http://www.youtube.com/watch?v=_oPAwA_Udwc&feature=feedu
+   http://www.youtube.com/embed/SA2iWivDJiE
+   http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US   
+ */
 -(NSString *)getYoutubeVideoId:(NSString*)url{
   
+  NSLog(@"NoticiaViewcontroller::getYoutubeVideoId url=%@", url);
+  
   NSString * local_url = [url stringByReplacingOccurrencesOfString:@"video://" withString:@"" ];
+  local_url = [self cleanUrl:local_url];
+  
   NSString *regex = @"^(?:https?://)?(?:www.)?(?:youtu.be/|youtube.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})";
   NSArray *_ids = [local_url captureComponentsMatchedByRegex:regex];
   NSString *ret = @"";
-  if ([_ids count]>2)
+  
+  NSLog(@"NoticiaViewcontroller::getYoutubeVideoId ComponentsMatched=%@", _ids);
+  
+  if ([_ids count]>1)
   {
     ret = [[NSString alloc] initWithFormat:@"%@",[_ids objectAtIndex:1]] ;
   }
@@ -55,16 +98,20 @@
  
 - (void)playAudio:(NSURL *)_url
 {
-  NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
-  //NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/watch?v=e3fsrQmHmfA"];
-  //_moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
-  MPMoviePlayerController *aPlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
+  NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
+  url = [self cleanUrl:url];
+  
+  //NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
+  //NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
+  NSURL *audio_url = [[NSURL alloc] initFileURLWithPath:url];
+  
+  MPMoviePlayerController *aPlayer = [[MPMoviePlayerController alloc] initWithContentURL:audio_url];
   [self setMoviePlayer:aPlayer];
 
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(moviePlayBackDidFinish:)
-                                               name:MPMoviePlayerPlaybackDidFinishNotification
-                                             object:_moviePlayer];
+                                        selector:@selector(moviePlayBackDidFinish:)
+                                        name:MPMoviePlayerPlaybackDidFinishNotification
+                                        object:_moviePlayer];
   
   _moviePlayer.controlStyle = MPMovieControlStyleDefault;
   _moviePlayer.shouldAutoplay = YES;
@@ -75,16 +122,16 @@
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
+  
   MPMoviePlayerController *player = [notification object];
   [[NSNotificationCenter defaultCenter]
-   removeObserver:self
-   name:MPMoviePlayerPlaybackDidFinishNotification
-   object:player];
+    removeObserver:self
+    name:MPMoviePlayerPlaybackDidFinishNotification
+    object:player];
   
-  if ([player
-       respondsToSelector:@selector(setFullscreen:animated:)])
+  if([player respondsToSelector:@selector(setFullscreen:animated:)])
   {
-    [player.view removeFromSuperview];
+    [player.view removeFromSuperview];  
   }
 }
 
@@ -93,16 +140,8 @@
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 - (IBAction) btnShareClick: (id)param{
-  
-  //[self playVideo:<#(NSURL *)#>];
-  return;
-  
-  NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
-  MPMoviePlayerController *player =  [[MPMoviePlayerController alloc] initWithContentURL:myURL];
-  [player prepareToPlay];
-  [player.view setFrame:self.view.bounds];  // player's frame must match parent's
-  [self.view addSubview: player.view];
-  [player play];
+  NSURL *url = [NSURL URLWithString:@"video://http://www.youtube.com/watch?v=PLyEQF13kx4"];
+  [self playVideo:url];
   
 }
 
@@ -127,6 +166,7 @@
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
+  [LocalSubstitutionCache cacheOrNot:YES];
 }
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
@@ -242,11 +282,11 @@
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
-    //    NSString *escapedURL = (__bridge NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)([_images_src objectAtIndex:i]), NULL,                                                                                kCFStringEncodingUTF8);
-    //NSString *escapedURL = [[NSString alloc] initWithCString:[_images_src objectAtIndex:i] encoding:NSUTF8StringEncoding];
-    NSString *escapedURL =  [[[((NSString *)object) stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
-    
-    NSLog(@"  escapedURL [%@]", escapedURL);
+    /*
+     NSString *escapedURL =  [[[((NSString *)object) stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
+    */
+    NSString *escapedURL = [self cleanUrl:((NSString *)object)];
+    //NSLog(@"  escapedURL [%@]", escapedURL);
     
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path

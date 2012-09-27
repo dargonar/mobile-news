@@ -13,7 +13,8 @@
 
 
 - (IBAction) btnBackClick: (id)param{
-  [[app_delegate navigationController] popViewControllerAnimated:YES];
+  [self.view removeFromSuperview];
+//  [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
 - (IBAction) btnShareClick: (id)param{}
@@ -43,7 +44,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
