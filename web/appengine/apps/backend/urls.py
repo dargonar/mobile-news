@@ -11,6 +11,10 @@ def get_rules():
       Route('/download/ivc'         ,  name='backend/ivc/download'        , handler='apps.backend.download.IVC:download'),
       Route('/download/ivc/feed'    ,  name='backend/ivc/download_feed'   , handler='apps.backend.download.IVC:download_feed'),
       Route('/download/ivc/article' ,  name='backend/ivc/download_article', handler='apps.backend.download.IVC:download_article'),
+      
+      Route('/check/eldia_gallery'         ,  name='backend/eldia_gallery/download'        , handler='apps.backend.download.ElDiaRSS:download'),
+      Route('/check/eldia_gallery/feed'    ,  name='backend/eldia_gallery/download_feed'   , handler='apps.backend.download.ElDiaRSS:download_feed'),
+      #Route('/check/eldia_gallery/article' ,  name='backend/eldia_gallery/download_article', handler='apps.backend.download.ElDiaRSS:download_article'),
     ]
     
     return rules

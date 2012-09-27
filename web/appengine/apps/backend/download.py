@@ -15,7 +15,7 @@ from google.appengine.ext import db, blobstore
 from google.appengine.api.images import get_serving_url
 
 from webapp2 import RequestHandler
-from models  import Category, Article, cats as feeds, DiarioIVC, Kato
+from models  import Category, Article, cats as feeds, DiarioIVC, Kato, ArticlesGallery
 
 from utils import do_slugify
 
@@ -225,3 +225,96 @@ class IVC(RequestHandler):
     
     medio.put()
   
+  
+# =======================================================
+# =======================================================
+class ElDiaRSS(RequestHandler):
+  def download(self, **kwargs):
+    items = [
+            '1_162052',
+            '1_162083',
+            '0_391700',
+            '1_162089',
+            '1_162098',
+            '1_162081',
+            '1_162086',
+            '1_162082',
+            '1_162090',
+            '1_162060',
+            '1_162094',
+            '1_162051',
+            '1_162099',
+            '0_391716',
+            '0_391751',
+            '1_162063',
+            '1_162070',
+            '1_162079',
+            '0_391698',
+            '0_391706',
+            '1_162097',
+            '0_391766',
+            '1_162095',
+            '1_162061',
+            '1_162091',
+            '1_162071',
+            '0_391681',
+            '1_162096',
+            '1_162093',
+            '1_162069',
+            '1_162058',
+            '0_391682',
+            '0_391684',
+            '1_162092',
+            '1_162074',
+            '0_391688',
+            '0_391675',
+            '0_391677',
+            '0_391679',
+            '1_162050',
+            '1_162053',
+            '1_162072',
+            '1_162080',
+            '0_391633',
+            '0_391687',
+            '1_162064',
+            '1_162067',
+            '1_162077',
+            '0_391669',
+            '1_162085',
+            '0_391667',
+            '0_391710',
+            '0_391683',
+            '0_391707',
+            '0_391714',
+            '0_391718',
+            '1_162049',
+            '1_162048',
+            '0_391629',
+            '0_391631',
+            '1_162073',
+            '1_162059',
+            '1_162087',
+            '1_162088' 
+            ]
+    
+    for item in items:
+      taskqueue.add(url='/check/eldia_gallery/feed', params={'id':item})
+
+  def download_feed(self, **kwargs):
+    self.request.charset = 'utf-8'
+    
+    id = self.request.POST.get('id')
+    url = u'http://www.eldia.com.ar/rss/noticia.aspx?id=%s' % id
+    
+    d = feedparser.parse(url)
+    
+    for item in d['items']:
+      
+      art = ArticlesGallery()
+      art.id  = id
+      art.url = url
+      art.has_gallery = 0
+      if item.has_key('media_group'):
+        has_gallery=1
+      #art.rss   = d['feed'] 
+      art.put()
