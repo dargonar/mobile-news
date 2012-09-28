@@ -11,7 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "YMobiPaperLib.h"
 
-@interface MenuViewController: UIViewController<UIGestureRecognizerDelegate>{
+@interface MenuViewController: UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate>{
   YMobiPaperLib *mYMobiPaperLib;
 }
 

@@ -11,18 +11,21 @@
 #import "NoticiaViewController.h"
 #import "YMobiPaperLib.h"
 
-@interface MainViewController : UIViewController<UIWebViewDelegate>
+@interface MainViewController : UIViewController<UIWebViewDelegate, YMobiPaperLibDelegate>
 {
   YMobiPaperLib *mYMobiPaperLib;
   NoticiaViewController *myNoticiaViewController;
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
 -(void) loadNoticiaView;
-
+-(void)loadSectionNews:(NSURL*)rawURL;
++(id)sharedInstance;
 //~/Library/Application Support/iPhone Simulator/
 @end

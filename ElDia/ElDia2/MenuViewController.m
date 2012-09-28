@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "MainViewController.h"
 
 
 
@@ -172,5 +173,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }*/
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType{
+  
+  
+  NSURL* url = [request URL];
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_SECTION])
+  {
+    [[MainViewController sharedInstance] loadSectionNews:url];
+    [self slideThenHide];
+    //[app_delegate.navigationController popViewControllerAnimated:YES];
+    
+    return NO;
+  }
+  return YES;
+  
+}
 
 @end

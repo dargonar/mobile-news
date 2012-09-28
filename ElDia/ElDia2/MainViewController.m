@@ -7,11 +7,13 @@
 //
 
 #import "MainViewController.h"
-
+#import "iToast.h"
 
 @implementation MainViewController
-@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController;
+@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick;
 
+static MainViewController *sharedInstance = nil;
+NSString *sectionId = nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -20,44 +22,67 @@
         // Custom initialization
     }
   
-  //Somos el handler para los dos controles
+  /*start = [NSDate date];
+  NSLog(@"MainViewController::initWirhNibName date:[%@]", start);*/
   self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
-  //self.mainUIWebView.delegate = self;
+  self.mYMobiPaperLib.delegate = self;
   
+  //Limpiamos la cache un poquito.
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    [self.mYMobiPaperLib cleanCache];
+  });
+  sharedInstance=self;
   return self;
 }
 
++(MainViewController *)sharedInstance{
+  return sharedInstance;
+}
+
+-(void)loadSectionNews:(NSURL*)rawURL{
+  sectionId = [rawURL host] ;
+  if([sectionId isEqualToString:@"0"])
+  {
+    sectionId=nil;
+    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:NO];
+  }
+  else
+  {
+    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST _webView:mainUIWebView tag:MSG_GET_SECTION_LIST force_load:NO];
+  }
+}
 
 - (IBAction) btnOptionsClick: (id)param{
   [app_delegate showSideMenu];
 }
 
 - (IBAction) btnRefreshClick: (id)param{
-    
+  [self showLoadingIndicator];
+  if(sectionId==nil)
+  {
+    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:YES];
+  }
+  else{
+    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSectionNews  queryString:sectionId xsl:XSL_PATH_SECTION_LIST _webView:mainUIWebView tag:MSG_GET_SECTION_LIST force_load:NO];
+  }
 }
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view from its nib.
   
-  NSLog(@"viewDidLoad BEGIN");
   
-  [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView];
-  NSLog(@"viewDidLoad END");
+  iToastSettings *theSettings = [iToastSettings getSharedSettings];
+  theSettings.duration = 2500;
+  [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:NO];
   
-  [self.mYMobiPaperLib removeLongPressGestureRecognizers:self.view];
-  [self.mYMobiPaperLib removeLongPressGestureRecognizers:self.mainUIWebView];
   [self loadNoticiaView];
 }
 
--(void) loadNoticiaView{
-  self.myNoticiaViewController= [[NoticiaViewController alloc]
-                                 initWithNibName:@"NoticiaViewController" bundle:[NSBundle mainBundle]];
-  self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  //self.myNoticiaViewController.delegate = self;
-
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
 }
+
 - (void)viewDidUnload
 {
   [super viewDidUnload];
@@ -71,10 +96,47 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void) showLoadingIndicator{
+  btnRefreshClick.hidden=YES;
+  btnRefreshClick.enabled=NO;
+  self.refresh_loading_indicator.hidden = NO;
+  [self.refresh_loading_indicator startAnimating];
+}
+-(void) hideLoadingIndicator{
+  btnRefreshClick.hidden=NO;
+  btnRefreshClick.enabled=YES;
+  self.refresh_loading_indicator.hidden = YES;
+  [self.refresh_loading_indicator stopAnimating];
+  
+}
+//YMobiPaperDelegate implementation
+- (void) requestSuccessful:(id)data message:(NSString*)message{
+  if(sectionId==nil)
+  {
+    [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+  }
+  else{[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:80] show];
+  }
+  [self hideLoadingIndicator];
+  
+}
+
+- (void) requestFailed:(id)error message:(NSString*)message{
+  [self hideLoadingIndicator];
+  
+}
 
 // UIWebView Delegate
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+}
 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+  //[webView stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
   navigationType:(UIWebViewNavigationType)navigationType{
@@ -111,7 +173,12 @@
   
 }
 
-
+-(void) loadNoticiaView{
+  self.myNoticiaViewController= [[NoticiaViewController alloc]
+                                 initWithNibName:@"NoticiaViewController" bundle:[NSBundle mainBundle]];
+  self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  
+}
 
 
 @end

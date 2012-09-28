@@ -47,6 +47,7 @@
   [self.window addSubview:self.navigationController.view];
   [self.window makeKeyAndVisible];//HACKED
   
+  
   return YES;
 }
 

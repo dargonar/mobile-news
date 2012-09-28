@@ -23,8 +23,9 @@
         <div id="menu">
           <ul>
             <!--li class="open"></li-->
+            <li><a href="seccion://0">Principal</a></li>
             <xsl:for-each select="rss/channel/item">
-              <li><a href="seccion://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>  
+              <li><a href="seccion://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>
             </xsl:for-each>
             <li class="close"></li>
           </ul>

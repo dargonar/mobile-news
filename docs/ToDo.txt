@@ -1,7 +1,7 @@
 
-OnLoad: borrar todo lo mas viejo de 5 dias.
+OnLoad: borrar todo lo mas viejo de 2 dias. [LISTO]
 Listado de noticias: Manejo de Index XML la primera vez q abro la app y demas...
-
+WebView: Long Press Gesture popupea para copiar o sharear el link, revelando que tenemos una puta vista!
 Listado de noticias: El loading image (background de los tags img) no se muestra mientras se cargan las imagenes.
 Listado de noticias: Refresh.
 Nota abierta: Cuando la nota es corta, la lista de relacionadas queda separada del bottom de la vista (el html es demasiado corto).

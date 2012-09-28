@@ -20,6 +20,14 @@
 #define SCHEMA_VIDEO @"video"
 #define SCHEMA_AUDIO @"audio"
 #define SCHEMA_GALERIA @"galeria"
+#define SCHEMA_SECTION @"seccion"
+
+#define MSG_UPD_MAIN @"update_main_list"
+#define MSG_GET_MAIN @"get_main_list"
+#define MSG_GET_NEW @"get_new"
+#define MSG_GET_SECTIONS @"get_sections"
+#define MSG_GET_SECTION_LIST @"get_section_list"
+#define MSG_UPD_SECTION_LIST @"update_section_list"
 
 
 typedef enum {
@@ -30,18 +38,36 @@ typedef enum {
   YMobiNavigationTypeOther = 4          // verga tiesa
 } YMobiNavigationType;
 
+@protocol YMobiPaperLibDelegate <NSObject>
+@required
+- (void) requestSuccessful:(id)data message:(NSString*)message;
+- (void) requestFailed:(id)error message:(NSString*)message;
+@end
 
-@interface YMobiPaperLib : NSObject{
-NSArray									*urls;
+@interface YMobiPaperLib : NSObject<NSURLConnectionDataDelegate>{
+  NSArray									*urls;
+  NSMutableDictionary     *messages;
+  NSMutableDictionary     *requestsMetadata;
+  __unsafe_unretained id <YMobiPaperLibDelegate> delegate;
+
 }
-
-@property (retain) NSArray									*urls;
+@property (retain) NSMutableDictionary *requestsMetadata;
+@property (retain) NSArray						 *urls;
+@property (retain) NSMutableDictionary *messages;
+// Delegate
+@property (nonatomic, assign) id <YMobiPaperLibDelegate> delegate;
 
 - (id)init;
--(void)loadHtml:(YMobiNavigationType *)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView ;
+-(void)loadHtml:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView ;
 -(void)loadHtml:(NSString *)path xsl:(NSString *)xsl  _webView:(UIWebView *) _webView;
--(NSString *)getHtml:(NSString *)path xsl:(NSString *)xsl;
--(NSString *)getUrl:(YMobiNavigationType *)item queryString:(NSString *)queryString;
 
--(void) removeLongPressGestureRecognizers:(UIView *)view;
+-(NSString *)loadURL:(NSString *)path;
+-(NSString *)getHtml:(NSString *)xml xsl:(NSString *)xsl;
+
+-(NSString *)getUrl:(YMobiNavigationType)item queryString:(NSString *)queryString;
+
+-(void) loadHtmlAsync:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView tag:(NSString*)tag force_load:(BOOL)force_load;
+
+- (void)cleanCache;
+-(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString;
 @end

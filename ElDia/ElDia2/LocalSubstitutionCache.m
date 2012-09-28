@@ -34,7 +34,7 @@ static bool do_cache = YES;
 	// Get the path for the request
 	//
 	NSString *pathString = [[request URL] absoluteString];
-	NSLog(@"Requieren: %@", pathString);
+	//NSLog(@"Requieren: %@", pathString);
   
   NSData   *data     = nil;
   NSString *mimeType = @"";
@@ -43,22 +43,22 @@ static bool do_cache = YES;
   if (cache) {
     data     = [cache objectAtIndex:0];
     mimeType = [cache objectAtIndex:1];
-    NSLog(@"Lo tengo [mime]=%@", mimeType);
+    //NSLog(@"Lo tengo [mime]=%@", mimeType);
   }
   else {
-    NSLog(@"No lo tengo, lo busco");
+    //NSLog(@"No lo tengo, lo busco");
     data     = [NSData dataWithContentsOfURL:[request URL]];
     
     if(!data)
     {
-      NSLog(@"Error trayendo me voy con nil");
+      //NSLog(@"Error trayendo me voy con nil");
       return nil;
     }
     
     mimeType = [self mimeTypeForURL:[request URL]];
     [[SqliteCache defaultCache] set:pathString data:data mimetype:mimeType];
     
-    NSLog(@"-->Lo encontre [mime]=%@", mimeType);
+    //NSLog(@"-->Lo encontre [mime]=%@", mimeType);
   }
   
 	// Create the cacheable response

@@ -78,6 +78,33 @@
   return [NSArray arrayWithObjects:data,mime,nil];
 }
 
+- (NSArray *)get:(NSString*)key since_hours:(int)since_hours{
+  assert(db!=NULL);
+  int err=0;
+  sqlite3_stmt *stm;
+  
+  err=sqlite3_prepare_v2(db, "SELECT mimetype FROM cache where id = ? and created_at > ?;", -1, &stm, NULL);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_bind_text(stm, 1, [[CryptoUtil sha1:key] UTF8String] , -1, SQLITE_STATIC);
+  assert(err==SQLITE_OK);
+  
+  int olddate = time(NULL) - since_hours*60*60;
+  err=sqlite3_bind_int(stm, 2, olddate);
+  assert(err==SQLITE_OK);
+  
+  err=sqlite3_step(stm);
+  if (err != SQLITE_ROW) {
+    return nil;
+  }
+  
+  NSString *mime = [NSString stringWithUTF8String:(const char *) sqlite3_column_text(stm, 0)];
+  err=sqlite3_finalize(stm);
+  
+  return [NSArray arrayWithObjects:mime,nil];
+ 
+}
+
 - (void)set:(NSString*)key data:(NSData *)data mimetype:(NSString*)mimetype {
   assert(db!=NULL);
   int err=0;
