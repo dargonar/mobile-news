@@ -134,6 +134,7 @@
             </xsl:call-template>
           </xsl:if>
           <xsl:if test="not(not($Node/media:thumbnail))">
+            <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
             <img src="{$Node/media:thumbnail/@url}" />
           </xsl:if>
           <xsl:if test="not($Node/media:thumbnail)">
@@ -292,6 +293,7 @@
           </xsl:call-template>
           <xsl:if test="not(not($Item/@thumbnail))">
             <xsl:if test="$Item/@thumbnail!=''">
+              <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
               <img src="{$Item/@thumbnail}" />
             </xsl:if>
           </xsl:if>

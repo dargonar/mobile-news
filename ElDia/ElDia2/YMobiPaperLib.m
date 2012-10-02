@@ -81,6 +81,7 @@
     
     NSString *xml = [self loadURL:path];
     NSString *html = [self getHtml:xml xsl:xsl];
+    //NSLog(@"HTML: [%@]", html);
     data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
     mimeType = @"text/html";
     [[SqliteCache defaultCache] set:path data:data mimetype:mimeType];
@@ -121,12 +122,19 @@
   // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
   cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
   
+  //Limpiamos otras mierdas
+  cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
+    
   HTMLGenerator *generator = [[HTMLGenerator alloc] init];
 
   return [generator generate:cleanedXML xslt_file:path_xslt];
 }
 
 -(void)setHtmlToView:(UIWebView*)webView data:(NSData*)data mimeType:(NSString*)mimeType{
+  if(webView==nil)
+  {
+    return;
+  }
   NSString *dirPath = [[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
@@ -151,6 +159,8 @@
 }
 
 - (void)cleanCache{
+  //Deberiamos poder limpiar ciertas cosas y otras no.
+  //Esto es: la data debe tener flags que indiquen el tipo de dato, mas alla del mimetype.
   [[SqliteCache defaultCache] clean:48];
 }
 
@@ -226,7 +236,9 @@
   NSString *xml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   
   
+  
   NSString *html = [self getHtml:xml xsl:(NSString*)[metadata objectForKey:KEY_XSL]];
+  
   NSData *html_data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
   NSString*mimeType = @"text/html";
   [[SqliteCache defaultCache] set:[[connection.originalRequest URL] absoluteString] data:html_data mimetype:mimeType];

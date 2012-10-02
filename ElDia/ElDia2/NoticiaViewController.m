@@ -14,7 +14,40 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus;
+
+NSInteger defaultTextFontSize = 14;
+static NSInteger textFontSize = 14;
+
+-(void)changeFontSize:(NSInteger)delta{
+  
+  if(delta<0) {
+      textFontSize = (textFontSize > 10) ? textFontSize -2 : textFontSize;
+  }
+  else
+    if(delta>0) {
+      textFontSize = (textFontSize < 26) ? textFontSize +2 : textFontSize;
+    }
+    else
+    {
+      NSLog(@" delta=0 -> FONTSize:[%d]", textFontSize);
+      //textFontSize = defaultTextFontSize;
+    }
+    
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';",
+                        textFontSize, (textFontSize+2)];
+  [mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+  jsString=nil;
+
+}
+- (IBAction) btnFontSizePlusClick: (id)param{
+  [self changeFontSize:1];
+}
+- (IBAction) btnFontSizeMinusClick: (id)param{
+  [self changeFontSize:-1];
+
+}
 
 -(NSString *)cleanUrl:(NSString*)url{
   NSString *escapedURL =  [[[[url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"http//" withString:@"http://"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
@@ -167,6 +200,7 @@
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
   [LocalSubstitutionCache cacheOrNot:YES];
+
 }
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
@@ -187,6 +221,7 @@
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
+  [self changeFontSize:0];
   NSLog(@"webViewDidFinishLoad");
 }
 

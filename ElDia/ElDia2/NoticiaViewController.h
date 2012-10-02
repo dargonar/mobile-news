@@ -26,8 +26,14 @@
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
+@property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
+@property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
+
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
+
+- (IBAction) btnFontSizePlusClick: (id)param;
+- (IBAction) btnFontSizeMinusClick: (id)param;
 
 - (void)loadPhotoGallery: (NSURL *)_url;
 - (void)playAudio: (NSURL *)_url;

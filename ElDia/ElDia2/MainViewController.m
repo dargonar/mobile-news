@@ -14,6 +14,7 @@
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
+BOOL cacheCleaned = NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,10 +28,6 @@ NSString *sectionId = nil;
   self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
   self.mYMobiPaperLib.delegate = self;
   
-  //Limpiamos la cache un poquito.
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    [self.mYMobiPaperLib cleanCache];
-  });
   sharedInstance=self;
   return self;
 }
@@ -74,6 +71,7 @@ NSString *sectionId = nil;
   
   iToastSettings *theSettings = [iToastSettings getSharedSettings];
   theSettings.duration = 2500;
+  
   [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:NO];
   
   [self loadNoticiaView];
@@ -113,9 +111,20 @@ NSString *sectionId = nil;
 - (void) requestSuccessful:(id)data message:(NSString*)message{
   if(sectionId==nil)
   {
-    [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+    //[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+    //Limpiamos la cache un poquito solo la primera vez que traemos.
+    if(cacheCleaned==NO && [((NSString*)data) isEqualToString:MSG_UPD_MAIN]==NO)
+    {
+      cacheCleaned=YES;
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self.mYMobiPaperLib cleanCache];
+      });
+      //Luego de limpiar llamamos para que se cachee el menu de secciones.
+      [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSections queryString:nil xsl:nil _webView:nil tag:MSG_GET_SECTIONS force_load:NO];
+    }
   }
-  else{[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:80] show];
+  else{
+    //[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:8] show];
   }
   [self hideLoadingIndicator];
   

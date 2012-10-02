@@ -179,6 +179,8 @@
 		CEECA63E1613E450007C8918 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECA63C1613E450007C8918 /* Icon@2x.png */; };
 		CEECA63F1613E450007C8918 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECA63D1613E450007C8918 /* Icon.png */; };
 		CEF0C7231616303A0064E9E2 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEF1277E161A898B00202C66 /* no_image_icon2_150.gif in Resources */ = {isa = PBXBuildFile; fileRef = CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */; };
+		CEF1277F161A898B00202C66 /* no_image_icon2_150.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF1277D161A898B00202C66 /* no_image_icon2_150.png */; };
 		CEF3B58715EC6A7700FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
 		CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
 /* End PBXBuildFile section */
@@ -418,6 +420,8 @@
 		CEECA6391613DDC1007C8918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		CEECA63C1613E450007C8918 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		CEECA63D1613E450007C8918 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = no_image_icon2_150.gif; sourceTree = "<group>"; };
+		CEF1277D161A898B00202C66 /* no_image_icon2_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image_icon2_150.png; sourceTree = "<group>"; };
 		CEF3B58515EC6A7700FF35B1 /* PSWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebView.h; sourceTree = "<group>"; };
 		CEF3B58615EC6A7700FF35B1 /* PSWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -574,6 +578,8 @@
 		CE7A826A15EC229F0061F481 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */,
+				CEF1277D161A898B00202C66 /* no_image_icon2_150.png */,
 				CE061B071614ECBE00C514A2 /* menu_bg.png */,
 				CE061B001614D74700C514A2 /* Icon_med.png */,
 				CE061B011614D74700C514A2 /* Icon.png */,
@@ -1092,6 +1098,8 @@
 				CE061B041614D74700C514A2 /* Icon.png in Resources */,
 				CE061B051614D74700C514A2 /* Icon@2x.png in Resources */,
 				CE061B081614ECBE00C514A2 /* menu_bg.png in Resources */,
+				CEF1277E161A898B00202C66 /* no_image_icon2_150.gif in Resources */,
+				CEF1277F161A898B00202C66 /* no_image_icon2_150.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
