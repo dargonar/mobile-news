@@ -21,7 +21,10 @@
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
+
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
+
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
 -(void) loadNoticiaView;

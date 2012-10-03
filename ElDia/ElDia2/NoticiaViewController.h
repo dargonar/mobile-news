@@ -14,11 +14,13 @@
 #import "YoutubeViewController.h"
 
 
-@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate>  {
+@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, YMobiPaperLibDelegate, FGalleryViewControllerDelegate>  {
 	NSArray *networkCaptions;
   NSArray *networkImages;
 	FGalleryViewController *networkGallery;
   YoutubeViewController* myYoutubeViewController;
+  
+  YMobiPaperLib *mYMobiPaperLib;
 }
 
 @property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
@@ -28,6 +30,9 @@
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
+@property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
@@ -39,5 +44,6 @@
 - (void)playAudio: (NSURL *)_url;
 - (void)playVideo: (NSURL *)_url;
 - (NSString *)getYoutubeVideoId:(NSString*)url;
+- (void)loadNoticia:(NSURL *)url;
 
 @end

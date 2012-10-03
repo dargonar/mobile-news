@@ -10,35 +10,47 @@
 #import "AppDelegate.h"
 #import "RegexKitLite.h"
 #import "LocalSubstitutionCache.h"
-
+#import "SHK.h"
+#import "ConfigHelper.h"
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus;
-
-NSInteger defaultTextFontSize = 14;
-static NSInteger textFontSize = 14;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus, loading_indicator;
 
 -(void)changeFontSize:(NSInteger)delta{
-  
+  NSInteger textFontSize = 14;
+  if([ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE]!=nil)
+  {
+    textFontSize = [[ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE] intValue];
+  }
+  bool fontChanged = NO;
   if(delta<0) {
       textFontSize = (textFontSize > 10) ? textFontSize -2 : textFontSize;
+    fontChanged=YES;
   }
   else
     if(delta>0) {
       textFontSize = (textFontSize < 26) ? textFontSize +2 : textFontSize;
+      fontChanged=YES;
     }
     else
     {
-      NSLog(@" delta=0 -> FONTSize:[%d]", textFontSize);
+      
+      //NSLog(@" delta=0 -> FONTSize:[%d]", textFontSize);
       //textFontSize = defaultTextFontSize;
     }
     
-  NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';",
-                        textFontSize, (textFontSize+2)];
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';", textFontSize, (textFontSize+2)];
+  
   [mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
   jsString=nil;
+  if(fontChanged==YES)
+  {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+      [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%d", textFontSize]];
+    });
+   }
 
 }
 - (IBAction) btnFontSizePlusClick: (id)param{
@@ -173,8 +185,18 @@ static NSInteger textFontSize = 14;
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 - (IBAction) btnShareClick: (id)param{
-  NSURL *url = [NSURL URLWithString:@"video://http://www.youtube.com/watch?v=PLyEQF13kx4"];
-  [self playVideo:url];
+  //NSURL *url = [NSURL URLWithString:@"video://http://www.youtube.com/watch?v=PLyEQF13kx4"];
+  //[self playVideo:url];
+  
+  // Create the item to share (in this example, a url)
+	NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
+	SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!"];
+  
+	// Get the ShareKit action sheet
+	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+  
+	// Display the action sheet
+	[actionSheet showFromToolbar:app_delegate.navigationController.toolbar];
   
 }
 
@@ -182,9 +204,17 @@ static NSInteger textFontSize = 14;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+      self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
+      self.mYMobiPaperLib.delegate = self;
     }
     return self;
+}
+
+-(void)loadNoticia:(NSURL *)url{
+  [self showLoadingIndicator];
+  [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
+  
+  //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView];
 }
 
 - (void)viewDidLoad
@@ -221,12 +251,14 @@ static NSInteger textFontSize = 14;
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self changeFontSize:0];
+  //[self changeFontSize:0];
+  //[self hideLoadingIndicator];
   NSLog(@"webViewDidFinishLoad");
 }
 
  -(void)webViewDidStartLoad:(UIWebView *)webView{
   NSLog(@"webViewDidStartLoad");
+   //[self showLoadingIndicator];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
   NSLog(@"didFailLoadWithError: %@", error);
@@ -295,33 +327,11 @@ static NSInteger textFontSize = 14;
     NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
     return;
   }
-  
-  /*
-   http//media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f1.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f2.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f3.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f4.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f5.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f6.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f7.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f8.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f9.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f10.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f11.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f12.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f13.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f14.jpg
-   http://media.eldia.com.ar/%2fediciones%2f20120902%2fsola%2f15.jpg
-   */
-  NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
+   NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
-    /*
-     NSString *escapedURL =  [[[((NSString *)object) stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
-    */
     NSString *escapedURL = [self cleanUrl:((NSString *)object)];
-    //NSLog(@"  escapedURL [%@]", escapedURL);
     
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path
@@ -403,12 +413,45 @@ static NSInteger textFontSize = 14;
 // END
 
 
+//YMobiPaperDelegate implementation
+- (void) requestSuccessful:(id)data message:(NSString*)message{
+    [self changeFontSize:0];
+    [self hideLoadingIndicator];
+}
+
+- (void) requestFailed:(id)error message:(NSString*)message{
+  [self hideLoadingIndicator];
+}
+
+-(void) showLoadingIndicator{
+  //btnRefreshClick.hidden=YES;
+  //btnRefreshClick.enabled=NO;
+  self.loading_indicator.hidden = NO;
+  [self.loading_indicator startAnimating];
+}
+-(void) hideLoadingIndicator{
+  //btnRefreshClick.hidden=NO;
+  //btnRefreshClick.enabled=YES;
+  self.loading_indicator.hidden = YES;
+  [self.loading_indicator stopAnimating];
+  
+}
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
+  // Release any retained subviews of the main view.
+  // e.g. self.myOutlet = nil;
+  self.mYMobiPaperLib = nil;
+  self.myYoutubeViewController=nil;
+  self.moviePlayer=nil;
+  self.bottomUIView=nil;
+  self.mainUIWebView=nil;
+  self.optionsBottomMenuUIImageView=nil;
+  self.btnFontSizePlus=nil;
+  self.btnFontSizeMinus=nil;
+  self.loading_indicator=nil;
+  
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

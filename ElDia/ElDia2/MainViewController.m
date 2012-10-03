@@ -10,7 +10,7 @@
 #import "iToast.h"
 
 @implementation MainViewController
-@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick;
+@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator;
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
@@ -38,6 +38,7 @@ BOOL cacheCleaned = NO;
 
 -(void)loadSectionNews:(NSURL*)rawURL{
   sectionId = [rawURL host] ;
+  [self showMainLoadingIndicator];
   if([sectionId isEqualToString:@"0"])
   {
     sectionId=nil;
@@ -72,6 +73,7 @@ BOOL cacheCleaned = NO;
   iToastSettings *theSettings = [iToastSettings getSharedSettings];
   theSettings.duration = 2500;
   
+  [self showMainLoadingIndicator];
   [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:NO];
   
   [self loadNoticiaView];
@@ -87,6 +89,11 @@ BOOL cacheCleaned = NO;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
   self.myNoticiaViewController =nil;
+  self.mYMobiPaperLib = nil;
+  
+  self.btnRefreshClick = nil;
+  self.mainUIWebView= nil;
+  self.refresh_loading_indicator= nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -107,6 +114,22 @@ BOOL cacheCleaned = NO;
   [self.refresh_loading_indicator stopAnimating];
   
 }
+
+-(void) showMainLoadingIndicator{
+  btnRefreshClick.hidden=YES;
+  btnRefreshClick.enabled=NO;
+  self.loading_indicator.hidden = NO;
+  [self.loading_indicator startAnimating];
+}
+-(void) hideMainLoadingIndicator{
+  btnRefreshClick.hidden=NO;
+  btnRefreshClick.enabled=YES;
+  self.loading_indicator.hidden = YES;
+  [self.loading_indicator stopAnimating];
+  
+}
+
+
 //YMobiPaperDelegate implementation
 - (void) requestSuccessful:(id)data message:(NSString*)message{
   if(sectionId==nil)
@@ -126,12 +149,14 @@ BOOL cacheCleaned = NO;
   else{
     //[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:8] show];
   }
+  [self hideMainLoadingIndicator];
   [self hideLoadingIndicator];
   
 }
 
 - (void) requestFailed:(id)error message:(NSString*)message{
   [self hideLoadingIndicator];
+  [self hideMainLoadingIndicator];
   
 }
 
@@ -171,8 +196,8 @@ BOOL cacheCleaned = NO;
     NSLog(@"MainViewController::linkClicked 5: %@", [_url absoluteString]);
     NSLog(@"MainViewController::linkClicked 6: %@", [_url scheme]);*/
     
+    [self.myNoticiaViewController loadNoticia:url];
     
-    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.myNoticiaViewController.mainUIWebView];
     
     NSLog(@"webView: DESPUES de cargar Noticia");
 
