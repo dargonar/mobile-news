@@ -1929,17 +1929,16 @@
 		CE8E72A415EBEDB9007E6F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/User/Documents/wdir/ymobipaper/ElDia/libs/**",
-					/Users/User/Documents/wdir/ymobipaper/iphone2/libs,
-					/usr/include/libxml2,
+					"$(SRCROOT)/libs",
+					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2D962B0E-C322-4DE5-AF17-3575DC128F19";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1947,17 +1946,16 @@
 		CE8E72A515EBEDB9007E6F09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/User/Documents/wdir/ymobipaper/ElDia/libs/**",
-					/Users/User/Documents/wdir/ymobipaper/iphone2/libs,
-					/usr/include/libxml2,
+					"$(SRCROOT)/libs",
+					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2D962B0E-C322-4DE5-AF17-3575DC128F19";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

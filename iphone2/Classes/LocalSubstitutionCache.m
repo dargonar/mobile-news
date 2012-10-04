@@ -15,6 +15,7 @@
 #import "LocalSubstitutionCache.h"
 #import "SqliteCache.h"
 #import "CryptoUtil.h"
+#import "MyCachedResponse.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -63,10 +64,10 @@
 			textEncodingName      :  nil]
 		autorelease];
 
-  NSCachedURLResponse *cachedResponse =
-		[[[NSCachedURLResponse alloc] initWithResponse:response data:data] autorelease];
-	
-	return cachedResponse;
+//  MyCachedResponse *cachedResponse =
+//		[[[MyCachedResponse alloc] initWithResponse:response data:data] autorelease];
+//	
+	return (id)cachedResponse;
 }
 
 -(NSString*) mimeTypeForURL: (NSURL *) url {

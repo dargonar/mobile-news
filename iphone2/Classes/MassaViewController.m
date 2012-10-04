@@ -179,6 +179,9 @@
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",location]];
   NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
   return urlRequest;
+  
+//  UIWebView *pp = [[UIWebView alloc] initWithFrame:CGRectMake(10, 10, 10, 10)];
+//  [pp ]
 }
 
 
@@ -186,6 +189,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   return NO;
 }
+
+
+//
+//- (void) webView : (WebView *) sender resource : (id) identifier didFinishLoadingFromDataSource : (id) dataSource { 
+//  NSLog(@"tomalo vos didFinishLoadingFromDataSource");
+//  return;
+//}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

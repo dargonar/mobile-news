@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:ignore="ContentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#5f95cd" >
+
+        <ImageButton
+            android:id="@+id/btn_logo_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/eldia" />
+
+        <ImageButton
+            android:id="@+id/btn_back_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/br_prev_icon_24" />
+
+    </RelativeLayout>
+
+	<com.diventi.mobipaper.ArticleWebView
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/article_webview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/header" />
+
+    <com.diventi.mobipaper.ToolbarView android:id="@+id/toolbar" android:background="@drawable/popup_top_dark" 
+        android:paddingLeft="8.0dip" android:paddingRight="8.0dip" 
+        android:focusable="true" android:layout_width="fill_parent" 
+        android:layout_height="60.0dip" android:layout_alignParentBottom="true">
+            <ImageButton
+            android:id="@+id/btn_options_hack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/share_icon_24" />
+    </com.diventi.mobipaper.ToolbarView> 
+    
+</RelativeLayout>

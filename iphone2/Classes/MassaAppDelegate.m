@@ -9,6 +9,7 @@
 #import "MassaAppDelegate.h"
 #import "MassaViewController.h"
 #import "LocalSubstitutionCache.h"
+#import "RNCachingURLProtocol.h"
 
 @implementation MassaAppDelegate
 
@@ -22,9 +23,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
     // Set the URL cache and leave it set permanently
-    LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
-    [NSURLCache setSharedURLCache:cache];
-
+//    LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
+//    [NSURLCache setSharedURLCache:cache];
+    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];
+  
     // Override point for customization after application launch.
 		viewController.wantsFullScreenLayout = YES;
     [UIApplication sharedApplication].statusBarHidden = YES;
