@@ -18,7 +18,7 @@
 
 @synthesize urls, messages, requestsMetadata, delegate;
 
-
+static NSMutableArray *_ids_de_noticias=nil;
 - (id)init{
 	
 	if (self = [super init]) {
@@ -234,10 +234,16 @@
   NSMutableDictionary *metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
   NSMutableData * data = (NSMutableData*)[metadata objectForKey:KEY_DATA];
   NSString *xml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSString *xsl =(NSString*)[metadata objectForKey:KEY_XSL];
   
-  
-  
-  NSString *html = [self getHtml:xml xsl:(NSString*)[metadata objectForKey:KEY_XSL]];
+  if(xsl==XSL_PATH_MAIN_LIST)
+  {
+    NSString *txt = [self getHtml:xml xsl:XSL_NOTICIAS_IDS];
+    [YMobiPaperLib setIds:txt];
+    txt=nil;
+    
+  }
+  NSString *html = [self getHtml:xml xsl:xsl];
   
   NSData *html_data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
   NSString*mimeType = @"text/html";
@@ -255,11 +261,48 @@
   metadata=nil;
   _key=nil;
   xml = nil;
+  xsl=nil;
   html=nil;
   html_data=nil;
   mimeType=nil;
   tag=nil;
 }
+
++(void)setIds:(NSString*)text{
+  _ids_de_noticias=nil;
+  _ids_de_noticias=[[NSMutableArray alloc] initWithArray:[text componentsSeparatedByString:@";"] copyItems:YES];
+  
+}
+
++(NSString*)getNextNoticiaId:(NSString*)_noticia_id{
+  if(_ids_de_noticias==nil)
+  {
+    return nil;
+  }
+  //_noticia_id = [_noticia_id stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  NSUInteger index = [_ids_de_noticias indexOfObject:_noticia_id];
+  if ((index+1)<[_ids_de_noticias count]) {
+    return [_ids_de_noticias objectAtIndex:(index+1)];
+  }
+  return nil;
+}
+
+
++(NSString*)getPrevNoticiaId:(NSString*)_noticia_id
+{
+  
+  if(_ids_de_noticias==nil)
+  {
+    return nil;
+  }
+  //_noticia_id = [_noticia_id stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  NSUInteger index = [_ids_de_noticias indexOfObject:_noticia_id];
+  if (index>0) {
+    return [_ids_de_noticias objectAtIndex:(index-1)];
+  }
+  return nil;
+}
+
 
 
 // Delegates

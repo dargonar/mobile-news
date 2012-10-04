@@ -11,7 +11,7 @@
   -->
   <xsl:include href="functions.xsl" />
   <!--xsl:output method="html" encoding="UTF-8" indent="yes"/-->
-  <xsl:output method="xml" 
+  <xsl:output method="html" 
     doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" 
     doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" indent="yes" encoding="UTF-8"/>
  

@@ -107,6 +107,7 @@ BOOL cacheCleaned = NO;
   self.refresh_loading_indicator.hidden = NO;
   [self.refresh_loading_indicator startAnimating];
 }
+
 -(void) hideLoadingIndicator{
   btnRefreshClick.hidden=NO;
   btnRefreshClick.enabled=YES;
@@ -196,7 +197,7 @@ BOOL cacheCleaned = NO;
     NSLog(@"MainViewController::linkClicked 5: %@", [_url absoluteString]);
     NSLog(@"MainViewController::linkClicked 6: %@", [_url scheme]);*/
     
-    [self.myNoticiaViewController loadNoticia:url];
+    [self.myNoticiaViewController loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
     
     
     NSLog(@"webView: DESPUES de cargar Noticia");

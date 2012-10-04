@@ -15,6 +15,7 @@
 #define XSL_PATH_SECTION_LIST @"2_section_list"
 #define XSL_PATH_NEWS @"3_new"
 #define XSL_PATH_SECTIONS @"4_menu"
+#define XSL_NOTICIAS_IDS @"_noticias_id_array"
 
 #define SCHEMA_NOTICIA @"noticia"
 #define SCHEMA_VIDEO @"video"
@@ -68,6 +69,10 @@ typedef enum {
 
 -(void) loadHtmlAsync:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView tag:(NSString*)tag force_load:(BOOL)force_load;
 
-- (void)cleanCache;
+-(void)cleanCache;
 -(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString;
+
++(void)setIds:(NSString*)text;
++(NSString*)getNextNoticiaId:(NSString*)_noticia_id;
++(NSString*)getPrevNoticiaId:(NSString*)_noticia_id;
 @end

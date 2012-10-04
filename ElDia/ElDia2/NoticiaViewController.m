@@ -12,6 +12,7 @@
 #import "LocalSubstitutionCache.h"
 #import "SHK.h"
 #import "ConfigHelper.h"
+#import "iToast.h"
 
 @implementation NoticiaViewController
 
@@ -19,9 +20,10 @@
 
 -(void)changeFontSize:(NSInteger)delta{
   NSInteger textFontSize = 14;
-  if([ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE]!=nil)
+  NSString *_textFontSize = [ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE];
+  if(_textFontSize!=nil)
   {
-    textFontSize = [[ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE] intValue];
+    textFontSize = [_textFontSize intValue];
   }
   bool fontChanged = NO;
   if(delta<0) {
@@ -210,11 +212,62 @@
     return self;
 }
 
--(void)loadNoticia:(NSURL *)url{
+-(void)loadNoticia:(NSString *)_noticia_id{
   [self showLoadingIndicator];
-  [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
+  // clean content
+  [self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+  
+  noticia_id = _noticia_id;
+  [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
   
   //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView];
+}
+
+- (void)addGestureRecognizers{
+  UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
+  rightSwipeRecognizer.numberOfTouchesRequired = 1;
+  rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+  rightSwipeRecognizer.cancelsTouchesInView = YES;
+  rightSwipeRecognizer.delegate=self;
+  [self.view addGestureRecognizer:rightSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
+  
+  UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
+  leftSwipeRecognizer.numberOfTouchesRequired = 1;
+  leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+  leftSwipeRecognizer.cancelsTouchesInView = YES;
+  leftSwipeRecognizer.delegate=self;
+  [self.view addGestureRecognizer:leftSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
+
+
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+  if ([touch.view isKindOfClass:[UIView class]])
+  {
+    // only recognises gesture started on a button
+    return YES;
+  }
+  return NO;
+}
+
+-(void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture{
+  //[[[iToast makeText:@"next noticia please"] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+  //stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]
+  NSString *nextNoticiaId = [YMobiPaperLib getNextNoticiaId:noticia_id];
+  if(nextNoticiaId!=nil)
+  {
+    [self loadNoticia:nextNoticiaId];
+    nextNoticiaId=nil;
+  }
+}
+-(void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture{
+  //[[[iToast makeText:@"noticia anterior nene"] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+  NSString *prevNoticiaId = [YMobiPaperLib getPrevNoticiaId:noticia_id];
+  if(prevNoticiaId!=nil)
+  {
+    [self loadNoticia:prevNoticiaId];
+    prevNoticiaId=nil;
+  }
 }
 
 - (void)viewDidLoad
@@ -223,7 +276,9 @@
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
   // Do any additional setup after loading the view from its nib.
-    
+  
+  
+  [self addGestureRecognizers];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -251,17 +306,17 @@
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  //[self changeFontSize:0];
+  [self changeFontSize:0];
   //[self hideLoadingIndicator];
   NSLog(@"webViewDidFinishLoad");
 }
 
  -(void)webViewDidStartLoad:(UIWebView *)webView{
-  NSLog(@"webViewDidStartLoad");
+   //NSLog(@"webViewDidStartLoad");
    //[self showLoadingIndicator];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-  NSLog(@"didFailLoadWithError: %@", error);
+  //NSLog(@"didFailLoadWithError: %@", error);
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -303,7 +358,7 @@
 
 -(void) loadPhotoGallery:(NSURL *)url{
   
-  NSLog(@" NSURL - 1: %@", [url absoluteString]);
+  //NSLog(@" NSURL - 1: %@", [url absoluteString]);
   
   NSString *_gallery_proto = @"gallery://";
   NSString *_url=[url absoluteString];
@@ -311,7 +366,7 @@
   NSRange range = [_url rangeOfString:_gallery_proto];
   
   if ( range.length <= 0 ) {
-    NSLog(@"loadPhotoGallery: [range.length <= 0] HAS NO PHOTO!");
+    //NSLog(@"loadPhotoGallery: [range.length <= 0] HAS NO PHOTO!");
     return;
   }
   
@@ -319,12 +374,12 @@
   NSArray *_images_src = [_url componentsSeparatedByString:@";"];
   
   if([_url length]<=0){
-    NSLog(@"loadPhotoGallery: [[_url length]<=0] HAS NO PHOTO!");
+    //NSLog(@"loadPhotoGallery: [[_url length]<=0] HAS NO PHOTO!");
     return;
   }
   
   if([_images_src count]<1){
-    NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
+    //NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
     return;
   }
    NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
@@ -368,7 +423,6 @@
   return num;
 }
 
-
 - (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
 {
 	return FGalleryPhotoSourceTypeNetwork;
@@ -382,12 +436,6 @@
   //caption = [networkCaptions objectAtIndex:index];
   //return caption;
 }
-
-/*
-- (NSString*)photoGallery:(FGalleryViewController*)gallery filePathForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
-  return [localImages objectAtIndex:index];
-}
- */
 
 - (NSString*)photoGallery:(FGalleryViewController *)gallery urlForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index {
   if(index>= [networkImages count])
@@ -415,8 +463,8 @@
 
 //YMobiPaperDelegate implementation
 - (void) requestSuccessful:(id)data message:(NSString*)message{
-    [self changeFontSize:0];
-    [self hideLoadingIndicator];
+  [self changeFontSize:0];
+  [self hideLoadingIndicator];
 }
 
 - (void) requestFailed:(id)error message:(NSString*)message{

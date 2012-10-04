@@ -20,6 +20,7 @@
 	FGalleryViewController *networkGallery;
   YoutubeViewController* myYoutubeViewController;
   
+  NSString *noticia_id;
   YMobiPaperLib *mYMobiPaperLib;
 }
 
@@ -44,6 +45,10 @@
 - (void)playAudio: (NSURL *)_url;
 - (void)playVideo: (NSURL *)_url;
 - (NSString *)getYoutubeVideoId:(NSString*)url;
-- (void)loadNoticia:(NSURL *)url;
+- (void)loadNoticia:(NSString *)_noticia_id;
 
+- (void)addGestureRecognizers;
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+- (void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture;
+- (void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture;
 @end
