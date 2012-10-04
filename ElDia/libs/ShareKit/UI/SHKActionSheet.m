@@ -44,9 +44,10 @@
 
 + (SHKActionSheet *)actionSheetForType:(SHKShareType)type
 {
-	SHKActionSheet *as = [[SHKActionSheet alloc] initWithTitle:SHKLocalizedString(@"Share")
-													  delegate:self
-											 cancelButtonTitle:nil
+	//HACK:SHKActionSheet *as = [[SHKActionSheet alloc] initWithTitle:SHKLocalizedString(@"Share")
+	SHKActionSheet *as = [[SHKActionSheet alloc] initWithTitle:SHKLocalizedString(@"Compartir")
+                                           delegate:self
+                                           cancelButtonTitle:nil
 										destructiveButtonTitle:nil
 											 otherButtonTitles:nil];
 	as.item = [[[SHKItem alloc] init] autorelease];
@@ -68,10 +69,11 @@
 	}
 	
 	// Add More button
-	[as addButtonWithTitle:SHKLocalizedString(@"More...")];
+	//HACK: [as addButtonWithTitle:SHKLocalizedString(@"More...")];
 	
 	// Add Cancel button
-	[as addButtonWithTitle:SHKLocalizedString(@"Cancel")];
+	//HACK:[as addButtonWithTitle:SHKLocalizedString(@"Cancel")];
+  [as addButtonWithTitle:SHKLocalizedString(@"Cancelar")];
 	as.cancelButtonIndex = as.numberOfButtons -1;
 	
 	return [as autorelease];

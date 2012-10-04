@@ -16,7 +16,7 @@
 
 @implementation YMobiPaperLib
 
-@synthesize urls, messages, requestsMetadata, delegate;
+@synthesize urls, messages, requestsMetadata, delegate, metadata;
 
 static NSMutableArray *_ids_de_noticias=nil;
 - (id)init{
@@ -241,7 +241,12 @@ static NSMutableArray *_ids_de_noticias=nil;
     NSString *txt = [self getHtml:xml xsl:XSL_NOTICIAS_IDS];
     [YMobiPaperLib setIds:txt];
     txt=nil;
-    
+  }
+  if(xsl==XSL_PATH_NEWS)
+  {
+    NSString *txt = [self getHtml:xml xsl:XSL_NOTICIA_METADATA];
+    [self setMetadata:txt];
+    txt=nil;
   }
   NSString *html = [self getHtml:xml xsl:xsl];
   

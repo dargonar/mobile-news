@@ -16,6 +16,7 @@
 #define XSL_PATH_NEWS @"3_new"
 #define XSL_PATH_SECTIONS @"4_menu"
 #define XSL_NOTICIAS_IDS @"_noticias_id_array"
+#define XSL_NOTICIA_METADATA @"_noticia_metadata"
 
 #define SCHEMA_NOTICIA @"noticia"
 #define SCHEMA_VIDEO @"video"
@@ -51,7 +52,10 @@ typedef enum {
   NSMutableDictionary     *requestsMetadata;
   __unsafe_unretained id <YMobiPaperLibDelegate> delegate;
 
+  NSString *metadata;
 }
+
+@property (retain) NSString *metadata; // Usado para info de la noticia, en NoticiaViewController.
 @property (retain) NSMutableDictionary *requestsMetadata;
 @property (retain) NSArray						 *urls;
 @property (retain) NSMutableDictionary *messages;

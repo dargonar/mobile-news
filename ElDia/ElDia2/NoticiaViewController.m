@@ -16,7 +16,7 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus, loading_indicator;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata;
 
 -(void)changeFontSize:(NSInteger)delta{
   NSInteger textFontSize = 14;
@@ -187,12 +187,11 @@
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 - (IBAction) btnShareClick: (id)param{
-  //NSURL *url = [NSURL URLWithString:@"video://http://www.youtube.com/watch?v=PLyEQF13kx4"];
-  //[self playVideo:url];
   
   // Create the item to share (in this example, a url)
-	NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
-	SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!"];
+	//NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
+	NSURL *url = [NSURL URLWithString:self.noticia_metadata];
+	SHKItem *item = [SHKItem URL:url title:@"ElDia.com.ar"];
   
 	// Get the ShareKit action sheet
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
@@ -217,8 +216,10 @@
   // clean content
   [self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
   
-  noticia_id = _noticia_id;
+  [self setNoticia_id:_noticia_id];
   [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
+  
+  
   
   //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView];
 }
@@ -465,6 +466,7 @@
 - (void) requestSuccessful:(id)data message:(NSString*)message{
   [self changeFontSize:0];
   [self hideLoadingIndicator];
+  [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
 }
 
 - (void) requestFailed:(id)error message:(NSString*)message{

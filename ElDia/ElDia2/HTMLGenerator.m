@@ -48,4 +48,5 @@
   
   return [NSString stringWithUTF8String:(const char*)html];
 }
+
 @end

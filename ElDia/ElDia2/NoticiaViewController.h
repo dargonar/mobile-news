@@ -21,8 +21,12 @@
   YoutubeViewController* myYoutubeViewController;
   
   NSString *noticia_id;
+  NSString *noticia_metadata;
   YMobiPaperLib *mYMobiPaperLib;
 }
+
+@property (retain) NSString *noticia_id;
+@property (retain) NSString *noticia_metadata;
 
 @property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
 @property (nonatomic, strong) MPMoviePlayerController *moviePlayer;

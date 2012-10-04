@@ -14,8 +14,8 @@
 // App Description
 // These values are used by any service that shows 'shared from XYZ'
 
-#define SHKMyAppName			@"My App Name"
-#define SHKMyAppURL				@"http://example.com"
+#define SHKMyAppName			@"El Dia"
+#define SHKMyAppURL				@"http://www.eldia.com.ar"
 
 
 
