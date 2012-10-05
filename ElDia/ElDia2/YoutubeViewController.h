@@ -10,8 +10,9 @@
 
 @interface YoutubeViewController : UIViewController<UIWebViewDelegate>
 
-@property (nonatomic, retain) IBOutlet UIWebView *mainUIWebView;
+@property (strong, nonatomic) IBOutlet UIWebView *mainUIWebView;
+
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
-
+-(void) loadVideo:(NSString*)key req:(NSURLRequest*)req;
 @end

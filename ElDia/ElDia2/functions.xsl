@@ -214,15 +214,7 @@
     <!-- <news:meta has_gallery="true" has_video="false" has_audio="false" /> -->
     <xsl:param name="Node" />
     <xsl:param name="container_type" />
-    <!--
-      <media:content url="http://www.eldia.com.ar/ediciones/20120713/20120713075728_1.mp3" type="audio/mpeg" duration="0" />
-      <media:content url="http://www.youtube.com/watch?v=aPAuviB6MRw" type="video" duration="0" />
-      <media:group>
-        <media:content url="http://media.eldia.com/edis/20120716/fotos_g/DATA_ART_165573.jpg" type="image/jpeg" width="600" height="404"></media:content>
-        <media:content url="http://media.eldia.com/edis/20120716/fotos_g/DATA_ART_165573.jpg" type="image/jpeg" width="600" height="404"></media:content>
-      </media:group>
-      -->
-    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:group/media:content or $Node/media:content[@type='video']">  
+    <!-- xsl:if test="$Node/media:content[@type='audio'] or $Node/media:group/media:content or $Node/media:content[@type='video']" -->
       <div class="media_link {$container_type}">
         
         <xsl:if test="$Node/media:content[@type='audio']">
@@ -241,10 +233,11 @@
         <xsl:if test="$Node/media:content[@type='video']">
           <a class="ico_video" href="video://{$Node/media:content[@type='video'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
+          <a class="ico_video" href="video://http://www.youtube.com/watch?v=aPAuviB6MRw" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
       
       </div>
-    </xsl:if>
+    <!--/xsl:if -->
   </xsl:template>
   
   <!-- Template generador del link de las imegenes de la galeria. -->

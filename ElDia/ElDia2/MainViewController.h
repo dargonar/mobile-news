@@ -25,6 +25,8 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 
+@property (nonatomic, retain) IBOutlet UIImageView *logo_imgvw_alpha;
+
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
 -(void) loadNoticiaView;

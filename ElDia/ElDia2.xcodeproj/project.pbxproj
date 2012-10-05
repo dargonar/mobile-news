@@ -203,6 +203,10 @@
 		CE83718616128D9800FC8269 /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716F16128D9800FC8269 /* functions.xsl */; };
 		CE83718716128D9800FC8269 /* 1_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717016128D9800FC8269 /* 1_main_list.xsl */; };
 		CE83718816128D9800FC8269 /* 2_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717116128D9800FC8269 /* 2_section_list.xsl */; };
+		CE85ACBC161EBAE500CC8099 /* YoutubeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85ACB8161EBAE500CC8099 /* YoutubeController.m */; };
+		CE85ACBD161EBAE500CC8099 /* youtubePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85ACBA161EBAE500CC8099 /* youtubePlayer.m */; };
+		CE85ACBF161EBE0100CC8099 /* YoutubeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85ACB8161EBAE500CC8099 /* YoutubeController.m */; };
+		CE85ACC0161EBE1300CC8099 /* youtubePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85ACBA161EBAE500CC8099 /* youtubePlayer.m */; };
 		CE8E5ACB15F051FA00E047BB /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8E5ACA15F051FA00E047BB /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE8E5ACD15F0565B00E047BB /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E5ACC15F0565B00E047BB /* libicucore.dylib */; };
 		CE8E727B15EBEDB8007E6F09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727A15EBEDB8007E6F09 /* UIKit.framework */; };
@@ -251,6 +255,8 @@
 		CEF1277F161A898B00202C66 /* no_image_icon2_150.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF1277D161A898B00202C66 /* no_image_icon2_150.png */; };
 		CEF3B58715EC6A7700FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
 		CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
+		CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
+		CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -561,6 +567,10 @@
 		CE83716F16128D9800FC8269 /* functions.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = functions.xsl; sourceTree = "<group>"; };
 		CE83717016128D9800FC8269 /* 1_main_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_main_list.xsl; sourceTree = "<group>"; };
 		CE83717116128D9800FC8269 /* 2_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_section_list.xsl; sourceTree = "<group>"; };
+		CE85ACB8161EBAE500CC8099 /* YoutubeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeController.m; sourceTree = "<group>"; };
+		CE85ACB9161EBAE500CC8099 /* YoutubeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoutubeController.h; sourceTree = "<group>"; };
+		CE85ACBA161EBAE500CC8099 /* youtubePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = youtubePlayer.m; sourceTree = "<group>"; };
+		CE85ACBB161EBAE500CC8099 /* youtubePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = youtubePlayer.h; sourceTree = "<group>"; };
 		CE8E5AC615F051E800E047BB /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		CE8E5ACA15F051FA00E047BB /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		CE8E5ACC15F0565B00E047BB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -626,6 +636,8 @@
 		CEF1277D161A898B00202C66 /* no_image_icon2_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image_icon2_150.png; sourceTree = "<group>"; };
 		CEF3B58515EC6A7700FF35B1 /* PSWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebView.h; sourceTree = "<group>"; };
 		CEF3B58615EC6A7700FF35B1 /* PSWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebView.m; sourceTree = "<group>"; };
+		CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
+		CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCYoutubeParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1302,6 +1314,10 @@
 				CE7A826515EC221F0061F481 /* MenuViewController.h */,
 				CE7A826615EC221F0061F481 /* MenuViewController.m */,
 				CE7A826715EC221F0061F481 /* MenuViewController.xib */,
+				CE85ACB8161EBAE500CC8099 /* YoutubeController.m */,
+				CE85ACB9161EBAE500CC8099 /* YoutubeController.h */,
+				CE85ACBA161EBAE500CC8099 /* youtubePlayer.m */,
+				CE85ACBB161EBAE500CC8099 /* youtubePlayer.h */,
 				CE83715416124E2300FC8269 /* YoutubeViewController.h */,
 				CE83715516124E2300FC8269 /* YoutubeViewController.m */,
 				CE83715616124E2300FC8269 /* YoutubeViewController.xib */,
@@ -1474,6 +1490,8 @@
 		CEF3B58915EC6A7B00FF35B1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */,
+				CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */,
 				CE8E5AC615F051E800E047BB /* RegexKitLite.h */,
 				CE8E5ACA15F051FA00E047BB /* RegexKitLite.m */,
 				CE16EC7215ED5C1200EC8210 /* CryptoUtil.h */,
@@ -1710,6 +1728,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */,
+				CE85ACC0161EBE1300CC8099 /* youtubePlayer.m in Sources */,
+				CE85ACBF161EBE0100CC8099 /* YoutubeController.m in Sources */,
 				CEF0C7231616303A0064E9E2 /* iToast.m in Sources */,
 				CE799AD315FE1CDE00C857A8 /* JSONKit.m in Sources */,
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
@@ -1833,6 +1854,9 @@
 				CE16EC7D15ED5C1200EC8210 /* SqliteCache.m in Sources */,
 				CE7D339115EE8F2700935444 /* iToast.m in Sources */,
 				CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */,
+				CE85ACBC161EBAE500CC8099 /* YoutubeController.m in Sources */,
+				CE85ACBD161EBAE500CC8099 /* youtubePlayer.m in Sources */,
+				CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

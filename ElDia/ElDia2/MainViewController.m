@@ -10,7 +10,7 @@
 #import "iToast.h"
 
 @implementation MainViewController
-@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator;
+@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha;
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
@@ -135,7 +135,6 @@ BOOL cacheCleaned = NO;
 - (void) requestSuccessful:(id)data message:(NSString*)message{
   if(sectionId==nil)
   {
-    //[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
     //Limpiamos la cache un poquito solo la primera vez que traemos.
     if(cacheCleaned==NO && [((NSString*)data) isEqualToString:MSG_UPD_MAIN]==NO)
     {
@@ -144,21 +143,32 @@ BOOL cacheCleaned = NO;
         [self.mYMobiPaperLib cleanCache];
       });
       //Luego de limpiar llamamos para que se cachee el menu de secciones.
-      [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSections queryString:nil xsl:nil _webView:nil tag:MSG_GET_SECTIONS force_load:NO];
+      [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS _webView:nil tag:MSG_GET_SECTIONS force_load:NO];
     }
   }
-  else{
-    //[[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:8] show];
-  }
+  
   [self hideMainLoadingIndicator];
   [self hideLoadingIndicator];
+  self.logo_imgvw_alpha.hidden = YES;
   
 }
 
 - (void) requestFailed:(id)error message:(NSString*)message{
   [self hideLoadingIndicator];
   [self hideMainLoadingIndicator];
+  self.logo_imgvw_alpha.hidden = NO;
+  [self showMessage:@"Ha ocurrido un error. Actualice la pantalla."];
+}
+
+-(void)showMessage:(NSString*)message{
+  NSInteger top=50;
+  if(sectionId!=nil)
+  {
+    top=80;
+  }
   
+  [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:top] show];
+
 }
 
 // UIWebView Delegate

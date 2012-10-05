@@ -1762,7 +1762,7 @@ xsltSaveResultToString(xmlChar **doc_txt_ptr, int * doc_txt_len,
 	*doc_txt_ptr = xmlStrndup(buf->buffer->content, *doc_txt_len);
     }
     (void)xmlOutputBufferClose(buf);
-    return 0;
+    return 0;	
 }
 
 /************************************************************************

@@ -8,13 +8,16 @@
 
 #import "YoutubeViewController.h"
 #import "AppDelegate.h"
+#import "HCYoutubeParser.h"
 
 @implementation YoutubeViewController
 
 
 - (IBAction) btnBackClick: (id)param{
   [self.view removeFromSuperview];
-//  [[app_delegate navigationController] popViewControllerAnimated:YES];
+  //UIView *playerView = [[self.view subviews] objectAtIndex:[[self.view subviews] count]-1];
+  
+  //[[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
 - (IBAction) btnShareClick: (id)param{}
@@ -40,6 +43,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+  self.mainUIWebView=nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -47,4 +51,27 @@
   return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void) loadVideo:(NSString*)key req:(NSURLRequest*) req{
+  
+  //[self.mainUIWebView loadRequest:req];
+  
+  //CGRect r = [[UIScreen mainScreen] applicationFrame];
+  
+  /*CGRect r = self.view.frame;
+  
+  NSString *str = [NSString stringWithFormat:@"<html><head></head>"
+                   "<body style='margin:0'>"
+                   "<iframe class=\"youtube-player\" type=\"text/html\" width=\"%f\" height=\"%f\" src=\"%@\" frameborder=\"0\">"
+                   "</iframe>"
+                   "</body>", r.size.width, r.size.height, [[NSString alloc] initWithFormat:@"http://www.youtube.com/embed/%@", key]];
+	
+	[self.mainUIWebView loadHTMLString:str baseURL:[NSURL URLWithString:@"http://www.youtube.com"]];
+  */
+  
+  
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+  return YES;
+}
 @end

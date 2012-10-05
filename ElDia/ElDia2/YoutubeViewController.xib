@@ -92,7 +92,7 @@
 					</object>
 					<object class="IBUIButton" id="261467396">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">1316</int>
+						<int key="NSvFlags">-2147482332</int>
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{276, 0}, {44, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -100,6 +100,7 @@
 						<reference key="NSNextKeyView" ref="389231303"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIEnabled">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIHighlightedTitleColor" ref="296302072"/>
@@ -159,6 +160,7 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
+				<bool key="IBUIClipsSubviews">YES</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
 					<boolean value="YES" key="IBUIIsAccessibilityElement"/>
@@ -225,9 +227,9 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="954060150"/>
 							<reference ref="517334057"/>
-							<reference ref="367602198"/>
 							<reference ref="261467396"/>
 							<reference ref="389231303"/>
+							<reference ref="367602198"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

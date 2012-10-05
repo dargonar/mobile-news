@@ -13,6 +13,9 @@
 #import "SHK.h"
 #import "ConfigHelper.h"
 #import "iToast.h"
+#import "YoutubeController.h"
+
+#import "HCYoutubeParser.h"
 
 @implementation NoticiaViewController
 
@@ -73,24 +76,77 @@
   [LocalSubstitutionCache cacheOrNot:NO];
   
   NSString *youtube = @"http://m.youtube.com/watch?v=%@&autoplay=1";
+  youtube = @"http://www.youtube.com/watch?v=%@";
   //http://m.youtube.com/watch?v=PLyEQF13kx4&autoplay=1
   
   NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
-  NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
+  
+  //NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
+  
   NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, video_id]];
   
-  if (self.myYoutubeViewController == nil) {
-    [self loadYoutubeViewController];
-  }
   
-  NSURLRequest *req = [NSURLRequest requestWithURL:youtubeURL];
+  // Gets an dictionary with each available youtube url
+  NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:youtubeURL];
+  
+  // Presents a MoviePlayerController with the youtube quality medium
+  MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
+  [self presentModalViewController:mp animated:YES];
+  mp=nil;
+  
+  // To get a thumbnail for an image there is now a async method for that
+  /*[HCYoutubeParser thumbnailForYoutubeURL:url
+                            thumbnailSize:YouTubeThumbnailDefaultHighQuality
+                            completeBlock:^(UIImage *image, NSError *error) {
+                              if (!error) {
+                                self.thumbailImageView.image = image;
+                              }
+                              else {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                                [alert show];
+                              }
+                            }];
+  */
+  //[self loadYoutubeViewController];
   
   //[app_delegate.navigationController pushViewController:myYoutubeViewController animated:YES];
-  [self.view addSubview:[self.myYoutubeViewController view]];
-  [self.myYoutubeViewController.mainUIWebView loadRequest:req];
+  //[self.view addSubview:self.myYoutubeViewController.view];
+  
+  //[self presentModalViewControllerWithPresentationStyle:UIModalPresentationFullScreen video_id:video_id];
+  
+  //NSURLRequest *req = [NSURLRequest requestWithURL:youtubeURL];
+  //[self.myYoutubeViewController.mainUIWebView loadRequest:req];
+  
+  //[self.myYoutubeViewController loadVideo:video_id req:req];
+  
+  //self.myYoutubeViewController =nil;
+  youtubeURL = nil;
+  //req=nil;
+  youtube=nil;
+  video_id=nil;
 }
 
+- (void) presentModalViewControllerWithPresentationStyle:(UIModalPresentationStyle)style video_id:(NSString*)video_id{
+    
+    YoutubeController *controller = [[YoutubeController alloc] init];
+  controller.video_id = video_id;
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [modalNavigationController navigationBar].hidden=YES;
+    [[modalNavigationController navigationBar] setTintColor:[UIColor colorWithWhite:0.2 alpha:1.0f]];
+    [modalNavigationController setModalPresentationStyle:style];
+    [modalNavigationController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self presentModalViewController:modalNavigationController
+                            animated:YES];
+    
+  //[modalNavigationController autorelease];
+    
+  }
+
 -(void) loadYoutubeViewController{
+  if (self.myYoutubeViewController != nil) {
+    return;
+  }
   self.myYoutubeViewController= [[YoutubeViewController alloc]
                                  initWithNibName:@"YoutubeViewController" bundle:[NSBundle mainBundle]];
   self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
