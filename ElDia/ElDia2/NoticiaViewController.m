@@ -14,9 +14,12 @@
 #import "ConfigHelper.h"
 #import "iToast.h"
 
+
+#import "HCYoutubeParser.h"
+
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, moviePlayer=_moviePlayer, myYoutubeViewController, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata;
 
 -(void)changeFontSize:(NSInteger)delta{
   NSInteger textFontSize = 14;
@@ -68,34 +71,80 @@
   return escapedURL;
 }
 
+
+
 - (void)playVideo:(NSURL *)_url{
   
   [LocalSubstitutionCache cacheOrNot:NO];
   
   NSString *youtube = @"http://m.youtube.com/watch?v=%@&autoplay=1";
+  youtube = @"http://www.youtube.com/watch?v=%@";
   //http://m.youtube.com/watch?v=PLyEQF13kx4&autoplay=1
   
   NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
-  NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
+  
+  //NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
+  
   NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, video_id]];
   
-  if (self.myYoutubeViewController == nil) {
-    [self loadYoutubeViewController];
+  /* ************* */
+  // Gets an dictionary with each available youtube url
+  NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:youtubeURL];
+  
+  if(videos==nil || [[videos allKeys] count]<1)
+  {
+    [[[iToast makeText:@"Este video no puede ser reproducido por cuestiones de copyright."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+    youtube = nil;
+    video_id = nil;
+    youtubeURL = nil;
+    videos = nil;
+    return;
   }
+  NSLog(@" status:%@  reason:%@", [videos objectForKey:@"status"], [videos objectForKey:@"reason"]);
+  // Presents a MoviePlayerController with the youtube quality medium
+  MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]] ];
   
-  NSURLRequest *req = [NSURLRequest requestWithURL:youtubeURL];
+  //[mp.moviePlayer setFullscreen:YES];
   
-  //[app_delegate.navigationController pushViewController:myYoutubeViewController animated:YES];
-  [self.view addSubview:[self.myYoutubeViewController view]];
-  [self.myYoutubeViewController.mainUIWebView loadRequest:req];
+  [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+	//[m_moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleEmbedded];
+  
+  //[mp.moviePlayer setContentURL:movieUrl];
+  [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
+  
+  
+  //[[UIApplication sharedApplication] setStatusBarHidden:YES];
+  [mp setWantsFullScreenLayout:YES];
+  
+  
+  [self presentModalViewController:mp animated:NO];
+  
+  //[self.view addSubview:mp.view];
+  
+  
+  [mp.moviePlayer prepareToPlay];
+	[mp.moviePlayer play];
+  mp=nil;
+  
+  // To get a thumbnail for an image there is now a async method for that
+  /*[HCYoutubeParser thumbnailForYoutubeURL:url
+                            thumbnailSize:YouTubeThumbnailDefaultHighQuality
+                            completeBlock:^(UIImage *image, NSError *error) {
+                              if (!error) {
+                                self.thumbailImageView.image = image;
+                              }
+                              else {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                                [alert show];
+                              }
+                            }];
+  */
+  youtubeURL = nil;
+  //req=nil;
+  youtube=nil;
+  video_id=nil;
 }
 
--(void) loadYoutubeViewController{
-  self.myYoutubeViewController= [[YoutubeViewController alloc]
-                                 initWithNibName:@"YoutubeViewController" bundle:[NSBundle mainBundle]];
-  self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  
-}
 
 /*
    '%^# Match any youtube URL
@@ -151,37 +200,47 @@
   //NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
   //NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
   NSURL *audio_url = [[NSURL alloc] initFileURLWithPath:url];
+  NSLog(@"%@", url);
   
-  MPMoviePlayerController *aPlayer = [[MPMoviePlayerController alloc] initWithContentURL:audio_url];
-  [self setMoviePlayer:aPlayer];
-
+  MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:audio_url];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackComplete:)
+                                               name:MPMoviePlayerPlaybackDidFinishNotification
+                                             object:moviePlayerController];
+  
+  [self.view addSubview:moviePlayerController.view];
+  moviePlayerController.fullscreen = YES;
+  [moviePlayerController play];
+  return;
+  /*
+  MPMoviePlayerViewController *aPlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:audio_url];
+  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                         selector:@selector(moviePlayBackDidFinish:)
                                         name:MPMoviePlayerPlaybackDidFinishNotification
-                                        object:_moviePlayer];
+                                        object:aPlayer];
   
-  _moviePlayer.controlStyle = MPMovieControlStyleDefault;
-  _moviePlayer.shouldAutoplay = YES;
-  [_moviePlayer prepareToPlay];
-  [self.view addSubview:_moviePlayer.view];
-  [_moviePlayer setFullscreen:YES animated:YES];
-  [_moviePlayer play];
+  [aPlayer.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+  [aPlayer.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
+  [aPlayer setWantsFullScreenLayout:YES];
+  //[self presentModalViewController:aPlayer animated:NO];
+  [self.view addSubview:aPlayer.view];
+  [aPlayer.moviePlayer prepareToPlay];
+	[aPlayer.moviePlayer play];
+  //®aPlayer=nil;*/
 }
 
-- (void) moviePlayBackDidFinish:(NSNotification*)notification {
-  
-  MPMoviePlayerController *player = [notification object];
-  [[NSNotificationCenter defaultCenter]
-    removeObserver:self
-    name:MPMoviePlayerPlaybackDidFinishNotification
-    object:player];
-  
-  if([player respondsToSelector:@selector(setFullscreen:animated:)])
-  {
-    [player.view removeFromSuperview];  
-  }
-}
 
+- (void)moviePlaybackComplete:(NSNotification *)notification
+{
+  MPMoviePlayerController *moviePlayerController = [notification object];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:MPMoviePlayerPlaybackDidFinishNotification
+                                                object:moviePlayerController];
+  
+  [moviePlayerController.view removeFromSuperview];
+  moviePlayerController = nil;
+}
 
 - (IBAction) btnBackClick: (id)param{
   [[app_delegate navigationController] popViewControllerAnimated:YES];
@@ -328,6 +387,7 @@
   //validar URL
   if (UIWebViewNavigationTypeLinkClicked == navigationType)
   {
+    self.bottomUIView.hidden = YES; //HACK!
     bool handled = NO;
     if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
     {
@@ -351,7 +411,9 @@
     }
     
     if(handled == YES)
+    {
       return NO;
+    }
     return NO; //YES;
   }
   return YES;
@@ -361,8 +423,13 @@
   
   //NSLog(@" NSURL - 1: %@", [url absoluteString]);
   
-  NSString *_gallery_proto = @"gallery://";
+  NSString *_gallery_proto = @"galeria://";
   NSString *_url=[url absoluteString];
+  
+  if([_url length]<=0){
+    //NSLog(@"loadPhotoGallery: [[_url length]<=0] HAS NO PHOTO!");
+    return;
+  }
   
   NSRange range = [_url rangeOfString:_gallery_proto];
   
@@ -373,11 +440,6 @@
   
   _url=[_url stringByReplacingOccurrencesOfString:_gallery_proto withString:@""];
   NSArray *_images_src = [_url componentsSeparatedByString:@";"];
-  
-  if([_url length]<=0){
-    //NSLog(@"loadPhotoGallery: [[_url length]<=0] HAS NO PHOTO!");
-    return;
-  }
   
   if([_images_src count]<1){
     //NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
@@ -493,8 +555,6 @@
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
   self.mYMobiPaperLib = nil;
-  self.myYoutubeViewController=nil;
-  self.moviePlayer=nil;
   self.bottomUIView=nil;
   self.mainUIWebView=nil;
   self.optionsBottomMenuUIImageView=nil;

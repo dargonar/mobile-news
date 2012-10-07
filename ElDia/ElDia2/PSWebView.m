@@ -2,6 +2,7 @@
 // You can redistribute it and/or modify it under the new BSD license.
 
 #import <objc/runtime.h>
+//#import <UIKit/UIKit.h>
 #import "PSWebView.h"
 
 @interface NSObject (UIWebViewTappingDelegate)
@@ -18,19 +19,33 @@
 
 - (void)__touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
 {
-	[self __touchesEnded:touches withEvent:event];
+  NSLog(@"%@",event);
+  /*
+  if ( [self isKindOfClass:[MPInlineVideoViewController class]]==YES) {
+    return;
+  }*/
+  @try{
 	
-	id webView = [[self superview] superview];
-	if (touches.count > 1) {
-		if ([webView respondsToSelector:@selector(fireZoomingEndedWithTouches:event:)]) {
-			[webView fireZoomingEndedWithTouches:touches event:event];
-		}
-	}
-	else {
-		if ([webView respondsToSelector:@selector(fireTappedWithTouch:event:)]) {
-			[webView fireTappedWithTouch:[touches anyObject] event:event];
-		}
-	}
+    //if([self respondsToSelector:@selector(__touchesEnded:touches:withEvent:)]==NO)
+    //  return;
+      
+    [self __touchesEnded:touches withEvent:event];
+	
+    id webView = [[self superview] superview];
+    if (touches.count > 1) {
+      if ([webView respondsToSelector:@selector(fireZoomingEndedWithTouches:event:)]) {
+        [webView fireZoomingEndedWithTouches:touches event:event];
+      }
+    }
+    else {
+      if ([webView respondsToSelector:@selector(fireTappedWithTouch:event:)]) {
+        [webView fireTappedWithTouch:[touches anyObject] event:event];
+      }
+    }
+  }
+  @catch (NSException * e) {
+    
+  }
 }
 
 @end
@@ -39,6 +54,7 @@ static BOOL hookInstalled = NO;
 
 static void installHook()
 {
+  
 	if (hookInstalled) return;
 	
 	hookInstalled = YES;

@@ -121,7 +121,8 @@
     // I edited this line so that the image view cannont move vertically
     [piece setCenter:CGPointMake([piece center].x + translation.x, [piece center].y)];
     [gesture setTranslation:CGPointZero inView:[piece superview]];
-    [self adjustWebViewWidth:(320-([piece center].x + translation.x))];
+    //    [self adjustWebViewWidth:(320-([piece center].x - translation.x))];
+    //HACK [self adjustWebViewWidth:(320-([piece center].x + translation.x))];
   }
   else if ([gesture state] == UIGestureRecognizerStateEnded)
     [self slideThenHide];

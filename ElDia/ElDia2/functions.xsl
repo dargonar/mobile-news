@@ -152,13 +152,13 @@
     <xsl:param name="MetaTag" />
     <!--xsl:param name="GuidTag" /-->
     <div class="ico_container">
-      <xsl:if test="$MetaTag/@has_gallery='true'">
+      <xsl:if test="$MetaTag/@has_gallery='true' or $MetaTag/@has_gallery='True'">
         <div class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
-      <xsl:if test="$MetaTag/@has_video='true'">
+      <xsl:if test="$MetaTag/@has_video='true' or $MetaTag/@has_video='True'">
         <div class="ico_video"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
-      <xsl:if test="$MetaTag/@has_audio='true'">
+      <xsl:if test="$MetaTag/@has_audio='true' or $MetaTag/@has_audio='True'">
         <div class="ico_audio"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
       </xsl:if>
       <!-- xsl:if test="$MetaTag/@has_audio='false' and $MetaTag/@has_video='false' and $MetaTag/@has_gallery='false'">
@@ -214,19 +214,14 @@
     <!-- <news:meta has_gallery="true" has_video="false" has_audio="false" /> -->
     <xsl:param name="Node" />
     <xsl:param name="container_type" />
-    <!--
-      <media:content url="http://www.eldia.com.ar/ediciones/20120713/20120713075728_1.mp3" type="audio/mpeg" duration="0" />
-      <media:content url="http://www.youtube.com/watch?v=aPAuviB6MRw" type="video" duration="0" />
-      <media:group>
-        <media:content url="http://media.eldia.com/edis/20120716/fotos_g/DATA_ART_165573.jpg" type="image/jpeg" width="600" height="404"></media:content>
-        <media:content url="http://media.eldia.com/edis/20120716/fotos_g/DATA_ART_165573.jpg" type="image/jpeg" width="600" height="404"></media:content>
-      </media:group>
-      -->
-    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:group/media:content or $Node/media:content[@type='video']">  
+    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:content[@type='audio/mpeg'] or $Node/media:group/media:content or $Node/media:content[@type='video']" >
       <div class="media_link {$container_type}">
         
         <xsl:if test="$Node/media:content[@type='audio']">
           <a class="ico_audio" href="audio://{$Node/media:content[@type='audio'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+        </xsl:if>
+        <xsl:if test="$Node/media:content[@type='audio/mpeg']">
+          <a class="ico_audio" href="audio://{$Node/media:content[@type='audio/mpeg'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
         
         <xsl:if test="$Node/media:group/media:content">
@@ -241,6 +236,8 @@
         <xsl:if test="$Node/media:content[@type='video']">
           <a class="ico_video" href="video://{$Node/media:content[@type='video'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
+        
+        <!--a class="ico_video" href="video://http://www.youtube.com/watch?v=aPAuviB6MRw" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a-->
         <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
       
       </div>

@@ -11,14 +11,12 @@
 #import "FGalleryViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "YMobiPaperLib.h"
-#import "YoutubeViewController.h"
 
 
 @interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, YMobiPaperLibDelegate, FGalleryViewControllerDelegate>  {
 	NSArray *networkCaptions;
   NSArray *networkImages;
 	FGalleryViewController *networkGallery;
-  YoutubeViewController* myYoutubeViewController;
   
   NSString *noticia_id;
   NSString *noticia_metadata;
@@ -28,8 +26,6 @@
 @property (retain) NSString *noticia_id;
 @property (retain) NSString *noticia_metadata;
 
-@property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
-@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;

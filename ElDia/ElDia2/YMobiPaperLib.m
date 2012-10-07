@@ -108,26 +108,37 @@ static NSMutableArray *_ids_de_noticias=nil;
 
 -(NSString *)getHtml:(NSString *)xml xsl:(NSString *)xsl{
   
+  NSString *cleanedXML = @"";
   NSString* path_xslt = [[NSBundle mainBundle] pathForResource:xsl  ofType:@"xsl"];
-  NSString *regexTotal2 = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
+  
+  NSString *htmlAttributesRegex = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
   //  source: http://www.andrewbarber.com/post/Remove-HTML-Attributes-and-Tags-from-HTML-Source.aspx
   //  (?<=<):                                 (-) starting '<', no matchea ningun grupo.
-  //  ([^/>]+):                               (1) matchea todo lo que haya entre '<' y 'style="...'. Por ejemplot 'span font="12px;" '.
+  //  ([^/>]+):                               (1) matchea todo lo que haya entre '<' y 'style="...'. Por ejemplot 'span font="12px;"  '.
   //  (\\s(style|class)=['\"][^'\"]+?['\"]):  (2) matchea 'style="<estilo>"', atributo entre comillas simples o dobles.
   //  ([^/>]*):                               (3) asegura que termina en espacio(' ') o en cierre de tag '>';
   //  (?=/?>|\\s):                            (-) aseguramos que se trata de un tag y metemos en el tercer cualquier otro atributo del tag.
-                                   
-  NSString *cleanedXML = @"";
   
-  // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
-  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
+  NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
   
-  //Limpiamos otras mierdas
-  cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
+  @try{
+    // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
+    cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
     
-  HTMLGenerator *generator = [[HTMLGenerator alloc] init];
+    //Limpiamos otras mierdas
+    //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
+    cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
 
-  return [generator generate:cleanedXML xslt_file:path_xslt];
+    HTMLGenerator *generator = [[HTMLGenerator alloc] init];
+
+    return [generator generate:cleanedXML xslt_file:path_xslt];
+  }
+  @catch (NSException * e) {
+    [self requestFailed:nil message:e.reason];
+  }
+  @finally {
+    //NSLog(@"finally");
+  }
 }
 
 -(void)setHtmlToView:(UIWebView*)webView data:(NSData*)data mimeType:(NSString*)mimeType{
@@ -144,7 +155,8 @@ static NSMutableArray *_ids_de_noticias=nil;
   data = nil;
   //[mimeType dealloc];
   mimeType = nil;
-
+  dirPath=nil;
+  dirURL=nil;
 }
 
 -(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString{
@@ -161,7 +173,15 @@ static NSMutableArray *_ids_de_noticias=nil;
 - (void)cleanCache{
   //Deberiamos poder limpiar ciertas cosas y otras no.
   //Esto es: la data debe tener flags que indiquen el tipo de dato, mas alla del mimetype.
-  [[SqliteCache defaultCache] clean:48];
+  @try{
+    [[SqliteCache defaultCache] clean:48];
+  }
+  @catch (NSException * e) {
+    [self requestFailed:nil message:e.reason];
+  }
+  @finally {
+    //NSLog(@"finally");
+  }
 }
 
 // Async implementation
@@ -169,19 +189,27 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   NSString* path = [self getUrl:item queryString:queryString];
   
-  if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
-  {
-    NSArray  *cache = [[SqliteCache defaultCache] get:path];
-    if(cache)
+  @try{
+    if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
     {
-      NSData   *data     =data     = [cache objectAtIndex:0];
-      NSString *mimeType = mimeType = [cache objectAtIndex:1];
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self setHtmlToView:_webView data:data mimeType:mimeType];
-      });
-      [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
-      return;
+      NSArray  *cache = [[SqliteCache defaultCache] get:path];
+      if(cache)
+      {
+        NSData   *data     =data     = [cache objectAtIndex:0];
+        NSString *mimeType = mimeType = [cache objectAtIndex:1];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+          [self setHtmlToView:_webView data:data mimeType:mimeType];
+        });
+        [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
+        return;
+      }
     }
+  }
+  @catch (NSException * e) {
+    [self requestFailed:tag message:e.reason];
+  }
+  @finally {
+    //NSLog(@"finally");
   }
   //Vinculo request con vista
   NSURL *theURL =  [[NSURL alloc]initWithString:path ];
@@ -189,15 +217,15 @@ static NSMutableArray *_ids_de_noticias=nil;
                                 cachePolicy:NSURLRequestReloadIgnoringCacheData
                                 timeoutInterval:60.0];
   
-  NSMutableDictionary *metadata = [[NSMutableDictionary alloc] init];
-  [metadata setValue:xsl forKey:KEY_XSL];
-  [metadata setValue:_webView forKey:KEY_VIEW];
-  [metadata setValue:tag forKey:KEY_TAG];
+  NSMutableDictionary *_metadata = [[NSMutableDictionary alloc] init];
+  [_metadata setValue:xsl forKey:KEY_XSL];
+  [_metadata setValue:_webView forKey:KEY_VIEW];
+  [_metadata setValue:tag forKey:KEY_TAG];
   
   NSMutableData *recv_data = [[NSMutableData alloc] init];
-  [metadata setValue:recv_data forKey:KEY_DATA];
+  [_metadata setValue:recv_data forKey:KEY_DATA];
   
-  [requestsMetadata setValue:metadata forKey:[NSString stringWithFormat:@"%i",[theRequest hash]]];
+  [requestsMetadata setValue:_metadata forKey:[NSString stringWithFormat:@"%i",[theRequest hash]]];
   
   [NSURLConnection connectionWithRequest:theRequest delegate:self];
   
@@ -212,14 +240,14 @@ static NSMutableArray *_ids_de_noticias=nil;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
   NSString*_key=[NSString stringWithFormat:@"%i",[connection.originalRequest hash]];
-  NSMutableDictionary *metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
-  NSString *tag = (NSString*)[metadata objectForKey:KEY_TAG];
+  NSMutableDictionary *_metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
+  NSString *tag = (NSString*)[_metadata objectForKey:KEY_TAG];
   
   [self requestFailed:tag message:(NSString *)[messages objectForKey:tag]];
 
   [requestsMetadata removeObjectForKey:_key];
   _key=nil;
-  metadata =nil;
+  _metadata =nil;
   tag=nil;
 
 }
@@ -231,10 +259,11 @@ static NSMutableArray *_ids_de_noticias=nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
   
   NSString*_key=[NSString stringWithFormat:@"%i",[connection.originalRequest hash]];
-  NSMutableDictionary *metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
-  NSMutableData * data = (NSMutableData*)[metadata objectForKey:KEY_DATA];
+  NSMutableDictionary *_metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
+  NSMutableData * data = (NSMutableData*)[_metadata objectForKey:KEY_DATA];
   NSString *xml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSString *xsl =(NSString*)[metadata objectForKey:KEY_XSL];
+  NSString *xsl =(NSString*)[_metadata objectForKey:KEY_XSL];
+  NSString *tag = (NSString*)[_metadata objectForKey:KEY_TAG];
   
   if(xsl==XSL_PATH_MAIN_LIST)
   {
@@ -252,24 +281,35 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   NSData *html_data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
   NSString*mimeType = @"text/html";
-  [[SqliteCache defaultCache] set:[[connection.originalRequest URL] absoluteString] data:html_data mimetype:mimeType];
+  
+  @try {
+    [[SqliteCache defaultCache] set:[[connection.originalRequest URL] absoluteString] data:html_data mimetype:mimeType];
+  }
+  @catch (NSException * e) {
+  //[self requestFailed:tag message:e.reason];
+   }
+  @finally {
+  //NSLog(@"finally");
+  }
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    [self setHtmlToView:(UIWebView*)[metadata objectForKey:KEY_VIEW] data:html_data mimeType:mimeType];
+    [self setHtmlToView:(UIWebView*)[_metadata objectForKey:KEY_VIEW] data:html_data mimeType:mimeType];
   });
-  NSString *tag = (NSString*)[metadata objectForKey:KEY_TAG];
   //[self requestSuccessful:(NSString*)[metadata objectForKey:KEY_TAG] message:@"Proceso OK"];
+    
   [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
   
-  [requestsMetadata removeObjectForKey:_key];
-  data=nil;
-  metadata=nil;
-  _key=nil;
-  xml = nil;
-  xsl=nil;
   html=nil;
   html_data=nil;
   mimeType=nil;
+    
+  
+  [requestsMetadata removeObjectForKey:_key];
+  data=nil;
+  _metadata=nil;
+  _key=nil;
+  xml = nil;
+  xsl=nil;
   tag=nil;
 }
 

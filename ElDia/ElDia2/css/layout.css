@@ -338,6 +338,7 @@ div.main_img_container, div.main_foto {
 
 .media_link.no_photo{
   margin-top:8px;
+  height:30px;
 }
 .media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
   width:30px;
