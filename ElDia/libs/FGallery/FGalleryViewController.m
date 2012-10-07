@@ -472,18 +472,60 @@
 	[self moveScrollerToCurrentIndexWithAnimation:NO];
 }
 
+- (IBAction)backAction:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)setUseThumbnailView:(BOOL)useThumbnailView
 {
-  //
-  UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back", @"") style: UIBarButtonItemStyleBordered target: nil action: nil];
+  UIImage *image = [UIImage imageNamed: @"bg.png"];
+  [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+  [image release];
+  image = nil;
+  /*
+  UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Volver", @"") style: UIBarButtonItemStylePlain target: nil action: nil];
+  //UIImage *backImage = [UIImage imageNamed: @"br_prev_icon_24.png"];
+  //UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:backImage style:UIBarButtonItemStylePlain target:nil action:nil];
+  //[newBackButton setBackgroundImage:backImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
   [[self navigationItem] setBackBarButtonItem: newBackButton];
   [newBackButton release];
-    
+  //[backImage release];
+  //backImage=nil;
+  newBackButton = nil;
+  */
+  
+  UIImage *backImage = [UIImage imageNamed: @"br_prev_icon_24.png"];
+  /*UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+  btn.bounds = CGRectMake( 0, 0, backImage.size.width, backImage.size.height );
+  [btn setImage:backImage forState:UIControlStateNormal];
+  UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+  */
+  UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+  [a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
+  [a1 addTarget:self action:@selector(backAction:)forControlEvents:UIControlEventTouchUpInside];
+  
+  [a1 setImage:[UIImage imageNamed:@"br_prev_icon_24.png"] forState:UIControlStateNormal];
+  UIBarButtonItem *ba1 = [[UIBarButtonItem alloc] initWithCustomView:a1];
+  
+  self.navigationItem.leftBarButtonItem = ba1;
+  
+  //[[self navigationItem] setBackBarButtonItem: ba1];
+  //[backBtn release];
+  [a1 release];
+  a1=nil;
+  [ba1 release];	
+  ba1=nil;
+  [backImage release];
+  backImage=nil;
+  //backBtn = nil;
+  
+  
   _useThumbnailView = useThumbnailView;
   if( self.navigationController ) {
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
       if (_useThumbnailView) {
-          UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"See all", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
+          UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ver todas", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
           [self.navigationItem setRightBarButtonItem:btn animated:YES];
       }
       else {
@@ -688,7 +730,7 @@
 - (void)updateTitle
 {
     if (!_hideTitle){
-        [self setTitle:[NSString stringWithFormat:@"%i %@ %i", _currentIndex+1, NSLocalizedString(@"of", @"") , [_photoSource numberOfPhotosForPhotoGallery:self]]];
+        [self setTitle:[NSString stringWithFormat:@"%i %@ %i", _currentIndex+1, NSLocalizedString(@"de", @"") , [_photoSource numberOfPhotosForPhotoGallery:self]]];
     }else{
         [self setTitle:@""];
     }
@@ -802,7 +844,7 @@
     _isThumbViewShowing = YES;
     
     [self arrangeThumbs];
-    [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"Close", @"")];
+    [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"Cerrar", @"")];
     
     if (animation) {
         // do curl animation
@@ -821,7 +863,7 @@
 - (void)hideThumbnailViewWithAnimation:(BOOL)animation
 {
     _isThumbViewShowing = NO;
-    [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"See all", @"")];
+    [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"Ver todas", @"")];
     
     if (animation) {
         // do curl animation

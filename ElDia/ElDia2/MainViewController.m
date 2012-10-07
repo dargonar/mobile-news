@@ -55,6 +55,7 @@ BOOL cacheCleaned = NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
+  
   [self showLoadingIndicator];
   if(sectionId==nil)
   {

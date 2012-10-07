@@ -108,24 +108,27 @@ static NSMutableArray *_ids_de_noticias=nil;
 
 -(NSString *)getHtml:(NSString *)xml xsl:(NSString *)xsl{
   
+  NSString *cleanedXML = @"";
+  NSString* path_xslt = [[NSBundle mainBundle] pathForResource:xsl  ofType:@"xsl"];
+  
+  NSString *htmlAttributesRegex = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
+  //  source: http://www.andrewbarber.com/post/Remove-HTML-Attributes-and-Tags-from-HTML-Source.aspx
+  //  (?<=<):                                 (-) starting '<', no matchea ningun grupo.
+  //  ([^/>]+):                               (1) matchea todo lo que haya entre '<' y 'style="...'. Por ejemplot 'span font="12px;"  '.
+  //  (\\s(style|class)=['\"][^'\"]+?['\"]):  (2) matchea 'style="<estilo>"', atributo entre comillas simples o dobles.
+  //  ([^/>]*):                               (3) asegura que termina en espacio(' ') o en cierre de tag '>';
+  //  (?=/?>|\\s):                            (-) aseguramos que se trata de un tag y metemos en el tercer cualquier otro atributo del tag.
+  
+  NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
+  
   @try{
-    NSString* path_xslt = [[NSBundle mainBundle] pathForResource:xsl  ofType:@"xsl"];
-    NSString *regexTotal2 = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
-    //  source: http://www.andrewbarber.com/post/Remove-HTML-Attributes-and-Tags-from-HTML-Source.aspx
-    //  (?<=<):                                 (-) starting '<', no matchea ningun grupo.
-    //  ([^/>]+):                               (1) matchea todo lo que haya entre '<' y 'style="...'. Por ejemplot 'span font="12px;"  '.
-    //  (\\s(style|class)=['\"][^'\"]+?['\"]):  (2) matchea 'style="<estilo>"', atributo entre comillas simples o dobles.
-    //  ([^/>]*):                               (3) asegura que termina en espacio(' ') o en cierre de tag '>';
-    //  (?=/?>|\\s):                            (-) aseguramos que se trata de un tag y metemos en el tercer cualquier otro atributo del tag.
-                                   
-    NSString *cleanedXML = @"";
-    
     // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
-    cleanedXML = [xml stringByReplacingOccurrencesOfRegex:regexTotal2 withString:@"$1"];
+    cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
     
     //Limpiamos otras mierdas
-    cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
-      
+    //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
+    cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
+
     HTMLGenerator *generator = [[HTMLGenerator alloc] init];
 
     return [generator generate:cleanedXML xslt_file:path_xslt];

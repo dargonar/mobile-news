@@ -23,9 +23,9 @@
 
 
 /**
- Convenient method for decoding a html encoded string
+ Convenient method for decoding a html encoded string	
  */
-- (NSString *)stringByDecodingURLFormat;
+- (NSString *)stringByDecodingURLFormat;	
 
 @end
 
@@ -102,40 +102,46 @@
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
         if (!error) {
-            NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+          NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
             
-            NSMutableDictionary *parts = [responseString dictionaryFromQueryStringComponents];
+          NSMutableDictionary *parts = [responseString dictionaryFromQueryStringComponents];
             
-            if (parts) {
+          if (parts) {
+            /*NSLog(@" REASON: %@", [parts objectForKey:@"reason"]);
+            NSLog(@" STATUS: %@", [parts objectForKey:@"status"]);
+            if( [((NSString*)[parts objectForKey:@"status"]) isEqual:@"fail"])
+            {
+              NSLog(@" ERROR: %@", [parts objectForKey:@"reason"]);
+              return nil;
+            }*/
+            NSString *fmtStreamMapString = [[parts objectForKey:@"url_encoded_fmt_stream_map"] objectAtIndex:0];
+            NSArray *fmtStreamMapArray = [fmtStreamMapString componentsSeparatedByString:@","];
                 
-                NSString *fmtStreamMapString = [[parts objectForKey:@"url_encoded_fmt_stream_map"] objectAtIndex:0];
-                NSArray *fmtStreamMapArray = [fmtStreamMapString componentsSeparatedByString:@","];
+            NSMutableDictionary *videoDictionary = [NSMutableDictionary dictionary];
                 
-                NSMutableDictionary *videoDictionary = [NSMutableDictionary dictionary];
-                
-                for (NSString *videoEncodedString in fmtStreamMapArray) {
-                    NSMutableDictionary *videoComponents = [videoEncodedString dictionaryFromQueryStringComponents];
-                    NSString *type = [[[videoComponents objectForKey:@"type"] objectAtIndex:0] stringByDecodingURLFormat];
-                    NSString *signature = nil;
-                    if ([videoComponents objectForKey:@"sig"]) {
-                        signature = [[videoComponents objectForKey:@"sig"] objectAtIndex:0];
-                    }
+            for (NSString *videoEncodedString in fmtStreamMapArray) {
+              NSMutableDictionary *videoComponents = [videoEncodedString dictionaryFromQueryStringComponents];
+              NSString *type = [[[videoComponents objectForKey:@"type"] objectAtIndex:0] stringByDecodingURLFormat];
+              NSString *signature = nil;
+              if ([videoComponents objectForKey:@"sig"]) {
+                signature = [[videoComponents objectForKey:@"sig"] objectAtIndex:0];
+              }
                     
-                    if ([type rangeOfString:@"mp4"].length > 0) {
-                        NSString *url = [[[videoComponents objectForKey:@"url"] objectAtIndex:0] stringByDecodingURLFormat];
-                        url = [NSString stringWithFormat:@"%@&signature=%@", url, signature];
-                        
-                        NSString *quality = [[[videoComponents objectForKey:@"quality"] objectAtIndex:0] stringByDecodingURLFormat];
-                        
-                        NSLog(@"Found video for quality: %@", quality);
-                        [videoDictionary setObject:url forKey:quality];
-                    }
-                }
+              if ([type rangeOfString:@"mp4"].length > 0) {
+                NSString *url = [[[videoComponents objectForKey:@"url"] objectAtIndex:0] stringByDecodingURLFormat];
+                url = [NSString stringWithFormat:@"%@&signature=%@", url, signature];
                 
-                return videoDictionary;
+                NSString *quality = [[[videoComponents objectForKey:@"quality"] objectAtIndex:0] stringByDecodingURLFormat];
+                    
+                NSLog(@"Found video for quality: %@", quality);
+                [videoDictionary setObject:url forKey:quality];
             }
         }
+                
+        return videoDictionary;
+      }
     }
+  }
     
     return nil;
 }
