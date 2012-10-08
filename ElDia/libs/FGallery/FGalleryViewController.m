@@ -495,18 +495,11 @@
   newBackButton = nil;
   */
   
-  UIImage *backImage = [UIImage imageNamed: @"br_prev_icon_24.png"];
-  /*UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-  btn.bounds = CGRectMake( 0, 0, backImage.size.width, backImage.size.height );
-  [btn setImage:backImage forState:UIControlStateNormal];
-  UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
-  */
-  UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+  UIButton *a1 = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
   [a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
   [a1 addTarget:self action:@selector(backAction:)forControlEvents:UIControlEventTouchUpInside];
-  
   [a1 setImage:[UIImage imageNamed:@"br_prev_icon_24.png"] forState:UIControlStateNormal];
-  UIBarButtonItem *ba1 = [[UIBarButtonItem alloc] initWithCustomView:a1];
+  UIBarButtonItem *ba1 = [[[UIBarButtonItem alloc] initWithCustomView:a1] autorelease];
   
   self.navigationItem.leftBarButtonItem = ba1;
   
@@ -516,20 +509,22 @@
   a1=nil;
   [ba1 release];	
   ba1=nil;
-  [backImage release];
-  backImage=nil;
-  //backBtn = nil;
-  
   
   _useThumbnailView = useThumbnailView;
   if( self.navigationController ) {
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
       if (_useThumbnailView) {
-          UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ver todas", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
-          [self.navigationItem setRightBarButtonItem:btn animated:YES];
+        UIButton *t1 = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
+        [t1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
+        [t1 addTarget:self action:@selector(handleSeeAllTouch:)forControlEvents:UIControlEventTouchUpInside];
+        [t1 setImage:[UIImage imageNamed:@"thumbnails.png"] forState:UIControlStateNormal];
+        UIBarButtonItem *bt1 = [[[UIBarButtonItem alloc] initWithCustomView:t1] autorelease];
+  
+        //UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ver todas", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
+        [self.navigationItem setRightBarButtonItem:bt1 animated:YES];
       }
       else {
-          [self.navigationItem setRightBarButtonItem:nil animated:NO];
+        [self.navigationItem setRightBarButtonItem:nil animated:NO];
       }
   }
 }

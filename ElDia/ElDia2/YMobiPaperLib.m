@@ -278,6 +278,8 @@ static NSMutableArray *_ids_de_noticias=nil;
     txt=nil;
   }
   NSString *html = [self getHtml:xml xsl:xsl];
+  if([xsl isEqualToString:XSL_PATH_SECTION_LIST])
+    NSLog(@"%@", html);
   
   NSData *html_data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
   NSString*mimeType = @"text/html";

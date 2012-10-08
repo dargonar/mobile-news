@@ -19,7 +19,7 @@
 
 - (void)__touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
 {
-  NSLog(@"%@",event);
+  //NSLog(@"%@",event);
   /*
   if ( [self isKindOfClass:[MPInlineVideoViewController class]]==YES) {
     return;

@@ -248,6 +248,8 @@
 		CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
 		CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
 		CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
+		CEF7C2C7162361200040E9AC /* thumbnails.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C5162361200040E9AC /* thumbnails.png */; };
+		CEF7C2C8162361200040E9AC /* thumbnails@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C6162361200040E9AC /* thumbnails@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -608,6 +610,8 @@
 		CEF3B58615EC6A7700FF35B1 /* PSWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebView.m; sourceTree = "<group>"; };
 		CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
 		CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCYoutubeParser.m; sourceTree = "<group>"; };
+		CEF7C2C5162361200040E9AC /* thumbnails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnails.png; sourceTree = "<group>"; };
+		CEF7C2C6162361200040E9AC /* thumbnails@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnails@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1120,6 +1124,8 @@
 		CE7A826A15EC229F0061F481 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CEF7C2C5162361200040E9AC /* thumbnails.png */,
+				CEF7C2C6162361200040E9AC /* thumbnails@2x.png */,
 				CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */,
 				CEF1277D161A898B00202C66 /* no_image_icon2_150.png */,
 				CE061B071614ECBE00C514A2 /* menu_bg.png */,
@@ -1543,6 +1549,8 @@
 				CEED58B61622130E007A7FDC /* share.png in Resources */,
 				CEED58B71622130E007A7FDC /* share@2x.png in Resources */,
 				CEED58B81622130E007A7FDC /* menu_bg.png in Resources */,
+				CEF7C2C7162361200040E9AC /* thumbnails.png in Resources */,
+				CEF7C2C8162361200040E9AC /* thumbnails@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

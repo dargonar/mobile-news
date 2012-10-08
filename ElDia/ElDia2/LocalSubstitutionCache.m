@@ -36,6 +36,12 @@ static bool do_cache = YES;
 	NSString *pathString = [[request URL] absoluteString];
 	//NSLog(@"Requieren: %@", pathString);
   
+  if([[[request URL] scheme] isEqualToString:@"file"])
+  {
+    NSLog(@" NOT CACHED: %@",pathString);
+    return nil;
+  }
+  
   NSData   *data     = nil;
   NSString *mimeType = @"";
   
