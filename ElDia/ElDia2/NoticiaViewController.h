@@ -11,6 +11,7 @@
 #import "FGalleryViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "YMobiPaperLib.h"
+#import "YoutubeViewController.h"
 
 
 @interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, YMobiPaperLibDelegate, FGalleryViewControllerDelegate>  {
@@ -21,7 +22,12 @@
   NSString *noticia_id;
   NSString *noticia_metadata;
   YMobiPaperLib *mYMobiPaperLib;
+
+  YoutubeViewController *myYoutubeViewController;
 }
+
+@property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
+
 
 @property (retain) NSString *noticia_id;
 @property (retain) NSString *noticia_metadata;

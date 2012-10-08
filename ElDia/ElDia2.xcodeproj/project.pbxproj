@@ -71,6 +71,7 @@
 		CE16EC8215ED766A00EC8210 /* LocalSubstitutionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7715ED5C1200EC8210 /* LocalSubstitutionCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EC8315ED766A00EC8210 /* SqliteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7915ED5C1200EC8210 /* SqliteCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
 		CE78798915F7FA56009AA708 /* photo-gallery-edit-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */; };
 		CE78798A15F7FA56009AA708 /* photo-gallery-left.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798415F7FA56009AA708 /* photo-gallery-left.png */; };
 		CE78798B15F7FA56009AA708 /* photo-gallery-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798515F7FA56009AA708 /* photo-gallery-left@2x.png */; };
@@ -241,6 +242,9 @@
 		CEED58B61622130E007A7FDC /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CEED58A51622130E007A7FDC /* share.png */; };
 		CEED58B71622130E007A7FDC /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEED58A61622130E007A7FDC /* share@2x.png */; };
 		CEED58B81622130E007A7FDC /* menu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEED58A71622130E007A7FDC /* menu_bg.png */; };
+		CEEEC0C316236C030037F329 /* YoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEEC0C116236C030037F329 /* YoutubeViewController.m */; };
+		CEEEC0C416236C030037F329 /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
+		CEEEC0C61623700A0037F329 /* YoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEEC0C116236C030037F329 /* YoutubeViewController.m */; };
 		CEF0C7231616303A0064E9E2 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CEF1277E161A898B00202C66 /* no_image_icon2_150.gif in Resources */ = {isa = PBXBuildFile; fileRef = CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */; };
 		CEF1277F161A898B00202C66 /* no_image_icon2_150.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF1277D161A898B00202C66 /* no_image_icon2_150.png */; };
@@ -604,6 +608,9 @@
 		CEED58A51622130E007A7FDC /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		CEED58A61622130E007A7FDC /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		CEED58A71622130E007A7FDC /* menu_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_bg.png; sourceTree = "<group>"; };
+		CEEEC0C016236C030037F329 /* YoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoutubeViewController.h; sourceTree = "<group>"; };
+		CEEEC0C116236C030037F329 /* YoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeViewController.m; sourceTree = "<group>"; };
+		CEEEC0C216236C030037F329 /* YoutubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YoutubeViewController.xib; sourceTree = "<group>"; };
 		CEF1277C161A898B00202C66 /* no_image_icon2_150.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = no_image_icon2_150.gif; sourceTree = "<group>"; };
 		CEF1277D161A898B00202C66 /* no_image_icon2_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image_icon2_150.png; sourceTree = "<group>"; };
 		CEF3B58515EC6A7700FF35B1 /* PSWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebView.h; sourceTree = "<group>"; };
@@ -1304,6 +1311,9 @@
 				CE7A826515EC221F0061F481 /* MenuViewController.h */,
 				CE7A826615EC221F0061F481 /* MenuViewController.m */,
 				CE7A826715EC221F0061F481 /* MenuViewController.xib */,
+				CEEEC0C016236C030037F329 /* YoutubeViewController.h */,
+				CEEEC0C116236C030037F329 /* YoutubeViewController.m */,
+				CEEEC0C216236C030037F329 /* YoutubeViewController.xib */,
 			);
 			path = ElDia2;
 			sourceTree = "<group>";
@@ -1435,6 +1445,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */,
 				CE8E728515EBEDB8007E6F09 /* InfoPlist.strings in Resources */,
 				CE7A825E15EC21F00061F481 /* MainViewController.xib in Resources */,
 				CE7A826415EC220F0061F481 /* NoticiaViewController.xib in Resources */,
@@ -1560,6 +1571,7 @@
 			files = (
 				CE8E729D15EBEDB9007E6F09 /* InfoPlist.strings in Resources */,
 				CE7D339315EE8F3800935444 /* README.md in Resources */,
+				CEEEC0C416236C030037F329 /* YoutubeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1586,6 +1598,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEEC0C61623700A0037F329 /* YoutubeViewController.m in Sources */,
 				CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */,
 				CEF0C7231616303A0064E9E2 /* iToast.m in Sources */,
 				CE799AD315FE1CDE00C857A8 /* JSONKit.m in Sources */,
@@ -1701,6 +1714,7 @@
 				CE7D339115EE8F2700935444 /* iToast.m in Sources */,
 				CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */,
 				CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */,
+				CEEEC0C316236C030037F329 /* YoutubeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

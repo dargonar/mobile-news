@@ -8,14 +8,14 @@
 
 #import "YoutubeViewController.h"
 #import "AppDelegate.h"
-#import "HCYoutubeParser.h"
+
 
 @implementation YoutubeViewController
 
 
 - (IBAction) btnBackClick: (id)param{
+  
   [self.view removeFromSuperview];
-  //UIView *playerView = [[self.view subviews] objectAtIndex:[[self.view subviews] count]-1];
   
   //[[app_delegate navigationController] popViewControllerAnimated:YES];
 }
@@ -53,7 +53,7 @@
 
 -(void) loadVideo:(NSString*)key req:(NSURLRequest*) req{
   
-  //[self.mainUIWebView loadRequest:req];
+  [self.mainUIWebView loadRequest:req];
   
   //CGRect r = [[UIScreen mainScreen] applicationFrame];
   

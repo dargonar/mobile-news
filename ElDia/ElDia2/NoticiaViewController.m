@@ -14,12 +14,11 @@
 #import "ConfigHelper.h"
 #import "iToast.h"
 
-
 #import "HCYoutubeParser.h"
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController;
 
 -(void)changeFontSize:(NSInteger)delta{
   NSInteger textFontSize = 14;
@@ -77,8 +76,7 @@
   
   [LocalSubstitutionCache cacheOrNot:NO];
   
-  NSString *youtube = @"http://m.youtube.com/watch?v=%@&autoplay=1";
-  youtube = @"http://www.youtube.com/watch?v=%@";
+  NSString *youtube = @"http://www.youtube.com/watch?v=%@";
   //http://m.youtube.com/watch?v=PLyEQF13kx4&autoplay=1
   
   NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
@@ -93,12 +91,28 @@
   
   if(videos==nil || [[videos allKeys] count]<1)
   {
+    if(self.myYoutubeViewController!=nil)
+      self.myYoutubeViewController =nil;
+    self.myYoutubeViewController = [[YoutubeViewController alloc] initWithNibName:@"YoutubeViewController" bundle:[NSBundle mainBundle]];
+    self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    //[self presentModalViewController:self.myYoutubeViewController animated:NO];
+    [self.view addSubview:self.myYoutubeViewController.view];
+  
+    
+    NSLog(@" Loaded Youtube WEB View");
+    NSString *youtubeMobile = @"http://m.youtube.com/watch?v=%@"; //&autoplay=1";
+    [self.myYoutubeViewController loadVideo:video_id req:[NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:youtubeMobile, video_id]]]];
+    
+    youtubeMobile = nil;
+    
+    /*
     [[[iToast makeText:@"Este video no puede ser reproducido por cuestiones de copyright."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
     youtube = nil;
     video_id = nil;
     youtubeURL = nil;
     videos = nil;
-    return;
+    */return;
   }
   NSLog(@" status:%@  reason:%@", [videos objectForKey:@"status"], [videos objectForKey:@"reason"]);
   // Presents a MoviePlayerController with the youtube quality medium
