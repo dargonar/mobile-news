@@ -174,9 +174,12 @@
     _captionContainer					= [[UIView alloc] initWithFrame:CGRectZero];
     _caption							= [[UILabel alloc] initWithFrame:CGRectZero];
     
-    _toolbar.barStyle					= UIBarStyleBlackTranslucent;
-    _container.backgroundColor			= [UIColor blackColor];
-    
+   // _toolbar.barStyle					= UIBarStyleBlackTranslucent;
+  _container.backgroundColor			= [UIColor whiteColor];
+  _toolbar.backgroundColor = [UIColor colorWithRed:52 green:121 blue:201 alpha:1];
+  //3479c9
+  //52 121 201
+  
     // listen for container frame changes so we can properly update the layout during auto-rotation or going in and out of fullscreen
     [_container addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     
@@ -205,7 +208,7 @@
     _container.autoresizingMask					= UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // setup thumbs view
-    _thumbsView.backgroundColor					= [UIColor whiteColor];
+  _thumbsView.backgroundColor					= [UIColor blackColor];//[UIColor whiteColor];
     _thumbsView.hidden							= YES;
     _thumbsView.contentInset					= UIEdgeInsetsMake( kThumbnailSpacing, kThumbnailSpacing, kThumbnailSpacing, kThumbnailSpacing);
     
@@ -223,8 +226,11 @@
 	[_captionContainer addSubview:_caption];
 	
 	// create buttons for toolbar
-	UIImage *leftIcon = [UIImage imageNamed:@"photo-gallery-left.png"];
-	UIImage *rightIcon = [UIImage imageNamed:@"photo-gallery-right.png"];
+	//UIImage *leftIcon = [UIImage imageNamed:@"photo-gallery-left.png"];
+	//UIImage *rightIcon = [UIImage imageNamed:@"photo-gallery-right.png"];
+  UIImage *leftIcon = [UIImage imageNamed:@"br_prev_icon_24.png"];
+	UIImage *rightIcon = [UIImage imageNamed:@"br_next_icon_24.png"];
+	
 	_nextButton = [[UIBarButtonItem alloc] initWithImage:rightIcon style:UIBarButtonItemStylePlain target:self action:@selector(next)];
 	_prevButton = [[UIBarButtonItem alloc] initWithImage:leftIcon style:UIBarButtonItemStylePlain target:self action:@selector(previous)];
 	
@@ -257,6 +263,7 @@
     [_captionContainer release], _captionContainer = nil;
     [_caption release], _caption = nil;
     
+  NSLog(@" GALLERY viewDidUnload");
     [super viewDidUnload];
 }
 
@@ -481,45 +488,38 @@
 {
   UIImage *image = [UIImage imageNamed: @"bg.png"];
   [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-  [image release];
-  image = nil;
-  /*
-  UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Volver", @"") style: UIBarButtonItemStylePlain target: nil action: nil];
-  //UIImage *backImage = [UIImage imageNamed: @"br_prev_icon_24.png"];
-  //UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithImage:backImage landscapeImagePhone:backImage style:UIBarButtonItemStylePlain target:nil action:nil];
-  //[newBackButton setBackgroundImage:backImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-  [[self navigationItem] setBackBarButtonItem: newBackButton];
-  [newBackButton release];
-  //[backImage release];
-  //backImage=nil;
-  newBackButton = nil;
-  */
+  //[image release];
+  //image = nil;
   
-  UIButton *a1 = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
+  UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
   [a1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
   [a1 addTarget:self action:@selector(backAction:)forControlEvents:UIControlEventTouchUpInside];
   [a1 setImage:[UIImage imageNamed:@"br_prev_icon_24.png"] forState:UIControlStateNormal];
-  UIBarButtonItem *ba1 = [[[UIBarButtonItem alloc] initWithCustomView:a1] autorelease];
+  UIBarButtonItem *ba1 = [[UIBarButtonItem alloc] initWithCustomView:a1];
   
   self.navigationItem.leftBarButtonItem = ba1;
   
-  //[[self navigationItem] setBackBarButtonItem: ba1];
-  //[backBtn release];
-  [a1 release];
-  a1=nil;
-  [ba1 release];	
-  ba1=nil;
   
+  /*[a1 release];
+  a1=nil;
+  [ba1 release];
+  ba1=nil;
+  */
   _useThumbnailView = useThumbnailView;
   if( self.navigationController ) {
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
       if (_useThumbnailView) {
-        UIButton *t1 = [[UIButton buttonWithType:UIButtonTypeCustom] autorelease];
+        UIButton *t1 = [UIButton buttonWithType:UIButtonTypeCustom];
         [t1 setFrame:CGRectMake(0.0f, 0.0f, 25.0f, 25.0f)];
         [t1 addTarget:self action:@selector(handleSeeAllTouch:)forControlEvents:UIControlEventTouchUpInside];
         [t1 setImage:[UIImage imageNamed:@"thumbnails.png"] forState:UIControlStateNormal];
-        UIBarButtonItem *bt1 = [[[UIBarButtonItem alloc] initWithCustomView:t1] autorelease];
-  
+        UIBarButtonItem *bt1 = [[UIBarButtonItem alloc] initWithCustomView:t1];
+
+        /*[t1 release];
+        t1=nil;
+        [bt1 release];
+        bt1=nil;
+        */
         //UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ver todas", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
         [self.navigationItem setRightBarButtonItem:bt1 animated:YES];
       }
@@ -1258,6 +1258,8 @@
     [_prevButton release];
     _prevButton = nil;
 	
+  
+  NSLog(@" GALLERY dealloc");
     [super dealloc];
 }
 

@@ -330,7 +330,7 @@ div.main_img_container, div.main_foto {
 }
 
 .media_link.video_over_photo {
-  position:absolute;bottom:0px;margin-left:-10px !important;
+  position:absolute;bottom:0px;margin-left:-10px !important;height:30px;
 }
 .media_link.video_over_photo.plus {
   margin-left:-20px !important;

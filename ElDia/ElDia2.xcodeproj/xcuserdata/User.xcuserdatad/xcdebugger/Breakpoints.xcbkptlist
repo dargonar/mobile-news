@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libs/FGallery/FGalleryViewController.m"
-         timestampString = "368590363.314852"
+         timestampString = "371507215.919945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
+         startingLineNumber = "462"
+         endingLineNumber = "462"
          landmarkName = "-layoutViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,26 +21,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "371501209.346965"
+         timestampString = "371506657.55208"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "551"
-         endingLineNumber = "551"
+         startingLineNumber = "569"
+         endingLineNumber = "569"
          landmarkName = "@implementation NoticiaViewController"
          landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "371502727.042991"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "475"
-         endingLineNumber = "475"
-         landmarkName = "-loadPhotoGallery:"
-         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

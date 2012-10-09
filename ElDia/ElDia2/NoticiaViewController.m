@@ -290,6 +290,7 @@
     if (self) {
       self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
       self.mYMobiPaperLib.delegate = self;
+      networkGallery = nil;
     }
     return self;
 }
@@ -420,17 +421,24 @@
     }
     else if ([[url scheme]isEqualToString:SCHEMA_VIDEO])
     {
-      [self playVideo:url];
+      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self playVideo:url];
+      //});
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:SCHEMA_AUDIO])
     {
-      [self playAudio:url];
+      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self playAudio:url];
+      //});
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:SCHEMA_GALERIA])
     {
-      [self loadPhotoGallery:url];
+      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self loadPhotoGallery:url];
+      //});
+      
       handled = YES;
     }
     
@@ -445,6 +453,11 @@
 
 -(void) loadPhotoGallery:(NSURL *)url{
   
+  if(networkGallery!=nil)
+  {
+    if([networkGallery.tagID isEqualToString:self.noticia_id]==NO)
+      networkGallery=nil;
+  }
   //NSLog(@" NSURL - 1: %@", [url absoluteString]);
   
   NSString *_gallery_proto = @"galeria://";
@@ -492,16 +505,25 @@
   networkImages = [[NSArray alloc]initWithArray:_array copyItems:YES];
   
   networkGallery = [[FGalleryViewController alloc] initWithPhotoSource:self];
+  networkGallery.tagID = self.noticia_id;
   
   [app_delegate.navigationController  pushViewController:networkGallery animated:YES];
-  //[networkGallery release];
-  
   app_delegate.navigationController.navigationBar.hidden=NO;
   
+  
+  _gallery_proto = nil;
+  _url=nil;
+    _url=nil;
+  _array =nil;
+  _images_src = nil;
+  
+  //networkCaptions = nil;
+  //networkImages = nil;
+  //networkGallery = nil;
+  //NSLog(@"GalleryPhotos cargada!");
 }
 
 #pragma mark - FGalleryViewControllerDelegate Methods
-
 
 - (int)numberOfPhotosForPhotoGallery:(FGalleryViewController *)gallery
 {
@@ -512,9 +534,8 @@
 
 - (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
 {
-	return FGalleryPhotoSourceTypeNetwork;
+  return FGalleryPhotoSourceTypeNetwork;
 }
-
 
 - (NSString*)photoGallery:(FGalleryViewController *)gallery captionForPhotoAtIndex:(NSUInteger)index
 {
@@ -528,8 +549,8 @@
   if(index>= [networkImages count])
     return [networkImages objectAtIndex:0];
   
-  if(index< 0)
-    return [networkImages objectAtIndex:([networkImages count]-1)];
+  //if(index< 0)
+  //  return [networkImages objectAtIndex:([networkImages count]-1)];
   
   return [networkImages objectAtIndex:index];
 }
@@ -539,7 +560,6 @@
   // ex:
   //[localGallery removeImageAtIndex:[localGallery currentIndex]];
 }
-
 
 - (void)handleEditCaptionButtonTouch:(id)sender {
   // here we could implement some code to change the caption for a stored image
@@ -585,6 +605,11 @@
   self.btnFontSizePlus=nil;
   self.btnFontSizeMinus=nil;
   self.loading_indicator=nil;
+  
+  networkCaptions = nil;
+  networkImages = nil;
+  networkGallery = nil;
+
   
 }
 
