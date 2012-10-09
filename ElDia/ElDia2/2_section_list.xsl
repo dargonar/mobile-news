@@ -20,7 +20,6 @@
       </head>
       
       <body>
-            
         <xsl:call-template name="TituloSeccionONotisRelac">
           <xsl:with-param name="Titulo" select="rss/channel/item[1]/category"/>
         </xsl:call-template>
@@ -28,7 +27,6 @@
         <xsl:call-template name="ListadoNoticiasEnListado">
           <xsl:with-param name="Nodes" select="rss/channel/item"/>
         </xsl:call-template>
-        
       </body>
     </html>
   </xsl:template>

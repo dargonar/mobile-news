@@ -112,7 +112,8 @@
     video_id = nil;
     youtubeURL = nil;
     videos = nil;
-    */return;
+    */
+    return;
   }
   NSLog(@" status:%@  reason:%@", [videos objectForKey:@"status"], [videos objectForKey:@"reason"]);
   // Presents a MoviePlayerController with the youtube quality medium
@@ -213,35 +214,44 @@
   
   //NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
   //NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
-  NSURL *audio_url = [[NSURL alloc] initFileURLWithPath:url];
-  NSLog(@"%@", url);
+  //NSURL *audio_url = [[NSURL alloc] initFileURLWithPath:url];
+  NSLog(@" audio:: %@", url);
   
+  
+  /*
   MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:audio_url];
   
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackComplete:)
                                                name:MPMoviePlayerPlaybackDidFinishNotification
                                              object:moviePlayerController];
   
+  moviePlayerController.shouldAutoplay = NO;
+  moviePlayerController.view.frame = self.view.frame;
+  moviePlayerController.scalingMode= MPMovieScalingModeFill;
+  moviePlayerController.controlStyle =MPMovieControlStyleFullscreen;
+
+  
   [self.view addSubview:moviePlayerController.view];
-  moviePlayerController.fullscreen = YES;
+  //moviePlayerController.fullscreen = YES;
+  [moviePlayerController prepareToPlay];
   [moviePlayerController play];
+   */
+  
+  MPMoviePlayerViewController* mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
+  
+  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
+  mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
+
+  [self presentModalViewController:mpviewController animated:YES];
+  
+  [[mpviewController moviePlayer] prepareToPlay];
+  [[mpviewController moviePlayer] play];
+
+  url=nil;
+  mpviewController=nil;
   return;
-  /*
-  MPMoviePlayerViewController *aPlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:audio_url];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                        selector:@selector(moviePlayBackDidFinish:)
-                                        name:MPMoviePlayerPlaybackDidFinishNotification
-                                        object:aPlayer];
-  
-  [aPlayer.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-  [aPlayer.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
-  [aPlayer setWantsFullScreenLayout:YES];
-  //[self presentModalViewController:aPlayer animated:NO];
-  [self.view addSubview:aPlayer.view];
-  [aPlayer.moviePlayer prepareToPlay];
-	[aPlayer.moviePlayer play];
-  //®aPlayer=nil;*/
+ 
 }
 
 
