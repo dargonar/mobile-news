@@ -295,10 +295,12 @@
     return self;
 }
 
+-(void)loadBlank{
+  [self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+ }
 -(void)loadNoticia:(NSString *)_noticia_id{
   [self showLoadingIndicator];
   // clean content
-  [self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
   
   [self setNoticia_id:_noticia_id];
   [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];

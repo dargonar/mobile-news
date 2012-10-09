@@ -214,7 +214,7 @@
     <!-- <news:meta has_gallery="true" has_video="false" has_audio="false" /> -->
     <xsl:param name="Node" />
     <xsl:param name="container_type" />
-    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:content[@type='audio/mpeg'] or $Node/media:group/media:content or $Node/media:content[@type='video'] or $Node/media:thumbnail" >
+    <xsl:if test="$Node/media:content[@type='audio'] or $Node/media:content[@type='audio/mpeg'] or $Node/media:group/media:content or $Node/media:content[@type='video']" >
       <div class="media_link {$container_type}">
         
         <xsl:if test="$Node/media:content[@type='audio']">
@@ -237,11 +237,11 @@
           <a href="galeria://{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
         
-        <xsl:if test="$Node/media:content[@type='video']">
+        <!-- xsl:if test="$Node/media:content[@type='video']">
           <a class="ico_video" href="video://{$Node/media:content[@type='video'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
+        </xsl:if -->
         
-        <!--a class="ico_video" href="video://http://www.youtube.com/watch?v=aPAuviB6MRw" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a-->
+        
         <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
       
       </div>

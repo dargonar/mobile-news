@@ -52,7 +52,7 @@
 - (void)playVideo: (NSURL *)_url;
 - (NSString *)getYoutubeVideoId:(NSString*)url;
 - (void)loadNoticia:(NSString *)_noticia_id;
-
+-(void)loadBlank;
 - (void)addGestureRecognizers;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
 - (void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture;

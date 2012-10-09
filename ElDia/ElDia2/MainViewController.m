@@ -194,6 +194,9 @@ BOOL cacheCleaned = NO;
 
     //[self.mainUIWebView loadHTMLString:[self.mYMobiPaperLib getUrl:YMobiNavigationTypeNews queryString:[url lastPathComponent]] baseURL:nil];
     
+    if (self.myNoticiaViewController != nil) {
+      [self.myNoticiaViewController loadBlank];
+    }
     if (self.myNoticiaViewController == nil) {
       [self loadNoticiaView];      
     }

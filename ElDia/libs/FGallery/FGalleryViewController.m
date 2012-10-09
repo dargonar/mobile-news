@@ -173,10 +173,11 @@
     _toolbar							= [[UIToolbar alloc] initWithFrame:CGRectZero];
     _captionContainer					= [[UIView alloc] initWithFrame:CGRectZero];
     _caption							= [[UILabel alloc] initWithFrame:CGRectZero];
-    
-   // _toolbar.barStyle					= UIBarStyleBlackTranslucent;
-  _container.backgroundColor			= [UIColor whiteColor];
-  _toolbar.backgroundColor = [UIColor colorWithRed:52 green:121 blue:201 alpha:1];
+
+    UIImage *_image = [UIImage imageNamed: @"bg.png"];
+    [_toolbar setBackgroundImage:_image forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
+  _innerContainer.backgroundColor			= [UIColor blackColor];//[UIColor colorWithRed:52 green:121 blue:201 alpha:1];//[UIColor whiteColor];
+  // Blue Color
   //3479c9
   //52 121 201
   

@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libs/FGallery/FGalleryViewController.m"
-         timestampString = "371507215.919945"
+         timestampString = "371512024.299201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "462"
-         endingLineNumber = "462"
+         startingLineNumber = "469"
+         endingLineNumber = "469"
          landmarkName = "-layoutViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "371506657.55208"
+         timestampString = "371513881.217278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "569"
-         endingLineNumber = "569"
+         startingLineNumber = "573"
+         endingLineNumber = "573"
          landmarkName = "@implementation NoticiaViewController"
          landmarkType = "3">
       </FileBreakpoint>
