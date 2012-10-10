@@ -343,8 +343,8 @@ div.main_img_container, div.main_foto {
 .media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
   width:30px;
 	height:30px;
-  margin-right:8px;
-	display:block;
+  /*margin-right:8px;*/
+	display: inline-block;
   margin-left:10px;
 }
 .media_link .ico_video {
@@ -369,4 +369,10 @@ div.main_img_container, div.main_foto {
 #informacion { 
   font-size: 14px;
   line-height: 16px;
+}
+
+
+.bajada {
+  display:block;font-size:16px; line-height:18px;margin-bottom:14px;
+ 
 }

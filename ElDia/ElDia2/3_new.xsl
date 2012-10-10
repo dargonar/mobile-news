@@ -19,7 +19,7 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <!-- meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" / -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
         <link rel="stylesheet" type="text/css" href="layout.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>NOTICIA</title>

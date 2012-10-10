@@ -97,11 +97,13 @@
 	// More
 	else if (buttonIndex == sharers.count)
 	{
-		SHKShareMenu *shareMenu = [[SHKCustomShareMenu alloc] initWithStyle:UITableViewStyleGrouped];
+		/*SHKShareMenu *shareMenu = [[SHKCustomShareMenu alloc] initWithStyle:UITableViewStyleGrouped];
 		shareMenu.item = item;
 		[[SHK currentHelper] showViewController:shareMenu];
-		[shareMenu release];
-	}
+		[shareMenu release];*/
+    [[SHK currentHelper] hideCurrentViewControllerAnimated:YES];
+  }
+
 	
 	[super dismissWithClickedButtonIndex:buttonIndex animated:animated];
 }

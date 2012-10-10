@@ -62,7 +62,7 @@ BOOL cacheCleaned = NO;
     [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST _webView:mainUIWebView tag:MSG_GET_MAIN force_load:YES];
   }
   else{
-    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSectionNews  queryString:sectionId xsl:XSL_PATH_SECTION_LIST _webView:mainUIWebView tag:MSG_GET_SECTION_LIST force_load:NO];
+    [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeSectionNews  queryString:sectionId xsl:XSL_PATH_SECTION_LIST _webView:mainUIWebView tag:MSG_GET_SECTION_LIST force_load:YES];
   }
 }
 

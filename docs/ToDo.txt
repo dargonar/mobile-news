@@ -1,3 +1,27 @@
+Primero "arrastra" el archivo .mobileprovision a Applications (iTunes de tu iPad) y luego instala el .ipa.
+Fijate como hacen acá: http://www.innerfence.com/howto/install-iphone-application-ad-hoc-distribution
+
+
+
+  ---OK--- * Cancel del share: cuelga la app.
+  ---OK--- * (Sin Inet) Ver una nota: muestra la screen en blanco (no da ningún error como si lo da en cambio de sección o refresh)
+  ---OK--- * El click en una nota relacionada levanta la pantalla de tamaño de texto y no lleva a la nota.
+  ---OK--- * En una nota que tenia video, cuando entro, no veo el link de video (titulo: "Lo filmaron infraganti", seccion: "La Ciudad")
+  ---OK--- * El refresh dentro de una sección no hace nada.
+  ---OK--- * modificar text size de bajada cuando cambio texto de nota.
+
+Cosas que no son errores pero podrían mejorarse para ver 2:
+
+  * Escuchar mp3 sin inet, muestra el player y lo desaparece (no muestra error)
+  ---OK--- * La pantalla de tamaño de texto no se muestra con fade in / fade out.
+  ---OK--- * Cuando se abre una nota, muestra el contenido viejo que tenia el webview -> se va a blanco con loading -> y luego aparece la nota nueva. (Da la sensación de pagina web)
+
+Cosas para que sea una app ZARPADA:
+ 
+  * Menos monotono el diseño (meter otras secciones visuales)
+  * Dual webview para no ver los flasheos cuando se refresca.
+
+--
 Compartir nota, comparit foto, compartir video, compartir audio.
 Retina display.
 iPad display.

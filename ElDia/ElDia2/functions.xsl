@@ -202,6 +202,11 @@
           <br />
           <h1><xsl:value-of select="$Node/title" /></h1>
         </div>
+        <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
+          <div class="bajada" id="bajada">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
+          </div>
+        </xsl:if>
         <div id="informacion" style="display:block;">
           <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
         </div>
@@ -233,13 +238,13 @@
           <a href="galeria://{$gallery}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
         
-        <xsl:if test="$Node/media:thumbnail">
+        <!--xsl:if test="$Node/media:thumbnail">
           <a href="galeria://{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
+        </xsl:if-->
         
-        <!-- xsl:if test="$Node/media:content[@type='video']">
+        <xsl:if test="$Node/media:content[@type='video']">
           <a class="ico_video" href="video://{$Node/media:content[@type='video'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if -->
+        </xsl:if>
         
         
         <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>

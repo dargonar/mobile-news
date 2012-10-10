@@ -10,6 +10,7 @@
 #import "HTMLGenerator.h"
 #import "CryptoUtil.h"
 #import "SqliteCache.h"
+#import "Reachability.h"
 
 #define XSL_PATH_MAIN_LIST @"1_main_list"
 #define XSL_PATH_SECTION_LIST @"2_section_list"
@@ -79,4 +80,7 @@ typedef enum {
 +(void)setIds:(NSString*)text;
 +(NSString*)getNextNoticiaId:(NSString*)_noticia_id;
 +(NSString*)getPrevNoticiaId:(NSString*)_noticia_id;
+
+-(BOOL)areWeConnectedToInternet;
+
 @end

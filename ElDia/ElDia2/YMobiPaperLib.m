@@ -328,6 +328,8 @@ static NSMutableArray *_ids_de_noticias=nil;
   }
   //_noticia_id = [_noticia_id stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
   NSUInteger index = [_ids_de_noticias indexOfObject:_noticia_id];
+  if(index==NSNotFound)
+    return nil;
   if ((index+1)<[_ids_de_noticias count]) {
     return [_ids_de_noticias objectAtIndex:(index+1)];
   }
@@ -344,6 +346,8 @@ static NSMutableArray *_ids_de_noticias=nil;
   }
   //_noticia_id = [_noticia_id stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
   NSUInteger index = [_ids_de_noticias indexOfObject:_noticia_id];
+  if(index==NSNotFound)
+    return nil;
   if (index>0) {
     return [_ids_de_noticias objectAtIndex:(index-1)];
   }
@@ -370,5 +374,29 @@ static NSMutableArray *_ids_de_noticias=nil;
 	[[self delegate] requestFailed:argument message:message];
 }
 
+// Internet detector
+-(BOOL)areWeConnectedToInternet{
+  Reachability *reachability = [Reachability reachabilityForInternetConnection];
+  [reachability startNotifier];
+  
+  NetworkStatus status = [reachability currentReachabilityStatus];
+  
+  if(status == NotReachable)
+  {
+    //No internet
+    return NO;
+  }
+  else if (status == ReachableViaWiFi)
+  {
+    //WiFi
+    return YES;
+  }
+  else if (status == ReachableViaWWAN)
+  {
+    //3G
+    return YES;
+  }
+  return YES;
+}
 
 @end

@@ -213,7 +213,9 @@
 		CE9B9C43161CB3BE00B3AEC0 /* ConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9B9C42161CB3BE00B3AEC0 /* ConfigHelper.m */; };
 		CECBA71315F93E1D00519197 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECBA71215F93E1D00519197 /* MediaPlayer.framework */; };
 		CED990A615F537A500969586 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED990A515F537A500969586 /* MessageUI.framework */; };
+		CEE015491625E6E4002D70E3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE015451625E6E4002D70E3 /* Reachability.m */; };
 		CEE05EB51624CE6C00FCC210 /* br_next_icon_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE05EB41624CE6C00FCC210 /* br_next_icon_24@2x.png */; };
+		CEE05EB71624E4A600FCC210 /* MainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */; };
 		CEECA6351613D976007C8918 /* default@2x_no_pleno.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEECA6321613D976007C8918 /* default@2x_no_pleno.jpg */; };
 		CEECA63A1613DDC1007C8918 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECA6381613DDC0007C8918 /* Default@2x.png */; };
 		CEECA63B1613DDC1007C8918 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECA6391613DDC1007C8918 /* Default.png */; };
@@ -575,7 +577,10 @@
 		CE9B9C42161CB3BE00B3AEC0 /* ConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigHelper.m; sourceTree = "<group>"; };
 		CECBA71215F93E1D00519197 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		CED990A515F537A500969586 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CEE015451625E6E4002D70E3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		CEE015461625E6E4002D70E3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CEE05EB41624CE6C00FCC210 /* br_next_icon_24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "br_next_icon_24@2x.png"; sourceTree = "<group>"; };
+		CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController_iPad.xib; sourceTree = "<group>"; };
 		CEECA6321613D976007C8918 /* default@2x_no_pleno.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default@2x_no_pleno.jpg"; sourceTree = "<group>"; };
 		CEECA6381613DDC0007C8918 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CEECA6391613DDC1007C8918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1293,6 +1298,7 @@
 				CE7A825A15EC21F00061F481 /* MainViewController.h */,
 				CE7A825B15EC21F00061F481 /* MainViewController.m */,
 				CE7A825C15EC21F00061F481 /* MainViewController.xib */,
+				CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */,
 				CE7A826015EC220F0061F481 /* NoticiaViewController.h */,
 				CE7A826115EC220F0061F481 /* NoticiaViewController.m */,
 				CE7A826215EC220F0061F481 /* NoticiaViewController.xib */,
@@ -1339,6 +1345,8 @@
 		CEF3B58915EC6A7B00FF35B1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEE015451625E6E4002D70E3 /* Reachability.m */,
+				CEE015461625E6E4002D70E3 /* Reachability.h */,
 				CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */,
 				CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */,
 				CE8E5AC615F051E800E047BB /* RegexKitLite.h */,
@@ -1546,6 +1554,7 @@
 				CEF7C2C7162361200040E9AC /* thumbnails.png in Resources */,
 				CEF7C2C8162361200040E9AC /* thumbnails@2x.png in Resources */,
 				CEE05EB51624CE6C00FCC210 /* br_next_icon_24@2x.png in Resources */,
+				CEE05EB71624E4A600FCC210 /* MainViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1699,6 +1708,7 @@
 				CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */,
 				CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */,
 				CEEEC0C316236C030037F329 /* YoutubeViewController.m in Sources */,
+				CEE015491625E6E4002D70E3 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

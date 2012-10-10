@@ -21,6 +21,7 @@
 @synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController;
 
 -(void)changeFontSize:(NSInteger)delta{
+  
   NSInteger textFontSize = 14;
   NSString *_textFontSize = [ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE];
   if(_textFontSize!=nil)
@@ -44,11 +45,15 @@
       //textFontSize = defaultTextFontSize;
     }
     
-  NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';", textFontSize, (textFontSize+2)];
+  NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';", textFontSize, (textFontSize+2)];
   
+  NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%dpx';document.getElementById('bajada').style.lineHeight= '%dpx';", textFontSize+2, (textFontSize+4)];
+  
+  NSLog(@" fontsize: %@", jsString);
   [mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
   jsString=nil;
+  partial_jsString=nil;
   if(fontChanged==YES)
   {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -280,7 +285,8 @@
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
   
 	// Display the action sheet
-	[actionSheet showFromToolbar:app_delegate.navigationController.toolbar];
+	//[actionSheet showFromToolbar:app_delegate.navigationController.toolbar];
+  [actionSheet showFromToolbar:self.navigationController.toolbar];
   
 }
 
@@ -296,7 +302,9 @@
 }
 
 -(void)loadBlank{
-  [self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
+  self.bottomUIView.hidden = YES;
+  //[self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
  }
 -(void)loadNoticia:(NSString *)_noticia_id{
   [self showLoadingIndicator];
@@ -304,7 +312,6 @@
   
   [self setNoticia_id:_noticia_id];
   [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
-  
   
   
   //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView];
@@ -387,7 +394,28 @@
 }
 
 - (void)singleTapWebView {
-  self.bottomUIView.hidden = !self.bottomUIView.hidden;
+  //self.bottomUIView.hidden = !self.bottomUIView.hidden;
+  
+  if([self.bottomUIView isHidden]==NO)
+    [UIView animateWithDuration:.5
+                   animations: ^ {
+                     [self.bottomUIView setAlpha:0];
+                   }
+                   completion: ^ (BOOL finished) {
+                     self.bottomUIView.hidden = YES;
+                   }];
+  else if([self.bottomUIView isHidden]==YES)
+  {
+    [self.bottomUIView setAlpha:0];
+    self.bottomUIView.hidden = NO;
+    [UIView animateWithDuration:.5
+                     animations: ^ {
+                       [self.bottomUIView setAlpha:1];
+                     }
+                     completion: ^ (BOOL finished) {
+                       //self.bottomUIView.hidden = YES;
+                     }];
+  }
   //NSLog(@"singleTapWebView");
 }
 
@@ -418,6 +446,7 @@
     bool handled = NO;
     if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
     {
+      [self loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
       // Aca tenemos que lodear otra noticia!!
       handled = YES;
     }
@@ -579,6 +608,9 @@
 
 - (void) requestFailed:(id)error message:(NSString*)message{
   [self hideLoadingIndicator];
+  
+  [[[iToast makeText:@"Ha ocurrido un error. Actualice la pantalla."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+  
 }
 
 -(void) showLoadingIndicator{
