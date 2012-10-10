@@ -561,15 +561,15 @@
 		CE8E727A15EBEDB8007E6F09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE8E727C15EBEDB8007E6F09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE8E727E15EBEDB8007E6F09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CE8E728215EBEDB8007E6F09 /* ElDia2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDia2-Info.plist"; sourceTree = "<group>"; };
+		CE8E728215EBEDB8007E6F09 /* ElDia-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDia-Info.plist"; sourceTree = "<group>"; };
 		CE8E728415EBEDB8007E6F09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE8E728615EBEDB8007E6F09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CE8E728815EBEDB8007E6F09 /* ElDia2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ElDia2-Prefix.pch"; sourceTree = "<group>"; };
+		CE8E728815EBEDB8007E6F09 /* ElDia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ElDia-Prefix.pch"; sourceTree = "<group>"; };
 		CE8E728915EBEDB8007E6F09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE8E728A15EBEDB8007E6F09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CE8E729115EBEDB9007E6F09 /* ElDia2Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElDia2Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8E729115EBEDB9007E6F09 /* ElDiaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElDiaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8E729215EBEDB9007E6F09 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE8E729A15EBEDB9007E6F09 /* ElDia2Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDia2Tests-Info.plist"; sourceTree = "<group>"; };
+		CE8E729A15EBEDB9007E6F09 /* ElDiaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ElDiaTests-Info.plist"; sourceTree = "<group>"; };
 		CE8E729C15EBEDB9007E6F09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE8E729E15EBEDB9007E6F09 /* ElDia2Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElDia2Tests.h; sourceTree = "<group>"; };
 		CE8E729F15EBEDB9007E6F09 /* ElDia2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElDia2Tests.m; sourceTree = "<group>"; };
@@ -1261,7 +1261,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8E727615EBEDB8007E6F09 /* ElDia2.app */,
-				CE8E729115EBEDB9007E6F09 /* ElDia2Tests.octest */,
+				CE8E729115EBEDB9007E6F09 /* ElDiaTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1315,10 +1315,10 @@
 		CE8E728115EBEDB8007E6F09 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE8E728215EBEDB8007E6F09 /* ElDia2-Info.plist */,
+				CE8E728215EBEDB8007E6F09 /* ElDia-Info.plist */,
 				CE8E728315EBEDB8007E6F09 /* InfoPlist.strings */,
 				CE8E728615EBEDB8007E6F09 /* main.m */,
-				CE8E728815EBEDB8007E6F09 /* ElDia2-Prefix.pch */,
+				CE8E728815EBEDB8007E6F09 /* ElDia-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1336,7 +1336,7 @@
 		CE8E729915EBEDB9007E6F09 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE8E729A15EBEDB9007E6F09 /* ElDia2Tests-Info.plist */,
+				CE8E729A15EBEDB9007E6F09 /* ElDiaTests-Info.plist */,
 				CE8E729B15EBEDB9007E6F09 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1372,9 +1372,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CE8E727515EBEDB8007E6F09 /* ElDia2 */ = {
+		CE8E727515EBEDB8007E6F09 /* ElDia */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE8E72A315EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia2" */;
+			buildConfigurationList = CE8E72A315EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia" */;
 			buildPhases = (
 				CE8E727215EBEDB8007E6F09 /* Sources */,
 				CE8E727315EBEDB8007E6F09 /* Frameworks */,
@@ -1384,14 +1384,14 @@
 			);
 			dependencies = (
 			);
-			name = ElDia2;
+			name = ElDia;
 			productName = ElDia2;
 			productReference = CE8E727615EBEDB8007E6F09 /* ElDia2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CE8E729015EBEDB9007E6F09 /* ElDia2Tests */ = {
+		CE8E729015EBEDB9007E6F09 /* ElDiaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE8E72A615EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia2Tests" */;
+			buildConfigurationList = CE8E72A615EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDiaTests" */;
 			buildPhases = (
 				CE8E728C15EBEDB9007E6F09 /* Sources */,
 				CE8E728D15EBEDB9007E6F09 /* Frameworks */,
@@ -1403,9 +1403,9 @@
 			dependencies = (
 				CE8E729715EBEDB9007E6F09 /* PBXTargetDependency */,
 			);
-			name = ElDia2Tests;
+			name = ElDiaTests;
 			productName = ElDia2Tests;
-			productReference = CE8E729115EBEDB9007E6F09 /* ElDia2Tests.octest */;
+			productReference = CE8E729115EBEDB9007E6F09 /* ElDiaTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1417,7 +1417,7 @@
 				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Lion User";
 			};
-			buildConfigurationList = CE8E727015EBEDB8007E6F09 /* Build configuration list for PBXProject "ElDia2" */;
+			buildConfigurationList = CE8E727015EBEDB8007E6F09 /* Build configuration list for PBXProject "ElDia" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1430,8 +1430,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CE8E727515EBEDB8007E6F09 /* ElDia2 */,
-				CE8E729015EBEDB9007E6F09 /* ElDia2Tests */,
+				CE8E727515EBEDB8007E6F09 /* ElDia */,
+				CE8E729015EBEDB9007E6F09 /* ElDiaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1717,7 +1717,7 @@
 /* Begin PBXTargetDependency section */
 		CE8E729715EBEDB9007E6F09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CE8E727515EBEDB8007E6F09 /* ElDia2 */;
+			target = CE8E727515EBEDB8007E6F09 /* ElDia */;
 			targetProxy = CE8E729615EBEDB9007E6F09 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1759,7 +1759,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1774,6 +1774,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1787,7 +1788,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1796,6 +1797,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1805,15 +1807,15 @@
 		CE8E72A415EBEDB9007E6F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
+				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/libs",
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
-				INFOPLIST_FILE = "ElDia2/ElDia2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
+				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1822,15 +1824,15 @@
 		CE8E72A515EBEDB9007E6F09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
+				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/libs",
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
-				INFOPLIST_FILE = "ElDia2/ElDia2-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
+				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1846,8 +1848,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
-				INFOPLIST_FILE = "ElDia2Tests/ElDia2Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ElDia2Tests/ElDiaTests-Info.plist";
+				PRODUCT_NAME = ElDiaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1863,8 +1865,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia2-Prefix.pch";
-				INFOPLIST_FILE = "ElDia2Tests/ElDia2Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ElDia2Tests/ElDiaTests-Info.plist";
+				PRODUCT_NAME = ElDiaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1873,7 +1875,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CE8E727015EBEDB8007E6F09 /* Build configuration list for PBXProject "ElDia2" */ = {
+		CE8E727015EBEDB8007E6F09 /* Build configuration list for PBXProject "ElDia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE8E72A115EBEDB9007E6F09 /* Debug */,
@@ -1882,7 +1884,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE8E72A315EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia2" */ = {
+		CE8E72A315EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE8E72A415EBEDB9007E6F09 /* Debug */,
@@ -1891,7 +1893,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE8E72A615EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia2Tests" */ = {
+		CE8E72A615EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDiaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE8E72A715EBEDB9007E6F09 /* Debug */,

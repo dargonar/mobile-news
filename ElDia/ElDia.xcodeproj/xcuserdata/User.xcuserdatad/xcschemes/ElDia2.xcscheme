@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE8E727515EBEDB8007E6F09"
                BuildableName = "ElDia2.app"
-               BlueprintName = "ElDia2"
-               ReferencedContainer = "container:ElDia2.xcodeproj">
+               BlueprintName = "ElDia"
+               ReferencedContainer = "container:ElDia.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE8E729015EBEDB9007E6F09"
                BuildableName = "ElDia2Tests.octest"
-               BlueprintName = "ElDia2Tests"
-               ReferencedContainer = "container:ElDia2.xcodeproj">
+               BlueprintName = "ElDiaTests"
+               ReferencedContainer = "container:ElDia.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8E727515EBEDB8007E6F09"
             BuildableName = "ElDia2.app"
-            BlueprintName = "ElDia2"
-            ReferencedContainer = "container:ElDia2.xcodeproj">
+            BlueprintName = "ElDia"
+            ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -57,14 +57,15 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8E727515EBEDB8007E6F09"
             BuildableName = "ElDia2.app"
-            BlueprintName = "ElDia2"
-            ReferencedContainer = "container:ElDia2.xcodeproj">
+            BlueprintName = "ElDia"
+            ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +82,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8E727515EBEDB8007E6F09"
             BuildableName = "ElDia2.app"
-            BlueprintName = "ElDia2"
-            ReferencedContainer = "container:ElDia2.xcodeproj">
+            BlueprintName = "ElDia"
+            ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
