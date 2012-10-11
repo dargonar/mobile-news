@@ -28,11 +28,17 @@
   self.window.backgroundColor = [UIColor whiteColor];//HACKED
   
   // create the content view controller using the LogoExpandingViewController for no particular reason
-  self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+  NSString *mainNibName = @"MainViewController";
+  NSString *menuNibName = @"MenuViewController";
+  if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+    mainNibName = @"MainViewController_iPad";
+    menuNibName = @"MenuViewController_iPad";
+  }
+  self.mainViewController = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
   
   // create the menuViewController also in the app delegate so we can swap it in as the
   // windows root view controller whenever its required
-  self.menuViewController = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
+  self.menuViewController = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   
   // set the rootViewController to the contentViewController
   //self.window.rootViewController = self.mainViewController;//HACKED

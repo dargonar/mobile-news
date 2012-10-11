@@ -79,6 +79,7 @@
 		CE16EC8315ED766A00EC8210 /* SqliteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7915ED5C1200EC8210 /* SqliteCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
+		CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */; };
 		CE78798915F7FA56009AA708 /* photo-gallery-edit-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */; };
 		CE78798A15F7FA56009AA708 /* photo-gallery-left.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798415F7FA56009AA708 /* photo-gallery-left.png */; };
 		CE78798B15F7FA56009AA708 /* photo-gallery-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE78798515F7FA56009AA708 /* photo-gallery-left@2x.png */; };
@@ -257,6 +258,8 @@
 		CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3B58615EC6A7700FF35B1 /* PSWebView.m */; };
 		CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
 		CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
+		CEF6A9EF162739720032052A /* MenuViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */; };
+		CEF6A9F216273CB70032052A /* YoutubeViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */; };
 		CEF7C2C7162361200040E9AC /* thumbnails.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C5162361200040E9AC /* thumbnails.png */; };
 		CEF7C2C8162361200040E9AC /* thumbnails@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C6162361200040E9AC /* thumbnails@2x.png */; };
 /* End PBXBuildFile section */
@@ -371,6 +374,7 @@
 		CE16EC7915ED5C1200EC8210 /* SqliteCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteCache.m; sourceTree = "<group>"; };
 		CE16EC7E15ED5ECB00EC8210 /* YMobiPaperLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMobiPaperLib.h; sourceTree = "<group>"; };
 		CE16EC7F15ED5ECB00EC8210 /* YMobiPaperLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMobiPaperLib.m; sourceTree = "<group>"; };
+		CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticiaViewController_iPad.xib; sourceTree = "<group>"; };
 		CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-edit-caption.png"; sourceTree = "<group>"; };
 		CE78798415F7FA56009AA708 /* photo-gallery-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-left.png"; sourceTree = "<group>"; };
 		CE78798515F7FA56009AA708 /* photo-gallery-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-left@2x.png"; sourceTree = "<group>"; };
@@ -571,7 +575,7 @@
 		CE8E5AC615F051E800E047BB /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		CE8E5ACA15F051FA00E047BB /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		CE8E5ACC15F0565B00E047BB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		CE8E727615EBEDB8007E6F09 /* ElDia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElDia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8E727615EBEDB8007E6F09 /* ElDia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElDia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8E727A15EBEDB8007E6F09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE8E727C15EBEDB8007E6F09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE8E727E15EBEDB8007E6F09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -628,6 +632,8 @@
 		CEF3B58615EC6A7700FF35B1 /* PSWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebView.m; sourceTree = "<group>"; };
 		CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
 		CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCYoutubeParser.m; sourceTree = "<group>"; };
+		CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPad.xib; sourceTree = "<group>"; };
+		CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YoutubeViewController_iPad.xib; sourceTree = "<group>"; };
 		CEF7C2C5162361200040E9AC /* thumbnails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnails.png; sourceTree = "<group>"; };
 		CEF7C2C6162361200040E9AC /* thumbnails@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnails@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1281,7 +1287,7 @@
 		CE8E727715EBEDB8007E6F09 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE8E727615EBEDB8007E6F09 /* ElDia2.app */,
+				CE8E727615EBEDB8007E6F09 /* ElDia.app */,
 				CE8E729115EBEDB9007E6F09 /* ElDiaTests.octest */,
 			);
 			name = Products;
@@ -1323,12 +1329,15 @@
 				CE7A826015EC220F0061F481 /* NoticiaViewController.h */,
 				CE7A826115EC220F0061F481 /* NoticiaViewController.m */,
 				CE7A826215EC220F0061F481 /* NoticiaViewController.xib */,
+				CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */,
 				CE7A826515EC221F0061F481 /* MenuViewController.h */,
 				CE7A826615EC221F0061F481 /* MenuViewController.m */,
 				CE7A826715EC221F0061F481 /* MenuViewController.xib */,
+				CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */,
 				CEEEC0C016236C030037F329 /* YoutubeViewController.h */,
 				CEEEC0C116236C030037F329 /* YoutubeViewController.m */,
 				CEEEC0C216236C030037F329 /* YoutubeViewController.xib */,
+				CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */,
 			);
 			path = ElDia2;
 			sourceTree = "<group>";
@@ -1407,7 +1416,7 @@
 			);
 			name = ElDia;
 			productName = ElDia2;
-			productReference = CE8E727615EBEDB8007E6F09 /* ElDia2.app */;
+			productReference = CE8E727615EBEDB8007E6F09 /* ElDia.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CE8E729015EBEDB9007E6F09 /* ElDiaTests */ = {
@@ -1583,6 +1592,9 @@
 				CE01DEF316262FB200B9B3EA /* Default-Portrait~ipad.png in Resources */,
 				CE01DEF516262FC400B9B3EA /* Default-Portrait@2x~ipad.png in Resources */,
 				CE01DEF71626302E00B9B3EA /* Icon@2x_ipad.png in Resources */,
+				CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */,
+				CEF6A9EF162739720032052A /* MenuViewController_iPad.xib in Resources */,
+				CEF6A9F216273CB70032052A /* YoutubeViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

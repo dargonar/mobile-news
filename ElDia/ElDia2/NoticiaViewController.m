@@ -98,7 +98,12 @@
   {
     if(self.myYoutubeViewController!=nil)
       self.myYoutubeViewController =nil;
-    self.myYoutubeViewController = [[YoutubeViewController alloc] initWithNibName:@"YoutubeViewController" bundle:[NSBundle mainBundle]];
+    
+    NSString *videoNibName = @"YoutubeViewController";
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+      videoNibName = @"YoutubeViewController_iPad";
+    }
+    self.myYoutubeViewController = [[YoutubeViewController alloc] initWithNibName:videoNibName bundle:[NSBundle mainBundle]];
     self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     //[self presentModalViewController:self.myYoutubeViewController animated:NO];

@@ -134,6 +134,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     return [generator generate:cleanedXML xslt_file:path_xslt];
   }
   @catch (NSException * e) {
+    NSLog(@"YMobiPaperLib::getHtml e:%@", e.reason);
     [self requestFailed:nil message:e.reason];
   }
   @finally {
@@ -177,6 +178,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     [[SqliteCache defaultCache] clean:48];
   }
   @catch (NSException * e) {
+    NSLog(@"YMobiPaperLib::cleanCache e:%@", e.reason);
     [self requestFailed:nil message:e.reason];
   }
   @finally {
@@ -206,6 +208,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     }
   }
   @catch (NSException * e) {
+    NSLog(@"YMobiPaperLib::loadHtmlAsync e:%@", e.reason);
     [self requestFailed:tag message:e.reason];
   }
   @finally {
@@ -244,7 +247,9 @@ static NSMutableArray *_ids_de_noticias=nil;
   NSString *tag = (NSString*)[_metadata objectForKey:KEY_TAG];
   
   [self requestFailed:tag message:(NSString *)[messages objectForKey:tag]];
-
+  
+  NSLog(@"YMobiPaperLib::connection didFailWithError:%@ code:%d", error.description, error.code);
+  
   [requestsMetadata removeObjectForKey:_key];
   _key=nil;
   _metadata =nil;
@@ -288,7 +293,9 @@ static NSMutableArray *_ids_de_noticias=nil;
     [[SqliteCache defaultCache] set:[[connection.originalRequest URL] absoluteString] data:html_data mimetype:mimeType];
   }
   @catch (NSException * e) {
-  //[self requestFailed:tag message:e.reason];
+    NSLog(@"YMobiPaperLib::connectionDidFinishLoading cleanCache exception:%@", e.reason);
+    
+    //[self requestFailed:tag message:e.reason];
    }
   @finally {
   //NSLog(@"finally");

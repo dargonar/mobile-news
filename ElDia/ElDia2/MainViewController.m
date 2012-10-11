@@ -223,8 +223,13 @@ BOOL cacheCleaned = NO;
 }
 
 -(void) loadNoticiaView{
+  
+  NSString *noticiaNibName = @"NoticiaViewController";
+  if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+    noticiaNibName = @"NoticiaViewController_iPad";
+  }
   self.myNoticiaViewController= [[NoticiaViewController alloc]
-                                 initWithNibName:@"NoticiaViewController" bundle:[NSBundle mainBundle]];
+                                 initWithNibName:noticiaNibName bundle:[NSBundle mainBundle]];
   self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
   
 }
