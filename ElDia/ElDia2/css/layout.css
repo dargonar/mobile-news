@@ -92,7 +92,7 @@ img {
 	padding:5px 0 5px 0;
 }
 #titulo_seccion, #titulo_seccion  .lbl_titulo_seccion{
-	font-size:17px;
+	font-size:1.05em; /*17px*/
 	color:#fff;
 	margin:0;
 }
@@ -121,7 +121,9 @@ img {
 
 #menu li a {
 	display:block;
-	font-size:18px;
+	font-size:1.25em/*20px*/;
+  line-height:1.75em;/*28px*/
+	
 	color:#fff;
 	text-decoration:none;
 	padding:8px 20px 9px 20px;
@@ -163,12 +165,13 @@ img {
   position:relative;
   width:100%;
 }
+
 #listado li  a{
 	display:block;
   height:95px;
   width:100%;
 	color:#333;
-	font-size:14px;
+	font-size:1em /*14px*/;
 	line-height:0px;
   border:none;}
 
@@ -200,7 +203,8 @@ img {
   /*position: absolute;
   right: 0px;*/
   /*background-image:url(../img/../img/img_listado.png);*/
-  background-image:url(img_listado.png);
+  /*background-image:url(img_listado.png);*/
+  background-color:transparent;
   background-repeat:no-repeat;
   background-position: center center;
   overflow:hidden;
@@ -270,7 +274,7 @@ div.main_img_container, div.main_foto {
   width:124px;
   display:block;
   position:absolute;
-  z-index:3;
+  z-index:4;
 }
 .right_ico_container{
   float:right;
@@ -313,10 +317,8 @@ div.main_img_container, div.main_foto {
 /***** NOTA *****/
 #nota, #nota label, #listado li label  {
 	color:#333;
-	/*font-size:14px;
-	line-height:16px;*/
-  font-size: 1em;
-  line-height: 1.4em;
+	font-size: 1em /*14px*/;
+	line-height:1.2em/*16px*/;
 }
 #nota{  
   min-height:100px;
@@ -327,9 +329,8 @@ div.main_img_container, div.main_foto {
 
 #nota h1 {
 	display:block;color:#333;
-  font-size:24px;
-	/*line-height:24px;*/
-  line-height:26px;
+  font-size:1.5em/*24px*/;
+  line-height:1.1em/*26px*/;
   margin: 15px 0px 15px 0px;
   font-weight:bold;
 }
@@ -400,11 +401,10 @@ div.main_img_container, div.main_foto {
   display:block;
 }
 
-#informacion { 
-  /*font-size: 14px;
-  line-height: 16px;*/
-  font-size: 1em;
-  line-height: 1.4em;
+#informacion {
+  /* ojo la font-size se setea desde noticiaviewcontroller!!! */
+  font-size: 1.1em /*14px*/;
+  line-height: 1.4em/*16px;*/;
 }
 #informacion p{
   -webkit-margin-before: 1em;
@@ -415,8 +415,8 @@ font-weight:bold;}
 .bajada {
   display:block;
   /*font-size:16px; line-height:18px;margin-bottom:14px;*/
-  font-size: 1.2em;
-  line-height: 1.3em;
+  font-size: 1.3em;
+  line-height: 1.2em;
   margin-bottom: 1em;
 }
 
@@ -425,7 +425,7 @@ font-weight:bold;}
 }
 
 .full_width label.titulo{
-  /*width:308px;*/
+  width:308px;
   display:inline-block;
 }
 .full_width label.seccion{display:inline-block;}

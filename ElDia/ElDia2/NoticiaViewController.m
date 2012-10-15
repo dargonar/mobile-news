@@ -22,20 +22,20 @@
 
 -(void)changeFontSize:(NSInteger)delta{
   
-  NSInteger textFontSize = 14;
+  CGFloat textFontSize = 1.0;
   NSString *_textFontSize = [ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE];
   if(_textFontSize!=nil)
   {
-    textFontSize = [_textFontSize intValue];
+    textFontSize = [_textFontSize floatValue];
   }
   bool fontChanged = NO;
   if(delta<0) {
-      textFontSize = (textFontSize > 10) ? textFontSize -2 : textFontSize;
+      textFontSize = (textFontSize >= 1) ? textFontSize -0.05 : textFontSize;
     fontChanged=YES;
   }
   else
     if(delta>0) {
-      textFontSize = (textFontSize < 26) ? textFontSize +2 : textFontSize;
+      textFontSize = (textFontSize < 2.6) ? textFontSize +0.05 : textFontSize;
       fontChanged=YES;
     }
     else
@@ -45,9 +45,13 @@
       //textFontSize = defaultTextFontSize;
     }
     
-  NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%dpx';document.getElementById('informacion').style.lineHeight= '%dpx';", textFontSize, (textFontSize+2)];
+  //NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';document.getElementById('informacion').style.lineHeight= '%fem';", textFontSize, (textFontSize+0.2)];
   
-  NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%dpx';document.getElementById('bajada').style.lineHeight= '%dpx';", textFontSize+2, (textFontSize+4)];
+  //NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%fem';document.getElementById('bajada').style.lineHeight= '%fem';", textFontSize+0.2, (textFontSize+0.3)];
+  
+  NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';", textFontSize];
+  
+  NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%fem'", textFontSize+0.2];
   
   NSLog(@" fontsize: %@", jsString);
   [mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
@@ -57,7 +61,7 @@
   if(fontChanged==YES)
   {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-      [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%d", textFontSize]];
+      [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%f", textFontSize]];
     });
    }
 

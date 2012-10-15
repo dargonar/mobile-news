@@ -36,6 +36,7 @@ BOOL cacheCleaned = NO;
   return sharedInstance;
 }
 
+// Aqui me llaman para cargar noticias de una seccion. Eventualmente puede ser la seccion principal, o no-seccion.
 -(void)loadSectionNews:(NSURL*)rawURL{
   sectionId = [rawURL host] ;
   [self showMainLoadingIndicator];
