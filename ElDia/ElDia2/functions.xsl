@@ -118,31 +118,51 @@
   <!-- Template de la noticia en listado de noticias uniforme (ListadoNoticiasEnListado). Para listado principal o de seccion. -->  
   <xsl:template name="NoticiaEnListado">
     <xsl:param name="Node" />
+    
+    <xsl:variable name="has_image" select="not(not($Node/media:thumbnail))"></xsl:variable>
+    <xsl:variable name="full_width" >
+      <xsl:if test="not($has_image)">
+        <xsl:text>full_width</xsl:text>
+      </xsl:if>
+    </xsl:variable>
+    
     <li>
       <a href="noticia://{$Node/guid}" title="">
-        <div class="titular">
+        <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
               <xsl:with-param name="DateTime" select="$Node/pubDate"/>
             </xsl:call-template>
           </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text><label class="seccion"><xsl:value-of select="$Node/category" /></label><br />
-          <label><xsl:value-of select="$Node/title" /></label>
+          <label class="titulo"><xsl:value-of select="$Node/title" /></label>
         </div>
-        <div class="foto img_container">
+        
+        <xsl:if test="not(not($has_image))">
+          <div class="foto img_container">
+            <xsl:if test="not(not($Node/news:meta))">
+              <xsl:call-template name="MediaAttach">
+                <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+              </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="not(not($Node/media:thumbnail))">
+              <div class="imagen_secundaria" style="background-image:url({$Node/media:thumbnail/@url}) !important;"></div>
+              <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
+              <!-- img src="{$Node/media:thumbnail/@url}" / -->
+            </xsl:if>
+            <xsl:if test="not($Node/media:thumbnail)">
+              <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+            </xsl:if>
+          </div>
+        </xsl:if>
+        <xsl:if test="not($has_image)">
           <xsl:if test="not(not($Node/news:meta))">
-            <xsl:call-template name="MediaAttach">
-              <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
-            </xsl:call-template>
+            <div class="right_ico_container">
+              <xsl:call-template name="MediaAttach">
+                <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+              </xsl:call-template>
+            </div>
           </xsl:if>
-          <xsl:if test="not(not($Node/media:thumbnail))">
-            <div class="imagen_secundaria" style="background-image:url({$Node/media:thumbnail/@url}) !important;"></div>
-            <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
-            <!-- img src="{$Node/media:thumbnail/@url}" / -->
-          </xsl:if>
-          <xsl:if test="not($Node/media:thumbnail)">
-            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-          </xsl:if>
-        </div>
+        </xsl:if>
       </a>
       <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </li>
@@ -280,6 +300,14 @@
   <!-- Template de la noticia en listado de noticias relacionadas (ListadoNoticiasRelacionadas). -->  
   <xsl:template name="NoticiaRelacionada">
     <xsl:param name="Item" />
+    
+    <xsl:variable name="has_image" select="not(not($Item/@thumbnail))"></xsl:variable>
+    <xsl:variable name="full_width" >
+      <xsl:if test="not($has_image)">
+        <xsl:text>full_width</xsl:text>
+      </xsl:if>
+    </xsl:variable>
+    
     <li>
       <a href="noticia://{$Item/@guid}" title="">
         <div class="titular">
@@ -293,24 +321,36 @@
             <label class="seccion"><xsl:value-of select="$Item/@lead" /></label> 
           </xsl:if>
           <br />
-          <label><xsl:value-of select="$Item/." /></label>
+          <label class="titulo"><xsl:value-of select="$Item/." /></label>
         </div>
-        <div class="foto img_container">
-          <xsl:call-template name="MediaAttach">
-            <xsl:with-param name="MetaTag" select="$Item/news:meta"/>
-          </xsl:call-template>
-          <xsl:if test="not(not($Item/@thumbnail))">
-            <xsl:if test="$Item/@thumbnail!=''">
-              <div class="imagen_secundaria" style="background-image:url({$Item/@thumbnail}) !important;"></div>
-              <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
-              <!--div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div-->
-              <!--img src="{$Item/@thumbnail}" /-->
+        
+        <xsl:if test="not(not($has_image))">
+          <div class="foto img_container">
+            <xsl:call-template name="MediaAttach">
+              <xsl:with-param name="MetaTag" select="$Item/news:meta"/>
+            </xsl:call-template>
+            <xsl:if test="not(not($Item/@thumbnail))">
+              <xsl:if test="$Item/@thumbnail!=''">
+                <div class="imagen_secundaria" style="background-image:url({$Item/@thumbnail}) !important;"></div>
+                <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
+                <!--div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div-->
+                <!--img src="{$Item/@thumbnail}" /-->
+              </xsl:if>
             </xsl:if>
+            <xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
+              <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+            </xsl:if>
+          </div>
+        </xsl:if>
+        <xsl:if test="not($has_image)">
+          <xsl:if test="not(not($Item/news:meta))">
+            <div class="right_ico_container">
+              <xsl:call-template name="MediaAttach">
+                <xsl:with-param name="MetaTag" select="$Item/news:meta"/>
+              </xsl:call-template>
+            </div>
           </xsl:if>
-          <xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
-            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-          </xsl:if>
-        </div>
+        </xsl:if>
       </a>
       <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </li>

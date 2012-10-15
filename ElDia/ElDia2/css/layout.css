@@ -267,10 +267,13 @@ div.main_img_container, div.main_foto {
 }
 
 #listado .foto .ico_container{
-  width:100%;
+  width:124px;
   display:block;
   position:absolute;
   z-index:3;
+}
+.right_ico_container{
+  float:right;
 }
 
 #listado .foto .ico_container .ico_galeria, #listado .foto .ico_container .ico_video, #listado .foto .ico_container .ico_audio {
@@ -416,3 +419,13 @@ font-weight:bold;}
   line-height: 1.3em;
   margin-bottom: 1em;
 }
+
+.full_width{
+  width:100% !important;
+}
+
+.full_width label.titulo{
+  /*width:308px;*/
+  display:inline-block;
+}
+.full_width label.seccion{display:inline-block;}
