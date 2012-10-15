@@ -65,7 +65,8 @@ body {
 	margin:0 auto;
 	padding:0;
 	width:320px;
-	font-family:"Myriad Pro", Arial, Helvetica, sans-serif;
+	/*font-family:"Myriad Pro", Arial, Helvetica, sans-serif;*/
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 body.menu {
@@ -212,10 +213,21 @@ div.main_img_container, div.main_foto {
   position:relative;
 }
 
+/*#agenda section .description .imagen {*/
+.imagen_principal {
+  /*margin-bottom: 20px;*/
+  height: 180px;
+  width: 320px;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+
+
 .img_container img , .img_loader{
   background-color:#FFFFFF;
   /*background-image:url(../img/../img/ajax-loader.gif) !important;*/
-  background-image:url(ajax_loader.gif) !important;
+  background-image:url(loading_indicator_big_blue.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   clear:both;
@@ -227,6 +239,17 @@ div.main_img_container, div.main_foto {
   border:0;
   border: 0px solid #FFF;
 }
+
+.imagen_secundaria{
+  height: 94px;
+  width: 124px;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  z-index:3;
+  position: absolute;
+  
+}
 .img_container img{
   width:auto !important;
   height:94px;
@@ -234,7 +257,7 @@ div.main_img_container, div.main_foto {
 .main_img_container img {
   background-color:#FFF;
   /*background-image:url(../img/ajax-loader.gif) !important;*/
-  background-image:url(ajax_loader.gif) !important;
+  background-image:url(loading_indicator_big_blue.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   width:100%;
@@ -287,8 +310,10 @@ div.main_img_container, div.main_foto {
 /***** NOTA *****/
 #nota, #nota label, #listado li label  {
 	color:#333;
-	font-size:14px;
-	line-height:16px;
+	/*font-size:14px;
+	line-height:16px;*/
+  font-size: 1em;
+  line-height: 1.4em;
 }
 #nota{  
   min-height:100px;
@@ -300,7 +325,8 @@ div.main_img_container, div.main_foto {
 #nota h1 {
 	display:block;color:#333;
   font-size:24px;
-	line-height:24px;
+	/*line-height:24px;*/
+  line-height:26px;
   margin: 15px 0px 15px 0px;
   font-weight:bold;
 }
@@ -330,10 +356,12 @@ div.main_img_container, div.main_foto {
 }
 
 .media_link.video_over_photo {
-  position:absolute;bottom:0px;margin-left:-10px !important;height:30px;
+  position:absolute;bottom:0px;
+  margin-left:-8px !important;
+  height:30px;
 }
 .media_link.video_over_photo.plus {
-  margin-left:-20px !important;
+  margin-left:-18px !important;
 }
 
 .media_link.no_photo{
@@ -341,11 +369,14 @@ div.main_img_container, div.main_foto {
   height:30px;
 }
 .media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
-  width:30px;
-	height:30px;
+  width:50px; /*width:30px;*/
+	background-color:#0066cc;
+  height:30px;
   /*margin-right:8px;*/
 	display: inline-block;
-  margin-left:10px;
+  margin-left:8px;
+  background-repeat:no-repeat;
+  background-position:center center;
 }
 .media_link .ico_video {
   /*background-image:url(../img/../img/ico_video.png);*/
@@ -367,12 +398,21 @@ div.main_img_container, div.main_foto {
 }
 
 #informacion { 
-  font-size: 14px;
-  line-height: 16px;
+  /*font-size: 14px;
+  line-height: 16px;*/
+  font-size: 1em;
+  line-height: 1.4em;
 }
-
+#informacion p{
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;}
+#informacion p.negrita_upper{
+font-weight:bold;}
 
 .bajada {
-  display:block;font-size:16px; line-height:18px;margin-bottom:14px;
- 
+  display:block;
+  /*font-size:16px; line-height:18px;margin-bottom:14px;*/
+  font-size: 1.2em;
+  line-height: 1.3em;
+  margin-bottom: 1em;
 }
