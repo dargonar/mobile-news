@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define CFG_NOTICIA_FONTSIZE @"CFG_NOTICIA_FONTSIZE"
+#define CFG_FIRSTTIME @"CFG_FIRSTTIME"
 
 @interface ConfigHelper : NSObject
 

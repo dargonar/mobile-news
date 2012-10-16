@@ -40,6 +40,7 @@ static NSMutableArray *_ids_de_noticias=nil;
                      MSG_UPD_MAIN,
                      MSG_UPD_SECTION_LIST,
                      nil];
+    
     NSArray *values = [[NSArray alloc] initWithObjects:
                        @"Acabamos de actualizar el listado de noticias!",
                        @"Aqui esta la noticia!",
@@ -54,59 +55,14 @@ static NSMutableArray *_ids_de_noticias=nil;
 	return self;
 }
 
--(NSString *)getUrl:(YMobiNavigationType)item queryString:(NSString *)queryString{
-  NSString *path = [urls objectAtIndex:(NSInteger)item];
-  if ([queryString length]>0) {
-    path = [[NSString alloc] initWithFormat:path,queryString];
-  }
-  return path;
-}
-
--(void)loadHtml:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView {
-  [self loadHtml:[self getUrl:item queryString:queryString] xsl:xsl _webView:_webView];
-}
-
-
--(void)loadHtml:(NSString *)path xsl:(NSString *)xsl  _webView:(UIWebView *) _webView {
-  
-  NSData   *data     = nil;
-  NSString *mimeType = nil;
-  
-  NSArray  *cache = [[SqliteCache defaultCache] get:path];
-  if(cache) {
-    data     = [cache objectAtIndex:0];
-    mimeType = [cache objectAtIndex:1];
-  }
-  else {
-    
-    NSString *xml = [self loadURL:path];
-    NSString *html = [self getHtml:xml xsl:xsl];
-    //NSLog(@"HTML: [%@]", html);
-    data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
-    mimeType = @"text/html";
-    [[SqliteCache defaultCache] set:path data:data mimetype:mimeType];
-    
-  }
-  
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  
-  [_webView loadData:data MIMEType:mimeType textEncodingName:@"utf-8" baseURL:dirURL];
-
-  //[data dealloc];
-  data = nil;
-  //[mimeType dealloc];
-  mimeType = nil;
-
-}
-
 -(NSString *)loadURL:(NSString *)path{
   //HACK: Validar error!
+  NSLog(@"loadURL:%@", path);
   return [NSString stringWithContentsOfURL:[NSURL URLWithString:path] encoding:NSUTF8StringEncoding error:nil];
-
+  
 }
 
--(NSString *)getHtml:(NSString *)xml xsl:(NSString *)xsl{
+-(NSString *)buildHtml:(NSString *)xml xsl:(NSString *)xsl{
   
   NSString *cleanedXML = @"";
   NSString* path_xslt = [[NSBundle mainBundle] pathForResource:xsl  ofType:@"xsl"];
@@ -128,13 +84,13 @@ static NSMutableArray *_ids_de_noticias=nil;
     //Limpiamos otras mierdas
     //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
     cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
-
+    
     HTMLGenerator *generator = [[HTMLGenerator alloc] init];
-
+    NSLog(@" cleanedXML:%@", xsl);
     return [generator generate:cleanedXML xslt_file:path_xslt];
   }
   @catch (NSException * e) {
-    NSLog(@"YMobiPaperLib::getHtml e:%@", e.reason);
+    NSLog(@"YMobiPaperLib::buildHtml e:%@", e.reason);
     [self requestFailed:nil message:e.reason];
   }
   @finally {
@@ -142,22 +98,58 @@ static NSMutableArray *_ids_de_noticias=nil;
   }
 }
 
--(void)setHtmlToView:(UIWebView*)webView data:(NSData*)data mimeType:(NSString*)mimeType{
-  if(webView==nil)
-  {
-    return;
+
+-(NSString *)getUrl:(YMobiNavigationType)item queryString:(NSString *)queryString{
+  NSString *path = [urls objectAtIndex:(NSInteger)item];
+  if ([queryString length]>0) {
+    path = [[NSString alloc] initWithFormat:path,queryString];
   }
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  return path;
+}
+
+
+-(NSString*)getHtmlPath:(NSString*)path{
+  return [NSString stringWithFormat:@"%@.html",path];
   
-  [webView loadData:data MIMEType:mimeType textEncodingName:@"utf-8" baseURL:dirURL];
+};
+
+// publica
+-(NSData*)getHtml:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  {
+ return [self getHtml:[self getUrl:item queryString:queryString] xsl:xsl];
+}
+// publica
+-(NSData*)getHtml:(NSString *)path xsl:(NSString *)xsl {
   
-  //[data dealloc];
-  data = nil;
-  //[mimeType dealloc];
-  mimeType = nil;
-  dirPath=nil;
-  dirURL=nil;
+  NSData   *data     = nil;
+  NSString *mimeType = nil;
+  NSString *html_path = [self getHtmlPath:path];
+  
+  NSArray  *cache = [[SqliteCache defaultCache] get:html_path];
+  if(cache) {
+    // Si esta en cache la devolvemos!
+    //ToDo: chquear que sea noticia o main, y cargar los componenetes necesarios.
+    data     = [cache objectAtIndex:0];
+    mimeType = [cache objectAtIndex:1];
+  }
+  else {
+    // No esta en cache, la buscamos sync
+    NSString *xml = [self loadURL:path];
+    NSString *html = [self buildHtml:xml xsl:xsl];
+    
+    data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
+    
+    [[SqliteCache defaultCache] set:html_path data:data mimetype:@"text/html"];
+
+    
+    NSData *data_xml    = [xml dataUsingEncoding:NSUTF8StringEncoding] ;// [NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
+    [[SqliteCache defaultCache] set:path data:data_xml mimetype:@"text/xml"];
+  }
+  
+  //NSString *dirPath = [[NSBundle mainBundle] bundlePath];
+ 	//NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  //[_webView loadData:data MIMEType:mimeType textEncodingName:@"utf-8" baseURL:dirURL];
+  return data;
+
 }
 
 -(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString{
@@ -186,141 +178,89 @@ static NSMutableArray *_ids_de_noticias=nil;
   }
 }
 
-// Async implementation
--(void) loadHtmlAsync:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView tag:(NSString*)tag force_load:(BOOL)force_load {
-  
-  NSString* path = [self getUrl:item queryString:queryString];
-  
-  @try{
-    if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
-    {
-      NSArray  *cache = [[SqliteCache defaultCache] get:path];
-      if(cache)
-      {
-        NSData   *data     =data     = [cache objectAtIndex:0];
-        NSString *mimeType = mimeType = [cache objectAtIndex:1];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-          [self setHtmlToView:_webView data:data mimeType:mimeType];
-        });
-        [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
-        return;
-      }
-    }
+-(NSData*) getChachedDataAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event{
+  NSData   *data     = [self getChachedData:[self getUrl:item queryString:queryString] tag:tag fire_event:fire_event];
+  if(data==nil)
+    return nil;
+  NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+  if(xml_data==nil)
+  {
+    return nil;
   }
-  @catch (NSException * e) {
-    NSLog(@"YMobiPaperLib::loadHtmlAsync e:%@", e.reason);
-    [self requestFailed:tag message:e.reason];
+  [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
+  return data;
+}
+-(NSData*) getChachedData:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event{
+  return [self getChachedData:[self getUrl:item queryString:queryString] tag:tag fire_event:fire_event];
+}
+
+-(NSData*) getChachedData:(NSString*)path tag:(NSString*)tag fire_event:(BOOL)fire_event{
+  
+  NSArray  *cache = [[SqliteCache defaultCache] get:path];
+  if(cache)
+  {
+    NSData   *data     = [cache objectAtIndex:0];
+    NSString *mimeType = [cache objectAtIndex:1];
+    if(fire_event)
+      [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
+    return data;
   }
-  @finally {
-    //NSLog(@"finally");
-  }
-  //Vinculo request con vista
-  NSURL *theURL =  [[NSURL alloc]initWithString:path ];
-  NSURLRequest *theRequest=[NSURLRequest requestWithURL:theURL
-                                cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                timeoutInterval:60.0];
-  
-  NSMutableDictionary *_metadata = [[NSMutableDictionary alloc] init];
-  [_metadata setValue:xsl forKey:KEY_XSL];
-  [_metadata setValue:_webView forKey:KEY_VIEW];
-  [_metadata setValue:tag forKey:KEY_TAG];
-  
-  NSMutableData *recv_data = [[NSMutableData alloc] init];
-  [_metadata setValue:recv_data forKey:KEY_DATA];
-  
-  [requestsMetadata setValue:_metadata forKey:[NSString stringWithFormat:@"%i",[theRequest hash]]];
-  
-  [NSURLConnection connectionWithRequest:theRequest delegate:self];
-  
+  return nil;
 }
 
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-  
-  [((NSMutableData *)[((NSMutableDictionary *)[requestsMetadata objectForKey:[NSString stringWithFormat:@"%i",[connection.originalRequest hash]]]) objectForKey:KEY_DATA]) appendData:data];
-  
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-  NSString*_key=[NSString stringWithFormat:@"%i",[connection.originalRequest hash]];
-  NSMutableDictionary *_metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
-  NSString *tag = (NSString*)[_metadata objectForKey:KEY_TAG];
-  
-  [self requestFailed:tag message:(NSString *)[messages objectForKey:tag]];
-  
-  NSLog(@"YMobiPaperLib::connection didFailWithError:%@ code:%d", error.description, error.code);
-  
-  [requestsMetadata removeObjectForKey:_key];
-  _key=nil;
-  _metadata =nil;
-  tag=nil;
-
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
-
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-  
-  NSString*_key=[NSString stringWithFormat:@"%i",[connection.originalRequest hash]];
-  NSMutableDictionary *_metadata = (NSMutableDictionary *)[requestsMetadata objectForKey:_key];
-  NSMutableData * data = (NSMutableData*)[_metadata objectForKey:KEY_DATA];
-  NSString *xml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSString *xsl =(NSString*)[_metadata objectForKey:KEY_XSL];
-  NSString *tag = (NSString*)[_metadata objectForKey:KEY_TAG];
-  
+-(void)configureXSL:(NSString*)xsl xml:(NSString*)xml{
   if(xsl==XSL_PATH_MAIN_LIST)
   {
-    NSString *txt = [self getHtml:xml xsl:XSL_NOTICIAS_IDS];
+    // MetaHACK: extraemos los id de las noticias para poder navegarlas con gestures.
+    // Lo retenemos en ids.
+    NSString *txt = [self buildHtml:xml xsl:XSL_NOTICIAS_IDS];
     [YMobiPaperLib setIds:txt];
     txt=nil;
   }
   if(xsl==XSL_PATH_NEWS)
   {
-    NSString *txt = [self getHtml:xml xsl:XSL_NOTICIA_METADATA];
+    // MetaHACK: extraemos metadata de la noticia (como el web link). Lo asignamos en la propeidad metadata para que luego pueda ser consumido.
+    NSString *txt = [self buildHtml:xml xsl:XSL_NOTICIA_METADATA];
     [self setMetadata:txt];
     txt=nil;
   }
-  NSString *html = [self getHtml:xml xsl:xsl];
-  //if([xsl isEqualToString:XSL_PATH_SECTION_LIST])
-  // NSLog(@"%@", html);
-  
-  NSData *html_data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
-  NSString*mimeType = @"text/html";
-  
-  @try {
-    [[SqliteCache defaultCache] set:[[connection.originalRequest URL] absoluteString] data:html_data mimetype:mimeType];
-  }
-  @catch (NSException * e) {
-    NSLog(@"YMobiPaperLib::connectionDidFinishLoading cleanCache exception:%@", e.reason);
-    
-    //[self requestFailed:tag message:e.reason];
-   }
-  @finally {
-  //NSLog(@"finally");
-  }
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    [self setHtmlToView:(UIWebView*)[_metadata objectForKey:KEY_VIEW] data:html_data mimeType:mimeType];
-  });
-  //[self requestSuccessful:(NSString*)[metadata objectForKey:KEY_TAG] message:@"Proceso OK"];
-    
-  [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
-  
-  html=nil;
-  html_data=nil;
-  mimeType=nil;
-    
-  
-  [requestsMetadata removeObjectForKey:_key];
-  data=nil;
-  _metadata=nil;
-  _key=nil;
-  xml = nil;
-  xsl=nil;
-  tag=nil;
 }
+
+// publica
+-(NSData*) getHtmlAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag force_load:(BOOL)force_load {
+  
+  NSString* path = [self getUrl:item queryString:queryString];
+  
+  NSData* html_data = nil;
+  
+  if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
+  {
+    html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+    
+    return html_data;
+  }
+  
+  if(html_data==nil)
+  {
+    html_data= [self getHtml:path xsl:xsl];
+  }
+  
+  if(html_data!=nil)
+  {
+    NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+    if(xml_data==nil)
+    {
+      return nil;
+    }
+    //NSString* newStr = [[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding] autorelease];
+    //NSString* newStr = [NSString stringWithUTF8String:[theData bytes]];
+    
+    [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
+  }
+  
+  return html_data;
+}
+ 
 
 +(void)setIds:(NSString*)text{
   _ids_de_noticias=nil;

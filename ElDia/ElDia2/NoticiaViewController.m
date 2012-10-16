@@ -20,6 +20,20 @@
 
 @synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib;
 
+-(void)setHtmlToView:(NSData*)data{
+  
+  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
+ 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  
+  [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
+  
+  data = nil;
+  dirPath=nil;
+  dirURL=nil;
+  
+}
+
+
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -315,16 +329,41 @@
   self.bottomUIView.hidden = YES;
   //[self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
  }
+
+-(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
+  
+  NSLog(@"NoticiaViewController::setHtmlToView ME llamaron!!!");
+  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
+ 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  
+  [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
+  
+  if(stop_loading_indicators)
+  {
+    [self hideLoadingIndicator];
+  }
+  data = nil;
+  dirPath=nil;
+  dirURL=nil;
+  
+}
+
 -(void)loadNoticia:(NSString *)_noticia_id{
   [self showLoadingIndicator];
   // clean content
   
   [self setNoticia_id:_noticia_id];
-  [self.mYMobiPaperLib loadHtmlAsync:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS _webView:self.mainUIWebView tag:MSG_GET_NEW force_load:NO];
   
+  [self showLoadingIndicator];
   
-  //[self.mYMobiPaperLib loadHtml:YMobiNavigationTypeNews queryString:[url host] xsl:XSL_PATH_NEWS _webView:self.mainUIWebView];
-}
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
+    // tell the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self setHtmlToView:data stop_loading_indicators:YES];
+    });
+  });
+  }
 
 - (void)addGestureRecognizers{
   UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];

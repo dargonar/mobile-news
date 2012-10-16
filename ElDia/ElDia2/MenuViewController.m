@@ -42,11 +42,24 @@
   [panGesture setDelegate:self];
   [screenShotImageView addGestureRecognizer:panGesture];
   
-  [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS _webView:self.webView];
   self.webView.scrollView.bounces = NO;
   self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
-}
+  
+  /*
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS _webView:self.webView];
+  });
+  */
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
+    // tell the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self setHtmlToView:data];
+    });
+  });
+  
+  }
 
 - (void)viewDidUnload
 {
@@ -55,6 +68,20 @@
   // remove the gesture recognizers
   [self.screenShotImageView removeGestureRecognizer:self.tapGesture];
   [self.screenShotImageView removeGestureRecognizer:self.panGesture];
+}
+
+-(void)setHtmlToView:(NSData*)data{
+  
+  //NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
+  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
+ 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  
+  [self.webView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
+  
+  data = nil;
+  dirPath=nil;
+  dirURL=nil;
+  
 }
 
 -(void)viewWillAppear:(BOOL)animated

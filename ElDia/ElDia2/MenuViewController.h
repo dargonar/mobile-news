@@ -25,5 +25,6 @@
 - (void)slideThenHide;
 - (void)adjustAnchorPointForGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer ;
 - (IBAction) btnCloseClick: (id)param;
--(void)adjustWebViewWidth:(CGFloat)_width;
+- (void)adjustWebViewWidth:(CGFloat)_width;
+- (void)setHtmlToView:(NSData*)data;
 @end

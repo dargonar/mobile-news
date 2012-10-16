@@ -64,15 +64,22 @@ typedef enum {
 @property (nonatomic, assign) id <YMobiPaperLibDelegate> delegate;
 
 - (id)init;
--(void)loadHtml:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView ;
--(void)loadHtml:(NSString *)path xsl:(NSString *)xsl  _webView:(UIWebView *) _webView;
+
+-(NSData*)getHtml:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl;
+-(NSData*)getHtml:(NSString *)path xsl:(NSString *)xsl;
+-(NSString*)getHtmlPath:(NSString*)path;
 
 -(NSString *)loadURL:(NSString *)path;
--(NSString *)getHtml:(NSString *)xml xsl:(NSString *)xsl;
+-(NSString *)buildHtml:(NSString *)xml xsl:(NSString *)xsl;
 
 -(NSString *)getUrl:(YMobiNavigationType)item queryString:(NSString *)queryString;
 
--(void) loadHtmlAsync:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl  _webView:(UIWebView *) _webView tag:(NSString*)tag force_load:(BOOL)force_load;
+-(NSData*) getHtmlAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag force_load:(BOOL)force_load;
+-(void)configureXSL:(NSString*)xsl xml:(NSString*)xml;
+
+-(NSData*) getChachedData:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event;
+-(NSData*) getChachedData:(NSString*)path tag:(NSString*)tag fire_event:(BOOL)fire_event;
+-(NSData*) getChachedDataAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event;
 
 -(void)cleanCache;
 -(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString;

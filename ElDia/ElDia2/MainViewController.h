@@ -27,10 +27,22 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *logo_imgvw_alpha;
 
+@property (nonatomic, retain) IBOutlet UIImageView *welcome_imgvw;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;
+
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
 -(void) loadNoticiaView;
 -(void)loadSectionNews:(NSURL*)rawURL;
 +(id)sharedInstance;
+
+-(void) hideWelcomeLoadingIndicator;
+-(void) showWelcomeLoadingIndicator;
+-(void) firstTimeUseGone;
+-(bool) isFirstTimeUse;
+
+-(void)loadIndex:(BOOL)force_load;
+-(void)loadLastKnownIndex;
 //~/Library/Application Support/iPhone Simulator/
+
 @end
