@@ -51,15 +51,16 @@ static NSMutableArray *_ids_de_noticias=nil;
                        nil];
     messages = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     requestsMetadata = [[NSMutableDictionary alloc] init];
+    
+    keys=nil;
+    values=nil;
   }
 	return self;
 }
 
 -(NSString *)loadURL:(NSString *)path{
   //HACK: Validar error!
-  NSLog(@"loadURL:%@", path);
   return [NSString stringWithContentsOfURL:[NSURL URLWithString:path] encoding:NSUTF8StringEncoding error:nil];
-  
 }
 
 -(NSString *)buildHtml:(NSString *)xml xsl:(NSString *)xsl{
@@ -77,6 +78,8 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
   
+  HTMLGenerator *generator = [[HTMLGenerator alloc] init];
+  
   @try{
     // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
     cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
@@ -85,7 +88,6 @@ static NSMutableArray *_ids_de_noticias=nil;
     //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
     cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
     
-    HTMLGenerator *generator = [[HTMLGenerator alloc] init];
     NSLog(@" cleanedXML:%@", xsl);
     return [generator generate:cleanedXML xslt_file:path_xslt];
   }
@@ -94,7 +96,10 @@ static NSMutableArray *_ids_de_noticias=nil;
     [self requestFailed:nil message:e.reason];
   }
   @finally {
-    //NSLog(@"finally");
+    cleanedXML=nil;
+    path_xslt=nil;
+    htmlAttributesRegex=nil;
+    generator=nil;
   }
 }
 
@@ -107,10 +112,8 @@ static NSMutableArray *_ids_de_noticias=nil;
   return path;
 }
 
-
 -(NSString*)getHtmlPath:(NSString*)path{
   return [NSString stringWithFormat:@"%@.html",path];
-  
 };
 
 // publica
@@ -140,14 +143,18 @@ static NSMutableArray *_ids_de_noticias=nil;
     
     [[SqliteCache defaultCache] set:html_path data:data mimetype:@"text/html"];
 
-    
+    // Solo cacheamos el XML.
     NSData *data_xml    = [xml dataUsingEncoding:NSUTF8StringEncoding] ;// [NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
     [[SqliteCache defaultCache] set:path data:data_xml mimetype:@"text/xml"];
+    
+    xml = nil;
+    html=nil;
+    data_xml=nil;
   }
   
-  //NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	//NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  //[_webView loadData:data MIMEType:mimeType textEncodingName:@"utf-8" baseURL:dirURL];
+  mimeType = nil;
+  html_path = nil;
+  cache = nil;
   return data;
 
 }
@@ -157,9 +164,12 @@ static NSMutableArray *_ids_de_noticias=nil;
     return NO;
   NSString* path = [self getUrl:item queryString:queryString];
   NSArray  *cache = [[SqliteCache defaultCache] get:path since_hours:1];
+  path=nil;
   if(cache) {
+    cache=nil;
     return NO;
   }
+  cache=nil;
   return YES;
 }
 
@@ -183,13 +193,27 @@ static NSMutableArray *_ids_de_noticias=nil;
   NSString *html_path = [self getHtmlPath:path];
   NSData   *data     = [self getChachedData:html_path tag:tag fire_event:fire_event];
   if(data==nil)
+  {
+    path=nil;
+    html_path=nil;
+    
     return nil;
+  }
+  
   NSData* xml_data = [self getChachedData:path tag:tag fire_event:NO];
   if(xml_data==nil)
   {
+    data=nil;
+    path=nil;
+    html_path=nil;
+  
     return nil;
   }
   [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
+  path=nil;
+  html_path=nil;
+  xml_data=nil;
+
   return data;
 }
 
@@ -209,6 +233,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     NSData   *data     = [cache objectAtIndex:0];
     if(fire_event)
       [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
+    cache=nil;
     return data;
   }
   return nil;
@@ -243,14 +268,16 @@ static NSMutableArray *_ids_de_noticias=nil;
   {
     NSLog(@"YMobiPaperLib::getHtmlAndConfigure No me fuerzan y no debo reloadearla");
     html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:YES];
-    
     if(html_data!=nil)
+    {
+      path=nil;
       return html_data;
+    }
   }
   
   if(html_data==nil)
   {
-    html_data= [self getHtml:path xsl:xsl];
+    html_data = [self getHtml:path xsl:xsl];
   }
   
   if(html_data!=nil)
@@ -258,12 +285,14 @@ static NSMutableArray *_ids_de_noticias=nil;
     NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:NO];
     if(xml_data==nil)
     {
+      path=nil;
+      html_data=nil;
       return nil;
     }
-    //NSString* newStr = [[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding] autorelease];
-    //NSString* newStr = [NSString stringWithUTF8String:[theData bytes]];
     
     [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
+    path=nil;
+    xml_data=nil;
   }
   
   return html_data;
@@ -308,8 +337,6 @@ static NSMutableArray *_ids_de_noticias=nil;
   }
   return nil;
 }
-
-
 
 // Delegates
 - (void)requestSuccessful:(id)argument message:(NSString*)message

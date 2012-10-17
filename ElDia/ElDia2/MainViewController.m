@@ -135,10 +135,11 @@ BOOL cacheCleaned = NO;
 
 -(void)loadSection:(BOOL)force_load{
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST tag:MSG_GET_SECTION_LIST force_load:force_load];
+    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST tag:MSG_GET_SECTION_LIST force_load:force_load];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
+      data=nil;
     });
   });
   
@@ -146,7 +147,7 @@ BOOL cacheCleaned = NO;
 
 -(void)loadIndex:(BOOL)force_load{
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
+    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
@@ -161,7 +162,7 @@ BOOL cacheCleaned = NO;
         NSLog(@"MainViewController::loadindex ");
         
       }
-
+      data=nil;
       
     });
   });
@@ -169,13 +170,14 @@ BOOL cacheCleaned = NO;
 
 -(void)loadLastKnownIndex{
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
+    __block NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
     if(data==nil)
       return;
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data  stop_loading_indicators:YES];
-      [self  showRefreshLoadingIndicator];
+      [self showRefreshLoadingIndicator];
+      data=nil;
     });
   });
 }

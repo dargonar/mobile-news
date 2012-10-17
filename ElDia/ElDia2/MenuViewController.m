@@ -46,16 +46,12 @@
   self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
   
-  /*
-   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    [self.mYMobiPaperLib loadHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS _webView:self.webView];
-  });
-  */
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
+    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data];
+      data = nil;
     });
   });
   

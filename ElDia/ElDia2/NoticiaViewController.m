@@ -60,10 +60,8 @@
   partial_jsString=nil;
   if(fontChanged==YES)
   {
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-      [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%f", textFontSize]];
-    //});
-   }
+    [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%f", textFontSize]];
+  }
 
 }
 - (IBAction) btnFontSizePlusClick: (id)param{
@@ -83,80 +81,55 @@
 
 - (void)playVideo:(NSURL *)_url{
   
+  [self showLoadingIndicator];
+  // Deshabilitamos el cache.
   [LocalSubstitutionCache cacheOrNot:NO];
   
-  NSString *youtube = @"http://www.youtube.com/watch?v=%@";
-  //http://m.youtube.com/watch?v=PLyEQF13kx4&autoplay=1
+  __block NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  __block NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"http://www.youtube.com/watch?v=%@", video_id]];
   
-  NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //background task
   
-  //NSLog(@"NoticiaViewController::playVideo video_id=%@", video_id);
-  
-  NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:youtube, video_id]];
-  
-  /* ************* */
-  // Gets an dictionary with each available youtube url
-  NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:youtubeURL];
-  
-  if(videos==nil || [[videos allKeys] count]<1)
-  {
-    if(self.myYoutubeViewController!=nil)
-      self.myYoutubeViewController =nil;
+    // Gets an dictionary with each available youtube url
+    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:youtubeURL];
     
-    NSString *videoNibName = @"YoutubeViewController";
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
-      videoNibName = @"YoutubeViewController_iPad";
-    }
-    self.myYoutubeViewController = [[YoutubeViewController alloc] initWithNibName:videoNibName bundle:[NSBundle mainBundle]];
-    self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      // update UI
     
-    //[self presentModalViewController:self.myYoutubeViewController animated:NO];
-    [self.view addSubview:self.myYoutubeViewController.view];
+      if(videos==nil || [[videos allKeys] count]<1)
+      {
+        if(self.myYoutubeViewController!=nil)
+          self.myYoutubeViewController =nil;
+        NSString *videoNibName = @"YoutubeViewController";
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+          videoNibName = @"YoutubeViewController_iPad";
+        }
+        self.myYoutubeViewController = [[YoutubeViewController alloc] initWithNibName:videoNibName bundle:[NSBundle mainBundle]];
+        self.myYoutubeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
+        [self.view addSubview:self.myYoutubeViewController.view];
   
-    
-    NSLog(@" Loaded Youtube WEB View");
-    NSString *youtubeMobile = @"http://m.youtube.com/watch?v=%@"; //&autoplay=1";
-    [self.myYoutubeViewController loadVideo:video_id req:[NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:youtubeMobile, video_id]]]];
-    
-    youtubeMobile = nil;
-    
-    /*
-    [[[iToast makeText:@"Este video no puede ser reproducido por cuestiones de copyright."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
-    youtube = nil;
-    video_id = nil;
-    youtubeURL = nil;
-    videos = nil;
-    */
-    return;
-  }
-  NSLog(@" status:%@  reason:%@", [videos objectForKey:@"status"], [videos objectForKey:@"reason"]);
-  // Presents a MoviePlayerController with the youtube quality medium
-  MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]] ];
-  
-  //[mp.moviePlayer setFullscreen:YES];
-  
-  [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-	//[m_moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleEmbedded];
-  
-  //[mp.moviePlayer setContentURL:movieUrl];
-  [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
-  
-  
-  //[[UIApplication sharedApplication] setStatusBarHidden:YES];
-  [mp setWantsFullScreenLayout:YES];
-  
-  
-  [self presentModalViewController:mp animated:NO];
-  
-  //[self.view addSubview:mp.view];
-  
-  
-  [mp.moviePlayer prepareToPlay];
-	[mp.moviePlayer play];
-  mp=nil;
-  
-  // To get a thumbnail for an image there is now a async method for that
-  /*[HCYoutubeParser thumbnailForYoutubeURL:url
+        NSString *youtubeMobile = @"http://m.youtube.com/watch?v=%@"; //&autoplay=1";
+        [self.myYoutubeViewController loadVideo:video_id req:[NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:youtubeMobile, video_id]]]];
+        
+        videoNibName=nil;
+        youtubeMobile = nil;
+      }
+      else
+      {
+        // Presents a MoviePlayerController with the youtube quality medium
+        MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]] ];
+        [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+        [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
+        [mp setWantsFullScreenLayout:YES];
+        [self presentModalViewController:mp animated:NO];
+        [mp.moviePlayer prepareToPlay];
+        [mp.moviePlayer play];
+        mp=nil;
+      }
+      // To get a thumbnail for an image there is now a async method for that
+      /*[HCYoutubeParser thumbnailForYoutubeURL:url
                             thumbnailSize:YouTubeThumbnailDefaultHighQuality
                             completeBlock:^(UIImage *image, NSError *error) {
                               if (!error) {
@@ -167,11 +140,14 @@
                                 [alert show];
                               }
                             }];
-  */
-  youtubeURL = nil;
-  //req=nil;
-  youtube=nil;
-  video_id=nil;
+       */
+      youtubeURL = nil;
+      video_id=nil;
+      
+      [self hideLoadingIndicator];
+    });
+  });
+  
 }
 
 
@@ -203,8 +179,6 @@
  */
 -(NSString *)getYoutubeVideoId:(NSString*)url{
   
-  NSLog(@"NoticiaViewcontroller::getYoutubeVideoId url=%@", url);
-  
   NSString * local_url = [url stringByReplacingOccurrencesOfString:@"video://" withString:@"" ];
   local_url = [self cleanUrl:local_url];
   
@@ -218,52 +192,36 @@
   {
     ret = [[NSString alloc] initWithFormat:@"%@",[_ids objectAtIndex:1]] ;
   }
+  
+  local_url=nil;
+  regex=nil;
+  _ids=nil;
   return ret;
 }
  
 - (void)playAudio:(NSURL *)_url
 {
-  NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
+  [self showLoadingIndicator];
+  __block NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
   url = [self cleanUrl:url];
   
-  //NSURL *url = [NSURL URLWithString:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
-  //NSURL *myURL = [[NSURL alloc] initFileURLWithPath:@"http://www.eldia.com.ar/ediciones/20120906/20120906090522_1.mp3"];
-  //NSURL *audio_url = [[NSURL alloc] initFileURLWithPath:url];
-  NSLog(@" audio:: %@", url);
-  
-  
-  /*
-  MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:audio_url];
-  
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackComplete:)
-                                               name:MPMoviePlayerPlaybackDidFinishNotification
-                                             object:moviePlayerController];
-  
-  moviePlayerController.shouldAutoplay = NO;
-  moviePlayerController.view.frame = self.view.frame;
-  moviePlayerController.scalingMode= MPMovieScalingModeFill;
-  moviePlayerController.controlStyle =MPMovieControlStyleFullscreen;
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //background task
+    __block MPMoviePlayerViewController* mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
+    mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
+    mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
+    
+    [self presentModalViewController:mpviewController animated:YES];
 
-  
-  [self.view addSubview:moviePlayerController.view];
-  //moviePlayerController.fullscreen = YES;
-  [moviePlayerController prepareToPlay];
-  [moviePlayerController play];
-   */
-  
-  MPMoviePlayerViewController* mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
-  
-  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
-  mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
-
-  [self presentModalViewController:mpviewController animated:YES];
-  
-  [[mpviewController moviePlayer] prepareToPlay];
-  [[mpviewController moviePlayer] play];
-
-  url=nil;
-  mpviewController=nil;
+    [[mpviewController moviePlayer] prepareToPlay];
+    [[mpviewController moviePlayer] play];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      url=nil;
+      mpviewController=nil;
+      [self hideLoadingIndicator];
+    });
+  });
   return;
  
 }
@@ -283,6 +241,7 @@
 - (IBAction) btnBackClick: (id)param{
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
+
 - (IBAction) btnShareClick: (id)param{
   
   // Create the item to share (in this example, a url)
@@ -313,8 +272,7 @@
 -(void)loadBlank{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
   self.bottomUIView.hidden = YES;
-  //[self.mainUIWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
- }
+}
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
@@ -348,12 +306,13 @@
   [self showLoadingIndicator];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
+    __block NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
       [self changeFontSize:0];
       [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
+      data = nil;
     });
   });
   }
@@ -386,8 +345,6 @@
 }
 
 -(void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture{
-  //[[[iToast makeText:@"next noticia please"] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
-  //stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]
   NSString *nextNoticiaId = [YMobiPaperLib getNextNoticiaId:noticia_id];
   if(nextNoticiaId!=nil)
   {
@@ -396,7 +353,6 @@
   }
 }
 -(void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture{
-  //[[[iToast makeText:@"noticia anterior nene"] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
   NSString *prevNoticiaId = [YMobiPaperLib getPrevNoticiaId:noticia_id];
   if(prevNoticiaId!=nil)
   {
@@ -410,9 +366,8 @@
   [super viewDidLoad];
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
+
   // Do any additional setup after loading the view from its nib.
-  
-  
   [self addGestureRecognizers];
 }
 
@@ -460,7 +415,6 @@
                        //self.bottomUIView.hidden = YES;
                      }];
   }
-  //NSLog(@"singleTapWebView");
 }
 
 
@@ -490,7 +444,6 @@
     if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
     {
       [self loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
-      // Aca tenemos que lodear otra noticia!!
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:SCHEMA_VIDEO])
@@ -500,26 +453,22 @@
     }
     else if ([[url scheme]isEqualToString:SCHEMA_AUDIO])
     {
-      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self playAudio:url];
-      //});
+      [self playAudio:url];
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:SCHEMA_GALERIA])
     {
-      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self loadPhotoGallery:url];
-      //});
-      
+      [self loadPhotoGallery:url];
       handled = YES;
     }
-    
+    url=nil;
     if(handled == YES)
     {
       return NO;
     }
     return NO; //YES;
   }
+  url=nil;
   return YES;
 }
 
@@ -559,7 +508,6 @@
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
     NSString *escapedURL = [self cleanUrl:((NSString *)object)];
-    
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path
     // so you still should check scheme and all other NSURL attributes you need
@@ -570,7 +518,7 @@
       [_array addObject:escapedURL];
     }
     candidateURL=nil;
-    
+    escapedURL=nil;
   }
   
   networkCaptions = [[NSArray alloc]initWithArray:_array copyItems:YES];
@@ -585,7 +533,6 @@
   
   _gallery_proto = nil;
   _url=nil;
-    _url=nil;
   _array =nil;
   _images_src = nil;
   
