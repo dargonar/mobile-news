@@ -301,7 +301,7 @@
   <xsl:template name="NoticiaRelacionada">
     <xsl:param name="Item" />
     
-    <xsl:variable name="has_image" select="not(not($Item/@thumbnail))"></xsl:variable>
+    <xsl:variable name="has_image" select="$Item/@thumbnail!=''"></xsl:variable>
     <xsl:variable name="full_width" >
       <xsl:if test="not($has_image)">
         <xsl:text>full_width</xsl:text>
@@ -310,7 +310,7 @@
     
     <li>
       <a href="noticia://{$Item/@guid}" title="">
-        <div class="titular">
+        <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
               <xsl:with-param name="DateTime" select="$Item/@pubDate"/>
@@ -333,15 +333,14 @@
               <xsl:if test="$Item/@thumbnail!=''">
                 <div class="imagen_secundaria" style="background-image:url({$Item/@thumbnail}) !important;"></div>
                 <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
-                <!--div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div-->
-                <!--img src="{$Item/@thumbnail}" /-->
               </xsl:if>
             </xsl:if>
-            <xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
+            <!--xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
               <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-            </xsl:if>
+            </xsl:if-->
           </div>
         </xsl:if>
+        
         <xsl:if test="not($has_image)">
           <xsl:if test="not(not($Item/news:meta))">
             <div class="right_ico_container">
