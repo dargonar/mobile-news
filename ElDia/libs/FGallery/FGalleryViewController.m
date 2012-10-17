@@ -482,12 +482,15 @@
 
 - (IBAction)backAction:(id)sender
 {
+  self.navigationController.navigationBar.hidden = YES;
   [self.navigationController popViewControllerAnimated:YES];
+  
 }
 
 - (void)setUseThumbnailView:(BOOL)useThumbnailView
 {
   UIImage *image = [UIImage imageNamed: @"bg.png"];
+  //UIImage *image = [UIImage imageNamed: @"egopv_error_placeholder.png"];
   [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
   //[image release];
   //image = nil;

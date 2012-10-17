@@ -179,10 +179,12 @@ static NSMutableArray *_ids_de_noticias=nil;
 }
 
 -(NSData*) getChachedDataAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event{
-  NSData   *data     = [self getChachedData:[self getUrl:item queryString:queryString] tag:tag fire_event:fire_event];
+  NSString* path=[self getUrl:item queryString:queryString];
+  NSString *html_path = [self getHtmlPath:path];
+  NSData   *data     = [self getChachedData:html_path tag:tag fire_event:fire_event];
   if(data==nil)
     return nil;
-  NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+  NSData* xml_data = [self getChachedData:path tag:tag fire_event:NO];
   if(xml_data==nil)
   {
     return nil;
@@ -190,8 +192,13 @@ static NSMutableArray *_ids_de_noticias=nil;
   [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
   return data;
 }
--(NSData*) getChachedData:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event{
-  return [self getChachedData:[self getUrl:item queryString:queryString] tag:tag fire_event:fire_event];
+
+-(NSData*) getChachedData:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event is_html:(BOOL)is_html{
+  NSString* path = [self getUrl:item queryString:queryString];
+  if (is_html==YES) {
+    path = [self getHtmlPath:path];
+  }
+  return [self getChachedData:path tag:tag fire_event:fire_event];
 }
 
 -(NSData*) getChachedData:(NSString*)path tag:(NSString*)tag fire_event:(BOOL)fire_event{
@@ -200,7 +207,6 @@ static NSMutableArray *_ids_de_noticias=nil;
   if(cache)
   {
     NSData   *data     = [cache objectAtIndex:0];
-    NSString *mimeType = [cache objectAtIndex:1];
     if(fire_event)
       [self requestSuccessful:tag message:(NSString *)[messages objectForKey:tag]];
     return data;
@@ -235,9 +241,11 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
   {
-    html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+    NSLog(@"YMobiPaperLib::getHtmlAndConfigure No me fuerzan y no debo reloadearla");
+    html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:YES];
     
-    return html_data;
+    if(html_data!=nil)
+      return html_data;
   }
   
   if(html_data==nil)
@@ -247,7 +255,7 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   if(html_data!=nil)
   {
-    NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES];
+    NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:NO];
     if(xml_data==nil)
     {
       return nil;

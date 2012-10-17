@@ -18,21 +18,7 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib;
-
--(void)setHtmlToView:(NSData*)data{
-  
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  
-  [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
-  data = nil;
-  dirPath=nil;
-  dirURL=nil;
-  
-}
-
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView;
 
 -(void)changeFontSize:(NSInteger)delta{
   
@@ -55,7 +41,7 @@
     else
     {
       
-      //NSLog(@" delta=0 -> FONTSize:[%d]", textFontSize);
+      NSLog(@"NoticiaViewController::changeFontSize delta=0 ");
       //textFontSize = defaultTextFontSize;
     }
     
@@ -68,15 +54,15 @@
   NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%fem'", textFontSize+0.2];
   
   NSLog(@" fontsize: %@", jsString);
-  [mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
   jsString=nil;
   partial_jsString=nil;
   if(fontChanged==YES)
   {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
       [ConfigHelper setSettingValue:CFG_NOTICIA_FONTSIZE value:[[NSString alloc] initWithFormat:@"%f", textFontSize]];
-    });
+    //});
    }
 
 }
@@ -337,7 +323,12 @@
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
+  /*
+   if(data!=nil)
+    NSLog(@" html:%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+  else
+    NSLog(@" html:NIL");
+  */
   if(stop_loading_indicators)
   {
     [self hideLoadingIndicator];
@@ -350,7 +341,7 @@
 
 -(void)loadNoticia:(NSString *)_noticia_id{
   [self showLoadingIndicator];
-  // clean content
+  // clean cont	ent
   
   [self setNoticia_id:_noticia_id];
   
@@ -361,6 +352,8 @@
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
+      [self changeFontSize:0];
+      [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
     });
   });
   }
@@ -427,7 +420,10 @@
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
   [LocalSubstitutionCache cacheOrNot:YES];
-
+  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
+  networkCaptions = nil;
+  networkImages = nil;
+  networkGallery = nil;
 }
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
@@ -469,8 +465,7 @@
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self changeFontSize:0];
-  //[self hideLoadingIndicator];
+  //[self changeFontSize:0];
   NSLog(@"webViewDidFinishLoad");
 }
 
@@ -500,9 +495,7 @@
     }
     else if ([[url scheme]isEqualToString:SCHEMA_VIDEO])
     {
-      //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self playVideo:url];
-      //});
+      [self playVideo:url];
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:SCHEMA_AUDIO])
@@ -649,15 +642,17 @@
 
 //YMobiPaperDelegate implementation
 - (void) requestSuccessful:(id)data message:(NSString*)message{
-  [self changeFontSize:0];
-  [self hideLoadingIndicator];
-  [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
+  NSLog(@"NoticiaViewConteroller::requestSuccessful");
+  
+  //[self changeFontSize:0];
+  //[self hideLoadingIndicator];
+  //[self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
 }
 
 - (void) requestFailed:(id)error message:(NSString*)message{
-  [self hideLoadingIndicator];
-  
-  [[[iToast makeText:@"Ha ocurrido un error. Actualice la pantalla."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
+  NSLog(@"NoticiaViewConteroller::requestFailed");
+  //[self hideLoadingIndicator];
+  //[[[iToast makeText:@"Ha ocurrido un error. Actualice la pantalla."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
   
 }
 
@@ -687,6 +682,8 @@
   self.btnFontSizePlus=nil;
   self.btnFontSizeMinus=nil;
   self.loading_indicator=nil;
+  
+  self.headerUIImageView=nil;
   
   networkCaptions = nil;
   networkImages = nil;

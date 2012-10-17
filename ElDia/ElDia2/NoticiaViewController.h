@@ -35,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *headerUIImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
@@ -57,4 +58,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
 - (void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture;
 - (void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture;
+-(void)changeFontSize:(NSInteger)delta;
+
+-(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators;
 @end
