@@ -8,6 +8,7 @@
 
 #import "YMobiPaperLib.h"
 #import "RegexKitLite.h"
+#import "asi-http-request/ASIHTTPRequest.h"
 
 #define KEY_XSL @"key_xsl"
 #define KEY_VIEW @"key_view"
@@ -17,6 +18,10 @@
 @implementation YMobiPaperLib
 
 @synthesize urls, messages, requestsMetadata, delegate, metadata;
+
+NSLock *errorLock;
+NSLock *sqliteLock;
+NSError *lastError;
 
 static NSMutableArray *_ids_de_noticias=nil;
 - (id)init{
@@ -58,9 +63,60 @@ static NSMutableArray *_ids_de_noticias=nil;
 	return self;
 }
 
+/*
+ [myLock lock]; locks the lock. This prevents other threads that are trying to acquire the lock from continuing until the lock is released.
+ [myLock unlock]; unlocks the lock. This can only be done by the thread that locked the lock, and obviously allows other threads to acquire it.
+ [myLock tryLock]; attempts to lock the lock, returns NO if it fails, otherwise returns YES.
+ [myLock lockBeforeDate:]; attemp
+ */
+
+-(void)setLasError:(NSError*)error{
+  if([errorLock tryLock])
+  {
+    lastError = [error copy];
+    [errorLock unlock];
+  }
+}
+
+-(void)setLasErrorDesc:(NSString*)error{
+  NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+  [errorDetail setValue:error forKey:NSLocalizedDescriptionKey];
+  [self setLasError:[NSError errorWithDomain:@"eldia.com.ar" code:0 userInfo:errorDetail]] ;
+  errorDetail=nil;
+}
+
+-(NSError*)getLasError{
+  if([errorLock tryLock])
+  {
+    NSError* local_copy = [lastError copy];
+    lastError=nil;
+    [errorLock unlock];
+    return local_copy;
+  }
+  return nil;
+}
+
 -(NSString *)loadURL:(NSString *)path{
-  //HACK: Validar error!
-  return [NSString stringWithContentsOfURL:[NSURL URLWithString:path] encoding:NSUTF8StringEncoding error:nil];
+  
+  NSURL *url = [NSURL URLWithString:path];
+  
+  //[ASIHTTPRequest setDefaultTimeOutSeconds:15];
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+  [request setNumberOfTimesToRetryOnTimeout:2];
+  [request setTimeOutSeconds:15];
+  [request startSynchronous];
+  NSError *error = [request error];
+  if (!error) {
+    if ([request responseStatusCode]!=200)
+    {
+      [self setLasErrorDesc:@"Servidor Inaccesible"];
+      return nil;
+    }
+    return [request responseString];
+  }
+  [self setLasError:error];
+  return nil;
+  //return [NSString stringWithContentsOfURL:[NSURL URLWithString:path] encoding:NSUTF8StringEncoding error:nil];
 }
 
 -(NSString *)buildHtml:(NSString *)xml xsl:(NSString *)xsl{
@@ -137,6 +193,11 @@ static NSMutableArray *_ids_de_noticias=nil;
   else {
     // No esta en cache, la buscamos sync
     NSString *xml = [self loadURL:path];
+    
+    if(xml==nil){
+      return nil;
+    }
+    
     NSString *html = [self buildHtml:xml xsl:xsl];
     
     data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];

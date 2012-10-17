@@ -90,5 +90,7 @@ typedef enum {
 +(NSString*)getPrevNoticiaId:(NSString*)_noticia_id;
 
 -(BOOL)areWeConnectedToInternet;
-
+-(NSError*)getLasError;
+-(void)setLasError:(NSError*)error;
+-(void)setLasErrorDesc:(NSString*)error;
 @end

@@ -12,7 +12,7 @@
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
-            welcome_imgvw, welcome_indicator;
+            welcome_imgvw, welcome_indicator, offline_imgvw;
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
@@ -117,6 +117,10 @@ BOOL cacheCleaned = NO;
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
+  if(data==nil){
+    [self onlineOrShowError];
+    return;
+  }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
   NSString *dirPath = [[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
@@ -133,9 +137,29 @@ BOOL cacheCleaned = NO;
 
 }
 
+-(BOOL)onlineOrShowError{
+  BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
+  NSError*err=[mYMobiPaperLib getLasError];
+  if(err!=nil)
+  {
+    NSString*title=@"Aviso";
+    if(!online)
+      title=@"Aviso: OFFLINE";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:err.description delegate:nil cancelButtonTitle:nil otherButtonTitles:nil,nil];
+    [alert show];
+    alert=nil;
+  }
+  self.offline_imgvw.hidden= !online;
+  return online;
+}
+
 -(void)loadSection:(BOOL)force_load{
+  if(![self onlineOrShowError])
+    return;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST tag:MSG_GET_SECTION_LIST force_load:force_load];
+    
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
@@ -146,9 +170,11 @@ BOOL cacheCleaned = NO;
 }
 
 -(void)loadIndex:(BOOL)force_load{
+  if(![self onlineOrShowError])
+    return;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
-    // tell the main thread
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data stop_loading_indicators:YES];
       
@@ -171,8 +197,6 @@ BOOL cacheCleaned = NO;
 -(void)loadLastKnownIndex{
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
-    if(data==nil)
-      return;
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setHtmlToView:data  stop_loading_indicators:YES];
@@ -289,8 +313,6 @@ BOOL cacheCleaned = NO;
   if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_NOTICIA])
   {
 
-    //[self.mainUIWebView loadHTMLString:[self.mYMobiPaperLib getUrl:YMobiNavigationTypeNews queryString:[url lastPathComponent]] baseURL:nil];
-    
     if (self.myNoticiaViewController != nil) {
       [self.myNoticiaViewController loadBlank];
     }
@@ -299,14 +321,6 @@ BOOL cacheCleaned = NO;
     }
     
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
-    /*
-    NSURL* _url = [[NSURL alloc] initWithString:@"video://http://www.youtube.com/watch?v=e3fsrQmHmfA"];
-    NSLog(@"MainViewController::linkClicked 1: %@", [_url lastPathComponent]);
-    NSLog(@"MainViewController::linkClicked 2: %@", [_url host]); // OK
-    NSLog(@"MainViewController::linkClicked 3: %@", [_url pathComponents]);
-    NSLog(@"MainViewController::linkClicked 4: %@", [_url query]);
-    NSLog(@"MainViewController::linkClicked 5: %@", [_url absoluteString]);
-    NSLog(@"MainViewController::linkClicked 6: %@", [_url scheme]);*/
     
     [self.myNoticiaViewController loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
     

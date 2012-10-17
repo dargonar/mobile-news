@@ -26,6 +26,7 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 
 @property (nonatomic, retain) IBOutlet UIImageView *logo_imgvw_alpha;
+@property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
 
 @property (nonatomic, retain) IBOutlet UIImageView *welcome_imgvw;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;

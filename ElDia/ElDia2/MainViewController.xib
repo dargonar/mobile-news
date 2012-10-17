@@ -124,7 +124,7 @@
 						<string key="NSFrame">{{90, 0}, {140, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="716588659"/>
+						<reference key="NSNextKeyView" ref="78601396"/>
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -220,6 +220,21 @@
 						<bool key="IBUIHidesWhenStopped">NO</bool>
 						<int key="IBUIStyle">0</int>
 					</object>
+					<object class="IBUIImageView" id="78601396">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{244, 12}, {32, 32}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="716588659"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">offline.png</string>
+						</object>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
@@ -303,6 +318,14 @@
 					<int key="connectionID">39</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">offline_imgvw</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="78601396"/>
+					</object>
+					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnRefreshClick:</string>
 						<reference key="source" ref="716588659"/>
@@ -341,7 +364,6 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="716588659"/>
 							<reference ref="150553790"/>
 							<reference ref="771200325"/>
 							<reference ref="170410026"/>
@@ -351,6 +373,8 @@
 							<reference ref="1048165088"/>
 							<reference ref="120408043"/>
 							<reference ref="455961632"/>
+							<reference ref="716588659"/>
+							<reference ref="78601396"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -425,6 +449,12 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">welcome_indicator</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">40</int>
+						<reference key="object" ref="78601396"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">offline_imgvw</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -440,6 +470,7 @@
 				<boolean value="NO" key="32.showNotes"/>
 				<string key="34.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<reference key="5.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="5.showNotes"/>
@@ -461,7 +492,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">41</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -487,6 +518,7 @@
 						<string key="loading_indicator">UIActivityIndicatorView</string>
 						<string key="logo_imgvw_alpha">UIImageView</string>
 						<string key="mainUIWebView">UIWebView</string>
+						<string key="offline_imgvw">UIImageView</string>
 						<string key="refresh_loading_indicator">UIActivityIndicatorView</string>
 						<string key="welcome_imgvw">UIImageView</string>
 						<string key="welcome_indicator">UIActivityIndicatorView</string>
@@ -507,6 +539,10 @@
 						<object class="IBToOneOutletInfo" key="mainUIWebView">
 							<string key="name">mainUIWebView</string>
 							<string key="candidateClassName">UIWebView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="offline_imgvw">
+							<string key="name">offline_imgvw</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="refresh_loading_indicator">
 							<string key="name">refresh_loading_indicator</string>
@@ -541,6 +577,7 @@
 			<string key="bg.png">{320, 44}</string>
 			<string key="list.png">{24, 24}</string>
 			<string key="logo.png">{149, 23}</string>
+			<string key="offline.png">{36, 36}</string>
 			<string key="refresh.png">{36, 36}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1498</string>

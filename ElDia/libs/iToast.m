@@ -48,6 +48,7 @@ static iToastSettings *sharedSettings = nil;
 	
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 5, textSize.height + 5)];
 	label.backgroundColor = [UIColor clearColor];
+	//label.backgroundColor = [UIColor blackColor];
 	label.textColor = [UIColor whiteColor];
 	label.font = font;
 	label.text = text;
