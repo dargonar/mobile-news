@@ -39,6 +39,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
+@property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
+
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 

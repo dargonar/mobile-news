@@ -56,7 +56,8 @@ static NSMutableArray *_ids_de_noticias=nil;
                        nil];
     messages = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
     requestsMetadata = [[NSMutableDictionary alloc] init];
-    
+    sqliteLock = [[NSLock alloc] init];
+    errorLock = [[NSLock alloc] init];
     keys=nil;
     values=nil;
   }
@@ -102,9 +103,13 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   //[ASIHTTPRequest setDefaultTimeOutSeconds:15];
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-  [request setNumberOfTimesToRetryOnTimeout:2];
+  [request setNumberOfTimesToRetryOnTimeout:1];
   [request setTimeOutSeconds:15];
+  request.timeOutSeconds=15;
+  [request setShouldAttemptPersistentConnection:NO];
+  
   [request startSynchronous];
+  
   NSError *error = [request error];
   if (!error) {
     if ([request responseStatusCode]!=200)
@@ -183,7 +188,12 @@ static NSMutableArray *_ids_de_noticias=nil;
   NSString *mimeType = nil;
   NSString *html_path = [self getHtmlPath:path];
   
-  NSArray  *cache = [[SqliteCache defaultCache] get:html_path];
+  NSArray  *cache = nil;
+  while (![sqliteLock tryLock]) {
+    //
+  }
+  cache=[[SqliteCache defaultCache] get:html_path];
+  [sqliteLock unlock];
   if(cache) {
     // Si esta en cache la devolvemos!
     //ToDo: chquear que sea noticia o main, y cargar los componenetes necesarios.
@@ -202,11 +212,21 @@ static NSMutableArray *_ids_de_noticias=nil;
     
     data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
     
+    while (![sqliteLock tryLock]) {
+      
+      //
+    }
     [[SqliteCache defaultCache] set:html_path data:data mimetype:@"text/html"];
-
+    [sqliteLock unlock];
+    
+  
     // Solo cacheamos el XML.
     NSData *data_xml    = [xml dataUsingEncoding:NSUTF8StringEncoding] ;// [NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
+    while (![sqliteLock tryLock]) {
+      //
+    }
     [[SqliteCache defaultCache] set:path data:data_xml mimetype:@"text/xml"];
+    [sqliteLock unlock];
     
     xml = nil;
     html=nil;
@@ -224,7 +244,13 @@ static NSMutableArray *_ids_de_noticias=nil;
   if(item!=(int)YMobiNavigationTypeMain && item!=(int)YMobiNavigationTypeSectionNews && item!=(int)YMobiNavigationTypeSections)
     return NO;
   NSString* path = [self getUrl:item queryString:queryString];
-  NSArray  *cache = [[SqliteCache defaultCache] get:path since_hours:1];
+  NSArray  *cache = nil;
+  while (![sqliteLock tryLock]) {
+    //
+  }
+  cache = [[SqliteCache defaultCache] get:path since_hours:1];
+  [sqliteLock unlock];
+  
   path=nil;
   if(cache) {
     cache=nil;
@@ -237,16 +263,13 @@ static NSMutableArray *_ids_de_noticias=nil;
 - (void)cleanCache{
   //Deberiamos poder limpiar ciertas cosas y otras no.
   //Esto es: la data debe tener flags que indiquen el tipo de dato, mas alla del mimetype.
-  @try{
-    [[SqliteCache defaultCache] clean:48];
+  while (![sqliteLock tryLock]) {
+      //
   }
-  @catch (NSException * e) {
-    NSLog(@"YMobiPaperLib::cleanCache e:%@", e.reason);
-    [self requestFailed:nil message:e.reason];
-  }
-  @finally {
-    //NSLog(@"finally");
-  }
+  [[SqliteCache defaultCache] clean:48];
+  [sqliteLock unlock];
+    
+  
 }
 
 -(NSData*) getChachedDataAndConfigure:(YMobiNavigationType)item queryString:(NSString *)queryString xsl:(NSString *)xsl tag:(NSString*)tag fire_event:(BOOL)fire_event{
@@ -288,7 +311,12 @@ static NSMutableArray *_ids_de_noticias=nil;
 
 -(NSData*) getChachedData:(NSString*)path tag:(NSString*)tag fire_event:(BOOL)fire_event{
   
-  NSArray  *cache = [[SqliteCache defaultCache] get:path];
+  NSArray  *cache = nil;
+  while (![sqliteLock tryLock]) {
+    //
+  }
+  cache = [[SqliteCache defaultCache] get:path];
+  [sqliteLock unlock];
   if(cache)
   {
     NSData   *data     = [cache objectAtIndex:0];
@@ -421,25 +449,30 @@ static NSMutableArray *_ids_de_noticias=nil;
 -(BOOL)areWeConnectedToInternet{
   Reachability *reachability = [Reachability reachabilityForInternetConnection];
   [reachability startNotifier];
-  
   NetworkStatus status = [reachability currentReachabilityStatus];
+  [reachability stopNotifier];
   
+  bool ret = NO;
   if(status == NotReachable)
   {
     //No internet
-    return NO;
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet No internet");
+    ret= NO;
   }
   else if (status == ReachableViaWiFi)
   {
     //WiFi
-    return YES;
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet Wifi");
+    ret= YES;
   }
   else if (status == ReachableViaWWAN)
   {
     //3G
-    return YES;
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet 3G");
+    ret = YES;
   }
-  return YES;
+  reachability = nil;
+  return ret;
 }
 
 @end

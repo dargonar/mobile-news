@@ -12,7 +12,7 @@
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
-            welcome_imgvw, welcome_indicator, offline_imgvw;
+            welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl;
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
@@ -118,7 +118,7 @@ BOOL cacheCleaned = NO;
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
   if(data==nil){
-    [self onlineOrShowError];
+    [self onlineOrShowError:YES];
     return;
   }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
@@ -137,24 +137,39 @@ BOOL cacheCleaned = NO;
 
 }
 
--(BOOL)onlineOrShowError{
+-(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
   BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
   NSError*err=[mYMobiPaperLib getLasError];
-  if(err!=nil)
+  if((err!=nil || !online)&&showAlertIfNeeded)
   {
+    NSLog(@"onlineOrShowError err||offline");
     NSString*title=@"Aviso";
+    NSString*message=@"";
     if(!online)
+    {
       title=@"Aviso: OFFLINE";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:err.description delegate:nil cancelButtonTitle:nil otherButtonTitles:nil,nil];
+      message=@"Contenido del diario inalcanzable. Intente mas tarde.";
+    }
+    
+    if(err!=nil )
+      message=err.description;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
     [alert show];
     alert=nil;
   }
-  self.offline_imgvw.hidden= !online;
+  else{
+    NSLog(@"onlineOrShowError NI err||offline");
+  }
+  
+  self.offline_imgvw.hidden=online;
+  self.offline_lbl.hidden=online;
+  if(!online)
+    [self hideLoadingIndicator];
   return online;
 }
 
 -(void)loadSection:(BOOL)force_load{
-  if(![self onlineOrShowError])
+  if(![self onlineOrShowError:YES])
     return;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
@@ -170,13 +185,14 @@ BOOL cacheCleaned = NO;
 }
 
 -(void)loadIndex:(BOOL)force_load{
-  if(![self onlineOrShowError])
+  if(![self onlineOrShowError:YES])
     return;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self setHtmlToView:data stop_loading_indicators:YES];
+      if(data!=nil)
+        [self setHtmlToView:data stop_loading_indicators:YES];
       
       if(cacheCleaned==NO )
       {
@@ -185,7 +201,6 @@ BOOL cacheCleaned = NO;
           [self.mYMobiPaperLib cleanCache];
           [self.mYMobiPaperLib getHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS];
         });
-        NSLog(@"MainViewController::loadindex ");
         
       }
       data=nil;
@@ -195,15 +210,23 @@ BOOL cacheCleaned = NO;
 }
 
 -(void)loadLastKnownIndex{
+  NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
+  if(data!=nil)
+    [self setHtmlToView:data  stop_loading_indicators:YES];
+  [self hideLoadingIndicator];
+  [self showRefreshLoadingIndicator];
+  data=nil;
+  /*
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
-    // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self setHtmlToView:data  stop_loading_indicators:YES];
+      if(data!=nil)
+        [self setHtmlToView:data  stop_loading_indicators:YES];
       [self showRefreshLoadingIndicator];
       data=nil;
     });
   });
+   */
 }
 
 

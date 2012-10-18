@@ -27,6 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *logo_imgvw_alpha;
 @property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
+@property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
 
 @property (nonatomic, retain) IBOutlet UIImageView *welcome_imgvw;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;
@@ -37,8 +38,12 @@
 -(void)loadSectionNews:(NSURL*)rawURL;
 +(id)sharedInstance;
 
--(void) hideWelcomeLoadingIndicator;
+-(void) showRefreshLoadingIndicator;
+-(void) showMainLoadingIndicator;
 -(void) showWelcomeLoadingIndicator;
+-(void) hideLoadingIndicator;
+-(void) hideRefreshLoadingIndicator;
+
 -(void) firstTimeUseGone;
 -(bool) isFirstTimeUse;
 

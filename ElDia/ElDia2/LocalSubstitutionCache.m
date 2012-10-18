@@ -38,7 +38,7 @@ static bool do_cache = YES;
   
   if([[[request URL] scheme] isEqualToString:@"file"])
   {
-    NSLog(@" NOT CACHED: %@",pathString);
+    //NSLog(@" NOT CACHED: %@",pathString);
     return nil;
   }
   

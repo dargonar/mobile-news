@@ -18,7 +18,37 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw;
+
+-(BOOL)onlineOrShowError{
+  BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
+  NSError*err=[mYMobiPaperLib getLasError];
+  if(err!=nil || !online)
+  {
+    NSLog(@"onlineOrShowError err||offline");
+    NSString*title=@"Aviso";
+    NSString*message=@"";
+    if(!online)
+    {
+      title=@"Aviso: OFFLINE";
+      message=@"Contenido del diario inalcanzable. Intente mas tarde.";
+    }
+    
+    if(err!=nil )
+      message=err.description;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+    [alert show];
+    alert=nil;
+  }
+  else{
+    NSLog(@"onlineOrShowError NI err||offline");
+  }
+  
+  self.offline_imgvw.hidden=online;
+  if(!online)
+    [self hideLoadingIndicator];
+  return online;
+}
 
 -(void)changeFontSize:(NSInteger)delta{
   
@@ -244,6 +274,9 @@
 
 - (IBAction) btnShareClick: (id)param{
   
+  if(![self onlineOrShowError])
+    return;
+
   // Create the item to share (in this example, a url)
 	//NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
 	NSURL *url = [NSURL URLWithString:self.noticia_metadata];
@@ -276,17 +309,16 @@
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
-  NSLog(@"NoticiaViewController::setHtmlToView ME llamaron!!!");
+  if(data==nil){
+    [self onlineOrShowError];
+    return;
+  }
+  NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
   NSString *dirPath = [[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  /*
-   if(data!=nil)
-    NSLog(@" html:%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-  else
-    NSLog(@" html:NIL");
-  */
+  
   if(stop_loading_indicators)
   {
     [self hideLoadingIndicator];
@@ -440,6 +472,10 @@
   if (UIWebViewNavigationTypeLinkClicked == navigationType)
   {
     self.bottomUIView.hidden = YES; //HACK!
+    
+    if(![self onlineOrShowError])
+      return NO;
+    
     bool handled = NO;
     if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
     {
