@@ -209,7 +209,11 @@ static NSMutableArray *_ids_de_noticias=nil;
     }
     
     NSString *html = [self buildHtml:xml xsl:xsl];
-    
+    if(html==nil)
+    {
+      [self setLasErrorDesc:@"XML Invalido"];
+      return nil;
+    }
     data     = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
     
     while (![sqliteLock tryLock]) {

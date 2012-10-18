@@ -18,38 +18,43 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw, offline_lbl;
 
--(BOOL)onlineOrShowError{
+-(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
+  
   BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
-  NSError*err=[mYMobiPaperLib getLasError];
-  if(err!=nil || !online)
+  
+  if(!online&&showAlertIfNeeded)
   {
-    NSLog(@"onlineOrShowError err||offline");
-    NSString*title=@"Aviso";
-    NSString*message=@"";
-    if(!online)
-    {
-      title=@"Aviso: OFFLINE";
-      message=@"Contenido del diario inalcanzable. Intente mas tarde.";
-    }
-    
-    if(err!=nil )
-      message=err.description;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-    [alert show];
-    alert=nil;
+    [self showError:@"OFFLINE" message:@"Contenido del diario inalcanzable. Actualice la pantalla mas tarde."];
   }
   else{
     NSLog(@"onlineOrShowError NI err||offline");
   }
   
   self.offline_imgvw.hidden=online;
-  if(!online)
-    [self hideLoadingIndicator];
+  self.offline_lbl.hidden=online;
+  //if(!online) [self hideLoadingIndicator];
+  
   return online;
 }
 
+-(BOOL)checkAndShowError{
+  NSError*err=[mYMobiPaperLib getLasError];
+  if(err==nil )
+    return NO;
+  [self showError:@"Aviso" message:@"Ha ocurrido un error. Actualice la pantalla mas tarde."];
+  return YES;
+  
+}
+
+-(void)showError:(NSString*)title message:(NSString*)message{
+  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+  [alert show];
+  alert=nil;
+  
+}
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -274,9 +279,9 @@
 
 - (IBAction) btnShareClick: (id)param{
   
-  if(![self onlineOrShowError])
+  if(![self onlineOrShowError:YES])
     return;
-
+  
   // Create the item to share (in this example, a url)
 	//NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
 	NSURL *url = [NSURL URLWithString:self.noticia_metadata];
@@ -309,8 +314,13 @@
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
+  if(stop_loading_indicators)
+  {
+    [self hideLoadingIndicator];
+  }
+  
   if(data==nil){
-    [self onlineOrShowError];
+    //[self onlineOrShowError:YES];
     return;
   }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
@@ -319,10 +329,6 @@
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
   
-  if(stop_loading_indicators)
-  {
-    [self hideLoadingIndicator];
-  }
   data = nil;
   dirPath=nil;
   dirURL=nil;
@@ -330,17 +336,25 @@
 }
 
 -(void)loadNoticia:(NSString *)_noticia_id{
+  
   [self showLoadingIndicator];
   // clean cont	ent
   
   [self setNoticia_id:_noticia_id];
   
-  [self showLoadingIndicator];
+  [self onlineOrShowError:YES];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
+      if(data==nil)
+      {
+        [self checkAndShowError];
+        [self hideLoadingIndicator];
+        return;
+      }
+
       [self setHtmlToView:data stop_loading_indicators:YES];
       [self changeFontSize:0];
       [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
@@ -473,7 +487,7 @@
   {
     self.bottomUIView.hidden = YES; //HACK!
     
-    if(![self onlineOrShowError])
+    if(![self onlineOrShowError:YES])
       return NO;
     
     bool handled = NO;

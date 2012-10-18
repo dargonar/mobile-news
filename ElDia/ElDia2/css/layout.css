@@ -104,7 +104,7 @@ img {
 	background-color:#323232;
 /*  width:265px;*/
   width:276px;
-  overflow-y:hidden;
+  overflow-x:hidden;
 }
 
 #menu ul {

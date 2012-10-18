@@ -14,6 +14,7 @@
 @implementation MenuViewController
 @synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView, mYMobiPaperLib;
 
+BOOL html_set=NO;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -21,6 +22,7 @@
         // Custom initialization
     }
   
+  html_set=NO;
   self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
   return self;
 }
@@ -46,6 +48,10 @@
   self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
   
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
+  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
+  [self setHtmlToView:htmlData];
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
     // tell the main thread
@@ -68,6 +74,8 @@
 
 -(void)setHtmlToView:(NSData*)data{
   
+  
+  html_set=YES;
   //NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
   NSString *dirPath = [[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];

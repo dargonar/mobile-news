@@ -40,6 +40,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
 @property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
+@property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
@@ -63,4 +64,8 @@
 -(void)changeFontSize:(NSInteger)delta;
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators;
+
+-(void)showError:(NSString*)title message:(NSString*)message;
+-(BOOL)checkAndShowError;
+-(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded;
 @end

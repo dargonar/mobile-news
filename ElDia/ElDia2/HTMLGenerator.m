@@ -28,9 +28,19 @@
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	
   const char *tmp = [xml UTF8String];
+  //const char *tmp = "por vergon";//[xml UTF8String];
   int   len2      = strlen(tmp);
   
+  //int error = xmlSchemaValidateDoc( validityContext, doc);
+  //xmlSchemaSetValidErrors
+  
   xmlDocPtr doc = xmlParseMemory(tmp,len2);
+  
+  if(doc==nil || !doc)
+  {
+    NSLog(@"HTMLGenerator::generate INVALID XML");
+    return nil;
+  }
   
   xmlDocPtr res = xsltApplyStylesheet(cur, doc, NULL);
   

@@ -49,6 +49,10 @@
 
 -(void)loadIndex:(BOOL)force_load;
 -(void)loadLastKnownIndex;
+
+-(void)showError:(NSString*)title message:(NSString*)message;
+-(BOOL)checkAndShowError;
+-(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded;
 //~/Library/Application Support/iPhone Simulator/
 
 @end

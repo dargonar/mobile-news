@@ -117,8 +117,13 @@ BOOL cacheCleaned = NO;
 
 -(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
   
+  if(stop_loading_indicators)
+  {
+    [self hideLoadingIndicator];
+  }
+  
   if(data==nil){
-    [self onlineOrShowError:YES];
+    //[self onlineOrShowError:YES];
     return;
   }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
@@ -127,10 +132,7 @@ BOOL cacheCleaned = NO;
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
   
-  if(stop_loading_indicators)
-  {
-    [self hideLoadingIndicator];
-  }
+  
   data = nil;
   dirPath=nil;
   dirURL=nil;
@@ -138,24 +140,12 @@ BOOL cacheCleaned = NO;
 }
 
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
+  
   BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
-  NSError*err=[mYMobiPaperLib getLasError];
-  if((err!=nil || !online)&&showAlertIfNeeded)
+  
+  if(!online&&showAlertIfNeeded)
   {
-    NSLog(@"onlineOrShowError err||offline");
-    NSString*title=@"Aviso";
-    NSString*message=@"";
-    if(!online)
-    {
-      title=@"Aviso: OFFLINE";
-      message=@"Contenido del diario inalcanzable. Intente mas tarde.";
-    }
-    
-    if(err!=nil )
-      message=err.description;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-    [alert show];
-    alert=nil;
+    [self showError:@"OFFLINE" message:@"Contenido del diario inalcanzable. Actualice la pantalla mas tarde."];
   }
   else{
     NSLog(@"onlineOrShowError NI err||offline");
@@ -163,20 +153,44 @@ BOOL cacheCleaned = NO;
   
   self.offline_imgvw.hidden=online;
   self.offline_lbl.hidden=online;
-  if(!online)
-    [self hideLoadingIndicator];
+  //if(!online) [self hideLoadingIndicator];
+  
   return online;
 }
 
+-(BOOL)checkAndShowError{
+  NSError*err=[mYMobiPaperLib getLasError];
+  if(err==nil )
+    return NO;
+  [self showError:@"Aviso" message:@"Ha ocurrido un error. Actualice la pantalla mas tarde."];
+  return YES;
+  
+}
+  
+-(void)showError:(NSString*)title message:(NSString*)message{
+  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+  [alert show];
+  alert=nil;
+
+}
+
 -(void)loadSection:(BOOL)force_load{
-  if(![self onlineOrShowError:YES])
-    return;
+  
+  BOOL online = [self onlineOrShowError:YES];
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST tag:MSG_GET_SECTION_LIST force_load:force_load];
     
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
+      if(data==nil)
+      {
+        [self checkAndShowError];
+        [self hideLoadingIndicator];
+        return;
+      }
       [self setHtmlToView:data stop_loading_indicators:YES];
       data=nil;
     });
@@ -185,14 +199,22 @@ BOOL cacheCleaned = NO;
 }
 
 -(void)loadIndex:(BOOL)force_load{
-  if(![self onlineOrShowError:YES])
-    return;
+  
+  [self onlineOrShowError:YES];
+
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      if(data!=nil)
-        [self setHtmlToView:data stop_loading_indicators:YES];
+      
+      if(data==nil)
+      {
+        [self checkAndShowError];
+        [self hideLoadingIndicator];
+        return;
+      }
+      
+      [self setHtmlToView:data stop_loading_indicators:YES];
       
       if(cacheCleaned==NO )
       {
