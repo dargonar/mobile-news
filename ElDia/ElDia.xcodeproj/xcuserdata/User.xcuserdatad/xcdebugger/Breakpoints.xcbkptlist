@@ -21,7 +21,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "372281891.331572"
+         timestampString = "372307965.519416"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "640"
@@ -47,12 +47,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "372280711.341618"
+         timestampString = "372311030.219886"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "-showError:message:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "372311055.274961"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-setHtmlToView:stop_loading_indicators:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

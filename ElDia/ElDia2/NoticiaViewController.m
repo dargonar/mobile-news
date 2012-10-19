@@ -237,12 +237,12 @@
 - (void)playAudio:(NSURL *)_url
 {
   [self showLoadingIndicator];
-  __block NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
+  /*__block*/ NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
   url = [self cleanUrl:url];
+  /*__block*/ MPMoviePlayerViewController* mpviewController = nil;
   
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    //background task
-    __block MPMoviePlayerViewController* mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
+  //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
     mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
     mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
     
@@ -251,12 +251,12 @@
     [[mpviewController moviePlayer] prepareToPlay];
     [[mpviewController moviePlayer] play];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+  //dispatch_async(dispatch_get_main_queue(), ^{
       url=nil;
       mpviewController=nil;
       [self hideLoadingIndicator];
-    });
-  });
+  //});
+  //});
   return;
  
 }

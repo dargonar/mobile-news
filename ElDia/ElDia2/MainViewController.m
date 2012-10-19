@@ -27,8 +27,12 @@ BOOL cacheCleaned = NO;
   
   self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
   self.mYMobiPaperLib.delegate = self;
-  
+
+  sharedInstance = nil;
+  sectionId = nil;
+  cacheCleaned = NO;
   sharedInstance=self;
+  
   return self;
 }
 
@@ -43,8 +47,7 @@ BOOL cacheCleaned = NO;
   bool firstTimeUse = [self isFirstTimeUse];
   if(firstTimeUse)
     [self showWelcomeLoadingIndicator];
-  
-  if(!firstTimeUse)
+  else
     [self showMainLoadingIndicator];
  
   [self loadLastKnownIndex];
@@ -82,18 +85,21 @@ BOOL cacheCleaned = NO;
 
 // Aqui me llaman para cargar noticias de una seccion. Eventualmente puede ser la seccion principal, o no-seccion.
 -(void)loadSectionNews:(NSURL*)rawURL{
+  
   sectionId = [rawURL host] ;
+  
   [self showMainLoadingIndicator];
+  
   if([sectionId isEqualToString:@"0"])
   {
     sectionId=nil;
     [self loadIndex:NO];
-    NSLog(@"MainViewController::loadSectionNews loadIndex POST Call");
+    //NSLog(@"MainViewController::loadSectionNews loadIndex POST Call");
   }
   else
   {
     [self loadSection:NO];
-    NSLog(@"MainViewController::loadSectionNews loadSection POST Call");
+    //NSLog(@"MainViewController::loadSectionNews loadSection POST Call");
   }
 }
 
@@ -177,7 +183,7 @@ BOOL cacheCleaned = NO;
 
 -(void)loadSection:(BOOL)force_load{
   
-  BOOL online = [self onlineOrShowError:YES];
+  [self onlineOrShowError:YES];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
@@ -203,6 +209,7 @@ BOOL cacheCleaned = NO;
   [self onlineOrShowError:YES];
 
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -300,8 +307,7 @@ BOOL cacheCleaned = NO;
   
   self.logo_imgvw_alpha.hidden = YES;
   
-  bool firstTimeUse = [self isFirstTimeUse];
-  if(firstTimeUse)
+  if([self isFirstTimeUse]==YES)
   {
     [self firstTimeUseGone];
   }
