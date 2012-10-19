@@ -245,7 +245,8 @@ static NSMutableArray *_ids_de_noticias=nil;
 }
 
 -(bool)mustReloadPath:(YMobiNavigationType)item queryString:(NSString *)queryString{
-  if(item!=(int)YMobiNavigationTypeMain && item!=(int)YMobiNavigationTypeSectionNews && item!=(int)YMobiNavigationTypeSections)
+  
+  if(item!=YMobiNavigationTypeMain && item!=YMobiNavigationTypeSectionNews && item!=YMobiNavigationTypeSections)
     return NO;
   NSString* path = [self getUrl:item queryString:queryString];
   NSArray  *cache = nil;
@@ -360,7 +361,7 @@ static NSMutableArray *_ids_de_noticias=nil;
   if(force_load==NO && [self mustReloadPath:item queryString:queryString ]==NO)
   {
     NSLog(@"YMobiPaperLib::getHtmlAndConfigure No me fuerzan y no debo reloadearla");
-    html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:YES];
+    html_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:NO is_html:YES];
     if(html_data!=nil)
     {
       path=nil;
@@ -375,7 +376,7 @@ static NSMutableArray *_ids_de_noticias=nil;
   
   if(html_data!=nil)
   {
-    NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:YES is_html:NO];
+    NSData* xml_data = [self getChachedData:item queryString:queryString xsl:xsl tag:tag fire_event:NO is_html:NO];
     if(xml_data==nil)
     {
       path=nil;

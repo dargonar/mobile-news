@@ -35,6 +35,19 @@ BOOL cacheCleaned = NO;
   
   return self;
 }
+/*
++ (MainViewController *) sharedInstance
+{
+  static MainViewController *sharedInstance = NULL;
+  @synchronized(self)
+  {
+    if(sharedInstance == NULL)
+      sharedInstance = [[MainViewController alloc] init];
+  }
+  
+  return sharedInstance;
+}
+*/
 
 - (void)viewDidLoad
 {
@@ -86,7 +99,7 @@ BOOL cacheCleaned = NO;
 // Aqui me llaman para cargar noticias de una seccion. Eventualmente puede ser la seccion principal, o no-seccion.
 -(void)loadSectionNews:(NSURL*)rawURL{
   
-  sectionId = [rawURL host] ;
+  sectionId = [[rawURL host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ;
   
   [self showMainLoadingIndicator];
   
