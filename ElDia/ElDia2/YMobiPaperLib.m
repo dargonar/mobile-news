@@ -28,7 +28,7 @@ static NSMutableArray *_ids_de_noticias=nil;
 	
 	if (self = [super init]) {
     urls = [[NSArray alloc] initWithObjects:
-            @"http://www.eldia.com.ar/rss/index.aspx",
+            @"http://192.168.1.103:82/rss/index.xml",//@"http://www.eldia.com.ar/rss/index.aspx",
             @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@",
             @"http://www.eldia.com.ar/rss/secciones.aspx",
             @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@",
@@ -105,6 +105,7 @@ static NSMutableArray *_ids_de_noticias=nil;
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
   [request setNumberOfTimesToRetryOnTimeout:1];
   [request setTimeOutSeconds:15];
+  [request setCachePolicy:ASIDoNotWriteToCacheCachePolicy|ASIDoNotReadFromCacheCachePolicy];
   request.timeOutSeconds=15;
   [request setShouldAttemptPersistentConnection:NO];
   
@@ -188,6 +189,7 @@ static NSMutableArray *_ids_de_noticias=nil;
   NSString *mimeType = nil;
   NSString *html_path = [self getHtmlPath:path];
   
+  /*
   NSArray  *cache = nil;
   while (![sqliteLock tryLock]) {
     //
@@ -200,7 +202,8 @@ static NSMutableArray *_ids_de_noticias=nil;
     data     = [cache objectAtIndex:0];
     mimeType = [cache objectAtIndex:1];
   }
-  else {
+  else
+  {
     // No esta en cache, la buscamos sync
     NSString *xml = [self loadURL:path];
     
@@ -236,10 +239,40 @@ static NSMutableArray *_ids_de_noticias=nil;
     html=nil;
     data_xml=nil;
   }
+   */
+  
+  NSString *xml = [self loadURL:path];
+  
+  if(xml==nil){
+    return nil;
+  }
+  
+  NSString *html = [self buildHtml:xml xsl:xsl];
+  if(html==nil)
+  {
+    [self setLasErrorDesc:@"XML Invalido"];
+    return nil;
+  }
+  
+  data = [NSData dataWithBytes:[html UTF8String] length:[html length]+1];
+  
+  NSData *data_xml    = [xml dataUsingEncoding:NSUTF8StringEncoding] ;
+  // [NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
+  
+  while (![sqliteLock tryLock]) {
+    //
+  }
+  [[SqliteCache defaultCache] set:html_path data:data mimetype:@"text/html"];
+  [[SqliteCache defaultCache] set:path data:data_xml mimetype:@"text/xml"];
+  [sqliteLock unlock];
+  
+  xml = nil;
+  html=nil;
+  data_xml=nil;
   
   mimeType = nil;
   html_path = nil;
-  cache = nil;
+  //cache = nil;
   return data;
 
 }
