@@ -28,7 +28,7 @@ static NSMutableArray *_ids_de_noticias=nil;
 	
 	if (self = [super init]) {
     urls = [[NSArray alloc] initWithObjects:
-            @"http://192.168.1.103:82/rss/index.xml",//@"http://www.eldia.com.ar/rss/index.aspx",
+            @"http://www.eldia.com.ar/rss/index.aspx",
             @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@",
             @"http://www.eldia.com.ar/rss/secciones.aspx",
             @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@",
