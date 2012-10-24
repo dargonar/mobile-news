@@ -247,6 +247,8 @@ BOOL cacheCleaned = NO;
       }
       data=nil;
       
+      //[[[iToast makeText:@"Marky... chupame el moco!"] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:50] show];
+
     });
   });
 }

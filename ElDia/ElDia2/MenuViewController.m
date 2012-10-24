@@ -34,6 +34,18 @@ BOOL html_set=NO;
 {
   [super viewDidLoad];
   
+  self.webView.hidden=YES;
+  
+  self.webView.scrollView.bounces = NO;
+  self.webView.scrollView.bouncesZoom = NO;
+  self.webView.scrollView.alwaysBounceHorizontal = NO;
+  
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
+  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
+  [self setHtmlToView:htmlData];
+  
+  self.webView.hidden=NO;
+  
   // create a UITapGestureRecognizer to detect when the screenshot recieves a single tap
   tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapScreenShot:)];
   [screenShotImageView addGestureRecognizer:tapGesture];
@@ -44,19 +56,11 @@ BOOL html_set=NO;
   [panGesture setDelegate:self];
   [screenShotImageView addGestureRecognizer:panGesture];
   
-  self.webView.scrollView.bounces = NO;
-  self.webView.scrollView.bouncesZoom = NO;
-  self.webView.scrollView.alwaysBounceHorizontal = NO;
-  
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
-  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
-  [self setHtmlToView:htmlData];
-  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
     // tell the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self setHtmlToView:data];
+      [self setHtmlToView:data];	
       data = nil;
     });
   });
@@ -74,14 +78,19 @@ BOOL html_set=NO;
 
 -(void)setHtmlToView:(NSData*)data{
   
+  if(data==nil)
+    return;
   
+  self.webView.hidden=YES;
   html_set=YES;
+  
   //NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
   NSString *dirPath = [[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.webView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
   
+  self.webView.hidden=NO;
   data = nil;
   dirPath=nil;
   dirURL=nil;

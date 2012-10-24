@@ -43,18 +43,21 @@ static iToastSettings *sharedSettings = nil;
 	
 	UIImage *image = [theSettings.images valueForKey:[NSString stringWithFormat:@"%i", type]];
 	
-	UIFont *font = [UIFont systemFontOfSize:16];
+	//UIFont *font = [UIFont systemFontOfSize:16];
+  UIFont *font = [UIFont fontWithName:@"Arial-BoldMT" size:17];
+
 	CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
-	
+
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 5, textSize.height + 5)];
 	label.backgroundColor = [UIColor clearColor];
 	//label.backgroundColor = [UIColor blackColor];
-	label.textColor = [UIColor whiteColor];
+  label.textColor = [UIColor whiteColor];
 	label.font = font;
 	label.text = text;
 	label.numberOfLines = 0;
 	label.shadowColor = [UIColor darkGrayColor];
 	label.shadowOffset = CGSizeMake(1, 1);
+  
 	
 	UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
 	if (image) {
@@ -74,7 +77,7 @@ static iToastSettings *sharedSettings = nil;
 		[imageView release];
 	}
 	
-	v.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+	v.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
 	v.layer.cornerRadius = 5;
 	
 	UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
