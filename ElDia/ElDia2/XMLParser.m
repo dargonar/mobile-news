@@ -31,13 +31,14 @@
   for (int i=0; i<[items count]; i++) {
     GDataXMLElement *item = (GDataXMLElement *)[items objectAtIndex:i];
     
+    NSArray* temp_img = [item elementsForName:@"media:thumbnail"];
+    if([temp_img count]!=1)
+      continue;
+    
     NSArray* temp = [item elementsForName:@"guid"];
     if([temp count]!=1)
       return nil;
-    NSArray* temp_img = [item elementsForName:@"media:thumbnail"];
-    if([temp_img count]!=1)
-      return nil;
-
+    
     NSString* _url=[self urlAttribute:temp_img];
     NSString* _local_uri=[CryptoUtil sha1:_url];
     
@@ -56,8 +57,7 @@
     temp_img=nil;
   }
   
-  GDataXMLDocument *document = [[GDataXMLDocument alloc]
-                                 initWithRootElement:[doc rootElement]] ;
+  GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:[doc rootElement]] ;
   *xml_data = nil;
   *xml_data = document.XMLData;
   doc=nil;
@@ -66,9 +66,9 @@
 }
 
 -(void)setUrlAttribute:(NSArray*)elements value:(NSString*)value{
-  NSLog(@"setUrlAttribute antes de setear VALUE: %@",value);
+  //NSLog(@"setUrlAttribute antes de setear VALUE: %@",value);
   [[((GDataXMLElement*) [elements objectAtIndex:0]) attributeForName:@"url"] setStringValue:value];
-  NSLog(@"setUrlAttribute seteado?? VALUE: %@",[self urlAttribute:elements]);
+  //NSLog(@"setUrlAttribute seteado?? VALUE: %@",[self urlAttribute:elements]);
   
 }
 
