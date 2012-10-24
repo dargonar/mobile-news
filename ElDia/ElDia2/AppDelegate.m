@@ -10,19 +10,24 @@
 #import "MainViewController.h"
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "LocalSubstitutionCache.h"
+#import "MobiImage.h"
+#import "DiskCache.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize mainViewController;
 @synthesize menuViewController, navigationController;
+@synthesize download_queue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
-  LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
-  [NSURLCache setSharedURLCache:cache];
+  NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+  [[DiskCache defaultCache] configure:rootFolder];
+  
+  //LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
+  //[NSURLCache setSharedURLCache:cache];
   
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//HACKED
   self.window.backgroundColor = [UIColor whiteColor];//HACKED
@@ -113,4 +118,41 @@
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)downloadImages:(NSArray *)mobi_images {
+
+  if (![self download_queue]) {
+    self.download_queue = [[NSOperationQueue alloc] init];
+    [self.download_queue setMaxConcurrentOperationCount:20]; //20 al mismo tiempo?
+  }
+  
+  for (int i=0; i<[mobi_images count]; i++) {
+
+    MobiImage *mobi_image = [mobi_images objectAtIndex:i];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"mi", mobi_image, nil];
+
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
+
+    [request setUserInfo:params];
+
+    //[request setNumberOfTimesToRetryOnTimeout:2];
+    //[request setTimeOutSeconds:NSTimeIn]
+    
+    [request setDelegate:self];
+    [request setDidFinishSelector:@selector(requestDone:)];
+    [request setDidFailSelector:@selector(requestWentWrong:)];
+    
+    [self.download_queue addOperation:request];  
+  }
+}
+
+- (void)requestDone:(ASIHTTPRequest *)request
+{
+  
+}
+
+- (void)requestWentWrong:(ASIHTTPRequest *)request
+{
+
+}
 @end

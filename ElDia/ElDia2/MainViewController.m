@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "iToast.h"
 #import "ConfigHelper.h"
+#import "ScreenManager.h"
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
@@ -56,7 +57,7 @@ BOOL cacheCleaned = NO;
   
   iToastSettings *theSettings = [iToastSettings getSharedSettings];
   theSettings.duration = 2500;
-  
+  /*
   bool firstTimeUse = [self isFirstTimeUse];
   if(firstTimeUse)
     [self showWelcomeLoadingIndicator];
@@ -68,6 +69,18 @@ BOOL cacheCleaned = NO;
   [self loadIndex:YES];
    
   [self loadNoticiaView];
+  */
+  
+  ScreenManager *mgr = [[ScreenManager alloc] init];
+  NSArray *arr = [mgr getSection:@"section://main" useCache:YES];
+  
+  NSData  *data = [arr objectAtIndex:0];
+  NSArray *imgs = [arr objectAtIndex:1];
+  
+  [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+
+  mgr = nil;
+
   
   NSLog(@"MainViewController::viewDidLoad termina");
   
@@ -150,6 +163,8 @@ BOOL cacheCleaned = NO;
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
+  
+  [self.mainUIWebView loadData:nil MIMEType:nil textEncodingName:nil baseURL:nil];
   
   
   data = nil;

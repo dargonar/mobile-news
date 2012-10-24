@@ -10,13 +10,15 @@
 
 @interface DiskCache : NSObject
 
++ (DiskCache *) defaultCache;
 
--(NSString*)getKey:(NSString*)key can_delete:(BOOL)can_delete;
--(NSString*)getString:(NSString*)key can_delete:(BOOL)can_delete;
--(NSData*)getData:(NSString*)key can_delete:(BOOL)can_delete;
--(void)store:(NSString*)key data:(NSData*)data can_delete:(BOOL)can_delete;
--(BOOL)file_exists:(NSString*)key can_delete:(BOOL)can_delete;
+-(NSString*) getKey:(NSString*)key prefix:(NSString*)prefix;
+-(NSString*) getString:(NSString*)key prefix:(NSString*)prefix;
+-(NSData*)   getData:(NSString*)key prefix:(NSString*)prefix;
+
+-(void) store:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
+-(BOOL) file_exists:(NSString*)key prefix:(NSString*)prefix;
 -(void) create_folder:(NSString*)folder_name;
--(void)configure:(NSString*)root_dir;
+-(void) configure:(NSString*)root_dir;
 
 @end

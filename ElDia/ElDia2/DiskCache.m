@@ -14,32 +14,42 @@
 
 NSString* cache_folder;
 
--(NSString*)getKey:(NSString*)key can_delete:(BOOL)can_delete{
-  if(can_delete)
-    return [NSString stringWithFormat:@"%@/d_%@",cache_folder, key];
+
++ (DiskCache *) defaultCache
+{
+  static DiskCache *defaultCache = NULL;
+  @synchronized(self)
+  {
+    if(defaultCache == NULL)
+      defaultCache = [[DiskCache alloc] init];
+  }
   
-  return [NSString stringWithFormat:@"%@/x_%@", cache_folder, key];
+  return defaultCache;
+}
+
+-(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix{
+  return [NSString stringWithFormat:@"%@/%@_%@", cache_folder, prefix, key];
   
 }
 
--(NSString*)getString:(NSString*)key can_delete:(BOOL)can_delete{
-  if(![self file_exists:key can_delete:can_delete])
+-(NSString*)getString:(NSString*)key prefix:(NSString*)prefix{
+  if(![self file_exists:key prefix:prefix])
     return nil;
   
-  return [NSString stringWithContentsOfFile:[self getKey:key can_delete:can_delete] encoding:NSUTF8StringEncoding error:nil];
+  return [NSString stringWithContentsOfFile:[self getFileName:key prefix:prefix] encoding:NSUTF8StringEncoding error:nil];
 }
 
 
--(NSData*)getData:(NSString*)key can_delete:(BOOL)can_delete{
-  if(![self file_exists:key can_delete:can_delete])
+-(NSData*)getData:(NSString*)key prefix:(NSString*)prefix{
+  if(![self file_exists:key prefix:prefix])
     return nil;
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  return [fileManager contentsAtPath:[self getKey:key can_delete:can_delete]];
+  return [fileManager contentsAtPath:[self getFileName:key prefix:prefix]];
 }
 
--(void)store:(NSString*)key data:(NSData*)data can_delete:(BOOL)can_delete{
-  NSString* file=[self getKey:key can_delete:can_delete];
+-(void)store:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
+  NSString* file=[self getFileName:key prefix:prefix];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
   [fileManager createFileAtPath:file contents:data attributes:nil];
@@ -49,8 +59,8 @@ NSString* cache_folder;
 
 }
 
--(BOOL)file_exists:(NSString*)key can_delete:(BOOL)can_delete{
-  NSString* file=[self getKey:key can_delete:can_delete];
+-(BOOL)file_exists:(NSString*)key prefix:(NSString*)prefix{
+  NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager fileExistsAtPath:file isDirectory:nil];
 }
