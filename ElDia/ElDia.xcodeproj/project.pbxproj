@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050EF1F16388B0F00DE98ED /* ScreenManager.m */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
 		CE01DEEF16262E1300B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEE16262E1300B9B3EA /* Icon_ipad.png */; };
 		CE01DEF116262E1800B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF016262E1800B9B3EA /* Icon_ipad.png */; };
@@ -280,6 +281,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6050EF1E16388B0F00DE98ED /* ScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenManager.h; sourceTree = "<group>"; };
+		6050EF1F16388B0F00DE98ED /* ScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenManager.m; sourceTree = "<group>"; };
 		CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		CE01DEEE16262E1300B9B3EA /* Icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_ipad.png; sourceTree = "<group>"; };
 		CE01DEF016262E1800B9B3EA /* Icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_ipad.png; path = ../Icon_ipad.png; sourceTree = "<group>"; };
@@ -1600,6 +1603,8 @@
 				CE16EC7F15ED5ECB00EC8210 /* YMobiPaperLib.m */,
 				CE9B9C41161CB3BE00B3AEC0 /* ConfigHelper.h */,
 				CE9B9C42161CB3BE00B3AEC0 /* ConfigHelper.m */,
+				6050EF1E16388B0F00DE98ED /* ScreenManager.h */,
+				6050EF1F16388B0F00DE98ED /* ScreenManager.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1936,6 +1941,7 @@
 				CEC83040162F1FEF0085FF54 /* ASIS3Request.m in Sources */,
 				CEC83041162F1FEF0085FF54 /* ASIS3ServiceRequest.m in Sources */,
 				CEDCC5F5163736E400D7B94F /* DiskCache.m in Sources */,
+				6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

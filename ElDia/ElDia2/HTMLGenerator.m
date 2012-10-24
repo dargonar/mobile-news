@@ -20,19 +20,15 @@
 #import "HTMLGenerator.h"
 
 @implementation HTMLGenerator
-- (NSString*)generate:(NSString*)xml  xslt_file:(NSString*)xslt_file {
+- (NSData*)generate:(NSData*)xml  xslt_file:(NSString*)xslt_file {
 
   xmlSubstituteEntitiesDefault(1);
 	xmlLoadExtDtdDefaultValue = 1;
   
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	
-  const char *tmp = [xml UTF8String];
-  //const char *tmp = "por vergon";//[xml UTF8String];
+  const char *tmp = [xml bytes];
   int   len2      = strlen(tmp);
-  
-  //int error = xmlSchemaValidateDoc( validityContext, doc);
-  //xmlSchemaSetValidErrors
   
   xmlDocPtr doc = xmlParseMemory(tmp,len2);
   
@@ -56,7 +52,7 @@
   xsltCleanupGlobals();
   xmlCleanupParser();
   
-  return [NSString stringWithUTF8String:(const char*)html];
+  return   [NSData dataWithBytes:(const void *)html length:len];
 }
 
 @end

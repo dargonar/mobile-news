@@ -15,9 +15,13 @@
 
 
 // Parseo el xml en busca de imagenes, las retorno en un array y modifico el path de la imagen.
--(NSArray*)getImagesURLs:(NSData**)xml_data{
+-(NSArray*)extractImagesAndRebuild:(NSData**)xml_data{
   
-  //  rss/channel/item/media:thumbnail@url
+  if (*xml_data == nil) {
+    return nil;
+  }
+  
+  //rss/channel/item/media:thumbnail@url
   
   NSError *error;
   GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:&error];
