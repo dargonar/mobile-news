@@ -67,6 +67,7 @@ NSString* cache_folder;
 
 }
 
+
 -(void)configure:(NSString*)root_dir{
   
   cache_folder=[NSString stringWithFormat:@"%@/%@",root_dir,CACHE_FOLDER];

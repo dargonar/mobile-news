@@ -58,6 +58,7 @@
 }
 
 
+
 -(void)showSideMenu
 {
   // before swaping the views, we'll take a "screenshot" of the current view
