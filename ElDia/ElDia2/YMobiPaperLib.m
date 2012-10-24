@@ -9,6 +9,7 @@
 #import "YMobiPaperLib.h"
 #import "RegexKitLite.h"
 #import "asi-http-request/ASIHTTPRequest.h"
+#import "XMLParser.h"
 
 #define KEY_XSL @"key_xsl"
 #define KEY_VIEW @"key_view"
@@ -417,6 +418,15 @@ static NSMutableArray *_ids_de_noticias=nil;
       return nil;
     }
     
+    XMLParser *parser = [[XMLParser alloc]init];
+    NSArray *images=[parser getImagesURLs:&xml_data];
+    
+    //NSLog(@"%@", [[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]);
+    
+    NSString* dir = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    [[NSFileManager defaultManager] createFileAtPath:[dir stringByAppendingPathComponent: @"data_xml"] contents:xml_data attributes:nil];
+    
+    return nil;
     [self configureXSL:xsl xml:[[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding]];
     path=nil;
     xml_data=nil;

@@ -10,5 +10,5 @@
 
 @interface XMLParser : NSObject
 
--(NSArray*)getImagesURLs:(NSData*)xml_data;
+-(NSArray*)getImagesURLs:(NSData**)xml_data;
 @end

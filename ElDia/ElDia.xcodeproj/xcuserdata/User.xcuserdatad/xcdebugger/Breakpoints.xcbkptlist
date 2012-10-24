@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/XMLParser.m"
-         timestampString = "372784195.370769"
+         timestampString = "372795318.114589"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "17"
-         endingLineNumber = "17"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
          landmarkName = "-getImagesURLs:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,13 +73,39 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/XMLParser.m"
-         timestampString = "372792609.054687"
+         timestampString = "372796144.338917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "@implementation XMLParser"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/XMLParser.m"
+         timestampString = "372796144.338917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-getImagesURLs:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/YMobiPaperLib.m"
+         timestampString = "372796538.215883"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "429"
+         endingLineNumber = "429"
+         landmarkName = "-getHtmlAndConfigure:queryString:xsl:tag:force_load:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
