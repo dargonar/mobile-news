@@ -10,21 +10,40 @@
 #import "DiskCache.h"
 
 @implementation ResourceManager
--(void)copyBundleResourcesTo:(NSString*)folder{
+
++(void)copyBundleResourcesToCacheFolder{
   
   
   NSString *sourcePath = [[NSBundle mainBundle] resourcePath];
-  NSString *destPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"includes"];
-  
-  [NSString stringWithFormat:@"%@/%@",root_dir,CACHE_FOLDER]
+  NSString *destPath = [[DiskCache defaultCache] getCacheFolder];
   
   NSArray* resContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
   
-  for (NSString* obj in resContents){
+  BOOL checked = NO;
+  for(int i=0;i<[resContents count];i++){
+    
+    NSString* path = (NSString*)[resContents objectAtIndex:i];
+    if(!([path hasSuffix:@".jpg"]||[path hasSuffix:@".png"]||[path hasSuffix:@".gif"]||[path hasSuffix:@".jpeg"]||[path hasSuffix:@".css"]))
+      continue;
+    
+    if(!checked)
+    {
+      NSArray *filenames = [path componentsSeparatedByString:@"/"];
+      NSString* filename = (NSString*)[filenames objectAtIndex:([filenames count]-1) ];
+      if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",destPath,filename]])
+      {
+        break;
+      }
+      else
+      {
+        checked=YES;
+      }
+    }
+    
     NSError* error;
-    if (![[NSFileManager defaultManager] copyItemAtPath:[sourcePath stringByAppendingPathComponent:obj] toPath:[destPath stringByAppendingPathComponent:obj]
-                                                  error:&error])
-      NSLog(@"Error: %@", error);;
+    if (![[NSFileManager defaultManager] copyItemAtPath:path toPath:destPath error:&error])
+      NSLog(@"Error: %@", error);
+    
   }
   
 }

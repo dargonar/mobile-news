@@ -65,6 +65,9 @@ NSString* cache_folder;
   return [fileManager fileExistsAtPath:file isDirectory:nil];
 }
 
+-(NSString*)getCacheFolder{
+  return cache_folder;
+}
 
 -(void) create_folder:(NSString*)folder_name
 {
