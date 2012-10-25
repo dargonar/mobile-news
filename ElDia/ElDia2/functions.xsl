@@ -127,7 +127,7 @@
     </xsl:variable>
     
     <li>
-      <a href="noticia://{$Node/guid}" title="">
+      <a href="noticia://{$Node/guid};{$Node/link};{$Node/title};{$Node/description}" title="">
         <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
