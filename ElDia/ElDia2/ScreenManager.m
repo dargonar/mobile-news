@@ -70,16 +70,14 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 
   //Problemas downloading?
   if (xml == nil) {
-    if(error!=nil){ *error = [NSError errorWithDomain:nil code:1 userInfo:nil]; };
-    return nil;
+    return [self buildError:error desc:@"download xml" code:1];
   }
   
   //Rebuildeamos el xml
   XMLParser *parser = [[XMLParser alloc] init];
   NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
   if (mobi_images == nil) {
-    if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
-    return nil;
+    return [self buildError:error desc:@"extracting images" code:2];
   }
   
   //Cacheamos las referencias a imagenes
@@ -94,6 +92,11 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   [cache put:key data:html prefix:prefix];
     
   return html;
+}
+
+-(NSData *) errorDownloading:(NSError **)error {
+  if(error!=nil){ *error = [NSError errorWithDomain:@"error" code:1 userInfo:nil]; };
+  return nil;
 }
 
 -(NSData *)downloadUrl:(NSString*)surl {
@@ -179,17 +182,25 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   NSData *data = [cache get:key prefix:@"mi"];
 
   if(data == nil) {
-    if(error!=nil){ *error = [NSError errorWithDomain:nil code:1 userInfo:nil]; };
-    return nil;
+    return [self buildError:error desc:@"mobiimages (mi) not found" code:3];
   }
   
   NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   if (mobi_images == nil) {
-    if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
-    return nil;
+    return [self buildError:error desc:@"unarchive failed" code:4];
   }
 
   return mobi_images;
+}
+
+-(id) buildError:(NSError **)error desc:(NSString *)desc code:(NSInteger)code {
+  
+  if (error != nil) {
+    [NSError errorWithDomain:@"screenManager" 
+                        code:code 
+                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedDescriptionKey, desc, nil]];
+  }
+  return nil;
 }
 
 @end
