@@ -8,13 +8,19 @@
 
 #import "BaseMobiViewController.h"
 
+#import "AppDelegate.h"
+#import "DiskCache.h"
+#import "iToast.h"
+
+
+
 @interface BaseMobiViewController ()
 
 @end
 
 @implementation BaseMobiViewController
 
-@synthesize mScreenManager;
+@synthesize mScreenManager, mainUIWebView, currentUrl;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,4 +66,35 @@
   
   return NO;
 }
+
+-(void)setHTML:(NSData*)data url:(NSString*)url{
+  [mainUIWebView  loadData:data
+                  MIMEType:@"text/html"
+          textEncodingName:@"utf-8"
+                   baseURL:[[DiskCache defaultCache] getFolderUrl]];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSError *err;
+     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
+     [app_delegate downloadImages:mobi_images obj:self request_url:url];
+     
+  });
+}
+-(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url{
+  
+  if(self.currentUrl!=url)
+    return;
+  
+  __block NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
+                                 , mobi_image.local_uri
+                                 , mobi_image.local_uri
+                                 , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    jsString=nil;
+  });
+  
+}
+
 @end

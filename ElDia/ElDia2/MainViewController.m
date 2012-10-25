@@ -9,12 +9,11 @@
 #import "MainViewController.h"
 #import "iToast.h"
 #import "ConfigHelper.h"
-#import "ScreenManager.h"
-#import "DiskCache.h"
+#import "AppDelegate.h"
 
 
 @implementation MainViewController
-@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
+@synthesize mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl;
 
 BOOL splashOn=NO;
 static MainViewController *sharedInstance = nil;
@@ -39,12 +38,6 @@ BOOL cacheCleaned = NO;
   return self;
 }
 
-/*
-- (void)loadImages{
-  NSArray *mobi_images = [self.mScreenManager getPendingImages:@"section://main" error:&err];
-  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
-  
-}*/
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -55,10 +48,7 @@ BOOL cacheCleaned = NO;
   {
     NSError *err;
     NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
-    [mainUIWebView  loadData:data
-                    MIMEType:@"text/html"
-                    textEncodingName:@"utf-8"
-                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
+    [self setHTML:data url:self.currentUrl];
     splashOn=NO;
     return;
   }
@@ -71,7 +61,8 @@ BOOL cacheCleaned = NO;
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
-  NSDate * date =[self.mScreenManager sectionDate:self.currentUrl];
+  NSString* url = [self.currentUrl copy];
+  NSDate * date =[self.mScreenManager sectionDate:url];
   if( ![self isOld:date])
     return;
   
@@ -90,16 +81,17 @@ BOOL cacheCleaned = NO;
         }
         return;
       }
-      [mainUIWebView  loadData:data
-                      MIMEType:@"text/html"
-                      textEncodingName:@"utf-8"
-                      baseURL:[[DiskCache defaultCache] getFolderUrl]];
+      
+      [self setHTML:data url:url];
+      
       data=nil;
+      
       
     });
   });
   
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
@@ -126,25 +118,7 @@ BOOL cacheCleaned = NO;
   return sharedInstance;
 }
 
-// Aqui me llaman para cargar noticias de una seccion. Eventualmente puede ser la seccion principal, o no-seccion.
--(void)loadSectionNews:(NSURL*)rawURL{
-  
-  sectionId = [[rawURL host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ;
-  
-  [self showMainLoadingIndicator];
-  
-  if([sectionId isEqualToString:@"0"])
-  {
-    sectionId=nil;
-    [self loadIndex:NO];
-    //NSLog(@"MainViewController::loadSectionNews loadIndex POST Call");
-  }
-  else
-  {
-    [self loadSection:NO];
-    //NSLog(@"MainViewController::loadSectionNews loadSection POST Call");
-  }
-}
+
 
 - (IBAction) btnOptionsClick: (id)param{
   [app_delegate showSideMenu];
@@ -154,58 +128,9 @@ BOOL cacheCleaned = NO;
 
   
   [self showRefreshLoadingIndicator];
-  if(sectionId==nil)
-  {
-    [self loadIndex:YES];
-  }
-  else{
-    [self loadSection:YES];
-  }
+  //ToDo
 }
 
--(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
-  
-  if(stop_loading_indicators)
-  {
-    [self hideLoadingIndicator];
-  }
-  
-  if(data==nil){
-    // [self onlineOrShowError:YES];
-    return;
-  }
-  NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
-
-  NSString *dirPath = [[DiskCache defaultCache] getFolder];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  
-  [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-
-  [self.mainUIWebView loadData:nil MIMEType:nil textEncodingName:nil baseURL:nil];
-  
-  
-  data = nil;
-  dirPath=nil;
-  dirURL=nil;
-
-}
-
--(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url{
-  
-  if(self.currentUrl!=url)
-    return;
-  
-  __block NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
-                         , mobi_image.local_uri
-                         , mobi_image.local_uri
-                         , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    jsString=nil;
-  });
-  
-}
 
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
   
@@ -243,85 +168,7 @@ BOOL cacheCleaned = NO;
 
 }
 
--(void)loadSection:(BOOL)force_load{
-  
-  [self onlineOrShowError:YES];
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSectionNews queryString:sectionId xsl:XSL_PATH_SECTION_LIST tag:MSG_GET_SECTION_LIST force_load:force_load];
-    
-    // tell the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if(data==nil)
-      {
-        [self checkAndShowError];
-        [self hideLoadingIndicator];
-        return;
-      }
-      [self setHtmlToView:data stop_loading_indicators:YES];
-      data=nil;
-    });
-  });
-  
-}
 
--(void)loadIndex:(BOOL)force_load{
-  
-  [self onlineOrShowError:YES];
-
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN force_load:force_load];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      
-      if(data==nil)
-      {
-        [self checkAndShowError];
-        [self hideLoadingIndicator];
-        return;
-      }
-      
-      [self setHtmlToView:data stop_loading_indicators:YES];
-      
-      if(cacheCleaned==NO )
-      {
-        cacheCleaned=YES;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-          [self.mYMobiPaperLib cleanCache];
-          [self.mYMobiPaperLib getHtml:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS];
-        });
-        
-      }
-      data=nil;
-      
-    });
-  });
-}
-
--(void)loadLastKnownIndex{
-  NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
-  if(data!=nil)
-    [self setHtmlToView:data  stop_loading_indicators:YES];
-  [self hideLoadingIndicator];
-  [self showRefreshLoadingIndicator];
-  data=nil;
-  
-}
-
-
--(bool)isFirstTimeUse{
-  if([ConfigHelper getSettingValue:CFG_FIRSTTIME]==nil)
-  {
-    return YES;
-  }
-  return NO;
-}
-
--(void)firstTimeUseGone{
-  [ConfigHelper setSettingValue:CFG_FIRSTTIME value:@"NO"];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -358,11 +205,7 @@ BOOL cacheCleaned = NO;
   [self.welcome_indicator stopAnimating];
   
   self.logo_imgvw_alpha.hidden = YES;
-  
-  if([self isFirstTimeUse]==YES)
-  {
-    [self firstTimeUseGone];
-  }
+ 
 }
 -(void) hideRefreshLoadingIndicator{
   btnRefreshClick.hidden=NO;
