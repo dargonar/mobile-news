@@ -66,12 +66,8 @@
 		CE16EC7115ED5B8B00EC8210 /* xsltwin32config.h.in in Resources */ = {isa = PBXBuildFile; fileRef = CE16EC4315ED5B8A00EC8210 /* xsltwin32config.h.in */; };
 		CE16EC7A15ED5C1200EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; };
 		CE16EC7B15ED5C1200EC8210 /* HTMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */; };
-		CE16EC7C15ED5C1200EC8210 /* LocalSubstitutionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7715ED5C1200EC8210 /* LocalSubstitutionCache.m */; };
-		CE16EC7D15ED5C1200EC8210 /* SqliteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7915ED5C1200EC8210 /* SqliteCache.m */; };
 		CE16EC8015ED5ECB00EC8210 /* YMobiPaperLib.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7F15ED5ECB00EC8210 /* YMobiPaperLib.m */; };
 		CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CE16EC8215ED766A00EC8210 /* LocalSubstitutionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7715ED5C1200EC8210 /* LocalSubstitutionCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CE16EC8315ED766A00EC8210 /* SqliteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7915ED5C1200EC8210 /* SqliteCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE1C1FE316307C1A00A18162 /* Default@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */; };
 		CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */; };
@@ -375,10 +371,6 @@
 		CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoUtil.m; sourceTree = "<group>"; };
 		CE16EC7415ED5C1200EC8210 /* HTMLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLGenerator.h; sourceTree = "<group>"; };
 		CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLGenerator.m; sourceTree = "<group>"; };
-		CE16EC7615ED5C1200EC8210 /* LocalSubstitutionCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalSubstitutionCache.h; sourceTree = "<group>"; };
-		CE16EC7715ED5C1200EC8210 /* LocalSubstitutionCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalSubstitutionCache.m; sourceTree = "<group>"; };
-		CE16EC7815ED5C1200EC8210 /* SqliteCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteCache.h; sourceTree = "<group>"; };
-		CE16EC7915ED5C1200EC8210 /* SqliteCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteCache.m; sourceTree = "<group>"; };
 		CE16EC7E15ED5ECB00EC8210 /* YMobiPaperLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMobiPaperLib.h; sourceTree = "<group>"; };
 		CE16EC7F15ED5ECB00EC8210 /* YMobiPaperLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMobiPaperLib.m; sourceTree = "<group>"; };
 		CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x_ipad.png"; sourceTree = "<group>"; };
@@ -1623,10 +1615,6 @@
 				CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */,
 				CE16EC7415ED5C1200EC8210 /* HTMLGenerator.h */,
 				CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */,
-				CE16EC7615ED5C1200EC8210 /* LocalSubstitutionCache.h */,
-				CE16EC7715ED5C1200EC8210 /* LocalSubstitutionCache.m */,
-				CE16EC7815ED5C1200EC8210 /* SqliteCache.h */,
-				CE16EC7915ED5C1200EC8210 /* SqliteCache.m */,
 				CEF3B58515EC6A7700FF35B1 /* PSWebView.h */,
 				CEF3B58615EC6A7700FF35B1 /* PSWebView.m */,
 				CE16EC7E15ED5ECB00EC8210 /* YMobiPaperLib.h */,
@@ -1854,8 +1842,6 @@
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */,
 				CEDCAFD91638BFA000CC84F4 /* ResourceManager.m in Sources */,
-				CE16EC8215ED766A00EC8210 /* LocalSubstitutionCache.m in Sources */,
-				CE16EC8315ED766A00EC8210 /* SqliteCache.m in Sources */,
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
 				CE8E728715EBEDB8007E6F09 /* main.m in Sources */,
 				CE8E728B15EBEDB8007E6F09 /* AppDelegate.m in Sources */,
@@ -1986,8 +1972,6 @@
 				CEF3B58715EC6A7700FF35B1 /* PSWebView.m in Sources */,
 				CE16EC7A15ED5C1200EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC7B15ED5C1200EC8210 /* HTMLGenerator.m in Sources */,
-				CE16EC7C15ED5C1200EC8210 /* LocalSubstitutionCache.m in Sources */,
-				CE16EC7D15ED5C1200EC8210 /* SqliteCache.m in Sources */,
 				CE7D339115EE8F2700935444 /* iToast.m in Sources */,
 				CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */,
 				CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */,

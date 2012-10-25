@@ -14,8 +14,7 @@
 
 
 @implementation MainViewController
-@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
-            welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
+@synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
 
 BOOL splashOn=NO;
 static MainViewController *sharedInstance = nil;
@@ -26,7 +25,7 @@ BOOL cacheCleaned = NO;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self configureToast];
     }
   
   self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
@@ -50,8 +49,6 @@ BOOL cacheCleaned = NO;
 {
   [super viewDidLoad];
   
-  [self configureToast];
-  
   [self setCurrentUrl:@"section://main"];
 
   if([self.mScreenManager sectionExists:self.currentUrl])
@@ -74,7 +71,8 @@ BOOL cacheCleaned = NO;
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
-  if( ![self isOld:[self.mScreenManager sectionDate:self.currentUrl]])
+  NSDate * date =[self.mScreenManager sectionDate:self.currentUrl];
+  if( ![self isOld:date])
     return;
   
   [self showRefreshLoadingIndicator];
@@ -96,6 +94,7 @@ BOOL cacheCleaned = NO;
                       MIMEType:@"text/html"
                       textEncodingName:@"utf-8"
                       baseURL:[[DiskCache defaultCache] getFolderUrl]];
+      [self hideLoadingIndicator];
       data=nil;
       
     });
