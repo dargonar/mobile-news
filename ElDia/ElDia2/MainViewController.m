@@ -10,6 +10,8 @@
 #import "iToast.h"
 #import "ConfigHelper.h"
 #import "ScreenManager.h"
+#import "DiskCache.h"
+
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
@@ -159,15 +161,15 @@ BOOL cacheCleaned = NO;
   }
   
   if(data==nil){
-    //[self onlineOrShowError:YES];
+    // [self onlineOrShowError:YES];
     return;
   }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
+  NSString *dirPath = [[DiskCache defaultCache] getCacheFolder] ;//[[NSBundle mainBundle] bundlePath];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
+
   [self.mainUIWebView loadData:nil MIMEType:nil textEncodingName:nil baseURL:nil];
   
   

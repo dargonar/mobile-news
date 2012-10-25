@@ -12,7 +12,7 @@
 
 + (DiskCache *) defaultCache;
 
--(NSString*) getKey:(NSString*)key prefix:(NSString*)prefix;
+-(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix;
 -(NSString*) getString:(NSString*)key prefix:(NSString*)prefix;
 -(NSData*)   getData:(NSString*)key prefix:(NSString*)prefix;
 
@@ -20,5 +20,5 @@
 -(BOOL) file_exists:(NSString*)key prefix:(NSString*)prefix;
 -(void) create_folder:(NSString*)folder_name;
 -(void) configure:(NSString*)root_dir;
-
+-(NSString*)getCacheFolder;
 @end

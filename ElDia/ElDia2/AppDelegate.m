@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MobiImage.h"
 #import "DiskCache.h"
+#import "ResourceManager.h"
 
 @implementation AppDelegate
 
@@ -25,6 +26,8 @@
   
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
   [[DiskCache defaultCache] configure:rootFolder];
+  [ResourceManager copyBundleResourcesToCacheFolder];
+  
   
   //LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
   //[NSURLCache setSharedURLCache:cache];
@@ -61,6 +64,7 @@
   
   return YES;
 }
+
 
 
 -(void)showSideMenu

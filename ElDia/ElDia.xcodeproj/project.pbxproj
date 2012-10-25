@@ -86,6 +86,7 @@
 		CE79A20F16385F58005D949D /* MobiImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20E16385F58005D949D /* MobiImage.m */; };
 		CE79A2101638659E005D949D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20B16385DAD005D949D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE79A211163865A3005D949D /* MobiImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20E16385F58005D949D /* MobiImage.m */; };
+		CE79A2151638A501005D949D /* ResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A2141638A501005D949D /* ResourceManager.m */; };
 		CE7A1F55161B5F88006BFC17 /* SHKOAuthSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A1EBB161B5F88006BFC17 /* SHKOAuthSharer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE7A1F56161B5F88006BFC17 /* SHKSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A1EBD161B5F88006BFC17 /* SHKSharer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE7A1F57161B5F88006BFC17 /* UIWebView+SHK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A1EC0161B5F88006BFC17 /* UIWebView+SHK.m */; };
@@ -233,6 +234,7 @@
 		CED3442C1630AA5F00C77C79 /* loading_indicator_small_blue.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344281630AA5E00C77C79 /* loading_indicator_small_blue.gif */; };
 		CED3442D1630AA5F00C77C79 /* loading_indicator_small.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344291630AA5F00C77C79 /* loading_indicator_small.gif */; };
 		CED990A615F537A500969586 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED990A515F537A500969586 /* MessageUI.framework */; };
+		CEDCAFD91638BFA000CC84F4 /* ResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A2141638A501005D949D /* ResourceManager.m */; };
 		CEDCC5F5163736E400D7B94F /* DiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCC5F4163736E400D7B94F /* DiskCache.m */; };
 		CEE015491625E6E4002D70E3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE015451625E6E4002D70E3 /* Reachability.m */; };
 		CEE05EB51624CE6C00FCC210 /* br_next_icon_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE05EB41624CE6C00FCC210 /* br_next_icon_24@2x.png */; };
@@ -399,6 +401,8 @@
 		CE79A20B16385DAD005D949D /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		CE79A20D16385F58005D949D /* MobiImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobiImage.h; sourceTree = "<group>"; };
 		CE79A20E16385F58005D949D /* MobiImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobiImage.m; sourceTree = "<group>"; };
+		CE79A2131638A501005D949D /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
+		CE79A2141638A501005D949D /* ResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceManager.m; sourceTree = "<group>"; };
 		CE7A1EBA161B5F88006BFC17 /* SHKOAuthSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKOAuthSharer.h; sourceTree = "<group>"; };
 		CE7A1EBB161B5F88006BFC17 /* SHKOAuthSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHKOAuthSharer.m; sourceTree = "<group>"; };
 		CE7A1EBC161B5F88006BFC17 /* SHKSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKSharer.h; sourceTree = "<group>"; };
@@ -870,6 +874,15 @@
 				CE79A20B16385DAD005D949D /* GDataXMLNode.m */,
 			);
 			name = GData;
+			sourceTree = "<group>";
+		};
+		CE79A2121638A4CE005D949D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE79A2131638A501005D949D /* ResourceManager.h */,
+				CE79A2141638A501005D949D /* ResourceManager.m */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		CE7A1EB7161B5F88006BFC17 /* ShareKit */ = {
@@ -1552,6 +1565,7 @@
 		CEC907601638304A00210C3E /* MobiPaperLib */ = {
 			isa = PBXGroup;
 			children = (
+				CE79A2121638A4CE005D949D /* Resources */,
 				CEF3B58915EC6A7B00FF35B1 /* Utils */,
 				CEC907631638385700210C3E /* XML */,
 				CEC907621638305A00210C3E /* Cache */,
@@ -1822,6 +1836,7 @@
 				CE799AD315FE1CDE00C857A8 /* JSONKit.m in Sources */,
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */,
+				CEDCAFD91638BFA000CC84F4 /* ResourceManager.m in Sources */,
 				CE16EC8215ED766A00EC8210 /* LocalSubstitutionCache.m in Sources */,
 				CE16EC8315ED766A00EC8210 /* SqliteCache.m in Sources */,
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
@@ -1963,6 +1978,7 @@
 				CEC8305B162F425F0085FF54 /* _Reachability.m in Sources */,
 				CE79A20C16385DAD005D949D /* GDataXMLNode.m in Sources */,
 				CE79A20F16385F58005D949D /* MobiImage.m in Sources */,
+				CE79A2151638A501005D949D /* ResourceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2069,8 +2085,10 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2086,8 +2104,10 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
