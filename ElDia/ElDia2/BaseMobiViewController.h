@@ -18,4 +18,6 @@
 @property (nonatomic, retain) ScreenManager *mScreenManager;
 
 -(void)configureToast;
+-(BOOL)isOld:(NSDate*)date;
+
 @end

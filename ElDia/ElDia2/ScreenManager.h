@@ -15,7 +15,10 @@
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
+-(NSData *)getMenu:(BOOL)useCache error:(NSError **)error;
 
+-(NSDate*) sectionDate:(NSString*)url ;
+  
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error;
 
 @end

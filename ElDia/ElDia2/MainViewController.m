@@ -17,6 +17,7 @@
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
             welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
 
+BOOL splashOn=NO;
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
 BOOL cacheCleaned = NO;
@@ -39,55 +40,66 @@ BOOL cacheCleaned = NO;
   return self;
 }
 
+/*
+- (void)loadImages{
+  NSArray *mobi_images = [self.mScreenManager getPendingImages:@"section://main" error:&err];
+  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
+  
+}*/
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
   [self configureToast];
   
-  /*
-  bool firstTimeUse = [self isFirstTimeUse];
-  if(firstTimeUse)
-    [self showWelcomeLoadingIndicator];
-  else
-    [self showMainLoadingIndicator];
- 
-  [self loadLastKnownIndex];
-  
-  [self loadIndex:YES];
-   
-  [self loadNoticiaView];
-  */
-  
-  [self showWelcomeLoadingIndicator];
-  
   [self setCurrentUrl:@"section://main"];
 
-  NSError *err;
-  ScreenManager *mgr = [[ScreenManager alloc] init];
-  NSData *data = [mgr getSection:@"section://main" useCache:YES error:&err];
-  if (data == nil) {
-  self.mScreenManager = [[ScreenManager alloc] init];
-  
-  // Pido la ultima pantalla buena conocida.
-
-  NSArray *arr = [self.mScreenManager getSection:@"section://main" useCache:YES];
-  
-  if (arr == nil) {
-    [[[iToast makeText:@"Diario inaccesible."] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:50 ] show:iToastTypeWarning];
-    [self hideLoadingIndicator];
+  if([self.mScreenManager sectionExists:self.currentUrl])
+  {
+    [self showRefreshLoadingIndicator];
+    NSError *err;
+    NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
+    [mainUIWebView  loadData:data
+                    MIMEType:@"text/html"
+                    textEncodingName:@"utf-8"
+                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
+    splashOn=NO;
     return;
   }
+  splashOn=YES;
+  [self showWelcomeLoadingIndicator];
+  
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+
+  if( ![self isOld:[self.mScreenManager sectionDate:self.currentUrl]])
+    return;
+  
+  [self showRefreshLoadingIndicator];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    __block NSError *err;
+    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
     
-  [mainUIWebView loadData:data 
-                 MIMEType:@"text/html" 
-                 textEncodingName:@"utf-8" 
-                 baseURL:[[DiskCache defaultCache] getFolderUrl]];
-  
-  NSArray *mobi_images = [mgr getPendingImages:@"section://main" error:&err];
-  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
-  
-  NSLog(@"MainViewController::viewDidLoad termina");
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if(data==nil)
+      {
+        if(splashOn)
+        {
+          //paro el loading del splash y muestro un ewarning  + un boton de reload.
+        }
+        return;
+      }
+      [mainUIWebView  loadData:data
+                      MIMEType:@"text/html"
+                      textEncodingName:@"utf-8"
+                      baseURL:[[DiskCache defaultCache] getFolderUrl]];
+      data=nil;
+      
+    });
+  });
   
 }
 
@@ -185,17 +197,16 @@ BOOL cacheCleaned = NO;
   if(self.currentUrl!=url)
     return;
   
-  NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
+  __block NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
                          , mobi_image.local_uri
                          , mobi_image.local_uri
                          , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
   
-  NSLog(@" js: %@", jsString);
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    jsString=nil;
+  });
   
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  
-  jsString=nil;
-  return;
 }
 
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{

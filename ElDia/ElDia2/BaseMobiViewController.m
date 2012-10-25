@@ -48,4 +48,10 @@
   UIImage *warning_image = [UIImage imageNamed: @"warning.png"];
   [theSettings setImage:warning_image forType:iToastTypeWarning];
 }
+
+-(BOOL)isOld:(NSDate*)date {
+  if([date timeIntervalSinceNow] > (60*60))
+    return YES;
+  return NO;
+}
 @end
