@@ -92,7 +92,7 @@
     <xsl:param name="MetaTag" />
     <div class="main_img_container">
       <!-- img src="{$ImageUrl}" / -->
-      <div class="imagen_principal" style="background-image:url({$ImageUrl});"></div>
+      <div class="imagen_principal" style="background-image:url(i_{$ImageUrl});"></div>
       <div class="media_link video_over_photo"> <!-- plus -->
         <xsl:call-template name="MediaAttach">
           <xsl:with-param name="MetaTag" select="$MetaTag"/>

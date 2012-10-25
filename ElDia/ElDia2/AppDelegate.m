@@ -128,7 +128,7 @@
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"mi", mobi_image, nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:mobi_image, @"mi", nil];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
 
@@ -147,11 +147,19 @@
 
 - (void)requestDone:(ASIHTTPRequest *)request
 {
+  NSDictionary *params = [request userInfo];
+  MobiImage *image = [params objectForKey:@"mi"];
   
+  NSData *data = [request responseData];
+  [[DiskCache defaultCache] store:image.local_uri data:data prefix:@"i"];
+  NSLog(@"Baje url: %@", image.url);
 }
 
 - (void)requestWentWrong:(ASIHTTPRequest *)request
 {
+  NSDictionary *params = [request userInfo];
+  MobiImage *image = [params objectForKey:@"mi"];
 
+  NSLog(@"ERROR url: %@", image.url);
 }
 @end

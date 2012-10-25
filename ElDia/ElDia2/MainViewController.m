@@ -77,7 +77,7 @@ BOOL cacheCleaned = NO;
   NSData  *data = [arr objectAtIndex:0];
   NSArray *imgs = [arr objectAtIndex:1];
   
-  [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+  [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:];
   
   [app_delegate downloadImages:imgs];
   
