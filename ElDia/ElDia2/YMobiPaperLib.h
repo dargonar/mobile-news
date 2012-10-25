@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "HTMLGenerator.h"
 #import "CryptoUtil.h"
-#import "SqliteCache.h"
 #import "Reachability.h"
 
 #define XSL_PATH_MAIN_LIST @"1_main_list"

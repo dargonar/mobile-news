@@ -14,11 +14,13 @@
 
 @implementation BaseMobiViewController
 
+@synthesize mScreenManager;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+      self.mScreenManager = [[ScreenManager alloc] init];
     }
     return self;
 }
@@ -50,8 +52,12 @@
 }
 
 -(BOOL)isOld:(NSDate*)date {
-  if([date timeIntervalSinceNow] > (60*60))
+  if(date==nil)
     return YES;
+  NSTimeInterval t= [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceDate:date];
+  if(t > (60*60*2))
+    return YES;
+  
   return NO;
 }
 @end

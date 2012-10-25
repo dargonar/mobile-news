@@ -260,12 +260,6 @@ static NSMutableArray *_ids_de_noticias=nil;
   NSData *data_xml    = [xml dataUsingEncoding:NSUTF8StringEncoding] ;
   // [NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
   
-  while (![sqliteLock tryLock]) {
-    //
-  }
-  [[SqliteCache defaultCache] set:html_path data:data mimetype:@"text/html"];
-  [[SqliteCache defaultCache] set:path data:data_xml mimetype:@"text/xml"];
-  [sqliteLock unlock];
   
   xml = nil;
   html=nil;
@@ -284,12 +278,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     return NO;
   NSString* path = [self getUrl:item queryString:queryString];
   NSArray  *cache = nil;
-  while (![sqliteLock tryLock]) {
-    //
-  }
-  cache = [[SqliteCache defaultCache] get:path since_hours:1];
-  [sqliteLock unlock];
-  
+    
   path=nil;
   if(cache) {
     cache=nil;
@@ -300,14 +289,7 @@ static NSMutableArray *_ids_de_noticias=nil;
 }
 
 - (void)cleanCache{
-  //Deberiamos poder limpiar ciertas cosas y otras no.
-  //Esto es: la data debe tener flags que indiquen el tipo de dato, mas alla del mimetype.
-  while (![sqliteLock tryLock]) {
-      //
-  }
-  [[SqliteCache defaultCache] clean:48];
-  [sqliteLock unlock];
-    
+      
   
 }
 
@@ -351,11 +333,6 @@ static NSMutableArray *_ids_de_noticias=nil;
 -(NSData*) getChachedData:(NSString*)path tag:(NSString*)tag fire_event:(BOOL)fire_event{
   
   NSArray  *cache = nil;
-  while (![sqliteLock tryLock]) {
-    //
-  }
-  cache = [[SqliteCache defaultCache] get:path];
-  [sqliteLock unlock];
   if(cache)
   {
     NSData   *data     = [cache objectAtIndex:0];

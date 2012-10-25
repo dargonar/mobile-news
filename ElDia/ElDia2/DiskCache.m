@@ -100,10 +100,17 @@ int       max_size;
   NSFileManager *fileManager= [NSFileManager defaultManager];
   NSString* fileName=[self getFileName:key prefix:prefix];
   if(![self exists:key prefix:prefix])
+  {
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:0];
+    return date; //[NSDate dateWithTimeIntervalSince1970:0];
+  }
+  
+  NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:fileName error:nil];
+  if(fileDictionary==nil)
     return [NSDate dateWithTimeIntervalSince1970:0];
   
-  NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
-  return [fileDictionary fileCreationDate];
+  NSDate * date = [fileDictionary fileCreationDate];
+  return date;
 }
 
 -(unsigned long long) size {

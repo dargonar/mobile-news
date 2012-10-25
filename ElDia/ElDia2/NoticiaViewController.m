@@ -9,7 +9,6 @@
 #import "NoticiaViewController.h"
 #import "AppDelegate.h"
 #import "RegexKitLite.h"
-#import "LocalSubstitutionCache.h"
 #import "SHK.h"
 #import "ConfigHelper.h"
 #import "iToast.h"
@@ -113,7 +112,6 @@
   
   [self showLoadingIndicator];
   // Deshabilitamos el cache.
-  [LocalSubstitutionCache cacheOrNot:NO];
   
   __block NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
   __block NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"http://www.youtube.com/watch?v=%@", video_id]];
@@ -415,7 +413,6 @@
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
-  [LocalSubstitutionCache cacheOrNot:YES];
   [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
   networkCaptions = nil;
   networkImages = nil;
