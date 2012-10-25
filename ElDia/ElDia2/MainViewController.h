@@ -10,13 +10,16 @@
 #import "AppDelegate.h"
 #import "NoticiaViewController.h"
 #import "YMobiPaperLib.h"
+#import "MobiImage.h"
 
 @interface MainViewController : UIViewController<UIWebViewDelegate, YMobiPaperLibDelegate>
 {
   YMobiPaperLib *mYMobiPaperLib;
   NoticiaViewController *myNoticiaViewController;
+  NSString* current_url;
 }
 
+@property (nonatomic, retain) NSString* currentUrl;
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
@@ -55,4 +58,7 @@
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded;
 //~/Library/Application Support/iPhone Simulator/
 
+-(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url;
+
+  
 @end

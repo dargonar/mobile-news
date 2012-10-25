@@ -1565,6 +1565,7 @@
 		CEC907601638304A00210C3E /* MobiPaperLib */ = {
 			isa = PBXGroup;
 			children = (
+				CEDCAFDB1638E75D00CC84F4 /* ViewControllers */,
 				CE79A2121638A4CE005D949D /* Resources */,
 				CEF3B58915EC6A7B00FF35B1 /* Utils */,
 				CEC907631638385700210C3E /* XML */,
@@ -1592,6 +1593,13 @@
 				CE79A20E16385F58005D949D /* MobiImage.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		CEDCAFDB1638E75D00CC84F4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		CEF3B58915EC6A7B00FF35B1 /* Utils */ = {
