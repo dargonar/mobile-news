@@ -59,7 +59,7 @@
   }
   
   GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:[doc rootElement]] ;
-  if (document) {
+  if (document == nil) {
     return [ErrorBuilder build:error desc:@"generated xml" code:ERR_GENERATED_XML];
   }
   
@@ -81,7 +81,7 @@
 -(NSString*)urlAttribute:(NSArray*)elements{
   GDataXMLNode *node = [(GDataXMLElement*) [elements objectAtIndex:0] attributeForName:@"url"];
 
-  if (node != nil) {
+  if (node == nil) {
       return nil;
   }
   

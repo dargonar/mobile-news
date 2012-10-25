@@ -13,9 +13,9 @@
 +(id) build:(NSError **)error desc:(NSString *)desc code:(NSInteger)code {
   
   if (error != nil) {
-    [NSError errorWithDomain:@"mobi" 
-                        code:code 
-                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedDescriptionKey, desc, nil]];
+    *error = [NSError errorWithDomain:@"mobi" 
+                                 code:code 
+                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedDescriptionKey, desc, nil]];
   }
   return nil;
 }
