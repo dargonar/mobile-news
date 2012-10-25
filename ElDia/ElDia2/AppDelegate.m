@@ -23,10 +23,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-  [[DiskCache defaultCache] configure:rootFolder];
-  [ResourceManager copyBundleResourcesToCacheFolder];
+  [[DiskCache defaultCache] configure:rootFolder cache_size:5];
+
+  NSString* cache_folder = [[DiskCache defaultCache] getFolder];
+
+  NSString *appFolder = [[NSBundle mainBundle] resourcePath];
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  
+  NSError *err=nil;
+
+  NSString* cssFolder = [cache_folder stringByAppendingPathComponent:@"css"];
+  NSString* imgFolder = [cache_folder stringByAppendingPathComponent:@"img"];
+  
+  if (![fileManager fileExistsAtPath:cssFolder]) {
+    [fileManager createSymbolicLinkAtPath:cssFolder withDestinationPath:appFolder error:&err];
+    NSLog(@"Error1: %@", err != nil ? [err description] : @"NIL");
+  }
+
+  if (![fileManager fileExistsAtPath:imgFolder]) {
+    [fileManager createSymbolicLinkAtPath:imgFolder withDestinationPath:appFolder error:&err];
+    NSLog(@"Error2: %@", err != nil ? [err description] : @"NIL");
+  }
+
+  NSLog(@"Cache current size: %llu", [[DiskCache defaultCache] size]);
+  
+  //[ResourceManager copyBundleResourcesToCacheFolder];
   
   
   //LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
@@ -61,6 +83,10 @@
   [self.window addSubview:self.navigationController.view];
   [self.window makeKeyAndVisible];//HACKED
   
+  
+  //HACK SACAR ANTES DE RELEASE
+  //[NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+  //id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   return YES;
 }
@@ -128,6 +154,9 @@
     [self.download_queue setMaxConcurrentOperationCount:20]; //20 al mismo tiempo?
   }
   
+  if(mobi_images == nil)
+    return;
+  
   for (int i=0; i<[mobi_images count]; i++) {
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];
@@ -155,7 +184,7 @@
   MobiImage *image = [params objectForKey:@"mi"];
   
   NSData *data = [request responseData];
-  [[DiskCache defaultCache] store:image.local_uri data:data prefix:@"i"];
+  [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
   NSLog(@"Baje url: %@", image.url);
 }
 

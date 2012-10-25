@@ -13,7 +13,7 @@
 
 
 NSString* cache_folder;
-
+int       max_size;
 
 + (DiskCache *) defaultCache
 {
@@ -32,23 +32,15 @@ NSString* cache_folder;
   
 }
 
--(NSString*)getString:(NSString*)key prefix:(NSString*)prefix{
-  if(![self file_exists:key prefix:prefix])
-    return nil;
-  
-  return [NSString stringWithContentsOfFile:[self getFileName:key prefix:prefix] encoding:NSUTF8StringEncoding error:nil];
-}
-
-
--(NSData*)getData:(NSString*)key prefix:(NSString*)prefix{
-  if(![self file_exists:key prefix:prefix])
+-(NSData*)get:(NSString*)key prefix:(NSString*)prefix{
+  if(![self exists:key prefix:prefix])
     return nil;
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager contentsAtPath:[self getFileName:key prefix:prefix]];
 }
 
--(void)store:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
+-(void)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
   NSString* file=[self getFileName:key prefix:prefix];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
@@ -56,17 +48,30 @@ NSString* cache_folder;
   
   fileManager=nil;
   file=nil;
-
+  
 }
 
--(BOOL)file_exists:(NSString*)key prefix:(NSString*)prefix{
+-(void)remove:(NSString*)key prefix:(NSString*)prefix{
+
+  NSString* file=[self getFileName:key prefix:prefix];
+  NSFileManager *fileManager= [NSFileManager defaultManager];
+
+  NSError *err = nil;
+  [fileManager removeItemAtPath:file error:&err];
+}
+
+-(BOOL)exists:(NSString *)key prefix:(NSString *)prefix {
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager fileExistsAtPath:file isDirectory:nil];
 }
 
--(NSString*)getCacheFolder{
+-(NSString*)getFolder{
   return cache_folder;
+}
+
+-(NSURL*)getFolderUrl{
+  return [[NSURL alloc] initFileURLWithPath:cache_folder isDirectory:YES];
 }
 
 -(void) create_folder:(NSString*)folder_name
@@ -81,11 +86,39 @@ NSString* cache_folder;
 }
 
 
--(void)configure:(NSString*)root_dir{
+-(void)configure:(NSString*)root_dir cache_size:(int)cache_size {
   
-  cache_folder=[NSString stringWithFormat:@"%@/%@",root_dir,CACHE_FOLDER];
+  max_size     = cache_size;
+  cache_folder = [NSString stringWithFormat:@"%@/%@",root_dir,CACHE_FOLDER];
+  
   [self create_folder:cache_folder];
   
 }
+
+-(unsigned long long) size {
+
+  NSFileManager *fileManager= [NSFileManager defaultManager];
+  
+  NSArray *filesArray = [fileManager subpathsOfDirectoryAtPath:cache_folder error:nil];
+  NSEnumerator *filesEnumerator = [filesArray objectEnumerator];
+
+  NSString *fileName;
+  unsigned long long totalSize = 0;
+  
+  while (fileName = [filesEnumerator nextObject]) {
+
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"]) {
+      NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
+      totalSize += [fileDictionary fileSize];
+    }
+  }
+  
+  return totalSize;
+}
+
+-(void) purge {
+  
+}
+
 
 @end

@@ -12,13 +12,16 @@
 
 + (DiskCache *) defaultCache;
 
--(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix;
--(NSString*) getString:(NSString*)key prefix:(NSString*)prefix;
--(NSData*)   getData:(NSString*)key prefix:(NSString*)prefix;
+-(void)configure:(NSString*)root_dir cache_size:(int)cache_size;
+  
+-(NSData*)   get:(NSString*)key prefix:(NSString*)prefix;
+-(void)      put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
+-(void)      remove:(NSString*)key prefix:(NSString*)prefix;
+-(BOOL)      exists:(NSString*)key prefix:(NSString*)prefix;
 
--(void) store:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
--(BOOL) file_exists:(NSString*)key prefix:(NSString*)prefix;
--(void) create_folder:(NSString*)folder_name;
--(void) configure:(NSString*)root_dir;
--(NSString*)getCacheFolder;
+-(unsigned long long) size;
+-(void)      purge;
+
+-(NSString*) getFolder;
+-(NSURL*)    getFolderUrl;
 @end

@@ -231,7 +231,7 @@ div.main_img_container, div.main_foto {
 .img_container img , .img_loader{
   background-color:#FFFFFF;
   /*background-image:url(../img/../img/ajax-loader.gif) !important;*/
-  background-image:url(loading_indicator_big_blue.gif) !important;
+  background-image:url(../img/loading_indicator_big_blue.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   clear:both;
@@ -261,7 +261,7 @@ div.main_img_container, div.main_foto {
 .main_img_container img {
   background-color:#FFF;
   /*background-image:url(../img/ajax-loader.gif) !important;*/
-  background-image:url(loading_indicator_big_blue.gif) !important;
+  background-image:url(../img/loading_indicator_big_blue.gif) !important;
   background-repeat:no-repeat;
   background-position: center center;
   width:100%;
@@ -288,17 +288,17 @@ div.main_img_container, div.main_foto {
 }
 #listado .foto .ico_video {
 	/*background-image:url(../img/../img/ico_video_black.png);*/
-	background-image:url(ico_video_black.png);
+	background-image:url(../img/ico_video_black.png);
 }
 
 #listado .foto .ico_audio {
 	/*background-image:url(../img/../img/ico_audio_black.png);*/
-  background-image:url(ico_audio_black.png);
+  background-image:url(../img/ico_audio_black.png);
 }
 
 #listado .foto .ico_galeria {
   /*background-image:url(../img/../img/ico_gallery_black.png);*/
-  background-image:url(ico_gallery_black.png);
+  background-image:url(../img/ico_gallery_black.png);
 }
 
 #listado .separador {
@@ -355,7 +355,7 @@ div.main_img_container, div.main_foto {
 	height:18px;
 	display:block;
   /*background-image:url(../img/../img/ico_video_blue.png);*/
-  background-image:url(ico_video_blue.png);
+  background-image:url(../img/ico_video_blue.png);
 	float:right;
 }
 
@@ -384,17 +384,17 @@ div.main_img_container, div.main_foto {
 }
 .media_link .ico_video {
   /*background-image:url(../img/../img/ico_video.png);*/
-  background-image:url(ico_video.png);
+  background-image:url(../img/ico_video.png);
 }
 
 .media_link .ico_audio {
 	/*background-image:url(../img/../img/ico_audio.png);*/
-	background-image:url(ico_audio.png);
+	background-image:url(../img/ico_audio.png);
 }
 
 .media_link .ico_galeria {
   /*background-image:url(../img/../img/ico_galeria.png);*/
-  background-image:url(ico_galeria.png);
+  background-image:url(../img/ico_galeria.png);
 }
 
 #nota .separador {

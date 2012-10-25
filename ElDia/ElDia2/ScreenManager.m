@@ -36,7 +36,7 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
 
-  return [cache file_exists:key prefix:prefix];
+  return [cache exists:key prefix:prefix];
 }
 
 /***********************************************************************************/
@@ -60,16 +60,20 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   if (useCache) {
 
     //Trato de traer el XML original
-    xml = [cache getData:key prefix:[prefix stringByAppendingString:@"x"]];
+    xml = [cache get:key prefix:[prefix stringByAppendingString:@"x"]];
 
     //Si ya esta el html -> devuelvo (html, list<images>)
     //NOTA: se devuelven las imagenes y no se disparan las tareas de aca para que lo haga el que llamo, asi tiene tiempo de poner el contenido
     //      en el webview y no se pierden eventos de JS.
     
-    NSData *html = [cache getData:key prefix:prefix];
+    NSData *html = [cache get:key prefix:prefix];
 
     if (html != nil) {
       NSArray *mobi_images = [self pendingImages:&xml];
+
+      //Chequeamos si hay que borrar el xml
+      [self remove_xml:key xml:xml mobi_images:mobi_images prefix:prefix];
+
       return [NSArray arrayWithObjects:html, mobi_images, nil];
     };
 
@@ -87,7 +91,7 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
     }
     
     //Cacheamos el xml
-    [cache store:key data:xml prefix:[prefix stringByAppendingString:@"x"]];
+    [cache put:key data:xml prefix:[prefix stringByAppendingString:@"x"]];
   }
   
   //Rebuildeamos el xml
@@ -102,9 +106,21 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url]];
   
   //Lo storeamos
-  [cache store:key data:html prefix:prefix];
+  [cache put:key data:html prefix:prefix];
+  
+  //Chequeamos si hay que borrar el xml
+  [self remove_xml:key xml:xml mobi_images:mobi_images prefix:prefix];
   
   return [NSArray arrayWithObjects:html, mobi_images, nil];
+}
+
+-(void) remove_xml:(NSString*)key xml:(NSData *)xml mobi_images:(NSArray*)mobi_images prefix:(NSString*)prefix{
+  //Borramos el xml de disco si existe y no hay mas imagenes por bajar
+  if (xml != nil && mobi_images != nil && [mobi_images count] == 0 ) {
+    DiskCache *cache = [DiskCache defaultCache];
+    [cache remove:key prefix:[prefix stringByAppendingString:@"x"]];
+  }
+ 
 }
 
 -(NSData *)downloadUrl:(NSString*)surl {
@@ -161,13 +177,16 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 -(NSArray *)pendingImages:(NSData**)xml {
   XMLParser *parser = [[XMLParser alloc] init];
   NSArray *images = [parser extractImagesAndRebuild:xml];
+  if (images == nil) {
+    return nil;
+  }
   
   NSMutableArray *ret = [[NSMutableArray alloc] init];
   
   DiskCache *cache = [DiskCache defaultCache];
   for (int i=0; i<[images count]; i++) {
     MobiImage *image = [images objectAtIndex:i];
-    if( ![cache file_exists:image.local_uri prefix:@"i"] )
+    if( ![cache exists:image.local_uri prefix:@"i"] )
       [ret addObject:image];
   }
   
