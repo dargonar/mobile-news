@@ -15,7 +15,7 @@
 
 @implementation MainViewController
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
-            welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl;
+            welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
 
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
@@ -73,6 +73,7 @@ BOOL cacheCleaned = NO;
   [self loadNoticiaView];
   */
   
+  [self setCurrentUrl:@"section://main"];
   ScreenManager *mgr = [[ScreenManager alloc] init];
   NSArray *arr = [mgr getSection:@"section://main" useCache:YES];
   if (arr == nil) {
@@ -87,7 +88,7 @@ BOOL cacheCleaned = NO;
                  textEncodingName:@"utf-8" 
                  baseURL:[[DiskCache defaultCache] getFolderUrl]];
   
-  [app_delegate downloadImages:imgs];
+  [app_delegate downloadImages:imgs obj:self request_url:@"section://main"];
   
   [self hideLoadingIndicator];
   
@@ -145,8 +146,7 @@ BOOL cacheCleaned = NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
-  //self performSelectorOnMainThread:<#(SEL)#> withObject:<#(id)#> waitUntilDone:<#(BOOL)#>
-  
+
   
   [self showRefreshLoadingIndicator];
   if(sectionId==nil)
@@ -183,6 +183,24 @@ BOOL cacheCleaned = NO;
   dirPath=nil;
   dirURL=nil;
 
+}
+
+-(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url{
+  
+  if(self.currentUrl!=url)
+    return;
+  
+  NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
+                         , mobi_image.local_uri
+                         , mobi_image.local_uri
+                         , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
+  
+  NSLog(@" llego imigi: %@", mobi_image.local_uri);
+  
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+  jsString=nil;
+  return;
 }
 
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{

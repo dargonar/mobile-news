@@ -147,7 +147,7 @@
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)downloadImages:(NSArray *)mobi_images {
+- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url{
 
   if (![self download_queue]) {
     self.download_queue = [[NSOperationQueue alloc] init];
@@ -161,7 +161,7 @@
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:mobi_image, @"mi", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:mobi_image, @"mi",obj, @"id",request_url, @"url", nil];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
 
@@ -176,16 +176,20 @@
     
     [self.download_queue addOperation:request];  
   }
-}
+}	
 
 - (void)requestDone:(ASIHTTPRequest *)request
 {
   NSDictionary *params = [request userInfo];
   MobiImage *image = [params objectForKey:@"mi"];
-  
   NSData *data = [request responseData];
   [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
   NSLog(@"Baje url: %@", image.url);
+ 
+  NSString *url = [params objectForKey:@"url"];
+  MainViewController *obj = (MainViewController*)[params objectForKey:@"id"];
+  [obj onImageDownloaded:image url:url];
+  
 }
 
 - (void)requestWentWrong:(ASIHTTPRequest *)request

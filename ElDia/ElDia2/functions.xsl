@@ -92,7 +92,7 @@
     <xsl:param name="MetaTag" />
     <div class="main_img_container">
       <!-- img src="{$ImageUrl}" / -->
-      <div class="imagen_principal" style="background-image:url(i_{$ImageUrl});"></div>
+      <div class="imagen_principal" id="{$ImageUrl}" style="background-image:url(i_{$ImageUrl});"></div>
       <div class="media_link video_over_photo"> <!-- plus -->
         <xsl:call-template name="MediaAttach">
           <xsl:with-param name="MetaTag" select="$MetaTag"/>
@@ -145,7 +145,7 @@
               </xsl:call-template>
             </xsl:if>
             <xsl:if test="not(not($Node/media:thumbnail))">
-              <div class="imagen_secundaria" style="background-image:url(i_{$Node/media:thumbnail/@url}) !important;"></div>
+              <div class="imagen_secundaria" id="{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url}) !important;"></div>
               <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
               <!-- img src="{$Node/media:thumbnail/@url}" / -->
             </xsl:if>
@@ -331,7 +331,7 @@
             </xsl:call-template>
             <xsl:if test="not(not($Item/@thumbnail))">
               <xsl:if test="$Item/@thumbnail!=''">
-                <div class="imagen_secundaria" style="background-image:url(i_{$Item/@thumbnail}) !important;"></div>
+                <div class="imagen_secundaria" id="{$Item/@thumbnail}" style="background-image:url(i_{$Item/@thumbnail}) !important;"></div>
                 <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
               </xsl:if>
             </xsl:if>
