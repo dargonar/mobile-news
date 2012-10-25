@@ -21,8 +21,13 @@ NSString * const SECTIONS_STYLESHEET = @"2_section_list.xsl";
 NSString * const MAIN_URL     = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL  = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
 NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
+NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 
 @implementation ScreenManager
+
+-(BOOL) menuExists:(NSString*)url {
+  return [self screenExists:url prefix:@"m"];
+}
 
 -(BOOL) sectionExists:(NSString*)url {
   return [self screenExists:url prefix:@"s"];

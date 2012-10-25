@@ -38,27 +38,13 @@ BOOL cacheCleaned = NO;
   
   return self;
 }
-/*
-+ (MainViewController *) sharedInstance
-{
-  static MainViewController *sharedInstance = NULL;
-  @synchronized(self)
-  {
-    if(sharedInstance == NULL)
-      sharedInstance = [[MainViewController alloc] init];
-  }
-  
-  return sharedInstance;
-}
-*/
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
+  [self configureToast];
   
-  iToastSettings *theSettings = [iToastSettings getSharedSettings];
-  theSettings.duration = 2500;
   /*
   bool firstTimeUse = [self isFirstTimeUse];
   if(firstTimeUse)
@@ -73,12 +59,23 @@ BOOL cacheCleaned = NO;
   [self loadNoticiaView];
   */
   
+  [self showWelcomeLoadingIndicator];
+  
   [self setCurrentUrl:@"section://main"];
 
   NSError *err;
   ScreenManager *mgr = [[ScreenManager alloc] init];
   NSData *data = [mgr getSection:@"section://main" useCache:YES error:&err];
   if (data == nil) {
+  self.mScreenManager = [[ScreenManager alloc] init];
+  
+  // Pido la ultima pantalla buena conocida.
+
+  NSArray *arr = [self.mScreenManager getSection:@"section://main" useCache:YES];
+  
+  if (arr == nil) {
+    [[[iToast makeText:@"Diario inaccesible."] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:50 ] show:iToastTypeWarning];
+    [self hideLoadingIndicator];
     return;
   }
     
@@ -90,10 +87,6 @@ BOOL cacheCleaned = NO;
   NSArray *mobi_images = [mgr getPendingImages:@"section://main" error:&err];
   [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
   
-  [self hideLoadingIndicator];
-  
-  mgr = nil;
-
   NSLog(@"MainViewController::viewDidLoad termina");
   
 }
@@ -107,6 +100,8 @@ BOOL cacheCleaned = NO;
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
+  self.mScreenManager=nil;
+  
   self.myNoticiaViewController =nil;
   self.mYMobiPaperLib = nil;
   
@@ -292,8 +287,6 @@ BOOL cacheCleaned = NO;
       }
       data=nil;
       
-      //[[[iToast makeText:@"Marky... chupame el moco!"] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:50] show];
-
     });
   });
 }
@@ -305,17 +298,7 @@ BOOL cacheCleaned = NO;
   [self hideLoadingIndicator];
   [self showRefreshLoadingIndicator];
   data=nil;
-  /*
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    __block NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if(data!=nil)
-        [self setHtmlToView:data  stop_loading_indicators:YES];
-      [self showRefreshLoadingIndicator];
-      data=nil;
-    });
-  });
-   */
+  
 }
 
 
@@ -407,13 +390,16 @@ BOOL cacheCleaned = NO;
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+  //ToDo: mostrar algo sif necessary.
+  [self hideLoadingIndicator];
+  
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  //[webView stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"];
+  [self hideLoadingIndicator];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
