@@ -79,7 +79,7 @@ BOOL cacheCleaned = NO;
   NSData  *data = [arr objectAtIndex:0];
   NSArray *imgs = [arr objectAtIndex:1];
   
-  NSURL *baseUrl = [NSURL fileURLWithPath:[[DiskCache defaultCache] getCacheFolder]];  
+  NSURL *baseUrl = [NSURL fileURLWithPath:[[DiskCache defaultCache] getCacheFolder] isDirectory:YES];  
   [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:baseUrl];
   
   [app_delegate downloadImages:imgs];
