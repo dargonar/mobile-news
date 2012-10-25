@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MobiImage : NSObject{
+@interface MobiImage : NSObject <NSCoding> {
   NSString *url;
   NSString *local_uri;
   NSString *noticia_id;

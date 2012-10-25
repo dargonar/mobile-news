@@ -107,7 +107,7 @@ int       max_size;
   
   while (fileName = [filesEnumerator nextObject]) {
 
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"]) {
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] ) {
       NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
       totalSize += [fileDictionary fileSize];
     }

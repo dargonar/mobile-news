@@ -13,6 +13,9 @@
 -(BOOL) sectionExists:(NSString*)url;
 -(BOOL) articleExists:(NSString*)url;
 
--(NSArray *)getSection:(NSString*)url useCache:(BOOL)useCache;
--(NSArray *)getArticle:(NSString*)url useCache:(BOOL)useCache;
+-(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
+-(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
+
+-(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error;
+
 @end

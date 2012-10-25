@@ -19,6 +19,19 @@
   
 }
 
+- (id)initWithCoder:(NSCoder *)decoder {
+  NSString *tmp_url        = [decoder decodeObject];
+  NSString *tmp_localuri   = [decoder decodeObject];
+  NSString *tmp_noticia_id = [decoder decodeObject];
+  return [MobiImage initWithData:tmp_url _local_uri:tmp_localuri _noticia_id:tmp_noticia_id];
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+  [encoder encodeObject:self.url];
+  [encoder encodeObject:self.local_uri];
+  [encoder encodeObject:self.noticia_id];
+}
+
 +(MobiImage*)initWithData:(NSString*)_url _local_uri:(NSString*)_local_uri _noticia_id:(NSString*)_noticia_id{
   MobiImage* _MobiImage=[[MobiImage alloc] init];
   [_MobiImage setLocal_uri:_local_uri];
