@@ -10,23 +10,23 @@
 #import "GDataXMLNode.h"
 #import "MobiImage.h"
 #import "CryptoUtil.h"
+#import "ErrorBuilder.h"
 
 @implementation XMLParser
 
 
 // Parseo el xml en busca de imagenes, las retorno en un array y modifico el path de la imagen.
--(NSArray*)extractImagesAndRebuild:(NSData**)xml_data{
+-(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError **)error{
   
   NSMutableArray *mobi_images = [[NSMutableArray alloc] init];
   
-  if (*xml_data == nil) {
-    return mobi_images;
+  if (xml_data == nil || *xml_data == nil) {
+    return [ErrorBuilder  build:error desc:@"invalid xml to parse" code:ERR_INVALID_XML];
   }
   
   //rss/channel/item/media:thumbnail@url
   
-  NSError *error;
-  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:&error];
+  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:error];
   if (doc == nil)
     return nil;
   
@@ -41,9 +41,12 @@
     
     NSArray* temp = [item elementsForName:@"guid"];
     if([temp count]!=1)
-      return nil;
+      continue;
     
     NSString* _url=[self urlAttribute:temp_img];
+    if (_url == nil)
+      continue;
+
     NSString* _local_uri=[CryptoUtil sha1:_url];
     
     MobiImage* mobiImage = [MobiImage initWithData:_url
@@ -53,28 +56,36 @@
     [mobi_images addObject:mobiImage];
     
     [self setUrlAttribute:temp_img value:_local_uri];
-   
-    item=nil;
-    _url=nil;
-    _local_uri=nil;
-    temp=nil;
-    temp_img=nil;
   }
   
   GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:[doc rootElement]] ;
+  if (document) {
+    return [ErrorBuilder build:error desc:@"generated xml" code:ERR_GENERATED_XML];
+  }
+  
   *xml_data = nil;
   *xml_data = document.XMLData;
-  doc=nil;
-  document=nil;
+
   return [NSArray arrayWithArray:mobi_images];
 }
 
--(void)setUrlAttribute:(NSArray*)elements value:(NSString*)value{
-  [[((GDataXMLElement*) [elements objectAtIndex:0]) attributeForName:@"url"] setStringValue:value];
+-(BOOL)setUrlAttribute:(NSArray*)elements value:(NSString*)value {
+  GDataXMLNode *node = [(GDataXMLElement*) [elements objectAtIndex:0] attributeForName:@"url"];
+  if (node != nil) {
+    [node setStringValue:value];
+    return YES;
+  }
+  return NO;
 }
 
 -(NSString*)urlAttribute:(NSArray*)elements{
-  return [((GDataXMLElement*) [elements objectAtIndex:0]) attributeForName:@"url"].stringValue;
+  GDataXMLNode *node = [(GDataXMLElement*) [elements objectAtIndex:0] attributeForName:@"url"];
+
+  if (node != nil) {
+      return nil;
+  }
+  
+  return [node stringValue];
 }
 
 -(NSString*)firstElementAsString:(NSArray*)elements{

@@ -152,7 +152,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
     
     NSLog(@" cleanedXML:%@", xsl);
-    return [generator generate:cleanedXML xslt_file:path_xslt];
+    //return [generator generate:cleanedXML xslt_file:path_xslt error:error)];
   }
   @catch (NSException * e) {
     NSLog(@"YMobiPaperLib::buildHtml e:%@", e.reason);

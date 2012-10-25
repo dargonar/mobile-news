@@ -13,6 +13,7 @@
 #import "ASIHTTPRequest.h"
 #import "XMLParser.h"
 #import "MobiImage.h"
+#import "ErrorBuilder.h"
 
 NSString * const MAIN_STYLESHEET      = @"1_main_list.xsl";
 NSString * const NOTICIA_STYLESHEET   = @"3_new.xsl";
@@ -82,49 +83,68 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   }
   
   //Lo bajo
-  NSData *xml = [self downloadUrl:url];
+  NSData *xml = [self downloadUrl:url error:error];
 
   //Problemas downloading?
   if (xml == nil) {
-    return [self buildError:error desc:@"download xml" code:1];
+    return nil;
   }
 
   if(processImages)
   {
     //Rebuildeamos el xml
     XMLParser *parser = [[XMLParser alloc] init];
-    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
+    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error];
     if (mobi_images == nil) {
-      return [self buildError:error desc:@"extracting images" code:2];
+      return nil;
     }
     
-    //Cacheamos las referencias a imagenes
+    //Serializamos las imagenes a un NSData
     NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
-    [cache put:key data:tmp prefix:@"mi"];
+    if (tmp == nil) {
+      return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
+    }
+    
+    //Las guardamos en cache
+    if(![cache put:key data:tmp prefix:@"mi"]) {
+      return [ErrorBuilder build:error desc:@"cache mobiimages" code:ERR_CACHING_MI];
+    }
   }
   
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
-  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url]];
+  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url] error:error];
+  
+  if (html == nil) {
+    return nil;
+  }
   
   //Lo guardamos y retornamos
-  [cache put:key data:html prefix:prefix];
+  if(![cache put:key data:html prefix:prefix]) {
+    return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
+  }
     
   return html;
 }
 
--(NSData *)downloadUrl:(NSString*)surl {
+-(NSData *)downloadUrl:(NSString*)surl error:(NSError**)error {
   
   NSURL *url = [self getXmlHttpUrl:surl];
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
   [request startSynchronous];
   
-  NSError *error = [request error];
-  if (error) {
-    return nil; //download problem -> RETRY?
+  NSError *request_error = [request error];
+  if (request_error != nil) {
+    if (error != nil) *error = request_error;
+    return nil;
   }
-  
-  return [request responseData];
+
+  NSData *response = [request responseData];
+  if (response == nil) {
+    return [ErrorBuilder build:error desc:@"request null" code:ERR_REQUEST_NULL];
+  }
+ 
+  return response;
 }
 
 
@@ -200,29 +220,18 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 -(NSArray *)getImages:(NSString*)key error:(NSError**)error {
 
   DiskCache      *cache = [DiskCache defaultCache];
-
   NSData *data = [cache get:key prefix:@"mi"];
 
   if(data == nil) {
-    return [self buildError:error desc:@"mobiimages (mi) not found" code:3];
+    return nil;
   }
   
   NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   if (mobi_images == nil) {
-    return [self buildError:error desc:@"unarchive failed" code:4];
+    return [ErrorBuilder build:error desc:@"unarchive failed" code:ERR_DESERIALIZING_MI];
   }
 
   return mobi_images;
-}
-
--(id) buildError:(NSError **)error desc:(NSString *)desc code:(NSInteger)code {
-  
-  if (error != nil) {
-    [NSError errorWithDomain:@"screenManager" 
-                        code:code 
-                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedDescriptionKey, desc, nil]];
-  }
-  return nil;
 }
 
 @end
