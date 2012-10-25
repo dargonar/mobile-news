@@ -42,85 +42,58 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 /***********************************************************************************/
 
 
--(NSArray *)getSection:(NSString*)url useCache:(BOOL)useCache {
-  return [self getScreen:url useCache:useCache prefix:@"s"];
+-(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache prefix:@"s" error:error];
 }
 
--(NSArray *)getArticle:(NSString*)url useCache:(BOOL)useCache {
-  return [self getScreen:url useCache:useCache prefix:@"a"];
+-(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
+  return [self getScreen:url useCache:useCache prefix:@"a" error:error];
 }
 
--(NSArray *)getScreen:(NSString*)url useCache:(BOOL)useCache prefix:(NSString*)prefix{
+-(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache prefix:(NSString*)prefix error:(NSError**)error {
   
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  NSData    *xml   = nil;
   
   //Si piden ver la cache
   if (useCache) {
 
-    //Trato de traer el XML original
-    xml = [cache get:key prefix:[prefix stringByAppendingString:@"x"]];
-
-    //Si ya esta el html -> devuelvo (html, list<images>)
-    //NOTA: se devuelven las imagenes y no se disparan las tareas de aca para que lo haga el que llamo, asi tiene tiempo de poner el contenido
-    //      en el webview y no se pierden eventos de JS.
-    
     NSData *html = [cache get:key prefix:prefix];
-
     if (html != nil) {
-      NSArray *mobi_images = [self pendingImages:&xml];
-
-      //Chequeamos si hay que borrar el xml
-      [self remove_xml:key xml:xml mobi_images:mobi_images prefix:prefix];
-
-      return [NSArray arrayWithObjects:html, mobi_images, nil];
-    };
+      return html;
+    }
 
   }
+  
+  //Lo bajo
+  NSData *xml = [self downloadUrl:url];
 
-  //Si no tengo xml (por que no esta o por que me forzaron a ir a la red)
+  //Problemas downloading?
   if (xml == nil) {
-    
-    //Lo bajo
-    xml = [self downloadUrl:url];
-    
-    //Problemas downloading?
-    if (xml == nil) {
-      return nil;
-    }
-    
-    //Cacheamos el xml
-    [cache put:key data:xml prefix:[prefix stringByAppendingString:@"x"]];
+    if(error!=nil){ *error = [NSError errorWithDomain:nil code:1 userInfo:nil]; };
+    return nil;
   }
   
   //Rebuildeamos el xml
-  NSArray *mobi_images = [self pendingImages:&xml];
-
-  if (mobi_images == nil || xml == nil) {
-    return nil; //TODO: por que fue?
+  XMLParser *parser = [[XMLParser alloc] init];
+  NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
+  if (mobi_images == nil) {
+    if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
+    return nil;
   }
+  
+  //Cacheamos las referencias a imagenes
+  NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
+  [cache put:key data:tmp prefix:@"mi"];
   
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url]];
   
-  //Lo storeamos
+  //Lo guardamos y retornamos
   [cache put:key data:html prefix:prefix];
-  
-  //Chequeamos si hay que borrar el xml
-  [self remove_xml:key xml:xml mobi_images:mobi_images prefix:prefix];
-  
-  return [NSArray arrayWithObjects:html, mobi_images, nil];
-}
-
--(void) remove_xml:(NSString*)key xml:(NSData *)xml mobi_images:(NSArray*)mobi_images prefix:(NSString*)prefix{
-  //Borramos el xml de disco si existe y no hay mas imagenes por bajar
-  if (xml != nil && mobi_images != nil && [mobi_images count] == 0 ) {
-    DiskCache *cache = [DiskCache defaultCache];
-    [cache remove:key prefix:[prefix stringByAppendingString:@"x"]];
-  }
- 
+    
+  return html;
 }
 
 -(NSData *)downloadUrl:(NSString*)surl {
@@ -174,23 +147,49 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   return nil;
 }
 
--(NSArray *)pendingImages:(NSData**)xml {
-  XMLParser *parser = [[XMLParser alloc] init];
-  NSArray *images = [parser extractImagesAndRebuild:xml];
+-(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error {
+  
+  NSString *key = [CryptoUtil sha1:url];
+  NSArray *images = [self getImages:key error:error];
   if (images == nil) {
     return nil;
   }
-  
+
+  DiskCache      *cache = [DiskCache defaultCache];
   NSMutableArray *ret = [[NSMutableArray alloc] init];
   
-  DiskCache *cache = [DiskCache defaultCache];
   for (int i=0; i<[images count]; i++) {
     MobiImage *image = [images objectAtIndex:i];
     if( ![cache exists:image.local_uri prefix:@"i"] )
       [ret addObject:image];
   }
+
+  //Vacio? ya estan todas bajadas borramos "mi"
+  if ([ret count] == 0 ) {
+    [cache remove:key prefix:@"mi"];
+  }
   
   return ret;
+}
+
+-(NSArray *)getImages:(NSString*)key error:(NSError**)error {
+
+  DiskCache      *cache = [DiskCache defaultCache];
+
+  NSData *data = [cache get:key prefix:@"mi"];
+
+  if(data == nil) {
+    if(error!=nil){ *error = [NSError errorWithDomain:nil code:1 userInfo:nil]; };
+    return nil;
+  }
+  
+  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  if (mobi_images == nil) {
+    if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
+    return nil;
+  }
+
+  return mobi_images;
 }
 
 @end

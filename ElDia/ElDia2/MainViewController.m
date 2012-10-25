@@ -74,21 +74,21 @@ BOOL cacheCleaned = NO;
   */
   
   [self setCurrentUrl:@"section://main"];
+
+  NSError *err;
   ScreenManager *mgr = [[ScreenManager alloc] init];
-  NSArray *arr = [mgr getSection:@"section://main" useCache:YES];
-  if (arr == nil) {
+  NSData *data = [mgr getSection:@"section://main" useCache:YES error:&err];
+  if (data == nil) {
     return;
   }
-  
-  NSData  *data = [arr objectAtIndex:0];
-  NSArray *imgs = [arr objectAtIndex:1];
-  
+    
   [mainUIWebView loadData:data 
                  MIMEType:@"text/html" 
                  textEncodingName:@"utf-8" 
                  baseURL:[[DiskCache defaultCache] getFolderUrl]];
   
-  [app_delegate downloadImages:imgs obj:self request_url:@"section://main"];
+  NSArray *mobi_images = [mgr getPendingImages:@"section://main" error:&err];
+  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
   
   [self hideLoadingIndicator];
   

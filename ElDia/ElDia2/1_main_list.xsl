@@ -25,7 +25,7 @@
         </xsl:call-template>
         
         <xsl:call-template name="ListadoNoticiasEnListado">
-          <xsl:with-param name="Nodes" select="rss/channel/item[position() > 1]"/>
+          <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 10]"/>
         </xsl:call-template>
       </body>
     </html>
