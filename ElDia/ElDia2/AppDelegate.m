@@ -151,11 +151,19 @@
 
 - (void)requestDone:(ASIHTTPRequest *)request
 {
+  NSDictionary *params = [request userInfo];
+  MobiImage *image = [params objectForKey:@"mi"];
   
+  NSData *data = [request responseData];
+  [[DiskCache defaultCache] store:image.local_uri data:data prefix:@"i"];
+  NSLog(@"Baje url: %@", image.url);
 }
 
 - (void)requestWentWrong:(ASIHTTPRequest *)request
 {
+  NSDictionary *params = [request userInfo];
+  MobiImage *image = [params objectForKey:@"mi"];
 
+  NSLog(@"ERROR url: %@", image.url);
 }
 @end

@@ -12,6 +12,7 @@
 #import "HTMLGenerator.h"
 #import "ASIHTTPRequest.h"
 #import "XMLParser.h"
+#import "MobiImage.h"
 
 NSString * const MAIN_STYLESHEET     = @"1_main_list.xsl";
 NSString * const NOTICIA_STYLESHEET  = @"3_new.xsl";
@@ -159,7 +160,18 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 
 -(NSArray *)pendingImages:(NSData**)xml {
   XMLParser *parser = [[XMLParser alloc] init];
-  return[parser extractImagesAndRebuild:xml];
+  NSArray *images = [parser extractImagesAndRebuild:xml];
+  
+  NSMutableArray *ret = [[NSMutableArray alloc] init];
+  
+  DiskCache *cache = [DiskCache defaultCache];
+  for (int i=0; i<[images count]; i++) {
+    MobiImage *image = [images objectAtIndex:i];
+    if( ![cache file_exists:image.local_uri prefix:@"i"] )
+      [ret addObject:image];
+  }
+  
+  return ret;
 }
 
 @end
