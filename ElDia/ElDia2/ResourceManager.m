@@ -28,9 +28,9 @@
     
     if(!checked)
     {
-      NSArray *filenames = [path componentsSeparatedByString:@"/"];
-      NSString* filename = (NSString*)[filenames objectAtIndex:([filenames count]-1) ];
-      if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",destPath,filename]])
+      //NSArray *filenames = [path componentsSeparatedByString:@"/"];
+      // NSString* filename = (NSString*)[filenames objectAtIndex:([filenames count]-1) ];
+      if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",destPath,path]])
       {
         break;
       }
@@ -41,7 +41,7 @@
     }
     
     NSError* error;
-    if (![[NSFileManager defaultManager] copyItemAtPath:path toPath:destPath error:&error])
+    if (![[NSFileManager defaultManager] copyItemAtPath:[NSString stringWithFormat:@"%@/%@",sourcePath,path] toPath:[NSString stringWithFormat:@"%@/%@",destPath,path] error:&error])
       NSLog(@"Error: %@", error);
     
   }

@@ -132,7 +132,7 @@
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"mi", mobi_image, nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:mobi_image, @"mi", nil];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
 

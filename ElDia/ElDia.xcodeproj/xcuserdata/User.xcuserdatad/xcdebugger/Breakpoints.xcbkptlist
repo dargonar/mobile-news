@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "372818005.247825"
+         timestampString = "372818959.497054"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "191"
-         endingLineNumber = "191"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "-onlineOrShowError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -66,6 +66,19 @@
          startingLineNumber = "20"
          endingLineNumber = "20"
          landmarkName = "-extractImagesAndRebuild:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "372818959.497054"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "172"
+         endingLineNumber = "172"
+         landmarkName = "-setHtmlToView:stop_loading_indicators:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
