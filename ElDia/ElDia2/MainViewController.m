@@ -13,7 +13,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -69,8 +69,7 @@ BOOL errorOn=NO;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
     __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
-    data=nil;
-    dispatch_async(dispatch_get_main_queue(), ^{
+  dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
         if(errorOn)
