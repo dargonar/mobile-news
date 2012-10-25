@@ -15,7 +15,7 @@
   
   
   NSString *sourcePath = [[NSBundle mainBundle] resourcePath];
-  NSString *destPath = [[DiskCache defaultCache] getCacheFolder];
+  NSString *destPath = [[DiskCache defaultCache] getFolder];
   
   NSArray* resContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourcePath error:NULL];
   

@@ -75,23 +75,25 @@ BOOL cacheCleaned = NO;
   
   [self setCurrentUrl:@"section://main"];
   ScreenManager *mgr = [[ScreenManager alloc] init];
-  NSArray *arr = [mgr getSection:self.currentUrl  useCache:YES];
+  NSArray *arr = [mgr getSection:@"section://main" useCache:YES];
+  if (arr == nil) {
+    return;
+  }
   
   NSData  *data = [arr objectAtIndex:0];
   NSArray *imgs = [arr objectAtIndex:1];
   
-  NSString *dirPath = [[DiskCache defaultCache] getCacheFolder] ;//[[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
+  [mainUIWebView loadData:data 
+                 MIMEType:@"text/html" 
+                 textEncodingName:@"utf-8" 
+                 baseURL:[[DiskCache defaultCache] getFolderUrl]];
   
-  [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
-  [app_delegate downloadImages:imgs obj:self request_url:self.currentUrl];
+  [app_delegate downloadImages:imgs obj:self request_url:@"section://main"];
   
   [self hideLoadingIndicator];
   
   mgr = nil;
 
-  
   NSLog(@"MainViewController::viewDidLoad termina");
   
 }
@@ -168,7 +170,8 @@ BOOL cacheCleaned = NO;
     return;
   }
   NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
-  NSString *dirPath = [[DiskCache defaultCache] getCacheFolder] ;//[[NSBundle mainBundle] bundlePath];
+
+  NSString *dirPath = [[DiskCache defaultCache] getFolder];
  	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
   
   [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];

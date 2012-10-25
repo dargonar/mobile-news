@@ -17,8 +17,10 @@
 // Parseo el xml en busca de imagenes, las retorno en un array y modifico el path de la imagen.
 -(NSArray*)extractImagesAndRebuild:(NSData**)xml_data{
   
+  NSMutableArray *mobi_images = [[NSMutableArray alloc] init];
+  
   if (*xml_data == nil) {
-    return nil;
+    return mobi_images;
   }
   
   //rss/channel/item/media:thumbnail@url
@@ -26,11 +28,9 @@
   NSError *error;
   GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:&error];
   if (doc == nil)
-  { return nil; }
+    return nil;
   
   NSArray *items = [doc nodesForXPath:@"//rss/channel/item" error:nil];
-  //NSLog(@"%@", doc.rootElement);
-  NSMutableArray *mobi_images = [[NSMutableArray alloc] init];
   
   for (int i=0; i<[items count]; i++) {
     GDataXMLElement *item = (GDataXMLElement *)[items objectAtIndex:i];
@@ -70,10 +70,7 @@
 }
 
 -(void)setUrlAttribute:(NSArray*)elements value:(NSString*)value{
-  //NSLog(@"setUrlAttribute antes de setear VALUE: %@",value);
   [[((GDataXMLElement*) [elements objectAtIndex:0]) attributeForName:@"url"] setStringValue:value];
-  //NSLog(@"setUrlAttribute seteado?? VALUE: %@",[self urlAttribute:elements]);
-  
 }
 
 -(NSString*)urlAttribute:(NSArray*)elements{
