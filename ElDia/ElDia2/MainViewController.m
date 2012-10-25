@@ -80,7 +80,11 @@ BOOL cacheCleaned = NO;
   NSArray *imgs = [arr objectAtIndex:1];
   
   [mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
-
+  
+  [app_delegate downloadImages:imgs];
+  
+  [self hideLoadingIndicator];
+  
   mgr = nil;
 
   
