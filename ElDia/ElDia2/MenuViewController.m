@@ -221,10 +221,9 @@ BOOL html_set=NO;
   NSURL* url = [request URL];
   if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_SECTION])
   {
-    [[MainViewController sharedInstance] loadSectionNews:url];
+    //[[MainViewController sharedInstance] loadSectionNews:url];
+    //ToDo -> llamar al main view
     [self slideThenHide];
-    //[app_delegate.navigationController popViewControllerAnimated:YES];
-    
     return NO;
   }
   return YES;

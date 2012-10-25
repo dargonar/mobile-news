@@ -187,7 +187,7 @@
   NSLog(@"Baje url: %@", image.url);
  
   NSString *url = [params objectForKey:@"url"];
-  MainViewController *obj = (MainViewController*)[params objectForKey:@"id"];
+  BaseMobiViewController *obj = (BaseMobiViewController*)[params objectForKey:@"id"];
   [obj onImageDownloaded:image url:url];
   
 }
