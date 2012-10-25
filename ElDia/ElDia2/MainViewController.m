@@ -34,42 +34,42 @@ BOOL errorOn=NO;
 {
   [super viewDidLoad];
   
-  [self setCurrentUrl:@"section://main"];
+  NSString *mainUrl = @"section://main";
+  [self setCurrentUrl:mainUrl];
 
-  if([self.mScreenManager sectionExists:self.currentUrl])
+  if([self.mScreenManager sectionExists:mainUrl])
   {
     NSError *err;
-    NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
-    [self setHTML:data url:self.currentUrl];
+    NSData *data = [self.mScreenManager getSection:mainUrl useCache:YES error:&err];
+    [self setHTML:data url:mainUrl];
     splashOn=NO;
     return;
   }
   
   splashOn=YES;
   [self showWelcomeLoadingIndicator];
-  
 }
 
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
   NSString* url = [self.currentUrl copy];
+
   NSDate * date =[self.mScreenManager sectionDate:url];
   if( ![self isOld:date])
     return;
   
-  //[self showRefreshLoadingIndicator];
-  
-  [self reloadUrl:url];
+  [self reloadUrl:url useCache:YES];
   
 }
 
--(void)reloadUrl:(NSString*)url{
+-(void)reloadUrl:(NSString*)url useCache:(BOOL)useCache {
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
-    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
-  dispatch_async(dispatch_get_main_queue(), ^{
+    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
+    //data=nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
         if(errorOn)
@@ -122,6 +122,8 @@ BOOL errorOn=NO;
 - (IBAction) btnRefreshClick: (id)param{
   [self showRefreshLoadingIndicator];
   //ToDo
+  NSString* url = [self.currentUrl copy];
+  [self reloadUrl:url useCache:NO];
 }
 
 - (IBAction) btnRefresh2Click: (id)param{
@@ -130,8 +132,7 @@ BOOL errorOn=NO;
   [self.refresh_loading_indicator2 startAnimating];
   errorOn=YES;
   NSString* url = [self.currentUrl copy];
-  [self reloadUrl:url];
-
+  [self reloadUrl:url useCache:NO];
 }
 
 

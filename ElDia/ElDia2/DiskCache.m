@@ -14,6 +14,7 @@
 
 NSString* cache_folder;
 int       max_size;
+BOOL      init_ok = NO;
 
 + (DiskCache *) defaultCache
 {
@@ -29,10 +30,11 @@ int       max_size;
 
 -(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix{
   return [NSString stringWithFormat:@"%@/%@_%@", cache_folder, prefix, key];
-  
 }
 
 -(NSData*)get:(NSString*)key prefix:(NSString*)prefix{
+  if(!init_ok) return nil;
+
   if(![self exists:key prefix:prefix])
     return nil;
   
@@ -40,51 +42,62 @@ int       max_size;
   return [fileManager contentsAtPath:[self getFileName:key prefix:prefix]];
 }
 
--(void)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
+-(BOOL)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
+  if(!init_ok) return nil;
+
   NSString* file=[self getFileName:key prefix:prefix];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  [fileManager createFileAtPath:file contents:data attributes:nil];
-  
-  fileManager=nil;
-  file=nil;
-  
+  return [fileManager createFileAtPath:file contents:data attributes:nil];
 }
 
--(void)remove:(NSString*)key prefix:(NSString*)prefix{
+-(BOOL)remove:(NSString*)key prefix:(NSString*)prefix{
+  if(!init_ok) return;
 
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
 
   NSError *err = nil;
-  [fileManager removeItemAtPath:file error:&err];
+  return [fileManager removeItemAtPath:file error:&err];
 }
 
 -(BOOL)exists:(NSString *)key prefix:(NSString *)prefix {
+  if(!init_ok) return NO;
+  
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager fileExistsAtPath:file isDirectory:nil];
 }
 
 -(NSString*)getFolder{
+  if(!init_ok) return nil;
   return cache_folder;
 }
 
 -(NSURL*)getFolderUrl{
+  if(!init_ok) return nil;
   return [[NSURL alloc] initFileURLWithPath:cache_folder isDirectory:YES];
 }
 
 -(void) create_folder:(NSString*)folder_name
 {
-  BOOL isDir=YES;
+  init_ok = YES;
+  
+  BOOL isDir;
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  if(![fileManager fileExistsAtPath:folder_name isDirectory:&isDir])
-    if(![fileManager createDirectoryAtPath:folder_name withIntermediateDirectories:YES attributes:nil error:NULL])
-      NSLog(@"Error: Create folder failed %@", folder_name);
-  fileManager=nil;
 
+  //Existe y es un folder?
+  BOOL exists = [fileManager fileExistsAtPath:folder_name isDirectory:&isDir];
+  if(exists && isDir)
+    return;
+  
+  //No existe y lo creo ok?
+  if([fileManager createDirectoryAtPath:folder_name withIntermediateDirectories:YES attributes:nil error:NULL])
+    return;
+  
+  //No pudimos inicializar / no hay cache
+  init_ok = NO;
 }
-
 
 -(void)configure:(NSString*)root_dir cache_size:(int)cache_size {
   
@@ -96,7 +109,8 @@ int       max_size;
 }
 
 -(NSDate *)createdAt:(NSString*)key prefix:(NSString*)prefix{
-
+  if(!init_ok) return nil;
+  
   NSFileManager *fileManager= [NSFileManager defaultManager];
   NSString* fileName=[self getFileName:key prefix:prefix];
   if(![self exists:key prefix:prefix])
@@ -114,7 +128,7 @@ int       max_size;
 }
 
 -(unsigned long long) size {
-
+  if(!init_ok) return 0;
   NSFileManager *fileManager= [NSFileManager defaultManager];
   
   NSArray *filesArray = [fileManager subpathsOfDirectoryAtPath:cache_folder error:nil];
@@ -135,7 +149,7 @@ int       max_size;
 }
 
 -(void) purge {
-  
+  if(!init_ok) return;  
 }
 
 

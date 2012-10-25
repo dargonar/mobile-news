@@ -15,8 +15,8 @@
 -(void)configure:(NSString*)root_dir cache_size:(int)cache_size;
   
 -(NSData*)   get:(NSString*)key prefix:(NSString*)prefix;
--(void)      put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
--(void)      remove:(NSString*)key prefix:(NSString*)prefix;
+-(BOOL)      put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
+-(BOOL)      remove:(NSString*)key prefix:(NSString*)prefix;
 -(BOOL)      exists:(NSString*)key prefix:(NSString*)prefix;
 
 -(NSDate *)createdAt:(NSString*)key prefix:(NSString*)prefix;

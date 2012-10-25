@@ -18,15 +18,23 @@
 #include <libxslt/xsltutils.h>
 
 #import "HTMLGenerator.h"
+#import "ErrorBuilder.h"
 
 @implementation HTMLGenerator
-- (NSData*)generate:(NSData*)xml  xslt_file:(NSString*)xslt_file {
+- (NSData*)generate:(NSData*)xml  xslt_file:(NSString*)xslt_file error:(NSError**)error {
 
   xmlSubstituteEntitiesDefault(1);
 	xmlLoadExtDtdDefaultValue = 1;
+
+  if ( xslt_file == nil || xml == nil ) {
+    return [ErrorBuilder build:error desc:@"invalid xlst param" code:ERR_INVALID_XSL_PARAM];
+  }
   
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
-	
+	if (cur == nil || !cur) {
+    return [ErrorBuilder build:error desc:@"xsltParseStylesheetFile nil" code:0x2004]; //HACK: ERR_INVALID_XSL 
+  }
+  
   const char *tmp = [xml bytes];
   int   len2      = [xml length];
   
@@ -34,15 +42,13 @@
   
   if(doc==nil || !doc)
   {
-    NSLog(@"HTMLGenerator::generate INVALID XML");
-    return nil;
+    return [ErrorBuilder build:error desc:@"invalid xml" code:ERR_INVALID_XML];
   }
   
   xmlDocPtr res = xsltApplyStylesheet(cur, doc, NULL);
   if(doc==res || !res)
   {
-    NSLog(@"HTMLGenerator::generate INVALID XSL");
-    return nil;
+    return [ErrorBuilder build:error desc:@"xsl transform error" code:ERR_XSL_TANSFORM];
   }
   
   xmlChar *html = 0;
@@ -56,6 +62,10 @@
   
   xsltCleanupGlobals();
   xmlCleanupParser();
+  
+  if (html == nil || !html || len == 0 ) {
+    return [ErrorBuilder build:error desc:@"html null or zero" code:ERR_GENERATED_HTML];
+  }
   
   return   [NSData dataWithBytes:(const void *)html length:len];
 }

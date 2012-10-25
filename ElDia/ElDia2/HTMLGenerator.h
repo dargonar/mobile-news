@@ -13,5 +13,5 @@
 #import <Foundation/Foundation.h>
 
 @interface HTMLGenerator : NSObject
-- (NSData*)generate:(NSData*)xml  xslt_file:(NSString*)xslt_file;
+- (NSData*)generate:(NSData*)xml  xslt_file:(NSString*)xslt_file error:(NSError**)error;
 @end

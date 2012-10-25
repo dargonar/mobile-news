@@ -75,9 +75,8 @@
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSError *err;
-     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
-     [app_delegate downloadImages:mobi_images obj:self request_url:url];
-     
+    NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
+    [app_delegate downloadImages:mobi_images obj:self request_url:url];
   });
 }
 -(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url{

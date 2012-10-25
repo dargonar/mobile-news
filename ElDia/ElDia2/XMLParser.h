@@ -10,5 +10,5 @@
 
 @interface XMLParser : NSObject
 
--(NSArray*)extractImagesAndRebuild:(NSData**)xml_data;
+-(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError**)error;
 @end
