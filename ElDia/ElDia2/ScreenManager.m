@@ -13,9 +13,9 @@
 #import "ASIHTTPRequest.h"
 #import "XMLParser.h"
 
-NSString * const MAIN_STYLESHEET     = @"http://www.eldia.com.ar/rss/index.aspx";
-NSString * const NOTICIA_STYLESHEET  = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
-NSString * const SECTIONS_STYLESHEET = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
+NSString * const MAIN_STYLESHEET     = @"1_main_list.xsl";
+NSString * const NOTICIA_STYLESHEET  = @"3_new.xsl";
+NSString * const SECTIONS_STYLESHEET = @"2_section_list.xsl";
 
 NSString * const MAIN_URL     = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL  = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
@@ -124,15 +124,15 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 -(NSString*)getStyleSheet:(NSString*)url {
 
   if( [url hasPrefix:@"section://main"] ) {
-    return MAIN_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MAIN_STYLESHEET];
   }
   
   if( [url hasPrefix:@"noticia://" ] ) {  
-    return NOTICIA_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:NOTICIA_STYLESHEET];
   }
   
   if( [url hasPrefix:@"section://"] ) {  
-    return SECTIONS_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SECTIONS_STYLESHEET];
   }
 
   return nil;

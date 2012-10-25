@@ -28,7 +28,7 @@
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	
   const char *tmp = [xml bytes];
-  int   len2      = strlen(tmp);
+  int   len2      = [xml length];
   
   xmlDocPtr doc = xmlParseMemory(tmp,len2);
   
@@ -39,6 +39,11 @@
   }
   
   xmlDocPtr res = xsltApplyStylesheet(cur, doc, NULL);
+  if(doc==res || !res)
+  {
+    NSLog(@"HTMLGenerator::generate INVALID XSL");
+    return nil;
+  }
   
   xmlChar *html = 0;
   int len=0;
