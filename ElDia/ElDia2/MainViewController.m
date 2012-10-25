@@ -195,7 +195,7 @@ BOOL cacheCleaned = NO;
                          , mobi_image.local_uri
                          , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
   
-  NSLog(@" llego imigi: %@", mobi_image.local_uri);
+  NSLog(@" js: %@", jsString);
   
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
