@@ -88,14 +88,14 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   if (xml == nil) {
     return [self buildError:error desc:@"download xml" code:1];
   }
+
   if(processImages)
   {
     //Rebuildeamos el xml
     XMLParser *parser = [[XMLParser alloc] init];
     NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
     if (mobi_images == nil) {
-      if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
-      return nil;
+      return [self buildError:error desc:@"extracting images" code:2];
     }
     
     //Cacheamos las referencias a imagenes
@@ -111,11 +111,6 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   [cache put:key data:html prefix:prefix];
     
   return html;
-}
-
--(NSData *) errorDownloading:(NSError **)error {
-  if(error!=nil){ *error = [NSError errorWithDomain:@"error" code:1 userInfo:nil]; };
-  return nil;
 }
 
 -(NSData *)downloadUrl:(NSString*)surl {
