@@ -53,7 +53,6 @@ BOOL cacheCleaned = NO;
 
   if([self.mScreenManager sectionExists:self.currentUrl])
   {
-    [self showRefreshLoadingIndicator];
     NSError *err;
     NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
     [mainUIWebView  loadData:data
@@ -63,6 +62,7 @@ BOOL cacheCleaned = NO;
     splashOn=NO;
     return;
   }
+  
   splashOn=YES;
   [self showWelcomeLoadingIndicator];
   
@@ -94,7 +94,6 @@ BOOL cacheCleaned = NO;
                       MIMEType:@"text/html"
                       textEncodingName:@"utf-8"
                       baseURL:[[DiskCache defaultCache] getFolderUrl]];
-      [self hideLoadingIndicator];
       data=nil;
       
     });
