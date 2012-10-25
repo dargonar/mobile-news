@@ -14,15 +14,28 @@
 #import "XMLParser.h"
 #import "MobiImage.h"
 
-NSString * const MAIN_STYLESHEET     = @"1_main_list.xsl";
-NSString * const NOTICIA_STYLESHEET  = @"3_new.xsl";
-NSString * const SECTIONS_STYLESHEET = @"2_section_list.xsl";
+NSString * const MAIN_STYLESHEET      = @"1_main_list.xsl";
+NSString * const NOTICIA_STYLESHEET   = @"3_new.xsl";
+NSString * const SECTIONS_STYLESHEET  = @"2_section_list.xsl";
+NSString * const MENU_STYLESHEET      = @"4_menu.xsl";
 
 NSString * const MAIN_URL     = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL  = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
 NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
+NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 
 @implementation ScreenManager
+
+-(NSDate*) sectionDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"s"];
+}
+
+/**/
+-(BOOL) menuExists:(NSString*)url {
+  return [self screenExists:url prefix:@"m"];
+}
 
 -(BOOL) sectionExists:(NSString*)url {
   return [self screenExists:url prefix:@"s"];
@@ -41,16 +54,19 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
 
 /***********************************************************************************/
 
+-(NSData *)getMenu:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:@"menu://" useCache:useCache processImages:NO prefix:@"m" error:error];
+}
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache prefix:@"s" error:error];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
-  return [self getScreen:url useCache:useCache prefix:@"a" error:error];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error];
 }
 
--(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache prefix:(NSString*)prefix error:(NSError**)error {
+-(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error {
   
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
@@ -72,17 +88,20 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
   if (xml == nil) {
     return [self buildError:error desc:@"download xml" code:1];
   }
-  
-  //Rebuildeamos el xml
-  XMLParser *parser = [[XMLParser alloc] init];
-  NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
-  if (mobi_images == nil) {
-    return [self buildError:error desc:@"extracting images" code:2];
+  if(processImages)
+  {
+    //Rebuildeamos el xml
+    XMLParser *parser = [[XMLParser alloc] init];
+    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml];
+    if (mobi_images == nil) {
+      if(error!=nil){ *error = [NSError errorWithDomain:nil code:2 userInfo:nil]; };
+      return nil;
+    }
+    
+    //Cacheamos las referencias a imagenes
+    NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
+    [cache put:key data:tmp prefix:@"mi"];
   }
-  
-  //Cacheamos las referencias a imagenes
-  NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
-  [cache put:key data:tmp prefix:@"mi"];
   
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
@@ -128,6 +147,9 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SECTIONS_STYLESHEET];
   }
 
+  if( [url hasPrefix:@"menu://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MENU_STYLESHEET];
+  }
   return nil;
 }
 
@@ -142,10 +164,15 @@ NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion
     return [NSURL URLWithString:[NSString stringWithFormat:NOTICIA_URL,[tmp host]]];
   }
   
-  if( [url hasPrefix:@"section://"] ) {  
+  if( [url hasPrefix:@"section://"] ) {
     NSURL *tmp = [NSURL URLWithString:url];
     return [NSURL URLWithString:[NSString stringWithFormat:SECTIONS_URL,[tmp host]]];
   }
+
+  if( [url hasPrefix:@"menu://"] ) {
+    return [NSURL URLWithString:MENU_URL];
+  }
+  
 
   return nil;
 }

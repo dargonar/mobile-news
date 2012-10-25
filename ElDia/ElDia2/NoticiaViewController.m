@@ -77,12 +77,7 @@
     {
       
       NSLog(@"NoticiaViewController::changeFontSize delta=0 ");
-      //textFontSize = defaultTextFontSize;
     }
-    
-  //NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';document.getElementById('informacion').style.lineHeight= '%fem';", textFontSize, (textFontSize+0.2)];
-  
-  //NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%fem';document.getElementById('bajada').style.lineHeight= '%fem';", textFontSize+0.2, (textFontSize+0.3)];
   
   NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';", textFontSize];
   

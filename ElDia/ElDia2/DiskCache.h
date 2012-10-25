@@ -19,6 +19,8 @@
 -(void)      remove:(NSString*)key prefix:(NSString*)prefix;
 -(BOOL)      exists:(NSString*)key prefix:(NSString*)prefix;
 
+-(NSDate *)createdAt:(NSString*)key prefix:(NSString*)prefix;
+
 -(unsigned long long) size;
 -(void)      purge;
 

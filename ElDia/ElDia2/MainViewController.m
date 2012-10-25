@@ -17,6 +17,7 @@
 @synthesize mainUIWebView, mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha,
             welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl, currentUrl;
 
+BOOL splashOn=NO;
 static MainViewController *sharedInstance = nil;
 NSString *sectionId = nil;
 BOOL cacheCleaned = NO;
@@ -38,63 +39,67 @@ BOOL cacheCleaned = NO;
   
   return self;
 }
-/*
-+ (MainViewController *) sharedInstance
-{
-  static MainViewController *sharedInstance = NULL;
-  @synchronized(self)
-  {
-    if(sharedInstance == NULL)
-      sharedInstance = [[MainViewController alloc] init];
-  }
-  
-  return sharedInstance;
-}
-*/
 
+/*
+- (void)loadImages{
+  NSArray *mobi_images = [self.mScreenManager getPendingImages:@"section://main" error:&err];
+  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
+  
+}*/
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-  
-  iToastSettings *theSettings = [iToastSettings getSharedSettings];
-  theSettings.duration = 2500;
-  /*
-  bool firstTimeUse = [self isFirstTimeUse];
-  if(firstTimeUse)
-    [self showWelcomeLoadingIndicator];
-  else
-    [self showMainLoadingIndicator];
- 
-  [self loadLastKnownIndex];
-  
-  [self loadIndex:YES];
-   
-  [self loadNoticiaView];
-  */
+  [self configureToast];
   
   [self setCurrentUrl:@"section://main"];
 
-  NSError *err;
-  ScreenManager *mgr = [[ScreenManager alloc] init];
-  NSData *data = [mgr getSection:@"section://main" useCache:YES error:&err];
-  if (data == nil) {
+  if([self.mScreenManager sectionExists:self.currentUrl])
+  {
+    [self showRefreshLoadingIndicator];
+    NSError *err;
+    NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
+    [mainUIWebView  loadData:data
+                    MIMEType:@"text/html"
+                    textEncodingName:@"utf-8"
+                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
+    splashOn=NO;
     return;
   }
-    
-  [mainUIWebView loadData:data 
-                 MIMEType:@"text/html" 
-                 textEncodingName:@"utf-8" 
-                 baseURL:[[DiskCache defaultCache] getFolderUrl]];
+  splashOn=YES;
+  [self showWelcomeLoadingIndicator];
   
-  NSArray *mobi_images = [mgr getPendingImages:@"section://main" error:&err];
-  [app_delegate downloadImages:mobi_images obj:self request_url:@"section://main"];
-  
-  [self hideLoadingIndicator];
-  
-  mgr = nil;
+}
 
-  NSLog(@"MainViewController::viewDidLoad termina");
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+
+  if( ![self isOld:[self.mScreenManager sectionDate:self.currentUrl]])
+    return;
+  
+  [self showRefreshLoadingIndicator];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    __block NSError *err;
+    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if(data==nil)
+      {
+        if(splashOn)
+        {
+          //paro el loading del splash y muestro un ewarning  + un boton de reload.
+        }
+        return;
+      }
+      [mainUIWebView  loadData:data
+                      MIMEType:@"text/html"
+                      textEncodingName:@"utf-8"
+                      baseURL:[[DiskCache defaultCache] getFolderUrl]];
+      data=nil;
+      
+    });
+  });
   
 }
 
@@ -107,6 +112,8 @@ BOOL cacheCleaned = NO;
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
+  self.mScreenManager=nil;
+  
   self.myNoticiaViewController =nil;
   self.mYMobiPaperLib = nil;
   
@@ -190,17 +197,16 @@ BOOL cacheCleaned = NO;
   if(self.currentUrl!=url)
     return;
   
-  NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
+  __block NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
                          , mobi_image.local_uri
                          , mobi_image.local_uri
                          , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
   
-  NSLog(@" js: %@", jsString);
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    jsString=nil;
+  });
   
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  
-  jsString=nil;
-  return;
 }
 
 -(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
@@ -292,8 +298,6 @@ BOOL cacheCleaned = NO;
       }
       data=nil;
       
-      //[[[iToast makeText:@"Marky... chupame el moco!"] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:50] show];
-
     });
   });
 }
@@ -305,17 +309,7 @@ BOOL cacheCleaned = NO;
   [self hideLoadingIndicator];
   [self showRefreshLoadingIndicator];
   data=nil;
-  /*
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    __block NSData* data=[self.mYMobiPaperLib getChachedDataAndConfigure:YMobiNavigationTypeMain queryString:nil xsl:XSL_PATH_MAIN_LIST tag:MSG_GET_MAIN fire_event:NO];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if(data!=nil)
-        [self setHtmlToView:data  stop_loading_indicators:YES];
-      [self showRefreshLoadingIndicator];
-      data=nil;
-    });
-  });
-   */
+  
 }
 
 
@@ -407,13 +401,16 @@ BOOL cacheCleaned = NO;
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+  //ToDo: mostrar algo sif necessary.
+  [self hideLoadingIndicator];
+  
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  //[webView stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"];
+  [self hideLoadingIndicator];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request

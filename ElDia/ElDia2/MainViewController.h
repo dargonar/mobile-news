@@ -11,8 +11,9 @@
 #import "NoticiaViewController.h"
 #import "YMobiPaperLib.h"
 #import "MobiImage.h"
+#import "BaseMobiViewController.h"
 
-@interface MainViewController : UIViewController<UIWebViewDelegate, YMobiPaperLibDelegate>
+@interface MainViewController : BaseMobiViewController<UIWebViewDelegate, YMobiPaperLibDelegate>
 {
   YMobiPaperLib *mYMobiPaperLib;
   NoticiaViewController *myNoticiaViewController;
