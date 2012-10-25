@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "NoticiaViewController.h"
-#import "YMobiPaperLib.h"
 #import "BaseMobiViewController.h"
 
-@interface MainViewController : BaseMobiViewController<UIWebViewDelegate, YMobiPaperLibDelegate>
+@interface MainViewController : BaseMobiViewController<UIWebViewDelegate>
 {
-  YMobiPaperLib *mYMobiPaperLib;
   NoticiaViewController *myNoticiaViewController;
   NSString* current_url;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
-@property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
@@ -29,12 +26,15 @@
 @property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
 @property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
 
-@property (nonatomic, retain) IBOutlet UIImageView *welcome_imgvw;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;
+@property (nonatomic, retain) IBOutlet UIView *welcome_view;
+@property (nonatomic, retain) IBOutlet UIView *error_view;
+
+@property (nonatomic, retain) IBOutlet UIButton *btnRefresh2;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator2;
 
 - (IBAction) btnOptionsClick: (id)param;
 - (IBAction) btnRefreshClick: (id)param;
-
+- (IBAction) btnRefresh2Click: (id)param;
 
 -(void) showRefreshLoadingIndicator;
 -(void) showMainLoadingIndicator;
@@ -42,9 +42,6 @@
 -(void) hideLoadingIndicator;
 -(void) hideRefreshLoadingIndicator;
 
--(void)showError:(NSString*)title message:(NSString*)message;
--(BOOL)checkAndShowError;
--(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded;
 //~/Library/Application Support/iPhone Simulator/
 
 

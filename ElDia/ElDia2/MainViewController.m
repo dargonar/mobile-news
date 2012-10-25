@@ -13,27 +13,19 @@
 
 
 @implementation MainViewController
-@synthesize mYMobiPaperLib, myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_imgvw, welcome_indicator, offline_imgvw, offline_lbl;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view;
 
 BOOL splashOn=NO;
-static MainViewController *sharedInstance = nil;
-NSString *sectionId = nil;
-BOOL cacheCleaned = NO;
+BOOL errorOn=NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self configureToast];
+      splashOn = NO;
+      errorOn = NO;
     }
-  
-  self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
-  self.mYMobiPaperLib.delegate = self;
-
-  sharedInstance = nil;
-  sectionId = nil;
-  cacheCleaned = NO;
-  sharedInstance=self;
   
   return self;
 }
@@ -66,17 +58,30 @@ BOOL cacheCleaned = NO;
   if( ![self isOld:date])
     return;
   
-  [self showRefreshLoadingIndicator];
+  //[self showRefreshLoadingIndicator];
+  
+  [self reloadUrl:url];
+  
+}
+
+-(void)reloadUrl:(NSString*)url{
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
     __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
-    
+    data=nil;
     dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
+        if(errorOn)
+        {
+          [self.refresh_loading_indicator2 stopAnimating];
+          self.btnRefresh2.hidden=NO;
+        }
         if(splashOn)
         {
+          self.error_view.hidden=NO;
+          [self hideLoadingIndicator];
           //paro el loading del splash y muestro un ewarning  + un boton de reload.
         }
         return;
@@ -89,9 +94,7 @@ BOOL cacheCleaned = NO;
       
     });
   });
-  
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
@@ -105,19 +108,12 @@ BOOL cacheCleaned = NO;
   self.mScreenManager=nil;
   
   self.myNoticiaViewController =nil;
-  self.mYMobiPaperLib = nil;
   
   self.btnRefreshClick = nil;
   self.mainUIWebView= nil;
   self.refresh_loading_indicator= nil;
-  self.welcome_imgvw=nil;
-  self.welcome_indicator=nil;
+  self.welcome_view=nil;
 } 
-
-+(MainViewController *)sharedInstance{
-  return sharedInstance;
-}
-
 
 
 - (IBAction) btnOptionsClick: (id)param{
@@ -125,49 +121,19 @@ BOOL cacheCleaned = NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
-
-  
   [self showRefreshLoadingIndicator];
   //ToDo
 }
 
-
--(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
-  
-  BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
-  
-  if(!online&&showAlertIfNeeded)
-  {
-    [self showError:@"OFFLINE" message:@"Contenido del diario inalcanzable. Actualice la pantalla mas tarde."];
-  }
-  else{
-    NSLog(@"onlineOrShowError NI err||offline");
-  }
-  
-  self.offline_imgvw.hidden=online;
-  self.offline_lbl.hidden=online;
-  //if(!online) [self hideLoadingIndicator];
-  
-  return online;
-}
-
--(BOOL)checkAndShowError{
-  NSError*err=[mYMobiPaperLib getLasError];
-  if(err==nil )
-    return NO;
-  [self showError:@"Aviso" message:@"Ha ocurrido un error. Actualice la pantalla mas tarde."];
-  return YES;
-  
-}
-  
--(void)showError:(NSString*)title message:(NSString*)message{
-  
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-  [alert show];
-  alert=nil;
+- (IBAction) btnRefresh2Click: (id)param{
+  self.btnRefresh2.hidden=YES;
+  self.refresh_loading_indicator2.hidden=NO;
+  [self.refresh_loading_indicator2 startAnimating];
+  errorOn=YES;
+  NSString* url = [self.currentUrl copy];
+  [self reloadUrl:url];
 
 }
-
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -187,9 +153,7 @@ BOOL cacheCleaned = NO;
   [self showRefreshLoadingIndicator];
 }
 -(void) showWelcomeLoadingIndicator{
-  self.welcome_imgvw.hidden = NO;
-  self.welcome_indicator.hidden = NO;
-  [self.welcome_indicator startAnimating];
+  welcome_view.hidden = NO;
   [self showRefreshLoadingIndicator];
 }
 
@@ -200,9 +164,7 @@ BOOL cacheCleaned = NO;
   
   [self hideRefreshLoadingIndicator];
   
-  self.welcome_imgvw.hidden = YES;
-  self.welcome_indicator.hidden = YES;
-  [self.welcome_indicator stopAnimating];
+  welcome_view.hidden = YES;
   
   self.logo_imgvw_alpha.hidden = YES;
  
@@ -214,26 +176,9 @@ BOOL cacheCleaned = NO;
   [self.refresh_loading_indicator stopAnimating];
 }
 
-//YMobiPaperDelegate implementation
-- (void) requestSuccessful:(id)data message:(NSString*)message{
-  
-  NSLog(@"MainViewController::requestSuccesfull message: %@", message);
-
-  [self hideLoadingIndicator];
-  
-}
-
-- (void) requestFailed:(id)error message:(NSString*)message{
-  [self hideLoadingIndicator];
-  [self showMessage:@"Ha ocurrido un error. Actualice la pantalla."];
-}
-
 -(void)showMessage:(NSString*)message{
   NSInteger top=50;
-  if(sectionId!=nil)
-  {
-    top=80;
-  }
+  top=80;
   
   [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:top] show];
 
@@ -244,7 +189,7 @@ BOOL cacheCleaned = NO;
 {
   //ToDo: mostrar algo sif necessary.
   [self hideLoadingIndicator];
-  
+  self.error_view.hidden=YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
