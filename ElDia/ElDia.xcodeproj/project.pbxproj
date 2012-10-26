@@ -269,6 +269,8 @@
 		CEF6A9F216273CB70032052A /* YoutubeViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */; };
 		CEF7C2C7162361200040E9AC /* thumbnails.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C5162361200040E9AC /* thumbnails.png */; };
 		CEF7C2C8162361200040E9AC /* thumbnails@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF7C2C6162361200040E9AC /* thumbnails@2x.png */; };
+		CEF9FC9C163B2EED00E45995 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9FC9B163B2EED00E45995 /* Utils.m */; };
+		CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEF9FC9E163B472D00E45995 /* url-encode.xsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -712,6 +714,9 @@
 		CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YoutubeViewController_iPad.xib; sourceTree = "<group>"; };
 		CEF7C2C5162361200040E9AC /* thumbnails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnails.png; sourceTree = "<group>"; };
 		CEF7C2C6162361200040E9AC /* thumbnails@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnails@2x.png"; sourceTree = "<group>"; };
+		CEF9FC9A163B2EED00E45995 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		CEF9FC9B163B2EED00E45995 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		CEF9FC9E163B472D00E45995 /* url-encode.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "url-encode.xsl"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1322,6 +1327,7 @@
 				CE83715916128D9800FC8269 /* css */,
 				CE83715B16128D9800FC8269 /* img */,
 				CE83716D16128D9800FC8269 /* 3_new.xsl */,
+				CEF9FC9E163B472D00E45995 /* url-encode.xsl */,
 				CE83716E16128D9800FC8269 /* 4_menu.xsl */,
 				CE83716F16128D9800FC8269 /* functions.xsl */,
 				CEECEE49161D2FBF00926433 /* _noticias_id_array.xsl */,
@@ -1628,6 +1634,8 @@
 				6050EF1F16388B0F00DE98ED /* ScreenManager.m */,
 				605C9A961639D6F100CBD806 /* ErrorBuilder.h */,
 				605C9A971639D6F100CBD806 /* ErrorBuilder.m */,
+				CEF9FC9A163B2EED00E45995 /* Utils.h */,
+				CEF9FC9B163B2EED00E45995 /* Utils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1803,6 +1811,7 @@
 				CED2A5D81630F9EA0027DFF1 /* Icon.png in Resources */,
 				CED2A5DA1630F9F60027DFF1 /* Default@2x.png in Resources */,
 				CEECF0E41639845300058824 /* warning.png in Resources */,
+				CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1967,6 +1976,7 @@
 				6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */,
 				CEECF0E8163988DB00058824 /* BaseMobiViewController.m in Sources */,
 				605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */,
+				CEF9FC9C163B2EED00E45995 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

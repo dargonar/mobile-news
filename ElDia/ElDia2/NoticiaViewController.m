@@ -8,52 +8,19 @@
 
 #import "NoticiaViewController.h"
 #import "AppDelegate.h"
-#import "RegexKitLite.h"
 #import "SHK.h"
 #import "ConfigHelper.h"
 #import "iToast.h"
+#import "Utils.h"
 
 #import "HCYoutubeParser.h"
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus, loading_indicator, noticia_id, noticia_metadata, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw, offline_lbl;
+@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus,
+            loading_indicator, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw, offline_lbl,
+            noticia_id, noticia_url, noticia_title, noticia_bajada;
 
--(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded{
-  
-  BOOL online = [self.mYMobiPaperLib areWeConnectedToInternet];
-  
-  if(!online&&showAlertIfNeeded)
-  {
-    [self showError:@"OFFLINE" message:@"Contenido del diario inalcanzable. Actualice la pantalla mas tarde."];
-  }
-  else{
-    NSLog(@"onlineOrShowError NI err||offline");
-  }
-  
-  self.offline_imgvw.hidden=online;
-  self.offline_lbl.hidden=online;
-  //if(!online) [self hideLoadingIndicator];
-  
-  return online;
-}
-
--(BOOL)checkAndShowError{
-  NSError*err=[mYMobiPaperLib getLasError];
-  if(err==nil )
-    return NO;
-  [self showError:@"Aviso" message:@"Ha ocurrido un error. Actualice la pantalla mas tarde."];
-  return YES;
-  
-}
-
--(void)showError:(NSString*)title message:(NSString*)message{
-  
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-  [alert show];
-  alert=nil;
-  
-}
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -82,7 +49,6 @@
   
   NSString *jsString  = [partial_jsString  stringByAppendingFormat:@"document.getElementById('bajada').style.fontSize= '%fem'", textFontSize+0.2];
   
-  NSLog(@" fontsize: %@", jsString);
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
   jsString=nil;
@@ -101,19 +67,12 @@
 
 }
 
--(NSString *)cleanUrl:(NSString*)url{
-  NSString *escapedURL =  [[[[url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"http//" withString:@"http://"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"] stringByReplacingOccurrencesOfString:@"http:/" withString:@"http://"];
-  return escapedURL;
-}
-
-
-
 - (void)playVideo:(NSURL *)_url{
   
   [self showLoadingIndicator];
   // Deshabilitamos el cache.
   
-  __block NSString *video_id = [[self getYoutubeVideoId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
+  __block NSString *video_id = [[Utils getYoutubeId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
   __block NSURL *youtubeURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"http://www.youtube.com/watch?v=%@", video_id]];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -156,19 +115,7 @@
         [mp.moviePlayer play];
         mp=nil;
       }
-      // To get a thumbnail for an image there is now a async method for that
-      /*[HCYoutubeParser thumbnailForYoutubeURL:url
-                            thumbnailSize:YouTubeThumbnailDefaultHighQuality
-                            completeBlock:^(UIImage *image, NSError *error) {
-                              if (!error) {
-                                self.thumbailImageView.image = image;
-                              }
-                              else {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-                                [alert show];
-                              }
-                            }];
-       */
+      
       youtubeURL = nil;
       video_id=nil;
       
@@ -178,80 +125,27 @@
   
 }
 
-
-/*
-   '%^# Match any youtube URL
-   
-   (?:https?://)?  # Optional scheme. Either http or https
-   (?:www\.)?      # Optional www subdomain
-   (?:             # Group host alternatives
-   youtu\.be/    # Either youtu.be,
-   
-   | youtube\.com  # or youtube.com
-   (?:           # Group path alternatives
-   /embed/     # Either /embed/
-   | /v/         # or /v/
-   | /watch\?v=  # or /watch\?v=
-   
-   )             # End path alternatives.
-   )               # End host alternatives.
-   ([\w-]{10,12})  # Allow 10-12 for 11 char youtube id.
-   $%x'
-   
-   Tested on 
-   http://www.youtube.com/watch?v=e3fsrQmHmfA
-   http://youtu.be/SA2iWivDJiE
-   http://www.youtube.com/watch?v=_oPAwA_Udwc&feature=feedu
-   http://www.youtube.com/embed/SA2iWivDJiE
-   http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US   
- */
--(NSString *)getYoutubeVideoId:(NSString*)url{
-  
-  NSString * local_url = [url stringByReplacingOccurrencesOfString:@"video://" withString:@"" ];
-  local_url = [self cleanUrl:local_url];
-  
-  NSString *regex = @"^(?:https?://)?(?:www.)?(?:youtu.be/|youtube.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})";
-  NSArray *_ids = [local_url captureComponentsMatchedByRegex:regex];
-  NSString *ret = @"";
-  
-  NSLog(@"NoticiaViewcontroller::getYoutubeVideoId ComponentsMatched=%@", _ids);
-  
-  if ([_ids count]>1)
-  {
-    ret = [[NSString alloc] initWithFormat:@"%@",[_ids objectAtIndex:1]] ;
-  }
-  
-  local_url=nil;
-  regex=nil;
-  _ids=nil;
-  return ret;
-}
- 
-- (void)playAudio:(NSURL *)_url
+- (void)playAudio:(NSURL *)url
 {
   [self showLoadingIndicator];
-  /*__block*/ NSString * url = [[_url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ];
-  url = [self cleanUrl:url];
-  /*__block*/ MPMoviePlayerViewController* mpviewController = nil;
   
-  //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:url]];
-    mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
-    mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
-    
-    [self presentModalViewController:mpviewController animated:YES];
+  NSString * cleaned_url = [Utils cleanUrl:[[url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ]] ;
+  MPMoviePlayerViewController* mpviewController = nil;
+  
+  mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:cleaned_url]];
+  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
+  mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
 
-    [[mpviewController moviePlayer] prepareToPlay];
-    [[mpviewController moviePlayer] play];
-    
-  //dispatch_async(dispatch_get_main_queue(), ^{
-      url=nil;
-      mpviewController=nil;
-      [self hideLoadingIndicator];
-  //});
-  //});
-  return;
- 
+  [self presentModalViewController:mpviewController animated:YES];
+
+  [[mpviewController moviePlayer] prepareToPlay];
+  [[mpviewController moviePlayer] play];
+
+  cleaned_url=nil;
+  mpviewController=nil;
+  
+  [self hideLoadingIndicator];
+
 }
 
 
@@ -272,13 +166,15 @@
 
 - (IBAction) btnShareClick: (id)param{
   
-  if(![self onlineOrShowError:YES])
-    return;
+//  if(![self onlineOrShowError:YES])
+//    return;
   
   // Create the item to share (in this example, a url)
 	//NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
-	NSURL *url = [NSURL URLWithString:self.noticia_metadata];
-	SHKItem *item = [SHKItem URL:url title:@"ElDia.com.ar"];
+	
+  NSURL *url = [NSURL URLWithString:self.noticia_url];
+  
+	SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title] ];
   
 	// Get the ShareKit action sheet
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
@@ -328,14 +224,16 @@
   
 }
 
--(void)loadNoticia:(NSString *)_noticia_id{
+-(void)loadNoticia:(NSURL *)url{
   
   [self showLoadingIndicator];
   // clean cont	ent
-  
-  [self setNoticia_id:_noticia_id];
-  
-  [self onlineOrShowError:YES];
+  //{$Node/guid};{$Node/link};{$Node/title};{$Node/description}
+  NSArray *metadata = [[url host] componentsSeparatedByString:@";;"];
+  [self setNoticia_id:[metadata objectAtIndex:0]];
+  [self setNoticia_url:[metadata objectAtIndex:1]];
+  [self setNoticia_title:[metadata objectAtIndex:2]];
+  [self setNoticia_bajada:[metadata objectAtIndex:3]];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
@@ -343,14 +241,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
-        [self checkAndShowError];
+        //[self checkAndShowError];
         [self hideLoadingIndicator];
         return;
       }
 
       [self setHtmlToView:data stop_loading_indicators:YES];
       [self changeFontSize:0];
-      [self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
       data = nil;
     });
   });
@@ -479,8 +376,8 @@
   {
     self.bottomUIView.hidden = YES; //HACK!
     
-    if(![self onlineOrShowError:YES])
-      return NO;
+//    if(![self onlineOrShowError:YES])
+//      return NO;
     
     bool handled = NO;
     if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
@@ -549,7 +446,7 @@
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
-    NSString *escapedURL = [self cleanUrl:((NSString *)object)];
+    NSString *escapedURL = [Utils cleanUrl:((NSString *)object)];
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path
     // so you still should check scheme and all other NSURL attributes you need
@@ -626,24 +523,7 @@
   // here we could implement some code to change the caption for a stored image
 }
 
-// END
 
-
-//YMobiPaperDelegate implementation
-- (void) requestSuccessful:(id)data message:(NSString*)message{
-  NSLog(@"NoticiaViewConteroller::requestSuccessful");
-  
-  //[self changeFontSize:0];
-  //[self hideLoadingIndicator];
-  //[self setNoticia_metadata:[self.mYMobiPaperLib metadata] ];
-}
-
-- (void) requestFailed:(id)error message:(NSString*)message{
-  NSLog(@"NoticiaViewConteroller::requestFailed");
-  //[self hideLoadingIndicator];
-  //[[[iToast makeText:@"Ha ocurrido un error. Actualice la pantalla."] setGravity:iToastGravityTop offsetLeft:0 offsetTop:50] show];
-  
-}
 
 -(void) showLoadingIndicator{
   //btnRefreshClick.hidden=YES;

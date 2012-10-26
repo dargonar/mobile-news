@@ -36,9 +36,7 @@ BOOL errorOn=NO;
   
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
-  
-  // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
-  //   No importa que tan vieja sea.
+
   if([self.mScreenManager sectionExists:mainUrl])
   {
     NSError *err;
@@ -56,10 +54,8 @@ BOOL errorOn=NO;
   [super viewDidAppear:animated];
 
   NSString* url = [self.currentUrl copy];
-  
-  // 2 Cuando aparece la vista intentamos traernos todo si lo cacheado es viejo (o no teniamos nada!).
+
   NSDate * date =[self.mScreenManager sectionDate:url];
-  
   if( ![self isOld:date])
     return;
   
@@ -71,9 +67,14 @@ BOOL errorOn=NO;
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
+<<<<<<< HEAD
+    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:YES error:&err];
+  dispatch_async(dispatch_get_main_queue(), ^{
+=======
     __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
-
+    //data=nil;
     dispatch_async(dispatch_get_main_queue(), ^{
+>>>>>>> f95740be2cd5701d2171a0a5de5d6ee0dd3639ea
       if(data==nil)
       {
         if(errorOn)
@@ -161,14 +162,18 @@ BOOL errorOn=NO;
   [self showRefreshLoadingIndicator];
 }
 
+
 -(void) hideLoadingIndicator{
   self.loading_indicator.hidden = YES;
   [self.loading_indicator stopAnimating];
+  
   [self hideRefreshLoadingIndicator];
+  
   welcome_view.hidden = YES;
+  
   self.logo_imgvw_alpha.hidden = YES;
+ 
 }
-
 -(void) hideRefreshLoadingIndicator{
   btnRefreshClick.hidden=NO;
   btnRefreshClick.enabled=YES;
@@ -180,7 +185,7 @@ BOOL errorOn=NO;
   NSInteger top=50;
   top=80;
   
-  [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:top] show];
+  [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:top] show];
 
 }
 
@@ -216,8 +221,11 @@ BOOL errorOn=NO;
     
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-    [self.myNoticiaViewController loadNoticia:url];
+    [self.myNoticiaViewController loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
     
+    
+    NSLog(@"webView: DESPUES de cargar Noticia");
+
     return NO;
   }
   return YES;

@@ -14,6 +14,7 @@
 #import "XMLParser.h"
 #import "MobiImage.h"
 #import "ErrorBuilder.h"
+#import "Utils.h"
 
 NSString * const MAIN_STYLESHEET      = @"1_main_list.xsl";
 NSString * const NOTICIA_STYLESHEET   = @"3_new.xsl";
@@ -107,13 +108,14 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
     
     //Las guardamos en cache
     if(![cache put:key data:tmp prefix:@"mi"]) {
-      return [ErrorBuilder build:error desc:@"cache mobiimages" code:ERR_CACHING_MI];
+      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
     }
   }
   
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
-  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url] error:error];
+  
+  NSData *html = [htmlGen generate:[Utils sanitizeXML:xml ] xslt_file:[self getStyleSheet:url] error:error];
   
   if (html == nil) {
     return nil;

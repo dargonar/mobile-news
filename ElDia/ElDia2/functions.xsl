@@ -4,6 +4,7 @@
   xmlns:media="http://search.yahoo.com/mrss/"
   xmlns:news="http://www.diariosmoviles.com.ar/news-rss/">
   
+  <xsl:include href="url-encode.xsl" />
   <!--  Con estas variables podemos convertir un string en upper case o lower case. 
         -) translate($variable, $smallcase, $uppercase)
         No se utilizan
@@ -63,7 +64,10 @@
   <xsl:template name="DestacadaEnListadoPrincipal">
     <xsl:param name="Node" />
     <div id="nota">
-      <a href="noticia://{$Node/guid}" title="principal">
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="{$Node/link}"/>
+      </xsl:call-template>
+      <a href="noticia://{$Node/guid}?url={$link}&title={$Node/title}&header={$Node/description}" title="principal">
         <xsl:if test="not(not($Node/media:thumbnail))" >
           <xsl:call-template name="ImagenNoticiaDestacada">
             <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
@@ -127,7 +131,7 @@
     </xsl:variable>
     
     <li>
-      <a href="noticia://{$Node/guid};{$Node/link};{$Node/title};{$Node/description}" title="">
+      <a href="noticia://{$Node/guid}?url={$Node/link}&title={$Node/title}&header={$Node/description}" title="">
         <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
@@ -309,7 +313,7 @@
     </xsl:variable>
     
     <li>
-      <a href="noticia://{$Item/@guid}" title="">
+      <a href="noticia://{$Item/@guid}?url={$Item/@url}&title={$Item/.}&header=" title="">
         <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">

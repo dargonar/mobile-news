@@ -14,13 +14,15 @@
 #import "YoutubeViewController.h"
 
 
-@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, YMobiPaperLibDelegate, FGalleryViewControllerDelegate>  {
+@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, FGalleryViewControllerDelegate>  {
 	NSArray *networkCaptions;
   NSArray *networkImages;
 	FGalleryViewController *networkGallery;
   
   NSString *noticia_id;
-  NSString *noticia_metadata;
+  NSString *noticia_url;
+  NSString *noticia_title;
+  NSString *noticia_bajada;
   YMobiPaperLib *mYMobiPaperLib;
 
   YoutubeViewController *myYoutubeViewController;
@@ -30,7 +32,9 @@
 
 
 @property (retain) NSString *noticia_id;
-@property (retain) NSString *noticia_metadata;
+@property (retain) NSString *noticia_url;
+@property (retain) NSString *noticia_title;
+@property (retain) NSString *noticia_bajada;
 
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
@@ -45,27 +49,13 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 @property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 
+
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
-
 - (IBAction) btnFontSizePlusClick: (id)param;
 - (IBAction) btnFontSizeMinusClick: (id)param;
 
-- (void)loadPhotoGallery: (NSURL *)_url;
-- (void)playAudio: (NSURL *)_url;
-- (void)playVideo: (NSURL *)_url;
-- (NSString *)getYoutubeVideoId:(NSString*)url;
-- (void)loadNoticia:(NSString *)_noticia_id;
--(void)loadBlank;
-- (void)addGestureRecognizers;
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
-- (void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture;
-- (void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture;
--(void)changeFontSize:(NSInteger)delta;
+- (void)loadNoticia:(NSURL *)url;
+- (void)loadBlank;
 
--(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators;
-
--(void)showError:(NSString*)title message:(NSString*)message;
--(BOOL)checkAndShowError;
--(BOOL)onlineOrShowError:(BOOL)showAlertIfNeeded;
 @end
