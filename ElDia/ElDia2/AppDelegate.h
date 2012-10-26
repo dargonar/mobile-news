@@ -28,7 +28,7 @@
 
 - (void)showSideMenu;
 - (void)hideSideMenu;
-- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url;
+//- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url;
 - (void)requestDone:(ASIHTTPRequest *)request;
 - (void)requestWentWrong:(ASIHTTPRequest *)request;
 

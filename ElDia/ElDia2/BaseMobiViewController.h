@@ -21,5 +21,5 @@
 -(void)configureToast;
 -(BOOL)isOld:(NSDate*)date;
 -(void)setHTML:(NSData*)data url:(NSString*)url;
--(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url;
+
 @end

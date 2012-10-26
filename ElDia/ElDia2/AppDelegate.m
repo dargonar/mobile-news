@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Lion User. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "MenuViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "MobiImage.h"
 #import "DiskCache.h"
-#import "ResourceManager.h"
 
 @implementation AppDelegate
 
@@ -48,11 +48,11 @@
 
   NSLog(@"Cache current size: %llu", [[DiskCache defaultCache] size]);
   
-  //[ResourceManager copyBundleResourcesToCacheFolder];
+  [[NSNotificationCenter defaultCenter] addObserver:self 
+                                           selector:@selector(onDownloadImages:) 
+                                               name:@"com.diventi.mobipaper.download_images" 
+                                             object:nil];
   
-  
-  //LocalSubstitutionCache *cache = [[LocalSubstitutionCache alloc] init];
-  //[NSURLCache setSharedURLCache:cache];
   
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//HACKED
   self.window.backgroundColor = [UIColor whiteColor];//HACKED
@@ -147,21 +147,34 @@
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url{
+- (void)onDownloadImages:(NSNotification *)notif {
 
+  if (notif == nil) {
+    return;
+  }
+  
   if (![self download_queue]) {
     self.download_queue = [[NSOperationQueue alloc] init];
     [self.download_queue setMaxConcurrentOperationCount:20]; //20 al mismo tiempo?
   }
-  
-  if(mobi_images == nil)
+
+  NSArray   *mobi_images = [notif object];
+  NSDictionary *userInfo = [notif userInfo];
+  if(mobi_images == nil || userInfo == nil) {
     return;
+  }
   
   for (int i=0; i<[mobi_images count]; i++) {
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];
+    if (mobi_image == nil) {
+      continue;
+    }
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:mobi_image, @"mi",obj, @"id",request_url, @"url", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                              mobi_image, @"mi", 
+                              [userInfo objectForKey:@"url"], @"url", 
+                              nil];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
 
@@ -182,21 +195,27 @@
 {
   NSDictionary *params = [request userInfo];
   MobiImage *image = [params objectForKey:@"mi"];
-  NSData *data = [request responseData];
-  [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
-  NSLog(@"Baje url: %@", image.url);
- 
-  NSString *url = [params objectForKey:@"url"];
-  BaseMobiViewController *obj = (BaseMobiViewController*)[params objectForKey:@"id"];
-  [obj onImageDownloaded:image url:url];
   
+  NSData *data = [request responseData];
+  
+  if (data != nil) {
+    [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
+  }
+  
+  [[NSNotificationCenter defaultCenter] 
+    postNotificationName:@"com.diventi.mobipaper.image_downloaded" 
+                  object:data != nil ? image : nil
+                userInfo:params];
+
 }
 
 - (void)requestWentWrong:(ASIHTTPRequest *)request
 {
   NSDictionary *params = [request userInfo];
-  MobiImage *image = [params objectForKey:@"mi"];
 
-  NSLog(@"ERROR url: %@", image.url);
+  [[NSNotificationCenter defaultCenter] 
+    postNotificationName:@"com.diventi.mobipaper.image_downloaded" 
+                  object:nil
+                userInfo:params];
 }
 @end

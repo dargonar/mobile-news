@@ -27,6 +27,7 @@
     if (self) {
         // Custom initialization
       self.mScreenManager = [[ScreenManager alloc] init];
+
     }
     return self;
 }
@@ -34,13 +35,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+  [[NSNotificationCenter defaultCenter] addObserver:self 
+                                           selector:@selector(onDownloadImages:) 
+                                               name:@"com.diventi.mobipaper.image_downloaded" 
+                                             object:nil];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+  [super viewDidUnload];
+
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                               name:@"com.diventi.mobipaper.image_downloaded" 
+                                             object:nil];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -76,10 +85,33 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSError *err;
     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
-    [app_delegate downloadImages:mobi_images obj:self request_url:url];
+
+    if (mobi_images != nil) {
+      NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", nil];
+      
+      [[NSNotificationCenter defaultCenter] 
+        postNotificationName:@"com.diventi.mobipaper.download_images" 
+                      object:mobi_images 
+                    userInfo:userInfo];
+    }
+    
   });
 }
--(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url{
+-(void)onImageDownloaded:(NSNotification *)notif {
+  
+  if (notif == nil) {
+    return;
+  }
+  
+  MobiImage    *mobi_image = [notif object];
+  NSDictionary *userInfo   = [notif userInfo];
+  
+  if(mobi_image == nil) {
+    //TODO: se bajo con error ... ponemos un loguito?
+    return;
+  }
+
+  NSString *url = [userInfo objectForKey:@"url"];
   
   if(self.currentUrl!=url)
     return;
