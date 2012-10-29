@@ -10,11 +10,11 @@
 #import "PSWebView.h"
 #import "FGalleryViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "YMobiPaperLib.h"
+#import "BaseMobiViewController.h"
 #import "YoutubeViewController.h"
 
 
-@interface NoticiaViewController : UIViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, FGalleryViewControllerDelegate>  {
+@interface NoticiaViewController : BaseMobiViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, FGalleryViewControllerDelegate>  {
 	NSArray *networkCaptions;
   NSArray *networkImages;
 	FGalleryViewController *networkGallery;
@@ -22,19 +22,17 @@
   NSString *noticia_id;
   NSString *noticia_url;
   NSString *noticia_title;
-  NSString *noticia_bajada;
-  YMobiPaperLib *mYMobiPaperLib;
+  NSString *noticia_header;
 
   YoutubeViewController *myYoutubeViewController;
 }
 
 @property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
 
-
 @property (retain) NSString *noticia_id;
 @property (retain) NSString *noticia_url;
 @property (retain) NSString *noticia_title;
-@property (retain) NSString *noticia_bajada;
+@property (retain) NSString *noticia_header;
 
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
@@ -47,7 +45,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
-@property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 
 
 - (IBAction) btnBackClick: (id)param;

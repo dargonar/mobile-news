@@ -13,7 +13,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -43,7 +43,7 @@ BOOL errorOn=NO;
   {
     NSError *err;
     NSData *data = [self.mScreenManager getSection:mainUrl useCache:YES error:&err];
-    [self setHTML:data url:mainUrl];
+    [self setHTML:data url:mainUrl webView:self.mainUIWebView];
     splashOn=NO;
     return;
   }
@@ -90,7 +90,7 @@ BOOL errorOn=NO;
         return;
       }
       
-      [self setHTML:data url:url];
+      [self setHTML:data url:url webView:self.mainUIWebView];
       
       data=nil;
       
@@ -204,7 +204,7 @@ BOOL errorOn=NO;
   
   
   NSURL* url = [request URL];
-  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_NOTICIA])
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"noticia"])
   {
 
     if (self.myNoticiaViewController != nil) {

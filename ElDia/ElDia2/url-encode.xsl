@@ -17,7 +17,7 @@
        Note: By "iso-string" we mean a Unicode string where all
        the characters happen to fall in the ASCII and ISO-8859-1
        ranges (32-126 and 160-255) -->
-  <xsl:param name="iso-string" select="'&#161;Hola, C&#233;sar!'"/>
+  <!-- xsl:param name="iso-string" select="'&#161;Hola, C&#233;sar!'"/ -->
 
   <!-- Characters we'll support.
        We could add control chars 0-31 and 127-159, but we won't. -->

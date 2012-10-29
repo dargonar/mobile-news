@@ -58,13 +58,62 @@
   //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
   cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
   
+  //NSMutableString *invalidCharsString = [[NSMutableString alloc] init];
+  //unichar character;
+  //character = 0x07;
+  //[invalidCharsString appendFormat:@"%C", character];
+  //NSCharacterSet *invalidChars = [NSCharacterSet characterSetWithCharactersInString:invalidCharsString];
+  //cleanedXML =[cleanedXML stringByTrimmingCharactersInSet:invalidChars];
+
+  cleanedXML = [Utils validXMLString:cleanedXML ];
+  
   htmlAttributesRegex = nil;
   undecodedAmpersandRegex = nil;
   
   //[NSData dataWithBytes:[xml UTF8String] length:[xml length]+1];
   //[xml dataUsingEncoding:NSUTF8StringEncoding] ;
+  
+  return [cleanedXML dataUsingEncoding:NSUTF8StringEncoding] ;
+}
 
-  return [xml dataUsingEncoding:NSUTF8StringEncoding] ;
++ (NSString *)validXMLString:(NSString*)xml
+{
+    static NSCharacterSet *invalidXMLCharacterSet = nil;
+  
+  if (invalidXMLCharacterSet == nil)
+  {
+    // First, create a character set containing all valid UTF8 characters.
+    NSMutableCharacterSet *xmlCharacterSet = [[NSMutableCharacterSet alloc] init];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0x9, 1)];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0xA, 1)];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0xD, 1)];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0x20, 0xD7FF - 0x20)];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0xE000, 0xFFFD - 0xE000)];
+    [xmlCharacterSet addCharactersInRange:NSMakeRange(0x10000, 0x10FFFF - 0x10000)];
+    
+    // Then create and retain an inverted set, which will thus contain all invalid XML characters.
+    invalidXMLCharacterSet = [xmlCharacterSet invertedSet] ;
+    xmlCharacterSet=nil;
+  }
+  
+  // Are there any invalid characters in this string?
+  NSRange range = [xml rangeOfCharacterFromSet:invalidXMLCharacterSet];
+  
+  // If not, just return self unaltered.
+  if (range.length == 0)
+    return xml;
+  
+  // Otherwise go through and remove any illegal XML characters from a copy of the string.
+  NSMutableString *cleanedString = [xml mutableCopy];
+  
+  while (range.length > 0)
+  {
+    [cleanedString deleteCharactersInRange:range];
+    range = [cleanedString rangeOfCharacterFromSet:invalidXMLCharacterSet options:NSCaseInsensitiveSearch range:NSMakeRange(range.location, [cleanedString length] - range.location)];
+    
+  }
+  
+  return cleanedString;
 }
 
 @end

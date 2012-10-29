@@ -15,11 +15,11 @@
 }
 
 @property (nonatomic, retain) ScreenManager *mScreenManager;
-@property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
 @property (nonatomic, retain) NSString* currentUrl;
+@property (nonatomic, retain) UIWebView* myUIWebView;
 
 -(void)configureToast;
 -(BOOL)isOld:(NSDate*)date;
--(void)setHTML:(NSData*)data url:(NSString*)url;
+-(void)setHTML:(NSData*)data url:(NSString*)url webView:(UIWebView*)webView;
 -(void)onImageDownloaded:(MobiImage*)mobi_image url:(NSString*)url;
 @end

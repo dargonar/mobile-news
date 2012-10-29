@@ -73,6 +73,8 @@
 		CE1C1FE316307C1A00A18162 /* Default@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */; };
 		CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */; };
 		CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
+		CE5D11A6163E3158002E34F5 /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
+		CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A8163E38D0002E34F5 /* NewsManager.m */; };
 		CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */; };
 		CE78799715F7FA88009AA708 /* FGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799215F7FA88009AA708 /* FGalleryPhoto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE78799815F7FA88009AA708 /* FGalleryPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799415F7FA88009AA708 /* FGalleryPhotoView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -240,8 +242,6 @@
 		CEE4137D162E46E0007EEE76 /* egopv_error_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE41379162E46E0007EEE76 /* egopv_error_placeholder@2x.png */; };
 		CEE4137E162E46E0007EEE76 /* egopv_photo_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE4137A162E46E0007EEE76 /* egopv_photo_placeholder.png */; };
 		CEE4137F162E46E0007EEE76 /* egopv_photo_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE4137B162E46E0007EEE76 /* egopv_photo_placeholder@2x.png */; };
-		CEECEE4A161D2FBF00926433 /* _noticias_id_array.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEECEE49161D2FBF00926433 /* _noticias_id_array.xsl */; };
-		CEECEE4D161D613D00926433 /* _noticia_metadata.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEECEE4C161D613D00926433 /* _noticia_metadata.xsl */; };
 		CEECF0E41639845300058824 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECF0E31639845300058824 /* warning.png */; };
 		CEECF0E8163988DB00058824 /* BaseMobiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECF0E7163988DB00058824 /* BaseMobiViewController.m */; };
 		CEED58A81622130E007A7FDC /* br_prev_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CEED58971622130E007A7FDC /* br_prev_icon_24.png */; };
@@ -381,6 +381,10 @@
 		CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x_ipad.png"; sourceTree = "<group>"; };
 		CE1C1FE116307C1A00A18162 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x_ipad.png"; sourceTree = "<group>"; };
+		CE5D11A4163E3157002E34F5 /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
+		CE5D11A5163E3158002E34F5 /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
+		CE5D11A7163E38CF002E34F5 /* NewsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsManager.h; sourceTree = "<group>"; };
+		CE5D11A8163E38D0002E34F5 /* NewsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsManager.m; sourceTree = "<group>"; };
 		CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticiaViewController_iPad.xib; sourceTree = "<group>"; };
 		CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-edit-caption.png"; sourceTree = "<group>"; };
 		CE78798415F7FA56009AA708 /* photo-gallery-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-left.png"; sourceTree = "<group>"; };
@@ -683,8 +687,6 @@
 		CEECA6321613D976007C8918 /* default@2x_no_pleno.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default@2x_no_pleno.jpg"; sourceTree = "<group>"; };
 		CEECA6381613DDC0007C8918 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CEECA6391613DDC1007C8918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		CEECEE49161D2FBF00926433 /* _noticias_id_array.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = _noticias_id_array.xsl; sourceTree = "<group>"; };
-		CEECEE4C161D613D00926433 /* _noticia_metadata.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = _noticia_metadata.xsl; sourceTree = "<group>"; };
 		CEECF0E31639845300058824 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		CEECF0E6163988DB00058824 /* BaseMobiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMobiViewController.h; sourceTree = "<group>"; };
 		CEECF0E7163988DB00058824 /* BaseMobiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMobiViewController.m; sourceTree = "<group>"; };
@@ -1330,8 +1332,6 @@
 				CEF9FC9E163B472D00E45995 /* url-encode.xsl */,
 				CE83716E16128D9800FC8269 /* 4_menu.xsl */,
 				CE83716F16128D9800FC8269 /* functions.xsl */,
-				CEECEE49161D2FBF00926433 /* _noticias_id_array.xsl */,
-				CEECEE4C161D613D00926433 /* _noticia_metadata.xsl */,
 				CE83717016128D9800FC8269 /* 1_main_list.xsl */,
 				CE83717116128D9800FC8269 /* 2_section_list.xsl */,
 				CED344241630A4A300C77C79 /* menu_dummy.html */,
@@ -1636,6 +1636,10 @@
 				605C9A971639D6F100CBD806 /* ErrorBuilder.m */,
 				CEF9FC9A163B2EED00E45995 /* Utils.h */,
 				CEF9FC9B163B2EED00E45995 /* Utils.m */,
+				CE5D11A4163E3157002E34F5 /* URLParser.h */,
+				CE5D11A5163E3158002E34F5 /* URLParser.m */,
+				CE5D11A7163E38CF002E34F5 /* NewsManager.h */,
+				CE5D11A8163E38D0002E34F5 /* NewsManager.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1764,11 +1768,10 @@
 				CE83718516128D9800FC8269 /* 4_menu.xsl in Resources */,
 				CE83718616128D9800FC8269 /* functions.xsl in Resources */,
 				CE83718716128D9800FC8269 /* 1_main_list.xsl in Resources */,
+				CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */,
 				CE83718816128D9800FC8269 /* 2_section_list.xsl in Resources */,
 				CE7A1F71161B5F88006BFC17 /* Localizable.strings in Resources */,
 				CE7A1F78161B5F88006BFC17 /* FBConnect.bundle in Resources */,
-				CEECEE4A161D2FBF00926433 /* _noticias_id_array.xsl in Resources */,
-				CEECEE4D161D613D00926433 /* _noticia_metadata.xsl in Resources */,
 				CEED58A81622130E007A7FDC /* br_prev_icon_24.png in Resources */,
 				CEED58A91622130E007A7FDC /* bg@2x.png in Resources */,
 				CEED58AA1622130E007A7FDC /* br_prev_icon_24@2x.png in Resources */,
@@ -1811,7 +1814,6 @@
 				CED2A5D81630F9EA0027DFF1 /* Icon.png in Resources */,
 				CED2A5DA1630F9F60027DFF1 /* Default@2x.png in Resources */,
 				CEECF0E41639845300058824 /* warning.png in Resources */,
-				CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1848,6 +1850,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5D11A6163E3158002E34F5 /* URLParser.m in Sources */,
 				CEEEC0C61623700A0037F329 /* YoutubeViewController.m in Sources */,
 				CEC8305C162F42750085FF54 /* _Reachability.m in Sources */,
 				CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */,
@@ -1977,6 +1980,7 @@
 				CEECF0E8163988DB00058824 /* BaseMobiViewController.m in Sources */,
 				605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */,
 				CEF9FC9C163B2EED00E45995 /* Utils.m in Sources */,
+				CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

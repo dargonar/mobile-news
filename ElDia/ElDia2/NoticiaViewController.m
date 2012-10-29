@@ -12,14 +12,16 @@
 #import "ConfigHelper.h"
 #import "iToast.h"
 #import "Utils.h"
+#import "URLParser.h"
+#import "NewsManager.h"
 
 #import "HCYoutubeParser.h"
 
 @implementation NoticiaViewController
 
 @synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView, btnFontSizePlus, btnFontSizeMinus,
-            loading_indicator, myYoutubeViewController, mYMobiPaperLib, headerUIImageView, offline_imgvw, offline_lbl,
-            noticia_id, noticia_url, noticia_title, noticia_bajada;
+            loading_indicator, myYoutubeViewController, headerUIImageView, offline_imgvw, offline_lbl,
+            noticia_id, noticia_url, noticia_title, noticia_header;
 
 -(void)changeFontSize:(NSInteger)delta{
   
@@ -189,9 +191,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-      self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
-      self.mYMobiPaperLib.delegate = self;
-      networkGallery = nil;
+     networkGallery = nil;
     }
     return self;
 }
@@ -201,57 +201,52 @@
   self.bottomUIView.hidden = YES;
 }
 
--(void)setHtmlToView:(NSData*)data stop_loading_indicators:(BOOL)stop_loading_indicators{
-  
-  if(stop_loading_indicators)
-  {
-    [self hideLoadingIndicator];
-  }
-  
-  if(data==nil){
-    //[self onlineOrShowError:YES];
-    return;
-  }
-  NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  
-  [self.mainUIWebView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
-  data = nil;
-  dirPath=nil;
-  dirURL=nil;
-  
-}
-
 -(void)loadNoticia:(NSURL *)url{
   
   [self showLoadingIndicator];
-  // clean cont	ent
   //{$Node/guid};{$Node/link};{$Node/title};{$Node/description}
-  NSArray *metadata = [[url host] componentsSeparatedByString:@";;"];
-  [self setNoticia_id:[metadata objectAtIndex:0]];
-  [self setNoticia_url:[metadata objectAtIndex:1]];
-  [self setNoticia_title:[metadata objectAtIndex:2]];
-  [self setNoticia_bajada:[metadata objectAtIndex:3]];
+  [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
+ 
+  URLParser *parser = [[URLParser alloc] initWithURLString:[url absoluteString]];
+  
+  [self setNoticia_url:[parser valueForVariable:@"url"]];
+  [self setNoticia_title:[parser valueForVariable:@"title"]];
+  [self setNoticia_header:[parser valueForVariable:@"header"]];
+  parser=nil;
+  
+  NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
+  
+  if([self.mScreenManager sectionExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getSection:uri useCache:YES error:&err];
+    [self setHTML:data url:uri webView:self.mainUIWebView];
+    return;
+  }
+  [self loadUrl:uri useCache:NO];
+}
+
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    __block NSData* data = [self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeNews queryString:noticia_id xsl:XSL_PATH_NEWS tag:MSG_GET_NEW force_load:NO];
-    // tell the main thread
+    __block NSError *err;
+    __block NSData *data = [self.mScreenManager getArticle:url useCache:useCache error:&err];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
-        //[self checkAndShowError];
-        [self hideLoadingIndicator];
+          [self hideLoadingIndicator];
         return;
       }
-
-      [self setHtmlToView:data stop_loading_indicators:YES];
-      [self changeFontSize:0];
-      data = nil;
+      
+      [self setHTML:data url:url webView:self.mainUIWebView];
+     
+      data=nil;
+      
+      
     });
   });
-  }
+}
 
 - (void)addGestureRecognizers{
   UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
@@ -281,19 +276,19 @@
 }
 
 -(void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture{
-  NSString *nextNoticiaId = [YMobiPaperLib getNextNoticiaId:noticia_id];
-  if(nextNoticiaId!=nil)
+  NSURL *nextNoticiaUrl = [NewsManager getNextNoticiaId:noticia_id];
+  if(nextNoticiaUrl!=nil)
   {
-    [self loadNoticia:nextNoticiaId];
-    nextNoticiaId=nil;
+    [self loadNoticia:nextNoticiaUrl];
+    nextNoticiaUrl=nil;
   }
 }
 -(void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture{
-  NSString *prevNoticiaId = [YMobiPaperLib getPrevNoticiaId:noticia_id];
-  if(prevNoticiaId!=nil)
+  NSURL *prevNoticiaUrl = [NewsManager getPrevNoticiaId:noticia_id];
+  if(prevNoticiaUrl!=nil)
   {
-    [self loadNoticia:prevNoticiaId];
-    prevNoticiaId=nil;
+    [self loadNoticia:prevNoticiaUrl];
+    prevNoticiaUrl=nil;
   }
 }
 
@@ -354,16 +349,15 @@
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  //[self changeFontSize:0];
-  NSLog(@"webViewDidFinishLoad");
-}
+  [self hideLoadingIndicator];
+  [self changeFontSize:0];}
 
  -(void)webViewDidStartLoad:(UIWebView *)webView{
    //NSLog(@"webViewDidStartLoad");
    //[self showLoadingIndicator];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-  //NSLog(@"didFailLoadWithError: %@", error);
+  [self hideLoadingIndicator];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -380,22 +374,22 @@
 //      return NO;
     
     bool handled = NO;
-    if ([[url scheme]isEqualToString:SCHEMA_NOTICIA])
+    if ([[url scheme]isEqualToString:@"noticia"])
     {
-      [self loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
+      [self loadNoticia:url];
       handled = YES;
     }
-    else if ([[url scheme]isEqualToString:SCHEMA_VIDEO])
+    else if ([[url scheme]isEqualToString:@"video"])
     {
       [self playVideo:url];
       handled = YES;
     }
-    else if ([[url scheme]isEqualToString:SCHEMA_AUDIO])
+    else if ([[url scheme]isEqualToString:@"audio"])
     {
       [self playAudio:url];
       handled = YES;
     }
-    else if ([[url scheme]isEqualToString:SCHEMA_GALERIA])
+    else if ([[url scheme]isEqualToString:@"galeria"])
     {
       [self loadPhotoGallery:url];
       handled = YES;
@@ -544,7 +538,6 @@
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
-  self.mYMobiPaperLib = nil;
   self.bottomUIView=nil;
   self.mainUIWebView=nil;
   self.optionsBottomMenuUIImageView=nil;

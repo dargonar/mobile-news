@@ -43,7 +43,7 @@ BOOL      init_ok = NO;
 }
 
 -(BOOL)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
-  if(!init_ok) return nil;
+  if(!init_ok) return NO;
 
   NSString* file=[self getFileName:key prefix:prefix];
   
@@ -52,7 +52,7 @@ BOOL      init_ok = NO;
 }
 
 -(BOOL)remove:(NSString*)key prefix:(NSString*)prefix{
-  if(!init_ok) return;
+  if(!init_ok) return NO;
 
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];

@@ -20,13 +20,14 @@
 
 @implementation BaseMobiViewController
 
-@synthesize mScreenManager, mainUIWebView, currentUrl;
+@synthesize mScreenManager, currentUrl, myUIWebView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
       self.mScreenManager = [[ScreenManager alloc] init];
+      self.myUIWebView=nil;
     }
     return self;
 }
@@ -67,12 +68,13 @@
   return NO;
 }
 
--(void)setHTML:(NSData*)data url:(NSString*)url{
-  [mainUIWebView  loadData:data
+-(void)setHTML:(NSData*)data url:(NSString*)url webView:(UIWebView*)webView{
+  [webView  loadData:data
                   MIMEType:@"text/html"
           textEncodingName:@"utf-8"
                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
-  
+  if(self.myUIWebView==nil)
+    self.myUIWebView=webView;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSError *err;
     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
@@ -90,7 +92,9 @@
                                  , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
   
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    if(self.myUIWebView==nil)
+      return;
+    [self.myUIWebView stringByEvaluatingJavaScriptFromString:jsString];
     jsString=nil;
   });
   

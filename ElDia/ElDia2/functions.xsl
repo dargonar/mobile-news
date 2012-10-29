@@ -64,10 +64,12 @@
   <xsl:template name="DestacadaEnListadoPrincipal">
     <xsl:param name="Node" />
     <div id="nota">
-      <xsl:call-template name="url-encode">
-        <xsl:with-param name="str" select="{$Node/link}"/>
-      </xsl:call-template>
-      <a href="noticia://{$Node/guid}?url={$link}&title={$Node/title}&header={$Node/description}" title="principal">
+      <xsl:variable name="encoded_url" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/link"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$Node/title}&amp;header={$Node/description}" title="principal">
         <xsl:if test="not(not($Node/media:thumbnail))" >
           <xsl:call-template name="ImagenNoticiaDestacada">
             <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
@@ -80,9 +82,9 @@
               <xsl:call-template name="FormatDate">
                 <xsl:with-param name="DateTime" select="$Node/pubDate"/>
               </xsl:call-template>
-            </label> | <label class="seccion"><xsl:value-of select="$Node/category" /></label>
-            <!--div class="ico_video" href="#" style="display:block;"></div --><br />
-            <h1><xsl:value-of select="$Node/title" /></h1>
+            </label> | <label class="seccion"><xsl:value-of disable-output-escaping="yes" select="$Node/category" /></label>
+            <br />
+            <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
           </div>
         </div>
       </a>
@@ -95,9 +97,8 @@
     <xsl:param name="ImageUrl" />
     <xsl:param name="MetaTag" />
     <div class="main_img_container">
-      <!-- img src="{$ImageUrl}" / -->
       <div class="imagen_principal" id="{$ImageUrl}" style="background-image:url(i_{$ImageUrl});"></div>
-      <div class="media_link video_over_photo"> <!-- plus -->
+      <div class="media_link video_over_photo">
         <xsl:call-template name="MediaAttach">
           <xsl:with-param name="MetaTag" select="$MetaTag"/>
         </xsl:call-template>
@@ -129,16 +130,25 @@
         <xsl:text>full_width</xsl:text>
       </xsl:if>
     </xsl:variable>
-    
+    <xsl:variable name="encoded_url" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/link"/>
+      </xsl:call-template>
+    </xsl:variable>
     <li>
-      <a href="noticia://{$Node/guid}?url={$Node/link}&title={$Node/title}&header={$Node/description}" title="">
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$Node/title}&amp;header={$Node/description}" title="">
         <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
               <xsl:with-param name="DateTime" select="$Node/pubDate"/>
             </xsl:call-template>
-          </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text><label class="seccion"><xsl:value-of select="$Node/category" /></label><br />
-          <label class="titulo"><xsl:value-of select="$Node/title" /></label>
+          </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+          <label class="seccion">
+            <xsl:call-template name="ReplaceInfoGral">
+              <xsl:with-param name="seccion" select="$Node/category"/>
+            </xsl:call-template>
+          </label><br />
+          <label class="titulo"><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></label>
         </div>
         
         <xsl:if test="not(not($has_image))">
@@ -224,9 +234,13 @@
             <xsl:call-template name="FormatDate">
               <xsl:with-param name="DateTime" select="$Node/pubDate"/>
             </xsl:call-template>
-          </label> | <label class="seccion"><xsl:value-of select="$Node/category" /></label>
+          </label> | <label class="seccion">
+            <xsl:call-template name="ReplaceInfoGral">
+              <xsl:with-param name="seccion" select="$Node/category"/>
+            </xsl:call-template>
+          </label>
           <br />
-          <h1><xsl:value-of select="$Node/title" /></h1>
+          <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
         </div>
         <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
           <div class="bajada" id="bajada">
@@ -311,9 +325,13 @@
         <xsl:text>full_width</xsl:text>
       </xsl:if>
     </xsl:variable>
-    
+    <xsl:variable name="encoded_url" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Item/@url"/>
+      </xsl:call-template>
+    </xsl:variable>
     <li>
-      <a href="noticia://{$Item/@guid}?url={$Item/@url}&title={$Item/.}&header=" title="">
+      <a href="noticia://{$Item/@guid}?url={$encoded_url}&amp;title={$Item/.}&amp;header=" title="">
         <div class="titular {$full_width}">
           <label>
             <xsl:call-template name="FormatDate">
@@ -322,10 +340,14 @@
           </label> 
           <xsl:if test="$Item/@lead!=''">
             <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-            <label class="seccion"><xsl:value-of select="$Item/@lead" /></label> 
+            <label class="seccion">
+              <xsl:call-template name="ReplaceInfoGral">
+                <xsl:with-param name="seccion" select="$Item/@lead"/>
+              </xsl:call-template>
+              <!--xsl:value-of disable-output-escaping="yes" select="$Item/@lead" /--></label>
           </xsl:if>
           <br />
-          <label class="titulo"><xsl:value-of select="$Item/." /></label>
+          <label class="titulo"><xsl:value-of disable-output-escaping="yes" select="$Item/." /></label>
         </div>
         
         <xsl:if test="not(not($has_image))">
@@ -362,7 +384,39 @@
   <!-- Template para el titulo de seccion o el header de las noticias relacionadas. -->
   <xsl:template name="TituloSeccionONotisRelac">
     <xsl:param name="Titulo" />
-    <div id="titulo_seccion"><label class="lbl_titulo_seccion"><xsl:value-of select="$Titulo" /></label></div>
+    <div id="titulo_seccion"><label class="lbl_titulo_seccion"><xsl:value-of disable-output-escaping="yes" select="$Titulo" /></label></div>
+  </xsl:template>
+  
+  <xsl:template name="ReplaceInfoGral">
+    <xsl:param name="seccion" />
+    <xsl:variable name="replace">Información General</xsl:variable>
+    <xsl:variable name="by">Información Gral</xsl:variable>
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$seccion" />
+        <xsl:with-param name="replace" select="$replace" />
+        <xsl:with-param name="by"  select="$by" />
+      </xsl:call-template>
+   </xsl:template>
+
+  <xsl:template name="string-replace-all">
+    <xsl:param name="text" />
+    <xsl:param name="replace" />
+    <xsl:param name="by" />
+    <xsl:choose>
+      <xsl:when test="contains($text, $replace)">
+        <xsl:value-of select="substring-before($text,$replace)" />
+        <xsl:value-of select="$by" />
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text"
+          select="substring-after($text,$replace)" />
+          <xsl:with-param name="replace" select="$replace" />
+          <xsl:with-param name="by" select="$by" />
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
 </xsl:stylesheet>
