@@ -12,12 +12,17 @@
 @synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView;
 
 NSString *currentUrl=@"menu://";
+BOOL viewDidLoad = NO;
+BOOL htmlSet = NO;
+NSData*dati=nil;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
       currentUrl=@"menu://";
+      viewDidLoad = NO;
+      dati=nil;
     }
   
   return self;
@@ -35,16 +40,23 @@ NSString *currentUrl=@"menu://";
   self.webView.scrollView.alwaysBounceHorizontal = NO;
   self.webView.hidden=NO;
   /*
-   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
-  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
-  [self setHTML:htmlData url:currentUrl webView:self.webView];
-  
-  [self loadUrl:YES];
+   [self loadUrl:YES];
   */
   
   [self loadGesturesRecognizers];
-  
+  viewDidLoad=YES;
+  if(dati!=nil)
+  {
+    [self setHTML:dati url:currentUrl webView:self.webView];
+    htmlSet=YES;
+    dati=nil;
   }
+  if(!htmlSet){
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
+    NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
+    [self setHTML:htmlData url:currentUrl webView:self.webView];
+  }
+}
 
 -(void)loadGesturesRecognizers{
   // create a UITapGestureRecognizer to detect when the screenshot recieves a single tap
@@ -65,6 +77,7 @@ NSString *currentUrl=@"menu://";
   // remove the gesture recognizers
   [self.screenShotImageView removeGestureRecognizer:self.tapGesture];
   [self.screenShotImageView removeGestureRecognizer:self.panGesture];
+  
 }
 
 -(void)loadUrl:(BOOL)useCache{
@@ -73,7 +86,10 @@ NSString *currentUrl=@"menu://";
   {
     NSError *err;
     NSData *data = [self.mScreenManager getMenu:YES error:&err];
-    [self setHTML:data url:currentUrl webView:self.webView];
+    if(viewDidLoad)
+      [self setHTML:data url:currentUrl webView:self.webView];
+    else
+      dati=data;
     return;
   }
 
@@ -86,9 +102,12 @@ NSString *currentUrl=@"menu://";
       {
         return;
       }
-      
-      [self setHTML:data url:currentUrl  webView:self.webView];
-      
+      if(viewDidLoad)
+      {
+        [self setHTML:data url:currentUrl  webView:self.webView];
+        htmlSet=YES;
+      }else
+        dati=data;
       data=nil; 
       
       

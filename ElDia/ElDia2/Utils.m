@@ -8,6 +8,7 @@
 
 #import "Utils.h"
 #import "RegexKitLite.h"
+#import "Reachability.h"
 
 @implementation Utils
 
@@ -114,6 +115,36 @@
   }
   
   return cleanedString;
+}
+
+// Internet detector
++(BOOL)areWeConnectedToInternet{
+  Reachability *reachability = [Reachability reachabilityForInternetConnection];
+  //[reachability startNotifier];
+  NetworkStatus status = [reachability currentReachabilityStatus];
+  //[reachability stopNotifier];
+  
+  bool ret = NO;
+  if(status == NotReachable)
+  {
+    //No internet
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet No internet");
+    ret= NO;
+  }
+  else if (status == ReachableViaWiFi)
+  {
+    //WiFi
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet Wifi");
+    ret= YES;
+  }
+  else if (status == ReachableViaWWAN)
+  {
+    //3G
+    NSLog(@"YMobiPaperLib::areWeConnectedToInternet 3G");
+    ret = YES;
+  }
+  reachability = nil;
+  return ret;
 }
 
 @end

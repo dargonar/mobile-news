@@ -10,6 +10,7 @@
 #import "iToast.h"
 #import "ConfigHelper.h"
 #import "AppDelegate.h"
+#import "ErrorBuilder.h"
 
 
 @implementation MainViewController
@@ -75,18 +76,25 @@ BOOL errorOn=NO;
     __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+      
       if(data==nil)
       {
-        if(errorOn)
+        /*if(errorOn)
         {
           [self onError:NO];
         }
-        if(splashOn)
+        if(splashOn)	
         {
-          [self onError:YES];
           [self onNothing];
-          //paro el loading del splash y muestro un ewarning  + un boton de reload.
+        }*/
+        [self onNothing];
+        if([err code]==ERR_NO_INTERNET_CONNECTION)
+        {
+          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion."];
         }
+        else
+          [self onError:NO];
+        
         return;
       }
       
@@ -200,22 +208,12 @@ BOOL errorOn=NO;
   [self onLoading:NO];
 }
 
--(void)showMessage:(NSString*)message{
-  NSInteger top=50;
-  top=80;
-  [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:top] show];
-}
-
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
   NSLog(@"WEBVIEW: end load with error");
   NSLog(@"Error: %@ %@", error, [error userInfo]);
 
-  //ToDo: mostrar algo sif necessary.
-  [self hideLoadingIndicator];
-  self.error_view.hidden=YES;
-  //ToDo: mostrar algo if necessary.
   [self onNothing];
 }
 
@@ -226,7 +224,6 @@ BOOL errorOn=NO;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
   NSLog(@"WEBVIEW: end load");
-  [self hideLoadingIndicator];
   [self onNothing];
 }
 

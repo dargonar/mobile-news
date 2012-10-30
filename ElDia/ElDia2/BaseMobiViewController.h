@@ -21,5 +21,5 @@
 -(void)configureToast;
 -(BOOL)isOld:(NSDate*)date;
 -(void)setHTML:(NSData*)data url:(NSString*)url webView:(UIWebView*)webView;
-
+-(void)showMessage:(NSString*)message;
 @end

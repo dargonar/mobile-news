@@ -48,8 +48,9 @@ static iToastSettings *sharedSettings = nil;
 
 	CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
 
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 5, textSize.height + 5)];
-	label.backgroundColor = [UIColor clearColor];
+	//UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 5, textSize.height + 5)];
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 15, textSize.height + 15)];
+  label.backgroundColor = [UIColor clearColor];
 	//label.backgroundColor = [UIColor blackColor];
   label.textColor = [UIColor whiteColor];
 	label.font = font;

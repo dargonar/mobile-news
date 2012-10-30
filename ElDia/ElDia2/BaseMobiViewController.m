@@ -61,9 +61,14 @@
 
 /*****/
 
+-(void)showMessage:(NSString*)message{
+  [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
+}
+
+
 -(void)configureToast{
   iToastSettings *theSettings = [iToastSettings getSharedSettings];
-  theSettings.duration = 2500;
+  theSettings.duration = 4000;
   //UIImage *warning_image = [UIImage imageNamed: @"warning.48x48.png"];
   UIImage *warning_image = [UIImage imageNamed: @"warning.hueco.48x48.png"];
   [theSettings setImage:warning_image forType:iToastTypeWarning];

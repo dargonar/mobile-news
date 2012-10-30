@@ -14,6 +14,7 @@
 #import "Utils.h"
 #import "URLParser.h"
 #import "NewsManager.h"
+#import "ErrorBuilder.h"
 
 #import "HCYoutubeParser.h"
 
@@ -71,7 +72,8 @@
 
 - (void)playVideo:(NSURL *)_url{
   
-  [self showLoadingIndicator];
+  
+  [self onLoading:YES];
   // Deshabilitamos el cache.
   
   __block NSString *video_id = [[Utils getYoutubeId:[_url absoluteString]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]];
@@ -121,7 +123,7 @@
       youtubeURL = nil;
       video_id=nil;
       
-      [self hideLoadingIndicator];
+      [self onLoading:NO];
     });
   });
   
@@ -129,7 +131,7 @@
 
 - (void)playAudio:(NSURL *)url
 {
-  [self showLoadingIndicator];
+  [self onLoading:YES];
   
   NSString * cleaned_url = [Utils cleanUrl:[[url absoluteString] stringByReplacingOccurrencesOfString:@"audio://" withString:@"" ]] ;
   MPMoviePlayerViewController* mpviewController = nil;
@@ -146,7 +148,7 @@
   cleaned_url=nil;
   mpviewController=nil;
   
-  [self hideLoadingIndicator];
+  [self onLoading:NO];
 
 }
 
@@ -168,8 +170,11 @@
 
 - (IBAction) btnShareClick: (id)param{
   
-//  if(![self onlineOrShowError:YES])
-//    return;
+  if(![Utils areWeConnectedToInternet])
+  {
+    [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado."];
+    return;
+  }
   
   // Create the item to share (in this example, a url)
 	//NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
@@ -203,7 +208,7 @@
 
 -(void)loadNoticia:(NSURL *)url{
   
-  [self showLoadingIndicator];
+  [self onLoading:YES];
   //{$Node/guid};{$Node/link};{$Node/title};{$Node/description}
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
@@ -233,9 +238,15 @@
     __block NSData *data = [self.mScreenManager getArticle:url useCache:useCache error:&err];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+      
       if(data==nil)
       {
-          [self hideLoadingIndicator];
+        [self onLoading:NO];
+        
+        if([err code]==ERR_NO_INTERNET_CONNECTION)
+        {
+          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion."];
+        }
         return;
       }
       
@@ -349,7 +360,7 @@
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self hideLoadingIndicator];
+  [self onLoading:NO];
   [self changeFontSize:0];}
 
  -(void)webViewDidStartLoad:(UIWebView *)webView{
@@ -357,7 +368,7 @@
    //[self showLoadingIndicator];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-  [self hideLoadingIndicator];
+  [self onLoading:NO];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -370,8 +381,11 @@
   {
     self.bottomUIView.hidden = YES; //HACK!
     
-//    if(![self onlineOrShowError:YES])
-//      return NO;
+    if(![Utils areWeConnectedToInternet])
+    {
+      [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado."];
+      return NO;
+    }
     
     bool handled = NO;
     if ([[url scheme]isEqualToString:@"noticia"])
@@ -519,18 +533,12 @@
 
 
 
--(void) showLoadingIndicator{
-  //btnRefreshClick.hidden=YES;
-  //btnRefreshClick.enabled=NO;
-  self.loading_indicator.hidden = NO;
-  [self.loading_indicator startAnimating];
-}
--(void) hideLoadingIndicator{
-  //btnRefreshClick.hidden=NO;
-  //btnRefreshClick.enabled=YES;
-  self.loading_indicator.hidden = YES;
-  [self.loading_indicator stopAnimating];
-  
+-(void) onLoading:(BOOL)started{
+  self.loading_indicator.hidden = !started;
+  if(started)
+    [self.loading_indicator startAnimating];
+  else
+    [self.loading_indicator stopAnimating];
 }
 
 - (void)viewDidUnload

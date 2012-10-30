@@ -83,6 +83,10 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 
   }
   
+  if(![Utils areWeConnectedToInternet])
+  {
+    return [ErrorBuilder build:error desc:@"no internet conection" code:ERR_NO_INTERNET_CONNECTION];
+  }
   //Lo bajo
   NSData *xml = [self downloadUrl:url error:error];
   
