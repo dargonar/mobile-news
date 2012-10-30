@@ -13,7 +13,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -36,12 +36,14 @@ BOOL errorOn=NO;
   
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
-
+  
+  // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
+  //   No importa que tan vieja sea.
   if([self.mScreenManager sectionExists:mainUrl])
   {
     NSError *err;
     NSData *data = [self.mScreenManager getSection:mainUrl useCache:YES error:&err];
-    [self setHTML:data url:mainUrl];
+    [self setHTML:data url:mainUrl webView:self.mainUIWebView];
     splashOn=NO;
     return;
   }
@@ -54,8 +56,10 @@ BOOL errorOn=NO;
   [super viewDidAppear:animated];
 
   NSString* url = [self.currentUrl copy];
-
+  
+  // 2 Cuando aparece la vista intentamos traernos todo si lo cacheado es viejo (o no teniamos nada!).
   NSDate * date =[self.mScreenManager sectionDate:url];
+  
   if( ![self isOld:date])
     return;
   
@@ -68,7 +72,7 @@ BOOL errorOn=NO;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
     __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
-    //data=nil;
+
     dispatch_async(dispatch_get_main_queue(), ^{
       if(data==nil)
       {
@@ -86,7 +90,7 @@ BOOL errorOn=NO;
         return;
       }
       
-      [self setHTML:data url:url];
+      [self setHTML:data url:url webView:self.mainUIWebView];
       
       data=nil;
       
@@ -161,18 +165,14 @@ BOOL errorOn=NO;
   [self showRefreshLoadingIndicator];
 }
 
-
 -(void) hideLoadingIndicator{
   self.loading_indicator.hidden = YES;
   [self.loading_indicator stopAnimating];
-  
   [self hideRefreshLoadingIndicator];
-  
   welcome_view.hidden = YES;
-  
   self.logo_imgvw_alpha.hidden = YES;
- 
 }
+
 -(void) hideRefreshLoadingIndicator{
   btnRefreshClick.hidden=NO;
   btnRefreshClick.enabled=YES;
@@ -184,7 +184,7 @@ BOOL errorOn=NO;
   NSInteger top=50;
   top=80;
   
-  [[[iToast makeText:message] setGravity:iToastGravityTop offsetLeft:0 offsetTop:top] show];
+  [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:top] show];
 
 }
 
@@ -214,7 +214,7 @@ BOOL errorOn=NO;
   
   
   NSURL* url = [request URL];
-  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_NOTICIA])
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"noticia"])
   {
 
     if (self.myNoticiaViewController != nil) {
@@ -226,11 +226,8 @@ BOOL errorOn=NO;
     
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-    [self.myNoticiaViewController loadNoticia:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]]];
+    [self.myNoticiaViewController loadNoticia:url];
     
-    
-    NSLog(@"webView: DESPUES de cargar Noticia");
-
     return NO;
   }
   return YES;

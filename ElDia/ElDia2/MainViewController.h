@@ -16,6 +16,8 @@
   NSString* current_url;
 }
 
+@property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
+
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
 
