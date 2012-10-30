@@ -163,6 +163,7 @@ static NSMutableArray *_ids_de_noticias=nil;
     path_xslt=nil;
     htmlAttributesRegex=nil;
     generator=nil;
+    
   }
 }
 
