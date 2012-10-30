@@ -17,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>LISTADO PRINCIPAL</title>
+        <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
       <body>
@@ -25,7 +26,7 @@
         </xsl:call-template>
         
         <xsl:call-template name="ListadoNoticiasEnListado">
-          <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 10]"/>
+          <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1]"/>
         </xsl:call-template>
       </body>
     </html>

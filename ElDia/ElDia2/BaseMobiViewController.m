@@ -21,14 +21,16 @@
 @implementation BaseMobiViewController
 
 @synthesize mScreenManager, mainUIWebView, currentUrl;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
     if (self) {
         // Custom initialization
       self.mScreenManager = [[ScreenManager alloc] init];
-
     }
+  
     return self;
 }
 
@@ -37,7 +39,7 @@
     [super viewDidLoad];
 
   [[NSNotificationCenter defaultCenter] addObserver:self 
-                                           selector:@selector(onDownloadImages:) 
+                                           selector:@selector(onImageDownloaded:) 
                                                name:@"com.diventi.mobipaper.image_downloaded" 
                                              object:nil];
 }
@@ -98,32 +100,30 @@
   });
 }
 -(void)onImageDownloaded:(NSNotification *)notif {
-  
+
   if (notif == nil) {
     return;
   }
-  
+
   MobiImage    *mobi_image = [notif object];
   NSDictionary *userInfo   = [notif userInfo];
   
+  //TODO: se bajo con error ... ponemos un loguito?
   if(mobi_image == nil) {
-    //TODO: se bajo con error ... ponemos un loguito?
     return;
   }
-
+  
   NSString *url = [userInfo objectForKey:@"url"];
+  NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
   
-  if(self.currentUrl!=url)
+  if(self.currentUrl != url)
     return;
-  
-  __block NSString *jsString  = [NSString stringWithFormat:@"document.getElementById('%@').style.backgroundImage = ''; document.getElementById('%@').style.backgroundImage = 'url(%@)';"
-                                 , mobi_image.local_uri
-                                 , mobi_image.local_uri
-                                 , [NSString stringWithFormat:@"i_%@", mobi_image.local_uri ] ];
+
+  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@')"
+                                 , mobi_image.local_uri];
   
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    jsString=nil;
   });
   
 }

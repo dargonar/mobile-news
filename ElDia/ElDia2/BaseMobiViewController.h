@@ -11,7 +11,7 @@
 #import "MobiImage.h"
 
 @interface BaseMobiViewController : UIViewController{
-  ScreenManager *mScreenManager;
+  ScreenManager   *mScreenManager;
 }
 
 @property (nonatomic, retain) ScreenManager *mScreenManager;

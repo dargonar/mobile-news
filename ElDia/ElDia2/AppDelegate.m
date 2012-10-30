@@ -35,6 +35,7 @@
 
   NSString* cssFolder = [cache_folder stringByAppendingPathComponent:@"css"];
   NSString* imgFolder = [cache_folder stringByAppendingPathComponent:@"img"];
+  NSString* jsFolder  = [cache_folder stringByAppendingPathComponent:@"js"];
   
   if (![fileManager fileExistsAtPath:cssFolder]) {
     [fileManager createSymbolicLinkAtPath:cssFolder withDestinationPath:appFolder error:&err];
@@ -44,6 +45,11 @@
   if (![fileManager fileExistsAtPath:imgFolder]) {
     [fileManager createSymbolicLinkAtPath:imgFolder withDestinationPath:appFolder error:&err];
     NSLog(@"Error2: %@", err != nil ? [err description] : @"NIL");
+  }
+
+  if (![fileManager fileExistsAtPath:jsFolder]) {
+    [fileManager createSymbolicLinkAtPath:jsFolder withDestinationPath:appFolder error:&err];
+    NSLog(@"Error3: %@", err != nil ? [err description] : @"NIL");
   }
 
   NSLog(@"Cache current size: %llu", [[DiskCache defaultCache] size]);
@@ -85,8 +91,8 @@
   
   
   //HACK SACAR ANTES DE RELEASE
-  //[NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-  //id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
+  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   return YES;
 }
@@ -153,6 +159,10 @@
     return;
   }
   
+  //NSLog(@"aguanto ..");
+  //sleep(5);
+  //NSLog(@"salgo ..");
+  
   if (![self download_queue]) {
     self.download_queue = [[NSOperationQueue alloc] init];
     [self.download_queue setMaxConcurrentOperationCount:20]; //20 al mismo tiempo?
@@ -163,7 +173,7 @@
   if(mobi_images == nil || userInfo == nil) {
     return;
   }
-  
+    
   for (int i=0; i<[mobi_images count]; i++) {
 
     MobiImage *mobi_image = [mobi_images objectAtIndex:i];

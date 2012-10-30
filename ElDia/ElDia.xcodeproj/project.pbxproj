@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		602230D5163B61CB0091D201 /* functions.js in Sources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
+		602230D6163B64B50091D201 /* functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
 		6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050EF1F16388B0F00DE98ED /* ScreenManager.m */; };
 		605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605C9A971639D6F100CBD806 /* ErrorBuilder.m */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
@@ -282,6 +284,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		602230D4163B61CB0091D201 /* functions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = functions.js; sourceTree = "<group>"; };
 		6050EF1E16388B0F00DE98ED /* ScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenManager.h; sourceTree = "<group>"; };
 		6050EF1F16388B0F00DE98ED /* ScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenManager.m; sourceTree = "<group>"; };
 		605C9A961639D6F100CBD806 /* ErrorBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorBuilder.h; sourceTree = "<group>"; };
@@ -751,6 +754,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		602230D2163B61B30091D201 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				602230D4163B61CB0091D201 /* functions.js */,
+			);
+			name = js;
+			sourceTree = "<group>";
+		};
 		CE16EBF915ED5B8A00EC8210 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1319,6 +1330,7 @@
 		CE7D338815EE889500935444 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				602230D2163B61B30091D201 /* js */,
 				CE83715916128D9800FC8269 /* css */,
 				CE83715B16128D9800FC8269 /* img */,
 				CE83716D16128D9800FC8269 /* 3_new.xsl */,
@@ -1798,6 +1810,7 @@
 				CED344251630A4A300C77C79 /* menu_dummy.html in Resources */,
 				CED3442A1630AA5F00C77C79 /* loading_indicator_big_blue.gif in Resources */,
 				CED3442B1630AA5F00C77C79 /* loading_indicator_big.gif in Resources */,
+				602230D6163B64B50091D201 /* functions.js in Resources */,
 				CED3442C1630AA5F00C77C79 /* loading_indicator_small_blue.gif in Resources */,
 				CED3442D1630AA5F00C77C79 /* loading_indicator_small.gif in Resources */,
 				CED2A5D81630F9EA0027DFF1 /* Icon.png in Resources */,
@@ -1967,6 +1980,7 @@
 				6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */,
 				CEECF0E8163988DB00058824 /* BaseMobiViewController.m in Sources */,
 				605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */,
+				602230D5163B61CB0091D201 /* functions.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

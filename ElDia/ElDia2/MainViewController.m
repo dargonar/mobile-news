@@ -120,6 +120,10 @@ BOOL errorOn=NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
+
+//  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
+//  return;
+  
   [self showRefreshLoadingIndicator];
   //ToDo
   NSString* url = [self.currentUrl copy];
@@ -187,15 +191,21 @@ BOOL errorOn=NO;
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+  NSLog(@"WEBVIEW: end load with error");
+  NSLog(@"Error: %@ %@", error, [error userInfo]);
+
   //ToDo: mostrar algo sif necessary.
   [self hideLoadingIndicator];
   self.error_view.hidden=YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
+  NSLog(@"WEBVIEW: start load");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
+  NSLog(@"WEBVIEW: end load");
   [self hideLoadingIndicator];
 }
 
