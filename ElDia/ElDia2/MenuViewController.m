@@ -7,23 +7,19 @@
 //
 
 #import "MenuViewController.h"
-#import "MainViewController.h"
-
-
 
 @implementation MenuViewController
-@synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView, mYMobiPaperLib;
+@synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView;
 
-BOOL html_set=NO;
+NSString *currentUrl=@"menu://";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+      currentUrl=@"menu://";
     }
   
-  html_set=NO;
-  self.mYMobiPaperLib = [[YMobiPaperLib alloc] init];
   return self;
 }
 
@@ -34,18 +30,23 @@ BOOL html_set=NO;
 {
   [super viewDidLoad];
   
-  self.webView.hidden=YES;
-  
   self.webView.scrollView.bounces = NO;
   self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
-  
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
-  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
-  [self setHtmlToView:htmlData];
-  
   self.webView.hidden=NO;
+  /*
+   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
+  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
+  [self setHTML:htmlData url:currentUrl webView:self.webView];
   
+  [self loadUrl:YES];
+  */
+  
+  [self loadGesturesRecognizers];
+  
+  }
+
+-(void)loadGesturesRecognizers{
   // create a UITapGestureRecognizer to detect when the screenshot recieves a single tap
   tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapScreenShot:)];
   [screenShotImageView addGestureRecognizer:tapGesture];
@@ -55,17 +56,7 @@ BOOL html_set=NO;
   [panGesture setMaximumNumberOfTouches:2];
   [panGesture setDelegate:self];
   [screenShotImageView addGestureRecognizer:panGesture];
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    __block NSData* data=[self.mYMobiPaperLib getHtmlAndConfigure:YMobiNavigationTypeSections queryString:nil xsl:XSL_PATH_SECTIONS tag:MSG_GET_SECTIONS force_load:YES];
-    // tell the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self setHtmlToView:data];	
-      data = nil;
-    });
-  });
-  
-  }
+}
 
 - (void)viewDidUnload
 {
@@ -76,25 +67,34 @@ BOOL html_set=NO;
   [self.screenShotImageView removeGestureRecognizer:self.panGesture];
 }
 
--(void)setHtmlToView:(NSData*)data{
+-(void)loadUrl:(BOOL)useCache{
   
-  if(data==nil)
+  if(useCache && [self.mScreenManager menuExists])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getMenu:YES error:&err];
+    [self setHTML:data url:currentUrl webView:self.webView];
     return;
-  
-  self.webView.hidden=YES;
-  html_set=YES;
-  
-  //NSLog(@"MainViewController::setHtmlToView ME llamaron!!!");
-  NSString *dirPath = [[NSBundle mainBundle] bundlePath];
- 	NSURL *dirURL = [[NSURL alloc] initFileURLWithPath:dirPath isDirectory:YES];
-  
-  [self.webView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:dirURL];
-  
-  self.webView.hidden=NO;
-  data = nil;
-  dirPath=nil;
-  dirURL=nil;
-  
+  }
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    __block NSError *err;
+    __block NSData *data = [self.mScreenManager getMenu:NO error:&err];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if(data==nil)
+      {
+        return;
+      }
+      
+      [self setHTML:data url:currentUrl  webView:self.webView];
+      
+      data=nil; 
+      
+      
+    });
+  });
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -219,9 +219,9 @@ BOOL html_set=NO;
   
   
   NSURL* url = [request URL];
-  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:SCHEMA_SECTION])
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"section"])
   {
-    //[[MainViewController sharedInstance] loadSectionNews:url];
+    [app_delegate loadSectionNews:url];
     //ToDo -> llamar al main view
     [self slideThenHide];
     return NO;

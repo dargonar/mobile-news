@@ -35,8 +35,8 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 }
 
 /**/
--(BOOL) menuExists:(NSString*)url {
-  return [self screenExists:url prefix:@"m"];
+-(BOOL) menuExists{
+  return [self screenExists:@"menu://" prefix:@"m"];
 }
 
 -(BOOL) sectionExists:(NSString*)url {
@@ -85,12 +85,14 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   
   //Lo bajo
   NSData *xml = [self downloadUrl:url error:error];
-
+  
   //Problemas downloading?
   if (xml == nil) {
     return nil;
   }
-
+  
+  xml = [Utils sanitizeXML:xml];
+  
   if(processImages)
   {
     //Rebuildeamos el xml
@@ -115,7 +117,7 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   
-  NSData *html = [htmlGen generate:[Utils sanitizeXML:xml ] xslt_file:[self getStyleSheet:url] error:error];
+  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url] error:error];
   
   if (html == nil) {
     return nil;

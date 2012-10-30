@@ -29,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
 
 @property (nonatomic, retain) IBOutlet UIView *welcome_view;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;
 @property (nonatomic, retain) IBOutlet UIView *error_view;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnRefresh2;
@@ -38,11 +39,8 @@
 - (IBAction) btnRefreshClick: (id)param;
 - (IBAction) btnRefresh2Click: (id)param;
 
--(void) showRefreshLoadingIndicator;
--(void) showMainLoadingIndicator;
--(void) showWelcomeLoadingIndicator;
--(void) hideLoadingIndicator;
--(void) hideRefreshLoadingIndicator;
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache;
+
 
 //~/Library/Application Support/iPhone Simulator/
 

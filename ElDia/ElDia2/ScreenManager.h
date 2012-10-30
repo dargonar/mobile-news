@@ -12,6 +12,7 @@
 
 -(BOOL) sectionExists:(NSString*)url;
 -(BOOL) articleExists:(NSString*)url;
+-(BOOL) menuExists;
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;

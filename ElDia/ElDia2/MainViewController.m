@@ -13,7 +13,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -39,17 +39,18 @@ BOOL errorOn=NO;
   
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
+  
   if([self.mScreenManager sectionExists:mainUrl])
   {
     NSError *err;
     NSData *data = [self.mScreenManager getSection:mainUrl useCache:YES error:&err];
     [self setHTML:data url:mainUrl webView:self.mainUIWebView];
+    [app_delegate loadMenu:YES];
     splashOn=NO;
     return;
   }
   
-  splashOn=YES;
-  [self showWelcomeLoadingIndicator];
+  [self onWelcome:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -63,11 +64,11 @@ BOOL errorOn=NO;
   if( ![self isOld:date])
     return;
   
-  [self reloadUrl:url useCache:YES];
+  [self loadUrl:url useCache:YES];
   
 }
 
--(void)reloadUrl:(NSString*)url useCache:(BOOL)useCache {
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
@@ -78,13 +79,12 @@ BOOL errorOn=NO;
       {
         if(errorOn)
         {
-          [self.refresh_loading_indicator2 stopAnimating];
-          self.btnRefresh2.hidden=NO;
+          [self onError:NO];
         }
         if(splashOn)
         {
-          self.error_view.hidden=NO;
-          [self hideLoadingIndicator];
+          [self onError:YES];
+          [self onNothing];
           //paro el loading del splash y muestro un ewarning  + un boton de reload.
         }
         return;
@@ -94,7 +94,7 @@ BOOL errorOn=NO;
       
       data=nil;
       
-      
+      [app_delegate loadMenu:NO];
     });
   });
 }
@@ -124,68 +124,86 @@ BOOL errorOn=NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
-
-//  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
-//  return;
-  
-  [self showRefreshLoadingIndicator];
+  [self onRefreshing:YES];
   //ToDo
   NSString* url = [self.currentUrl copy];
-  [self reloadUrl:url useCache:NO];
+  [self loadUrl:url useCache:NO];
 }
 
 - (IBAction) btnRefresh2Click: (id)param{
-  self.btnRefresh2.hidden=YES;
-  self.refresh_loading_indicator2.hidden=NO;
-  [self.refresh_loading_indicator2 startAnimating];
-  errorOn=YES;
+  [self onErrorRefreshing:YES];
   NSString* url = [self.currentUrl copy];
-  [self reloadUrl:url useCache:NO];
+  [self loadUrl:url useCache:NO];
 }
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void) showRefreshLoadingIndicator{
-  btnRefreshClick.hidden=YES;
-  btnRefreshClick.enabled=NO;
-  self.refresh_loading_indicator.hidden = NO;
-  [self.refresh_loading_indicator startAnimating];
-}
--(void) showMainLoadingIndicator{
-  self.loading_indicator.hidden = NO;
-  [self.loading_indicator startAnimating];
-  [self showRefreshLoadingIndicator];
-}
--(void) showWelcomeLoadingIndicator{
-  welcome_view.hidden = NO;
-  [self showRefreshLoadingIndicator];
+
+-(void) onErrorRefreshing:(BOOL)started{
+  self.btnRefresh2.hidden=started;
+  self.refresh_loading_indicator2.hidden=!started;
+  if(started)
+    [self.refresh_loading_indicator2 startAnimating ];
+  else
+    [self.refresh_loading_indicator2 stopAnimating ];
+      
+  //errorOn=!started;
 }
 
--(void) hideLoadingIndicator{
-  self.loading_indicator.hidden = YES;
-  [self.loading_indicator stopAnimating];
-  [self hideRefreshLoadingIndicator];
-  welcome_view.hidden = YES;
-  self.logo_imgvw_alpha.hidden = YES;
+-(void) onRefreshing:(BOOL)started{
+  btnRefreshClick.hidden=started;
+  btnRefreshClick.enabled=!started;
+  self.refresh_loading_indicator.hidden = !started;
+  if(started)
+      [self.refresh_loading_indicator startAnimating ];
+  else
+    [self.refresh_loading_indicator stopAnimating ];
+
 }
 
--(void) hideRefreshLoadingIndicator{
-  btnRefreshClick.hidden=NO;
-  btnRefreshClick.enabled=YES;
-  self.refresh_loading_indicator.hidden = YES;
-  [self.refresh_loading_indicator stopAnimating];
+-(void) onLoading:(BOOL)started{
+  self.loading_indicator.hidden = !started;
+  if(started)
+    [self.loading_indicator startAnimating ];
+  else
+    [self.loading_indicator stopAnimating ];
+
+  [self onRefreshing:started];
+}
+
+-(void) onWelcome:(BOOL)started{
+  welcome_view.hidden = !started;
+  if(started)
+    [self.welcome_indicator startAnimating ];
+  else
+    [self.welcome_indicator stopAnimating ];
+
+  [self onRefreshing:started];
+  splashOn=started;
+  
+}
+
+-(void) onError:(BOOL)started{
+  error_view.hidden = !started;
+  [self onErrorRefreshing:NO];
+  errorOn=started;
+}
+
+-(void) onNothing{
+  //[self onRefreshing2:NO];
+  [self onRefreshing:NO];
+  [self onWelcome:NO];
+  [self onError:NO];
+  [self onLoading:NO];
 }
 
 -(void)showMessage:(NSString*)message{
   NSInteger top=50;
   top=80;
-  
   [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:top] show];
-
 }
 
 // UIWebView Delegate
@@ -197,6 +215,8 @@ BOOL errorOn=NO;
   //ToDo: mostrar algo sif necessary.
   [self hideLoadingIndicator];
   self.error_view.hidden=YES;
+  //ToDo: mostrar algo if necessary.
+  [self onNothing];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
@@ -207,6 +227,7 @@ BOOL errorOn=NO;
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
   NSLog(@"WEBVIEW: end load");
   [self hideLoadingIndicator];
+  [self onNothing];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -245,6 +266,5 @@ BOOL errorOn=NO;
   self.myNoticiaViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
   
 }
-
 
 @end

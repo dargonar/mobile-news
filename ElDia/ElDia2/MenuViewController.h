@@ -9,22 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "YMobiPaperLib.h"
+#import "BaseMobiViewController.h"
 
-@interface MenuViewController: UIViewController<UIWebViewDelegate,UIGestureRecognizerDelegate>{
-  YMobiPaperLib *mYMobiPaperLib;
-}
+@interface MenuViewController: BaseMobiViewController<UIWebViewDelegate,UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain)  YMobiPaperLib *mYMobiPaperLib;
 @property (strong, nonatomic) IBOutlet UIImageView *screenShotImageView;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) UIImage *screenShotImage;
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 
-- (void)slideThenHide;
-- (void)adjustAnchorPointForGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer ;
 - (IBAction) btnCloseClick: (id)param;
-- (void)adjustWebViewWidth:(CGFloat)_width;
-- (void)setHtmlToView:(NSData*)data;
+-(void)loadUrl:(BOOL)useCache;
+//- (void)slideThenHide;
+//- (void)adjustAnchorPointForGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer ;
+//- (void)adjustWebViewWidth:(CGFloat)_width;
+
 @end

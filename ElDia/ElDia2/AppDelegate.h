@@ -32,4 +32,6 @@
 - (void)requestDone:(ASIHTTPRequest *)request;
 - (void)requestWentWrong:(ASIHTTPRequest *)request;
 
+- (void)loadSectionNews:(NSURL*)url;
+- (void)loadMenu:(BOOL)useCache;
 @end

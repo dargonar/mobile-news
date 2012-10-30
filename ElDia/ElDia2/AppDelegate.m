@@ -70,11 +70,11 @@
     mainNibName = @"MainViewController_iPad";
     menuNibName = @"MenuViewController_iPad";
   }
+  self.menuViewController = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   self.mainViewController = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
   
   // create the menuViewController also in the app delegate so we can swap it in as the
   // windows root view controller whenever its required
-  self.menuViewController = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   
   // set the rootViewController to the contentViewController
   //self.window.rootViewController = self.mainViewController;//HACKED
@@ -97,7 +97,14 @@
   return YES;
 }
 
+-(void)loadMenu:(BOOL)useCache{
+  [self.menuViewController loadUrl:useCache];
+}
 
+-(void)loadSectionNews:(NSURL*)url{
+  self.mainViewController.currentUrl = [url absoluteString];
+  [self.mainViewController loadUrl:self.mainViewController.currentUrl useCache:YES];
+}
 
 -(void)showSideMenu
 {

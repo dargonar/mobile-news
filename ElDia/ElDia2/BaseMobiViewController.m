@@ -64,7 +64,8 @@
 -(void)configureToast{
   iToastSettings *theSettings = [iToastSettings getSharedSettings];
   theSettings.duration = 2500;
-  UIImage *warning_image = [UIImage imageNamed: @"warning.png"];
+  //UIImage *warning_image = [UIImage imageNamed: @"warning.48x48.png"];
+  UIImage *warning_image = [UIImage imageNamed: @"warning.hueco.48x48.png"];
   [theSettings setImage:warning_image forType:iToastTypeWarning];
 }
 
@@ -80,11 +81,13 @@
 
 -(void)setHTML:(NSData*)data url:(NSString*)url webView:(UIWebView*)webView{
   [webView  loadData:data
-                  MIMEType:@"text/html"
-          textEncodingName:@"utf-8"
-                   baseURL:[[DiskCache defaultCache] getFolderUrl]];
+            MIMEType:@"text/html"
+            textEncodingName:@"utf-8"
+            baseURL:[[DiskCache defaultCache] getFolderUrl]];
+
   if(self.myUIWebView==nil)
     self.myUIWebView=webView;
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSError *err;
     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
