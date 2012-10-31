@@ -67,7 +67,7 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
 }
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"c" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"c" error:error];
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -105,7 +105,8 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
     return nil;
   }
   
-  xml = [Utils sanitizeXML:xml];
+  if( ![url hasPrefix:@"clasificados://"] )
+    xml = [Utils sanitizeXML:xml];
   
   if(processImages)
   {

@@ -17,3 +17,14 @@ function refresh_background(imgs) {
     img.style.backgroundImage = url;
   }
 }
+
+var timeout_var=null;
+function show_actualizado(msg){
+  clearTimeout(timeout_var);
+  var el = document.getElementById('updated_msg');
+  if(!el)
+    return;
+  el.innerHTML = msg;
+  el.style.display = 'block';
+  timeout_var=setTimeout(function(){el.style.display = 'none';},3000);
+}

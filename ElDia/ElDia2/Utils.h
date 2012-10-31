@@ -14,4 +14,6 @@
 +(NSString *)getYoutubeId:(NSString*)url;
 +(NSData*)sanitizeXML:(NSData*)xml_data;
 +(BOOL)areWeConnectedToInternet;
++ (NSString *)timeAgoFromUnixTime:(double)seconds;
+
 @end

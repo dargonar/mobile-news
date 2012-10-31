@@ -35,8 +35,8 @@ NSData*dati=nil;
 {
   [super viewDidLoad];
   
-  self.webView.scrollView.bounces = NO;
-  self.webView.scrollView.bouncesZoom = NO;
+  //self.webView.scrollView.bounces = NO;
+  //self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
   self.webView.hidden=NO;
   /*

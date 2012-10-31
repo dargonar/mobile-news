@@ -11,6 +11,7 @@
 #import "ConfigHelper.h"
 #import "AppDelegate.h"
 #import "ErrorBuilder.h"
+#import "Utils.h"
 
 
 @implementation MainViewController
@@ -229,8 +230,19 @@ BOOL errorOn=NO;
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
-  NSLog(@"WEBVIEW: end load");
+  [self showUpdatedAt];
   [self onNothing];
+}
+
+-(void)showUpdatedAt{
+  
+  NSDate * date =[self.mScreenManager sectionDate:self.currentUrl];
+  NSString *jsString  = [NSString  stringWithFormat:@"show_actualizado('%@')", [Utils timeAgoFromUnixTime:[date timeIntervalSince1970]]];
+  
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+  jsString=nil;
+  date=nil;
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request

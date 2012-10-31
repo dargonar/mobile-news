@@ -232,7 +232,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType{
-  return NO;
+  if (UIWebViewNavigationTypeLinkClicked == navigationType )
+    return NO;
+  
+  return YES;
 }
 
 

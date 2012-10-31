@@ -32,7 +32,7 @@
   
   xsltStylesheetPtr cur = xsltParseStylesheetFile((const xmlChar *)[xslt_file UTF8String]);
 	if (cur == nil || !cur) {
-    return [ErrorBuilder build:error desc:@"xsltParseStylesheetFile nil" code:0x2004]; //HACK: ERR_INVALID_XSL 
+    return [ErrorBuilder build:error desc:@"xsltParseStylesheetFile nil" code:ERR_INVALID_XLS]; //HACK: ERR_INVALID_XSL 
   }
   
   const char *tmp = [xml bytes];
