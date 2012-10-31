@@ -61,8 +61,12 @@
 
 /*****/
 
--(void)showMessage:(NSString*)message{
-  [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
+-(void)showMessage:(NSString*)message isError:(BOOL)isError{
+  if(isError)
+    [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
+  else
+    [[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0];
+
 }
 
 
@@ -79,6 +83,7 @@
     return YES;
   NSTimeInterval t= [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceDate:date];
   if(t > (60*60*2))
+    //if(t > 1)
     return YES;
   
   return NO;

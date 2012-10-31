@@ -16,15 +16,17 @@
 #import "ErrorBuilder.h"
 #import "Utils.h"
 
-NSString * const MAIN_STYLESHEET      = @"1_main_list.xsl";
-NSString * const NOTICIA_STYLESHEET   = @"3_new.xsl";
-NSString * const SECTIONS_STYLESHEET  = @"2_section_list.xsl";
-NSString * const MENU_STYLESHEET      = @"4_menu.xsl";
+NSString * const MAIN_STYLESHEET          = @"1_main_list.xsl";
+NSString * const NOTICIA_STYLESHEET       = @"3_new.xsl";
+NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
+NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
+NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 
-NSString * const MAIN_URL     = @"http://www.eldia.com.ar/rss/index.aspx";
-NSString * const NOTICIA_URL  = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
-NSString * const SECTIONS_URL = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
-NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
+NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
+NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
+NSString * const SECTIONS_URL         = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
+NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.aspx";
+NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
 
 @implementation ScreenManager
 
@@ -37,6 +39,10 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 /**/
 -(BOOL) menuExists{
   return [self screenExists:@"menu://" prefix:@"m"];
+}
+
+-(BOOL) clasificadosExists:(NSString*)url {
+  return [self screenExists:url prefix:@"c"];
 }
 
 -(BOOL) sectionExists:(NSString*)url {
@@ -58,6 +64,10 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
 
 -(NSData *)getMenu:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:@"menu://" useCache:useCache processImages:NO prefix:@"m" error:error];
+}
+
+-(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"c" error:error];
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -91,7 +101,7 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   NSData *xml = [self downloadUrl:url error:error];
   
   //Problemas downloading?
-  if (xml == nil) {
+  if (xml == nil) {	
     return nil;
   }
   
@@ -139,6 +149,13 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   
   NSURL *url = [self getXmlHttpUrl:surl];
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+  
+  [request setNumberOfTimesToRetryOnTimeout:1];
+  [request setTimeOutSeconds:15];
+  [request setCachePolicy:ASIDoNotWriteToCacheCachePolicy|ASIDoNotReadFromCacheCachePolicy];
+  request.timeOutSeconds=15;
+  [request setShouldAttemptPersistentConnection:NO];
+  
   [request startSynchronous];
   
   NSError *request_error = [request error];
@@ -166,6 +183,11 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:NOTICIA_STYLESHEET];
   }
   
+  
+  if( [url hasPrefix:@"clasificados://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CLASIFICADOS_STYLESHEET];
+  }
+  
   if( [url hasPrefix:@"section://"] ) {  
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SECTIONS_STYLESHEET];
   }
@@ -190,6 +212,11 @@ NSString * const MENU_URL     = @"http://www.eldia.com.ar/rss/secciones.aspx";
   if( [url hasPrefix:@"section://"] ) {
     NSURL *tmp = [NSURL URLWithString:url];
     return [NSURL URLWithString:[NSString stringWithFormat:SECTIONS_URL,[tmp host]]];
+  }
+
+  if( [url hasPrefix:@"clasificados://"] ) {
+    NSURL *tmp = [NSURL URLWithString:url];
+    return [NSURL URLWithString:[NSString stringWithFormat:CLASIFICADOS_URL,[tmp host]]];
   }
 
   if( [url hasPrefix:@"menu://"] ) {

@@ -14,7 +14,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_imgvw, offline_lbl, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -59,13 +59,13 @@ BOOL errorOn=NO;
 
   NSString* url = [self.currentUrl copy];
   
-  // 2 Cuando aparece la vista intentamos traernos todo si lo cacheado es viejo (o no teniamos nada!).
   NSDate * date =[self.mScreenManager sectionDate:url];
-  
+  // Main list es muy viejo?
   if( ![self isOld:date])
     return;
   
-  [self loadUrl:url useCache:YES];
+  // Lo traemos de nuevo
+  [self loadUrl:url useCache:NO];
   
 }
 
@@ -79,24 +79,30 @@ BOOL errorOn=NO;
       
       if(data==nil)
       {
-        /*if(errorOn)
+        if(splashOn) //quiere decir que no habia nada cacheado... la primera vez?
         {
-          [self onError:NO];
+          //1: Saco el splash.
+          [self onWelcome:NO];
+          //2: Muestro pantalla de error.
+          [self onError:YES];
         }
-        if(splashOn)	
+        
+        if(errorOn)
         {
-          [self onNothing];
-        }*/
-        [self onNothing];
+          //Si estaba mostrando pantalla de error, detengo el indicator.
+          [self onErrorRefreshing:NO];
+        }
+        
         if([err code]==ERR_NO_INTERNET_CONNECTION)
         {
-          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion."];
+          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion." isError:YES];
         }
-        else
-          [self onError:NO];
         
         return;
       }
+      
+      if(!useCache)
+        [self showMessage:@"La trajimos DA VOLTA!" isError:NO];
       
       [self setHTML:data url:url webView:self.mainUIWebView];
       
@@ -189,7 +195,7 @@ BOOL errorOn=NO;
   else
     [self.welcome_indicator stopAnimating ];
 
-  [self onRefreshing:started];
+  //[self onRefreshing:started];
   splashOn=started;
   
 }

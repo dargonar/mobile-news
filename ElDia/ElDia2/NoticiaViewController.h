@@ -46,7 +46,6 @@
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 
-
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
 - (IBAction) btnFontSizePlusClick: (id)param;

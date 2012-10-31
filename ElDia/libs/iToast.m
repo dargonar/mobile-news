@@ -62,8 +62,10 @@ static iToastSettings *sharedSettings = nil;
 	
 	UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
 	if (image) {
-		v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 15, MAX(textSize.height, image.size.height) + 10);
-		label.center = CGPointMake(image.size.width + 10 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
+		v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 30, MAX(textSize.height, image.size.height) + 10);
+		label.center = CGPointMake(image.size.width + 25 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
+    //v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 15, MAX(textSize.height, image.size.height) + 10);
+		//label.center = CGPointMake(image.size.width + 10 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
 	} else {
 		v.frame = CGRectMake(0, 0, textSize.width + 10, textSize.height + 10);
 		label.center = CGPointMake(v.frame.size.width / 2, v.frame.size.height / 2);

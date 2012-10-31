@@ -157,6 +157,9 @@
 		CE7A826815EC221F0061F481 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A826615EC221F0061F481 /* MenuViewController.m */; };
 		CE7A826915EC221F0061F481 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7A826715EC221F0061F481 /* MenuViewController.xib */; };
 		CE7A828E15EC244F0061F481 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A828D15EC244E0061F481 /* QuartzCore.framework */; };
+		CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */; };
+		CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB6E116407A0900246713 /* ClasificadosViewController.m */; };
+		CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE7D339115EE8F2700935444 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; };
 		CE7D339315EE8F3800935444 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE7D339215EE8F3800935444 /* README.md */; };
 		CE83717216128D9800FC8269 /* layout.css in Resources */ = {isa = PBXBuildFile; fileRef = CE83715A16128D9800FC8269 /* layout.css */; };
@@ -566,6 +569,10 @@
 		CE7A829815EC3E3E0061F481 /* font_size_icon_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_size_icon_24.png; sourceTree = "<group>"; };
 		CE7A829915EC3E3E0061F481 /* font_size_icon_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_size_icon_32.png; sourceTree = "<group>"; };
 		CE7A829A15EC3E3E0061F481 /* font_size_icon_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_size_icon_48.png; sourceTree = "<group>"; };
+		CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_clasificados.xsl; sourceTree = "<group>"; };
+		CE7BB6E016407A0900246713 /* ClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasificadosViewController.h; sourceTree = "<group>"; };
+		CE7BB6E116407A0900246713 /* ClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasificadosViewController.m; sourceTree = "<group>"; };
+		CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClasificadosViewController.xib; sourceTree = "<group>"; };
 		CE7D338F15EE8F2700935444 /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
 		CE7D339015EE8F2700935444 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		CE7D339215EE8F3800935444 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -1352,6 +1359,7 @@
 				CE83716D16128D9800FC8269 /* 3_new.xsl */,
 				CEF9FC9E163B472D00E45995 /* url-encode.xsl */,
 				CE83716E16128D9800FC8269 /* 4_menu.xsl */,
+				CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */,
 				CE83716F16128D9800FC8269 /* functions.xsl */,
 				CE83717016128D9800FC8269 /* 1_main_list.xsl */,
 				CE83717116128D9800FC8269 /* 2_section_list.xsl */,
@@ -1460,6 +1468,9 @@
 				CE8E728915EBEDB8007E6F09 /* AppDelegate.h */,
 				CE8E728A15EBEDB8007E6F09 /* AppDelegate.m */,
 				CE8E728115EBEDB8007E6F09 /* Supporting Files */,
+				CE7BB6E016407A0900246713 /* ClasificadosViewController.h */,
+				CE7BB6E116407A0900246713 /* ClasificadosViewController.m */,
+				CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */,
 				CE7A825A15EC21F00061F481 /* MainViewController.h */,
 				CE7A825B15EC21F00061F481 /* MainViewController.m */,
 				CE7A825C15EC21F00061F481 /* MainViewController.xib */,
@@ -1838,6 +1849,8 @@
 				CEDA53F1163F6689009454F8 /* warning.48x48.png in Resources */,
 				CEDA53F2163F6689009454F8 /* warning.hueco.48x48.png in Resources */,
 				CEDA53F3163F6689009454F8 /* warning.hueco.256x256.png in Resources */,
+				CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */,
+				CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2005,6 +2018,7 @@
 				CEF9FC9C163B2EED00E45995 /* Utils.m in Sources */,
 				CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */,
 				602230D5163B61CB0091D201 /* functions.js in Sources */,
+				CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,5 +14,6 @@
 
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
--(void) loadVideo:(NSString*)key req:(NSURLRequest*)req;
+- (void) loadVideo:(NSString*)key req:(NSURLRequest*)req;
+- (void) loadData:(NSURL*)url;
 @end

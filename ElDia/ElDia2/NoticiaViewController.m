@@ -172,7 +172,7 @@
   
   if(![Utils areWeConnectedToInternet])
   {
-    [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado."];
+    [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado." isError:YES];
     return;
   }
   
@@ -221,10 +221,10 @@
   
   NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
   
-  if([self.mScreenManager sectionExists:uri])
+  if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
-    NSData *data = [self.mScreenManager getSection:uri useCache:YES error:&err];
+    NSData *data = [self.mScreenManager getArticle:uri useCache:YES error:&err];
     [self setHTML:data url:uri webView:self.mainUIWebView];
     return;
   }
@@ -245,7 +245,7 @@
         
         if([err code]==ERR_NO_INTERNET_CONNECTION)
         {
-          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion."];
+          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion." isError:YES];
         }
         return;
       }
@@ -383,7 +383,7 @@
     
     if(![Utils areWeConnectedToInternet])
     {
-      [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado."];
+      [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado." isError:YES];
       return NO;
     }
     

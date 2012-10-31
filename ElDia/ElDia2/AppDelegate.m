@@ -11,14 +11,15 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "MenuViewController.h"
+#import "ClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize mainViewController;
-@synthesize menuViewController, navigationController;
+@synthesize mainViewController, clasificadosViewController, menuViewController;
+@synthesize navigationController;
 @synthesize download_queue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -64,23 +65,18 @@
   self.window.backgroundColor = [UIColor whiteColor];//HACKED
   
   // create the content view controller using the LogoExpandingViewController for no particular reason
-  NSString *mainNibName = @"MainViewController";
-  NSString *menuNibName = @"MenuViewController";
+  NSString *mainNibName           = @"MainViewController";
+  NSString *menuNibName           = @"MenuViewController";
+  NSString *clasificadosNibName   = @"ClasificadosViewController";
   if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
     mainNibName = @"MainViewController_iPad";
     menuNibName = @"MenuViewController_iPad";
+    clasificadosNibName  = @"clasificadosViewController_iPad";
   }
-  self.menuViewController = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
-  self.mainViewController = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
+  self.menuViewController         = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
+  self.mainViewController         = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
+  self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
   
-  // create the menuViewController also in the app delegate so we can swap it in as the
-  // windows root view controller whenever its required
-  
-  // set the rootViewController to the contentViewController
-  //self.window.rootViewController = self.mainViewController;//HACKED
-  //[self.window makeKeyAndVisible];//HACKED
-  
-  //[self.navigationController pushViewController:self.mainViewController animated:YES];
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
   //[navigationController pushViewController:self.mainViewController animated:NO];
@@ -106,6 +102,10 @@
   [self.mainViewController loadUrl:self.mainViewController.currentUrl useCache:YES];
 }
 
+-(void)loadClasificados:(NSURL*)url{
+  [self.clasificadosViewController loadClasificados:url];
+}
+
 -(void)showSideMenu
 {
   // before swaping the views, we'll take a "screenshot" of the current view
@@ -124,6 +124,10 @@
   [navigationController pushViewController:self.menuViewController animated:NO ];
 }
 
+-(void)hideSideMenu2{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+}
 -(void)hideSideMenu
 {
   // all animation takes place elsewhere. When this gets called just swap the contentViewController in

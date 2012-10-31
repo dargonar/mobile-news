@@ -141,6 +141,7 @@ NSData*dati=nil;
 - (IBAction) btnCloseClick: (id)param{
   [self slideThenHide];
 }
+
 -(void) slideThenHide
 {
   // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
@@ -150,6 +151,17 @@ NSData*dati=nil;
   }
                    completion:^(BOOL finished){ [app_delegate hideSideMenu]; }];
 }
+
+-(void) slideThenHide2
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenu2]; }];
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -245,6 +257,14 @@ NSData*dati=nil;
     [self slideThenHide];
     return NO;
   }
+  else
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+    {
+      [app_delegate loadClasificados:url];
+      //ToDo -> llamar al main view
+      [self slideThenHide2];
+      return NO;
+    }
   return YES;
   
 }

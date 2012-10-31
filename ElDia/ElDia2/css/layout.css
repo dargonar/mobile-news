@@ -107,6 +107,11 @@ img {
   overflow-x:hidden;
 }
 
+#menu .menu-header{
+  text-shadow: 0px 1px 0px #999999;height:auto;font-size:1em;
+  padding:2px 2px 2px 5px; background-color:#545454;color:#dddddd;
+}
+
 #menu ul {
 	list-style:none;
 	margin:0;
@@ -134,6 +139,12 @@ img {
 #menu li a:active {
 	background-color:#252525;
 	text-decoration:none;
+}
+
+#menu ul.clasificados li a {
+	display:block;
+	font-size:0.9em;
+  line-height:1.35em;
 }
 
 #menu .open {
@@ -427,3 +438,46 @@ font-weight:bold;}
   display:inline-block;
 }
 .full_width label.seccion{display:inline-block;}
+
+/***** CLASIFICADOS *****/
+
+#clasificados {
+	/*height:480px;*/
+  height:416px;
+	background-color:#EFEFEF /*#323232*/;
+/*  width:265px;*/
+  width:320px;
+  overflow-y:hidden;
+}
+
+#clasificados .menu-header{
+  text-shadow: 0px 1px 0px #999999;height:auto;font-size:1em;
+  padding:2px 2px 2px 5px; background-color:#545454;color:#dddddd;
+}
+
+#clasificados ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+  font-size:1em;
+
+}
+
+#clasificados li {
+	/*width:auto;*/
+  width:100%;
+
+}
+
+#clasificados li div {
+	display:block;
+  line-height:1.05em;
+	color:#000000;
+	text-decoration:none;
+	padding:8px 20px 9px 20px;
+	border-top:#c3c3c3 solid 1px;
+	border-bottom:#eaeaea solid 1px;
+  /*border-top:#4d4d4d solid 1px;
+	border-bottom:#252525 solid 1px;*/
+}
+
