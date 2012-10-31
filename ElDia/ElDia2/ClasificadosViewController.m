@@ -20,11 +20,14 @@
 
 @synthesize mainUIWebView, bottomUIView, loading_indicator;
 
+NSData*notLoadedData = nil;
+BOOL mViewDidLoad=NO;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+      notLoadedData = nil;
     }
     return self;
 }
@@ -32,10 +35,16 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  // Do any additional setup after loading the view from its nib.
+
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
-  
-  // Do any additional setup after loading the view from its nib.
+  if(notLoadedData != nil)
+  {
+    [self setHTML:notLoadedData url:nil webView:self.mainUIWebView];
+    notLoadedData=nil;
+  }
+  mViewDidLoad=YES;
 }
 
 - (void)viewDidUnload
@@ -133,7 +142,10 @@
   {
     NSError *err;
     NSData *data = [self.mScreenManager getClasificados:uri useCache:YES error:&err];
-    [self setHTML:data url:uri webView:self.mainUIWebView];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
     return;
   }
   [self loadUrl:uri useCache:NO];
@@ -159,7 +171,10 @@
         return;
       }
       
-      [self setHTML:data url:url webView:self.mainUIWebView];
+      if(mViewDidLoad==NO)
+        notLoadedData=data;
+      else
+        [self setHTML:data url:nil webView:self.mainUIWebView];
       
       data=nil;
       
@@ -232,7 +247,9 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType{
-  if (UIWebViewNavigationTypeLinkClicked == navigationType )
+  
+  NSLog(@" %@ ", [request.URL absoluteString]);
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && ![[request.URL absoluteString] hasPrefix:@"tel"])
     return NO;
   
   return YES;

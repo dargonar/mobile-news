@@ -299,17 +299,20 @@ BOOL SHKinit;
 		{
 			case SHKShareTypeURL:
 				//favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKReadItLater",nil];
-				favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+				//favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+				favoriteSharers = [NSArray arrayWithObjects:@"SHKMail", nil];
 				break;
 				
 			case SHKShareTypeImage:
 				//favoriteSharers = [NSArray arrayWithObjects:@"SHKMail",@"SHKFacebook",@"SHKCopy",nil];
-        favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+        //favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+				favoriteSharers = [NSArray arrayWithObjects:@"SHKMail", nil];
 				break;
 				
 			case SHKShareTypeText:
 				//favoriteSharers = [NSArray arrayWithObjects:@"SHKMail",@"SHKTwitter",@"SHKFacebook", nil];
-        favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+        //favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
+				favoriteSharers = [NSArray arrayWithObjects:@"SHKMail", nil];
 				break;
 				
 			case SHKShareTypeFile:

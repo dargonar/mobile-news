@@ -102,7 +102,7 @@
     NSError *err;
     NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
 
-    if (mobi_images != nil) {
+    if (mobi_images != nil && url!=nil) {
       NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", nil];
       
       [[NSNotificationCenter defaultCenter] 
