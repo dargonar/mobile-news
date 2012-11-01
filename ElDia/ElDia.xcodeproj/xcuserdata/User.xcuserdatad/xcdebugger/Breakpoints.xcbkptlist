@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "373399734.974727"
+         timestampString = "373433706.198709"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
          landmarkName = "-btnRefresh2Click:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -222,6 +222,19 @@
          startingLineNumber = "253"
          endingLineNumber = "253"
          landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/ScreenManager.m"
+         timestampString = "373433127.328964"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-getArticle:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

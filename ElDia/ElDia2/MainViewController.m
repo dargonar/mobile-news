@@ -24,7 +24,7 @@ BOOL errorOn=NO;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self configureToast];
+      [self configureToast];
       splashOn = NO;
       errorOn = NO;
     }
@@ -102,14 +102,11 @@ BOOL errorOn=NO;
         return;
       }
       
-      if(!useCache)
-        [self showMessage:@"La trajimos DA VOLTA!" isError:NO];
-      
       [self setHTML:data url:url webView:self.mainUIWebView];
       
       data=nil;
       
-      [app_delegate loadMenu:NO];
+      [app_delegate loadMenu:useCache];
     });
   });
 }

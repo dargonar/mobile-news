@@ -1,6 +1,11 @@
 function update_image(img) {
   var el = document.getElementById(img);
-  el.style.backgroundImage = ''; 
+  if(el==null)
+  {
+    update_nota_abierta_image(img);
+    return;
+  }
+  el.style.backgroundImage = '';
   el.style.backgroundImage = 'url(i_' + img + ')';
 }
 
@@ -16,6 +21,12 @@ function refresh_background(imgs) {
     img.style.backgroundImage = '';
     img.style.backgroundImage = url;
   }
+}
+
+function update_nota_abierta_image(img){
+  var el = document.getElementById('img_'+img);
+  el.src = '';
+  el.src = 'url(i_' + img + ')';
 }
 
 var timeout_var=null;
