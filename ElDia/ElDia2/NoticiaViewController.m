@@ -172,7 +172,7 @@
   
   if(![Utils areWeConnectedToInternet])
   {
-    [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado." isError:YES];
+    [self showMessage:@"No hay conexión de red.\nInténtelo más tarde." isError:YES];
     return;
   }
   
@@ -245,7 +245,7 @@
         
         if([err code]==ERR_NO_INTERNET_CONNECTION)
         {
-          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion." isError:YES];
+          [self showMessage:@"No hay conexión de red.\nNo podemos acceder a la noticia." isError:YES];
         }
         return;
       }
@@ -383,7 +383,7 @@
     
     if(![Utils areWeConnectedToInternet])
     {
-      [self showMessage:@"No hay conexion de red.\nNo podemos desplegar el contenido solicitado." isError:YES];
+      [self showMessage:@"No hay conexión de red.\nNo podemos desplegar el contenido solicitado." isError:YES];
       return NO;
     }
     

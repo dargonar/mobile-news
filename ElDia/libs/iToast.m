@@ -58,24 +58,32 @@ static iToastSettings *sharedSettings = nil;
 	label.numberOfLines = 0;
 	label.shadowColor = [UIColor darkGrayColor];
 	label.shadowOffset = CGSizeMake(1, 1);
-  
+  label.textAlignment = UITextAlignmentCenter;
 	
 	UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
 	if (image) {
-		v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 30, MAX(textSize.height, image.size.height) + 10);
-		label.center = CGPointMake(image.size.width + 25 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
+		
+    v.frame = CGRectMake(0, 0, MAX(textSize.width, image.size.width) + 30, image.size.height + textSize.height + 30);
+		label.center = CGPointMake(v.frame.size.width / 2, image.size.height + 10 + (v.frame.size.height - image.size.height - 10) / 2);
+    
+    //v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 30, MAX(textSize.height, image.size.height) + 10);
+		//label.center = CGPointMake(image.size.width + 25 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
     //v.frame = CGRectMake(0, 0, image.size.width + textSize.width + 15, MAX(textSize.height, image.size.height) + 10);
 		//label.center = CGPointMake(image.size.width + 10 + (v.frame.size.width - image.size.width - 10) / 2, v.frame.size.height / 2);
 	} else {
 		v.frame = CGRectMake(0, 0, textSize.width + 10, textSize.height + 10);
 		label.center = CGPointMake(v.frame.size.width / 2, v.frame.size.height / 2);
 	}
-	[v addSubview:label];
+  v.layer.cornerRadius = 30; // this value vary as per your desire
+  v.clipsToBounds = YES;
+	
+  [v addSubview:label];
 	[label release];
 	
 	if (image) {
 		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-		imageView.frame = CGRectMake(5, (v.frame.size.height - image.size.height)/2, image.size.width, image.size.height);
+		//imageView.frame = CGRectMake(5, (v.frame.size.height - image.size.height)/2, image.size.width, image.size.height);
+		imageView.frame = CGRectMake( (v.frame.size.width - image.size.width)/2, 15,  image.size.width, image.size.height);
 		[v addSubview:imageView];
 		[imageView release];
 	}

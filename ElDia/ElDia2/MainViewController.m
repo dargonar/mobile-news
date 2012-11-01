@@ -19,6 +19,7 @@
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
+BOOL refreshingOn=NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,7 @@ BOOL errorOn=NO;
       [self configureToast];
       splashOn = NO;
       errorOn = NO;
+      refreshingOn=NO;
     }
   
   return self;
@@ -66,11 +68,14 @@ BOOL errorOn=NO;
     return;
   
   // Lo traemos de nuevo
-  [self loadUrl:url useCache:NO];
+  [self loadUrl:url useCache:NO reloadMenu:YES];
   
 }
 
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
+  [self loadUrl:url useCache:useCache reloadMenu:NO];
+}
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache reloadMenu:(BOOL)reloadMenu {
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
@@ -94,9 +99,14 @@ BOOL errorOn=NO;
           [self onErrorRefreshing:NO];
         }
         
+        if(refreshingOn)
+        {
+          [self onRefreshing:NO];
+        }
+        
         if([err code]==ERR_NO_INTERNET_CONNECTION)
         {
-          [self showMessage:@"No hay conexion de red.\nNo podemos actualizar la aplicacion." isError:YES];
+          [self showMessage:@"No hay conexión de red.\nNo podemos actualizar la aplicación." isError:YES];
         }
         
         return;
@@ -105,8 +115,8 @@ BOOL errorOn=NO;
       [self setHTML:data url:url webView:self.mainUIWebView];
       
       data=nil;
-      
-      [app_delegate loadMenu:useCache];
+      if(reloadMenu)
+        [app_delegate loadMenu:useCache];
     });
   });
 }
@@ -139,7 +149,7 @@ BOOL errorOn=NO;
   [self onRefreshing:YES];
   //ToDo
   NSString* url = [self.currentUrl copy];
-  [self loadUrl:url useCache:NO];
+  [self loadUrl:url useCache:NO reloadMenu:YES];
 }
 
 - (IBAction) btnRefresh2Click: (id)param{
@@ -173,7 +183,7 @@ BOOL errorOn=NO;
       [self.refresh_loading_indicator startAnimating ];
   else
     [self.refresh_loading_indicator stopAnimating ];
-
+  refreshingOn=started;
 }
 
 -(void) onLoading:(BOOL)started{
@@ -229,6 +239,7 @@ BOOL errorOn=NO;
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
   [self showUpdatedAt];
   [self onNothing];
+  //[self showMessage:@"Esto es una prueba.\nNo pretendemos ser dios." isError:YES];
 }
 
 -(void)showUpdatedAt{

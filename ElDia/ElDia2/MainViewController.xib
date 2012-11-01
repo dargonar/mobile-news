@@ -278,7 +278,7 @@
 							<object class="IBUIActivityIndicatorView" id="455961632">
 								<reference key="NSNextResponder" ref="943214099"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{141, 240}, {37, 37}}</string>
+								<string key="NSFrame">{{141, 250}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="943214099"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="542766659"/>
@@ -817,8 +817,7 @@
 						<string key="loading_indicator">UIActivityIndicatorView</string>
 						<string key="logo_imgvw_alpha">UIImageView</string>
 						<string key="mainUIWebView">UIWebView</string>
-						<string key="offline_imgvw">UIImageView</string>
-						<string key="offline_lbl">UILabel</string>
+						<string key="offline_view">UIView</string>
 						<string key="refresh_loading_indicator">UIActivityIndicatorView</string>
 						<string key="refresh_loading_indicator2">UIActivityIndicatorView</string>
 						<string key="welcome_indicator">UIActivityIndicatorView</string>
@@ -849,13 +848,9 @@
 							<string key="name">mainUIWebView</string>
 							<string key="candidateClassName">UIWebView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="offline_imgvw">
-							<string key="name">offline_imgvw</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="offline_lbl">
-							<string key="name">offline_lbl</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="offline_view">
+							<string key="name">offline_view</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="refresh_loading_indicator">
 							<string key="name">refresh_loading_indicator</string>

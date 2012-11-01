@@ -28,6 +28,7 @@ BOOL mViewDidLoad=NO;
     if (self) {
         // Custom initialization
       notLoadedData = nil;
+      mViewDidLoad = NO;
     }
     return self;
 }
@@ -59,7 +60,7 @@ BOOL mViewDidLoad=NO;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 /* **** */
@@ -138,7 +139,9 @@ BOOL mViewDidLoad=NO;
   
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
-  if([self.mScreenManager clasificadosExists:uri])
+  NSDate * date =[self.mScreenManager sectionDate:uri];
+  // Clasificado es muy viejo, o no existe?
+  if( [self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
   {
     NSError *err;
     NSData *data = [self.mScreenManager getClasificados:uri useCache:YES error:&err];

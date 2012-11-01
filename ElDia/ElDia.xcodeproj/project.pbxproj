@@ -248,6 +248,7 @@
 		CEE4137D162E46E0007EEE76 /* egopv_error_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE41379162E46E0007EEE76 /* egopv_error_placeholder@2x.png */; };
 		CEE4137E162E46E0007EEE76 /* egopv_photo_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE4137A162E46E0007EEE76 /* egopv_photo_placeholder.png */; };
 		CEE4137F162E46E0007EEE76 /* egopv_photo_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE4137B162E46E0007EEE76 /* egopv_photo_placeholder@2x.png */; };
+		CEE5FBDC1642BE4200E5CA82 /* CladificadosViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE5FBDB1642BE4200E5CA82 /* CladificadosViewController_iPad.xib */; };
 		CEECF0E41639845300058824 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECF0E31639845300058824 /* warning.png */; };
 		CEECF0E8163988DB00058824 /* BaseMobiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECF0E7163988DB00058824 /* BaseMobiViewController.m */; };
 		CEED58A81622130E007A7FDC /* br_prev_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CEED58971622130E007A7FDC /* br_prev_icon_24.png */; };
@@ -695,6 +696,7 @@
 		CEE41379162E46E0007EEE76 /* egopv_error_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "egopv_error_placeholder@2x.png"; sourceTree = "<group>"; };
 		CEE4137A162E46E0007EEE76 /* egopv_photo_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egopv_photo_placeholder.png; sourceTree = "<group>"; };
 		CEE4137B162E46E0007EEE76 /* egopv_photo_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "egopv_photo_placeholder@2x.png"; sourceTree = "<group>"; };
+		CEE5FBDB1642BE4200E5CA82 /* CladificadosViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CladificadosViewController_iPad.xib; sourceTree = "<group>"; };
 		CEECA6321613D976007C8918 /* default@2x_no_pleno.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default@2x_no_pleno.jpg"; sourceTree = "<group>"; };
 		CEECA6381613DDC0007C8918 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CEECA6391613DDC1007C8918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1458,6 +1460,7 @@
 				CE7BB6E016407A0900246713 /* ClasificadosViewController.h */,
 				CE7BB6E116407A0900246713 /* ClasificadosViewController.m */,
 				CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */,
+				CEE5FBDB1642BE4200E5CA82 /* CladificadosViewController_iPad.xib */,
 				CE7A825A15EC21F00061F481 /* MainViewController.h */,
 				CE7A825B15EC21F00061F481 /* MainViewController.m */,
 				CE7A825C15EC21F00061F481 /* MainViewController.xib */,
@@ -1837,6 +1840,7 @@
 				CEDA53F3163F6689009454F8 /* warning.hueco.256x256.png in Resources */,
 				CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */,
 				CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */,
+				CEE5FBDC1642BE4200E5CA82 /* CladificadosViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

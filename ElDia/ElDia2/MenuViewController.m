@@ -11,7 +11,6 @@
 @implementation MenuViewController
 @synthesize screenShotImageView, screenShotImage, tapGesture, panGesture, webView;
 
-NSString *currentUrl=@"menu://";
 BOOL viewDidLoad = NO;
 BOOL htmlSet = NO;
 NSData*dati=nil;
@@ -20,9 +19,9 @@ NSData*dati=nil;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-      currentUrl=@"menu://";
       viewDidLoad = NO;
       dati=nil;
+      htmlSet= NO;
     }
   
   return self;
@@ -45,16 +44,21 @@ NSData*dati=nil;
   
   [self loadGesturesRecognizers];
   viewDidLoad=YES;
+  [self loadDataIfExists];
+}
+
+-(void)loadDataIfExists{
   if(dati!=nil)
   {
-    [self setHTML:dati url:currentUrl webView:self.webView];
+    [self setHTML:dati url:nil webView:self.webView];
     htmlSet=YES;
     dati=nil;
+    return;
   }
   if(!htmlSet){
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
     NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
-    [self setHTML:htmlData url:currentUrl webView:self.webView];
+    [self setHTML:htmlData url:nil webView:self.webView];
   }
 }
 
@@ -87,7 +91,10 @@ NSData*dati=nil;
     NSError *err;
     NSData *data = [self.mScreenManager getMenu:YES error:&err];
     if(viewDidLoad)
-      [self setHTML:data url:currentUrl webView:self.webView];
+    {
+      [self setHTML:data url:nil webView:self.webView];
+      htmlSet=YES;
+    }
     else
       dati=data;
     return;
@@ -104,9 +111,10 @@ NSData*dati=nil;
       }
       if(viewDidLoad)
       {
-        [self setHTML:data url:currentUrl  webView:self.webView];
+        [self setHTML:data url:nil  webView:self.webView];
         htmlSet=YES;
-      }else
+      }
+      else
         dati=data;
       data=nil; 
       
