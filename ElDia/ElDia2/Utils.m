@@ -151,7 +151,7 @@
 {
   double difference = [[NSDate date] timeIntervalSince1970] - seconds;
   NSMutableArray *periods = [NSMutableArray arrayWithObjects:@"segundo", @"minuto", @"hora", @"dia", @"semana", @"mes", @"año", @"década", nil];
-  NSArray *lengths = [NSArray arrayWithObjects:@60, @60, @24, @7, @4.35, @12, @10, nil];
+  NSArray *lengths = [NSArray arrayWithObjects:@"60", @"60", @"24", @"7", @"4.35", @"12", @"10", nil];
   int j = 0;
   for(j=0; difference >= [[lengths objectAtIndex:j] doubleValue]; j++)
   {
