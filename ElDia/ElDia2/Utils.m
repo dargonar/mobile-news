@@ -9,6 +9,7 @@
 #import "Utils.h"
 #import "RegexKitLite.h"
 #import "Reachability.h"
+#import "GTMNSString+HTML.h"
 
 @implementation Utils
 
@@ -38,7 +39,12 @@
 }
 
 +(NSData*)sanitizeXML:(NSData*)xml_data{
-  
+  return [Utils sanitizeXML:xml_data unescaping_html_entities:NO];
+}
+
++(NSData*)sanitizeXML:(NSData*)xml_data unescaping_html_entities:(BOOL)unescaping_html_entities{
+
+
   NSString *cleanedXML = @"";
   
   NSString *xml = [[NSString alloc] initWithData:xml_data encoding:NSUTF8StringEncoding];
@@ -67,6 +73,9 @@
   //cleanedXML =[cleanedXML stringByTrimmingCharactersInSet:invalidChars];
 
   cleanedXML = [Utils validXMLString:cleanedXML ];
+  
+  if(unescaping_html_entities)
+    cleanedXML = [cleanedXML gtm_stringByUnescapingFromHTML];
   
   htmlAttributesRegex = nil;
   undecodedAmpersandRegex = nil;

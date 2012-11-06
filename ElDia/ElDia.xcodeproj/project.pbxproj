@@ -16,6 +16,8 @@
 		CE01DEF116262E1800B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF016262E1800B9B3EA /* Icon_ipad.png */; };
 		CE01DEF316262FB200B9B3EA /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */; };
 		CE01DEF516262FC400B9B3EA /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */; };
+		CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; };
+		CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
 		CE16EBF215ED5B1C00EC8210 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBF115ED5B1C00EC8210 /* CoreFoundation.framework */; };
 		CE16EBF415ED5B2C00EC8210 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBF315ED5B2C00EC8210 /* CoreMedia.framework */; };
@@ -301,6 +303,8 @@
 		CE01DEF016262E1800B9B3EA /* Icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_ipad.png; path = ../Icon_ipad.png; sourceTree = "<group>"; };
 		CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		CE02FB4E164947150049F63A /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		CE02FB4F164947150049F63A /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		CE061B001614D74700C514A2 /* Icon_med.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_med.png; sourceTree = "<group>"; };
 		CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CE16EBF115ED5B1C00EC8210 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -1635,6 +1639,8 @@
 		CEF3B58915EC6A7B00FF35B1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE02FB4E164947150049F63A /* GTMNSString+HTML.h */,
+				CE02FB4F164947150049F63A /* GTMNSString+HTML.m */,
 				CEE015451625E6E4002D70E3 /* Reachability.m */,
 				CEE015461625E6E4002D70E3 /* Reachability.h */,
 				CEF4A197161F6B9F0072EAB4 /* HCYoutubeParser.h */,
@@ -1886,6 +1892,7 @@
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */,
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
+				CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */,
 				CE8E728715EBEDB8007E6F09 /* main.m in Sources */,
 				CE8E728B15EBEDB8007E6F09 /* AppDelegate.m in Sources */,
 				CE7A825D15EC21F00061F481 /* MainViewController.m in Sources */,
@@ -2027,6 +2034,7 @@
 				CEC8305B162F425F0085FF54 /* _Reachability.m in Sources */,
 				CE79A20C16385DAD005D949D /* GDataXMLNode.m in Sources */,
 				CE79A20F16385F58005D949D /* MobiImage.m in Sources */,
+				CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 +(NSString *)cleanUrl:(NSString*)url;
 +(NSString *)getYoutubeId:(NSString*)url;
 +(NSData*)sanitizeXML:(NSData*)xml_data;
++(NSData*)sanitizeXML:(NSData*)xml_data unescaping_html_entities:(BOOL)unescaping_html_entities;
 +(BOOL)areWeConnectedToInternet;
 + (NSString *)timeAgoFromUnixTime:(double)seconds;
 

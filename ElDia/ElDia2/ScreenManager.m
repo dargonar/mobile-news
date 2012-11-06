@@ -106,8 +106,9 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
   }
   
   if( ![url hasPrefix:@"clasificados://"] )
-    xml = [Utils sanitizeXML:xml];
-  
+  {
+    xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"]||[url hasPrefix:@"section://"])];
+  }
   if(processImages)
   {
     //Rebuildeamos el xml
