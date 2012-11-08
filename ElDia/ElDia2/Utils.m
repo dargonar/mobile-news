@@ -60,11 +60,6 @@
   // Limpiamos el XML quitandole los stributos class y style de las etiquetas.
   cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
   
-  NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
-  //Limpiamos otras mierdas
-  //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
-  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
-  
   //NSMutableString *invalidCharsString = [[NSMutableString alloc] init];
   //unichar character;
   //character = 0x07;
@@ -76,6 +71,11 @@
   
   if(unescaping_html_entities)
     cleanedXML = [cleanedXML gtm_stringByUnescapingFromHTML];
+  
+  NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
+  //Limpiamos otras mierdas
+  //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
+  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
   
   htmlAttributesRegex = nil;
   undecodedAmpersandRegex = nil;

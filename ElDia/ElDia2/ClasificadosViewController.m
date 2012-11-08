@@ -137,6 +137,7 @@ BOOL mViewDidLoad=NO;
 
 -(void)loadClasificados:(NSURL *)url{
   
+  [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
   NSDate * date =[self.mScreenManager sectionDate:uri];

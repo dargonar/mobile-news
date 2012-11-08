@@ -14,6 +14,7 @@
 BOOL viewDidLoad = NO;
 BOOL htmlSet = NO;
 NSData*dati=nil;
+NSLock *lock;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,6 +23,7 @@ NSData*dati=nil;
       viewDidLoad = NO;
       dati=nil;
       htmlSet= NO;
+      lock=[[NSLock alloc] init];
     }
   
   return self;
@@ -38,16 +40,14 @@ NSData*dati=nil;
   //self.webView.scrollView.bouncesZoom = NO;
   self.webView.scrollView.alwaysBounceHorizontal = NO;
   self.webView.hidden=NO;
-  /*
-   [self loadUrl:YES];
-  */
-  
   [self loadGesturesRecognizers];
+  
   viewDidLoad=YES;
   [self loadDataIfExists];
 }
 
 -(void)loadDataIfExists{
+  [lock lock];
   if(dati!=nil)
   {
     [self setHTML:dati url:nil webView:self.webView];
@@ -55,11 +55,14 @@ NSData*dati=nil;
     dati=nil;
     return;
   }
+  [lock unlock];
+
   if(!htmlSet){
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
     NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
     [self setHTML:htmlData url:nil webView:self.webView];
   }
+  
 }
 
 -(void)loadGesturesRecognizers{
@@ -86,6 +89,9 @@ NSData*dati=nil;
 
 -(void)loadUrl:(BOOL)useCache{
   
+  
+  NSLog (@"MenuViewCotroller::loadUrl useCache[%@]", useCache?@"SI":@"NO");
+  
   if(useCache && [self.mScreenManager menuExists])
   {
     NSError *err;
@@ -96,7 +102,11 @@ NSData*dati=nil;
       htmlSet=YES;
     }
     else
+    {
+      [lock lock];
       dati=data;
+      [lock unlock];
+    }
     return;
   }
 
@@ -115,7 +125,11 @@ NSData*dati=nil;
         htmlSet=YES;
       }
       else
+      {
+        [lock lock];
         dati=data;
+        [lock unlock];
+      }
       data=nil; 
       
       

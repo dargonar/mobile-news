@@ -138,16 +138,19 @@
     <li>
       <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$Node/title}&amp;header={$Node/description}" title="">
         <div class="titular {$full_width}">
-          <label>
-            <xsl:call-template name="FormatDate">
-              <xsl:with-param name="DateTime" select="$Node/pubDate"/>
-            </xsl:call-template>
-          </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-          <label class="seccion">
-            <xsl:call-template name="ReplaceInfoGral">
-              <xsl:with-param name="seccion" select="$Node/category"/>
-            </xsl:call-template>
-          </label><br />
+          <div class="header">
+            <label class="date">
+              <xsl:call-template name="FormatDate">
+                <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+              </xsl:call-template>
+            </label><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+            <label class="seccion">
+              <xsl:call-template name="ReplaceInfoGral">
+                <xsl:with-param name="seccion" select="$Node/category"/>
+              </xsl:call-template>
+            </label>
+          </div>
+          <br />
           <label class="titulo"><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></label>
         </div>
         
@@ -230,15 +233,15 @@
       
       <div class="contenido">
         <div id="titulo">
-          <label>
-            <xsl:call-template name="FormatDate">
-              <xsl:with-param name="DateTime" select="$Node/pubDate"/>
-            </xsl:call-template>
-          </label> | <label class="seccion">
-            <xsl:call-template name="ReplaceInfoGral">
-              <xsl:with-param name="seccion" select="$Node/category"/>
-            </xsl:call-template>
-          </label>
+            <label class="date">
+              <xsl:call-template name="FormatDate">
+                <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+              </xsl:call-template>
+            </label> | <label class="seccion">
+              <xsl:call-template name="ReplaceInfoGral">
+                <xsl:with-param name="seccion" select="$Node/category"/>
+              </xsl:call-template>
+            </label>
           <br />
           <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
         </div>
@@ -307,9 +310,11 @@
     <div id="listado" style="display:block;">
       <ul class="main_list">
         <xsl:for-each select="$Items">
-          <xsl:call-template name="NoticiaRelacionada">
-            <xsl:with-param name="Item" select="."/>
-          </xsl:call-template>
+          <xsl:if test="@guid!=''">
+            <xsl:call-template name="NoticiaRelacionada">
+              <xsl:with-param name="Item" select="."/>
+            </xsl:call-template>
+          </xsl:if>
         </xsl:for-each>
       </ul>
     </div>
@@ -333,19 +338,21 @@
     <li>
       <a href="noticia://{$Item/@guid}?url={$encoded_url}&amp;title={$Item/.}&amp;header=" title="">
         <div class="titular {$full_width}">
-          <label>
-            <xsl:call-template name="FormatDate">
-              <xsl:with-param name="DateTime" select="$Item/@pubDate"/>
-            </xsl:call-template>
-          </label> 
-          <xsl:if test="$Item/@lead!=''">
-            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-            <label class="seccion">
-              <xsl:call-template name="ReplaceInfoGral">
-                <xsl:with-param name="seccion" select="$Item/@lead"/>
-              </xsl:call-template>
-              <!--xsl:value-of disable-output-escaping="yes" select="$Item/@lead" /--></label>
-          </xsl:if>
+          <div class="header">
+              <label class="date">
+                <xsl:call-template name="FormatDate">
+                  <xsl:with-param name="DateTime" select="$Item/@pubDate"/>
+                </xsl:call-template>
+              </label>
+            <xsl:if test="$Item/@lead!=''">
+              <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
+              <label class="seccion">
+                <xsl:call-template name="ReplaceInfoGral">
+                  <xsl:with-param name="seccion" select="$Item/@lead"/>
+                </xsl:call-template>
+                <!--xsl:value-of disable-output-escaping="yes" select="$Item/@lead" /--></label>
+            </xsl:if>
+          </div>
           <br />
           <label class="titulo"><xsl:value-of disable-output-escaping="yes" select="$Item/." /></label>
         </div>

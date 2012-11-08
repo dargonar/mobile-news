@@ -87,8 +87,8 @@
   
   
   //HACK SACAR ANTES DE RELEASE
-//  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-//  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
+  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   return YES;
 }

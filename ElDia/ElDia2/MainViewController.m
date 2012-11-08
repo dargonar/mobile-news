@@ -15,7 +15,7 @@
 
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -29,6 +29,7 @@ BOOL refreshingOn=NO;
       splashOn = NO;
       errorOn = NO;
       refreshingOn=NO;
+      self.btnOptions.enabled=NO;
     }
   
   return self;
@@ -49,7 +50,7 @@ BOOL refreshingOn=NO;
     NSError *err;
     NSData *data = [self.mScreenManager getSection:mainUrl useCache:YES error:&err];
     [self setHTML:data url:mainUrl webView:self.mainUIWebView];
-    [app_delegate loadMenu:YES];
+    [self loadMenu:YES];
     splashOn=NO;
     return;
   }
@@ -57,6 +58,20 @@ BOOL refreshingOn=NO;
   [self onWelcome:YES];
 }
 
+-(void)loadMenu:(BOOL)useCache{
+  
+  if([self.mScreenManager menuExists])
+  {
+    self.btnOptions.enabled=YES;
+    if(useCache)
+      return;
+  }
+  
+  //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+  [app_delegate loadMenu:useCache];
+  //});
+  
+}
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
@@ -116,7 +131,7 @@ BOOL refreshingOn=NO;
       
       data=nil;
       if(reloadMenu)
-        [app_delegate loadMenu:useCache];
+        [self loadMenu:useCache];
     });
   });
 }

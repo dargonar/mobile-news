@@ -205,6 +205,12 @@ img {
 	padding:15px 20px 15px 10px;
   height:100% !important;
 }
+
+#listado .titular div.header{ font-size:0.9em;}
+#listado .titular div.header .date{}
+#listado .titular div.header .seccion{}
+
+
 #listado .foto {
 	width:124px;
 	height:94px;

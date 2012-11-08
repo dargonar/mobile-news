@@ -28,7 +28,7 @@
         </script>
       </head>
       
-      <body style="width:320px !important;">
+      <body>
         <div id="updated_msg" class="updated hidden">Actualizado hace 10 minutos</div>
         <xsl:call-template name="DestacadaEnListadoPrincipal">
           <xsl:with-param name="Node" select="rss/channel/item[1]"/>
