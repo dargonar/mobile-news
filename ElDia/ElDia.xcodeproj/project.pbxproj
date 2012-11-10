@@ -11,6 +11,9 @@
 		602230D6163B64B50091D201 /* functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
 		6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050EF1F16388B0F00DE98ED /* ScreenManager.m */; };
 		605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605C9A971639D6F100CBD806 /* ErrorBuilder.m */; };
+		78E3F003164DAD5200C7EB24 /* menu_clasificados.html in Resources */ = {isa = PBXBuildFile; fileRef = 78E3F002164DAD5200C7EB24 /* menu_clasificados.html */; };
+		78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */; };
+		78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
 		CE01DEEF16262E1300B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEE16262E1300B9B3EA /* Icon_ipad.png */; };
 		CE01DEF116262E1800B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF016262E1800B9B3EA /* Icon_ipad.png */; };
@@ -298,6 +301,10 @@
 		6050EF1F16388B0F00DE98ED /* ScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenManager.m; sourceTree = "<group>"; };
 		605C9A961639D6F100CBD806 /* ErrorBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorBuilder.h; sourceTree = "<group>"; };
 		605C9A971639D6F100CBD806 /* ErrorBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorBuilder.m; sourceTree = "<group>"; };
+		78E3F002164DAD5200C7EB24 /* menu_clasificados.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu_clasificados.html; sourceTree = "<group>"; };
+		78E99D9D164DF27D00780D54 /* MenuClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuClasificadosViewController.h; sourceTree = "<group>"; };
+		78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuClasificadosViewController.m; sourceTree = "<group>"; };
+		78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuClasificadosViewController.xib; sourceTree = "<group>"; };
 		CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		CE01DEEE16262E1300B9B3EA /* Icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_ipad.png; sourceTree = "<group>"; };
 		CE01DEF016262E1800B9B3EA /* Icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_ipad.png; path = ../Icon_ipad.png; sourceTree = "<group>"; };
@@ -1356,6 +1363,7 @@
 				CE83716F16128D9800FC8269 /* functions.xsl */,
 				CE83717016128D9800FC8269 /* 1_main_list.xsl */,
 				CE83717116128D9800FC8269 /* 2_section_list.xsl */,
+				78E3F002164DAD5200C7EB24 /* menu_clasificados.html */,
 				CED344241630A4A300C77C79 /* menu_dummy.html */,
 			);
 			name = resources;
@@ -1469,6 +1477,9 @@
 				CE7A825B15EC21F00061F481 /* MainViewController.m */,
 				CE7A825C15EC21F00061F481 /* MainViewController.xib */,
 				CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */,
+				78E99D9D164DF27D00780D54 /* MenuClasificadosViewController.h */,
+				78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */,
+				78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */,
 				CE7A826515EC221F0061F481 /* MenuViewController.h */,
 				CE7A826615EC221F0061F481 /* MenuViewController.m */,
 				CE7A826715EC221F0061F481 /* MenuViewController.xib */,
@@ -1847,6 +1858,8 @@
 				CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */,
 				CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */,
 				CEE5FBDC1642BE4200E5CA82 /* CladificadosViewController_iPad.xib in Resources */,
+				78E3F003164DAD5200C7EB24 /* menu_clasificados.html in Resources */,
+				78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2015,6 +2028,7 @@
 				CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */,
 				602230D5163B61CB0091D201 /* functions.js in Sources */,
 				CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */,
+				78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

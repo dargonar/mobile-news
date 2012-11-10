@@ -96,19 +96,29 @@ NSLock *lock;
   {
     NSError *err;
     NSData *data = [self.mScreenManager getMenu:YES error:&err];
-    if(viewDidLoad)
+    if(data!=nil)
     {
-      [self setHTML:data url:nil webView:self.webView];
-      htmlSet=YES;
+      
+      if(viewDidLoad)
+      {
+        NSLog (@"MenuViewCotroller::loadUrl viewDidLoad");
+
+        [self setHTML:data url:nil webView:self.webView];
+        htmlSet=YES;
+      }
+      else
+      {
+        NSLog (@"MenuViewCotroller::loadUrl !viewDidLoad");
+
+        [lock lock];
+        dati=data;
+        [lock unlock];
+      }
+      return;
     }
-    else
-    {
-      [lock lock];
-      dati=data;
-      [lock unlock];
-    }
-    return;
   }
+
+  NSLog (@"MenuViewCotroller::loadUrl Dispatching");
 
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
@@ -280,9 +290,9 @@ NSLock *lock;
     return NO;
   }
   else
-    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"]) // por ahora page://clasificados
     {
-      [app_delegate loadClasificados:url];
+      [app_delegate loadClasificadosMenu:url];
       //ToDo -> llamar al main view
       [self slideThenHide2];
       return NO;

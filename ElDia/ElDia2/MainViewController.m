@@ -62,14 +62,13 @@ BOOL refreshingOn=NO;
   
   if([self.mScreenManager menuExists])
   {
+    NSLog(@"MainViewController::loadMenu menu exists!");
     self.btnOptions.enabled=YES;
     if(useCache)
       return;
   }
   
-  //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
   [app_delegate loadMenu:useCache];
-  //});
   
 }
 - (void)viewDidAppear:(BOOL)animated{

@@ -11,14 +11,14 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "MenuViewController.h"
-#import "ClasificadosViewController.h"
+#import "MenuClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize mainViewController, clasificadosViewController, menuViewController;
+@synthesize mainViewController, menuClasificadosViewController, menuViewController;
 @synthesize navigationController;
 @synthesize download_queue;
 
@@ -67,15 +67,15 @@
   // create the content view controller using the LogoExpandingViewController for no particular reason
   NSString *mainNibName           = @"MainViewController";
   NSString *menuNibName           = @"MenuViewController";
-  NSString *clasificadosNibName   = @"ClasificadosViewController";
+  NSString *menuClasificadosNibName   = @"MenuClasificadosViewController";
   if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
     mainNibName = @"MainViewController_iPad";
     menuNibName = @"MenuViewController_iPad";
-    clasificadosNibName  = @"clasificadosViewController_iPad";
+    menuClasificadosNibName  = @"MenuClasificadosViewController_iPad"; // NO EXISTE!
   }
   self.menuViewController         = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   self.mainViewController         = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
-  self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+  self.menuClasificadosViewController = [[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
   
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
@@ -87,13 +87,14 @@
   
   
   //HACK SACAR ANTES DE RELEASE
-  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
+//  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+//  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   return YES;
 }
 
 -(void)loadMenu:(BOOL)useCache{
+  NSLog(@"app_delegate::loadMenu useCache:%@", useCache?@"SI":@"NO");
   [self.menuViewController loadUrl:useCache];
 }
 
@@ -102,8 +103,8 @@
   [self.mainViewController loadUrl:self.mainViewController.currentUrl useCache:YES];
 }
 
--(void)loadClasificados:(NSURL*)url{
-  [self.clasificadosViewController loadClasificados:url];
+-(void)loadClasificadosMenu:(NSURL*)url{
+  //[self.menuClasificadosViewController loadClasificados];
 }
 
 -(void)showSideMenu
@@ -126,7 +127,7 @@
 
 -(void)hideSideMenu2{
   [navigationController popToViewController:mainViewController animated:NO];
-  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+  [navigationController pushViewController:self.menuClasificadosViewController animated:YES ];
 }
 -(void)hideSideMenu
 {

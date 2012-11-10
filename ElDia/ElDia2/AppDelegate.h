@@ -12,7 +12,7 @@
 
 #define app_delegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@class MainViewController, MenuViewController, ClasificadosViewController;
+@class MainViewController, MenuViewController, MenuClasificadosViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
   NSOperationQueue  *download_queue;
@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) MainViewController *mainViewController;
 @property (strong, nonatomic) MenuViewController *menuViewController;
-@property (strong, nonatomic) ClasificadosViewController *clasificadosViewController;
+@property (strong, nonatomic) MenuClasificadosViewController *menuClasificadosViewController;
 
 @property (strong, nonatomic) UINavigationController * navigationController;
 @property (strong, nonatomic) NSOperationQueue *download_queue;;
@@ -37,5 +37,5 @@
 
 - (void)loadSectionNews:(NSURL*)url;
 - (void)loadMenu:(BOOL)useCache;
-- (void)loadClasificados:(NSURL*)url;
+- (void)loadClasificadosMenu:(NSURL*)url;
 @end
