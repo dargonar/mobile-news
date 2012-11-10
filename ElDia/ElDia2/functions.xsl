@@ -310,7 +310,7 @@
     <div id="listado" style="display:block;">
       <ul class="main_list">
         <xsl:for-each select="$Items">
-          <xsl:if test="@guid!=''">
+          <xsl:if test="normalize-space(@guid)!=''">
             <xsl:call-template name="NoticiaRelacionada">
               <xsl:with-param name="Item" select="."/>
             </xsl:call-template>

@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "ErrorBuilder.h"
 #import "Utils.h"
+#import "NewsManager.h"
+#import "XMLParser.h"
 
 
 @implementation MainViewController

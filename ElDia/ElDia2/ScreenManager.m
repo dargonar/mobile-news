@@ -71,7 +71,7 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -79,6 +79,10 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
 }
 
 -(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error {
+  return [self getScreen:url useCache:useCache processImages:processImages prefix:prefix error:error processNavigation:NO];
+}
+
+-(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error processNavigation:(BOOL)processNavigation {
   
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
@@ -88,6 +92,11 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
 
     NSData *html = [cache get:key prefix:prefix];
     if (html != nil) {
+      if(processNavigation)
+      {
+        NSData *_xml=[cache get:key prefix:@""];
+      }
+      
       return html;
     }
 
@@ -109,6 +118,7 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
   {
     xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"]||[url hasPrefix:@"section://"])];
   }
+  
   if(processImages)
   {
     //Rebuildeamos el xml

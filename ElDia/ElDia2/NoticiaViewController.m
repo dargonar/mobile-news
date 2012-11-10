@@ -209,7 +209,7 @@
 -(void)loadNoticia:(NSURL *)url{
   
   [self onLoading:YES];
-  //{$Node/guid};{$Node/link};{$Node/title};{$Node/description}
+  //noticia://guid?url=_url_&title=_title_&header=_header_
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
   URLParser *parser = [[URLParser alloc] initWithURLString:[url absoluteString]];

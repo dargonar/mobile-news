@@ -92,4 +92,55 @@
   return ((GDataXMLElement*) [elements objectAtIndex:0]).stringValue;
 }
 
+-(NSArray*)extractNewsUrls:(NSData**)xml_data error:(NSError **)error{
+  
+  //noticia://{$Node/guid}?url={$Node/link}&amp;title={$Node/title}&amp;header={$Node/description}
+  NSMutableArray *news_urls = [[NSMutableArray alloc] init];
+  
+  if (xml_data == nil || *xml_data == nil) {
+    return [ErrorBuilder  build:error desc:@"invalid xml to parse" code:ERR_INVALID_XML];
+  }
+  
+  //rss/channel/item/media:thumbnail@url
+  
+  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:error];
+  if (doc == nil)
+    return nil;
+  
+  NSArray *items = [doc nodesForXPath:@"//rss/channel/item" error:nil];
+  
+  for (int i=0; i<[items count]; i++) {
+    GDataXMLElement *item = (GDataXMLElement *)[items objectAtIndex:i];
+    
+    NSArray* temp_guid = [item elementsForName:@"guid"];
+    if([temp_guid count]!=1)
+      continue;
+    
+    NSArray* temp_link = [item elementsForName:@"link"];
+    if([temp_link count]!=1)
+      continue;
+    
+    NSArray* temp_title = [item elementsForName:@"title"];
+    if([temp_title count]!=1)
+      continue;
+
+    NSArray* temp_header = [item elementsForName:@"header"];
+    if([temp_header count]!=1)
+      continue;
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"noticia://%@?url=%@&title=%@&header%@",
+                                        [self firstElementAsString:temp_guid],
+                                        [self firstElementAsString:temp_link],
+                                        [self firstElementAsString:temp_title],
+                                        [self firstElementAsString:temp_header]]];
+    
+    [news_urls addObject:url];
+    
+  }
+  
+  *xml_data = nil;
+ 
+  return [NSArray arrayWithArray:news_urls];
+}
+
 @end

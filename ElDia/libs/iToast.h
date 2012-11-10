@@ -56,6 +56,8 @@ typedef enum iToastType {
 
 -(iToastSettings *) theSettings;
 
+- (void) removeToast:(NSTimer*)theTimer;
+
 @end
 
 

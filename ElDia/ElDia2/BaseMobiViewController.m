@@ -21,6 +21,7 @@
 @implementation BaseMobiViewController
 
 @synthesize mScreenManager, currentUrl, myUIWebView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,7 +61,6 @@
 }
 
 /*****/
-
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
   if(isError)
     [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
