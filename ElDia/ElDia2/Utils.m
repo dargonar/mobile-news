@@ -8,7 +8,7 @@
 
 #import "Utils.h"
 #import "RegexKitLite.h"
-#import "Reachability.h"
+#import "_Reachability.h"
 #import "GTMNSString+HTML.h"
 
 @implementation Utils

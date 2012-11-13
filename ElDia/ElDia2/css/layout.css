@@ -475,11 +475,9 @@ font-weight:bold;}
 /***** CLASIFICADOS *****/
 
 #clasificados {
-	/*height:480px;*/
   height:416px;
-	background-color:#EFEFEF /*#323232*/;
-/*  width:265px;*/
-  width:320px;
+	background-color:#EFEFEF;
+  width:100% !important;
   overflow-x:hidden;
   overflow-y:auto;
 }

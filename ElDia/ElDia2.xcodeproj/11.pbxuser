@@ -1,0 +1,217 @@
+// !$*UTF8*$!
+{
+	78F5026616151DF9008217DE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE16EC3615ED5B8A00EC8210 /* xslt.h */;
+		name = "xslt.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 413;
+		vrLoc = 0;
+	};
+	78F50273161533AF008217DE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */;
+		name = "HTMLGenerator.m: 15";
+		rLen = 7;
+		rLoc = 358;
+		rType = 0;
+		vrLen = 529;
+		vrLoc = 0;
+	};
+	78F50274161533AF008217DE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE7A826615EC221F0061F481 /* MenuViewController.m */;
+		name = "MenuViewController.m: 47";
+		rLen = 0;
+		rLoc = 1470;
+		rType = 0;
+		vrLen = 839;
+		vrLoc = 1021;
+	};
+	78F50275161533AF008217DE /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = CE16EC3815ED5B8A00EC8210 /* xsltconfig.h */;
+	};
+	78F50276161533AF008217DE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CE16EC3815ED5B8A00EC8210 /* xsltconfig.h */;
+		name = "xsltconfig.h: 4";
+		rLen = 0;
+		rLoc = 184;
+		rType = 0;
+		vrLen = 451;
+		vrLoc = 0;
+	};
+	78FA5EB4161327190099EED5 /* ElDia2 */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = ElDia2;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	78FA5EE21613271C0099EED5 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	78FA5EE31613271C0099EED5 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	CE16EC3615ED5B8A00EC8210 /* xslt.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {922, 1326}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 413}";
+		};
+	};
+	CE16EC3815ED5B8A00EC8210 /* xsltconfig.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {922, 2223}}";
+			sepNavSelRange = "{184, 0}";
+			sepNavVisRange = "{0, 451}";
+		};
+	};
+	CE16EC3915ED5B8A00EC8210 /* xsltconfig.h.in */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {996, 2197}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1084}";
+			sepNavWindowFrame = "{{15, 225}, {1055, 772}}";
+		};
+	};
+	CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 689}}";
+			sepNavSelRange = "{357, 0}";
+			sepNavVisRange = "{0, 440}";
+		};
+	};
+	CE7A826015EC220F0061F481 /* NoticiaViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 494}}";
+			sepNavSelRange = "{729, 0}";
+			sepNavVisRange = "{323, 768}";
+		};
+	};
+	CE7A826515EC221F0061F481 /* MenuViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 390}}";
+			sepNavSelRange = "{785, 0}";
+			sepNavVisRange = "{82, 704}";
+		};
+	};
+	CE7A826615EC221F0061F481 /* MenuViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {922, 2483}}";
+			sepNavSelRange = "{1470, 0}";
+			sepNavVisRange = "{1021, 839}";
+		};
+	};
+	CE8E726D15EBEDB8007E6F09 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 78FA5EB4161327190099EED5 /* ElDia2 */;
+		activeTarget = CE8E727515EBEDB8007E6F09 /* ElDia2 */;
+		addToTargets = (
+			CE8E727515EBEDB8007E6F09 /* ElDia2 */,
+		);
+		codeSenseManager = 78FA5EE31613271C0099EED5 /* Code sense */;
+		executables = (
+			78FA5EB4161327190099EED5 /* ElDia2 */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					744,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 370482598;
+			PBXWorkspaceStateSaveDate = 370482598;
+		};
+		perUserProjectItems = {
+			78F5026616151DF9008217DE /* PBXTextBookmark */ = 78F5026616151DF9008217DE /* PBXTextBookmark */;
+			78F50273161533AF008217DE /* PBXTextBookmark */ = 78F50273161533AF008217DE /* PBXTextBookmark */;
+			78F50274161533AF008217DE /* PBXTextBookmark */ = 78F50274161533AF008217DE /* PBXTextBookmark */;
+			78F50275161533AF008217DE /* PBXBookmark */ = 78F50275161533AF008217DE /* PBXBookmark */;
+			78F50276161533AF008217DE /* PBXTextBookmark */ = 78F50276161533AF008217DE /* PBXTextBookmark */;
+		};
+		sourceControlManager = 78FA5EE21613271C0099EED5 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	CE8E727515EBEDB8007E6F09 /* ElDia2 */ = {
+		activeExec = 0;
+		executables = (
+			78FA5EB4161327190099EED5 /* ElDia2 */,
+		);
+	};
+	CE8E728615EBEDB8007E6F09 /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 247}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{3, 325}";
+		};
+	};
+	CE8E728915EBEDB8007E6F09 /* AppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 455}}";
+			sepNavSelRange = "{487, 0}";
+			sepNavVisRange = "{0, 409}";
+			sepNavWindowFrame = "{{15, 225}, {1055, 772}}";
+		};
+	};
+	CE8E728A15EBEDB8007E6F09 /* AppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {856, 1573}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 349}";
+		};
+	};
+	CE8E729015EBEDB9007E6F09 /* ElDia2Tests */ = {
+		activeExec = 0;
+	};
+}

@@ -1,0 +1,91 @@
+// !$*UTF8*$!
+{
+	785200AE164736D40089518B /* ElDia */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = ElDia;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	785200D5164736FF0089518B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	785200D6164736FF0089518B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	CE8E726D15EBEDB8007E6F09 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 785200AE164736D40089518B /* ElDia */;
+		activeTarget = CE8E727515EBEDB8007E6F09 /* ElDia */;
+		codeSenseManager = 785200D6164736FF0089518B /* Code sense */;
+		executables = (
+			785200AE164736D40089518B /* ElDia */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					848,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 374072538;
+			PBXWorkspaceStateSaveDate = 374072538;
+		};
+		sourceControlManager = 785200D5164736FF0089518B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	CE8E727515EBEDB8007E6F09 /* ElDia */ = {
+		activeExec = 0;
+		executables = (
+			785200AE164736D40089518B /* ElDia */,
+		);
+	};
+	CE8E729015EBEDB9007E6F09 /* ElDiaTests */ = {
+		activeExec = 0;
+	};
+}

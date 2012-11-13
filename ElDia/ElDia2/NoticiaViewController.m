@@ -8,7 +8,6 @@
 
 #import "NoticiaViewController.h"
 #import "AppDelegate.h"
-#import "SHK.h"
 #import "ConfigHelper.h"
 #import "iToast.h"
 #import "Utils.h"
@@ -177,21 +176,21 @@
     return;
   }
 
-  //http://socialize.github.com/socialize-sdk-ios/action_bar.html
-  if (self.actionBar != nil) {
-    [self.actionBar removeFromSuperview];
-    self.actionBar = nil;
-  }
-  if (self.actionBar == nil) {
-    NSLog(@"raw %@",self.noticia_url);
-    NSLog(@"decoded %@",[Utils stringByDecodingURLFormat:self.noticia_url ]);
-    NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title], [Utils stringByDecodingURLFormat:self.noticia_url ]];
-    self.entity = [SZEntity entityWithKey:self.noticia_id name:text];
-    self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
-    
-    [self.view addSubview:self.actionBar];
-  }
-    
+//  //http://socialize.github.com/socialize-sdk-ios/action_bar.html
+//  if (self.actionBar != nil) {
+//    [self.actionBar removeFromSuperview];
+//    self.actionBar = nil;
+//  }
+//  if (self.actionBar == nil) {
+//    NSLog(@"raw %@",self.noticia_url);
+//    NSLog(@"decoded %@",[Utils stringByDecodingURLFormat:self.noticia_url ]);
+//    NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title], [Utils stringByDecodingURLFormat:self.noticia_url ]];
+//    self.entity = [SZEntity entityWithKey:self.noticia_id name:text];
+//    self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
+//    
+//    [self.view addSubview:self.actionBar];
+//  }
+  
   
 //   NSURL *url = [NSURL URLWithString:self.noticia_url];
 //   
