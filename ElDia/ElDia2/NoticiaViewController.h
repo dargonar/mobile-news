@@ -12,7 +12,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "BaseMobiViewController.h"
 #import "YoutubeViewController.h"
-#import <Socialize/Socialize.h>
+
 
 
 @interface NoticiaViewController : BaseMobiViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, FGalleryViewControllerDelegate>  {
@@ -28,9 +28,6 @@
   YoutubeViewController *myYoutubeViewController;
 }
 
-// Socialize
-@property (nonatomic, retain) SZActionBar *actionBar;
-@property (nonatomic, retain) id<SZEntity> entity;
 
 @property (nonatomic, retain) YoutubeViewController *myYoutubeViewController;
 

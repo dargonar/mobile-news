@@ -19,6 +19,7 @@
 		78E5B93A1652D94500C7ACCD /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B9391652D94500C7ACCD /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		78E5B9441652E45800C7ACCD /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */; };
 		78E5B9501652EB4800C7ACCD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B94F1652EB4800C7ACCD /* Reachability.m */; };
+		78E5B9561652F16900C7ACCD /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */; };
 		78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */; };
 		78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
@@ -92,8 +93,6 @@
 		CE78799715F7FA88009AA708 /* FGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799215F7FA88009AA708 /* FGalleryPhoto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE78799815F7FA88009AA708 /* FGalleryPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799415F7FA88009AA708 /* FGalleryPhotoView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE78799915F7FA88009AA708 /* FGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799615F7FA88009AA708 /* FGalleryViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CE799AD115FE1CD200C857A8 /* JSONKit.m */; };
-		CE799AD315FE1CDE00C857A8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CE799AD115FE1CD200C857A8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE79A20C16385DAD005D949D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20B16385DAD005D949D /* GDataXMLNode.m */; };
 		CE79A20F16385F58005D949D /* MobiImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20E16385F58005D949D /* MobiImage.m */; };
 		CE79A2101638659E005D949D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79A20B16385DAD005D949D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -510,6 +509,8 @@
 		78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		78E5B94E1652EB4800C7ACCD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		78E5B94F1652EB4800C7ACCD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		78E5B9541652F16900C7ACCD /* MySHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySHKConfigurator.h; sourceTree = "<group>"; };
+		78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySHKConfigurator.m; sourceTree = "<group>"; };
 		78E99D9D164DF27D00780D54 /* MenuClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuClasificadosViewController.h; sourceTree = "<group>"; };
 		78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuClasificadosViewController.m; sourceTree = "<group>"; };
 		78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuClasificadosViewController.xib; sourceTree = "<group>"; };
@@ -623,8 +624,6 @@
 		CE78799415F7FA88009AA708 /* FGalleryPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGalleryPhotoView.m; sourceTree = "<group>"; };
 		CE78799515F7FA88009AA708 /* FGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGalleryViewController.h; sourceTree = "<group>"; };
 		CE78799615F7FA88009AA708 /* FGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGalleryViewController.m; sourceTree = "<group>"; };
-		CE799AD015FE1CD200C857A8 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		CE799AD115FE1CD200C857A8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		CE79A20A16385DAD005D949D /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		CE79A20B16385DAD005D949D /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		CE79A20D16385F58005D949D /* MobiImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobiImage.h; sourceTree = "<group>"; };
@@ -927,7 +926,6 @@
 			children = (
 				78E5B94D1652EB4700C7ACCD /* Reachability */,
 				CEC82FD9162F1FEF0085FF54 /* asi-http-request */,
-				CE799AC815FE1C1C00C857A8 /* JSONKit */,
 				CE78799015F7FA88009AA708 /* FGallery */,
 				CE7D338E15EE8EEC00935444 /* itoast */,
 				CE16EBFA15ED5B8A00EC8210 /* libxslt */,
@@ -1026,15 +1024,6 @@
 				CE78799615F7FA88009AA708 /* FGalleryViewController.m */,
 			);
 			path = FGallery;
-			sourceTree = "<group>";
-		};
-		CE799AC815FE1C1C00C857A8 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				CE799AD015FE1CD200C857A8 /* JSONKit.h */,
-				CE799AD115FE1CD200C857A8 /* JSONKit.m */,
-			);
-			path = JSONKit;
 			sourceTree = "<group>";
 		};
 		CE79A20816385D52005D949D /* GData */ = {
@@ -1269,6 +1258,8 @@
 				CEEEC0C116236C030037F329 /* YoutubeViewController.m */,
 				CEEEC0C216236C030037F329 /* YoutubeViewController.xib */,
 				CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */,
+				78E5B9541652F16900C7ACCD /* MySHKConfigurator.h */,
+				78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */,
 			);
 			path = ElDia2;
 			sourceTree = "<group>";
@@ -1930,7 +1921,6 @@
 				CEEEC0C61623700A0037F329 /* YoutubeViewController.m in Sources */,
 				CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */,
 				CEF0C7231616303A0064E9E2 /* iToast.m in Sources */,
-				CE799AD315FE1CDE00C857A8 /* JSONKit.m in Sources */,
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */,
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
@@ -2011,13 +2001,13 @@
 				CE16EC7A15ED5C1200EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC7B15ED5C1200EC8210 /* HTMLGenerator.m in Sources */,
 				CE7D339115EE8F2700935444 /* iToast.m in Sources */,
-				CE799AD215FE1CD200C857A8 /* JSONKit.m in Sources */,
 				CEF4A199161F6B9F0072EAB4 /* HCYoutubeParser.m in Sources */,
 				CEEEC0C316236C030037F329 /* YoutubeViewController.m in Sources */,
 				CE79A20C16385DAD005D949D /* GDataXMLNode.m in Sources */,
 				CE79A20F16385F58005D949D /* MobiImage.m in Sources */,
 				CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */,
 				78E5B9501652EB4800C7ACCD /* Reachability.m in Sources */,
+				78E5B9561652F16900C7ACCD /* MySHKConfigurator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

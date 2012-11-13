@@ -14,7 +14,10 @@
 #import "MenuClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
-//#import <Socialize/Socialize.h>
+#import "MySHKConfigurator.h"
+
+#import "SHKConfiguration.h"
+#import "SHKFacebook.h"
 
 @implementation AppDelegate
 
@@ -87,23 +90,37 @@
   [self.window makeKeyAndVisible];//HACKED
   
   
+  DefaultSHKConfigurator *configurator = [[[MySHKConfigurator alloc] init] autorelease];
+  [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+  
   //HACK SACAR ANTES DE RELEASE
-//  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-//  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
-  
-  
+  //  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+  //  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   return YES;
 }
 
-// Get Socialize
-//[Socialize storeConsumerKey:@"e964f471-d8bf-4ee3-8b0a-497ad117d28e"];
-//[Socialize storeConsumerSecret:@"2e8ee88b-58f0-4ee1-ad4a-3584640d21b1"];
-//// app id 460382
-//[SZFacebookUtils setAppId:@"200298223439703"];
-//[SZTwitterUtils setConsumerKey:@"jkPcehgUmSBdRBvOvz9aQ" consumerSecret:@"4woY6QydnCcmKBsQNooNgQyN1aAi7aBXTBvoMnKexA"];
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-//  return [Socialize handleOpenURL:url];
-//}
+/* ShareKit */
+- (BOOL)handleOpenURL:(NSURL*)url
+{
+  NSString* scheme = [url scheme];
+  NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
+  if ([scheme hasPrefix:prefix])
+    return [SHKFacebook handleOpenURL:url];
+  return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  return [self handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+  return [self handleOpenURL:url];
+}
+
+
+
 
 -(void)loadMenu:(BOOL)useCache{
   NSLog(@"app_delegate::loadMenu useCache:%@", useCache?@"SI":@"NO");

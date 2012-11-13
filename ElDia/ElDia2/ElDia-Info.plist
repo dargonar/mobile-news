@@ -41,19 +41,9 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>Open SmartDownloads</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sz460382</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb200298223439703</string>
+				<string>fb200298223439703eldiamobile</string>
 			</array>
 		</dict>
 	</array>

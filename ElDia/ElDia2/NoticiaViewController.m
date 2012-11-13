@@ -17,12 +17,14 @@
 
 #import "HCYoutubeParser.h"
 
+#import "SHK.h"
+
 @implementation NoticiaViewController
 
 @synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView,
   btnFontSizePlus, btnFontSizeMinus, loading_indicator,
   myYoutubeViewController, headerUIImageView, offline_imgvw, offline_lbl,
-  noticia_id, noticia_url, noticia_title, noticia_header, actionBar;
+  noticia_id, noticia_url, noticia_title, noticia_header;
 
 -(void)changeFontSize:(NSInteger)delta{
   
@@ -175,32 +177,17 @@
     [self showMessage:@"No hay conexión de red.\nInténtelo más tarde." isError:YES];
     return;
   }
-
-//  //http://socialize.github.com/socialize-sdk-ios/action_bar.html
-//  if (self.actionBar != nil) {
-//    [self.actionBar removeFromSuperview];
-//    self.actionBar = nil;
-//  }
-//  if (self.actionBar == nil) {
-//    NSLog(@"raw %@",self.noticia_url);
-//    NSLog(@"decoded %@",[Utils stringByDecodingURLFormat:self.noticia_url ]);
-//    NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title], [Utils stringByDecodingURLFormat:self.noticia_url ]];
-//    self.entity = [SZEntity entityWithKey:self.noticia_id name:text];
-//    self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
-//    
-//    [self.view addSubview:self.actionBar];
-//  }
   
   
-//   NSURL *url = [NSURL URLWithString:self.noticia_url];
-//   
-//   SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title] ];
-//  
-//	// Get the ShareKit action sheet
-//	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-//  
-//	// Display the action sheet
-//	[actionSheet showFromToolbar:self.navigationController.toolbar];
+   NSURL *url = [NSURL URLWithString:self.noticia_url];
+   
+   SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title] ];
+  
+	// Get the ShareKit action sheet
+	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+  
+	// Display the action sheet
+	[actionSheet showFromToolbar:self.navigationController.toolbar];
 
 }
 
