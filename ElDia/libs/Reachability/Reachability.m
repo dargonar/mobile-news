@@ -104,7 +104,7 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 
-#import "_Reachability.h"
+#import "Reachability.h"
 
 NSString *const kInternetConnection  = @"InternetConnection";
 NSString *const kLocalWiFiConnection = @"LocalWiFiConnection";

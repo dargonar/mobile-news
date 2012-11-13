@@ -18,7 +18,7 @@
 		78E5B9381652D89500C7ACCD /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		78E5B93A1652D94500C7ACCD /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B9391652D94500C7ACCD /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		78E5B9441652E45800C7ACCD /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */; };
-		78E5B9471652E69A00C7ACCD /* _Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B9461652E69900C7ACCD /* _Reachability.m */; };
+		78E5B9501652EB4800C7ACCD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B94F1652EB4800C7ACCD /* Reachability.m */; };
 		78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */; };
 		78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
@@ -508,8 +508,8 @@
 		78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		78E5B9391652D94500C7ACCD /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		78E5B9451652E69900C7ACCD /* _Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Reachability.h; sourceTree = "<group>"; };
-		78E5B9461652E69900C7ACCD /* _Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Reachability.m; sourceTree = "<group>"; };
+		78E5B94E1652EB4800C7ACCD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		78E5B94F1652EB4800C7ACCD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		78E99D9D164DF27D00780D54 /* MenuClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuClasificadosViewController.h; sourceTree = "<group>"; };
 		78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuClasificadosViewController.m; sourceTree = "<group>"; };
 		78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuClasificadosViewController.xib; sourceTree = "<group>"; };
@@ -913,9 +913,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		78E5B94D1652EB4700C7ACCD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				78E5B94E1652EB4800C7ACCD /* Reachability.h */,
+				78E5B94F1652EB4800C7ACCD /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		CE16EBF915ED5B8A00EC8210 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				78E5B94D1652EB4700C7ACCD /* Reachability */,
 				CEC82FD9162F1FEF0085FF54 /* asi-http-request */,
 				CE799AC815FE1C1C00C857A8 /* JSONKit */,
 				CE78799015F7FA88009AA708 /* FGallery */,
@@ -1296,8 +1306,6 @@
 		CEC82FD9162F1FEF0085FF54 /* asi-http-request */ = {
 			isa = PBXGroup;
 			children = (
-				78E5B9451652E69900C7ACCD /* _Reachability.h */,
-				78E5B9461652E69900C7ACCD /* _Reachability.m */,
 				CEC82FDA162F1FEF0085FF54 /* ASIAuthenticationDialog.h */,
 				CEC82FDB162F1FEF0085FF54 /* ASIAuthenticationDialog.m */,
 				CEC82FDC162F1FEF0085FF54 /* ASICacheDelegate.h */,
@@ -2009,7 +2017,7 @@
 				CE79A20C16385DAD005D949D /* GDataXMLNode.m in Sources */,
 				CE79A20F16385F58005D949D /* MobiImage.m in Sources */,
 				CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */,
-				78E5B9471652E69A00C7ACCD /* _Reachability.m in Sources */,
+				78E5B9501652EB4800C7ACCD /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
