@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Lion User. All rights reserved.
 //
 
+//#import "DefaultSHKConfigurator.h"
 #import "DefaultSHKConfigurator.h"
 
 @interface MySHKConfigurator : DefaultSHKConfigurator

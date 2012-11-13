@@ -14,10 +14,10 @@
 #import "URLParser.h"
 #import "NewsManager.h"
 #import "ErrorBuilder.h"
-
+#import "SHK.h"
 #import "HCYoutubeParser.h"
 
-#import "SHK.h"
+ 
 
 @implementation NoticiaViewController
 
@@ -179,10 +179,12 @@
   }
   
   
-   NSURL *url = [NSURL URLWithString:self.noticia_url];
-   
-   SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title] ];
+  NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
   
+//  NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title] , [Utils stringByDecodingURLFormat:self.noticia_url]];
+  
+  SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", [Utils stringByDecodingURLFormat:self.noticia_title]] contentType:SHKURLContentTypeWebpage];
+
 	// Get the ShareKit action sheet
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
   
@@ -320,12 +322,6 @@
   networkImages = nil;
   networkGallery = nil;
   
-  //hack
-  if (self.actionBar != nil) {
-//    [self.actionBar removeFromSuperview];
-//    self.actionBar=nil;
-    self.actionBar.hidden = YES;
-  }
 }
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event

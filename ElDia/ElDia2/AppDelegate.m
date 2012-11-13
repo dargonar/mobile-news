@@ -90,7 +90,7 @@
   [self.window makeKeyAndVisible];//HACKED
   
   
-  DefaultSHKConfigurator *configurator = [[[MySHKConfigurator alloc] init] autorelease];
+  DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
   [SHKConfiguration sharedInstanceWithConfigurator:configurator];
   
   //HACK SACAR ANTES DE RELEASE

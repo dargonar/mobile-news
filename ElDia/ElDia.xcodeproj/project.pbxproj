@@ -20,6 +20,7 @@
 		78E5B9441652E45800C7ACCD /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */; };
 		78E5B9501652EB4800C7ACCD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B94F1652EB4800C7ACCD /* Reachability.m */; };
 		78E5B9561652F16900C7ACCD /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */; };
+		78E5B9581652FBAA00C7ACCD /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */; };
 		78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */; };
 		78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
@@ -1926,6 +1927,7 @@
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
 				CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */,
 				CE8E728715EBEDB8007E6F09 /* main.m in Sources */,
+				78E5B9581652FBAA00C7ACCD /* MySHKConfigurator.m in Sources */,
 				CE8E728B15EBEDB8007E6F09 /* AppDelegate.m in Sources */,
 				CE7A825D15EC21F00061F481 /* MainViewController.m in Sources */,
 				CE7A826315EC220F0061F481 /* NoticiaViewController.m in Sources */,
@@ -2127,7 +2129,7 @@
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "Submodules/**";
+				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2155,7 +2157,7 @@
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "Submodules/**";
+				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
