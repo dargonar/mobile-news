@@ -320,6 +320,7 @@ BOOL SHKinit;
 				break;
 		}
 		
+    favoriteSharers = [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook",@"SHKMail",nil];
 		// Save defaults to prefs
 		[self setFavorites:favoriteSharers forType:type];
 	}

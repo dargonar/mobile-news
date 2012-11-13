@@ -14,6 +14,7 @@
 #import "MenuClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
+#import <Socialize/Socialize.h>
 
 @implementation AppDelegate
 
@@ -90,7 +91,16 @@
 //  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
 //  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
+  [Socialize storeConsumerKey:@"e964f471-d8bf-4ee3-8b0a-497ad117d28e"];
+  [Socialize storeConsumerSecret:@"2e8ee88b-58f0-4ee1-ad4a-3584640d21b1"];
+  // app id 460382
+  [SZFacebookUtils setAppId:@"200298223439703"];
+  [SZTwitterUtils setConsumerKey:@"jkPcehgUmSBdRBvOvz9aQ" consumerSecret:@"4woY6QydnCcmKBsQNooNgQyN1aAi7aBXTBvoMnKexA"];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [Socialize handleOpenURL:url];
 }
 
 -(void)loadMenu:(BOOL)useCache{

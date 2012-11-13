@@ -10,6 +10,16 @@
 #import "NoticiaViewController.h"
 #import "BaseMobiViewController.h"
 
+/*
+ SKU99-0001-20121112
+ Bundle IDcom.diventi.mobipaper
+ Apple ID
+ 578331790
+ Type
+ iOS App
+ Default LanguageSpanish
+ */
+
 @interface MainViewController : BaseMobiViewController<UIWebViewDelegate>
 {
   NoticiaViewController *myNoticiaViewController;

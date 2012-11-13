@@ -179,4 +179,11 @@
   return [NSString stringWithFormat:@"Actualizado hace %li %@", (long)difference, [periods objectAtIndex:j]];
 }
 
++ (NSString *)stringByDecodingURLFormat:(NSString*)string
+{
+  NSString *result = [(NSString *)string stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+  result = [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  return result;
+}
+
 @end

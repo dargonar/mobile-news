@@ -177,6 +177,7 @@
 						<string key="NSFrame">{{142, 212}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -277,7 +278,7 @@
 							<object class="IBUIActivityIndicatorView" id="455961632">
 								<reference key="NSNextResponder" ref="943214099"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{141, 250}, {37, 37}}</string>
+								<string key="NSFrame">{{141, 350}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="943214099"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="542766659"/>
@@ -890,10 +891,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
-		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">

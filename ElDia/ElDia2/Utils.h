@@ -16,5 +16,5 @@
 +(NSData*)sanitizeXML:(NSData*)xml_data unescaping_html_entities:(BOOL)unescaping_html_entities;
 +(BOOL)areWeConnectedToInternet;
 + (NSString *)timeAgoFromUnixTime:(double)seconds;
-
++ (NSString *)stringByDecodingURLFormat:(NSString*)string;
 @end
