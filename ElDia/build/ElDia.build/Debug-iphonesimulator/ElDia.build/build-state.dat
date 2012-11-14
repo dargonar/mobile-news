@@ -198,6 +198,11 @@ c000000004CC12246000000000029B310
 t1287725638
 s2732816
 
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+c000000004CC127E80000000000074190
+t1287727080
+s475536
+
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreMedia.framework/CoreMedia
 c000000004CC127FC0000000000063DD0
 t1287727100
@@ -273,6 +278,11 @@ c000000004CC1225F0000000000006506
 t1287725663
 s25862
 
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/MapKit.framework/MapKit
+c000000004CC12977000000000017E7F0
+t1287727479
+s1566704
+
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/MediaPlayer.framework/Headers/MediaPlayer.h
 c000000004CC656490000000000000294
 t1288066633
@@ -332,6 +342,11 @@ N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2
 c000000004CC121F60000000000068970
 t1287725558
 s428400
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Twitter.framework/Twitter
+c00000000000000000000000000000000
+t2
+s0
 
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
 c000000004CC1281F0000000000000AA1
@@ -683,6 +698,11 @@ c000000004CC10DA50000000000122A50
 t1287720357
 s1190480
 
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/lib/libz.1.2.5.dylib
+c00000000000000000000000000000000
+t2
+s0
+
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/lib/libz.dylib
 c000000004CC109C300000000000123B0
 t1287719363
@@ -714,9 +734,9 @@ t1352072827
 s4803
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/1_main_list.xsl
-c000000005096FE7A00000000000007C6
-t1352072826
-s1990
+c00000000509C18D300000000000007A6
+t1352407251
+s1958
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/2_section_list.xsl
 c000000005096FE7A000000000000058C
@@ -729,9 +749,9 @@ t1352072826
 s1956
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/4_menu.xsl
-c000000005096FE7A00000000000012CB
-t1352072826
-s4811
+c00000000509DCC2500000000000006B1
+t1352518693
+s1713
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/5_clasificados.xsl
 c000000005096FE7A0000000000000601
@@ -746,16 +766,19 @@ i<UIKit/UIKit.h>
 i"ASIHTTPRequest.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.m
-c00000000509BAD350000000000002505
-t1352379701
-s9477
+c0000000050A2C3B900000000000028A3
+t1352844217
+s10403
 i<QuartzCore/QuartzCore.h>
 i"AppDelegate.h"
 i"MainViewController.h"
 i"MenuViewController.h"
-i"ClasificadosViewController.h"
+i"MenuClasificadosViewController.h"
 i"MobiImage.h"
 i"DiskCache.h"
+i"MySHKConfigurator.h"
+i"SHKConfiguration.h"
+i"SHKFacebook.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/BaseMobiViewController.h
 c000000005096FE7A00000000000002C8
@@ -766,8 +789,8 @@ i"ScreenManager.h"
 i"MobiImage.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/BaseMobiViewController.m
-c000000005096FE7A0000000000000F84
-t1352072826
+c00000000509DD4690000000000000F84
+t1352520809
 s3972
 i"BaseMobiViewController.h"
 i"AppDelegate.h"
@@ -788,8 +811,8 @@ i"BaseMobiViewController.h"
 i"PSWebView.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/ClasificadosViewController.m
-c00000000509BB10A0000000000001AC5
-t1352380682
+c00000000509DC05D0000000000001AC5
+t1352515677
 s6853
 i"ClasificadosViewController.h"
 i"ConfigHelper.h"
@@ -798,9 +821,9 @@ i"Utils.h"
 i"AppDelegate.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/ClasificadosViewController.xib
-c000000005096FE7A000000000000717A
-t1352072826
-s29050
+c00000000509DC34700000000000062C6
+t1352516423
+s25286
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/ConfigHelper.h
 c000000005096FE7A00000000000001C1
@@ -946,33 +969,57 @@ t1352072826
 s4803
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h
-c000000005096FE7A00000000000005E6
-t1352072826
-s1510
+c0000000050A14575000000000000069D
+t1352746357
+s1693
 i<UIKit/UIKit.h>
 i"NoticiaViewController.h"
 i"BaseMobiViewController.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m
-c000000005096FE7A0000000000001D5D
-t1352072826
-s7517
+c00000000509DDAD40000000000001E9F
+t1352522452
+s7839
 i"MainViewController.h"
 i"iToast.h"
 i"ConfigHelper.h"
 i"AppDelegate.h"
 i"ErrorBuilder.h"
 i"Utils.h"
+i"NewsManager.h"
+i"XMLParser.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.xib
-c000000005096FE7A000000000000A26A
-t1352072826
-s41578
+c0000000050A1111C000000000000A3A8
+t1352732956
+s41896
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController_iPad.xib
 c000000005096FE7A000000000000A07F
 t1352072826
 s41087
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuClasificadosViewController.h
+c00000000509DC44A000000000000023A
+t1352516682
+s570
+i<UIKit/UIKit.h>
+i"BaseMobiViewController.h"
+i"ClasificadosViewController.h"
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuClasificadosViewController.m
+c00000000509DC6E00000000000000A02
+t1352517344
+s2562
+i"MenuClasificadosViewController.h"
+i"ErrorBuilder.h"
+i"Utils.h"
+i"AppDelegate.h"
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuClasificadosViewController.xib
+c00000000509DC347000000000000402F
+t1352516423
+s16431
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController.h
 c000000005096FE7A0000000000000398
@@ -984,20 +1031,20 @@ i<QuartzCore/QuartzCore.h>
 i"BaseMobiViewController.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController.m
-c000000005096FE7A0000000000002252
-t1352072826
-s8786
+c00000000509DCA280000000000002450
+t1352518184
+s9296
 i"MenuViewController.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController.xib
-c000000005096FE7A0000000000003B25
-t1352072826
-s15141
+c00000000509DC3470000000000003280
+t1352516423
+s12928
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController_iPad.xib
-c000000005096FE7A00000000000038EF
-t1352072826
-s14575
+c00000000509DC34700000000000037FE
+t1352516423
+s14334
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MobiImage.h
 c000000005096FE7A000000000000021F
@@ -1010,6 +1057,18 @@ c000000005096FE7A000000000000048B
 t1352072826
 s1163
 i"MobiImage.h"
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MySHKConfigurator.h
+c0000000050A2C22E0000000000000109
+t1352843822
+s265
+i"DefaultSHKConfigurator.h"
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/MySHKConfigurator.m
+c0000000050A2CA5E00000000000034EE
+t1352845918
+s13550
+i"MySHKConfigurator.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/NewsManager.h
 c000000005096FE7A0000000000000155
@@ -1024,9 +1083,9 @@ s1375
 i"NewsManager.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h
-c000000005096FE7A000000000000072C
-t1352072826
-s1836
+c0000000050A2BD5F000000000000072E
+t1352842591
+s1838
 i<UIKit/UIKit.h>
 i"PSWebView.h"
 i"FGalleryViewController.h"
@@ -1035,18 +1094,18 @@ i"BaseMobiViewController.h"
 i"YoutubeViewController.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.m
-c000000005096FE7A00000000000044B0
-t1352072826
-s17584
+c0000000050A2C7D000000000000044E8
+t1352845264
+s17640
 i"NoticiaViewController.h"
 i"AppDelegate.h"
-i"SHK.h"
 i"ConfigHelper.h"
 i"iToast.h"
 i"Utils.h"
 i"URLParser.h"
 i"NewsManager.h"
 i"ErrorBuilder.h"
+i"SHK.h"
 i"HCYoutubeParser.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.xib
@@ -1121,15 +1180,15 @@ i<stdio.h>
 i"RegexKitLite.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/ScreenManager.h
-c000000005096FE7A000000000000030C
-t1352072826
+c00000000509DDC11000000000000030C
+t1352522769
 s780
 i<Foundation/Foundation.h>
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/ScreenManager.m
-c00000000509BAD350000000000001F76
-t1352379701
-s8054
+c00000000509DDE80000000000000212C
+t1352523392
+s8492
 i"ScreenManager.h"
 i"DiskCache.h"
 i"CryptoUtil.h"
@@ -1147,36 +1206,36 @@ s374
 i<Foundation/Foundation.h>
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/URLParser.m
-c000000005096FE7A0000000000000513
-t1352072826
+c0000000050A1B1990000000000000513
+t1352774041
 s1299
 i"URLParser.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/Utils.h
-c00000000509BAD3500000000000001F3
-t1352379701
-s499
+c0000000050A1B1D6000000000000022D
+t1352774102
+s557
 i<Foundation/Foundation.h>
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/Utils.m
-c00000000509BAD350000000000001A68
-t1352379701
-s6760
+c0000000050A2A4A70000000000001B75
+t1352836263
+s7029
 i"Utils.h"
 i"RegexKitLite.h"
-i"Reachability.h"
+i"_Reachability.h"
 i"GTMNSString+HTML.h"
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/XMLParser.h
-c000000005096FE7A000000000000011A
-t1352072826
-s282
+c00000000509DDA520000000000000161
+t1352522322
+s353
 i<Foundation/Foundation.h>
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/XMLParser.m
-c000000005096FE7A0000000000000A3C
-t1352072826
-s2620
+c00000000509DDA4900000000000010FE
+t1352522313
+s4350
 i"XMLParser.h"
 i"GDataXMLNode.h"
 i"MobiImage.h"
@@ -1203,9 +1262,9 @@ t1352072826
 s16222
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController_iPad.xib
-c000000005096FE7A0000000000003CF9
-t1352072826
-s15609
+c0000000050A2AA0100000000000035CE
+t1352837633
+s13774
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/bg@2x.png
 c000000005096FE7B0000000000000193
@@ -1228,9 +1287,9 @@ t1352072827
 s3949
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/css/layout.css
-c000000005096FE7B0000000000002840
-t1352072827
-s10304
+c0000000050A2ADD70000000000002AAF
+t1352838615
+s10927
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/egopv_error_placeholder.png
 c000000005096FE7B0000000000001493
@@ -1278,9 +1337,9 @@ t1352072827
 s1056
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/functions.xsl
-c000000005096FE7B0000000000004AD9
-t1352072827
-s19161
+c00000000509DD6BF0000000000004C0A
+t1352521407
+s19466
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/img/ajax_loader.gif
 c000000005064CFCD0000000000002253
@@ -1403,6 +1462,11 @@ N/Users/11/Documents/ymobipaper/ElDia/ElDia2/menu_bg.png
 c000000005064CFCD0000000000008655
 t1348784077
 s34389
+
+N/Users/11/Documents/ymobipaper/ElDia/ElDia2/menu_clasificados.html
+c00000000509DCC15000000000000102F
+t1352518677
+s4143
 
 N/Users/11/Documents/ymobipaper/ElDia/ElDia2/menu_dummy.html
 c000000005096FE7B00000000000001FE
@@ -1584,6 +1648,10 @@ N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/Make
 t2
 s0
 
+N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/MenuClasificadosViewController.nib
+t2
+s0
+
 N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/MenuViewController.nib
 t2
 s0
@@ -1603,6 +1671,10 @@ s0
 N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/PkgInfo
 t1352073087
 s8
+
+N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/ShareKit.bundle
+t2
+s0
 
 N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/YoutubeViewController.nib
 t1352073102
@@ -1813,6 +1885,10 @@ t2
 s0
 
 N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/menu_bg.png
+t2
+s0
+
+N/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/menu_clasificados.html
 t2
 s0
 
@@ -2129,6 +2205,10 @@ N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/El
 t2
 s0
 
+N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MenuClasificadosViewController.o
+t2
+s0
+
 N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MenuViewController.o
 t2
 s0
@@ -2136,6 +2216,10 @@ s0
 N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MobiImage.o
 t1352073098
 s11756
+
+N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MySHKConfigurator.o
+t2
+s0
 
 N/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/NSMutableURLRequest+Parameters.o
 t1352073094
@@ -3418,6 +3502,13 @@ t1352072827
 s1393
 i"SHKViewControllerWrapper.h"
 
+N/Users/11/Documents/ymobipaper/ElDia/libs/_Reachability.h
+c0000000050A2B0A90000000000000F1B
+t1352839337
+s3867
+i<Foundation/Foundation.h>
+i<SystemConfiguration/SystemConfiguration.h>
+
 N/Users/11/Documents/ymobipaper/ElDia/libs/asi-http-request/ASIAuthenticationDialog.h
 c000000005096FE7B0000000000000453
 t1352072827
@@ -3770,9 +3861,9 @@ i<SystemConfiguration/SystemConfiguration.h>
 i<netinet/in.h>
 
 N/Users/11/Documents/ymobipaper/ElDia/libs/iToast.h
-c00000000505CA63E000000000000067E
-t1348249150
-s1662
+c00000000509DD40400000000000006A8
+t1352520708
+s1704
 i<Foundation/Foundation.h>
 i<UIKit/UIKit.h>
 
@@ -4575,6 +4666,181 @@ c00000000505CA63E000000000000087A
 t1348249150
 s2170
 
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Configuration/DefaultSHKConfigurator.h
+c0000000050A290270000000000000F2D
+t1352831015
+s3885
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Configuration/SHKConfiguration.h
+c0000000050A2902700000000000006DA
+t1352831015
+s1754
+i<Foundation/Foundation.h>
+i"DefaultSHKConfigurator.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/Base Sharer Classes/SHKSharer.h
+c0000000050A290270000000000001853
+t1352831015
+s6227
+i<UIKit/UIKit.h>
+i"SHK.h"
+i"SHKFormController.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/Categories/GTMNSString+HTML.h
+c0000000050A2902700000000000008F1
+t1352831015
+s2289
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/Categories/UIWebView+SHK.h
+c0000000050A290270000000000000567
+t1352831015
+s1383
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/Helpers/SHKRequest.h
+c0000000050A29027000000000000089E
+t1352831015
+s2206
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/SHK.h
+c0000000050A290270000000000000F7E
+t1352831015
+s3966
+i<Foundation/Foundation.h>
+i"DefaultSHKConfigurator.h"
+i"SHKItem.h"
+i"SHKActionSheet.h"
+i"SHKRequest.h"
+i"SHKActivityIndicator.h"
+i"SHKFormFieldSettings.h"
+i"UIWebView+SHK.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Core/SHKItem.h
+c0000000050A290270000000000001559
+t1352831015
+s5465
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Customize UI/SHKCustomFormControllerLargeTextField.h
+c0000000050A29027000000000000055F
+t1352831015
+s1375
+i<Foundation/Foundation.h>
+i"SHKFormControllerLargeTextField.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Customize UI/SHKCustomFormFieldCell.h
+c0000000050A290270000000000000524
+t1352831015
+s1316
+i<Foundation/Foundation.h>
+i"SHKFormFieldCell.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/Sharers/Services/Facebook/SHKFacebook.h
+c0000000050A2902700000000000005C7
+t1352831015
+s1479
+i<Foundation/Foundation.h>
+i"Facebook.h"
+i"SHKSharer.h"
+i"SHKCustomFormControllerLargeTextField.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKActionSheet.h
+c0000000050A29027000000000000068B
+t1352831015
+s1675
+i<Foundation/Foundation.h>
+i"SHK.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKActivityIndicator.h
+c0000000050A2902700000000000007A6
+t1352831015
+s1958
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKFormController.h
+c0000000050A290270000000000000869
+t1352831015
+s2153
+i<UIKit/UIKit.h>
+i"SHKFormFieldSettings.h"
+i"SHKCustomFormFieldCell.h"
+i"SHKFormOptionController.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKFormControllerLargeTextField.h
+c0000000050A290270000000000000484
+t1352831015
+s1156
+i<UIKit/UIKit.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKFormFieldCell.h
+c0000000050A290270000000000000688
+t1352831015
+s1672
+i<UIKit/UIKit.h>
+i"SHK.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKFormFieldSettings.h
+c0000000050A290270000000000000CFD
+t1352831015
+s3325
+i<Foundation/Foundation.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Classes/ShareKit/UI/SHKFormOptionController.h
+c0000000050A290270000000000000617
+t1352831015
+s1559
+i<UIKit/UIKit.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Submodules/evernote-ios-sdk/SampleApp/AppDelegate.h
+c0000000050A2904A00000000000000E3
+t1352831050
+s227
+i<UIKit/UIKit.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Submodules/facebook-ios-sdk/src/FBDialog.h
+c0000000050A2905F00000000000012BD
+t1352831071
+s4797
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Submodules/facebook-ios-sdk/src/FBLoginDialog.h
+c0000000050A2905F0000000000000571
+t1352831071
+s1393
+i"FBDialog.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Submodules/facebook-ios-sdk/src/FBRequest.h
+c0000000050A2905F0000000000001016
+t1352831071
+s4118
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/Submodules/facebook-ios-sdk/src/Facebook.h
+c0000000050A2905F000000000000132D
+t1352831071
+s4909
+i"FBLoginDialog.h"
+i"FBRequest.h"
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/build/Debug-iphonesimulator/ShareKit.bundle
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/11/Documents/ymobipaper/Submodules/ShareKit/build/Debug-iphonesimulator/libShareKit.a
+c00000000000000000000000000000000
+t2
+s0
+
+N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-atzpwkzuykthvveddibhgdjnywrc/ElDia-Prefix.pch.pth
+t2
+s0
+
 N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-bgyhramkdcsadbdokfgyhkhtnepd/ElDia-Prefix.pch.pth
 t1352073089
 s66800
@@ -4582,6 +4848,10 @@ s66800
 N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-bqbdvmmxnlzbofgbtymzbtumzkna/ElDia-Prefix.pch.pth
 t1352073088
 s2822196
+
+N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-cbmspzernwxwebdiojkzriyhkvnl/ElDia-Prefix.pch.pth
+t2
+s0
 
 N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-eahcycpjwmcjlfclpyqogmeqegaz/ElDia-Prefix.pch.pth
 t1352073089
@@ -4591,10 +4861,14 @@ N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrec
 t1352073088
 s2822196
 
+N/var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-hlbdrlynmnbritfpgwssmkkxmgnc/ElDia-Prefix.pch.pth
+t2
+s0
+
 NElDia2/ElDia-Info.plist
-c000000005096FE7A000000000000069F
-t1352072826
-s1695
+c0000000050A2BBDF0000000000000786
+t1352842207
+s1926
 
 CCheck dependencies
 r0
@@ -5613,6 +5887,9 @@ o       ^~~~~~~~~~~~~~~~~~~~~~
 o25 warnings and 7 errors generated.
 lSLF07#2@72"Compile /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765890#373765890#0(6898"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:9:In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h:10:In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h:14:/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h:13:12: error: unknown property attribute 'strong' @property (strong, nonatomic) IBOutlet UIWebView *mainUIWebView;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h:13:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) IBOutlet UIWebView *mainUIWebView; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h:13:1: warning: default property attribute 'assign' not appropriate for non-gc objectIn file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:12:/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:21:12: error: unknown property attribute 'strong' @property (strong, nonatomic) UIWindow *window;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:21:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) UIWindow *window; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:21:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:23:12: error: unknown property attribute 'strong' @property (strong, nonatomic) MainViewController *mainViewController;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:23:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) MainViewController *mainViewController; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:23:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:24:12: error: unknown property attribute 'strong' @property (strong, nonatomic) MenuViewController *menuViewController;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:24:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) MenuViewController *menuViewController; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:24:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:25:12: error: unknown property attribute 'strong' @property (strong, nonatomic) ClasificadosViewController *clasificadosViewController;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:25:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) ClasificadosViewController *clasificadosViewController; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:25:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:27:12: error: unknown property attribute 'strong' @property (strong, nonatomic) UINavigationController * navigationController;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:27:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) UINavigationController * navigationController; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:27:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:28:12: error: unknown property attribute 'strong' @property (strong, nonatomic) NSOperationQueue *download_queue;;            ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:28:1: warning: no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed @property (strong, nonatomic) NSOperationQueue *download_queue;; ^/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h:28:1: warning: default property attribute 'assign' not appropriate for non-gc object/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:57:3:{57:3-57:23}: warning: method '-onWelcome:' not found (return type defaults to 'id')   [self onWelcome:YES];   ^~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:71:3:{71:3-71:48}: warning: method '-loadUrl:useCache:reloadMenu:' not found (return type defaults to 'id')   [self loadUrl:url useCache:NO reloadMenu:YES];   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:76:3:{76:3-76:53}: warning: method '-loadUrl:useCache:reloadMenu:' not found (return type defaults to 'id')   [self loadUrl:url useCache:useCache reloadMenu:NO];   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:91:11:{91:11-91:30}: warning: method '-onWelcome:' not found (return type defaults to 'id')           [self onWelcome:NO];           ^~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:93:11:{93:11-93:29}: warning: method '-onError:' not found (return type defaults to 'id')           [self onError:YES];           ^~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:99:11:{99:11-99:38}: warning: method '-onErrorRefreshing:' not found (return type defaults to 'id')           [self onErrorRefreshing:NO];           ^~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:104:11:{104:11-104:33}: warning: method '-onRefreshing:' not found (return type defaults to 'id')           [self onRefreshing:NO];           ^~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:149:3:{149:3-149:26}: warning: method '-onRefreshing:' not found (return type defaults to 'id')   [self onRefreshing:YES];   ^~~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:156:3:{156:3-156:31}: warning: method '-onErrorRefreshing:' not found (return type defaults to 'id')   [self onErrorRefreshing:YES];   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:240:3:{240:3-240:23}: warning: method '-showUpdatedAt' not found (return type defaults to 'id')   [self showUpdatedAt];   ^~~~~~~~~~~~~~~~~~~~/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:268:7:{268:7-268:29}: warning: method '-loadNoticiaView' not found (return type defaults to 'id')       [self loadNoticiaView];             ^~~~~~~~~~~~~~~~~~~~~~25 warnings and 7 errors generated.32(4@35"Unknown property attribute 'strong'373765890#275#118#4(7@93"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h:14:373765890#181#94#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h373765626#14#0#14#0#0"0(7@90"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h:10:373765890#90#91#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h373765626#10#0#10#0#0"0(7@89"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:9:373765890#0#90#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#9#0#9#0#0"0(13@106"Unknown property attribute 'strong' in /Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765890#18446744073709551615#0#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#12#0#0#0"0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#473#161#4(7@93"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h:14:373765890#18446744073709551615#0#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h373765626#14#0#14#0#0"0(7@90"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h:10:373765890#18446744073709551615#0#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h373765626#10#0#10#0#0"0(7@89"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:9:373765890#18446744073709551615#0#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#9#0#9#0#0"0(13@148"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed in /Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765890#18446744073709551615#0#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#1#0#0#0"0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#703#153#4(7@93"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h:14:373765890#18446744073709551615#0#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/NoticiaViewController.h373765626#14#0#14#0#0"0(7@90"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h:10:373765890#18446744073709551615#0#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.h373765626#10#0#10#0#0"0(7@89"In file included from /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m:9:373765890#18446744073709551615#0#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#9#0#9#0#0"0(13@140"Default property attribute 'assign' not appropriate for non-gc object in /Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765890#18446744073709551615#0#0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#1#0#0#0"0(6@67"/Users/11/Documents/ymobipaper/ElDia/ElDia2/YoutubeViewController.h373765626#13#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#947#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#21#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#1118#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#21#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#1321#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#21#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#1464#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#23#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#1657#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#23#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#1882#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#23#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#2025#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#24#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#2218#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#24#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#2443#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#24#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#2586#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#25#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#2795#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#25#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#3036#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#25#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#3179#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#27#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#3379#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#27#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#3611#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#27#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(4@35"Unknown property attribute 'strong'373765890#3754#108#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#28#12#0#0#28"unknown property attribute *0(22@77"No 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed373765890#3942#151#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#28#1#0#0#77"no 'assign', 'retain', or 'copy' attribute is specified - 'assign' is assumed0(22@69"Default property attribute 'assign' not appropriate for non-gc object373765890#4162#143#0(6@57"/Users/11/Documents/ymobipaper/ElDia/ElDia2/AppDelegate.h373765626#28#1#0#0#69"default property attribute 'assign' not appropriate for non-gc object0(22@61"Method '-onWelcome:' not found (return type defaults to 'id')373765890#4305#155#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#57#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#57#3#57#23#22@79"Method '-loadUrl:useCache:reloadMenu:' not found (return type defaults to 'id')373765890#4509#173#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#71#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#71#3#71#48#22@79"Method '-loadUrl:useCache:reloadMenu:' not found (return type defaults to 'id')373765890#4781#173#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#76#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#76#3#76#53#22@61"Method '-onWelcome:' not found (return type defaults to 'id')373765890#5063#157#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#91#11#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#91#11#91#30#22@59"Method '-onError:' not found (return type defaults to 'id')373765890#5283#155#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#93#11#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#93#11#93#29#22@69"Method '-onErrorRefreshing:' not found (return type defaults to 'id')373765890#5499#165#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#99#11#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#99#11#99#38#22@64"Method '-onRefreshing:' not found (return type defaults to 'id')373765890#5743#163#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#104#11#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#104#11#104#33#22@64"Method '-onRefreshing:' not found (return type defaults to 'id')373765890#5975#161#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#149#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#149#3#149#26#22@69"Method '-onErrorRefreshing:' not found (return type defaults to 'id')373765890#6191#166#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#156#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#156#3#156#31#22@64"Method '-showUpdatedAt' not found (return type defaults to 'id')373765890#6422#161#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#240#3#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#240#3#240#23#22@66"Method '-loadNoticiaView' not found (return type defaults to 'id')373765890#6632#163#0(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#268#7#0#0#49"method * not found (return type defaults to 'id')1(6@64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m373765626#268#7#268#29#0#0#64"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m4443618960#2077"    cd /Users/11/Documents/ymobipaper/ElDia    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -pipe -fdiagnostics-print-source-range-info -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -Wuninitialized -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-generated-files.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-own-target-headers.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-all-target-headers.hmap -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-project-headers.hmap -F/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator -I/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/include -I/Users/11/Documents/ymobipaper/ElDia/libs -I/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/libxml2 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources/i386 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources -include /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-gieokndkoqxahdaonhvcrdjqmccm/ElDia-Prefix.pch -c /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController.m -o /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MainViewController.o1#
 
+CCompileC build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MenuClasificadosViewController.o /Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuClasificadosViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
 CCompileC build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MenuViewController.o /Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s373765890.926893
 e373765890.978659
@@ -5737,6 +6014,9 @@ xi386
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF07#2@63"Compile /Users/11/Documents/ymobipaper/ElDia/ElDia2/MobiImage.m373765898#373765898#0(0"0(0#0#55"/Users/11/Documents/ymobipaper/ElDia/ElDia2/MobiImage.m4443618960#2059"    cd /Users/11/Documents/ymobipaper/ElDia    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -pipe -fdiagnostics-print-source-range-info -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -Wuninitialized -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-generated-files.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-own-target-headers.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-all-target-headers.hmap -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-project-headers.hmap -F/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator -I/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/include -I/Users/11/Documents/ymobipaper/ElDia/libs -I/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/libxml2 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources/i386 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources -include /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-gieokndkoqxahdaonhvcrdjqmccm/ElDia-Prefix.pch -c /Users/11/Documents/ymobipaper/ElDia/ElDia2/MobiImage.m -o /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MobiImage.o0#
+
+CCompileC build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/MySHKConfigurator.o /Users/11/Documents/ymobipaper/ElDia/ElDia2/MySHKConfigurator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
 
 CCompileC build/ElDia.build/Debug-iphonesimulator/ElDia.build/Objects-normal/i386/NSMutableURLRequest+Parameters.o /Users/11/Documents/ymobipaper/ElDia/libs/ShareKit/Core/Helpers/OAuth/Categories/NSMutableURLRequest+Parameters.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s373765894.903384
@@ -7750,6 +8030,9 @@ lSLF07#2@40"CompileXIB ElDia2/MainViewController.xib373765900#373765902#0(1756"2
 CCompileXIB /Users/11/Documents/ymobipaper/ElDia/ElDia2/MainViewController_iPad.xib
 r0
 
+CCompileXIB /Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuClasificadosViewController.xib
+r0
+
 CCompileXIB /Users/11/Documents/ymobipaper/ElDia/ElDia2/MenuViewController.xib
 s373765902.417833
 e373765903.041110
@@ -7867,6 +8150,9 @@ CCpResource build/Debug-iphonesimulator/ElDia.app/Makefile.am libs/libxslt/Makef
 r0
 
 CCpResource build/Debug-iphonesimulator/ElDia.app/Makefile.in libs/libxslt/Makefile.in
+r0
+
+CCpResource build/Debug-iphonesimulator/ElDia.app/ShareKit.bundle /Users/11/Documents/ymobipaper/Submodules/ShareKit/build/Debug-iphonesimulator/ShareKit.bundle
 r0
 
 CCpResource build/Debug-iphonesimulator/ElDia.app/ajax_loader.gif ElDia2/img/ajax_loader.gif
@@ -8013,6 +8299,9 @@ r0
 CCpResource build/Debug-iphonesimulator/ElDia.app/menu_bg.png ElDia2/menu_bg.png
 r0
 
+CCpResource build/Debug-iphonesimulator/ElDia.app/menu_clasificados.html ElDia2/menu_clasificados.html
+r0
+
 CCpResource build/Debug-iphonesimulator/ElDia.app/menu_dummy.html ElDia2/menu_dummy.html
 r0
 
@@ -8112,6 +8401,9 @@ x/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/Info
 xElDia2/ElDia-Info.plist
 lSLF07#2@31"Process ElDia2/ElDia-Info.plist373765887#373765887#0(0"0(0#0#60"/Users/11/Documents/ymobipaper/ElDia/ElDia2/ElDia-Info.plist17241860864#474"    cd /Users/11/Documents/ymobipaper/ElDia    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility ElDia2/ElDia-Info.plist -genpkginfo /Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app/Info.plist0#
 
+CProcessPCH /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-atzpwkzuykthvveddibhgdjnywrc/ElDia-Prefix.pch.pth ElDia2/ElDia-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
 CProcessPCH /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-bgyhramkdcsadbdokfgyhkhtnepd/ElDia-Prefix.pch.pth ElDia2/ElDia-Prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
 s373765889.259321
 e373765889.287071
@@ -8140,6 +8432,9 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 oclang: warning: argument unused during compilation: '-fno-objc-arc'
 lSLF07#2@34"Precompile ElDia2/ElDia-Prefix.pch373765887#373765889#0(68"clang: warning: argument unused during compilation: '-fno-objc-arc'0(0#0#60"/Users/11/Documents/ymobipaper/ElDia/ElDia2/ElDia-Prefix.pch4443618960#1959"    cd /Users/11/Documents/ymobipaper/ElDia    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -pipe -fdiagnostics-print-source-range-info -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -Wuninitialized -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-generated-files.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-own-target-headers.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-all-target-headers.hmap -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-project-headers.hmap -F/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator -I/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/include -I/Users/11/Documents/ymobipaper/ElDia/libs -I/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/libxml2 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources/i386 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources -fno-objc-arc -c /Users/11/Documents/ymobipaper/ElDia/ElDia2/ElDia-Prefix.pch -o /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-bqbdvmmxnlzbofgbtymzbtumzkna/ElDia-Prefix.pch.pth0#
 
+CProcessPCH /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-cbmspzernwxwebdiojkzriyhkvnl/ElDia-Prefix.pch.pth ElDia2/ElDia-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
 CProcessPCH /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-eahcycpjwmcjlfclpyqogmeqegaz/ElDia-Prefix.pch.pth ElDia2/ElDia-Prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
 s373765889.025394
 e373765889.259152
@@ -8165,6 +8460,9 @@ xi386
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF07#2@34"Precompile ElDia2/ElDia-Prefix.pch373765887#373765889#0(0"0(0#0#60"/Users/11/Documents/ymobipaper/ElDia/ElDia2/ElDia-Prefix.pch4443618960#1945"    cd /Users/11/Documents/ymobipaper/ElDia    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -pipe -fdiagnostics-print-source-range-info -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -Wuninitialized -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-generated-files.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-own-target-headers.hmap -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-all-target-headers.hmap -iquote /Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/ElDia-project-headers.hmap -F/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator -I/Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/include -I/Users/11/Documents/ymobipaper/ElDia/libs -I/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/libxml2 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources/i386 -I/Users/11/Documents/ymobipaper/ElDia/build/ElDia.build/Debug-iphonesimulator/ElDia.build/DerivedSources -c /Users/11/Documents/ymobipaper/ElDia/ElDia2/ElDia-Prefix.pch -o /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-gieokndkoqxahdaonhvcrdjqmccm/ElDia-Prefix.pch.pth0#
+
+CProcessPCH /var/folders/85/qrsbpygs2t16mzpxxnqhyp4c0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/ElDia-Prefix-hlbdrlynmnbritfpgwssmkkxmgnc/ElDia-Prefix.pch.pth ElDia2/ElDia-Prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
 
 CTouch /Users/11/Documents/ymobipaper/ElDia/build/Debug-iphonesimulator/ElDia.app
 r0
