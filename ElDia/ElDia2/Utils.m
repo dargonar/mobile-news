@@ -181,8 +181,10 @@
 
 + (NSString *)stringByDecodingURLFormat:(NSString*)string
 {
+  NSLog(@" stringByDecodingURLFormat RAW: %@", string);
   NSString *result = [(NSString *)string stringByReplacingOccurrencesOfString:@"+" withString:@" "];
   result = [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  NSLog(@" stringByDecodingURLFormat: %@", result);
   return result;
 }
 

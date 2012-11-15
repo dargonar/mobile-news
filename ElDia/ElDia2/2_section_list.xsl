@@ -17,9 +17,11 @@
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>SECCIONES</title>
+        <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
       <body>
+        <div id="updated_msg" class="updated hidden">Actualizado hace 10 minutos</div>
         <xsl:call-template name="TituloSeccionONotisRelac">
           <xsl:with-param name="Titulo" select="rss/channel/item[1]/category"/>
         </xsl:call-template>

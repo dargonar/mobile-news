@@ -21,11 +21,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
+        <script type="text/javascript" src="js/functions.js"></script>
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>NOTICIA</title>
       </head>
       
-      <body>
+      <body onload="update_imagen_nota_abierta()">
         
         <xsl:call-template name="NotaAbierta">
           <xsl:with-param name="Node" select="rss/channel/item[1]"/>

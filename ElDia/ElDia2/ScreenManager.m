@@ -94,7 +94,7 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
     if (html != nil) {
       if(processNavigation)
       {
-        NSData *_xml=[cache get:key prefix:@""];
+        [self processNewsForGestureNavigation:key];
       }
       
       return html;
@@ -153,9 +153,34 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
   if(![cache put:key data:html prefix:prefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
-    
+  
+  if([url hasPrefix:@"section://"])
+    [cache put:key data:xml prefix:@"xml"];
+  
+  if(processNavigation)
+  {
+    [self processNewsForGestureNavigation:xml dummy:NO];
+  }
+  
   return html;
 }
+
+-(void)processNewsForGestureNavigation:(NSString*)key{
+  DiskCache *cache = [DiskCache defaultCache];
+  NSData *_xml=[cache get:key prefix:@"xml"];
+  [self processNewsForGestureNavigation:_xml dummy:NO];
+  
+}
+
+-(void)processNewsForGestureNavigation:(NSData*)xml dummy:(BOOL)dummy{
+  
+  XMLParser *parser = [[XMLParser alloc] init];
+  NSError *error;
+  [parser extractNewsUrls:xml error:&error];
+  
+  //  :(NSData**)xml_data error:(NSError **)error{
+}
+
 
 -(NSData *)downloadUrl:(NSString*)surl error:(NSError**)error {
   

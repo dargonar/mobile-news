@@ -87,6 +87,10 @@
 		CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE1C1FE316307C1A00A18162 /* Default@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */; };
 		CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */; };
+		CE2E304F165499EB00260455 /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2E304C165499EB00260455 /* iVersion.bundle */; };
+		CE2E3050165499EB00260455 /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E304E165499EB00260455 /* iVersion.m */; };
+		CE2E30741654A30B00260455 /* versions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E30731654A30B00260455 /* versions.plist */; };
+		CE2E30761654A87100260455 /* BugSense-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2E30751654A87000260455 /* BugSense-iOS.framework */; };
 		CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
 		CE5D11A6163E3158002E34F5 /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
 		CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A8163E38D0002E34F5 /* NewsManager.m */; };
@@ -608,6 +612,11 @@
 		CE1C1FE016307C1A00A18162 /* Default@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x_ipad.png"; sourceTree = "<group>"; };
 		CE1C1FE116307C1A00A18162 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x_ipad.png"; sourceTree = "<group>"; };
+		CE2E304C165499EB00260455 /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
+		CE2E304D165499EB00260455 /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
+		CE2E304E165499EB00260455 /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
+		CE2E30731654A30B00260455 /* versions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = versions.plist; sourceTree = "<group>"; };
+		CE2E30751654A87000260455 /* BugSense-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "BugSense-iOS.framework"; path = "frameworks/BugSense-iOS.framework"; sourceTree = "<group>"; };
 		CE5D11A4163E3157002E34F5 /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
 		CE5D11A5163E3158002E34F5 /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
 		CE5D11A7163E38CF002E34F5 /* NewsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsManager.h; sourceTree = "<group>"; };
@@ -827,6 +836,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2E30761654A87100260455 /* BugSense-iOS.framework in Frameworks */,
 				78E5B9441652E45800C7ACCD /* libz.1.2.5.dylib in Frameworks */,
 				78E5B93A1652D94500C7ACCD /* Twitter.framework in Frameworks */,
 				78E5B9371652D85200C7ACCD /* libShareKit.a in Frameworks */,
@@ -925,6 +935,7 @@
 		CE16EBF915ED5B8A00EC8210 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E304B165499EB00260455 /* iVersion */,
 				78E5B94D1652EB4700C7ACCD /* Reachability */,
 				CEC82FD9162F1FEF0085FF54 /* asi-http-request */,
 				CE78799015F7FA88009AA708 /* FGallery */,
@@ -1012,6 +1023,16 @@
 				CE16EC4315ED5B8A00EC8210 /* xsltwin32config.h.in */,
 			);
 			path = libxslt;
+			sourceTree = "<group>";
+		};
+		CE2E304B165499EB00260455 /* iVersion */ = {
+			isa = PBXGroup;
+			children = (
+				CE2E304C165499EB00260455 /* iVersion.bundle */,
+				CE2E304D165499EB00260455 /* iVersion.h */,
+				CE2E304E165499EB00260455 /* iVersion.m */,
+			);
+			path = iVersion;
 			sourceTree = "<group>";
 		};
 		CE78799015F7FA88009AA708 /* FGallery */ = {
@@ -1116,6 +1137,7 @@
 		CE7D338815EE889500935444 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E30731654A30B00260455 /* versions.plist */,
 				602230D2163B61B30091D201 /* js */,
 				CE83715916128D9800FC8269 /* css */,
 				CE83715B16128D9800FC8269 /* img */,
@@ -1203,6 +1225,7 @@
 		CE8E727915EBEDB8007E6F09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E30751654A87000260455 /* BugSense-iOS.framework */,
 				78E5B9431652E45800C7ACCD /* libz.1.2.5.dylib */,
 				78E5B9391652D94500C7ACCD /* Twitter.framework */,
 				CEC83054162F3F090085FF54 /* CFNetwork.framework */,
@@ -1882,6 +1905,8 @@
 				CEE5FBDC1642BE4200E5CA82 /* CladificadosViewController_iPad.xib in Resources */,
 				78E3F003164DAD5200C7EB24 /* menu_clasificados.html in Resources */,
 				78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */,
+				CE2E304F165499EB00260455 /* iVersion.bundle in Resources */,
+				CE2E30741654A30B00260455 /* versions.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1922,6 +1947,7 @@
 				CEEEC0C61623700A0037F329 /* YoutubeViewController.m in Sources */,
 				CEF4A19B161F6CBC0072EAB4 /* HCYoutubeParser.m in Sources */,
 				CEF0C7231616303A0064E9E2 /* iToast.m in Sources */,
+				CE2E3050165499EB00260455 /* iVersion.m in Sources */,
 				CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */,
 				CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */,
 				CEF3B58A15EC73F900FF35B1 /* PSWebView.m in Sources */,
@@ -2113,6 +2139,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
+					"\"$(SRCROOT)/frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";
@@ -2141,6 +2168,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
+					"\"$(SRCROOT)/frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";

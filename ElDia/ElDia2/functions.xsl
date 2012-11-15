@@ -69,7 +69,19 @@
           <xsl:with-param name="str" select="$Node/link"/>
         </xsl:call-template>
       </xsl:variable>
-      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$Node/title}&amp;header={$Node/description}" title="principal">
+      <xsl:variable name="encoded_title" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/title"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_description" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/description"/>
+        </xsl:call-template>
+      </xsl:variable>
+
+      
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="principal">
         <xsl:if test="not(not($Node/media:thumbnail))" >
           <xsl:call-template name="ImagenNoticiaDestacada">
             <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
@@ -135,8 +147,19 @@
         <xsl:with-param name="str" select="$Node/link"/>
       </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="encoded_title" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/title"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="encoded_description" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/description"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
     <li>
-      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$Node/title}&amp;header={$Node/description}" title="">
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="">
         <div class="titular {$full_width}">
           <div class="header">
             <label class="date">
@@ -214,7 +237,7 @@
       <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <img src="i_{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" />
+            <img src="i_{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
             <xsl:variable name="container_type">video_over_photo</xsl:variable>
             <xsl:call-template name="MediaLink">
               <xsl:with-param name="Node" select="$Node"/>
@@ -335,8 +358,14 @@
         <xsl:with-param name="str" select="$Item/@url"/>
       </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="encoded_title" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Item/."/>
+      </xsl:call-template>
+    </xsl:variable>
+    
     <li>
-      <a href="noticia://{$Item/@guid}?url={$encoded_url}&amp;title={$Item/.}&amp;header=" title="">
+      <a href="noticia://{$Item/@guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header=" title="">
         <div class="titular {$full_width}">
           <div class="header">
               <label class="date">

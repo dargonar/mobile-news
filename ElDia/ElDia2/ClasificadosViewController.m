@@ -142,7 +142,8 @@ BOOL mViewDidLoad=NO;
   NSString *uri = [url absoluteString];
   NSDate * date =[self.mScreenManager sectionDate:uri];
   // Clasificado es muy viejo, o no existe?
-  if( [self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  //if(![self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  if([self.mScreenManager clasificadosExists:uri])
   {
     NSError *err;
     NSData *data = [self.mScreenManager getClasificados:uri useCache:YES error:&err];
@@ -150,7 +151,9 @@ BOOL mViewDidLoad=NO;
       notLoadedData=data;
     else
       [self setHTML:data url:nil webView:self.mainUIWebView];
-    return;
+    
+    if(![self isOld:date])
+      return;
   }
   [self loadUrl:uri useCache:NO];
 }

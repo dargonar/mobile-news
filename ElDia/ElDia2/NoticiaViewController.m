@@ -17,6 +17,7 @@
 #import "SHK.h"
 #import "HCYoutubeParser.h"
 
+#import "GTMNSString+HTML.h"
  
 
 @implementation NoticiaViewController
@@ -183,7 +184,10 @@
   
 //  NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title] , [Utils stringByDecodingURLFormat:self.noticia_url]];
   
-  SHKItem *item = [SHKItem URL:url title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", [Utils stringByDecodingURLFormat:self.noticia_title]] contentType:SHKURLContentTypeWebpage];
+  NSLog(@" RAW title: %@", self.noticia_title );
+  SHKItem *item = [SHKItem URL:url
+                         title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", [Utils stringByDecodingURLFormat:self.noticia_title]]
+                          contentType:SHKURLContentTypeWebpage];
 
 	// Get the ShareKit action sheet
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
@@ -213,8 +217,8 @@
   //noticia://guid?url=_url_&title=_title_&header=_header_
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
-  URLParser *parser = [[URLParser alloc] initWithURLString:[url absoluteString]];
-  
+  URLParser *parser = [[URLParser alloc] initWithURLString:[[url absoluteString] gtm_stringByUnescapingFromHTML]];
+  NSLog(@" URL RAW %@",[[url absoluteString] gtm_stringByUnescapingFromHTML]);
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
   [self setNoticia_header:[parser valueForVariable:@"header"]];

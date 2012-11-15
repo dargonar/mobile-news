@@ -20,15 +20,9 @@
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>LISTADO PRINCIPAL</title>
         <script type="text/javascript" src="js/functions.js"></script>
-        <script type="text/javascript">
-          if( screen.width > 700 )
-            document.head.insertAdjacentHTML( 'beforeEnd', '<meta name="viewport" content="initial-scale=2.4, maximum-scale=2.4, user-scalable=no, width=320px" />' );
-          else
-            document.head.insertAdjacentHTML( 'beforeEnd', '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />' );
-        </script>
       </head>
       
-      <body>
+      <body onload="update_all_images()">
         <div id="updated_msg" class="updated hidden">Actualizado hace 10 minutos</div>
         <xsl:call-template name="DestacadaEnListadoPrincipal">
           <xsl:with-param name="Node" select="rss/channel/item[1]"/>

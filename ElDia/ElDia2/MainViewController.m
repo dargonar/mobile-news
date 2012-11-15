@@ -88,9 +88,15 @@ BOOL refreshingOn=NO;
   
 }
 
+-(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache{
+  [self onRefreshing:YES];
+  [self loadUrl:url useCache:useCache reloadMenu:NO];
+}
+
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
   [self loadUrl:url useCache:useCache reloadMenu:NO];
 }
+
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache reloadMenu:(BOOL)reloadMenu {
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -286,6 +292,7 @@ BOOL refreshingOn=NO;
     
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
+    NSLog(@" call load noticia: %@", [url absoluteString]);
     [self.myNoticiaViewController loadNoticia:url];
     
     return NO;

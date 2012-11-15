@@ -61,6 +61,7 @@ NSLock *lock;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_dummy" ofType:@"html"];
     NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
     [self setHTML:htmlData url:nil webView:self.webView];
+    [self loadUrl:YES];
   }
   
 }

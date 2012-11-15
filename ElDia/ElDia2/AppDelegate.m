@@ -14,8 +14,12 @@
 #import "MenuClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
-#import "MySHKConfigurator.h"
 
+#import "iVersion.h"
+//#import <BugSense-iOS.framework/BugSenseCrashController.h> //dSYM
+#import <BugSense-iOS/BugSenseController.h> //dSYM
+
+#import "MySHKConfigurator.h"
 #import "SHKConfiguration.h"
 #import "SHKFacebook.h"
 
@@ -26,8 +30,28 @@
 @synthesize navigationController;
 @synthesize download_queue;
 
+
++ (void)initialize
+{
+  [iVersion sharedInstance].ignoredVersion=nil;
+  
+  //set the bundle ID. normally you wouldn't need to do this
+  //as it is picked up automatically from your Info.plist file
+  //but we want to test with an app that's actually on the store
+  [iVersion sharedInstance].applicationBundleID = @"com.diventi.mobipaper";
+  //[iVersion sharedInstance].appStoreID = 578331790;
+  
+  //configure iVersion. These paths are optional - if you don't set
+  //them, iVersion will just get the release notes from iTunes directly (if your app is on the store)
+  [iVersion sharedInstance].remoteVersionsPlistURL = @"http://192.168.1.103:84/plists/versions.plist";
+  [iVersion sharedInstance].localVersionsPlistPath = @"versions.plist";
+  
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [BugSenseController sharedControllerWithBugSenseAPIKey:@"c80eb89d"];
+
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
   [[DiskCache defaultCache] configure:rootFolder cache_size:5];
 
@@ -129,7 +153,7 @@
 
 -(void)loadSectionNews:(NSURL*)url{
   self.mainViewController.currentUrl = [url absoluteString];
-  [self.mainViewController loadUrl:self.mainViewController.currentUrl useCache:YES];
+  [self.mainViewController loadUrlAndLoading:self.mainViewController.currentUrl useCache:YES];
 }
 
 -(void)loadClasificadosMenu:(NSURL*)url{

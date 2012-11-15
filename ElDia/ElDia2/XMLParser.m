@@ -92,18 +92,18 @@
   return ((GDataXMLElement*) [elements objectAtIndex:0]).stringValue;
 }
 
--(NSArray*)extractNewsUrls:(NSData**)xml_data error:(NSError **)error{
+-(NSArray*)extractNewsUrls:(NSData*)xml_data error:(NSError **)error{
   
   //noticia://{$Node/guid}?url={$Node/link}&amp;title={$Node/title}&amp;header={$Node/description}
   NSMutableArray *news_urls = [[NSMutableArray alloc] init];
   
-  if (xml_data == nil || *xml_data == nil) {
+  if (xml_data == nil ) {
     return [ErrorBuilder  build:error desc:@"invalid xml to parse" code:ERR_INVALID_XML];
   }
   
   //rss/channel/item/media:thumbnail@url
   
-  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:error];
+  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xml_data options:0 error:error];
   if (doc == nil)
     return nil;
   
@@ -138,8 +138,6 @@
     
   }
   
-  *xml_data = nil;
- 
   return [NSArray arrayWithArray:news_urls];
 }
 

@@ -49,8 +49,7 @@
 - (IBAction) btnRefreshClick: (id)param;
 - (IBAction) btnRefresh2Click: (id)param;
 
--(void)loadUrl:(NSString*)url useCache:(BOOL)useCache;
-
+-(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache;
 
 //~/Library/Application Support/iPhone Simulator/
 

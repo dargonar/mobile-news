@@ -29,6 +29,16 @@ function update_nota_abierta_image(img){
   el.src = 'url(i_' + img + ')';
 }
 
+function update_imagen_nota_abierta(){
+  var imgs = document.getElementsByClassName('imagenNotaAbierta');
+  for (var i = 0; i < imgs.length; ++i) {
+    var img = imgs[i];
+    var url = img.src;
+    img.src = '';
+    img.src = url;
+  }
+}
+
 var timeout_var=null;
 function show_actualizado(msg){
   clearTimeout(timeout_var);
