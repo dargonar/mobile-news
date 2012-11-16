@@ -10,6 +10,7 @@
 #import "RegexKitLite.h"
 #import "_Reachability.h"
 #import "GTMNSString+HTML.h"
+#import "NSString+HTML.h"
 
 @implementation Utils
 
@@ -70,8 +71,11 @@
   cleanedXML = [Utils validXMLString:cleanedXML ];
   
   if(unescaping_html_entities)
-    cleanedXML = [cleanedXML gtm_stringByUnescapingFromHTML];
-  
+  {
+    cleanedXML = [cleanedXML stringByDecodingHTMLEntities];
+    //gtm_stringByUnescapingFromHTML
+    //NSLog(@"    cleanedXML: [%@]", cleanedXML);
+  }
   NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
   //Limpiamos otras mierdas
   //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
@@ -181,10 +185,9 @@
 
 + (NSString *)stringByDecodingURLFormat:(NSString*)string
 {
-  NSLog(@" stringByDecodingURLFormat RAW: %@", string);
   NSString *result = [(NSString *)string stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-  result = [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-  NSLog(@" stringByDecodingURLFormat: %@", result);
+  //result = [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  result = [result stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
   return result;
 }
 

@@ -63,13 +63,15 @@
               </xsl:when>
               <xsl:otherwise>
                 <xsl:message terminate="no">Warning: string contains a character that is out of range! Substituting "?".</xsl:message>
-                <xsl:text>63</xsl:text>
+                <xsl:text>32</xsl:text><!--xsl:text>696969</xsl:text--><!-- xsl:text>63</xsl:text -->
               </xsl:otherwise>
             </xsl:choose>
           </xsl:variable>
-        <xsl:variable name="hex-digit1" select="substring($hex,floor($codepoint div 16) + 1,1)"/>
-        <xsl:variable name="hex-digit2" select="substring($hex,$codepoint mod 16 + 1,1)"/>
-        <xsl:value-of select="concat('%',$hex-digit1,$hex-digit2)"/>
+        <!--xsl:if test="$codepoint != '696969'"-->
+          <xsl:variable name="hex-digit1" select="substring($hex,floor($codepoint div 16) + 1,1)"/>
+          <xsl:variable name="hex-digit2" select="substring($hex,$codepoint mod 16 + 1,1)"/>
+          <xsl:value-of select="concat('%',$hex-digit1,$hex-digit2)"/>
+        <!--/xsl:if-->
         </xsl:otherwise>
       </xsl:choose>
       <xsl:if test="string-length($str) &gt; 1">

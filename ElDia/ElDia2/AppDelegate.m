@@ -34,6 +34,7 @@
 + (void)initialize
 {
   [iVersion sharedInstance].ignoredVersion=nil;
+  [iVersion sharedInstance].showOnFirstLaunch = NO;
   
   //set the bundle ID. normally you wouldn't need to do this
   //as it is picked up automatically from your Info.plist file

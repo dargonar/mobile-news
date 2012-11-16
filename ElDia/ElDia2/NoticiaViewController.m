@@ -180,14 +180,13 @@
   }
   
   
-  NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
-  
-//  NSString *text = [NSString stringWithFormat:@"%@ %@", [Utils stringByDecodingURLFormat:self.noticia_title] , [Utils stringByDecodingURLFormat:self.noticia_url]];
+  //NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
+  NSURL *url = [NSURL URLWithString:self.noticia_url];
   
   NSLog(@" RAW title: %@", self.noticia_title );
   SHKItem *item = [SHKItem URL:url
-                         title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", [Utils stringByDecodingURLFormat:self.noticia_title]]
-                          contentType:SHKURLContentTypeWebpage];
+                        title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title]
+                        contentType:SHKURLContentTypeWebpage];
 
 	// Get the ShareKit action sheet
 	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
@@ -217,8 +216,16 @@
   //noticia://guid?url=_url_&title=_title_&header=_header_
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
-  URLParser *parser = [[URLParser alloc] initWithURLString:[[url absoluteString] gtm_stringByUnescapingFromHTML]];
-  NSLog(@" URL RAW %@",[[url absoluteString] gtm_stringByUnescapingFromHTML]);
+  NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;//[[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+  
+  //NSData *dt = [urlString__ dataUsingEncoding:NSASCIIStringEncoding];
+  //NSString *urlString = [[NSString alloc] initWithData:dt encoding:NSUTF8StringEncoding];
+  
+  //NSLog(@" URL 1: %@", urlString__);
+  NSLog(@" URL 1: %@", urlString);
+  NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
+  
+  URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
   [self setNoticia_header:[parser valueForVariable:@"header"]];
