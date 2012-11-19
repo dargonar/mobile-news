@@ -49,18 +49,13 @@
   
 }
 
-int cache_size = 30;
+int cache_size = 2; //30;
 -(void)checkCacheSize{
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-    unsigned long long size = [[DiskCache defaultCache] size];
-    unsigned long long cache_size_bytes =cache_size*1024*1024;
-    if(size> cache_size_bytes)
-    {
-      NSLog(@" Curret Cache Size:  %lld bytes", size);
-      [[DiskCache defaultCache] purge];
-    }
+    [[DiskCache defaultCache] purge];
+    
   });
   return;
   
@@ -99,8 +94,6 @@ int cache_size = 30;
     NSLog(@"Error3: %@", err != nil ? [err description] : @"NIL");
   }
 
-  NSLog(@"Cache current size: %llu", [[DiskCache defaultCache] size]);
-  
   [[NSNotificationCenter defaultCenter] addObserver:self 
                                            selector:@selector(onDownloadImages:) 
                                                name:@"com.diventi.mobipaper.download_images" 

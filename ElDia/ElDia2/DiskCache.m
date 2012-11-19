@@ -139,7 +139,7 @@ BOOL      init_ok = NO;
   
   while (fileName = [filesEnumerator nextObject]) {
 
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"]) {
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] || [fileName hasPrefix:@"c_"]) {
       NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
       totalSize += [fileDictionary fileSize];
     }
@@ -153,9 +153,24 @@ BOOL      init_ok = NO;
 -(void) purge {
   if(!init_ok) return;
   
-  unsigned long long objective_size =(unsigned long long) max_size * 1024 * 1024 * 0.25 ;
-  NSLog(@" MaxSize:  %lld bytes", (unsigned long long)(max_size * 1024 * 1024));
-  NSLog(@" Size to purge:  %lld bytes", objective_size);
+  unsigned long long size = [self size];
+  unsigned long long max_size_bytes =max_size*1024*1024;
+  
+  if(size < max_size_bytes)
+  {
+    NSLog(@" Current Cache size: (%llu)bytes is OK", size);
+    return;
+  }
+  
+  NSLog(@" Curret Cache Size:  %lld bytes", size);
+  
+  unsigned long long removeBytes = size-(unsigned long long)(max_size_bytes*0.25);
+  [self shrinkCache:removeBytes];
+}
+
+-(void)shrinkCache:(unsigned long long)removeBytes {
+  
+  NSLog(@" Size to purge:  %lld bytes", removeBytes);
   
   NSFileManager *manager = [NSFileManager defaultManager];
   
@@ -211,14 +226,14 @@ BOOL      init_ok = NO;
   for(NSDictionary* file in sortedFiles) {
     NSString *fileName = (NSString *)[file objectForKey:@"path"];
     NSString *fileCreateDate = (NSString *)[file objectForKey:@"lastModDate"];
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] ) {
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] || [fileName hasPrefix:@"c_"]) {
       NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];
       totalDeletedSize += [fileDictionary fileSize];
       [manager removeItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];
       
       NSLog(@" Deleted File: %@ -- %@", fileName, fileCreateDate);
       
-      if(totalDeletedSize>=objective_size)
+      if(totalDeletedSize>=removeBytes)
         break;
     }
   }
