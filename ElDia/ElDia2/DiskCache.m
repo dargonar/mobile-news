@@ -139,7 +139,7 @@ BOOL      init_ok = NO;
   
   while (fileName = [filesEnumerator nextObject]) {
 
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] ) {
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"]) {
       NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
       totalSize += [fileDictionary fileSize];
     }
@@ -148,9 +148,82 @@ BOOL      init_ok = NO;
   return totalSize;
 }
 
--(void) purge {
-  if(!init_ok) return;  
-}
 
+
+-(void) purge {
+  if(!init_ok) return;
+  
+  unsigned long long objective_size =(unsigned long long) max_size * 1024 * 1024 * 0.25 ;
+  NSLog(@" MaxSize:  %lld bytes", (unsigned long long)(max_size * 1024 * 1024));
+  NSLog(@" Size to purge:  %lld bytes", objective_size);
+  
+  NSFileManager *manager = [NSFileManager defaultManager];
+  
+  NSString* expandedPath = [cache_folder stringByExpandingTildeInPath];
+  
+  NSError* error = nil;
+  NSArray* filesArray = [manager contentsOfDirectoryAtPath:expandedPath error:&error];
+  if(error != nil) {
+    NSLog(@"Error in reading files: %@", [error localizedDescription]);
+    return;
+  }
+  
+  // sort by creation date
+  NSMutableArray* filesAndProperties = [NSMutableArray arrayWithCapacity:[filesArray count]];
+  for(NSString* file in filesArray) {
+    NSString* filePath = [expandedPath stringByAppendingPathComponent:file];
+    NSDictionary* properties = [[NSFileManager defaultManager]
+                                attributesOfItemAtPath:filePath
+                                error:&error];
+    NSDate* modDate = [properties objectForKey:NSFileModificationDate];
+    
+    if(error == nil)
+    {
+      [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                     file, @"path",
+                                     modDate, @"lastModDate",
+                                     nil]];
+    }
+  }
+  
+  // sort using a block
+  // order inverted as we want latest date first
+  NSArray* sortedFiles = [filesAndProperties sortedArrayUsingComparator:
+                          ^(id path1, id path2)
+                          {
+                            // compare
+                            NSComparisonResult comp = [[path1 objectForKey:@"lastModDate"] compare:
+                                                       [path2 objectForKey:@"lastModDate"]];
+                            // invert ordering
+                            if (comp == NSOrderedDescending) {
+                              comp = NSOrderedAscending;
+                            }
+                            else if(comp == NSOrderedAscending){
+                              comp = NSOrderedDescending;
+                            }
+                            return -1*comp;
+                          }];
+  
+  //NSLog(@"SortedFiles: %@", sortedFiles);
+
+  unsigned long long totalDeletedSize = 0;
+  
+  for(NSDictionary* file in sortedFiles) {
+    NSString *fileName = (NSString *)[file objectForKey:@"path"];
+    NSString *fileCreateDate = (NSString *)[file objectForKey:@"lastModDate"];
+    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] ) {
+      NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];
+      totalDeletedSize += [fileDictionary fileSize];
+      [manager removeItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];
+      
+      NSLog(@" Deleted File: %@ -- %@", fileName, fileCreateDate);
+      
+      if(totalDeletedSize>=objective_size)
+        break;
+    }
+  }
+  
+  NSLog(@" Current Size :  %lld bytes", [self size]);
+}
 
 @end

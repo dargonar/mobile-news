@@ -44,8 +44,25 @@
   
   //configure iVersion. These paths are optional - if you don't set
   //them, iVersion will just get the release notes from iTunes directly (if your app is on the store)
-  [iVersion sharedInstance].remoteVersionsPlistURL = @"http://192.168.1.103:84/plists/versions.plist";
-  [iVersion sharedInstance].localVersionsPlistPath = @"versions.plist";
+//  [iVersion sharedInstance].remoteVersionsPlistURL = @"http://192.168.1.103:84/plists/versions.plist";
+//  [iVersion sharedInstance].localVersionsPlistPath = @"versions.plist";
+  
+}
+
+int cache_size = 30;
+-(void)checkCacheSize{
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+    unsigned long long size = [[DiskCache defaultCache] size];
+    unsigned long long cache_size_bytes =cache_size*1024*1024;
+    if(size> cache_size_bytes)
+    {
+      NSLog(@" Curret Cache Size:  %lld bytes", size);
+      [[DiskCache defaultCache] purge];
+    }
+  });
+  return;
   
 }
 
@@ -54,7 +71,7 @@
   [BugSenseController sharedControllerWithBugSenseAPIKey:@"c80eb89d"];
 
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-  [[DiskCache defaultCache] configure:rootFolder cache_size:5];
+  [[DiskCache defaultCache] configure:rootFolder cache_size:cache_size];
 
   NSString* cache_folder = [[DiskCache defaultCache] getFolder];
 
@@ -121,6 +138,8 @@
   //HACK SACAR ANTES DE RELEASE
   //  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
   //  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
+  
+  [self checkCacheSize];
   return YES;
 }
 

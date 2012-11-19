@@ -15,7 +15,6 @@
 #import "NewsManager.h"
 #import "XMLParser.h"
 
-
 @implementation MainViewController
 @synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
 
@@ -168,6 +167,7 @@ BOOL refreshingOn=NO;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
+  
   [self onRefreshing:YES];
   //ToDo
   NSString* url = [self.currentUrl copy];
