@@ -13,6 +13,9 @@
 		605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605C9A971639D6F100CBD806 /* ErrorBuilder.m */; };
 		780499371651DFD30062C457 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499361651DFD30062C457 /* CoreLocation.framework */; };
 		780499391651DFED0062C457 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499381651DFED0062C457 /* MapKit.framework */; };
+		78D656FB165ACD210063B8FF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D656FA165ACD210063B8FF /* Default.png */; };
+		78D656FC165AD84D0063B8FF /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */; };
+		78D656FD165AD84F0063B8FF /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */; };
 		78E3F003164DAD5200C7EB24 /* menu_clasificados.html in Resources */ = {isa = PBXBuildFile; fileRef = 78E3F002164DAD5200C7EB24 /* menu_clasificados.html */; };
 		78E5B9371652D85200C7ACCD /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E5B8F01652D7D900C7ACCD /* libShareKit.a */; };
 		78E5B9381652D89500C7ACCD /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
@@ -26,8 +29,6 @@
 		CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEC16262DEA00B9B3EA /* Icon@2x.png */; };
 		CE01DEEF16262E1300B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEEE16262E1300B9B3EA /* Icon_ipad.png */; };
 		CE01DEF116262E1800B9B3EA /* Icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF016262E1800B9B3EA /* Icon_ipad.png */; };
-		CE01DEF316262FB200B9B3EA /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */; };
-		CE01DEF516262FC400B9B3EA /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */; };
 		CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; };
 		CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
@@ -185,7 +186,6 @@
 		CED33B8B1655D78B00C69E6F /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = CED33B891655D78B00C69E6F /* NSString+XMLEntities.m */; };
 		CED33B8C1655D98E00C69E6F /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CED33B871655D78B00C69E6F /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED33B8D1655D99100C69E6F /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = CED33B891655D78B00C69E6F /* NSString+XMLEntities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CED344231630824F00C77C79 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CEECA6391613DDC1007C8918 /* Default.png */; };
 		CED344251630A4A300C77C79 /* menu_dummy.html in Resources */ = {isa = PBXBuildFile; fileRef = CED344241630A4A300C77C79 /* menu_dummy.html */; };
 		CED3442A1630AA5F00C77C79 /* loading_indicator_big_blue.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344261630AA5E00C77C79 /* loading_indicator_big_blue.gif */; };
 		CED3442B1630AA5F00C77C79 /* loading_indicator_big.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344271630AA5E00C77C79 /* loading_indicator_big.gif */; };
@@ -512,6 +512,7 @@
 		605C9A971639D6F100CBD806 /* ErrorBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorBuilder.m; sourceTree = "<group>"; };
 		780499361651DFD30062C457 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		780499381651DFED0062C457 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		78D656FA165ACD210063B8FF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		78E3F002164DAD5200C7EB24 /* menu_clasificados.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu_clasificados.html; sourceTree = "<group>"; };
 		78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		78E5B9391652D94500C7ACCD /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -1210,6 +1211,7 @@
 		CE8E726B15EBEDB8007E6F09 = {
 			isa = PBXGroup;
 			children = (
+				78D656FA165ACD210063B8FF /* Default.png */,
 				78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */,
 				CED2A5D91630F9F60027DFF1 /* Default@2x.png */,
 				CED2A5D71630F9EA0027DFF1 /* Icon.png */,
@@ -1870,7 +1872,9 @@
 				CE83718416128D9800FC8269 /* 3_new.xsl in Resources */,
 				CE83718516128D9800FC8269 /* 4_menu.xsl in Resources */,
 				CE83718616128D9800FC8269 /* functions.xsl in Resources */,
+				78D656FC165AD84D0063B8FF /* Default-Portrait@2x~ipad.png in Resources */,
 				CE83718716128D9800FC8269 /* 1_main_list.xsl in Resources */,
+				78D656FD165AD84F0063B8FF /* Default-Portrait~ipad.png in Resources */,
 				CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */,
 				CE83718816128D9800FC8269 /* 2_section_list.xsl in Resources */,
 				CEED58A81622130E007A7FDC /* br_prev_icon_24.png in Resources */,
@@ -1893,8 +1897,6 @@
 				CE01DEED16262DEA00B9B3EA /* Icon@2x.png in Resources */,
 				CE01DEEF16262E1300B9B3EA /* Icon_ipad.png in Resources */,
 				CE01DEF116262E1800B9B3EA /* Icon_ipad.png in Resources */,
-				CE01DEF316262FB200B9B3EA /* Default-Portrait~ipad.png in Resources */,
-				CE01DEF516262FC400B9B3EA /* Default-Portrait@2x~ipad.png in Resources */,
 				CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */,
 				CEF6A9EF162739720032052A /* MenuViewController_iPad.xib in Resources */,
 				CEF6A9F216273CB70032052A /* YoutubeViewController_iPad.xib in Resources */,
@@ -1904,7 +1906,6 @@
 				CEE4137F162E46E0007EEE76 /* egopv_photo_placeholder@2x.png in Resources */,
 				CEC82FD6162F12DF0085FF54 /* offline.png in Resources */,
 				CEC82FD7162F12DF0085FF54 /* offline@2x.png in Resources */,
-				CED344231630824F00C77C79 /* Default.png in Resources */,
 				CE1C1FE316307C1A00A18162 /* Default@2x_ipad.png in Resources */,
 				CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */,
 				CED344251630A4A300C77C79 /* menu_dummy.html in Resources */,
@@ -1927,6 +1928,7 @@
 				78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */,
 				CE2E304F165499EB00260455 /* iVersion.bundle in Resources */,
 				CE2E30741654A30B00260455 /* versions.plist in Resources */,
+				78D656FB165ACD210063B8FF /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2179,7 +2181,7 @@
 				);
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2208,7 +2210,7 @@
 				);
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
