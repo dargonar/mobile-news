@@ -972,6 +972,25 @@ div.one_fourth  { width: 22%; }
 /*--------------------------------------------
 15. Lists
 ---------------------------------------------*/
+ul.apps {
+	list-style: none;
+	float: left;
+}
+	ul.apps li {
+		float: left;
+		margin-right: 5px;
+	}
+		ul.apps li a {
+			width: 32px;
+			height: 32px;
+			display: block;
+			text-indent: -99999px;
+			background: url('/mvp_1/images/button_icons.png') no-repeat top left;
+		}
+		ul.apps li.iphone a 				{ background-position: 0px -2px; }
+		ul.apps li.android a 				{ background-position: 0px -36px; }	
+      
+
 ul.social {
 	list-style: none;
 	float: left;

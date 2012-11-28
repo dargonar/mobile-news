@@ -16,9 +16,13 @@ class Index(FrontendHandler):
   def get(self, **kwargs):
     #return self.render_response('mvp_1/_index.html', form=self.form, **kwargs)
     return self.render_response('mvp_1/_index.html', form=self.form, **kwargs)
-    
+  
   def demo(self, **kwargs):
     return self.render_response('mvp_1/_demo.html')
+    
+  def clientes(self, **kwargs):
+    kwargs['clientes']='clientes'
+    return self.render_response('mvp_1/_index.html', form=self.form, **kwargs)
 
   def post(self, **kwargs):
     self.request.charset  = 'utf-8'
