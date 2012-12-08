@@ -7,6 +7,12 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	
+  <meta name="description" content="En DiariosMóviles creamos la aplicación de su diario para las plataformas iPhone, Android, Blackberry y Nokia." />
+  
+  <meta name="keywords" content="diario, noticia, aplicación, nativa, iPhone, Android, BlackBerry, Nokia, diarios , moviles, mobile, plataforma, comscore, e-planning" />
+    
+
+    
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="/mvp_1/stylesheets/base.css" />
 
@@ -34,17 +40,13 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="/mvp_1/images/apple-touch-icon-114x114.html">
 	<script type="text/javascript">
     
+    var go_to = 'home';
     {% if flash %}
-    /*  $(document).ready(function() {
-         FluidNav.goTo('contact'); 
-      });*/
-      var go_to = 'contact';
-    {% else %}
-      var go_to = 'home';
+      go_to = 'contacto';
     {% endif %}
     
-    {% if clientes %}
-      go_to = 'clientes';
+    {% if go_to %}
+      go_to = '{{ go_to }}';
     {% endif %}
   </script>
   <script type="text/javascript">      
@@ -86,11 +88,11 @@
         <nav>
           <ul>
             <li><a href="#home">Inicio</a></li>
-            <li><a href="#what" title="¿Qué es DiariosMóviles&copy;?">¿Qué es DiariosMóviles&copy;?</a></li>
+            <li><a href="/que_hacemos" title="¿Qué es DiariosMóviles&copy;?">¿Qué es DiariosMóviles&copy;?</a></li>
             <!-- li><a href="#updates" title="Características del servicio">Características</a></li -->
-            <li><a href="#faq" title="Preguntas frecuentes, precios">FAQ</a></li>
-            <li><a href="#clientes">Clientes</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="/faq" title="Preguntas frecuentes, precios">FAQ</a></li>
+            <li><a href="/clientes">Clientes</a></li>
+            <li><a href="/contacto">Contacto</a></li>
             
             <!--li><a href="#screenshots">Pantallas</a></li-->
             <!--li><a href="#press">Press</a></li-->
@@ -257,7 +259,7 @@
           <!-- End Team -->
             
           <!-- Start Features -->
-          <div id="what" class="page">
+          <div id="que_hacemos" class="page">
             
             <div class="about_us content_box">
               <div class="one_half">
@@ -509,7 +511,7 @@
           <!-- End Press -->
           
           <!-- Start Start Contact -->
-          <div id="contact" class="page">	
+          <div id="contacto" class="page">	
             <h1>Contacto</h1>
             <div class="contact content_box">
               
@@ -526,7 +528,7 @@
           
           <!-- Start Styles -->
           <div id="faq" class="page">
-            <h1>Preguntas frecuentes</h1>
+            <h1>Preguntas frecuentes <small>- FAQ</small></h1>
             <div class="toggle_list">
               <ul>
                 <li class="opened"> <!-- Use class "opened" to expand a toggle on page load -->
@@ -558,7 +560,7 @@
                     <p> DiariosMóviles se nutre de las noticias, clasificados y publicidad de la web de su diario, sin requerir nuevos desarrollos o inversiones en tecnología.</p>
                     <p>Nosotros nos encargamos de publicar las aplicaciones en las tiendas para iPhone, Android y Blackberry. </p>
                     <br/>
-                    <p>Puede <a href="#contact">solicitar un agente</a>, y nos comunicaremos a la brevedad.</p>
+                    <p>Puede <a href="/contacto">solicitar un agente</a>, y nos comunicaremos a la brevedad.</p>
                     
                   </div>
                 </li>

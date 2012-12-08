@@ -12,7 +12,7 @@ var FluidNav = {
 	},
 	goTo: function(page) {
 		var next_page = $("#"+page);
-		var nav_item = $('nav ul li a[href=#'+page+']')
+		var nav_item = $('nav ul li a[href$='+page+']'); //'nav ul li a[href=#'+page+'], 
 		$("nav ul li").removeClass("current");
 		nav_item.parent().addClass("current");
 		FluidNav.resizePage((next_page.height() + 40), true, function() {
@@ -25,7 +25,7 @@ var FluidNav = {
 		
 	},
 	centerArrow: function(nav_item, animate) {
-		var left_margin = (nav_item.parent().position().left + nav_item.parent().width()) + 24 - (nav_item.parent().width() / 2);
+    var left_margin = (nav_item.parent().position().left + nav_item.parent().width()) + 24 - (nav_item.parent().width() / 2);
 		if(animate != false) {
 			$("nav .arrow").animate({
 				left: left_margin - 8

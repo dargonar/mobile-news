@@ -20,8 +20,10 @@ class Index(FrontendHandler):
   def demo(self, **kwargs):
     return self.render_response('mvp_1/_demo.html')
     
-  def clientes(self, **kwargs):
-    kwargs['clientes']='clientes'
+  def slug(self, **kwargs):
+    if kwargs['slug'] not in ['que_hacemos', 'faq', 'clientes' , 'contacto']:
+      return self.redirect_to('mvp/index')
+    kwargs['go_to']=kwargs['slug']
     return self.render_response('mvp_1/_index.html', form=self.form, **kwargs)
 
   def post(self, **kwargs):
