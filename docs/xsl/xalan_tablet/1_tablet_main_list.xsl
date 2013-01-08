@@ -13,7 +13,7 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" href="css/layout.css" />
+        <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <title>LISTADO PRINCIPAL</title>
         <meta name="viewport" content="width=device-width,user-scalable=no" />
         <script type="text/javascript" src="js/functions.js"></script>
