@@ -1,0 +1,473 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin:0;
+	padding:0;
+	color:#333;
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+img { border:none; margin:0;}
+
+/*
+p { font-size:12px; line-height:18px; margin:0 0 10px 0;}
+h1 { font-size:30px; line-height:32px; margin:0 0 10px 0;}
+h2 { font-size:24px; line-height:26px; margin:0 0 10px 0;}
+*/
+
+p { font-size:1em; line-height:1.5em; margin:0 0 10px 0;}
+h1 { font-size:2.5em; line-height:1.1em; margin:0 0 10px 0;}
+h2 { font-size:2em; line-height:1.1em; margin:0 0 10px 0;}
+
+.fecha { color:#666;}
+.seccion { color:#0066cc;}
+.subtitulo { font-weight:bold;}
+.separador { clear:both; height:20px;}
+/*.separador { clear:both; height:1.667em;}*/
+
+.video { background-image:url(../img/ico_video.png); width:18px; height:18px; display:block;}
+
+
+/********************************************
+INDEX
+********************************************/
+#index {
+	width:960px;
+}
+
+#index a{text-decoration:none;color:inherit;}
+
+/* NOTA PRINCIPAL */
+#index .nota_principal {
+	background-color:#fff;
+}
+
+#index .nota_principal .info {
+	background-color:#333;
+	width:410px;
+	height:500px;
+	float:left;
+}
+
+#index .nota_principal .info h1 {
+	margin:20px 0 20px 0;
+}
+
+#index .nota_principal .info .encabezado {
+	color:#fff;
+	margin:30px;
+}
+
+#index .nota_principal .imagen {
+	background-color:#999;
+	width:550px;
+	height:500px;
+	float:left;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+
+/* NOTA SECUNDARIA */
+#index .nota_secundaria {
+	width:465px;
+	float:left;
+	margin-right:30px;
+  height:359px;
+  overflow:hidden;
+  position:relative;
+  }
+
+#index .nota_secundaria h1{
+  height: 66px !important; overflow-y:hidden;
+  }
+
+#index .nota_secundaria .imagen {
+	background-color:#999;
+	width:465px;
+	height:270px;
+  
+  background-size: cover;
+  background-position: center;
+  display: block;
+  position:relative;
+}
+
+/* NOTA TERCIARIA */
+#index .nota_terciaria {
+	width:300px;
+	float:left;
+	margin-right:30px;
+  height: 303px !important;
+  overflow:hidden;
+  position:relative;
+}
+
+#index .nota_terciaria h2 {height: 78px; overflow:hidden;}
+#index .nota_terciaria .info {
+	background-color:#fff;
+	width:300px;
+	height:200px;
+}
+
+#index .nota_terciaria .imagen {
+	background-color:#999;
+	width:300px;
+	height:200px;
+  background-size: cover;
+  background-position: center;
+  
+}
+
+/* NOTA ABIERTA */
+#index .nota_abierta {
+	background-color:#fff;
+}
+
+#index .nota_abierta .info {
+	background-color:#333;
+	width:410px;
+	height:500px;
+	float:left;
+}
+
+#index .nota_abierta .info h1 {
+	margin:20px 0 20px 0;
+}
+
+#index .nota_abierta .info .encabezado {
+	color:#fff;
+	margin:30px;
+}
+
+#index .nota_abierta .imagen {
+	background-color:#999;
+	width:550px;
+	height:500px;
+	float:left;
+  
+  background-size: cover;
+  background-position: center;
+  position:relative;
+}
+
+#index .nota_abierta .imagen-full {
+	background-color:#999;
+	width:960px;
+	height:600px;
+  background-size: cover;
+  background-position: center;
+}
+
+#index .nota_abierta .columna {
+	width:465px;
+	float:left;
+	margin-right:30px;
+}
+
+#index .last {
+	float:left;
+	margin-right:0 !important;
+}
+
+/* NOTA ABIERTA - MENU SECCIONES */
+#index .menu , body.menu{
+	background-color:#323232;
+}
+
+#index .menu ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+#index .menu li {
+	width:192px;
+	float:left;
+  
+  height: 215px;
+  overflow: hidden;
+}
+
+#index .menu li a {
+	display:block;
+  height: 215px;
+	font-size:12px;
+	color:#fff;
+	text-decoration:none;
+	background-color:#323232;
+	padding-top:1px;
+}
+
+#index .menu li a:hover {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#index .menu li a:active {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#index .menu li .selected {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#index .menu .seccion {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#646464', endColorstr='#323232'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#323232)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #646464, #323232); /* for firefox 3.6+ */
+	border-bottom:#252525 solid 1px;
+	font-weight:bold;
+	font-size:12px;
+	color:#fff;
+	padding:10px;
+}
+
+#index .menu .imagen {
+	background-color:#999;
+	width:172px;
+	height:115px;
+	margin:10px;
+  position:relative;
+}
+
+#index .menu .info {
+	padding:5px 10px 5px 10px;
+}
+
+
+/********************************************
+LANDSCAPE
+********************************************/
+#landscape {
+	width:600px;
+}
+
+/* NOTA ABIERTA */
+#landscape .nota_abierta .imagen {
+	background-color:#999;
+	width:600px;
+	height:300px;
+  
+  background-size: cover;
+  background-position: center;
+  position:relative;
+}
+
+#landscape .nota_abierta .info {
+	background-color:#fff;
+}
+
+/* NOTA ABIERTA - MENU SECCIONES */
+#landscape .menu {
+	background-color:#323232;
+}
+
+#landscape .menu ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+#landscape .menu li {
+	width:200px;
+	float:left;
+  height: 215px;
+  overflow:hidden;
+  background-color:#323232;
+}
+
+#landscape .menu li a {
+	display:block;
+	font-size:12px;
+	color:#fff;
+	text-decoration:none;
+	padding-top:1px;
+  height: 215px;
+}
+
+#landscape .menu li a:hover {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#landscape .menu li a:active {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#landscape .menu li .selected {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#landscape .menu .seccion {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#646464', endColorstr='#323232'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#323232)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #646464, #323232); /* for firefox 3.6+ */
+	border-bottom:#252525 solid 1px;
+	font-weight:bold;
+	font-size:12px;
+	color:#fff;
+	padding:10px;
+}
+
+#landscape .menu .imagen {
+	background-color:#999;
+	width:180px;
+	height:120px;
+	margin:10px;
+}
+
+#landscape .menu .info {
+	padding:5px 10px 5px 10px;
+}
+
+#landscape .menu .info p {
+  font-size:1.2em;
+  line-height:1.2em;
+  margin: 0;
+}
+
+#landscape .menu .subheader, #index .menu .subheader{
+  padding:5px 10px 5px 10px;
+}
+#landscape .menu .subheader p , #index .menu .subheader p {
+  font-size:1em;
+  line-height:1.1em;
+  margin: 0;
+}
+/********************************************
+MENU PRINCIPAL
+********************************************/
+#menu {
+	width:320px;
+}
+
+#menu ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+#menu li {
+	background-color:#323232;
+}
+
+#menu li a {
+	display:block;
+	font-size:18px;
+	color:#fff;
+	text-decoration:none;
+	padding:8px 20px 9px 20px;
+	border-top:#4d4d4d solid 1px;
+	border-bottom:#252525 solid 1px;
+}
+
+#menu li a:hover {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#menu li a:active {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#menu li.selected {
+	text-decoration:none;
+	background-color:#0066cc;
+}
+
+#menu li a.seccion {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#646464', endColorstr='#323232'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#323232)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #646464, #323232); /* for firefox 3.6+ */
+	border-bottom:#252525 solid 1px;
+	font-size:18px;
+	color:#fff;	
+}
+
+#menu li a.seccion:hover {
+	text-decoration:none;
+	background:#0066cc;
+}
+
+#menu li a.seccion:active {
+	text-decoration:none;
+	background:#0066cc;
+}
+
+#menu .seccion {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#646464', endColorstr='#323232'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#323232)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #646464, #323232); /* for firefox 3.6+ */
+	border-bottom:#252525 solid 1px;
+	font-size:18px;
+	color:#fff;
+	padding:8px 20px 9px 20px;
+}
+
+/* http://welcome.totheinter.net/columnizer-jquery-plugin/ */
+.two_columns {
+	-moz-column-count: 2;
+	-moz-column-gap: 20px;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 20px;
+	column-count: 2;
+	column-gap: 20px;
+}
+
+/* * STOLEN FROM SMARTPHONES * */
+
+div.main_img_container {
+  display:block;
+  width:100%;
+  height:auto;
+  position:relative;
+}
+.media_link.video_over_photo {
+  position:absolute;bottom:0px;
+  margin-left:-8px !important;
+  height:30px;
+}
+.media_link.video_over_photo.plus {
+  margin-left:-18px !important;
+}
+
+.media_link.no_photo{
+  margin-top:8px;
+  height:30px;
+}
+.media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
+  width:50px; /*width:30px;*/
+	background-color:#0066cc;
+  height:30px;
+  /*margin-right:8px;*/
+	display: inline-block;
+  margin-left:8px;
+  background-repeat:no-repeat;
+  background-position:center center;
+}
+.media_link .ico_video {
+  /*background-image:url(../img/../img/ico_video.png);*/
+  background-image:url(../img/ico_video.png);
+}
+
+.media_link .ico_audio {
+	/*background-image:url(../img/../img/ico_audio.png);*/
+	background-image:url(../img/ico_audio.png);
+}
+
+.media_link .ico_galeria {
+  /*background-image:url(../img/../img/ico_galeria.png);*/
+  background-image:url(../img/ico_galeria.png);
+}
+
+.menu.portrait_news_list_container {height: 246px;overflow-y: hidden;width: 960px;}
+  ul.portrait_news_list{height: 210px;width: auto; min-width:100%;}
+  ul.portrait_news_list li (float:left;)

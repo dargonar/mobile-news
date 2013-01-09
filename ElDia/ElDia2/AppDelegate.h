@@ -27,10 +27,9 @@
 @property (strong, nonatomic) UINavigationController * navigationController;
 @property (strong, nonatomic) NSOperationQueue *download_queue;;
 
-
 - (void)showSideMenu;
 - (void)hideSideMenu;
--(void)hideSideMenu2;
+- (void)hideSideMenu2;
 //- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url;
 - (void)requestDone:(ASIHTTPRequest *)request;
 - (void)requestWentWrong:(ASIHTTPRequest *)request;
@@ -38,4 +37,8 @@
 - (void)loadSectionNews:(NSURL*)url;
 - (void)loadMenu:(BOOL)useCache;
 - (void)loadClasificadosMenu:(NSURL*)url;
+
+- (BOOL)isiPad;
+- (BOOL)isLandscape;
+
 @end

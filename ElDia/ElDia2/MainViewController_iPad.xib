@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -636,49 +636,6 @@
 						<string key="objectName">header_img</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="160539963"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="772266459"/>
-							<reference ref="377522639"/>
-							<reference ref="1005325042"/>
-							<reference ref="565885365"/>
-							<reference ref="766709082"/>
-						</array>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">error_view</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">38</int>
-						<reference key="object" ref="772266459"/>
-						<reference key="parent" ref="160539963"/>
-						<string key="objectName">warning_image</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">37</int>
-						<reference key="object" ref="377522639"/>
-						<reference key="parent" ref="160539963"/>
-						<string key="objectName">error_lbl</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">36</int>
-						<reference key="object" ref="1005325042"/>
-						<reference key="parent" ref="160539963"/>
-						<string key="objectName">refresh_loading_indicator2</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="565885365"/>
-						<reference key="parent" ref="160539963"/>
-						<string key="objectName">refresh_btn2</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">34</int>
-						<reference key="object" ref="766709082"/>
-						<reference key="parent" ref="160539963"/>
-						<string key="objectName">logo_imgvw</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
 						<reference key="object" ref="432913398"/>
 						<array class="NSMutableArray" key="children">
@@ -721,6 +678,49 @@
 						<reference key="object" ref="430501063"/>
 						<reference key="parent" ref="365110996"/>
 						<string key="objectName">offline_imgvw</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="160539963"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="772266459"/>
+							<reference ref="377522639"/>
+							<reference ref="1005325042"/>
+							<reference ref="565885365"/>
+							<reference ref="766709082"/>
+						</array>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">error_view</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="766709082"/>
+						<reference key="parent" ref="160539963"/>
+						<string key="objectName">logo_imgvw</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="565885365"/>
+						<reference key="parent" ref="160539963"/>
+						<string key="objectName">refresh_btn2</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="1005325042"/>
+						<reference key="parent" ref="160539963"/>
+						<string key="objectName">refresh_loading_indicator2</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">37</int>
+						<reference key="object" ref="377522639"/>
+						<reference key="parent" ref="160539963"/>
+						<string key="objectName">error_lbl</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">38</int>
+						<reference key="object" ref="772266459"/>
+						<reference key="parent" ref="160539963"/>
+						<string key="objectName">warning_image</string>
 					</object>
 				</array>
 			</object>
@@ -807,6 +807,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnOptions">UIButton</string>
 						<string key="btnRefresh2">UIButton</string>
 						<string key="btnRefreshClick">UIButton</string>
 						<string key="error_view">UIView</string>
@@ -820,6 +821,10 @@
 						<string key="welcome_view">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnOptions">
+							<string key="name">btnOptions</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="btnRefresh2">
 							<string key="name">btnRefresh2</string>
 							<string key="candidateClassName">UIButton</string>
@@ -885,6 +890,6 @@
 			<string key="refresh.png">{36, 36}</string>
 			<string key="warning.hueco.256x256.png">{247, 217}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

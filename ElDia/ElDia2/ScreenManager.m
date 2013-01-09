@@ -15,12 +15,23 @@
 #import "MobiImage.h"
 #import "ErrorBuilder.h"
 #import "Utils.h"
+#import "AppDelegate.h"
 
 NSString * const MAIN_STYLESHEET          = @"1_main_list.xsl";
 NSString * const NOTICIA_STYLESHEET       = @"3_new.xsl";
 NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
 NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
+
+NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
+NSString * const iPad_SECTION_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_seccion_portrait.xsl";
+NSString * const iPad_SECTION_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_seccion_landscape.xsl";
+NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";
+NSString * const iPad_NOTICIA_LS_STYLESHEET           = @"3_tablet_new_landscape.xsl";
+NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_portrait.xsl";
+NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_landscape.xsl";
+NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones";
+NSString * const iPad_CLASIFICADOS_STYLESHEET         = @".xsl";
 
 NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
@@ -29,6 +40,16 @@ NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.
 NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
 
 @implementation ScreenManager
+
+BOOL mIsIpad=NO;
+
+-(id) init{
+  self = [super init];
+  if(self != nil){
+    mIsIpad = [app_delegate isiPad];
+  }
+  return self;
+}
 
 -(NSDate*) sectionDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
@@ -234,6 +255,38 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
   }
   return nil;
 }
+
+-(NSString*)getStyleSheetiPad:(NSString*)url {
+  
+  if( [url hasPrefix:@"list://"] ) {
+    NSString* sheet = iPad_MAIN_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  if( [url hasPrefix:@"noticia://" ] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_NOTICIA_LS_STYLESHEET:iPad_NOTICIA_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  
+  if( [url hasPrefix:@"clasificados://"] ) {
+    NSString* sheet = iPad_CLASIFICADOS_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  if( [url hasPrefix:@"section://"] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+    
+  }
+  
+  if( [url hasPrefix:@"menu://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_MENU_STYLESHEET];
+  }
+  
+  return nil;
+}
+
 
 -(NSURL*) getXmlHttpUrl:(NSString*)url {
   
