@@ -24,6 +24,7 @@ NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
+NSString * const iPad_SECTION_STYLESHEET                 = @"1_tablet_section_list.xsl";
 NSString * const iPad_SECTION_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_seccion_portrait.xsl";
 NSString * const iPad_SECTION_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_seccion_landscape.xsl";
 NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";
@@ -41,12 +42,12 @@ NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.a
 
 @implementation ScreenManager
 
-BOOL mIsIpad=NO;
+BOOL isIpad=NO;
 
 -(id) init{
   self = [super init];
   if(self != nil){
-    mIsIpad = [app_delegate isiPad];
+    isIpad = [app_delegate isiPad];
   }
   return self;
 }
@@ -78,7 +79,16 @@ BOOL mIsIpad=NO;
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
 
+  if(isIpad)
+    if ([app_delegate isLandscape]) {
+      [prefix stringByAppendingPathComponent:@"_l"];
+    }
   return [cache exists:key prefix:prefix];
+}
+
+// para iPad
+-(BOOL) sectionMenuExists:(NSString*)url {
+  return [self screenExists:url prefix:@"sm"];
 }
 
 /***********************************************************************************/
@@ -93,6 +103,10 @@ BOOL mIsIpad=NO;
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES];
+}
+
+-(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:YES];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -232,7 +246,12 @@ BOOL mIsIpad=NO;
 
 
 -(NSString*)getStyleSheet:(NSString*)url {
-
+  
+  if(isIpad)
+  {
+    return [self getStyleSheetiPad:url];
+  }
+  
   if( [url hasPrefix:@"section://main"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MAIN_STYLESHEET];
   }
@@ -258,9 +277,15 @@ BOOL mIsIpad=NO;
 
 -(NSString*)getStyleSheetiPad:(NSString*)url {
   
-  if( [url hasPrefix:@"list://"] ) {
+  if( [url hasPrefix:@"section://main"] ) {
     NSString* sheet = iPad_MAIN_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  if( [url hasPrefix:@"section://"] ) {
+    NSString* sheet = iPad_SECTION_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+    
   }
   
   if( [url hasPrefix:@"noticia://" ] ) {
@@ -274,7 +299,7 @@ BOOL mIsIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
-  if( [url hasPrefix:@"section://"] ) {
+  if( [url hasPrefix:@"section_menu://"] ) {
     NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     

@@ -23,6 +23,7 @@
 		78526B47169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */; };
 		78526B48169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */; };
 		78526B49169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */; };
+		788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
 		78D656FB165ACD210063B8FF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D656FA165ACD210063B8FF /* Default.png */; };
 		78D656FC165AD84D0063B8FF /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */; };
 		78D656FD165AD84F0063B8FF /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */; };
@@ -532,6 +533,7 @@
 		78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_portrait_2.xsl; sourceTree = "<group>"; };
 		78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_portrait.xsl; sourceTree = "<group>"; };
 		78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 4_tablet_menu_secciones.xsl; sourceTree = "<group>"; };
+		788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_section_list.xsl; sourceTree = "<group>"; };
 		78D656FA165ACD210063B8FF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		78E3F002164DAD5200C7EB24 /* menu_clasificados.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu_clasificados.html; sourceTree = "<group>"; };
 		78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
@@ -928,8 +930,9 @@
 			isa = PBXGroup;
 			children = (
 				78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */,
-				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
+				788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */,
 				78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */,
+				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
 				78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */,
 				78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */,
 				78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */,
@@ -1868,6 +1871,7 @@
 			files = (
 				78E5B9381652D89500C7ACCD /* ShareKit.bundle in Resources */,
 				78526B41169CD7BA00C96AD8 /* 1_tablet_main_list.xsl in Resources */,
+				788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */,
 				78526B42169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl in Resources */,
 				78526B43169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl in Resources */,
 				78526B44169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl in Resources */,
@@ -2230,14 +2234,14 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2259,14 +2263,14 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = ElDia;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};

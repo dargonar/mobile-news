@@ -22,6 +22,7 @@ BOOL splashOn=NO;
 BOOL errorOn=NO;
 BOOL refreshingOn=NO;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
