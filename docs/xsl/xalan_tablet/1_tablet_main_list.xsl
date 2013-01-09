@@ -22,18 +22,30 @@
       <body onload="update_all_images()">
         <div id="updated_msg" class="updated hidden">Actualizado hace 1 segundo</div>
         <div id="index">
-          <xsl:call-template name="tablet_index_portrait_main">
-            <xsl:with-param name="Node" select="rss/channel/item[1]"/>
-          </xsl:call-template>
           
-          <xsl:call-template name="tablet_index_portrait_secondary">
-            <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 4]"/>
-          </xsl:call-template>
+          <xsl:if test="not(rss/channel/item[1]/media:thumbnail)" >
+            <xsl:call-template name="tablet_index_portrait_secondary">
+              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 0 and position() &lt; 3]"/>
+            </xsl:call-template>
+            
+            <xsl:call-template name="tablet_index_portrait_terciary">
+              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 2]"/>
+            </xsl:call-template>
+          </xsl:if>
           
-          <xsl:call-template name="tablet_index_portrait_terciary">
-            <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 3]"/>
-          </xsl:call-template>
-          
+          <xsl:if test="NOT(not(rss/channel/item[1]/media:thumbnail))" >
+            <xsl:call-template name="tablet_index_portrait_main">
+              <xsl:with-param name="Node" select="rss/channel/item[1]"/>
+            </xsl:call-template>
+            
+            <xsl:call-template name="tablet_index_portrait_secondary">
+              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 4]"/>
+            </xsl:call-template>
+            
+            <xsl:call-template name="tablet_index_portrait_terciary">
+              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 3]"/>
+            </xsl:call-template>
+          </xsl:if>
         </div>
       </body>
     </html>
