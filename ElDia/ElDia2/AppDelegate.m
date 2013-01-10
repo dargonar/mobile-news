@@ -61,6 +61,23 @@ int cache_size = 2; //30;
   
 }
 
+-(BOOL)isLandscape{
+  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
+  
+  return UIDeviceOrientationIsLandscape(orientation);// ? @"Landscape" : @"Portrait";
+
+}
+
+-(BOOL)isiPad{
+  
+#ifdef UI_USER_INTERFACE_IDIOM
+  return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+#else
+  return NO;
+#endif
+  //return ([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [BugSenseController sharedControllerWithBugSenseAPIKey:@"c80eb89d"];
@@ -129,8 +146,8 @@ int cache_size = 2; //30;
   [SHKConfiguration sharedInstanceWithConfigurator:configurator];
   
   //HACK SACAR ANTES DE RELEASE
-  //  [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-  //  id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
+  //[NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
+  //id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   [self checkCacheSize];
   return YES;

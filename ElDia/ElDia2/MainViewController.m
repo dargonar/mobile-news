@@ -22,6 +22,7 @@ BOOL splashOn=NO;
 BOOL errorOn=NO;
 BOOL refreshingOn=NO;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,6 +44,7 @@ BOOL refreshingOn=NO;
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
   
+  [[self mainUIWebView] setScalesPageToFit:YES];
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
   

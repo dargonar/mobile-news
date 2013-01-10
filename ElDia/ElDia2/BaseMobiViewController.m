@@ -22,12 +22,17 @@
 
 @synthesize mScreenManager, currentUrl, myUIWebView;
 
+BOOL mIsIpad=NO;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
     if (self) {
         // Custom initialization
+      
+      mIsIpad = [app_delegate isiPad];
+      
       self.mScreenManager = [[ScreenManager alloc] init];
       self.myUIWebView=nil;
     }
