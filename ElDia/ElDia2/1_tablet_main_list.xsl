@@ -33,7 +33,7 @@
             </xsl:call-template>
           </xsl:if>
           
-          <xsl:if test="NOT(not(rss/channel/item[1]/media:thumbnail))" >
+          <xsl:if test="not(not(rss/channel/item[1]/media:thumbnail))" >
             <xsl:call-template name="tablet_index_portrait_main">
               <xsl:with-param name="Node" select="rss/channel/item[1]"/>
             </xsl:call-template>

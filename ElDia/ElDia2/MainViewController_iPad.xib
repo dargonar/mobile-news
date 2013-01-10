@@ -267,20 +267,20 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwLjM4MzE1NTQ0NjEgMQA</bytes>
+									<bytes key="NSRGB">MC4xODQzMTM3MjU1IDAuNDM5MjE1Njg2MyAwLjcwNTg4MjM1MjkAA</bytes>
 								</object>
 								<int key="IBUIContentMode">4</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Default.png</string>
+									<string key="NSResourceName">Default-Portrait~ipad.png</string>
 								</object>
 							</object>
 							<object class="IBUIActivityIndicatorView" id="562157038">
 								<reference key="NSNextResponder" ref="432913398"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{365, 525}, {37, 37}}</string>
+								<string key="NSFrame">{{365, 750}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="432913398"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="160539963"/>
@@ -404,7 +404,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwLjQgMC44AA</bytes>
+							<bytes key="NSRGB">MC4xODQzMTM3MjU1IDAuNDM5MjE1Njg2MyAwLjcwNTg4MjM1MjkAA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -468,14 +468,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mainUIWebView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="210623115"/>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">error_view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="160539963"/>
@@ -516,11 +508,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mainUIWebView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="210623115"/>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="210623115"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">20</int>
+					<int key="connectionID">57</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -772,7 +772,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">56</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -882,7 +882,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Default.png">{320, 480}</string>
+			<string key="Default-Portrait~ipad.png">{768, 1004}</string>
 			<string key="bg.png">{320, 44}</string>
 			<string key="list.png">{24, 24}</string>
 			<string key="logo.png">{149, 23}</string>

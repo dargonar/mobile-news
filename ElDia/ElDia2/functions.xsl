@@ -108,14 +108,15 @@
   <xsl:template name="ImagenNoticiaDestacada">
     <xsl:param name="ImageUrl" />
     <xsl:param name="MetaTag" />
-    <div class="main_img_container">
-      <div class="imagen_principal" id="{$ImageUrl}" style="background-image:url(i_{$ImageUrl});"></div>
-      <div class="media_link video_over_photo">
-        <xsl:call-template name="MediaAttach">
-          <xsl:with-param name="MetaTag" select="$MetaTag"/>
-        </xsl:call-template>
+    <!-- div class="main_img_container" -->
+      <div class="imagen" id="{$ImageUrl}" style="background-image:url(i_{$ImageUrl});">
+        <div class="media_link video_over_photo">
+          <xsl:call-template name="MediaAttach">
+            <xsl:with-param name="MetaTag" select="$MetaTag"/>
+          </xsl:call-template>
+        </div>
       </div>
-    </div>
+    <!-- /div -->
   </xsl:template>
   
   <!-- Template del listado de noticias uniforme. Para listado principal o de seccion. -->
@@ -237,7 +238,7 @@
       <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <img src="i_{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
+            <img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
             <xsl:variable name="container_type">video_over_photo</xsl:variable>
             <xsl:call-template name="MediaLink">
               <xsl:with-param name="Node" select="$Node"/>
@@ -453,6 +454,440 @@
         <xsl:value-of disable-output-escaping="yes" select="$text" />
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="tablet_index_portrait_main">
+    <xsl:param name="Node" />
+      <xsl:variable name="encoded_url" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/link"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_title" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/title"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_description" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/description"/>
+        </xsl:call-template>
+      </xsl:variable>
+    <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="principal">
+      <div class="nota_principal">
+        <div class="info">
+          <div class="encabezado">
+              <label class="fecha">
+              <xsl:call-template name="FormatDate">
+                <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+              </xsl:call-template>
+              </label> | <label class="seccion"><xsl:value-of disable-output-escaping="yes" select="$Node/category" /></label>
+              <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
+              <p class="subtitulo">
+              <xsl:value-of disable-output-escaping="yes" select="$Node/description" />
+              </p>
+          </div>
+        </div>
+        <xsl:if test="not(not($Node/media:thumbnail))" >
+          <xsl:call-template name="ImagenNoticiaDestacada">
+            <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
+            <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+          </xsl:call-template>
+        </xsl:if>
+        </div>
+      </a>
+    <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
+  </xsl:template>
+  
+  <xsl:template name="tablet_index_portrait_secondary">
+  <xsl:param name="Nodes" />
+    <xsl:for-each select="$Nodes">
+      <xsl:variable name="is_last" >
+        <xsl:if test="position()=2">
+          <xsl:text>last</xsl:text>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:call-template name="tablet_index_portrait_secondary_item">
+        <xsl:with-param name="Node" select="."/>
+        <xsl:with-param name="Last" select="$is_last"/>
+      </xsl:call-template>
+    </xsl:for-each>
+    <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
+  </xsl:template>
+  
+  <xsl:template name="tablet_index_portrait_secondary_item">
+    <xsl:param name="Node" />
+    <xsl:param name="Last" />
+    <xsl:variable name="encoded_url" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/link"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="encoded_title" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/title"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="encoded_description" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/description"/>
+      </xsl:call-template>
+    </xsl:variable>
+      
+    <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="principal">
+      <div class="nota_secundaria {$Last}">
+        <label class="fecha">
+          <xsl:call-template name="FormatDate">
+            <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+          </xsl:call-template>
+        </label> | <label class="seccion"><xsl:value-of disable-output-escaping="yes" select="$Node/category" /></label>
+        <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
+        <xsl:if test="not(not($Node/media:thumbnail))" >
+          <xsl:call-template name="ImagenNoticiaDestacada">
+            <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
+            <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+          </xsl:call-template>
+        </xsl:if>
+        </div>
+      </a>
+  </xsl:template>
+  
+  <xsl:template name="tablet_index_portrait_terciary">
+  <xsl:param name="Nodes" />
+    <xsl:for-each select="$Nodes">
+      <xsl:variable name="is_last2" >
+        <xsl:if test="(position() mod 3)=0">
+          <xsl:text>last</xsl:text>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:call-template name="tablet_index_portrait_terciary_item">
+        <xsl:with-param name="Node" select="."/>
+        <xsl:with-param name="Last" select="$is_last2"/>
+      </xsl:call-template>
+      <xsl:if test="(position() mod 3)=0">
+        <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template name="tablet_index_portrait_terciary_item">
+    <xsl:param name="Node" />
+    <xsl:param name="Last" />
+      <xsl:variable name="encoded_url" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/link"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_title" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/title"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_description" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/description"/>
+        </xsl:call-template>
+      </xsl:variable>
+      
+    <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="principal">
+      <div class="nota_terciaria {$Last}">
+        <label class="fecha">
+          <xsl:call-template name="FormatDate">
+            <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+          </xsl:call-template>
+        </label> | <label class="seccion"><xsl:value-of disable-output-escaping="yes" select="$Node/category" /></label>
+        <h2><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h2>
+        <xsl:if test="not(not($Node/media:thumbnail))" >
+          <xsl:call-template name="ImagenNoticiaDestacada">
+            <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
+            <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+          </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="not($Node/media:thumbnail)" >
+          <div class="info">
+            <p><xsl:value-of disable-output-escaping="yes" select="$Node/description" /></p>
+        </div>
+        </xsl:if>
+        </div>
+      </a>
+  </xsl:template>
+  
+  
+  <xsl:template name="tablet_news_list_landscape">
+  <xsl:param name="Nodes" />
+    <xsl:for-each select="$Nodes">
+      <xsl:call-template name="tablet_news_list_landscape_item">
+        <xsl:with-param name="Node" select="."/>
+      </xsl:call-template>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template name="tablet_news_list_landscape_item">
+    <xsl:param name="Node" />
+      <xsl:variable name="encoded_url" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/link"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_title" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/title"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="encoded_description" >
+        <xsl:call-template name="url-encode">
+          <xsl:with-param name="str" select="$Node/description"/>
+        </xsl:call-template>
+      </xsl:variable>
+    
+    <li>  
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header={$encoded_description}" title="principal">
+        <xsl:if test="not(not($Node/media:thumbnail))" >
+          <xsl:call-template name="ImagenNoticiaDestacada">
+            <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
+            <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+          </xsl:call-template>
+        </xsl:if>
+        <div class="info"><p><xsl:value-of disable-output-escaping="yes" select="$Node/title" /> </p></div>
+        <xsl:if test="not($Node/media:thumbnail)" >
+          <div class="subheader">
+            <p><xsl:value-of disable-output-escaping="yes" select="$Node/description" /></p>
+          </div>
+        </xsl:if>
+      </a>
+    </li>
+  </xsl:template>
+  
+  <xsl:template name="tablet_open_new_landscape">
+    <xsl:param name="Node" />
+    
+    <div id="landscape">
+      <div class="nota_abierta">
+        <label class="fecha">
+          <xsl:call-template name="FormatDate">
+            <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+          </xsl:call-template>
+        </label> | <label class="seccion">
+          <xsl:call-template name="ReplaceInfoGral">
+            <xsl:with-param name="seccion" select="$Node/category"/>
+          </xsl:call-template>
+        </label>
+        <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
+        
+        <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
+          <p class="subtitulo">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
+          </p>
+        </xsl:if>
+        
+        <xsl:choose>
+        <xsl:when test="not(not($Node/media:thumbnail))">
+          <div class="main_img_container">
+            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
+              <xsl:variable name="container_type">video_over_photo</xsl:variable>
+              <xsl:call-template name="MediaLink">
+                <xsl:with-param name="Node" select="$Node"/>
+                <xsl:with-param name="container_type" select="$container_type"/>
+              </xsl:call-template>
+            </div>
+          </div>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:variable name="container_type">no_photo</xsl:variable>
+          <xsl:call-template name="MediaLink">
+            <xsl:with-param name="Node" select="$Node"/>
+            <xsl:with-param name="container_type" select="$container_type"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+        
+        <div class="separador"></div>
+        <div class="info">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
+        </div>
+      </div><!-- nota_abierta -->
+    </div><!-- landscape -->
+  </xsl:template>
+  
+  <xsl:template name="tablet_news_related_landscape">
+    <xsl:param name="Items" />
+    <div id="landscape">
+      <div class="menu">
+        <div class="seccion">Relacionadas</div>
+        <ul>
+          <xsl:for-each select="$Items">
+            <xsl:if test="normalize-space(@guid)!=''">
+              <xsl:call-template name="tablet_news_related_landscape_item">
+                <xsl:with-param name="Node" select="."/>
+              </xsl:call-template>
+            </xsl:if>
+          </xsl:for-each>
+        </ul>
+      </div>
+    </div>
+  </xsl:template>
+  
+  <!-- Template de la noticia en listado de noticias relacionadas (ListadoNoticiasRelacionadas). -->  
+  <xsl:template name="tablet_news_related_landscape_item">
+    <xsl:param name="Node" />
+    <xsl:variable name="has_image" select="$Node/@thumbnail!=''"></xsl:variable>
+    <xsl:variable name="full_width" >
+      <xsl:if test="not($has_image)">
+        <xsl:text>full_width</xsl:text>
+      </xsl:if>
+    </xsl:variable>
+    <xsl:variable name="encoded_url" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/@url"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="encoded_title" >
+      <xsl:call-template name="url-encode">
+        <xsl:with-param name="str" select="$Node/."/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <li>  
+      <a href="noticia://{$Node/guid}?url={$encoded_url}&amp;title={$encoded_title}&amp;header=" title="principal">
+        <xsl:if test="not(not($Node/media:thumbnail))" >
+          <xsl:call-template name="ImagenNoticiaDestacada">
+            <xsl:with-param name="ImageUrl" select="$Node/media:thumbnail/@url"/>
+            <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
+          </xsl:call-template>
+        </xsl:if>
+        <div class="info"><p><xsl:value-of disable-output-escaping="yes" select="$Node/." /></p></div>
+        <xsl:if test="not($Node/media:thumbnail)" >
+          <div class="subheader">
+            <p><xsl:value-of disable-output-escaping="yes" select="$Node/description" /></p>
+          </div>
+        </xsl:if>
+      </a>
+    </li>
+  </xsl:template>
+
+  <xsl:template name="tablet_open_new_portrait">
+    <xsl:param name="Node" />
+    
+    <div id="index">
+      <div class="nota_abierta">
+        <div class="info">
+          <div class="encabezado">
+            <label class="fecha">
+              <xsl:call-template name="FormatDate">
+                <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+              </xsl:call-template>
+            </label> | <label class="seccion">
+              <xsl:call-template name="ReplaceInfoGral">
+                <xsl:with-param name="seccion" select="$Node/category"/>
+              </xsl:call-template>
+            </label>
+            <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
+            <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
+              <p class="subtitulo">
+                <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
+              </p>
+            </xsl:if>
+          </div>
+        </div>
+        <xsl:choose>
+        <xsl:when test="not(not($Node/media:thumbnail))">
+          <div class="main_img_container">
+            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
+              <!-- img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagen"/-->
+              <xsl:variable name="container_type">video_over_photo</xsl:variable>
+              <xsl:call-template name="MediaLink">
+                <xsl:with-param name="Node" select="$Node"/>
+                <xsl:with-param name="container_type" select="$container_type"/>
+              </xsl:call-template>
+            </div>
+          </div>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:variable name="container_type">no_photo</xsl:variable>
+          <xsl:call-template name="MediaLink">
+            <xsl:with-param name="Node" select="$Node"/>
+            <xsl:with-param name="container_type" select="$container_type"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+
+        <div class="separador"></div>
+
+        <div class="two_columns">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
+        </div>
+      </div><!-- nota_abierta -->
+    </div><!-- index -->
+  </xsl:template>
+
+  <xsl:template name="tablet_open_new_portrait_2">
+    <xsl:param name="Node" />
+    
+    <div id="index">
+      <div class="nota_abierta">
+        <label class="fecha">
+          <xsl:call-template name="FormatDate">
+            <xsl:with-param name="DateTime" select="$Node/pubDate"/>
+          </xsl:call-template>
+        </label> | <label class="seccion">
+          <xsl:call-template name="ReplaceInfoGral">
+            <xsl:with-param name="seccion" select="$Node/category"/>
+          </xsl:call-template>
+        </label>
+        <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
+        <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
+          <p class="subtitulo">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
+          </p>
+        </xsl:if>
+        
+        <xsl:choose>
+        <xsl:when test="not(not($Node/media:thumbnail))">
+          <div class="main_img_container">
+            <div class="imagen-full" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
+              <xsl:variable name="container_type">video_over_photo</xsl:variable>
+              <xsl:call-template name="MediaLink">
+                <xsl:with-param name="Node" select="$Node"/>
+                <xsl:with-param name="container_type" select="$container_type"/>
+              </xsl:call-template>
+            </div>
+          </div>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:variable name="container_type">no_photo</xsl:variable>
+          <xsl:call-template name="MediaLink">
+            <xsl:with-param name="Node" select="$Node"/>
+            <xsl:with-param name="container_type" select="$container_type"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+
+        <div class="separador"></div>
+
+        <div class="two_columns">
+            <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
+        </div>
+      </div><!-- nota_abierta -->
+    </div><!-- index -->
+  </xsl:template>
+  
+  
+  <xsl:template name="tablet_news_related_portrait">
+    <xsl:param name="Items" />
+    <div id="index">
+      <div class="menu portrait_news_list_container">
+        <div class="seccion">Relacionadas</div>
+        <ul class="portrait_news_list">
+          <xsl:for-each select="$Items">
+            <xsl:if test="normalize-space(@guid)!=''">
+              <xsl:call-template name="tablet_news_related_landscape_item">
+                <xsl:with-param name="Node" select="."/>
+              </xsl:call-template>
+            </xsl:if>
+          </xsl:for-each>
+        </ul>
+      </div>
+    </div>
   </xsl:template>
   
 </xsl:stylesheet>

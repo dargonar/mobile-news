@@ -44,6 +44,7 @@ BOOL refreshingOn=NO;
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
   
+  [[self mainUIWebView] setScalesPageToFit:YES];
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
   
