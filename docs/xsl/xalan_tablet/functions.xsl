@@ -502,7 +502,6 @@
   <xsl:template name="tablet_index_portrait_secondary">
   <xsl:param name="Nodes" />
     <xsl:for-each select="$Nodes">
-      <xsl:variable name="is_last" ></xsl:variable>
       <xsl:variable name="is_last" >
         <xsl:if test="position()=2">
           <xsl:text>last</xsl:text>
@@ -556,15 +555,14 @@
   <xsl:template name="tablet_index_portrait_terciary">
   <xsl:param name="Nodes" />
     <xsl:for-each select="$Nodes">
-      <xsl:variable name="is_last" >soto</xsl:variable>
-      <xsl:variable name="is_last" >
+      <xsl:variable name="is_last2" >
         <xsl:if test="(position() mod 3)=0">
           <xsl:text>last</xsl:text>
         </xsl:if>
       </xsl:variable>
       <xsl:call-template name="tablet_index_portrait_terciary_item">
         <xsl:with-param name="Node" select="."/>
-        <xsl:with-param name="Last" select="$is_last"/>
+        <xsl:with-param name="Last" select="$is_last2"/>
       </xsl:call-template>
       <xsl:if test="(position() mod 3)=0">
         <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
