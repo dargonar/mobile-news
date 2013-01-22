@@ -44,7 +44,9 @@ BOOL refreshingOn=NO;
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
   
-  [[self mainUIWebView] setScalesPageToFit:YES];
+  if ([app_delegate isiPad]) {
+    [[self mainUIWebView] setScalesPageToFit:YES];
+  }
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
   
@@ -295,7 +297,7 @@ BOOL refreshingOn=NO;
     [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
     NSLog(@" call load noticia: %@", [url absoluteString]);
-    [self.myNoticiaViewController loadNoticia:url];
+    [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
     return NO;
   }
@@ -306,7 +308,7 @@ BOOL refreshingOn=NO;
 -(void) loadNoticiaView{
   
   NSString *noticiaNibName = @"NoticiaViewController";
-  if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+  if([app_delegate isiPad]) {
     noticiaNibName = @"NoticiaViewController_iPad";
   }
   self.myNoticiaViewController= [[NoticiaViewController alloc]

@@ -10,19 +10,31 @@
 
 @implementation NewsManager
 
-static NSMutableArray *_ids_de_noticias=nil;
-static NSMutableArray *_urls_de_noticias=nil;
+NSMutableArray *_ids_de_noticias=nil;
+NSMutableArray *_urls_de_noticias=nil;
 
-+(void)setURLs:(NSArray*)array
++ (NewsManager *) defaultNewsManager
+{
+  static NewsManager *defaultNewsManager = NULL;
+  @synchronized(self)
+  {
+    if(defaultNewsManager == NULL)
+      defaultNewsManager = [[NewsManager alloc] init];
+  }
+  
+  return defaultNewsManager;
+}
+
+-(void)setURLs:(NSArray*)array
 {
   _ids_de_noticias=nil;
   _urls_de_noticias=nil;
   _urls_de_noticias=[array copy];
-  for(int i =0; i<[_ids_de_noticias count]; i++)
+  for(int i =0; i<[array count]; i++)
     [_ids_de_noticias addObject:[(NSURL*)[array objectAtIndex:i] host]];
 }
 
-+(NSURL*)getNextNoticiaId:(NSString*)_noticia_id
+-(NSURL*)getNextNoticiaId:(NSString*)_noticia_id
 {
   if(_ids_de_noticias==nil)
   {
@@ -38,7 +50,7 @@ static NSMutableArray *_urls_de_noticias=nil;
   return nil;
 }
 
-+(NSURL*)getPrevNoticiaId:(NSString*)_noticia_id
+-(NSURL*)getPrevNoticiaId:(NSString*)_noticia_id
 {
   
   if(_ids_de_noticias==nil)

@@ -238,7 +238,7 @@
       <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
+            <img src="i_{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
             <xsl:variable name="container_type">video_over_photo</xsl:variable>
             <xsl:call-template name="MediaLink">
               <xsl:with-param name="Node" select="$Node"/>
