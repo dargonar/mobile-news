@@ -22,9 +22,9 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, bottomUIView, optionsBottomMenuUIImageView,
+@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView,
   btnFontSizePlus, btnFontSizeMinus, loading_indicator,
-  myYoutubeViewController, headerUIImageView, offline_imgvw, offline_lbl,
+  myYoutubeViewController, headerUIImageView, offline_view,
   noticia_id, noticia_url, noticia_title, noticia_header;
 
 -(void)changeFontSize:(NSInteger)delta{
@@ -117,7 +117,9 @@
         [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
         [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
         [mp setWantsFullScreenLayout:YES];
-        [self presentModalViewController:mp animated:NO];
+        //[self presentModalViewController:mp animated:NO];
+        [self presentViewController:mp animated:NO completion:nil];
+        
         [mp.moviePlayer prepareToPlay];
         [mp.moviePlayer play];
         mp=nil;
@@ -143,8 +145,9 @@
   mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
   mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
 
-  [self presentModalViewController:mpviewController animated:YES];
-
+  //[self presentModalViewController:mpviewController animated:YES];
+  [self presentViewController:mpviewController animated:YES completion:nil];
+  
   [[mpviewController moviePlayer] prepareToPlay];
   [[mpviewController moviePlayer] play];
 
@@ -210,9 +213,10 @@
   self.bottomUIView.hidden = YES;
 }
 
--(void)loadNoticia:(NSURL *)url{
+-(void)loadNoticia:(NSURL *)url section:(NSString*)section{
   
   [self onLoading:YES];
+  self->currentSection = section;
   //noticia://guid?url=_url_&title=_title_&header=_header_
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
@@ -233,17 +237,42 @@
   
   NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
   
+  NSLog(@"URI: %@", uri);
   if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
     NSData *data = [self.mScreenManager getArticle:uri useCache:YES error:&err];
     [self setHTML:data url:uri webView:self.mainUIWebView];
+    [self loadSectionNews];
     return;
   }
+  
   [self loadUrl:uri useCache:NO];
+  [self loadSectionNews];
 }
 
--(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
+-(void)loadSectionNews{
+  if ([app_delegate isiPad]) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      __block NSError *err;
+      __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if(data==nil)
+        {
+          // data = dummy;
+        }
+        else
+        {
+          [self setHTML:data url:nil webView:self.menu_webview];
+        }
+        data=nil;
+      });
+    });
+  }
+}
+
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache{
+  
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
@@ -299,18 +328,18 @@
 }
 
 -(void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture{
-  NSURL *nextNoticiaUrl = [NewsManager getNextNoticiaId:noticia_id];
+  NSURL *nextNoticiaUrl = [[NewsManager defaultNewsManager] getNextNoticiaId:noticia_id];
   if(nextNoticiaUrl!=nil)
   {
-    [self loadNoticia:nextNoticiaUrl];
+    [self loadNoticia:nextNoticiaUrl section:self->currentSection ];
     nextNoticiaUrl=nil;
   }
 }
 -(void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture{
-  NSURL *prevNoticiaUrl = [NewsManager getPrevNoticiaId:noticia_id];
+  NSURL *prevNoticiaUrl = [[NewsManager defaultNewsManager] getPrevNoticiaId:noticia_id];
   if(prevNoticiaUrl!=nil)
   {
-    [self loadNoticia:prevNoticiaUrl];
+    [self loadNoticia:prevNoticiaUrl section:self->currentSection];
     prevNoticiaUrl=nil;
   }
 }
@@ -320,7 +349,15 @@
   [super viewDidLoad];
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
+  if ([app_delegate isiPad]) {
+    self.menu_webview.delegate = self;
+    self.menu_webview.hidden = NO;
 
+  }
+  
+  if ([app_delegate isiPad]) {
+    //[[self mainUIWebView] setScalesPageToFit:YES];
+  }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
 }
@@ -374,7 +411,18 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   [self onLoading:NO];
-  [self changeFontSize:0];}
+  [self changeFontSize:0];
+  
+  CGSize contentSize = webView.scrollView.contentSize;
+  CGSize viewSize = self.view.bounds.size;
+  
+  float rw = viewSize.width / contentSize.width;
+  
+  webView.scrollView.minimumZoomScale = rw;
+  webView.scrollView.maximumZoomScale = rw;
+  webView.scrollView.zoomScale = rw;
+}
+
 
  -(void)webViewDidStartLoad:(UIWebView *)webView{
    //NSLog(@"webViewDidStartLoad");
@@ -403,7 +451,7 @@
     bool handled = NO;
     if ([[url scheme]isEqualToString:@"noticia"])
     {
-      [self loadNoticia:url];
+      [self loadNoticia:url section:self->currentSection];
       handled = YES;
     }
     else if ([[url scheme]isEqualToString:@"video"])

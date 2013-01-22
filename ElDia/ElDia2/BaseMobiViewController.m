@@ -100,23 +100,22 @@ BOOL mIsIpad=NO;
             textEncodingName:@"utf-8"
             baseURL:[[DiskCache defaultCache] getFolderUrl]];
 
-  if(self.myUIWebView==nil)
-    self.myUIWebView=webView;
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSError *err;
-    NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
+  //if(self.myUIWebView==nil)
+  //  self.myUIWebView=webView;
+  if(url!=nil)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      NSError *err;
+      NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
 
-    if (mobi_images != nil && url!=nil) {
-      NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", nil];
+      if (mobi_images != nil) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", nil];
       
-      [[NSNotificationCenter defaultCenter] 
-        postNotificationName:@"com.diventi.mobipaper.download_images" 
-                      object:mobi_images 
-                    userInfo:userInfo];
-    }
-    
-  });
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"com.diventi.mobipaper.download_images"
+                object:mobi_images
+                userInfo:userInfo];
+      }
+    });
 }
 -(void)onImageDownloaded:(NSNotification *)notif {
 

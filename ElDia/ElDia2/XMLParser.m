@@ -11,6 +11,7 @@
 #import "MobiImage.h"
 #import "CryptoUtil.h"
 #import "ErrorBuilder.h"
+#import "Base64.h"
 
 @implementation XMLParser
 
@@ -124,21 +125,45 @@
     if([temp_title count]!=1)
       continue;
 
-    NSArray* temp_header = [item elementsForName:@"header"];
+    NSArray* temp_header = [item elementsForName:@"description"];
     if([temp_header count]!=1)
       continue;
+    /*
+    NSLog(@"guid %@", [self firstElementAsString:temp_guid]);
+    NSLog(@"link %@", [[self firstElementAsString:temp_link] base64EncodedString]);
+    NSLog(@"title %@", [self firstElementAsString:temp_title]);
+    NSLog(@"description %@", [self firstElementAsString:temp_header]);
+    */
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"noticia://%@?url=%@&title=%@&header%@",
+    /*
+     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"noticia://%@?url=%@&title=%@&header%@",
                                         [self firstElementAsString:temp_guid],
                                         [self firstElementAsString:temp_link],
                                         [self firstElementAsString:temp_title],
                                         [self firstElementAsString:temp_header]]];
+    */
     
+    NSURL * url = [NSURL URLWithString:[self URLEncodeString:
+                   [NSString stringWithFormat:@"noticia://%@?url=%@&title=%@&header%@",
+                                        [self firstElementAsString:temp_guid],
+                                        [self firstElementAsString:temp_link],
+                                        [self firstElementAsString:temp_title],
+                                        [self firstElementAsString:temp_header]]]];
     [news_urls addObject:url];
     
   }
   
   return [NSArray arrayWithArray:news_urls];
+}
+
+-(NSString *) URLEncodeString:(NSString *) str
+{
+  
+  NSMutableString *tempStr = [NSMutableString stringWithString:str];
+  [tempStr replaceOccurrencesOfString:@" " withString:@"+" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tempStr length])];
+  
+  
+  return [[NSString stringWithFormat:@"%@",tempStr] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end

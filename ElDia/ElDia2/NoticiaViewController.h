@@ -26,6 +26,7 @@
   NSString *noticia_header;
 
   YoutubeViewController *myYoutubeViewController;
+  NSString* currentSection;
 }
 
 
@@ -38,13 +39,13 @@
 
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
+@property (nonatomic, retain) IBOutlet UIWebView *menu_webview;
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *headerUIImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
-@property (nonatomic, retain) IBOutlet UIImageView *offline_imgvw;
-@property (nonatomic, retain) IBOutlet UILabel *offline_lbl;
+@property (nonatomic, retain) IBOutlet UIView *offline_view;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 
@@ -53,7 +54,7 @@
 - (IBAction) btnFontSizePlusClick: (id)param;
 - (IBAction) btnFontSizeMinusClick: (id)param;
 
-- (void)loadNoticia:(NSURL *)url;
+- (void)loadNoticia:(NSURL *)url section:(NSString*)section;
 - (void)loadBlank;
 
 @end

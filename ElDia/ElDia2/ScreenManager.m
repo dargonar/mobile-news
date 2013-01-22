@@ -15,6 +15,7 @@
 #import "MobiImage.h"
 #import "ErrorBuilder.h"
 #import "Utils.h"
+#import "NewsManager.h"
 #import "AppDelegate.h"
 
 NSString * const MAIN_STYLESHEET          = @"1_main_list.xsl";
@@ -102,11 +103,14 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES url_prefix:nil];
 }
 
+// para iPAd
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:YES];
+
+  //[NSString stringWithFormat:@"menu_%@", url]
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO url_prefix:@"menu_"];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -114,13 +118,20 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error {
-  return [self getScreen:url useCache:useCache processImages:processImages prefix:prefix error:error processNavigation:NO];
+  return [self getScreen:url useCache:useCache processImages:processImages prefix:prefix error:error processNavigation:NO url_prefix:nil];
 }
 
--(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error processNavigation:(BOOL)processNavigation {
+-(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error processNavigation:(BOOL)processNavigation url_prefix:(NSString*)urlPrefix {
+  
+  NSString* prefixedUrl = url;
+  if(urlPrefix!=nil)
+  {
+   prefixedUrl = [NSString stringWithFormat:@"%@%@",urlPrefix, url];
+  }
   
   DiskCache *cache = [DiskCache defaultCache];
-  NSString  *key   = [CryptoUtil sha1:url];
+  NSString  *key   = [CryptoUtil sha1:prefixedUrl];
+  NSString  *xml_key   = [CryptoUtil sha1:url];
   
   //Si piden ver la cache
   if (useCache) {
@@ -141,8 +152,15 @@ BOOL isIpad=NO;
   {
     return [ErrorBuilder build:error desc:@"no internet conection" code:ERR_NO_INTERNET_CONNECTION];
   }
+  
+  NSData *xml = nil;
+  if (useCache && urlPrefix!=nil) {
+    xml = [cache get:xml_key prefix:@"xml"];
+  }
+  
   //Lo bajo
-  NSData *xml = [self downloadUrl:url error:error];
+  if(xml==nil)
+    xml=[self downloadUrl:url error:error];
   
   //Problemas downloading?
   if (xml == nil) {	
@@ -178,7 +196,7 @@ BOOL isIpad=NO;
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   
-  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:url] error:error];
+  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:prefixedUrl] error:error];
   
   if (html == nil) {
     return nil;
@@ -189,7 +207,7 @@ BOOL isIpad=NO;
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
   
-  if([url hasPrefix:@"section://"])
+  if([prefixedUrl hasPrefix:@"section://"])
     [cache put:key data:xml prefix:@"xml"];
   
   if(processNavigation)
@@ -211,8 +229,8 @@ BOOL isIpad=NO;
   
   XMLParser *parser = [[XMLParser alloc] init];
   NSError *error;
-  [parser extractNewsUrls:xml error:&error];
-  
+  NSArray* array = [parser extractNewsUrls:xml error:&error];
+  [[NewsManager defaultNewsManager] setURLs:array];
   //  :(NSData**)xml_data error:(NSError **)error{
 }
 
@@ -276,6 +294,11 @@ BOOL isIpad=NO;
 }
 
 -(NSString*)getStyleSheetiPad:(NSString*)url {
+  
+  if( [url hasPrefix:@"menu_section://"] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
   
   if( [url hasPrefix:@"section://main"] ) {
     NSString* sheet = iPad_MAIN_STYLESHEET;
