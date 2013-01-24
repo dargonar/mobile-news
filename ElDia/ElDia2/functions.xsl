@@ -109,7 +109,7 @@
     <xsl:param name="ImageUrl" />
     <xsl:param name="MetaTag" />
     <!-- div class="main_img_container" -->
-      <div class="imagen" id="{$ImageUrl}" style="background-image:url({$ImageUrl});">
+      <div class="imagen" id="{$ImageUrl}" style="background-image:url(i_{$ImageUrl});">
         <div class="media_link video_over_photo">
           <xsl:call-template name="MediaAttach">
             <xsl:with-param name="MetaTag" select="$MetaTag"/>
@@ -186,7 +186,7 @@
               </xsl:call-template>
             </xsl:if>
             <xsl:if test="not(not($Node/media:thumbnail))">
-              <div class="imagen_secundaria" id="{$Node/media:thumbnail/@url}" style="background-image:url({$Node/media:thumbnail/@url}) !important;"></div>
+              <div class="imagen_secundaria" id="{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url}) !important;"></div>
               <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
               <!-- img src="{$Node/media:thumbnail/@url}" / -->
             </xsl:if>
@@ -238,7 +238,7 @@
       <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
+            <img src="i_{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
             <xsl:variable name="container_type">video_over_photo</xsl:variable>
             <xsl:call-template name="MediaLink">
               <xsl:with-param name="Node" select="$Node"/>
@@ -394,7 +394,7 @@
             </xsl:call-template>
             <xsl:if test="not(not($Item/@thumbnail))">
               <xsl:if test="$Item/@thumbnail!=''">
-                <div class="imagen_secundaria" id="{$Item/@thumbnail}" style="background-image:url({$Item/@thumbnail}) !important;"></div>
+                <div class="imagen_secundaria" id="{$Item/@thumbnail}" style="background-image:url(i_{$Item/@thumbnail}) !important;"></div>
                 <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
               </xsl:if>
             </xsl:if>
@@ -683,7 +683,7 @@
         <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url({$Node/media:thumbnail/@url});">
+            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
               <xsl:variable name="container_type">video_over_photo</xsl:variable>
               <xsl:call-template name="MediaLink">
                 <xsl:with-param name="Node" select="$Node"/>
@@ -792,7 +792,7 @@
         <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url({$Node/media:thumbnail/@url});">
+            <div class="imagen" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
               <!-- img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagen"/-->
               <xsl:variable name="container_type">video_over_photo</xsl:variable>
               <xsl:call-template name="MediaLink">
@@ -844,7 +844,7 @@
         <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
           <div class="main_img_container">
-            <div class="imagen-full" id="img_{$Node/media:thumbnail/@url}" style="background-image:url({$Node/media:thumbnail/@url});">
+            <div class="imagen-full" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
               <xsl:variable name="container_type">video_over_photo</xsl:variable>
               <xsl:call-template name="MediaLink">
                 <xsl:with-param name="Node" select="$Node"/>
