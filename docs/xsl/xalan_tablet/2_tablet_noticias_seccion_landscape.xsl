@@ -20,10 +20,10 @@
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
-      <body class="menu" onload="update_all_images()">
+      <body class="menu landscape" onload="update_all_images()">
         <div id="landscape">
+          <div class="seccion list"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
           <div class="menu">
-            <div class="seccion"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
               <ul>
                 <xsl:call-template name="tablet_news_list_landscape">
                   <xsl:with-param name="Nodes" select="rss/channel/item"/>

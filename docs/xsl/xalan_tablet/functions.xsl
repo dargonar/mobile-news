@@ -713,7 +713,7 @@
     <xsl:param name="Items" />
     <div id="landscape">
       <div class="menu">
-        <div class="seccion">Relacionadas</div>
+        <div class="seccion list">Relacionadas</div>
         <ul>
           <xsl:for-each select="$Items">
             <xsl:if test="normalize-space(@guid)!=''">
@@ -876,7 +876,7 @@
     <xsl:param name="Items" />
     <div id="index">
       <div class="menu portrait_news_list_container">
-        <div class="seccion">Relacionadas</div>
+        <div class="seccion list">Relacionadas</div>
         
         <xsl:variable name="list_width" >
           <xsl:value-of select="count($Items)*192"/>
