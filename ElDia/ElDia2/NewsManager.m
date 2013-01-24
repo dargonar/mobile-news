@@ -28,6 +28,7 @@ NSMutableArray *_urls_de_noticias=nil;
 -(void)setURLs:(NSArray*)array
 {
   _ids_de_noticias=nil;
+  _ids_de_noticias=[[NSMutableArray alloc] initWithCapacity:[array count]];
   _urls_de_noticias=nil;
   _urls_de_noticias=[array copy];
   for(int i =0; i<[array count]; i++)

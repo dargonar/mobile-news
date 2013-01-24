@@ -117,7 +117,8 @@ int cache_size = 2; //30;
                                              object:nil];
   
   
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//HACKED
+  //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//HACKED
+  self.window = [[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//HACKED
   self.window.backgroundColor = [UIColor whiteColor];//HACKED
   
   // create the content view controller using the LogoExpandingViewController for no particular reason

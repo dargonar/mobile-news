@@ -303,33 +303,35 @@ int MAIN_VIEW_TAG = 9669;
 }
 
 - (void)addGestureRecognizers{
-  UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self.mainUIWebView action:@selector(handleRightSwipe:)];
+  UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
   rightSwipeRecognizer.numberOfTouchesRequired = 1;
   rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
   rightSwipeRecognizer.cancelsTouchesInView = YES;
   rightSwipeRecognizer.delegate=self;
-  [self.view addGestureRecognizer:rightSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
+  [self.mainUIWebView addGestureRecognizer:rightSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
   
-  UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self.mainUIWebView action:@selector(handleLeftSwipe:)];
+  UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
   leftSwipeRecognizer.numberOfTouchesRequired = 1;
   leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
   leftSwipeRecognizer.cancelsTouchesInView = YES;
   leftSwipeRecognizer.delegate=self;
-  [self.view addGestureRecognizer:leftSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
-
+  [self.mainUIWebView addGestureRecognizer:leftSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
 
 }
 
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+  
   if ([touch.view isKindOfClass:[UIView class]])
   {
-    // only recognises gesture started on a button
     return YES;
   }
   return NO;
 }
 
 -(void)handleLeftSwipe :(UISwipeGestureRecognizer *)gesture{
+  if(is_loading == YES)
+    return;
   NSURL *nextNoticiaUrl = [[NewsManager defaultNewsManager] getNextNoticiaId:noticia_id];
   if(nextNoticiaUrl!=nil)
   {
@@ -338,6 +340,8 @@ int MAIN_VIEW_TAG = 9669;
   }
 }
 -(void)handleRightSwipe :(UISwipeGestureRecognizer *)gesture{
+  if(is_loading == YES)
+    return;
   NSURL *prevNoticiaUrl = [[NewsManager defaultNewsManager] getPrevNoticiaId:noticia_id];
   if(prevNoticiaUrl!=nil)
   {
@@ -349,6 +353,12 @@ int MAIN_VIEW_TAG = 9669;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
+  mWindow.viewToObserve = mainUIWebView;
+  mWindow.controllerThatObserves = self;
+
+
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
@@ -381,12 +391,17 @@ int MAIN_VIEW_TAG = 9669;
 	NSLog(@"finished zooming");
 }
 
-- (void)webView:(UIWebView*)sender tappedWithTouch:(UITouch*)touch event:(UIEvent*)event
+- (void)userDidTapWebView:(id)tapPoint{
+  [self singleTapWebView];
+}
+
+/*
+ - (void)webView:(UIWebView*)sender tappedWithTouch:(UITouch*)touch event:(UIEvent*)event
 {
 	NSLog(@"tapped");
   [self singleTapWebView];
 }
-
+*/
 - (void)singleTapWebView {
   //self.bottomUIView.hidden = !self.bottomUIView.hidden;
   
@@ -421,7 +436,7 @@ int MAIN_VIEW_TAG = 9669;
     CGSize contentSize = webView.scrollView.contentSize;
     CGSize viewSize = self.mainUIWebView.bounds.size;
   
-    float rw = viewSize.width / contentSize.width;
+    float rw =viewSize.width/contentSize.width;
   
     webView.scrollView.minimumZoomScale = rw;
     webView.scrollView.maximumZoomScale = rw;
@@ -611,8 +626,9 @@ int MAIN_VIEW_TAG = 9669;
 }
 
 
-
+BOOL is_loading = YES;
 -(void) onLoading:(BOOL)started{
+  is_loading=started;
   self.loading_indicator.hidden = !started;
   if(started)
     [self.loading_indicator startAnimating];

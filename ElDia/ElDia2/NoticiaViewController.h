@@ -12,10 +12,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "BaseMobiViewController.h"
 #import "YoutubeViewController.h"
+#import "TapDetectingWindow.h"
 
 
 
-@interface NoticiaViewController : BaseMobiViewController<UIWebViewDelegate, UIGestureRecognizerDelegate, FGalleryViewControllerDelegate>  {
+@interface NoticiaViewController : BaseMobiViewController<UIWebViewDelegate, UIGestureRecognizerDelegate,  FGalleryViewControllerDelegate, TapDetectingWindowDelegate>  {
 	NSArray *networkCaptions;
   NSArray *networkImages;
 	FGalleryViewController *networkGallery;
@@ -27,6 +28,8 @@
 
   YoutubeViewController *myYoutubeViewController;
   NSString* currentSection;
+  
+  TapDetectingWindow *mWindow;
 }
 
 
@@ -38,7 +41,8 @@
 @property (retain) NSString *noticia_header;
 
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
-@property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
+//@property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
+@property (nonatomic, retain) IBOutlet UIWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIWebView *menu_webview;
 @property (nonatomic, retain) IBOutlet UIImageView *optionsBottomMenuUIImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *headerUIImageView;
