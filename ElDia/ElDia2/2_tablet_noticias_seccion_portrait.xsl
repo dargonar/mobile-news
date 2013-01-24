@@ -24,7 +24,10 @@
         <div id="index">
           <div class="menu portrait_news_list_container">
             <div class="seccion"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
-              <ul>
+              <xsl:variable name="list_width" >
+                <xsl:value-of select="count(rss/channel/item)*192"/>
+              </xsl:variable>
+              <ul class="portrait_news_list" style="width:{$list_width}px;">
                 <xsl:call-template name="tablet_news_list_landscape">
                   <xsl:with-param name="Nodes" select="rss/channel/item"/>
                 </xsl:call-template>

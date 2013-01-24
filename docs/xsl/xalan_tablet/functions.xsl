@@ -877,7 +877,11 @@
     <div id="index">
       <div class="menu portrait_news_list_container">
         <div class="seccion">Relacionadas</div>
-        <ul class="portrait_news_list">
+        
+        <xsl:variable name="list_width" >
+          <xsl:value-of select="count($Items)*192"/>
+        </xsl:variable>
+        <ul class="portrait_news_list" style="width:{$list_width}px;">
           <xsl:for-each select="$Items">
             <xsl:if test="normalize-space(@guid)!=''">
               <xsl:call-template name="tablet_news_related_landscape_item">

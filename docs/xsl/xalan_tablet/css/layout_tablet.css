@@ -2,12 +2,16 @@
 /* CSS Document */
 
 body {
-	margin:0;
-	padding:0;
+	margin:0 !important;
+	padding:0 !important;
 	color:#333;
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
+  /*width:960px !important;*/
+  
 }
+
+body.portrait{width:960px;}
 
 img { border:none; margin:0;}
 
@@ -35,6 +39,10 @@ INDEX
 ********************************************/
 #index {
 	width:960px;
+  /*padding:24px;*/
+  padding:0 !important; 
+  margin:0 auto;
+  overflow:hidden;
 }
 
 #index a{text-decoration:none;color:inherit;}
@@ -468,6 +476,22 @@ div.main_img_container {
   background-image:url(../img/ico_galeria.png);
 }
 
-.menu.portrait_news_list_container {height: 246px;overflow-y: hidden;width: 960px;}
-  ul.portrait_news_list{height: 210px;width: auto; min-width:100%;}
-  ul.portrait_news_list li (float:left;)
+#index.portrait_news_list_container {
+	min-width:960px;
+  width:auto;
+  height: 246px;
+  float:left;
+  padding:0 !important; 
+  margin:0;
+  overflow:hidden;
+  
+}
+
+
+.menu.portrait_news_list_container {
+  height: 246px; min-width: 960px;width:auto; position: relative;
+  overflow-x:auto;
+  overflow-y:hidden;
+  } /* overflow-y: hidden;*/
+ul.portrait_news_list{height: 210px;width:auto; min-width:960px;display:inline-block;}
+ul.portrait_news_list li (float:left;)
