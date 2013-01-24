@@ -26,7 +26,7 @@
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
-      <body class="menu" onload="update_all_images()">
+      <body class="menu portrait" onload="update_all_images()">
         
         <xsl:if test="rss/channel/item[1]/news:related" >
           <xsl:call-template name="tablet_news_related_portrait">

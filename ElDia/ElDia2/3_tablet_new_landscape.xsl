@@ -26,7 +26,7 @@
         <title>NOTICIA</title>
       </head>
       
-      <body onload="update_imagen_nota_abierta()">
+      <body class="landscape" onload="update_imagen_nota_abierta()">
         
         <xsl:call-template name="tablet_open_new_landscape">
           <xsl:with-param name="Node" select="rss/channel/item[1]"/>
