@@ -23,7 +23,7 @@
       <body class="menu" onload="update_all_images()">
         <div id="index">
           <div class="menu portrait_news_list_container">
-            <div class="seccion"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
+            <div class="seccion list"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
               <xsl:variable name="list_width" >
                 <xsl:value-of select="count(rss/channel/item)*192"/>
               </xsl:variable>

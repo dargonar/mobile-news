@@ -27,6 +27,8 @@
   myYoutubeViewController, headerUIImageView, offline_view,
   noticia_id, noticia_url, noticia_title, noticia_header;
 
+int MAIN_VIEW_TAG = 9669;
+
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -301,14 +303,14 @@
 }
 
 - (void)addGestureRecognizers{
-  UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
+  UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self.mainUIWebView action:@selector(handleRightSwipe:)];
   rightSwipeRecognizer.numberOfTouchesRequired = 1;
   rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
   rightSwipeRecognizer.cancelsTouchesInView = YES;
   rightSwipeRecognizer.delegate=self;
   [self.view addGestureRecognizer:rightSwipeRecognizer]; // add in your webviewrightSwipeRecognizer
   
-  UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
+  UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self.mainUIWebView action:@selector(handleLeftSwipe:)];
   leftSwipeRecognizer.numberOfTouchesRequired = 1;
   leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
   leftSwipeRecognizer.cancelsTouchesInView = YES;
@@ -349,6 +351,7 @@
   [super viewDidLoad];
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
+  self.mainUIWebView.tag=MAIN_VIEW_TAG;
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
@@ -356,7 +359,8 @@
   }
   
   if ([app_delegate isiPad]) {
-    //[[self mainUIWebView] setScalesPageToFit:YES];
+    [[self mainUIWebView] setScalesPageToFit:YES];
+
   }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
@@ -413,14 +417,28 @@
   [self onLoading:NO];
   [self changeFontSize:0];
   
-  CGSize contentSize = webView.scrollView.contentSize;
-  CGSize viewSize = self.view.bounds.size;
+  if (webView.tag==MAIN_VIEW_TAG) {
+    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = self.mainUIWebView.bounds.size;
   
-  float rw = viewSize.width / contentSize.width;
+    float rw = viewSize.width / contentSize.width;
   
-  webView.scrollView.minimumZoomScale = rw;
-  webView.scrollView.maximumZoomScale = rw;
-  webView.scrollView.zoomScale = rw;
+    webView.scrollView.minimumZoomScale = rw;
+    webView.scrollView.maximumZoomScale = rw;
+    webView.scrollView.zoomScale = rw;
+  }
+  
+  if (app_delegate.isiPad && webView.tag!=MAIN_VIEW_TAG) {
+/*    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = self.mainUIWebView.bounds.size;
+    
+    float rw = viewSize.width / contentSize.width;
+    
+    webView.scrollView.minimumZoomScale = rw;
+    webView.scrollView.maximumZoomScale = rw;
+    webView.scrollView.zoomScale = rw;*/
+  }
+
 }
 
 
