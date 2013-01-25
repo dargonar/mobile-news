@@ -29,6 +29,8 @@
 		788A1DAA169DE285007DCDD3 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */; };
 		788A1DAC169DE28B007DCDD3 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAB169DE28A007DCDD3 /* Default-Landscape@2x~ipad.png */; };
 		788A1DAE169DF0E7007DCDD3 /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
+		788A3F4B16B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */; };
+		788A3F4C16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */; };
 		78D656FB165ACD210063B8FF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D656FA165ACD210063B8FF /* Default.png */; };
 		78D656FC165AD84D0063B8FF /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF416262FC400B9B3EA /* Default-Portrait@2x~ipad.png */; };
 		78D656FD165AD84F0063B8FF /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE01DEF216262FB200B9B3EA /* Default-Portrait~ipad.png */; };
@@ -544,6 +546,8 @@
 		788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		788A1DAB169DE28A007DCDD3 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		788A1DAD169DF0E7007DCDD3 /* functions.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = functions.xsl; sourceTree = "<group>"; };
+		788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_landscape.xsl; sourceTree = "<group>"; };
+		788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_portrait.xsl; sourceTree = "<group>"; };
 		78D656FA165ACD210063B8FF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		78E3F002164DAD5200C7EB24 /* menu_clasificados.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu_clasificados.html; sourceTree = "<group>"; };
 		78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
@@ -941,6 +945,8 @@
 				788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */,
 				78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */,
 				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
+				788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */,
+				788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */,
 				78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */,
 				78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */,
 				78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */,
@@ -1896,6 +1902,8 @@
 				788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */,
 				78526B42169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl in Resources */,
 				78526B43169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl in Resources */,
+				788A3F4B16B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl in Resources */,
+				788A3F4C16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl in Resources */,
 				78526B44169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl in Resources */,
 				78526B45169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl in Resources */,
 				78526B46169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl in Resources */,

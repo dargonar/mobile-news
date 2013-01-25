@@ -25,9 +25,12 @@ NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
-NSString * const iPad_SECTION_STYLESHEET                 = @"1_tablet_section_list.xsl";
+NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
 NSString * const iPad_SECTION_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_seccion_portrait.xsl";
 NSString * const iPad_SECTION_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_seccion_landscape.xsl";
+NSString * const iPad_MAIN_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_index_portrait.xsl";
+NSString * const iPad_MAIN_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_index_landscape.xsl";
+
 NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";
 NSString * const iPad_NOTICIA_LS_STYLESHEET           = @"3_tablet_new_landscape.xsl";
 NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_portrait.xsl";
@@ -110,7 +113,7 @@ BOOL isIpad=NO;
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
 
   //[NSString stringWithFormat:@"menu_%@", url]
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO url_prefix:@"menu_"];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"sm" error:error processNavigation:NO url_prefix:@"menu_"];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -294,6 +297,11 @@ BOOL isIpad=NO;
 }
 
 -(NSString*)getStyleSheetiPad:(NSString*)url {
+  
+  if( [url hasPrefix:@"menu_section://main"] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
   
   if( [url hasPrefix:@"menu_section://"] ) {
     NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;

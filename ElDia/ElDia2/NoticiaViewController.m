@@ -205,7 +205,8 @@ int MAIN_VIEW_TAG = 9669;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-     networkGallery = nil;
+      networkGallery = nil;
+      self->currentSection=nil;
     }
     return self;
 }
@@ -215,10 +216,9 @@ int MAIN_VIEW_TAG = 9669;
   self.bottomUIView.hidden = YES;
 }
 
--(void)loadNoticia:(NSURL *)url section:(NSString*)section{
+-(void)loadNoticia:(NSURL *)url section:(NSString*)section {
   
   [self onLoading:YES];
-  self->currentSection = section;
   //noticia://guid?url=_url_&title=_title_&header=_header_
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
@@ -250,6 +250,11 @@ int MAIN_VIEW_TAG = 9669;
   }
   
   [self loadUrl:uri useCache:NO];
+  
+  if (self->currentSection!=nil && [self->currentSection isEqualToString:section]) {
+    return;
+  }
+  self->currentSection = section;
   [self loadSectionNews];
 }
 

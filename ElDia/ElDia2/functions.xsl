@@ -237,14 +237,26 @@
     <div id="nota">
       <xsl:choose>
         <xsl:when test="not(not($Node/media:thumbnail))">
+          
           <div class="main_img_container">
+            <div class="imagenNotaAbierta" id="img_{$Node/media:thumbnail/@url}" style="background-image:url(i_{$Node/media:thumbnail/@url});">
+              <xsl:variable name="container_type">video_over_photo</xsl:variable>
+              <xsl:call-template name="MediaLink">
+                <xsl:with-param name="Node" select="$Node"/>
+                <xsl:with-param name="container_type" select="$container_type"/>
+              </xsl:call-template>
+            </div>
+          </div>
+          
+          <!--div class="main_img_container">
             <img src="{$Node/media:thumbnail/@url}" id="img_{$Node/media:thumbnail/@url}" class="imagenNotaAbierta"/>
             <xsl:variable name="container_type">video_over_photo</xsl:variable>
             <xsl:call-template name="MediaLink">
               <xsl:with-param name="Node" select="$Node"/>
               <xsl:with-param name="container_type" select="$container_type"/>
             </xsl:call-template>
-          </div>
+          </div-->
+          
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="container_type">no_photo</xsl:variable>

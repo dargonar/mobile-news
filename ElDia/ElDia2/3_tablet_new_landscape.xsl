@@ -27,11 +27,11 @@
       </head>
       
       <body class="landscape" onload="update_imagen_nota_abierta()">
-        
-        <xsl:call-template name="tablet_open_new_landscape">
-          <xsl:with-param name="Node" select="rss/channel/item[1]"/>
-        </xsl:call-template>
-        
+        <div class="padded">
+          <xsl:call-template name="tablet_open_new_landscape">
+            <xsl:with-param name="Node" select="rss/channel/item[1]"/>
+          </xsl:call-template>
+        </div>
         <!--xsl:if test="rss/channel/item[1]/news:related" >
           <xsl:variable name="Title">Noticias relacionadas</xsl:variable>
           <xsl:call-template name="TituloSeccionONotisRelac">
