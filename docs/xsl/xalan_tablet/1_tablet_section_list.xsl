@@ -19,9 +19,9 @@
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
-      <body onload="update_all_images()">
+      <body onload="update_all_images()" class="portrait padded">
         <div id="updated_msg" class="updated hidden">Actualizado hace 1 segundo</div>
-        <div id="index">
+        <div id="index" class="padded">
           <xsl:call-template name="tablet_index_portrait_secondary">
             <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 0 and position() &lt; 3]"/>
           </xsl:call-template>

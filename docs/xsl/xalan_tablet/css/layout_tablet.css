@@ -12,9 +12,11 @@ body {
 }
 
 body.portrait{width:960px;}
+body.padded{width:1020px;}
 
 img { border:none; margin:0;}
 
+div.padded, #index.padded{ background-color:#FFFFFF; padding:0px 30px 0px 30px !important;}
 /*
 p { font-size:12px; line-height:18px; margin:0 0 10px 0;}
 h1 { font-size:30px; line-height:32px; margin:0 0 10px 0;}
@@ -40,7 +42,7 @@ INDEX
 #index {
 	width:960px;
   /*padding:24px;*/
-  padding:0 !important; 
+  padding:0 ;
   margin:0 auto;
   overflow:hidden;
 }
@@ -240,6 +242,10 @@ INDEX
 	width:172px;
 	height:115px;
 	margin:10px;
+  
+  background-size: cover;
+  background-position: center;
+  display: block;
   position:relative;
 }
 
@@ -253,6 +259,10 @@ LANDSCAPE
 ********************************************/
 #landscape, .landscape {
 	width:600px;
+}
+
+body.landscape.padded{
+  width:660px;
 }
 
 /* NOTA ABIERTA */
