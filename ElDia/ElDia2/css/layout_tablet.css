@@ -12,7 +12,7 @@ body {
 }
 
 body.portrait{width:960px;}
-body.padded{width:1020px;}
+body.padded{width:1020px; overflow:hidden;}
 
 img { border:none; margin:0;}
 

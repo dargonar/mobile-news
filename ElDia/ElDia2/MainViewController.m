@@ -42,6 +42,8 @@ BOOL refreshingOn=NO;
   [super viewDidLoad];
   
   NSString *mainUrl = @"section://main";
+  //  mainUrl = @"noticia://1_173699";
+
   [self setCurrentUrl:mainUrl];
   
   if ([app_delegate isiPad]) {

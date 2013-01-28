@@ -438,6 +438,7 @@ int MAIN_VIEW_TAG = 9669;
   [self changeFontSize:0];
   
   if (webView.tag==MAIN_VIEW_TAG) {
+    
     CGSize contentSize = webView.scrollView.contentSize;
     CGSize viewSize = self.mainUIWebView.bounds.size;
   
