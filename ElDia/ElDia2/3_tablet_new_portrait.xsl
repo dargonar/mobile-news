@@ -18,21 +18,19 @@
   <xsl:template match="/">
     <html>
       <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <!-- meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" / -->
-        <meta name="viewport" content="width=device-width,user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
+        <title>NOTICIA PORTRAIT</title>
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
         <script type="text/javascript" src="js/functions.js"></script>
-        <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout_tablet.css" / -->
-        <title>NOTICIA</title>
       </head>
       
       <body onload="update_imagen_nota_abierta()" class="portrait padded">
-        <div class="padded">
+        
           <xsl:call-template name="tablet_open_new_portrait">
             <xsl:with-param name="Node" select="rss/channel/item[1]"/>
           </xsl:call-template>
-        </div>
+         
       </body>
     </html>
   </xsl:template>

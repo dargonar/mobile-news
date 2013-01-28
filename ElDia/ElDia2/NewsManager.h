@@ -14,5 +14,6 @@
 -(void)setURLs:(NSArray*)array;
 -(NSURL*)getNextNoticiaId:(NSString*)_noticia_id;
 -(NSURL*)getPrevNoticiaId:(NSString*)_noticia_id;
-
+-(NSInteger)getCount;
+-(NSInteger)getIndex:(NSString*)_noticia_id;
 @end

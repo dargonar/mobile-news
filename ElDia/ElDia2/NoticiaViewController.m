@@ -25,7 +25,7 @@
 @synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView,
   btnFontSizePlus, btnFontSizeMinus, loading_indicator,
   myYoutubeViewController, headerUIImageView, offline_view,
-  noticia_id, noticia_url, noticia_title, noticia_header;
+  noticia_id, noticia_url, noticia_title, noticia_header, pageControl;
 
 int MAIN_VIEW_TAG = 9669;
 
@@ -243,15 +243,21 @@ int MAIN_VIEW_TAG = 9669;
   if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
-    NSData *data = [self.mScreenManager getArticle:uri useCache:YES error:&err];
-    [self setHTML:data url:uri webView:self.mainUIWebView];
-    [self loadSectionNews];
-    return;
+    NSData*lastData = [self.mScreenManager getArticle:uri useCache:YES error:&err];
+    [self setHTML:lastData url:uri webView:self.mainUIWebView];
+  }
+  else
+  {
+    [self loadUrl:uri useCache:NO];
   }
   
-  [self loadUrl:uri useCache:NO];
-  
+  if([app_delegate isiPad]==NO)
+  {
+    pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
+    return;
+  }
   if (self->currentSection!=nil && [self->currentSection isEqualToString:section]) {
+    pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
     return;
   }
   self->currentSection = section;
@@ -271,6 +277,8 @@ int MAIN_VIEW_TAG = 9669;
         else
         {
           [self setHTML:data url:nil webView:self.menu_webview];
+          pageControl.numberOfPages = [[NewsManager defaultNewsManager] getCount ];
+          pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
         }
         data=nil;
       });
@@ -299,7 +307,6 @@ int MAIN_VIEW_TAG = 9669;
       }
       
       [self setHTML:data url:url webView:self.mainUIWebView];
-     
       data=nil;
       
       
@@ -367,19 +374,12 @@ int MAIN_VIEW_TAG = 9669;
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
+  
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
     
-    self.menu_webview.scrollView.bounces = NO;
-    
-    
-
-  }
-  
-  if ([app_delegate isiPad]) {
     [[self mainUIWebView] setScalesPageToFit:YES];
-    
   }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
@@ -441,30 +441,40 @@ int MAIN_VIEW_TAG = 9669;
   [self onLoading:NO];
   [self changeFontSize:0];
   
-  if (webView.tag==MAIN_VIEW_TAG) {
-    
-    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.mainUIWebView.bounds.size;
+  if (app_delegate.isiPad){
   
-    float rw =viewSize.width / contentSize.width;
-  
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;
+    if (webView.tag==MAIN_VIEW_TAG) {
+      
+      /*
+       CGFloat contentHeight = [[webView stringByEvaluatingJavaScriptFromString:
+       @"document.documentElement.scrollHeight"] floatValue];
+       webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y,
+       webView.frame.size.width, contentHeight);
+       */
+      
+      /*
+      CGSize contentSize = webView.scrollView.contentSize;
+      CGSize viewSize = self.mainUIWebView.bounds.size;
+      
+      float rw =viewSize.width / contentSize.width;
+      
+      webView.scrollView.minimumZoomScale = rw;
+      webView.scrollView.maximumZoomScale = rw;
+      webView.scrollView.zoomScale = rw;
+      */
+      
+      //[webView sizeThatFits:CGSizeZero];
+      
+      //[webView.scrollView sizeToFit];
+      //webView.scrollView.scrollEnabled = NO;
+       
+      
+    }
     
+    if (webView.tag!=MAIN_VIEW_TAG) {
+      
+    }
   }
-  
-  if (app_delegate.isiPad && webView.tag!=MAIN_VIEW_TAG) {
-/*    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.mainUIWebView.bounds.size;
-    
-    float rw = viewSize.width / contentSize.width;
-    
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;*/
-  }
-
 }
 
 

@@ -42,7 +42,7 @@ BOOL refreshingOn=NO;
   [super viewDidLoad];
   
   NSString *mainUrl = @"section://main";
-  //  mainUrl = @"noticia://1_173699";
+  //mainUrl = @"noticia://1_173756";
 
   [self setCurrentUrl:mainUrl];
   

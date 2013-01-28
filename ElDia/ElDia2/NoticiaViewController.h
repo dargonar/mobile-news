@@ -49,6 +49,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
+@property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
+
 @property (nonatomic, retain) IBOutlet UIView *offline_view;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
