@@ -370,12 +370,16 @@ int MAIN_VIEW_TAG = 9669;
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
+    
+    self.menu_webview.scrollView.bounces = NO;
+    
+    
 
   }
   
   if ([app_delegate isiPad]) {
     [[self mainUIWebView] setScalesPageToFit:YES];
-
+    
   }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
@@ -441,11 +445,12 @@ int MAIN_VIEW_TAG = 9669;
     CGSize contentSize = webView.scrollView.contentSize;
     CGSize viewSize = self.mainUIWebView.bounds.size;
   
-    float rw =viewSize.width/contentSize.width;
+    float rw =viewSize.width / contentSize.width;
   
     webView.scrollView.minimumZoomScale = rw;
     webView.scrollView.maximumZoomScale = rw;
     webView.scrollView.zoomScale = rw;
+    
   }
   
   if (app_delegate.isiPad && webView.tag!=MAIN_VIEW_TAG) {
