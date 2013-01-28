@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "374650143.020534"
+         timestampString = "381035136.934774"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "162"
-         endingLineNumber = "162"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,7 +65,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "255"
          endingLineNumber = "255"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadNoticia:section:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
