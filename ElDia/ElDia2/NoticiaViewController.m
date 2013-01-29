@@ -22,10 +22,11 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView,
-  btnFontSizePlus, btnFontSizeMinus, loading_indicator,
-  myYoutubeViewController, headerUIImageView, offline_view,
-  noticia_id, noticia_url, noticia_title, noticia_header, pageControl;
+@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView;
+@synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
+@synthesize myYoutubeViewController, headerUIImageView, offline_view;
+@synthesize noticia_id, noticia_url, noticia_title, noticia_header;
+@synthesize pageControl, pageIndicator;
 
 int MAIN_VIEW_TAG = 9669;
 
@@ -216,20 +217,45 @@ int MAIN_VIEW_TAG = 9669;
   self.bottomUIView.hidden = YES;
 }
 
+-(void)invalidatePageIndicators{
+  pageIndicator.hidden=YES;
+  pageControl.hidden=YES;
+}
+
+-(void)initPageIndicators:(NSInteger)count index:(NSInteger)index{
+  if(count>20)
+  {
+    pageIndicator.hidden=NO;
+    pageControl.hidden=YES;
+  }
+  else
+  {
+    pageIndicator.hidden=YES;
+    pageControl.hidden=NO;
+  }
+  
+  pageControl.numberOfPages = count;
+  pageIndicator.tag = count;
+  
+  [self setPageIndicatorIndex:index];
+}
+
+-(void)setPageIndicatorIndex:(NSInteger)index{
+  pageControl.currentPage = index;
+  [pageIndicator setText:[[NSString alloc] initWithFormat:@"%i / %i", (index+1),   pageIndicator.tag]];
+
+}
+
 -(void)loadNoticia:(NSURL *)url section:(NSString*)section {
   
   [self onLoading:YES];
-  //noticia://guid?url=_url_&title=_title_&header=_header_
+
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
-  NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;//[[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+  NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
   
-  //NSData *dt = [urlString__ dataUsingEncoding:NSASCIIStringEncoding];
-  //NSString *urlString = [[NSString alloc] initWithData:dt encoding:NSUTF8StringEncoding];
-  
-  //NSLog(@" URL 1: %@", urlString__);
-  NSLog(@" URL 1: %@", urlString);
-  NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
+  //NSLog(@" URL 1: %@", urlString);
+  //NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
   
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
@@ -251,15 +277,11 @@ int MAIN_VIEW_TAG = 9669;
     [self loadUrl:uri useCache:NO];
   }
   
-  if([app_delegate isiPad]==NO)
-  {
-    pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
+  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
+    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
-  if (self->currentSection!=nil && [self->currentSection isEqualToString:section]) {
-    pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
-    return;
-  }
+  
   self->currentSection = section;
   [self loadSectionNews];
 }
@@ -277,8 +299,8 @@ int MAIN_VIEW_TAG = 9669;
         else
         {
           [self setHTML:data url:nil webView:self.menu_webview];
-          pageControl.numberOfPages = [[NewsManager defaultNewsManager] getCount ];
-          pageControl.currentPage = [[NewsManager defaultNewsManager] getIndex:noticia_id];
+          [self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+          
         }
         data=nil;
       });

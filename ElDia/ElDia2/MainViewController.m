@@ -21,7 +21,7 @@
 BOOL splashOn=NO;
 BOOL errorOn=NO;
 BOOL refreshingOn=NO;
-
+NSLock *menuLock;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +32,7 @@ BOOL refreshingOn=NO;
       errorOn = NO;
       refreshingOn=NO;
       self.btnOptions.enabled=NO;
+      menuLock = [[NSLock alloc] init];
     }
   
   return self;
@@ -167,9 +168,11 @@ BOOL refreshingOn=NO;
   self.welcome_view=nil;
 } 
 
-
 - (IBAction) btnOptionsClick: (id)param{
+  if(![menuLock tryLock])
+    return;
   [app_delegate showSideMenu];
+  [menuLock unlock];
 }
 
 - (IBAction) btnRefreshClick: (id)param{

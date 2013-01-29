@@ -35,7 +35,7 @@ NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.
 NSString * const iPad_NOTICIA_LS_STYLESHEET           = @"3_tablet_new_landscape.xsl";
 NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_portrait.xsl";
 NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_landscape.xsl";
-NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones";
+NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones.xsl";
 NSString * const iPad_CLASIFICADOS_STYLESHEET         = @".xsl";
 
 NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";

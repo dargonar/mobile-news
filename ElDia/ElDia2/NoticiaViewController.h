@@ -50,6 +50,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
+@property (nonatomic, retain) IBOutlet UILabel *pageIndicator;
 
 @property (nonatomic, retain) IBOutlet UIView *offline_view;
 

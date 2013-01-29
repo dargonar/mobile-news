@@ -12,7 +12,7 @@
 
 #define app_delegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@class MainViewController, MenuViewController, MenuClasificadosViewController;
+@class MainViewController, MenuViewController, MenuClasificadosViewController, ClasificadosViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
   NSOperationQueue  *download_queue;
@@ -23,13 +23,14 @@
 @property (strong, nonatomic) MainViewController *mainViewController;
 @property (strong, nonatomic) MenuViewController *menuViewController;
 @property (strong, nonatomic) MenuClasificadosViewController *menuClasificadosViewController;
-
+@property (strong, nonatomic) ClasificadosViewController *clasificadosViewController;
 @property (strong, nonatomic) UINavigationController * navigationController;
 @property (strong, nonatomic) NSOperationQueue *download_queue;;
 
 - (void)showSideMenu;
 - (void)hideSideMenu;
 - (void)hideSideMenu2;
+- (void)hideSideMenu3;
 //- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url;
 - (void)requestDone:(ASIHTTPRequest *)request;
 - (void)requestWentWrong:(ASIHTTPRequest *)request;
