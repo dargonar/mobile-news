@@ -47,6 +47,7 @@ NSLock *lock;
 }
 
 -(void)loadDataIfExists{
+  
   [lock lock];
   if(dati!=nil)
   {
@@ -159,7 +160,8 @@ NSLock *lock;
   [screenShotImageView setImage:self.screenShotImage];
   [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   
-  [self adjustWebViewWidth:(320.0-44.0)];
+  //self.view.frame.size.width
+  [self adjustWebViewWidth:(320.0)];
   
   // now we'll animate it across to the right over 0.2 seconds with an Ease In and Out curve
   // this uses blocks to do the animation. Inside the block the frame of the UIImageView has its
@@ -239,9 +241,7 @@ NSLock *lock;
     return;
   }
   frame.size.width = _width;
-  NSLog(@"ANTES de setearle el width");
   webView.frame = frame;
-  NSLog(@"DESPUES de setearle el width");
 
 }
 
@@ -298,6 +298,15 @@ NSLock *lock;
       [self slideThenHide2];
       return NO;
     }
+    else
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"]) // por ahora page://clasificados
+      {
+        [app_delegate loadClasificadosMenu:url];
+        //ToDo -> llamar al main view
+        [self slideThenHide2];
+        return NO;
+      }
+  
   return YES;
   
 }

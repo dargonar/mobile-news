@@ -780,7 +780,7 @@
   <xsl:template name="tablet_open_new_portrait">
     <xsl:param name="Node" />
     
-    <div id="index">
+    <div id="index" class="padded top_padded">
       <div class="nota_abierta">
         <div class="info">
           <div class="encabezado">

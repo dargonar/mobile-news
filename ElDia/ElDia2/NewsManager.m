@@ -35,6 +35,26 @@ NSMutableArray *_urls_de_noticias=nil;
     [_ids_de_noticias addObject:[(NSURL*)[array objectAtIndex:i] host]];
 }
 
+
+-(NSInteger)getCount{
+  if(_ids_de_noticias==nil)
+    return 0;
+  return  (NSInteger)[_ids_de_noticias count];
+}
+-(NSInteger)getIndex:(NSString*)_noticia_id
+{
+  if(_ids_de_noticias==nil)
+  {
+    return 0;
+  }
+  NSUInteger index = [_ids_de_noticias indexOfObject:_noticia_id];
+  if(index==NSNotFound)
+    return 0;
+  return index;
+
+}
+
+
 -(NSURL*)getNextNoticiaId:(NSString*)_noticia_id
 {
   if(_ids_de_noticias==nil)

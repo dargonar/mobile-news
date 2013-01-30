@@ -22,10 +22,11 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView,
-  btnFontSizePlus, btnFontSizeMinus, loading_indicator,
-  myYoutubeViewController, headerUIImageView, offline_view,
-  noticia_id, noticia_url, noticia_title, noticia_header;
+@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView;
+@synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
+@synthesize myYoutubeViewController, headerUIImageView, offline_view;
+@synthesize noticia_id, noticia_url, noticia_title, noticia_header;
+@synthesize pageControl, pageIndicator;
 
 int MAIN_VIEW_TAG = 9669;
 
@@ -216,20 +217,45 @@ int MAIN_VIEW_TAG = 9669;
   self.bottomUIView.hidden = YES;
 }
 
+-(void)invalidatePageIndicators{
+  pageIndicator.hidden=YES;
+  pageControl.hidden=YES;
+}
+
+-(void)initPageIndicators:(NSInteger)count index:(NSInteger)index{
+  if(count>20)
+  {
+    pageIndicator.hidden=NO;
+    pageControl.hidden=YES;
+  }
+  else
+  {
+    pageIndicator.hidden=YES;
+    pageControl.hidden=NO;
+  }
+  
+  pageControl.numberOfPages = count;
+  pageIndicator.tag = count;
+  
+  [self setPageIndicatorIndex:index];
+}
+
+-(void)setPageIndicatorIndex:(NSInteger)index{
+  pageControl.currentPage = index;
+  [pageIndicator setText:[[NSString alloc] initWithFormat:@"%i / %i", (index+1),   pageIndicator.tag]];
+
+}
+
 -(void)loadNoticia:(NSURL *)url section:(NSString*)section {
   
   [self onLoading:YES];
-  //noticia://guid?url=_url_&title=_title_&header=_header_
+
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
-  NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;//[[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+  NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
   
-  //NSData *dt = [urlString__ dataUsingEncoding:NSASCIIStringEncoding];
-  //NSString *urlString = [[NSString alloc] initWithData:dt encoding:NSUTF8StringEncoding];
-  
-  //NSLog(@" URL 1: %@", urlString__);
-  NSLog(@" URL 1: %@", urlString);
-  NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
+  //NSLog(@" URL 1: %@", urlString);
+  //NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
   
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
@@ -243,17 +269,19 @@ int MAIN_VIEW_TAG = 9669;
   if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
-    NSData *data = [self.mScreenManager getArticle:uri useCache:YES error:&err];
-    [self setHTML:data url:uri webView:self.mainUIWebView];
-    [self loadSectionNews];
+    NSData*lastData = [self.mScreenManager getArticle:uri useCache:YES error:&err];
+    [self setHTML:lastData url:uri webView:self.mainUIWebView];
+  }
+  else
+  {
+    [self loadUrl:uri useCache:NO];
+  }
+  
+  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
+    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
   
-  [self loadUrl:uri useCache:NO];
-  
-  if (self->currentSection!=nil && [self->currentSection isEqualToString:section]) {
-    return;
-  }
   self->currentSection = section;
   [self loadSectionNews];
 }
@@ -271,6 +299,8 @@ int MAIN_VIEW_TAG = 9669;
         else
         {
           [self setHTML:data url:nil webView:self.menu_webview];
+          [self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+          
         }
         data=nil;
       });
@@ -299,7 +329,6 @@ int MAIN_VIEW_TAG = 9669;
       }
       
       [self setHTML:data url:url webView:self.mainUIWebView];
-     
       data=nil;
       
       
@@ -367,15 +396,12 @@ int MAIN_VIEW_TAG = 9669;
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
+  
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
-
-  }
-  
-  if ([app_delegate isiPad]) {
+    
     [[self mainUIWebView] setScalesPageToFit:YES];
-
   }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
@@ -437,29 +463,40 @@ int MAIN_VIEW_TAG = 9669;
   [self onLoading:NO];
   [self changeFontSize:0];
   
-  if (webView.tag==MAIN_VIEW_TAG) {
+  if (app_delegate.isiPad){
+  
+    if (webView.tag==MAIN_VIEW_TAG) {
+      
+      /*
+       CGFloat contentHeight = [[webView stringByEvaluatingJavaScriptFromString:
+       @"document.documentElement.scrollHeight"] floatValue];
+       webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y,
+       webView.frame.size.width, contentHeight);
+       */
+      
+      /*
+      CGSize contentSize = webView.scrollView.contentSize;
+      CGSize viewSize = self.mainUIWebView.bounds.size;
+      
+      float rw =viewSize.width / contentSize.width;
+      
+      webView.scrollView.minimumZoomScale = rw;
+      webView.scrollView.maximumZoomScale = rw;
+      webView.scrollView.zoomScale = rw;
+      */
+      
+      //[webView sizeThatFits:CGSizeZero];
+      
+      //[webView.scrollView sizeToFit];
+      //webView.scrollView.scrollEnabled = NO;
+       
+      
+    }
     
-    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.mainUIWebView.bounds.size;
-  
-    float rw =viewSize.width/contentSize.width;
-  
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;
+    if (webView.tag!=MAIN_VIEW_TAG) {
+      
+    }
   }
-  
-  if (app_delegate.isiPad && webView.tag!=MAIN_VIEW_TAG) {
-/*    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.mainUIWebView.bounds.size;
-    
-    float rw = viewSize.width / contentSize.width;
-    
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;*/
-  }
-
 }
 
 

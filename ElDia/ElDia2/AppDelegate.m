@@ -26,7 +26,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize mainViewController, menuClasificadosViewController, menuViewController;
+@synthesize mainViewController, menuClasificadosViewController, menuViewController, clasificadosViewController;
 @synthesize navigationController;
 @synthesize download_queue;
 
@@ -36,9 +36,6 @@
   [iVersion sharedInstance].ignoredVersion=nil;
   [iVersion sharedInstance].showOnFirstLaunch = NO;
   
-  //set the bundle ID. normally you wouldn't need to do this
-  //as it is picked up automatically from your Info.plist file
-  //but we want to test with an app that's actually on the store
   [iVersion sharedInstance].applicationBundleID = @"com.diventi.mobipaper";
   //[iVersion sharedInstance].appStoreID = 578331790;
   
@@ -125,15 +122,18 @@ int cache_size = 2; //30;
   NSString *mainNibName           = @"MainViewController";
   NSString *menuNibName           = @"MenuViewController";
   NSString *menuClasificadosNibName   = @"MenuClasificadosViewController";
+  NSString *clasificadosNibName       =@"ClasificadosViewController";
   if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
     mainNibName = @"MainViewController_iPad";
     menuNibName = @"MenuViewController_iPad";
-    menuClasificadosNibName  = @"MenuClasificadosViewController_iPad"; // NO EXISTE!
+    menuClasificadosNibName  = @"MenuClasificadosViewController_iPad";
+    clasificadosNibName       =@"ClasificadosViewController_iPad";
   }
   self.menuViewController         = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   self.mainViewController         = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
   self.menuClasificadosViewController = [[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
-  
+  self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
   //[navigationController pushViewController:self.mainViewController animated:NO];
@@ -209,6 +209,10 @@ int cache_size = 2; //30;
   [navigationController pushViewController:self.menuViewController animated:NO ];
 }
 
+-(void)hideSideMenu3{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+}
 -(void)hideSideMenu2{
   [navigationController popToViewController:mainViewController animated:NO];
   [navigationController pushViewController:self.menuClasificadosViewController animated:YES ];
