@@ -265,6 +265,9 @@ int MAIN_VIEW_TAG = 9669;
   
   NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
   
+  // Para ver si podemos recibir imagen updated.
+  [self setCurrentUrl:uri];
+  
   NSLog(@"URI: %@", uri);
   if([self.mScreenManager articleExists:uri])
   {
