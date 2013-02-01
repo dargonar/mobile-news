@@ -28,8 +28,8 @@
               <li><a href="section://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>
             </xsl:for-each>
             
-            <li><a href="clasificados://" class="seccion">Clasificados</a></li>
-            <!--
+            
+            <!-- li><a href="clasificados://" class="seccion">Clasificados</a></li -->
             <li class="seccion">Clasificados</li>
             <li><a href="clasificados://0">Salud</a></li>
             <li><a href="clasificados://1">Alquiler de habitaciones</a></li>
@@ -68,7 +68,7 @@
             <li><a href="clasificados://34">Jardinería, plantas y viveros</a></li>
             <li><a href="clasificados://35">Carpintería metalica y madera, puertas, cortinas</a></li>
             <li><a href="clasificados://36">Ferreterías - cerrajerías</a></li>
-            -->
+
             <li class="seccion">Varios</li>
             <li><a href="#">Fúnebres</a></li>
             <li><a href="#">Indice de Rubros</a></li>
