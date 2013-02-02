@@ -217,9 +217,9 @@ NSLock *menuLock;
 -(NSUInteger)supportedInterfaceOrientations
 {
   if ([app_delegate isiPad]==NO) {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationPortrait; //UIInterfaceOrientationMaskPortrait;
   }
-  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+  return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;//UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
 }
 
 BOOL isShowingLandscapeView = NO;
@@ -242,9 +242,126 @@ BOOL isShowingLandscapeView = NO;
   }
 }
 
--(void)positionateLandscape{
-  
+- (void)willRotateToInterfaceOrientation: (UIInterfaceOrientation)toInterfaceOrientation duration: (NSTimeInterval)duration {
+  double i = 0;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  NSLog(@"view :%@",[self.view description]);
+  switch (toInterfaceOrientation){
+    case UIInterfaceOrientationPortrait:
+    {
+      /*NSLog(@"rotate to Portrait");
+      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        self.docView.frame=CGRectMake(0, 50, width+20, height-70);
+        self.toolbar.frame=CGRectMake(0, 0,height , 50);
+        for (UIView * view in [toolbar subviews]) {
+          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag){
+            view.frame=CGRectMake(width-60, 6, 50, 36);
+            
+          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
+            view.frame=CGRectMake(width-160, 6, 80,36 );
+          }
+        }
+        [coverflow setFrame:CGRectMake(0, 0 , width+20, height/2-50)];
+        [titleLabel setFrame:CGRectMake(width/2-40,height/2-100, 100, 20)];
+        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
+          self.viewer.frame=CGRectMake(0, 0, 768, 1004);
+        }else{
+          self.viewer.frame=CGRectMake(0, 0, 320, 480);
+        }
+      }
+      i=0;*/
+    }break;
+    case UIInterfaceOrientationPortraitUpsideDown:
+    {
+      /*NSLog(@"rotate to PortraitUpsideDown");
+      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        self.docView.frame=CGRectMake(0, 50, width+20, height-70);
+        self.toolbar.frame=CGRectMake(0, 0,height , 50);
+        for (UIView * view in [toolbar subviews]) {
+          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
+            view.frame=CGRectMake(width-60, 6, 50, 36);
+            
+          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
+            view.frame=CGRectMake(width-160, 6, 80,36 );
+          }
+        }
+        
+        [coverflow setFrame:CGRectMake(0, 0 , width+20, height/2-50)];
+        [titleLabel setFrame:CGRectMake(width/2-40,height/2-100, 100, 20)];
+        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
+          self.viewer.frame=CGRectMake(0, 0, 768, 1004);
+        }else{
+          self.viewer.frame=CGRectMake(0, 0, 320, 480);
+        }
+        
+      }
+      
+      i=180;*/
+    }   break;
+    case UIInterfaceOrientationLandscapeLeft:{
+      
+      NSLog(@"rotate to LandscapeLeft");
+      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        //     self.coverflow.frame=CGRectMake(0, 0, height+20, width-20);
+        // x y width height
+        self.mainUIWebView.frame=CGRectMake(0, 44, height/2, width-44);
+        /*self.toolbar.frame=CGRectMake(0, 0,height+20 , 50);
+        for (UIView * view in [toolbar subviews]) {
+          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
+            view.frame=CGRectMake(height-60, 6, 50, 36);
+            NSLog(@"button %@",[view description]);
+          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
+            view.frame=CGRectMake(height-160, 6, 80,36 );
+          }
+        }
+        [coverflow setFrame:CGRectMake(0, 0 , height+20, width/2-50)];
+        [titleLabel setFrame:CGRectMake(height/2-40,width/2-80, 100, 20)];
+        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
+          self.viewer.frame=CGRectMake(0, 0, 1024, 748);
+        }else{
+          self.viewer.frame=CGRectMake(0, 0, 480, 320);
+        }
+         */
+      }
+      
+      i = 90;
+    }break;
+    case UIInterfaceOrientationLandscapeRight:{
+      NSLog(@"rotate to LandscapeRight");
+      /*if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        self.docView.frame=CGRectMake(0, 50, height+20, width-70);
+        self.toolbar.frame=CGRectMake(0, 0,height+20 , 50);
+        for (UIView * view in [toolbar subviews]) {
+          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
+            view.frame=CGRectMake(height-60, 6, 50, 36);
+          }
+          else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
+            view.frame=CGRectMake(height-160, 6, 80,36 );
+          }
+        }
+        [coverflow setFrame:CGRectMake(0, 0 , height+20, width/2-50)];
+        [titleLabel setFrame:CGRectMake(height/2-40,width/2-80, 100, 20)];
+        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
+          self.viewer.frame=CGRectMake(0, 0, 1024, 748);
+        }else{
+          self.viewer.frame=CGRectMake(0, 0, 480, 320);
+        }
+      }
+      */
+      i = -90;
+    }break;
+  }
 }
+
+-(void)positionateLandscape{
+  double i = 0;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  
+    self.mainUIWebView.frame =  CGRectMake(0, 44, 210, 260);
+}
+
 -(void)positionatePortrait{}
 
 -(void) onErrorRefreshing:(BOOL)started{
