@@ -136,19 +136,14 @@ int cache_size = 2; //30;
 
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
-  //[navigationController pushViewController:self.mainViewController animated:NO];
-  //[self.mainViewController release];
-  //  self.mainViewController = navigationController;
+  
   [self.window addSubview:self.navigationController.view];
+  //[self.window setRootViewController:self.navigationController];
   [self.window makeKeyAndVisible];//HACKED
   
   
   DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
   [SHKConfiguration sharedInstanceWithConfigurator:configurator];
-  
-  //HACK SACAR ANTES DE RELEASE
-  //[NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-  //id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   [self checkCacheSize];
   return YES;
