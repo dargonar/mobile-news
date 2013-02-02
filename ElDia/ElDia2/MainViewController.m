@@ -189,11 +189,63 @@ NSLock *menuLock;
   [self loadUrl:url useCache:NO];
 }
 
+
+
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  if ([app_delegate isiPad]) {
+    return YES;
+  }
+  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  
+  /*
+   if ((orientation == UIInterfaceOrientationPortrait) ||
+   (orientation == UIInterfaceOrientationLandscapeLeft))
+   return YES;
+   
+   return NO;
+   */
 }
 
+- (BOOL) shouldAutorotate
+{
+  return [app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  if ([app_delegate isiPad]==NO) {
+    return UIInterfaceOrientationMaskPortrait;
+  }
+  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+BOOL isShowingLandscapeView = NO;
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
+      !isShowingLandscapeView)
+  {
+    [self positionateLandscape];
+    isShowingLandscapeView = YES;
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
+           isShowingLandscapeView)
+  {
+    [self positionatePortrait];
+    isShowingLandscapeView = NO;
+  }
+}
+
+-(void)positionateLandscape{
+  
+}
+-(void)positionatePortrait{}
 
 -(void) onErrorRefreshing:(BOOL)started{
   self.btnRefresh2.hidden=started;

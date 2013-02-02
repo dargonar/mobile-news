@@ -23,7 +23,7 @@ img { border:none; margin:0;}
 div.padded, #index.padded{
   background-color:#FFFFFF; padding:0px 30px 0px 30px !important;}
 
-#index.padded{min-height:1100px;}
+#index.padded{min-height:1100px !important;}
 #index.top_padded{padding-top:30px !important;}
 /*
 p { font-size:12px; line-height:18px; margin:0 0 10px 0;}

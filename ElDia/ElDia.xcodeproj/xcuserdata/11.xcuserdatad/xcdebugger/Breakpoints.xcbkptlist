@@ -588,5 +588,44 @@
          landmarkName = "-onImageDownloaded:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "381439494.192975"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "195"
+         endingLineNumber = "195"
+         landmarkName = "@implementation MainViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "381439503.473838"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "381440793.828829"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
+         landmarkName = "-shouldAutorotate"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
