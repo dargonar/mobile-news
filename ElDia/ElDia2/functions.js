@@ -10,6 +10,7 @@ function update_image(img) {
 }
 
 function update_all_images() {
+  refresh_background(document.getElementsByClassName('imagen'));
   refresh_background(document.getElementsByClassName('imagen_principal'));
   refresh_background(document.getElementsByClassName('imagen_secundaria'));
 }
@@ -25,8 +26,9 @@ function refresh_background(imgs) {
 
 function update_nota_abierta_image(img){
   var el = document.getElementById('img_'+img);
-  el.src = '';
-  el.src = 'url(i_' + img + ')';
+  //el.src = '';
+  //el.src = 'url(i_' + img + ')';
+  refresh_background([el]);
 }
 
 function update_imagen_nota_abierta(){

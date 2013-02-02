@@ -512,7 +512,7 @@ div.main_img_container {
   overflow-y:hidden;
   }
 ul.portrait_news_list{height: 210px;width:auto; min-width:960px;display:inline-block;}
-ul.portrait_news_list li (float:left;)
+ul.portrait_news_list li {float:left;}
 
 /* cartel actualizado */
 .updated{
@@ -521,7 +521,7 @@ ul.portrait_news_list li (float:left;)
   width:100%;
   text-align:right;
   display:none;
-  position:absolute;
+/*  position:absolute;*/
   top:0px;
   z-index:3;
 }

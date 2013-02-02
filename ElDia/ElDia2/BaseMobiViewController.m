@@ -134,12 +134,17 @@ BOOL mIsIpad=NO;
   NSString *url = [userInfo objectForKey:@"url"];
   NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
   
+  NSLog(@"BaseMobiView::currentUrl [%@]", self.currentUrl);
   if(self.currentUrl != url)
+  {
+    NSLog(@"URL distintas: %@ != %@", self.currentUrl, url);
     return;
-
+  }
+  
   __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@')"
                                  , mobi_image.local_uri];
   
+  NSLog(@"Update Image JS: %@ [%@]", jsString, url);
   dispatch_async(dispatch_get_main_queue(), ^{
     if(self.myUIWebView==nil)
       return;
