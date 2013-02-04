@@ -26,11 +26,14 @@
   NSString* current_url;
 }
 
+@property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
+
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnOptions;
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
-@property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
+@property (nonatomic, retain) IBOutlet UIImageView *header;
+@property (nonatomic, retain) IBOutlet UIImageView *logo;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;

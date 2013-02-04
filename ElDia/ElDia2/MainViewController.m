@@ -17,6 +17,7 @@
 
 @implementation MainViewController
 @synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
+@synthesize header, logo;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -176,6 +177,9 @@ NSLock *menuLock;
 }
 
 - (IBAction) btnRefreshClick: (id)param{
+  //HACK
+  [self onError:YES];
+  return;
   
   [self onRefreshing:YES];
   //ToDo
@@ -246,7 +250,7 @@ BOOL isShowingLandscapeView = NO;
   double i = 0;
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
-  NSLog(@"view :%@",[self.view description]);
+  NSLog(@"view :%@; h:[%i] w:[%i]",[self.view description], height, width);
   switch (toInterfaceOrientation){
     case UIInterfaceOrientationPortrait:
     {
@@ -304,8 +308,8 @@ BOOL isShowingLandscapeView = NO;
       NSLog(@"rotate to LandscapeLeft");
       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         //     self.coverflow.frame=CGRectMake(0, 0, height+20, width-20);
-        // x y width height
         self.mainUIWebView.frame=CGRectMake(0, 44, height/2, width-44);
+        [self.mainUIWebView reload];
         /*self.toolbar.frame=CGRectMake(0, 0,height+20 , 50);
         for (UIView * view in [toolbar subviews]) {
           if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
@@ -358,8 +362,25 @@ BOOL isShowingLandscapeView = NO;
   double i = 0;
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
+
+  NSLog(@"view :%@; h:[%i] w:[%i]",[self.view description], height, width);
+
+  // x y width height
+
   
-    self.mainUIWebView.frame =  CGRectMake(0, 44, 210, 260);
+  self.header.frame=CGRectMake(width/2, 0, width/2, 44);
+  NSInteger logo_x = width/2 + ((width/2)/2)-(self.logo.frame.size.width/2);
+  self.logo.frame=CGRectMake(logo_x, 0, self.logo.frame.size.width, 44);
+  
+  self.btnOptions.hidden = YES;
+  self.btnRefreshClick.frame = CGRectMake(width-self.btnRefreshClick.frame.size.width, 0, self.btnRefreshClick.frame.size.width, self.btnRefreshClick.frame.size.height);
+  self.refresh_loading_indicator.frame = CGRectMake(width-self.refresh_loading_indicator.frame.size.width - 11 ,11 , self.refresh_loading_indicator.frame.size.width, self.refresh_loading_indicator.frame.size.height);
+  NSInteger loading_x = width/2 + ((width/2)/2)-(self.loading_indicator.frame.size.width/2);
+  self.loading_indicator.frame = CGRectMake(loading_x, height/2-self.loading_indicator.frame.size.height/2,self.loading_indicator.frame.size.width, self.loading_indicator.frame.size.height);
+
+  self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+  [self.mainUIWebView reload];
+  
 }
 
 -(void)positionatePortrait{}
