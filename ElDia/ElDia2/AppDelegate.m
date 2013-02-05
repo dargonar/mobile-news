@@ -137,8 +137,8 @@ int cache_size = 2; //30;
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
   
-  [self.window addSubview:self.navigationController.view];
-  //[self.window setRootViewController:self.navigationController];
+  //[self.window addSubview:self.navigationController.view];
+  [self.window setRootViewController:self.navigationController];
   [self.window makeKeyAndVisible];//HACKED
   
   
@@ -182,8 +182,12 @@ int cache_size = 2; //30;
   [self.mainViewController loadUrlAndLoading:self.mainViewController.currentUrl useCache:YES];
 }
 
--(void)loadClasificadosMenu:(NSURL*)url{
-  //[self.menuClasificadosViewController loadClasificados];
+-(void)loadClasificados:(NSURL*)url{
+  [self.clasificadosViewController loadClasificados:url];
+}
+
+-(void)showClasificados{
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
 }
 
 -(void)showSideMenu

@@ -29,6 +29,7 @@
 @property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
 
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
+@property (nonatomic, retain)  IBOutlet UIWebView *menu_webview;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnOptions;
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;

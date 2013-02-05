@@ -28,7 +28,6 @@
 @synthesize noticia_id, noticia_url, noticia_title, noticia_header;
 @synthesize pageControl, pageIndicator;
 
-int MAIN_VIEW_TAG = 9669;
 
 -(void)changeFontSize:(NSInteger)delta{
   

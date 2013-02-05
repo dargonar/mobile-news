@@ -10,6 +10,8 @@
 #import "ScreenManager.h"
 #import "MobiImage.h"
 
+#define MAIN_VIEW_TAG    0x6969
+
 @interface BaseMobiViewController : UIViewController{
   ScreenManager   *mScreenManager;
 }

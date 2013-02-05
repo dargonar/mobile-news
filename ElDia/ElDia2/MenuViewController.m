@@ -161,7 +161,7 @@ NSLock *lock;
   [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   
   //self.view.frame.size.width
-  [self adjustWebViewWidth:(320.0)];
+  [self adjustWebViewWidth:(480.0)];
   
   // now we'll animate it across to the right over 0.2 seconds with an Ease In and Out curve
   // this uses blocks to do the animation. Inside the block the frame of the UIImageView has its
@@ -195,6 +195,16 @@ NSLock *lock;
     [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
                    completion:^(BOOL finished){ [app_delegate hideSideMenu2]; }];
+}
+
+-(void) slideThenHide3
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenu3]; }];
 }
 
 
@@ -286,24 +296,20 @@ NSLock *lock;
   if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"section"])
   {
     [app_delegate loadSectionNews:url];
-    //ToDo -> llamar al main view
     [self slideThenHide];
     return NO;
   }
   else
     if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"]) // por ahora page://clasificados
     {
-      [app_delegate loadClasificadosMenu:url];
-      //ToDo -> llamar al main view
       [self slideThenHide2];
       return NO;
     }
     else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"]) // por ahora page://clasificados
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
       {
-        [app_delegate loadClasificadosMenu:url];
-        //ToDo -> llamar al main view
-        [self slideThenHide2];
+        [app_delegate loadClasificados:url];
+        [self slideThenHide3];
         return NO;
       }
   

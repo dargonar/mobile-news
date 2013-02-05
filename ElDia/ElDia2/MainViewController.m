@@ -16,7 +16,8 @@
 #import "XMLParser.h"
 
 @implementation MainViewController
-@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, mainUIWebView, welcome_indicator;
+@synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, welcome_indicator;
+@synthesize mainUIWebView, menu_webview;
 @synthesize header, logo;
 
 BOOL splashOn=NO;
@@ -44,13 +45,14 @@ NSLock *menuLock;
   [super viewDidLoad];
   
   NSString *mainUrl = @"section://main";
-  //mainUrl = @"noticia://1_173756";
-
   [self setCurrentUrl:mainUrl];
   
+  mainUIWebView.tag=MAIN_VIEW_TAG;
   if ([app_delegate isiPad]) {
     [[self mainUIWebView] setScalesPageToFit:YES];
+    [[self menu_webview] setScalesPageToFit:YES];
   }
+  
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
   
@@ -176,10 +178,25 @@ NSLock *menuLock;
   [menuLock unlock];
 }
 
+NSInteger soto = 0;
 - (IBAction) btnRefreshClick: (id)param{
+
   //HACK
-  [self onError:YES];
-  return;
+  /*if(soto==0)
+  {
+    soto=1;
+    [self onError:YES];
+    return;
+  }
+  
+  if(soto==1)
+  {
+    soto=2;
+    [self onWelcome:YES];
+    return;
+  }
+  soto=0;
+  */
   
   [self onRefreshing:YES];
   //ToDo
@@ -223,7 +240,13 @@ NSLock *menuLock;
   if ([app_delegate isiPad]==NO) {
     return UIInterfaceOrientationPortrait; //UIInterfaceOrientationMaskPortrait;
   }
-  return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;//UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
 }
 
 BOOL isShowingLandscapeView = NO;
@@ -359,7 +382,7 @@ BOOL isShowingLandscapeView = NO;
 }
 
 -(void)positionateLandscape{
-  double i = 0;
+  
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
 
@@ -367,7 +390,7 @@ BOOL isShowingLandscapeView = NO;
 
   // x y width height
 
-  
+  /*
   self.header.frame=CGRectMake(width/2, 0, width/2, 44);
   NSInteger logo_x = width/2 + ((width/2)/2)-(self.logo.frame.size.width/2);
   self.logo.frame=CGRectMake(logo_x, 0, self.logo.frame.size.width, 44);
@@ -378,10 +401,38 @@ BOOL isShowingLandscapeView = NO;
   NSInteger loading_x = width/2 + ((width/2)/2)-(self.loading_indicator.frame.size.width/2);
   self.loading_indicator.frame = CGRectMake(loading_x, height/2-self.loading_indicator.frame.size.height/2,self.loading_indicator.frame.size.width, self.loading_indicator.frame.size.height);
 
+  self.error_view.frame=CGRectMake(0, 0, width, height);
+  self.welcome_view.frame=CGRectMake(0, 0, width, height);
+  */
   self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
   [self.mainUIWebView reload];
   
+  self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  //[self.menu_webview reload];
+  [self loadMenu];
 }
+
+-(void)loadMenu{
+  if ([app_delegate isiPad]) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      __block NSError *err;
+      __block NSData *data = [self.mScreenManager getMenu:YES error:&err];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if(data==nil)
+        {
+          // data = dummy;
+        }
+        else
+        {
+          [self setHTML:data url:nil webView:self.menu_webview];
+          
+        }
+        data=nil;
+      });
+    });
+  }
+}
+
 
 -(void)positionatePortrait{}
 
@@ -479,22 +530,38 @@ BOOL isShowingLandscapeView = NO;
   
   
   NSURL* url = [request URL];
-  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"noticia"])
+  
+  if(webView.tag == MAIN_VIEW_TAG)
   {
-
-    if (self.myNoticiaViewController != nil) {
-      [self.myNoticiaViewController loadBlank];
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"noticia"])
+    {
+      if (self.myNoticiaViewController != nil) {
+        [self.myNoticiaViewController loadBlank];
+      }
+      if (self.myNoticiaViewController == nil) {
+        [self loadNoticiaView];
+      }
+    
+      [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
+    
+      NSLog(@" call load noticia: %@", [url absoluteString]);
+      [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
+    
+      return NO;
     }
-    if (self.myNoticiaViewController == nil) {
-      [self loadNoticiaView];      
+  }
+  else{
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"section"])
+    {
+      [app_delegate loadSectionNews:url];
+      return NO;
     }
-    
-    [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
-    
-    NSLog(@" call load noticia: %@", [url absoluteString]);
-    [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
-    
-    return NO;
+    else
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+      {
+        [app_delegate loadClasificados:url];
+        return NO;
+      }
   }
   return YES;
   
