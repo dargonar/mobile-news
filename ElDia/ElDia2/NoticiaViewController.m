@@ -394,7 +394,6 @@
   mWindow.viewToObserve = mainUIWebView;
   mWindow.controllerThatObserves = self;
 
-
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
@@ -402,6 +401,11 @@
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
+    
+    if([app_delegate isLandscape])
+    {
+      [self positionateLandscape];
+    }
     
     [[self mainUIWebView] setScalesPageToFit:YES];
   }
@@ -436,7 +440,6 @@
 }
 */
 - (void)singleTapWebView {
-  //self.bottomUIView.hidden = !self.bottomUIView.hidden;
   
   if([self.bottomUIView isHidden]==NO)
     [UIView animateWithDuration:.5
@@ -465,40 +468,16 @@
   [self onLoading:NO];
   [self changeFontSize:0];
   
-  if (app_delegate.isiPad){
+  /*
+   if (app_delegate.isiPad){
   
     if (webView.tag==MAIN_VIEW_TAG) {
-      
-      /*
-       CGFloat contentHeight = [[webView stringByEvaluatingJavaScriptFromString:
-       @"document.documentElement.scrollHeight"] floatValue];
-       webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y,
-       webView.frame.size.width, contentHeight);
-       */
-      
-      /*
-      CGSize contentSize = webView.scrollView.contentSize;
-      CGSize viewSize = self.mainUIWebView.bounds.size;
-      
-      float rw =viewSize.width / contentSize.width;
-      
-      webView.scrollView.minimumZoomScale = rw;
-      webView.scrollView.maximumZoomScale = rw;
-      webView.scrollView.zoomScale = rw;
-      */
-      
-      //[webView sizeThatFits:CGSizeZero];
-      
-      //[webView.scrollView sizeToFit];
-      //webView.scrollView.scrollEnabled = NO;
-       
-      
     }
     
     if (webView.tag!=MAIN_VIEW_TAG) {
-      
     }
-  }
+  } 
+   */
 }
 
 
@@ -702,9 +681,73 @@ BOOL is_loading = YES;
   
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+/* rotation handling */
+- (BOOL) shouldAutorotate
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  return YES; //[app_delegate isiPad];
 }
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+BOOL isLandscapeView = NO;
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  if([app_delegate isiPad]==NO)
+    return;
+  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
+      !isLandscapeView)
+  {
+    [self positionateLandscape];
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
+           isLandscapeView)
+  {
+    [self positionatePortrait];
+  }
+}
+
+-(void)positionateLandscape{
+
+  isLandscapeView = YES;
+  
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
+  
+  self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+  [self.mainUIWebView reload];
+  
+  [[self menu_webview] setScalesPageToFit:YES];
+  self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  [self loadSectionNews];
+}
+
+-(void)positionatePortrait{
+  
+  isLandscapeView = NO;
+  
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
+  self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
+  [self.mainUIWebView reload];
+  
+  [[self menu_webview] setScalesPageToFit:NO];
+  self.menu_webview.frame=CGRectMake(0, 44, width, 246);
+  [self loadSectionNews];
+}
+
 
 @end

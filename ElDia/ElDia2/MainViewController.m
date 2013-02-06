@@ -51,6 +51,11 @@ NSLock *menuLock;
   if ([app_delegate isiPad]) {
     [[self mainUIWebView] setScalesPageToFit:YES];
     [[self menu_webview] setScalesPageToFit:YES];
+    
+    if([app_delegate isLandscape])
+    {
+      [self positionateLandscape];
+    }
   }
   
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
@@ -211,35 +216,23 @@ NSInteger soto = 0;
 }
 
 
-
-
-
+/*
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   if ([app_delegate isiPad]) {
     return YES;
   }
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
-  
-  /*
-   if ((orientation == UIInterfaceOrientationPortrait) ||
-   (orientation == UIInterfaceOrientationLandscapeLeft))
-   return YES;
-   
-   return NO;
-   */
 }
+*/
 
 - (BOOL) shouldAutorotate
 {
-  return [app_delegate isiPad];
+  return YES; //[app_delegate isiPad];
 }
 
 -(NSUInteger)supportedInterfaceOrientations
 {
-  if ([app_delegate isiPad]==NO) {
-    return UIInterfaceOrientationPortrait; //UIInterfaceOrientationMaskPortrait;
-  }
   //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
   return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
 }
@@ -253,164 +246,56 @@ BOOL isShowingLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
+  if([app_delegate isiPad]==NO)
+    return;
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isShowingLandscapeView)
   {
     [self positionateLandscape];
-    isShowingLandscapeView = YES;
   }
   else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
            isShowingLandscapeView)
   {
     [self positionatePortrait];
-    isShowingLandscapeView = NO;
-  }
-}
-
-- (void)willRotateToInterfaceOrientation: (UIInterfaceOrientation)toInterfaceOrientation duration: (NSTimeInterval)duration {
-  double i = 0;
-  NSInteger  width=self.view.frame.size.width;
-  NSInteger  height=self.view.frame.size.height;
-  NSLog(@"view :%@; h:[%i] w:[%i]",[self.view description], height, width);
-  switch (toInterfaceOrientation){
-    case UIInterfaceOrientationPortrait:
-    {
-      /*NSLog(@"rotate to Portrait");
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        self.docView.frame=CGRectMake(0, 50, width+20, height-70);
-        self.toolbar.frame=CGRectMake(0, 0,height , 50);
-        for (UIView * view in [toolbar subviews]) {
-          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag){
-            view.frame=CGRectMake(width-60, 6, 50, 36);
-            
-          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
-            view.frame=CGRectMake(width-160, 6, 80,36 );
-          }
-        }
-        [coverflow setFrame:CGRectMake(0, 0 , width+20, height/2-50)];
-        [titleLabel setFrame:CGRectMake(width/2-40,height/2-100, 100, 20)];
-        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
-          self.viewer.frame=CGRectMake(0, 0, 768, 1004);
-        }else{
-          self.viewer.frame=CGRectMake(0, 0, 320, 480);
-        }
-      }
-      i=0;*/
-    }break;
-    case UIInterfaceOrientationPortraitUpsideDown:
-    {
-      /*NSLog(@"rotate to PortraitUpsideDown");
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        self.docView.frame=CGRectMake(0, 50, width+20, height-70);
-        self.toolbar.frame=CGRectMake(0, 0,height , 50);
-        for (UIView * view in [toolbar subviews]) {
-          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
-            view.frame=CGRectMake(width-60, 6, 50, 36);
-            
-          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
-            view.frame=CGRectMake(width-160, 6, 80,36 );
-          }
-        }
-        
-        [coverflow setFrame:CGRectMake(0, 0 , width+20, height/2-50)];
-        [titleLabel setFrame:CGRectMake(width/2-40,height/2-100, 100, 20)];
-        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
-          self.viewer.frame=CGRectMake(0, 0, 768, 1004);
-        }else{
-          self.viewer.frame=CGRectMake(0, 0, 320, 480);
-        }
-        
-      }
-      
-      i=180;*/
-    }   break;
-    case UIInterfaceOrientationLandscapeLeft:{
-      
-      NSLog(@"rotate to LandscapeLeft");
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        //     self.coverflow.frame=CGRectMake(0, 0, height+20, width-20);
-        self.mainUIWebView.frame=CGRectMake(0, 44, height/2, width-44);
-        [self.mainUIWebView reload];
-        /*self.toolbar.frame=CGRectMake(0, 0,height+20 , 50);
-        for (UIView * view in [toolbar subviews]) {
-          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
-            view.frame=CGRectMake(height-60, 6, 50, 36);
-            NSLog(@"button %@",[view description]);
-          }else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
-            view.frame=CGRectMake(height-160, 6, 80,36 );
-          }
-        }
-        [coverflow setFrame:CGRectMake(0, 0 , height+20, width/2-50)];
-        [titleLabel setFrame:CGRectMake(height/2-40,width/2-80, 100, 20)];
-        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
-          self.viewer.frame=CGRectMake(0, 0, 1024, 748);
-        }else{
-          self.viewer.frame=CGRectMake(0, 0, 480, 320);
-        }
-         */
-      }
-      
-      i = 90;
-    }break;
-    case UIInterfaceOrientationLandscapeRight:{
-      NSLog(@"rotate to LandscapeRight");
-      /*if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        self.docView.frame=CGRectMake(0, 50, height+20, width-70);
-        self.toolbar.frame=CGRectMake(0, 0,height+20 , 50);
-        for (UIView * view in [toolbar subviews]) {
-          if ([view isKindOfClass:[UIButton class]] && view.tag==kBackButtonTag)  {
-            view.frame=CGRectMake(height-60, 6, 50, 36);
-          }
-          else if([view isKindOfClass:[UIButton class]] && view.tag==kReloadButtonTag){
-            view.frame=CGRectMake(height-160, 6, 80,36 );
-          }
-        }
-        [coverflow setFrame:CGRectMake(0, 0 , height+20, width/2-50)];
-        [titleLabel setFrame:CGRectMake(height/2-40,width/2-80, 100, 20)];
-        if ([[[UIDevice currentDevice]model]isEqualToString:@"iPad"]) {
-          self.viewer.frame=CGRectMake(0, 0, 1024, 748);
-        }else{
-          self.viewer.frame=CGRectMake(0, 0, 480, 320);
-        }
-      }
-      */
-      i = -90;
-    }break;
   }
 }
 
 -(void)positionateLandscape{
-  
+  isShowingLandscapeView = YES;
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
-
-  NSLog(@"view :%@; h:[%i] w:[%i]",[self.view description], height, width);
-
   // x y width height
 
-  /*
-  self.header.frame=CGRectMake(width/2, 0, width/2, 44);
-  NSInteger logo_x = width/2 + ((width/2)/2)-(self.logo.frame.size.width/2);
-  self.logo.frame=CGRectMake(logo_x, 0, self.logo.frame.size.width, 44);
-  
-  self.btnOptions.hidden = YES;
-  self.btnRefreshClick.frame = CGRectMake(width-self.btnRefreshClick.frame.size.width, 0, self.btnRefreshClick.frame.size.width, self.btnRefreshClick.frame.size.height);
-  self.refresh_loading_indicator.frame = CGRectMake(width-self.refresh_loading_indicator.frame.size.width - 11 ,11 , self.refresh_loading_indicator.frame.size.width, self.refresh_loading_indicator.frame.size.height);
-  NSInteger loading_x = width/2 + ((width/2)/2)-(self.loading_indicator.frame.size.width/2);
-  self.loading_indicator.frame = CGRectMake(loading_x, height/2-self.loading_indicator.frame.size.height/2,self.loading_indicator.frame.size.width, self.loading_indicator.frame.size.height);
-
-  self.error_view.frame=CGRectMake(0, 0, width, height);
-  self.welcome_view.frame=CGRectMake(0, 0, width, height);
-  */
   self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
   [self.mainUIWebView reload];
   
+  self.btnOptions.hidden=YES;
+  self.btnOptions.enabled=NO;
+  
   self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  self.menu_webview.hidden = NO;
   //[self.menu_webview reload];
   [self loadMenu];
+  
 }
+
+
+-(void)positionatePortrait{
+  isShowingLandscapeView = NO;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
+  self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44);
+  [self.mainUIWebView reload];
+  
+  self.menu_webview.hidden = YES;
+  
+  self.btnOptions.hidden=NO;
+  self.btnOptions.enabled=YES;
+}
+
 
 -(void)loadMenu{
   if ([app_delegate isiPad]) {
@@ -425,16 +310,12 @@ BOOL isShowingLandscapeView = NO;
         else
         {
           [self setHTML:data url:nil webView:self.menu_webview];
-          
         }
         data=nil;
       });
     });
   }
 }
-
-
--(void)positionatePortrait{}
 
 -(void) onErrorRefreshing:(BOOL)started{
   self.btnRefresh2.hidden=started;

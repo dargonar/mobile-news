@@ -1,3 +1,28 @@
+function hasClass(el, name) {
+  return new RegExp('(\\s|^)'+name+'(\\s|$)').test(el.className);
+}
+function addClass(el, name)
+{
+  if (!hasClass(el, name)) { el.className += (el.className ? ' ' : '') +name; }
+}
+function removeClass(el, name)
+{
+  if (hasClass(el, name)) {
+    el.className=el.className.replace(new RegExp('(\\s|^)'+name+'(\\s|$)'),' ').replace(/^\s+|\s+$/g, '');
+  }
+}
+
+function indexToLandscape(){
+  var el = document.getElementById('index');
+  removeClass(el, 'padded');
+  addClass(el, 'padded_landscape');
+}
+function indexToLandscape(){
+  var el = document.getElementById('index');
+  removeClass(el, 'padded_landscape');
+  addClass(el, 'padded');
+}
+
 function update_image(img) {
   var el = document.getElementById(img);
   if(el==null)

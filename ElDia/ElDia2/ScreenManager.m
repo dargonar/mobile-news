@@ -85,7 +85,7 @@ BOOL isIpad=NO;
 
   if(isIpad)
     if ([app_delegate isLandscape]) {
-      [prefix stringByAppendingPathComponent:@"_l"];
+      prefix=[prefix stringByAppendingPathComponent:@"_l"];
     }
   return [cache exists:key prefix:prefix];
 }
@@ -321,6 +321,7 @@ BOOL isIpad=NO;
   
   if( [url hasPrefix:@"noticia://" ] ) {
     NSString* sheet = app_delegate.isLandscape ? iPad_NOTICIA_LS_STYLESHEET:iPad_NOTICIA_PT_STYLESHEET;
+    NSLog(@"ScreenManager::getStyleSheetiPad:: noticia:[%@]", sheet);
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
@@ -332,6 +333,7 @@ BOOL isIpad=NO;
   
   if( [url hasPrefix:@"section_menu://"] ) {
     NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+    NSLog(@"ScreenManager::getStyleSheetiPad:: section_menu:[%@]", sheet);
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     
   }

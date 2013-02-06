@@ -16,14 +16,16 @@ body {
 }
 
 body.portrait{width:960px;}
-body.padded{width:1020px !important; overflow:hidden;}
+body.padded{width:1020px !important; overflow-x:hidden;}
 
 img { border:none; margin:0;}
 
 div.padded, #index.padded{
   background-color:#FFFFFF; padding:0px 30px 0px 30px !important;}
 
-#index.padded{min-height:1100px !important;}
+#index.padded{min-height:1100px !important;} /* 1100 */
+#index.padded_landscape{min-height:1400px !important;}
+
 #index.top_padded{padding-top:30px !important;}
 /*
 p { font-size:12px; line-height:18px; margin:0 0 10px 0;}
@@ -52,7 +54,7 @@ INDEX
   /*padding:24px;*/
   padding:0 ;
   margin:0 auto;
-  overflow:hidden;
+  overflow-x:hidden;
 }
 
 #index a{text-decoration:none;color:inherit;}
