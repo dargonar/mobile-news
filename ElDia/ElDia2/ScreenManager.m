@@ -76,23 +76,23 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) articleExists:(NSString*)url {
-  return [self screenExists:url prefix:@"a"];
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
+  NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"a", html_prefix];
+  return [self screenExists:url prefix:composedPrefix];
 }
 
 -(BOOL) screenExists:(NSString*)url prefix:(NSString*)prefix {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
 
-  if(isIpad)
-    if ([app_delegate isLandscape]) {
-      prefix=[prefix stringByAppendingPathComponent:@"_l"];
-    }
   return [cache exists:key prefix:prefix];
 }
 
 // para iPad
 -(BOOL) sectionMenuExists:(NSString*)url {
-  return [self screenExists:url prefix:@"sm"];
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *composedPrefix = [NSString stringWithFormat:@"%@_%@",@"sm", html_prefix];
+  return [self screenExists:url prefix:composedPrefix];
 }
 
 /***********************************************************************************/
@@ -106,44 +106,55 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES url_prefix:nil];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
 }
 
 // para iPAd
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-
-  //[NSString stringWithFormat:@"menu_%@", url]
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"sm" error:error processNavigation:NO url_prefix:@"menu_"];
+  
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error];
+  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error];
+  
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):(nil);
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error processNavigation:NO html_prefix:html_prefix];
 }
+
 
 -(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error {
-  return [self getScreen:url useCache:useCache processImages:processImages prefix:prefix error:error processNavigation:NO url_prefix:nil];
+  return [self getScreen:url useCache:useCache processImages:processImages prefix:prefix error:error processNavigation:NO html_prefix:nil];
 }
 
--(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error processNavigation:(BOOL)processNavigation url_prefix:(NSString*)urlPrefix {
+-(NSData *)getScreen:(NSString*)url useCache:(BOOL)useCache processImages:(BOOL)processImages prefix:(NSString*)prefix error:(NSError**)error processNavigation:(BOOL)processNavigation html_prefix:(NSString*)html_prefix {
+  
+  // urlPrefix es para utilizar el mismo xml que 'url', pero generar otro HTML.
   
   NSString* prefixedUrl = url;
-  if(urlPrefix!=nil)
+  NSString* composedHtmlPrefix = prefix;
+  if(html_prefix!=nil)
   {
-   prefixedUrl = [NSString stringWithFormat:@"%@%@",urlPrefix, url];
+    prefixedUrl = [NSString stringWithFormat:@"%@%@",html_prefix, url];
+    composedHtmlPrefix = [NSString stringWithFormat:@"%@_%@",prefix, html_prefix];
   }
   
   DiskCache *cache = [DiskCache defaultCache];
-  NSString  *key   = [CryptoUtil sha1:prefixedUrl];
-  NSString  *xml_key   = [CryptoUtil sha1:url];
+  NSString  *key   = [CryptoUtil sha1:url];
+  //NSString  *xml_key   = [CryptoUtil sha1:url];
+  
+  NSLog(@" url[%@]; prefix:[%@].", url, composedHtmlPrefix);
   
   //Si piden ver la cache
   if (useCache) {
 
-    NSData *html = [cache get:key prefix:prefix];
+    NSData *html = [cache get:key prefix:composedHtmlPrefix];
     if (html != nil) {
       if(processNavigation)
       {
         [self processNewsForGestureNavigation:key];
+        //[self processNewsForGestureNavigation:xml_key];
       }
       
       return html;
@@ -157,12 +168,14 @@ BOOL isIpad=NO;
   }
   
   NSData *xml = nil;
-  if (useCache && urlPrefix!=nil) {
-    xml = [cache get:xml_key prefix:@"xml"];
+  // Esto significa que me piden de cache pero el html no esta cacheado, pero si lo esta el xml.
+  if (useCache && html_prefix!=nil) {
+    xml = [cache get:key prefix:@"xml"];
   }
   
   //Lo bajo
-  if(xml==nil)
+  BOOL downloaded = (xml==nil);
+  if(downloaded)
     xml=[self downloadUrl:url error:error];
   
   //Problemas downloading?
@@ -170,12 +183,12 @@ BOOL isIpad=NO;
     return nil;
   }
   
-  if( ![url hasPrefix:@"clasificados://"] )
+  if( ![url hasPrefix:@"clasificados://"] && downloaded==YES)
   {
     xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"]||[url hasPrefix:@"section://"])];
   }
   
-  if(processImages)
+  if(processImages && downloaded==YES)
   {
     //Rebuildeamos el xml
     XMLParser *parser = [[XMLParser alloc] init];
@@ -206,11 +219,11 @@ BOOL isIpad=NO;
   }
   
   //Lo guardamos y retornamos
-  if(![cache put:key data:html prefix:prefix]) {
+  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
   
-  if([prefixedUrl hasPrefix:@"section://"])
+  if(([url hasPrefix:@"section://"] || [url hasPrefix:@"noticia://"]) && downloaded)
     [cache put:key data:xml prefix:@"xml"];
   
   if(processNavigation)
@@ -299,12 +312,12 @@ BOOL isIpad=NO;
 -(NSString*)getStyleSheetiPad:(NSString*)url {
   
   if( [url hasPrefix:@"menu_section://main"] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
+    NSString* sheet = iPad_MAIN_NEWS_PT_STYLESHEET; //app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
-  if( [url hasPrefix:@"menu_section://"] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+  if( [url hasPrefix:@"ls_menu_section://"] ) {
+    NSString* sheet = iPad_SECTION_NEWS_LS_STYLESHEET; 
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
@@ -320,7 +333,13 @@ BOOL isIpad=NO;
   }
   
   if( [url hasPrefix:@"noticia://" ] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_NOTICIA_LS_STYLESHEET:iPad_NOTICIA_PT_STYLESHEET;
+    NSString* sheet = iPad_NOTICIA_PT_STYLESHEET; //app_delegate.isLandscape ? iPad_NOTICIA_LS_STYLESHEET:iPad_NOTICIA_PT_STYLESHEET;
+    NSLog(@"ScreenManager::getStyleSheetiPad:: noticia:[%@]", sheet);
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  if( [url hasPrefix:@"ls_noticia://" ] ) {
+    NSString* sheet = iPad_NOTICIA_LS_STYLESHEET; 
     NSLog(@"ScreenManager::getStyleSheetiPad:: noticia:[%@]", sheet);
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }

@@ -22,7 +22,7 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView;
+@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenu;
 @synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
 @synthesize myYoutubeViewController, headerUIImageView, offline_view;
 @synthesize noticia_id, noticia_url, noticia_title, noticia_header;
@@ -46,11 +46,6 @@
     if(delta>0) {
       textFontSize = (textFontSize < 2.6) ? textFontSize +0.05 : textFontSize;
       fontChanged=YES;
-    }
-    else
-    {
-      
-      NSLog(@"NoticiaViewController::changeFontSize delta=0 ");
     }
   
   NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';", textFontSize];
@@ -188,7 +183,6 @@
   //NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
   NSURL *url = [NSURL URLWithString:self.noticia_url];
   
-  NSLog(@" RAW title: %@", self.noticia_title );
   SHKItem *item = [SHKItem URL:url
                         title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title]
                         contentType:SHKURLContentTypeWebpage];
@@ -253,9 +247,6 @@
  
   NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
   
-  //NSLog(@" URL 1: %@", urlString);
-  //NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
-  
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
@@ -267,7 +258,21 @@
   // Para ver si podemos recibir imagen updated.
   [self setCurrentUrl:uri];
   
-  NSLog(@"URI: %@", uri);
+  [self loadNoticia];
+  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
+    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+    return;
+  }
+  self->currentSection = section;
+  [self loadSectionNews];
+}
+
+-(void)reLoadNoticia{
+  [self loadNoticia];
+}
+
+-(void)loadNoticia{
+  NSString*uri=[self currentUrl];
   if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
@@ -276,19 +281,13 @@
   }
   else
   {
-    [self loadUrl:uri useCache:NO];
+    [self loadUrl:uri useCache:YES];
   }
-  
-  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
-    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
-    return;
-  }
-  
-  self->currentSection = section;
-  [self loadSectionNews];
 }
 
 -(void)loadSectionNews{
+  //HACK!
+  //return;
   if ([app_delegate isiPad]) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
@@ -402,12 +401,12 @@
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
     
+    [[self mainUIWebView] setScalesPageToFit:YES];
+    
     if([app_delegate isLandscape])
     {
       [self positionateLandscape];
     }
-    
-    [[self mainUIWebView] setScalesPageToFit:YES];
   }
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
@@ -425,7 +424,7 @@
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
 {
-	NSLog(@"finished zooming");
+	//NSLog(@"finished zooming");
 }
 
 - (void)userDidTapWebView:(id)tapPoint{
@@ -568,7 +567,7 @@
     //NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
     return;
   }
-   NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
+  //NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
@@ -667,7 +666,7 @@ BOOL is_loading = YES;
   // e.g. self.myOutlet = nil;
   self.bottomUIView=nil;
   self.mainUIWebView=nil;
-  self.optionsBottomMenuUIImageView=nil;
+  self.optionsBottomMenu=nil;
   self.btnFontSizePlus=nil;
   self.btnFontSizeMinus=nil;
   self.loading_indicator=nil;
@@ -702,8 +701,6 @@ BOOL isLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
-  if([app_delegate isiPad]==NO)
-    return;
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
@@ -727,10 +724,20 @@ BOOL isLandscapeView = NO;
   // x y width height
   
   self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
-  [self.mainUIWebView reload];
+  //[self.mainUIWebView reload];
   
-  [[self menu_webview] setScalesPageToFit:YES];
   self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  [[self menu_webview] setScalesPageToFit:YES];
+  
+  self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
+  
+  self.pageControl.frame = CGRectMake(width/2, height-self.pageControl.frame.size.height, width/2, pageControl.frame.size.height);
+  
+  
+  self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+  
+  
+  [self reLoadNoticia];
   [self loadSectionNews];
 }
 
@@ -742,10 +749,18 @@ BOOL isLandscapeView = NO;
   NSInteger  height=self.view.frame.size.height;
   // x y width height
   self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
-  [self.mainUIWebView reload];
+  //[self.mainUIWebView reload];
   
   [[self menu_webview] setScalesPageToFit:NO];
   self.menu_webview.frame=CGRectMake(0, 44, width, 246);
+  
+  self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
+  
+  self.pageControl.frame = CGRectMake(0, height-self.pageControl.frame.size.height, width, pageControl.frame.size.height);
+  
+  self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+  
+  [self reLoadNoticia];
   [self loadSectionNews];
 }
 

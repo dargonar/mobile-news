@@ -246,8 +246,6 @@ BOOL isShowingLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
-  if([app_delegate isiPad]==NO)
-    return;
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&

@@ -47,7 +47,7 @@
 						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="219869537"/>
+						<reference key="NSNextKeyView" ref="726306216"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="48185723">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
@@ -158,7 +158,7 @@
 						<string key="NSFrame">{{0, 424}, {320, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="219869537"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -177,7 +177,6 @@
 						<string key="NSFrame">{{125, 430}, {70, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="726306216"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -394,14 +393,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">optionsBottomMenuUIImageView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="588220296"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">bottomUIView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="554873511"/>
@@ -471,6 +462,14 @@
 						<reference key="destination" ref="219869537"/>
 					</object>
 					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">optionsBottomMenu</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="554873511"/>
+					</object>
+					<int key="connectionID">53</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -593,6 +592,7 @@
 							<reference ref="301760838"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">optionsBottomMenu</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
@@ -690,7 +690,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">52</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -738,7 +738,7 @@
 						<string key="mainUIWebView">UIWebView</string>
 						<string key="menu_webview">UIWebView</string>
 						<string key="offline_view">UIView</string>
-						<string key="optionsBottomMenuUIImageView">UIImageView</string>
+						<string key="optionsBottomMenu">UIView</string>
 						<string key="pageControl">UIPageControl</string>
 						<string key="pageIndicator">UILabel</string>
 					</dictionary>
@@ -775,9 +775,9 @@
 							<string key="name">offline_view</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="optionsBottomMenuUIImageView">
-							<string key="name">optionsBottomMenuUIImageView</string>
-							<string key="candidateClassName">UIImageView</string>
+						<object class="IBToOneOutletInfo" key="optionsBottomMenu">
+							<string key="name">optionsBottomMenu</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="pageControl">
 							<string key="name">pageControl</string>

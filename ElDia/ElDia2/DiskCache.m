@@ -36,8 +36,11 @@ BOOL      init_ok = NO;
   if(!init_ok) return nil;
 
   if(![self exists:key prefix:prefix])
+  {
+    NSLog(@" NO GET [%@_%@]", prefix, key);
     return nil;
-  
+  }
+  NSLog(@" SI GET [%@_%@]", prefix, key);
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager contentsAtPath:[self getFileName:key prefix:prefix]];
 }
@@ -45,6 +48,7 @@ BOOL      init_ok = NO;
 -(BOOL)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
   if(!init_ok) return NO;
 
+  NSLog(@" SAVED [%@_%@]", prefix, key);
   NSString* file=[self getFileName:key prefix:prefix];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
@@ -66,7 +70,9 @@ BOOL      init_ok = NO;
   
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  return [fileManager fileExistsAtPath:file isDirectory:nil];
+  BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
+  NSLog(@" %@ EXISTS [%@_%@]",(serungo==YES?@"SI":@"NO"), prefix, key);
+  return serungo;
 }
 
 -(NSString*)getFolder{

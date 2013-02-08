@@ -19,7 +19,7 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <script type="text/javascript" src="js/functions.js"></script>
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout_tablet.css" / -->
@@ -27,7 +27,7 @@
       </head>
       
       <body class="landscape padded" onload="update_imagen_nota_abierta()">
-        <div class="padded">
+        <div class="padded top_padded">
           <xsl:call-template name="tablet_open_new_landscape">
             <xsl:with-param name="Node" select="rss/channel/item[1]"/>
           </xsl:call-template>
