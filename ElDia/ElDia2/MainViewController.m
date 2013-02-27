@@ -52,10 +52,10 @@ NSLock *menuLock;
     [[self mainUIWebView] setScalesPageToFit:YES];
     [[self menu_webview] setScalesPageToFit:YES];
     
-    if([app_delegate isLandscape])
-    {
-      [self positionateLandscape];
-    }
+  }
+  if([app_delegate isLandscape])
+  {
+    [self positionateLandscape];
   }
   
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
@@ -72,6 +72,20 @@ NSLock *menuLock;
   }
   
   [self onWelcome:YES];
+}
+
+-(void)reLoadIndex{
+  NSString*uri=[self currentUrl];
+  if([self.mScreenManager sectionExists:uri])
+  {
+    NSError *err;
+    NSData*lastData = [self.mScreenManager getSection:uri useCache:YES error:&err];
+    [self setHTML:lastData url:uri webView:self.mainUIWebView];
+  }
+  else
+  {
+    [self loadUrl:uri useCache:YES];
+  }
 }
 
 -(void)loadMenu:(BOOL)useCache{
@@ -186,6 +200,9 @@ NSLock *menuLock;
 NSInteger soto = 0;
 - (IBAction) btnRefreshClick: (id)param{
 
+  [[self menu_webview] setScalesPageToFit:YES];
+  [[self menu_webview] reload];
+  return;
   //HACK
   /*if(soto==0)
   {
@@ -216,15 +233,18 @@ NSInteger soto = 0;
 }
 
 
-/*
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  if ([app_delegate isiPad]) {
+  
+  return YES;
+  /*
+   if ([app_delegate isiPad]) {
     return YES;
   }
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
+   */
 }
-*/
 
 - (BOOL) shouldAutorotate
 {
@@ -258,6 +278,8 @@ BOOL isShowingLandscapeView = NO;
   {
     [self positionatePortrait];
   }
+  
+  [self reLoadIndex];
 }
 
 -(void)positionateLandscape{

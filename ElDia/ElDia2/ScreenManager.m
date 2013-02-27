@@ -72,7 +72,10 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) sectionExists:(NSString*)url {
-  return [self screenExists:url prefix:@"s"];
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
+  NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"s", html_prefix];
+  return [self screenExists:url prefix:composedPrefix];
+//  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) articleExists:(NSString*)url {
@@ -106,7 +109,11 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
+  
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):nil;
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:html_prefix];
+  
+  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
 }
 
 // para iPAd
@@ -326,8 +333,19 @@ BOOL isIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
+  if( [url hasPrefix:@"ls_section://main"] ) {
+    NSString* sheet = MAIN_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
   if( [url hasPrefix:@"section://"] ) {
     NSString* sheet = iPad_SECTION_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+    
+  }
+  
+  if( [url hasPrefix:@"ls_section://"] ) {
+    NSString* sheet = SECTIONS_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     
   }

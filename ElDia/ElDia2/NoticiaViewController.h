@@ -46,6 +46,7 @@
 @property (nonatomic, retain) IBOutlet UIWebView *menu_webview;
 @property (nonatomic, retain) IBOutlet UIView *optionsBottomMenu;
 @property (nonatomic, retain) IBOutlet UIImageView *headerUIImageView;
+@property (nonatomic, retain) IBOutlet UIButton *shareBtn;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 

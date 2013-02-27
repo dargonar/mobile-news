@@ -2253,7 +2253,7 @@
 		CE8E72A415EBEDB9007E6F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
@@ -2266,13 +2266,13 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "622C9F00-4E96-4E9E-9A12-10D06AFE904F";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -2282,7 +2282,7 @@
 		CE8E72A515EBEDB9007E6F09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
@@ -2295,13 +2295,13 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "622C9F00-4E96-4E9E-9A12-10D06AFE904F";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;

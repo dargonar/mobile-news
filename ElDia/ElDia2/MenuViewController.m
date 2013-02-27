@@ -160,15 +160,23 @@ NSLock *lock;
   [screenShotImageView setImage:self.screenShotImage];
   [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   
-  //self.view.frame.size.width
-  [self adjustWebViewWidth:(480.0)];
+  //[self adjustWebViewWidth:(320.0-44.0)];
+  //[self adjustWebViewWidth:(320.0)];
+  //[self adjustWebViewWidth:(480.0)];
   
   // now we'll animate it across to the right over 0.2 seconds with an Ease In and Out curve
   // this uses blocks to do the animation. Inside the block the frame of the UIImageView has its
   // x value changed to where it will end up with the animation is complete.
   // this animation doesn't require any action when completed so the block is left empty
+  
+  NSInteger _width = 265;
+  if([app_delegate isiPad])
+  {
+    _width = 480;
+  }
+  
   [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-    [screenShotImageView setFrame:CGRectMake(265, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [screenShotImageView setFrame:CGRectMake(_width, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
                    completion:^(BOOL finished){  }];
 }
