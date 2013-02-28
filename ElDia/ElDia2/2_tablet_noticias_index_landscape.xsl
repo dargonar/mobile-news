@@ -13,7 +13,8 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />
+        <!--meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" /-->
+        <meta name="viewport" content="width=600;user-scalable=no;" />
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout_tablet.css" / -->
         <title>NOTICIAS DE SECCION</title>

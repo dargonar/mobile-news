@@ -26,7 +26,7 @@
 @synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
 @synthesize myYoutubeViewController, headerUIImageView, offline_view;
 @synthesize noticia_id, noticia_url, noticia_title, noticia_header;
-@synthesize pageControl, pageIndicator;
+@synthesize pageControl, pageIndicator, shareBtn;
 
 
 -(void)changeFontSize:(NSInteger)delta{
@@ -171,6 +171,7 @@
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
+UIActionSheet* actionSheet;
 - (IBAction) btnShareClick: (id)param{
   
   if(![Utils areWeConnectedToInternet])
@@ -179,6 +180,11 @@
     return;
   }
   
+  if (actionSheet) {
+    [actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+    actionSheet = nil;
+    return;
+  }
   
   //NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
   NSURL *url = [NSURL URLWithString:self.noticia_url];
@@ -188,11 +194,15 @@
                         contentType:SHKURLContentTypeWebpage];
 
 	// Get the ShareKit action sheet
-	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-  
-	// Display the action sheet
-	[actionSheet showFromToolbar:self.navigationController.toolbar];
+	//SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+  actionSheet = [SHKActionSheet actionSheetForItem:item];
 
+	// Display the action sheet
+	if([app_delegate isiPad])
+    [actionSheet showFromRect:shareBtn.frame inView:self.view animated:YES];
+  else
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+  
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -680,6 +690,19 @@ BOOL is_loading = YES;
   
 }
 
+// HACK: Estaba comentado
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  
+  return YES;
+  /*
+   if ([app_delegate isiPad]) {
+   return YES;
+   }
+   return (interfaceOrientation == UIInterfaceOrientationPortrait);
+   */
+}
+
 /* rotation handling */
 - (BOOL) shouldAutorotate
 {
@@ -736,6 +759,7 @@ BOOL isLandscapeView = NO;
   
   self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
   
+  self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
   [self reLoadNoticia];
   [self loadSectionNews];
@@ -759,6 +783,8 @@ BOOL isLandscapeView = NO;
   self.pageControl.frame = CGRectMake(0, height-self.pageControl.frame.size.height, width, pageControl.frame.size.height);
   
   self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+  
+  self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
   [self reLoadNoticia];
   [self loadSectionNews];

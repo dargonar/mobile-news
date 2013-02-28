@@ -55,7 +55,8 @@
 
 -(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache;
 
-//~/Library/Application Support/iPhone Simulator/
+// ~/Library/Application Support/iPhone Simulator/
+// ~/Library/Developer/Xcode/DerivedData
 
 
 

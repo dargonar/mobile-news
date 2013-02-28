@@ -5,6 +5,7 @@ body {
 	margin:0 !important;
 	padding:0 !important;
 	color:#333;
+	/* font-size:16px; */
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
   /*width:960px !important;*/
@@ -21,13 +22,16 @@ body.padded{width:1020px !important; overflow-x:hidden;}
 img { border:none; margin:0;}
 
 div.padded, #index.padded{
-  background-color:#FFFFFF; padding:0px 30px 0px 30px !important;}
+  background-color:#FFFFFF; padding-left:30px !important;
+  padding-right:30px !important;}
 
 #index.padded{min-height:1100px !important;} /* 1100 */
 #index.padded_landscape{min-height:1400px !important;}
 
 /*#index.top_padded{padding-top:30px !important;}*/
-top_padded{padding-top:30px !important;}
+
+.top_padded{padding-top:30px !important;}
+
 /*
 p { font-size:12px; line-height:18px; margin:0 0 10px 0;}
 h1 { font-size:30px; line-height:32px; margin:0 0 10px 0;}
@@ -198,6 +202,9 @@ INDEX
 	background-color:#323232;
 }
 
+/*HACK para menu en main*/
+body.menu{ width:480px; overflow-x:hidden;background-color:#323232;}
+
 #index .menu ul {
 	list-style:none;
 	margin:0;
@@ -273,7 +280,7 @@ LANDSCAPE
 }
 
 body.landscape{
-  min-height:1200px;
+  min-height:700px; /* 1200 */
 }
 
 body.landscape.padded{
@@ -356,6 +363,7 @@ body.landscape.padded{
 	width:180px;
 	height:120px;
 	margin:10px;
+  position:relative;
 }
 
 #landscape .menu .info {
