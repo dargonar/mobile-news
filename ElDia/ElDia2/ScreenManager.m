@@ -31,12 +31,13 @@ NSString * const iPad_SECTION_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_secc
 NSString * const iPad_MAIN_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_index_portrait.xsl";
 NSString * const iPad_MAIN_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_index_landscape.xsl";
 
-NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";
+//NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";
+NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_global.xsl";
 NSString * const iPad_NOTICIA_LS_STYLESHEET           = @"3_tablet_new_landscape.xsl";
 NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_portrait.xsl";
 NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_landscape.xsl";
 NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones.xsl";
-NSString * const iPad_CLASIFICADOS_STYLESHEET         = @".xsl";
+NSString * const iPad_CLASIFICADOS_STYLESHEET         = @"5_tablet_clasificados.xsl";
 
 NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
@@ -72,16 +73,17 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) sectionExists:(NSString*)url {
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"s", html_prefix];
-  return [self screenExists:url prefix:composedPrefix];
-//  return [self screenExists:url prefix:@"s"];
+  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
+  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"s", html_prefix];
+  //return [self screenExists:url prefix:composedPrefix];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) articleExists:(NSString*)url {
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"a", html_prefix];
-  return [self screenExists:url prefix:composedPrefix];
+  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
+  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"a", html_prefix];
+  //return [self screenExists:url prefix:composedPrefix];
+  return [self screenExists:url prefix:@"a"];
 }
 
 -(BOOL) screenExists:(NSString*)url prefix:(NSString*)prefix {
@@ -110,10 +112,10 @@ BOOL isIpad=NO;
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):nil;
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:html_prefix];
+  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):nil;
+  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:html_prefix];
   
-  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
 }
 
 // para iPAd
@@ -124,10 +126,10 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
-  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error];
   
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):(nil);
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error processNavigation:NO html_prefix:html_prefix];
+  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):(nil);
+  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"a" error:error processNavigation:NO html_prefix:html_prefix];
 }
 
 

@@ -17,7 +17,7 @@ body {
 }
 
 body.portrait{width:960px;}
-body.padded{width:1020px !important; overflow-x:hidden;}
+body.padded{width:1020px; overflow-x:hidden;} /*width:1020px !important */
 
 img { border:none; margin:0;}
 
@@ -393,7 +393,8 @@ MENU PRINCIPAL
 	/*min-width:480px;*/
   /*width:480px; HACK*/ 
   width:256px; 
-  width:100%;
+  /*width:100%;*/
+  overflow-x:hidden;
 }
 
 #menu ul {
@@ -617,11 +618,11 @@ CLASIFICADOS
 	width:auto;
 }
 
-.global {width:100% !important; max-width:960px; overflow-x:hidden;}
-.global #index {width:auto; min-width:600px; max-width:900px; overflow-x:hidden;}
+.global {
+  /*width:100% !important;*/ 
+  /*max-width:960px; overflow-x:hidden;*/}
+.global #index {
+  /*width:auto;*/
+  min-width:600px; 
+  max-width:900px; overflow-x:hidden;}
 
-/*@media only screen and (max-width:800px) { 
-  .global {width:100% !important; max-width:660px; overflow-x:hidden;}
-  .global #index {width:600px; overflow-x:hidden;}
-
-}*/

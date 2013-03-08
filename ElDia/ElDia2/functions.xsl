@@ -792,13 +792,13 @@
           </label>
           <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
           <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
-            <p class="subtitulo">
+            <p id="bajada" class="subtitulo">
               <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
             </p>
           </xsl:if>
           <div class="separador"></div>
           
-          <div class="fila">
+          <div id="informacion" class="fila">
             <!-- div class="imagen"></div -->
             <xsl:if test="not(not($Node/media:thumbnail))">
               <div class="main_img_container">

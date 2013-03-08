@@ -24,6 +24,8 @@
 		78526B48169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */; };
 		78526B49169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */; };
 		785463F116B1DA8C008F027F /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 785463F016B1DA8C008F027F /* TapDetectingWindow.m */; };
+		78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
+		78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
 		788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
 		788A1DAA169DE285007DCDD3 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */; };
@@ -540,6 +542,8 @@
 		78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 4_tablet_menu_secciones.xsl; sourceTree = "<group>"; };
 		785463EF16B1DA8C008F027F /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
 		785463F016B1DA8C008F027F /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
+		78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_global.xsl; sourceTree = "<group>"; };
+		78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_tablet_clasificados.xsl; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_section_list.xsl; sourceTree = "<group>"; };
@@ -943,16 +947,18 @@
 			children = (
 				78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */,
 				788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */,
-				78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */,
-				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
 				788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */,
 				788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */,
+				78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */,
+				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
 				78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */,
 				78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */,
+				78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */,
 				78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */,
 				78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */,
 				78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */,
 				78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */,
+				78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */,
 			);
 			name = xsl_tablets;
 			sourceTree = "<group>";
@@ -2019,6 +2025,8 @@
 				788A1DAA169DE285007DCDD3 /* Default-Landscape~ipad.png in Resources */,
 				788A1DAC169DE28B007DCDD3 /* Default-Landscape@2x~ipad.png in Resources */,
 				788A1DAE169DF0E7007DCDD3 /* functions.xsl in Resources */,
+				78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */,
+				78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -475,18 +475,30 @@ UIActionSheet* actionSheet;
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   [self onLoading:NO];
+  
+  
+  if (webView.tag!=MAIN_VIEW_TAG) {
+    return;
+  }
+  
+  //[[self mainUIWebView] setScalesPageToFit:YES];
   [self changeFontSize:0];
   
-  /*
-   if (app_delegate.isiPad){
+   if (!app_delegate.isiPad){
+     return;
+   }
   
-    if (webView.tag==MAIN_VIEW_TAG) {
-    }
-    
-    if (webView.tag!=MAIN_VIEW_TAG) {
-    }
-  } 
-   */
+  
+  [self.mainUIWebView reload];
+  NSString *jsString =     jsString = @"document.body.style.width = '1020px !important';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:1020; user-scalable=YES;');metayi.setAttribute('content','width:1020; user-scalable=NO;');";
+
+  if(isLandscapeView==YES)
+    jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:660; user-scalable=YES;');metayi.setAttribute('content','width:660; user-scalable=NO;');";
+  
+  NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  NSLog(@" EvaluateJS:[%@] result:[%@]",jsString, result);
+  
+  
 }
 
 
@@ -695,12 +707,7 @@ BOOL is_loading = YES;
 {
   
   return YES;
-  /*
-   if ([app_delegate isiPad]) {
-   return YES;
-   }
-   return (interfaceOrientation == UIInterfaceOrientationPortrait);
-   */
+  
 }
 
 /* rotation handling */
@@ -712,7 +719,7 @@ BOOL is_loading = YES;
 -(NSUInteger)supportedInterfaceOrientations
 {
   //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
-  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+  return UIInterfaceOrientationMaskAll;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation

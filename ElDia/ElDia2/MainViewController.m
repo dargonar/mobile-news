@@ -203,7 +203,6 @@ NSInteger soto = 0;
   [[self menu_webview] setScalesPageToFit:YES];
   [[self menu_webview] reload];
   return;
-  //HACK
   /*if(soto==0)
   {
     soto=1;
@@ -254,7 +253,7 @@ NSInteger soto = 0;
 -(NSUInteger)supportedInterfaceOrientations
 {
   //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
-  return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+  return UIInterfaceOrientationMaskAll;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
@@ -288,15 +287,17 @@ BOOL isShowingLandscapeView = NO;
   NSInteger  height=self.view.frame.size.height;
   // x y width height
 
-  self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+  //self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+  self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44);
   [self.mainUIWebView reload];
   
   self.btnOptions.hidden=YES;
   self.btnOptions.enabled=NO;
   
-  self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  //self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  self.menu_webview.frame=CGRectMake(0, 44, 256, height-44);
   self.menu_webview.hidden = NO;
-  //[self.menu_webview reload];
+  [self.menu_webview reload];
   [self loadMenu];
   
 }
