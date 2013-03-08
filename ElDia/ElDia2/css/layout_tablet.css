@@ -5,7 +5,7 @@ body {
 	margin:0 !important;
 	padding:0 !important;
 	color:#333;
-	/* font-size:16px; */
+	/* font-size:12px; */
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
   /*width:960px !important;*/
@@ -203,7 +203,9 @@ INDEX
 }
 
 /*HACK para menu en main*/
-body.menu{ width:480px; overflow-x:hidden;background-color:#323232;}
+body.menu{ 
+  /*width:480px; HACK*/ width:256px; 
+  overflow-x:hidden;background-color:#323232;}
 
 #index .menu ul {
 	list-style:none;
@@ -388,7 +390,9 @@ body.landscape.padded{
 MENU PRINCIPAL
 ********************************************/
 #menu {
-	min-width:480px;
+	/*min-width:480px;*/
+  /*width:480px; HACK*/ 
+  width:256px; 
   width:100%;
 }
 
@@ -543,3 +547,81 @@ ul.portrait_news_list li {float:left;}
   top:0px;
   z-index:3;
 }
+
+/********************************************
+CLASIFICADOS
+********************************************/
+#clasificados {
+	width:960px;
+}
+
+#clasificados .fecha { color:#0066cc;}
+#clasificados .hora { color:#666;}
+#clasificados .clear { clear:both; margin-bottom:10px;}
+
+#clasificados .columna {
+	/*width:240px;*/
+  /*width:240px;*/
+  width:300px;
+	float:left;
+	padding:10px 8px 10px 10px;
+	border-right:#ccc solid 1px;
+}
+
+#clasificados .columna .aviso {
+	border-bottom:#ccc solid 1px;
+	margin:10px;
+}
+
+#clasificados .columna .encabezado {
+	border-bottom:#ccc solid 1px;
+	margin:10px;
+}
+
+#clasificados .columna .encabezado .titulo {
+	color:#0066cc;
+	font-size:18px;
+	line-height:18px;
+}
+
+#clasificados .columna .encabezado .rubro {
+	color:#0066cc;
+	font-size:30px;
+	line-height:30px;
+	margin-bottom:5px;
+}
+
+#clasificados .columna .encabezado .calendario {
+	padding:5px;
+	margin-right:1px;
+	background-color:#333;
+	color:#fff;
+	float:left;
+	font-size:18px;
+	margin-top:-8px;
+}
+
+#clasificados .columna .encabezado .calendario:hover {
+	background-color:#0066cc;
+}
+
+
+/* nota abierta 3 */
+#index  .nota_abierta .fila .imagen {
+	width:600px;
+	height:350px;
+	float:right;
+}
+
+#index .nota_abierta .fila {
+	width:auto;
+}
+
+.global {width:100% !important; max-width:960px; overflow-x:hidden;}
+.global #index {width:auto; min-width:600px; max-width:900px; overflow-x:hidden;}
+
+/*@media only screen and (max-width:800px) { 
+  .global {width:100% !important; max-width:660px; overflow-x:hidden;}
+  .global #index {width:600px; overflow-x:hidden;}
+
+}*/
