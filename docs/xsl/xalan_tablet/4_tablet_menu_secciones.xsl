@@ -16,7 +16,7 @@
         <!-- meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" / -->
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <!-- meta name="viewport" content="width=480; initial-scale=1.0; minimum-scale=1.0;"/ -->
-        <meta name="viewport" content="width=480;user-scalable=no;" />
+        <meta name="viewport" content="width=256;user-scalable=no;" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout_tablet.css" / -->
         <title>MENU</title>
       </head>

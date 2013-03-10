@@ -560,6 +560,11 @@
             <xsl:with-param name="MetaTag" select="$Node/news:meta"/>
           </xsl:call-template>
         </xsl:if>
+        <xsl:if test="not($Node/media:thumbnail)" >
+          <div class="info">
+            <p><xsl:value-of disable-output-escaping="yes" select="$Node/description" /></p>
+        </div>
+        </xsl:if>
         </div>
       </a>
   </xsl:template>
@@ -792,7 +797,7 @@
           </label>
           <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
           <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
-            <p class="subtitulo">
+            <p class="subtitulo" id="bajada">
               <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
             </p>
           </xsl:if>
@@ -812,7 +817,9 @@
                 </div>
               </div>
             </xsl:if>
-            <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
+            <div id="informacion" class="contenido">
+              <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
+            </div>
           <!--div class="two_columns">
               <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
           </div-->

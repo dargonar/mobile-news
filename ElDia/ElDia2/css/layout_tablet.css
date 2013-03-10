@@ -6,7 +6,7 @@ body {
 	padding:0 !important;
 	color:#333;
 	/* font-size:12px; */
-	font-size:12px;
+	font-size:14px;
 	font-family:Arial, Helvetica, sans-serif;
   /*width:960px !important;*/
   
@@ -42,9 +42,10 @@ p { font-size:1em; line-height:1.5em; margin:0 0 10px 0;}
 h1 { font-size:2.5em; line-height:1.1em; margin:0 0 10px 0;}
 h2 { font-size:2em; line-height:1.1em; margin:0 0 10px 0;}
 
-.fecha { color:#666;}
-.seccion { color:#0066cc;}
-.subtitulo { font-weight:bold;}
+.fecha { color:#666; font-size:1.25em;}
+.seccion { color:#0066cc;font-size:1.25em;}
+.subtitulo { font-weight:bold; font-size:1.5em; line-height:1.5em;}
+.contenido{ font-weight:normal; font-size:1.5em; line-height:1.5em;}
 .separador { clear:both; height:20px;}
 /*.separador { clear:both; height:1.667em;}*/
 
@@ -100,24 +101,28 @@ INDEX
 	width:465px;
 	float:left;
 	margin-right:30px;
-  height:359px;
+  /*height:359px;*/
+  height:422px; /* header:20 px + h1:120px + h1-mb:10px + img:270px = 416*/
   overflow:hidden;
   position:relative;
   }
 
 #index .nota_secundaria h1{
-  height: 66px !important; overflow-y:hidden;
+  height: 120px !important; overflow-y:hidden;
   }
 
 #index .nota_secundaria .imagen {
 	background-color:#999;
 	width:465px;
 	height:270px;
-  
   background-size: cover;
   background-position: center;
   display: block;
   position:relative;
+}
+
+#index .nota_secundaria .info p, #index .nota_terciaria .info p{
+  font-size:1.5em;
 }
 
 /* NOTA TERCIARIA */
@@ -125,16 +130,24 @@ INDEX
 	width:300px;
 	float:left;
 	margin-right:30px;
-  height: 303px !important;
+  /*height: 303px !important;*/
+  /*height: 350px !important;*/
+  height: 352px !important;
   overflow:hidden;
   position:relative;
 }
 
-#index .nota_terciaria h2 {height: 78px; overflow:hidden;}
+#index .nota_terciaria h2 {
+  /*height: 78px; */
+  height: 120px; 
+  overflow:hidden;
+}
 #index .nota_terciaria .info {
 	background-color:#fff;
 	width:300px;
-	height:200px;
+	/*height:200px;*/
+  height:185px !important;
+  overflow-x:hidden;
 }
 
 #index .nota_terciaria .imagen {
@@ -472,7 +485,6 @@ MENU PRINCIPAL
 }
 
 /* * STOLEN FROM SMARTPHONES * */
-
 div.main_img_container {
   display:block;
   width:100%;
@@ -609,9 +621,21 @@ CLASIFICADOS
 
 /* nota abierta 3 */
 #index  .nota_abierta .fila .imagen {
+	width:584px; /*600px;*/
+	height:340px; /*350px;*/
+	float:right;
+  margin-left:16px;
+  margin-bottom:8px;
+}
+
+@media only screen and (max-width:660px) { 
+  #index  .nota_abierta .fila .imagen {
 	width:600px;
 	height:350px;
 	float:right;
+  margin-left:0px;
+  margin-bottom:8px;
+}
 }
 
 #index .nota_abierta .fila {
