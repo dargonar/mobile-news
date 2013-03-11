@@ -59,6 +59,61 @@
     <xsl:value-of select="$mm"/>
   </xsl:template>
   
+  <xsl:template name="ParseDate">
+    <xsl:param name="DateTime" />
+    <xsl:param name="DatePart" />
+    <xsl:variable name="mo">
+      <xsl:value-of select="substring($DateTime,1,3)" />
+    </xsl:variable>
+    <xsl:variable name="day-temp">
+      <xsl:value-of select="substring-after($DateTime,', ')" />
+    </xsl:variable>
+    <xsl:variable name="day">
+      <xsl:value-of select="substring-before($day-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="month-year-temp">
+      <xsl:value-of select="substring-after($day-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="month">
+      <xsl:value-of select="substring-before($month-year-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="year-time-temp">
+      <xsl:value-of select="substring-after($month-year-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="year">
+      <xsl:value-of select="substring-before($year-time-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="time">
+      <xsl:value-of select="substring-after($year-time-temp,' ')" />
+    </xsl:variable>
+    <xsl:variable name="hh">
+      <xsl:value-of select="substring-before($time,':')" />
+    </xsl:variable>
+    <xsl:variable name="mm_ss">
+      <xsl:value-of select="substring-after($time,':')" />
+    </xsl:variable>
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring-before($mm_ss,':')" />
+    </xsl:variable>
+    <xsl:variable name="ss_gmt">
+      <xsl:value-of select="substring-after($mm_ss,':')" />
+    </xsl:variable>
+    <xsl:variable name="ss">
+      <xsl:value-of select="substring-before($ss_gmt,' ')" />
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$DatePart='year'">
+        <xsl:value-of select="$year"/>
+      </xsl:when>
+      <xsl:when test="$DatePart='month'">
+        <xsl:value-of select="$month"/>
+      </xsl:when>
+      <xsl:when test="$DatePart='day'">
+        <xsl:value-of select="$day"/>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+  
   <!-- Es el template de la noticia destacada en listado principal de noticias.
         Recibe al nodo "item"(Node) como parametro. -->
   <xsl:template name="DestacadaEnListadoPrincipal">
