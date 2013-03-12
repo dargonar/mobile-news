@@ -57,7 +57,8 @@ INDEX
 ********************************************/
 #index {
 	width:960px;
-  /*padding:24px;*/
+  min-width:600px;
+  max-width:960px;
   padding:0 ;
   margin:0 auto;
   overflow-x:hidden;
@@ -646,7 +647,7 @@ CLASIFICADOS
   /*width:100% !important;*/ 
   /*max-width:960px; overflow-x:hidden;*/}
 .global #index {
-  /*width:auto;*/
-  min-width:600px; 
-  max-width:900px; overflow-x:hidden;}
+  width:auto;
+  /*min-width:600px;
+  max-width:900px;*/ overflow-x:hidden;}
 

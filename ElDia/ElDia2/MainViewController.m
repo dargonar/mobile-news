@@ -253,7 +253,8 @@ NSInteger soto = 0;
 -(NSUInteger)supportedInterfaceOrientations
 {
   //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
-  return UIInterfaceOrientationMaskAll;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation

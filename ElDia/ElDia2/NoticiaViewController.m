@@ -498,7 +498,7 @@ UIActionSheet* actionSheet;
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   NSLog(@" EvaluateJS:[%@] result:[%@]",jsString, result);
   
-  
+  //[self.mainUIWebView ]
 }
 
 
@@ -719,7 +719,9 @@ BOOL is_loading = YES;
 -(NSUInteger)supportedInterfaceOrientations
 {
   //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
-  return UIInterfaceOrientationMaskAll;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
