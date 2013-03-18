@@ -477,7 +477,8 @@ font-weight:bold;}
 #clasificados {
   height:416px;
 	background-color:#EFEFEF;
-  width:100% !important;
+/*  width:100% !important;*/
+  width:320px;
   overflow-x:hidden;
   overflow-y:auto;
 }

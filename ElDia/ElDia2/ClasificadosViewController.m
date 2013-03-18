@@ -58,9 +58,36 @@ BOOL mViewDidLoad=NO;
 
 }
 
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  
+  return YES;
+  
+}
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+  
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  [mainUIWebView reload];
 }
 
 /* **** */
@@ -243,8 +270,8 @@ BOOL mViewDidLoad=NO;
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self changeFontSize:0];
   [self onLoading:NO];
+  [self changeFontSize:0];
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{

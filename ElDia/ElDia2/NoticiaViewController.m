@@ -407,12 +407,11 @@ UIActionSheet* actionSheet;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
   
+  [[self mainUIWebView] setScalesPageToFit:YES];
+
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
-    
-    [[self mainUIWebView] setScalesPageToFit:YES];
-    
     if([app_delegate isLandscape])
     {
       [self positionateLandscape];
@@ -751,52 +750,58 @@ BOOL isLandscapeView = NO;
 
   isLandscapeView = YES;
   
-  NSInteger  width=self.view.frame.size.width;
-  NSInteger  height=self.view.frame.size.height;
-  // x y width height
+  if([app_delegate isiPad])
+  {
+    NSInteger  width=self.view.frame.size.width;
+    NSInteger  height=self.view.frame.size.height;
+    // x y width height
   
-  self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
-  //[self.mainUIWebView reload];
+    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+    //[self.mainUIWebView reload];
   
-  self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
-  [[self menu_webview] setScalesPageToFit:YES];
+    self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+    [[self menu_webview] setScalesPageToFit:YES];
   
-  self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
+    self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
   
-  self.pageControl.frame = CGRectMake(width/2, height-self.pageControl.frame.size.height, width/2, pageControl.frame.size.height);
+    self.pageControl.frame = CGRectMake(width/2, height-self.pageControl.frame.size.height, width/2, pageControl.frame.size.height);
   
+    self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
   
-  self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+    self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
-  self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
-  
-  [self reLoadNoticia];
-  [self loadSectionNews];
+    [self loadSectionNews];
+  }
+  //[self reLoadNoticia];
+  [mainUIWebView reload];
 }
 
 -(void)positionatePortrait{
   
   isLandscapeView = NO;
+  if([app_delegate isiPad])
+  {
+    NSInteger  width=self.view.frame.size.width;
+    NSInteger  height=self.view.frame.size.height;
+    // x y width height
+    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
+    //[self.mainUIWebView reload];
   
-  NSInteger  width=self.view.frame.size.width;
-  NSInteger  height=self.view.frame.size.height;
-  // x y width height
-  self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
-  //[self.mainUIWebView reload];
+    [[self menu_webview] setScalesPageToFit:NO];
+    self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
-  [[self menu_webview] setScalesPageToFit:NO];
-  self.menu_webview.frame=CGRectMake(0, 44, width, 246);
+    self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
   
-  self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
+    self.pageControl.frame = CGRectMake(0, height-self.pageControl.frame.size.height, width, pageControl.frame.size.height);
   
-  self.pageControl.frame = CGRectMake(0, height-self.pageControl.frame.size.height, width, pageControl.frame.size.height);
+    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
   
-  self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
-  
-  self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
-  
-  [self reLoadNoticia];
-  [self loadSectionNews];
+    self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
+    //[self reLoadNoticia];
+    [self loadSectionNews];
+
+  }
+    [mainUIWebView reload];
 }
 
 
