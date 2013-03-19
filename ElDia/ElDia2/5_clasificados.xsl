@@ -20,7 +20,26 @@
       </head>
       
       <body>
+
         <div id="clasificados">
+          <div class="columna">
+            <div class="encabezado">
+              <div class="titulo">Clasificados</div>
+              <div class="rubro">
+                <xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/title" />
+              </div>
+              <p></p>
+              <div class="clear"></div>
+            </div>
+            <xsl:for-each select="rss/channel/item">
+              <xsl:if test="position() != last()">
+                <div class="aviso"> <p> <xsl:value-of disable-output-escaping="yes" select="description" /> </p> </div>
+              </xsl:if>
+            </xsl:for-each>
+          </div>  
+        </div>
+        
+        <!--div id="clasificados">
           <div class="menu-header">
             <xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/title" />
           </div>
@@ -29,7 +48,7 @@
               <li> <div> <xsl:value-of disable-output-escaping="yes" select="description" /> </div> </li>
             </xsl:for-each>
           </ul>
-        </div>
+        </div-->
         
       </body>
     </html>
