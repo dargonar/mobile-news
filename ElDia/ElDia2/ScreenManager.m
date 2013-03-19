@@ -43,7 +43,9 @@ NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx
 NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
 NSString * const SECTIONS_URL         = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
 NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.aspx";
-NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
+//NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
+NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
+NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
 
 @implementation ScreenManager
 
@@ -192,9 +194,11 @@ BOOL isIpad=NO;
     return nil;
   }
   
-  if( ![url hasPrefix:@"clasificados://"] && downloaded==YES)
+  //No sanitizamos clasificados porque viene en formato !UTF8.
+  //if( ![url hasPrefix:@"clasificados://"] && downloaded==YES)
+  if( downloaded==YES)
   {
-    xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"]||[url hasPrefix:@"section://"])];
+    xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"] || [url hasPrefix:@"section://"] || [url hasPrefix:@"clasificados://"])];
   }
   
   if(processImages && downloaded==YES)
