@@ -473,9 +473,11 @@ font-weight:bold;}
 .full_width label.seccion{display:inline-block;}
 
 /***** CLASIFICADOS *****/
-
+.menu_clasificados{
+  width:320px !important;  
+}
 #clasificados {
-  height:416px;
+  min-height:416px;
 	background-color:#EFEFEF;
 /*  width:100% !important;*/
   width:320px;

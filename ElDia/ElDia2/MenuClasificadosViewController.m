@@ -33,8 +33,10 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+  [[self mainUIWebView] setScalesPageToFit:YES];
   
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_clasificados" ofType:@"html"];
   NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
