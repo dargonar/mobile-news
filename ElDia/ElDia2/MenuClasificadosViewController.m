@@ -33,8 +33,10 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+  [[self mainUIWebView] setScalesPageToFit:YES];
   
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_clasificados" ofType:@"html"];
   NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
@@ -50,6 +52,36 @@
 
 - (IBAction) btnBackClick: (id)param{
   [[app_delegate navigationController] popViewControllerAnimated:YES];
+}
+
+// HACK: Estaba comentado
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  return YES;
+}
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+  
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  [mainUIWebView reload];
 }
 
 -(void) onLoading:(BOOL)started{

@@ -40,6 +40,7 @@ BOOL mViewDidLoad=NO;
 
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
+  [[self mainUIWebView] setScalesPageToFit:YES];
   if(notLoadedData != nil)
   {
     [self setHTML:notLoadedData url:nil webView:self.mainUIWebView];
@@ -58,9 +59,36 @@ BOOL mViewDidLoad=NO;
 
 }
 
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  
+  return YES;
+  
+}
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+  
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  [mainUIWebView reload];
 }
 
 /* **** */
@@ -159,7 +187,7 @@ BOOL mViewDidLoad=NO;
 }
 
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
-  [self onLoading:YES];
+  //[self onLoading:YES];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
     __block NSData *data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
@@ -205,51 +233,17 @@ BOOL mViewDidLoad=NO;
   app_delegate.navigationController.navigationBar.hidden=YES;
 }
 
-- (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
-{
-	NSLog(@"finished zooming");
-}
-
-- (void)webView:(UIWebView*)sender tappedWithTouch:(UITouch*)touch event:(UIEvent*)event
-{
-	NSLog(@"tapped");
-  [self singleTapWebView];
-}
-
-- (void)singleTapWebView {
-  //self.bottomUIView.hidden = !self.bottomUIView.hidden;
-  
-  if([self.bottomUIView isHidden]==NO)
-    [UIView animateWithDuration:.5
-                     animations: ^ {
-                       [self.bottomUIView setAlpha:0];
-                     }
-                     completion: ^ (BOOL finished) {
-                       self.bottomUIView.hidden = YES;
-                     }];
-  else if([self.bottomUIView isHidden]==YES)
-  {
-    [self.bottomUIView setAlpha:0];
-    self.bottomUIView.hidden = NO;
-    [UIView animateWithDuration:.5
-                     animations: ^ {
-                       [self.bottomUIView setAlpha:1];
-                     }
-                     completion: ^ (BOOL finished) {
-                       //self.bottomUIView.hidden = YES;
-                     }];
-  }
-}
-
-
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   [self changeFontSize:0];
   [self onLoading:NO];
+  
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+  NSLog(@"%@", error);
+  [self onLoading:NO];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request

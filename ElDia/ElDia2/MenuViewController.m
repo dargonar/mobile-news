@@ -36,9 +36,7 @@ NSLock *lock;
 {
   [super viewDidLoad];
   
-  //self.webView.scrollView.bounces = NO;
-  //self.webView.scrollView.bouncesZoom = NO;
-  self.webView.scrollView.alwaysBounceHorizontal = NO;
+  //self.webView.scrollView.alwaysBounceHorizontal = NO;
   self.webView.hidden=NO;
   [self loadGesturesRecognizers];
   
@@ -169,7 +167,7 @@ NSLock *lock;
   // x value changed to where it will end up with the animation is complete.
   // this animation doesn't require any action when completed so the block is left empty
   
-  NSInteger _width = 265;
+  NSInteger _width = 276;
   if([app_delegate isiPad])
   {
     _width = 480;
@@ -216,11 +214,33 @@ NSLock *lock;
 }
 
 
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  return NO;
 }
+
+- (BOOL) shouldAutorotate
+{
+  return NO; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+//BOOL isShowingLandscapeView = NO;
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  }
 
 - (void)singleTapScreenShot:(UITapGestureRecognizer *)gestureRecognizer
 {
