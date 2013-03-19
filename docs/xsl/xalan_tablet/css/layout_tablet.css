@@ -604,6 +604,13 @@ CLASIFICADOS
 	margin-bottom:5px;
 }
 
+#clasificados .columna .rubro {
+  color: #333;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 10px;
+}
+
 #clasificados .columna .encabezado .calendario {
 	padding:5px;
 	margin-right:1px;
