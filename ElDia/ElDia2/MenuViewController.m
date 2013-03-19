@@ -193,24 +193,24 @@ NSLock *lock;
                    completion:^(BOOL finished){ [app_delegate hideSideMenu]; }];
 }
 
--(void) slideThenHide2
+-(void) slideThenHideShowMenuClasificados
 {
   // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
   // it tells the app delegate using the completion block of the animation
   [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
     [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
-                   completion:^(BOOL finished){ [app_delegate hideSideMenu2]; }];
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushMenuClasificados]; }];
 }
 
--(void) slideThenHide3
+-(void) slideThenHideShowClasificados
 {
   // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
   // it tells the app delegate using the completion block of the animation
   [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
     [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
-                   completion:^(BOOL finished){ [app_delegate hideSideMenu3]; }];
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushClasificados]; }];
 }
 
 
@@ -328,18 +328,26 @@ NSLock *lock;
     return NO;
   }
   else
-    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"]) // por ahora page://clasificados
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"clasificados"]) // por ahora page://clasificados
     {
-      [self slideThenHide2];
+      [self slideThenHideShowMenuClasificados];
       return NO;
     }
     else
       if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
       {
         [app_delegate loadClasificados:url];
-        [self slideThenHide3];
+        [self slideThenHideShowClasificados];
         return NO;
       }
+      else
+        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"funebres"]) // por ahora page://clasificados
+        {
+          
+          [app_delegate loadClasificados:[[NSURL alloc]initWithString:@"funebres://full" ]];
+          [self slideThenHideShowClasificados];
+          return NO;
+        }
   
   return YES;
   

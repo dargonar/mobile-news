@@ -208,14 +208,21 @@ int cache_size = 2; //30;
   [navigationController pushViewController:self.menuViewController animated:NO ];
 }
 
--(void)hideSideMenu3{
+-(void)hideSideMenuPushFunebres{
   [navigationController popToViewController:mainViewController animated:NO];
   [navigationController pushViewController:self.clasificadosViewController animated:YES ];
 }
--(void)hideSideMenu2{
+
+-(void)hideSideMenuPushClasificados{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+}
+
+-(void)hideSideMenuPushMenuClasificados{
   [navigationController popToViewController:mainViewController animated:NO];
   [navigationController pushViewController:self.menuClasificadosViewController animated:YES ];
 }
+
 -(void)hideSideMenu
 {
   // all animation takes place elsewhere. When this gets called just swap the contentViewController in

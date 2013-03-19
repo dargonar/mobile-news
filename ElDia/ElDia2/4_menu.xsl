@@ -35,9 +35,6 @@
             <li>
               <a class="vip2" href="page://funebres">Fúnebres</a>
             </li>
-            <li>
-              <a class="vip2" href="page://funebres">Fúnebres</a>
-            </li>
             <li class="vip2_close"></li>
             
           </ul>

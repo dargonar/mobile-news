@@ -23,6 +23,7 @@ NSString * const NOTICIA_STYLESHEET       = @"3_new.xsl";
 NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
 NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
+NSString * const FUNEBRES_STYLESHEET      = @"6_funebres.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
 NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
@@ -38,6 +39,7 @@ NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_
 NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_landscape.xsl";
 NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones.xsl";
 NSString * const iPad_CLASIFICADOS_STYLESHEET         = @"5_tablet_clasificados.xsl";
+NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl";
 
 NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
@@ -72,6 +74,10 @@ BOOL isIpad=NO;
 
 -(BOOL) clasificadosExists:(NSString*)url {
   return [self screenExists:url prefix:@"c"];
+}
+
+-(BOOL) funebresExists:(NSString*)url {
+  return [self screenExists:url prefix:@"f"];
 }
 
 -(BOOL) sectionExists:(NSString*)url {
@@ -110,6 +116,10 @@ BOOL isIpad=NO;
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:url useCache:useCache processImages:NO prefix:@"c" error:error];
+}
+
+-(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"f" error:error];
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -312,6 +322,10 @@ BOOL isIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CLASIFICADOS_STYLESHEET];
   }
   
+  if( [url hasPrefix:@"funebres://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:FUNEBRES_STYLESHEET];
+  }
+  
   if( [url hasPrefix:@"section://"] ) {  
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SECTIONS_STYLESHEET];
   }
@@ -372,6 +386,10 @@ BOOL isIpad=NO;
   if( [url hasPrefix:@"clasificados://"] ) {
     NSString* sheet = iPad_CLASIFICADOS_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
+  if( [url hasPrefix:@"funebres://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FUNEBRES_STYLESHEET];
   }
   
   if( [url hasPrefix:@"section_menu://"] ) {
