@@ -163,6 +163,30 @@ BOOL mViewDidLoad=NO;
   self.bottomUIView.hidden = YES;
 }
 
+-(void)loadFunebres:(NSURL *)url{
+  
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager sectionDate:uri];
+  // Clasificado es muy viejo, o no existe?
+  //if(![self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  if([self.mScreenManager funebresExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getFunebres:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"funebres"];
+}
+
+
 -(void)loadClasificados:(NSURL *)url{
   
   [self loadBlank];
@@ -183,15 +207,19 @@ BOOL mViewDidLoad=NO;
     if(![self isOld:date])
       return;
   }
-  [self loadUrl:uri useCache:NO];
+  [self loadUrl:uri useCache:NO type:@"clasificados"];
 }
 
--(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache type:(NSString*)type{
   //[self onLoading:YES];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
-    __block NSData *data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
-    
+    __block NSData *data = nil;
+    if([type isEqualToString:@"funebres"])
+      data = [self.mScreenManager getFunebres:url useCache:useCache error:&err];
+    else
+      if([type isEqualToString:@"clasificados"])
+        data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
     dispatch_async(dispatch_get_main_queue(), ^{
       
       if(data==nil)

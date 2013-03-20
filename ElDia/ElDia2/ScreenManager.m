@@ -232,6 +232,9 @@ BOOL isIpad=NO;
     }
   }
   
+  // Test encoding.
+  //[cache put:key data:xml prefix:@"xml"];
+  
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   
@@ -432,6 +435,9 @@ BOOL isIpad=NO;
     return [NSURL URLWithString:MENU_URL];
   }
   
+  if( [url hasPrefix:@"funebres://"] ) {
+    return [NSURL URLWithString:FUNEBRES_URL];
+  }
 
   return nil;
 }
