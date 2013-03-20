@@ -39,6 +39,7 @@
 - (void)loadSectionNews:(NSURL*)url;
 - (void)loadMenu:(BOOL)useCache;
 - (void)loadClasificados:(NSURL*)url;
+- (void)loadFunebres:(NSURL*)url;
 - (void)showClasificados;
 
 - (BOOL)isiPad;

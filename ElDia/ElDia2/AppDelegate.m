@@ -186,6 +186,10 @@ int cache_size = 2; //30;
   [self.clasificadosViewController loadClasificados:url];
 }
 
+-(void)loadFunebres:(NSURL*)url{
+  [self.clasificadosViewController loadFunebres:url];
+}
+
 -(void)showClasificados{
   [navigationController pushViewController:self.clasificadosViewController animated:YES ];
 }

@@ -14,10 +14,12 @@
 -(BOOL) articleExists:(NSString*)url;
 -(BOOL) menuExists;
 -(BOOL) clasificadosExists:(NSString*)url;
+-(BOOL) funebresExists:(NSString*)url;
 
 -(BOOL) sectionMenuExists:(NSString*)url;
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
+-(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError**)error;
 -(NSData *)getMenu:(BOOL)useCache error:(NSError **)error;

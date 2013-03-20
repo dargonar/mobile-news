@@ -344,7 +344,7 @@ NSLock *lock;
         if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"funebres"]) // por ahora page://clasificados
         {
           
-          [app_delegate loadClasificados:[[NSURL alloc]initWithString:@"funebres://full" ]];
+          [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://full" ]];
           [self slideThenHideShowClasificados];
           return NO;
         }
