@@ -407,8 +407,9 @@ UIActionSheet* actionSheet;
   self.mainUIWebView.hidden = NO;
   self.mainUIWebView.tag=MAIN_VIEW_TAG;
   
-  [[self mainUIWebView] setScalesPageToFit:YES];
-
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [[self menu_webview] setScalesPageToFit:NO];
+  
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
@@ -479,14 +480,32 @@ UIActionSheet* actionSheet;
 }
 
 
+-(void) rotateHTML:(UIWebView*)webView{
+  if (webView.tag!=MAIN_VIEW_TAG) {
+    NSString *jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;');";
+    
+    if(isLandscapeView==YES)
+      jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;');";
+    
+    NSString* result =[self.menu_webview stringByEvaluatingJavaScriptFromString:jsString];
+    NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
+  }
+  else{
+    NSString *jsString = @"document.body.style.width = '1020px !important';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
+    //width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;
+    if(isLandscapeView==YES)
+      jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
+    
+    NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
+  }
+
+}
+
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   [self onLoading:NO];
   
-  
-  if (webView.tag!=MAIN_VIEW_TAG) {
-    return;
-  }
-  
+  [self rotateHTML:webView];
   //[[self mainUIWebView] setScalesPageToFit:YES];
   [self changeFontSize:0];
   
@@ -495,15 +514,7 @@ UIActionSheet* actionSheet;
    }
   
   
-  [self.mainUIWebView reload];
-  NSString *jsString =     jsString = @"document.body.style.width = '1020px !important';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:1020; user-scalable=YES;');metayi.setAttribute('content','width:1020; user-scalable=NO;');";
-
-  if(isLandscapeView==YES)
-    jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:660; user-scalable=YES;');metayi.setAttribute('content','width:660; user-scalable=NO;');";
-  
-  NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
-  
+  //[self.mainUIWebView reload];
   //[self.mainUIWebView ]
 }
 
@@ -751,7 +762,9 @@ BOOL isLandscapeView = NO;
   {
     [self positionatePortrait];
   }
-  [self loadSectionNews];
+  //[self loadSectionNews];
+  [self rotateHTML:self.mainUIWebView];
+  [self rotateHTML:self.menu_webview];
 }
 
 -(void)positionateLandscape{
@@ -768,7 +781,7 @@ BOOL isLandscapeView = NO;
     //[self.mainUIWebView reload];
   
     self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
-    [[self menu_webview] setScalesPageToFit:YES];
+    //[[self menu_webview] setScalesPageToFit:YES];
   
     self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
   
@@ -781,7 +794,7 @@ BOOL isLandscapeView = NO;
     //[self loadSectionNews];
   }
   //[self reLoadNoticia];
-   [mainUIWebView reload];
+  //[mainUIWebView reload];
 }
 
 -(void)positionatePortrait{
@@ -795,7 +808,7 @@ BOOL isLandscapeView = NO;
     self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
     //[self.mainUIWebView reload];
   
-    [[self menu_webview] setScalesPageToFit:NO];
+    //[[self menu_webview] setScalesPageToFit:NO];
     self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
     self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
@@ -809,7 +822,7 @@ BOOL isLandscapeView = NO;
     //[self loadSectionNews];
 
   }
-    [mainUIWebView reload];
+  //[mainUIWebView reload];
 }
 
 

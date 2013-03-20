@@ -35,6 +35,8 @@ NSLock *menuLock;
       refreshingOn=NO;
       self.btnOptions.enabled=NO;
       menuLock = [[NSLock alloc] init];
+      self.mainUIWebView.delegate=self;
+      self.menu_webview.delegate=self;
     }
   
   return self;
@@ -48,11 +50,16 @@ NSLock *menuLock;
   [self setCurrentUrl:mainUrl];
   
   mainUIWebView.tag=MAIN_VIEW_TAG;
-  //if ([app_delegate isiPad]) {
-    [[self mainUIWebView] setScalesPageToFit:YES];
-    [[self menu_webview] setScalesPageToFit:YES];
-    
-  //}
+  
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [self mainUIWebView].multipleTouchEnabled = NO;
+  self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+  
+  
+  if ([app_delegate isiPad]) {
+    [[self menu_webview] setScalesPageToFit:NO];
+    [self menu_webview].multipleTouchEnabled = NO;
+  }
   if([app_delegate isLandscape])
   {
     [self positionateLandscape];
@@ -78,7 +85,7 @@ NSLock *menuLock;
   NSString*uri=[self currentUrl];
   [self loadUrl:uri useCache:YES];
   
-  return;
+  /*
   if([self.mScreenManager sectionExists:uri])
   {
     NSError *err;
@@ -89,6 +96,7 @@ NSLock *menuLock;
   {
     [self loadUrl:uri useCache:YES];
   }
+   */
 }
 
 -(void)loadMenu:(BOOL)useCache{
@@ -161,6 +169,7 @@ NSLock *menuLock;
 
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache reloadMenu:(BOOL)reloadMenu {
   
+  showUpdatedAt = YES;
   NSString*type= [self getType:url];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -323,7 +332,7 @@ BOOL isShowingLandscapeView = NO;
     self.menu_webview.frame=CGRectMake(0, 44, 256, height-44);
     self.menu_webview.hidden = NO;
     [self.menu_webview reload];
-    [self loadMenu];
+    //[self loadMenu];
   }
   else{
     
@@ -435,29 +444,73 @@ BOOL isShowingLandscapeView = NO;
   [self onLoading:NO];
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+  
+  //[webView setScalesPageToFit:YES];
+  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
+  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
+  
+  if(webView.tag == MAIN_VIEW_TAG){
+    webView.hidden = YES;
+  }
+  
+}
+
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-  NSLog(@"WEBVIEW: end load with error");
-  NSLog(@"Error: %@ %@", error, [error userInfo]);
-
+  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
+  NSLog(@"WEBVIEW[%@] didFailLoadWithError Error: %@ %@", webDesc, error, [error userInfo]);
+  //[webView setScalesPageToFit:NO];
   [self onNothing];
+  if(webView.tag == MAIN_VIEW_TAG){
+    webView.hidden = NO;
+  }
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-  NSLog(@"WEBVIEW: start load");
-}
-
+bool showUpdatedAt = NO;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
-  [self showUpdatedAt];
-  [self onNothing];
+  [webView setScalesPageToFit:NO];
+  if(webView.tag == MAIN_VIEW_TAG)
+  {
+    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
+    [self showUpdatedAt];
+    [self onNothing];
+    
+    /*
+    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = self.view.bounds.size;
+    
+    float rw = viewSize.width / contentSize.width;
+    
+    webView.scrollView.minimumZoomScale = rw;
+    webView.scrollView.maximumZoomScale = rw;
+    webView.scrollView.zoomScale = rw;
+    */
+    
+    /*
+    CGFloat scale = 768.0/1020.0;
+    scale = 0.75;*/
+    NSString *jsString =     jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');";
+    
+    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    
+      webView.hidden = NO;
+  }
+  
+  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
+  NSLog(@"WEBVIEW[%@] webViewDidFinishLoad", webDesc);
+  
   //[self showMessage:@"Esto es una prueba.\nNo pretendemos ser dios." isError:YES];
 }
 
 -(void)showUpdatedAt{
   
-  NSDate * date =[self.mScreenManager sectionDate:self.currentUrl];
+  if(showUpdatedAt==NO)
+    return;
+  showUpdatedAt=NO;
+  
+  NSDate * date =[self getDate:self.currentUrl];
   NSString *jsString  = [NSString  stringWithFormat:@"show_actualizado('%@')", [Utils timeAgoFromUnixTime:[date timeIntervalSince1970]]];
   
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];

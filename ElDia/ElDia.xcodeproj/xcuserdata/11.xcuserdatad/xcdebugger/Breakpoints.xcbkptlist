@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "381794552.772202"
+         timestampString = "385499983.302423"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "383684117.959063"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "-loadUrlAndLoading:useCache:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "385505368.684016"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-loadUrl:useCache:reloadMenu:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,25 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "383684117.959063"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "162"
          endingLineNumber = "162"
-         landmarkName = "-loadUrl:useCache:reloadMenu:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/MainViewController.m"
-         timestampString = "383684117.959063"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
-         landmarkName = "-loadUrl:useCache:reloadMenu:"
+         landmarkName = "-getDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -99,13 +99,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "385336349.590318"
+         timestampString = "385507289.237022"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "518"
-         endingLineNumber = "518"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-         landmarkType = "5">
+         startingLineNumber = "529"
+         endingLineNumber = "529"
+         landmarkName = "@implementation NoticiaViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "385336349.590318"
+         timestampString = "385504462.938346"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "421"
-         endingLineNumber = "421"
+         startingLineNumber = "422"
+         endingLineNumber = "422"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,11 +502,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "214"
-         endingLineNumber = "214"
+         startingLineNumber = "223"
+         endingLineNumber = "223"
+         landmarkName = "-loadUrl:useCache:reloadMenu:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "385505368.684016"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
+         landmarkName = "-viewDidUnload"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "385505368.684016"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "233"
+         endingLineNumber = "233"
          landmarkName = "@implementation MainViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -515,38 +541,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "230"
-         endingLineNumber = "230"
-         landmarkName = "-supportedInterfaceOrientations"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "224"
-         endingLineNumber = "224"
-         landmarkName = "-shouldAutorotate"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "324"
-         endingLineNumber = "324"
-         landmarkName = "-loadMenu"
+         startingLineNumber = "333"
+         endingLineNumber = "333"
+         landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -619,11 +619,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "385336349.590318"
+         timestampString = "385506149.49962"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "760"
-         endingLineNumber = "760"
+         startingLineNumber = "773"
+         endingLineNumber = "773"
          landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
@@ -697,25 +697,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "435"
-         endingLineNumber = "435"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/MainViewController.m"
-         timestampString = "385334571.101162"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "441"
-         endingLineNumber = "441"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         startingLineNumber = "444"
+         endingLineNumber = "444"
+         landmarkName = "-onNothing"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -723,12 +710,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "383684117.959063"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "203"
-         endingLineNumber = "203"
-         landmarkName = "-btnRefreshClick:"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
+         landmarkName = "-loadUrl:useCache:reloadMenu:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -762,11 +749,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "385336349.590318"
+         timestampString = "385507289.237022"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "496"
-         endingLineNumber = "496"
+         startingLineNumber = "515"
+         endingLineNumber = "515"
          landmarkName = "-webViewDidFinishLoad:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -931,13 +918,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/MainViewController.m"
-         timestampString = "385413409.633948"
+         timestampString = "385505368.684016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
-         landmarkName = "-loadMenu:"
-         landmarkType = "5">
+         startingLineNumber = "101"
+         endingLineNumber = "101"
+         landmarkName = "@implementation MainViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1066,7 +1053,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "190"
          endingLineNumber = "190"
-         landmarkName = "-loadFunebres:"
+         landmarkName = "-loadClasificados:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1079,7 +1066,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "186"
          endingLineNumber = "186"
-         landmarkName = "-loadClasificados:"
+         landmarkName = "-loadSectionNews:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1093,6 +1080,58 @@
          startingLineNumber = "220"
          endingLineNumber = "220"
          landmarkName = "-loadUrl:useCache:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "385505368.684016"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "496"
+         endingLineNumber = "496"
+         landmarkName = "-webViewDidFinishLoad:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/MainViewController.m"
+         timestampString = "385505368.684016"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
+         landmarkName = "-positionateLandscape"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/NoticiaViewController.m"
+         timestampString = "385507534.617748"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "766"
+         endingLineNumber = "766"
+         landmarkName = "-didRotateFromInterfaceOrientation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/NoticiaViewController.m"
+         timestampString = "385507588.454944"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
+         landmarkName = "-rotateHTML:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

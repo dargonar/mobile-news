@@ -63,6 +63,9 @@ INDEX
   overflow-x:hidden;
 }
 
+.global #index {
+	width:auto !important;
+}
 #index a{text-decoration:none;color:inherit;}
 
 /* NOTA PRINCIPAL */
@@ -378,6 +381,8 @@ body.landscape.padded{
 	width:180px;
 	height:120px;
 	margin:10px;
+  background-size: cover;
+  background-position: center;
   position:relative;
 }
 
