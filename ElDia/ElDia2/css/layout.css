@@ -488,14 +488,11 @@ font-weight:bold;}
 /********************************************
 CLASIFICADOS
 ********************************************/
-.menu_clasificados{
-  width:320px !important;  
-}
+
 #clasificados {
   min-height:416px;
-	background-color:#EFEFEF;
-/*  width:100% !important;*/
-  width:320px;
+	/*background-color:#EFEFEF;*/
+  /*width:100% !important;*/
   overflow-x:hidden;
   overflow-y:auto;
 }
