@@ -165,6 +165,7 @@ BOOL mViewDidLoad=NO;
 
 -(void)loadFunebres:(NSURL *)url{
   
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypeNone;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
@@ -188,7 +189,7 @@ BOOL mViewDidLoad=NO;
 
 
 -(void)loadClasificados:(NSURL *)url{
-  
+    self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
