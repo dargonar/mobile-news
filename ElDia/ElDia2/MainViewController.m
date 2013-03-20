@@ -76,6 +76,9 @@ NSLock *menuLock;
 
 -(void)reLoadIndex{
   NSString*uri=[self currentUrl];
+  [self loadUrl:uri useCache:YES];
+  
+  return;
   if([self.mScreenManager sectionExists:uri])
   {
     NSError *err;
@@ -106,14 +109,21 @@ NSLock *menuLock;
 
   NSString* url = [self.currentUrl copy];
   
-  NSDate * date =[self.mScreenManager sectionDate:url];
+  NSDate * date = [self getDate:url];
+  
   // Main list es muy viejo?
   if( ![self isOld:date])
     return;
   
   // Lo traemos de nuevo
-  [self loadUrl:url useCache:NO reloadMenu:YES];
+  [self loadUrl:url useCache:NO reloadMenu:([url hasPrefix:@"section://"])];
   
+}
+
+
+-(void)loadClasificadosAndLoading:(NSString*)url useCache:(BOOL)useCache{
+  [self onRefreshing:YES];
+  [self loadUrl:url useCache:useCache reloadMenu:NO];
 }
 
 -(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache{
@@ -125,12 +135,49 @@ NSLock *menuLock;
   [self loadUrl:url useCache:useCache reloadMenu:NO];
 }
 
+-(NSString*)getType:(NSString*)url{
+  if( [url hasPrefix:@"clasificados://" ] ) {
+    return @"clasificados";
+  }
+  else
+    if( [url hasPrefix:@"funebres://" ] ) {
+      return @"funebres";
+    }
+  return @"section";
+  
+}
+
+-(NSDate*)getDate:(NSString*)url{
+  if( [url hasPrefix:@"clasificados://" ] ) {
+    return[self.mScreenManager clasificadosDate:url];
+  }
+  else
+    if( [url hasPrefix:@"funebres://" ] ) {
+      return[self.mScreenManager funebresDate:url];
+    }
+  return[self.mScreenManager sectionDate:url];
+}
+
+
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache reloadMenu:(BOOL)reloadMenu {
+  
+  NSString*type= [self getType:url];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
-    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
-
+    __block NSData *data = nil;
+    if([type isEqualToString:@"clasificados"])
+    {
+      data=[self.mScreenManager getClasificados:self.currentUrl useCache:useCache error:&err];
+    }
+    else
+      if([type isEqualToString:@"funebres"])
+      {
+        data=[self.mScreenManager getFunebres:self.currentUrl useCache:useCache error:&err];
+      }
+      else{
+      data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
       
       if(data==nil)
@@ -158,7 +205,7 @@ NSLock *menuLock;
         {
           [self showMessage:@"No hay conexión de red.\nNo podemos actualizar la aplicación." isError:YES];
         }
-        
+        NSLog(@"%d", [err code]);
         return;
       }
       
@@ -451,9 +498,12 @@ BOOL isShowingLandscapeView = NO;
       return NO;
     }
     else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"]))
       {
-        [app_delegate loadClasificados:url];
+        //[app_delegate loadClasificados:url];
+        [self setCurrentUrl:[url absoluteString]];
+        [self loadUrlAndLoading:[url absoluteString] useCache:YES];
+        
         return NO;
       }
   }

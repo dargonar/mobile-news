@@ -429,6 +429,13 @@ UIActionSheet* actionSheet;
   networkImages = nil;
   networkGallery = nil;
   
+  if ([app_delegate isiPad]) {
+    if([app_delegate isLandscape])
+    {
+      [self positionateLandscape];
+    }
+  }
+  
 }
   
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
@@ -495,7 +502,7 @@ UIActionSheet* actionSheet;
     jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:660; user-scalable=YES;');metayi.setAttribute('content','width:660; user-scalable=NO;');";
   
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  NSLog(@" EvaluateJS:[%@] result:[%@]",jsString, result);
+  NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
   
   //[self.mainUIWebView ]
 }
@@ -744,6 +751,7 @@ BOOL isLandscapeView = NO;
   {
     [self positionatePortrait];
   }
+  [self loadSectionNews];
 }
 
 -(void)positionateLandscape{
@@ -770,10 +778,10 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
-    [self loadSectionNews];
+    //[self loadSectionNews];
   }
   //[self reLoadNoticia];
-  [mainUIWebView reload];
+   [mainUIWebView reload];
 }
 
 -(void)positionatePortrait{
@@ -798,7 +806,7 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
     //[self reLoadNoticia];
-    [self loadSectionNews];
+    //[self loadSectionNews];
 
   }
     [mainUIWebView reload];

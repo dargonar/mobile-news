@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <title>LISTADO PRINCIPAL</title>
-        <meta name="viewport" content="width=device-width,user-scalable=no" />
+        <meta name="viewport" content="width=1020;user-scalable=no;" />
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
       

@@ -27,6 +27,9 @@
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
 
 -(NSDate*) sectionDate:(NSString*)url;  
+-(NSDate*) clasificadosDate:(NSString*)url ;
+-(NSDate*) funebresDate:(NSString*)url ;
+
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error;
 
 @end

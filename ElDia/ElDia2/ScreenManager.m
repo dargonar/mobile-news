@@ -67,6 +67,19 @@ BOOL isIpad=NO;
   return [cache createdAt:key prefix:@"s"];
 }
 
+-(NSDate*) funebresDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"f"];
+}
+
+
+-(NSDate*) clasificadosDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"c"];
+}
+
 /**/
 -(BOOL) menuExists{
   return [self screenExists:@"menu://" prefix:@"m"];
@@ -210,6 +223,8 @@ BOOL isIpad=NO;
   {
     xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"] || [url hasPrefix:@"section://"] || [url hasPrefix:@"clasificados://"])];
   }
+  
+  //<clasificado rubro="ALQUILER DE HABITACIONES">
   
   if(processImages && downloaded==YES)
   {

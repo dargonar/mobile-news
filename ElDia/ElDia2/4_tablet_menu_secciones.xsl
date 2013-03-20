@@ -45,7 +45,7 @@
             <li><a href="clasificados://9">Transportes</a></li>
             <li><a href="clasificados://10">Compra y venta art. del hogar (usados)</a></li>
             <li><a href="clasificados://11">Electrónica, música, equipos  y fotografía</a></li>
-            <li><a href="clasificados://12">Construcciones, planos y empresas</a></li>
+            <li><a href="clasificados://12">Construccio-nes, planos y empresas</a></li>
             <li><a href="clasificados://13">Albañilería, pintura, plomería, rep. techos</a></li>
             <li><a href="clasificados://14">Hipotecas, prestamos, transferencias y seguros</a></li>
             <li><a href="clasificados://15">Festejos y guarderías</a></li>
@@ -72,12 +72,9 @@
             <li><a href="clasificados://36">Ferreterías - cerrajerías</a></li>
 
             <li class="seccion">Varios</li>
-            <li><a href="#">Fúnebres</a></li>
-            <li><a href="#">Indice de Rubros</a></li>
-            <li><a href="#">Receptorías</a></li>
-            <li><a href="#">Avisos con Imágenes</a></li>
-            <li><a href="#">e-propiedades</a></li>
-            <li><a href="#">Motores Argentinos</a></li>
+            <li><a href="funebres://full">Fúnebres</a></li>
+            <li><a href="farmacias://full">Farmacias de turno</a></li>
+            <li><a href="cartelera://full">Cartelera de cine</a></li>
           </ul>
         </div>
 

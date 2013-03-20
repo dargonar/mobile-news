@@ -408,6 +408,7 @@ MENU PRINCIPAL
   width:256px; 
   /*width:100%;*/
   overflow-x:hidden;
+  height:auto;
 }
 
 #menu ul {

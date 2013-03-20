@@ -177,6 +177,9 @@ int cache_size = 2; //30;
   [self.menuViewController loadUrl:useCache];
 }
 
+-(void)loadService:(NSURL*)url{
+  [self loadSectionNews:url];
+}
 -(void)loadSectionNews:(NSURL*)url{
   self.mainViewController.currentUrl = [url absoluteString];
   [self.mainViewController loadUrlAndLoading:self.mainViewController.currentUrl useCache:YES];
