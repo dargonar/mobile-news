@@ -515,7 +515,10 @@ CLASIFICADOS
 }
 
 #clasificados .columna.ex, #clasificados .columna.exsimple{
-  padding-top:0px !important;
+  width:320px;
+	float:left;
+	padding:0px 0px 0px 0px;
+
 }
 
 #clasificados .columna .aviso {
