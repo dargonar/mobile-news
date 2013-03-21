@@ -413,29 +413,22 @@ UIActionSheet* actionSheet;
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
-    if([app_delegate isLandscape])
-    {
-      [self positionateLandscape];
-    }
   }
+  
   // Do any additional setup after loading the view from its nib.
   [self addGestureRecognizers];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
+  
   app_delegate.navigationController.navigationBar.hidden=YES;
   [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
   networkCaptions = nil;
   networkImages = nil;
   networkGallery = nil;
   
-  if ([app_delegate isiPad]) {
-    if([app_delegate isLandscape])
-    {
-      [self positionateLandscape];
-    }
-  }
+  [self positionate];
   
 }
   
@@ -481,7 +474,8 @@ UIActionSheet* actionSheet;
 
 
 -(void) rotateHTML:(UIWebView*)webView{
-  if (webView.tag!=MAIN_VIEW_TAG) {
+  /*
+   if (webView.tag!=MAIN_VIEW_TAG) {
     NSString *jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;');";
     
     if(isLandscapeView==YES)
@@ -491,31 +485,28 @@ UIActionSheet* actionSheet;
     NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
   }
   else{
-    NSString *jsString = @"document.body.style.width = '1020px !important';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
-    //width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;
-    if(isLandscapeView==YES)
-      jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
-    
-    NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
   }
+  */
+  
+  NSString *jsString = @"document.body.style.width = '1020px';metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
+    //width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;
+  if(isLandscapeView==YES)
+  {
+    jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
+  }
+  
+  NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
+  
 
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self onLoading:NO];
-  
-  [self rotateHTML:webView];
-  //[[self mainUIWebView] setScalesPageToFit:YES];
-  [self changeFontSize:0];
-  
-   if (!app_delegate.isiPad){
-     return;
-   }
-  
-  
-  //[self.mainUIWebView reload];
-  //[self.mainUIWebView ]
+  if (webView.tag==MAIN_VIEW_TAG) {
+    [self onLoading:NO];
+    [self rotateHTML:webView];
+    [self changeFontSize:0];
+  }
 }
 
 
@@ -749,7 +740,10 @@ BOOL is_loading = YES;
 BOOL isLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  
+  [self positionate];
+}
+
+-(void)positionate{
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
@@ -762,11 +756,14 @@ BOOL isLandscapeView = NO;
   {
     [self positionatePortrait];
   }
-  //[self loadSectionNews];
+  
+  [self loadSectionNews];
   [self rotateHTML:self.mainUIWebView];
-  [self rotateHTML:self.menu_webview];
-}
+  //[self rotateHTML:self.menu_webview];
+  [self.mainUIWebView reload];
+  //[self.menu_webview reload];
 
+}
 -(void)positionateLandscape{
 
   isLandscapeView = YES;
@@ -791,7 +788,6 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
-    //[self loadSectionNews];
   }
   //[self reLoadNoticia];
   //[mainUIWebView reload];
@@ -819,7 +815,6 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
     //[self reLoadNoticia];
-    //[self loadSectionNews];
 
   }
   //[mainUIWebView reload];

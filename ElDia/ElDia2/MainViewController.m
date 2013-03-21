@@ -112,6 +112,8 @@ NSLock *menuLock;
   [app_delegate loadMenu:useCache];
   
 }
+
+
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
@@ -229,6 +231,7 @@ NSLock *menuLock;
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  [self positionate];
 }
 
 - (void)viewDidUnload
@@ -296,6 +299,12 @@ BOOL isShowingLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
+  [self positionate];
+  
+}
+
+-(void)positionate{
+  
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
@@ -310,6 +319,7 @@ BOOL isShowingLandscapeView = NO;
   }
   
   [self reLoadIndex];
+
 }
 
 -(void)positionateLandscape{
@@ -332,7 +342,11 @@ BOOL isShowingLandscapeView = NO;
     self.menu_webview.frame=CGRectMake(0, 44, 256, height-44);
     self.menu_webview.hidden = NO;
     [self.menu_webview reload];
-    //[self loadMenu];
+    if(menuLoaded==NO)
+    {
+      menuLoaded=YES;
+      [self loadMenu];
+    }
   }
   else{
     
@@ -340,6 +354,8 @@ BOOL isShowingLandscapeView = NO;
   
   [self.mainUIWebView reload];
 }
+
+bool menuLoaded = NO;
 
 
 -(void)positionatePortrait{
@@ -470,38 +486,25 @@ BOOL isShowingLandscapeView = NO;
 
 bool showUpdatedAt = NO;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  [webView setScalesPageToFit:NO];
-  if(webView.tag == MAIN_VIEW_TAG)
+
+  if(webView.tag == MAIN_VIEW_TAG )
   {
-    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
-    [self showUpdatedAt];
     [self onNothing];
-    
-    /*
-    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.view.bounds.size;
-    
-    float rw = viewSize.width / contentSize.width;
-    
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;
-    */
-    
-    /*
-    CGFloat scale = 768.0/1020.0;
-    scale = 0.75;*/
-    NSString *jsString =     jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');";
+    if([current_url hasPrefix:@"section"])
+    {
+      [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
+      [self showUpdatedAt];
+    /*NSString *jsString = @"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');";
     
     [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    
-      webView.hidden = NO;
+    */
+    }
+    webView.hidden = NO;
   }
   
   NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
   NSLog(@"WEBVIEW[%@] webViewDidFinishLoad", webDesc);
   
-  //[self showMessage:@"Esto es una prueba.\nNo pretendemos ser dios." isError:YES];
 }
 
 -(void)showUpdatedAt{
@@ -538,7 +541,7 @@ bool showUpdatedAt = NO;
     
       [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-      NSLog(@" call load noticia: %@", [url absoluteString]);
+      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
       [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
       return NO;

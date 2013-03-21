@@ -1,3 +1,4 @@
+var metayi;
 function hasClass(el, name) {
   return new RegExp('(\\s|^)'+name+'(\\s|$)').test(el.className);
 }

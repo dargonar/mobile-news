@@ -15,8 +15,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>clasificados</title>
         <link rel="stylesheet" href="css/layout_tablet.css" type="text/css" />
-        <meta name="viewport" content="width=960;user-scalable=no;" />
-        
+        <!-- meta name="viewport" content="width=960;user-scalable=no;" / -->
+        <meta name="viewport" content="width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');" />
       </head>
       
       <body>

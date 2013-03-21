@@ -361,6 +361,17 @@ BOOL isIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
+  if( [url hasPrefix:@"section_menu://"] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+    
+  }
+  
+  if( [url hasPrefix:@"ls_menu_section://main"] ) {
+    NSString* sheet = iPad_MAIN_NEWS_LS_STYLESHEET; //app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
   if( [url hasPrefix:@"ls_menu_section://"] ) {
     NSString* sheet = iPad_SECTION_NEWS_LS_STYLESHEET; 
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
@@ -368,11 +379,6 @@ BOOL isIpad=NO;
   
   if( [url hasPrefix:@"section://main"] ) {
     NSString* sheet = iPad_MAIN_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"ls_section://main"] ) {
-    NSString* sheet = MAIN_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
@@ -409,14 +415,7 @@ BOOL isIpad=NO;
   if( [url hasPrefix:@"funebres://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FUNEBRES_STYLESHEET];
   }
-  
-  if( [url hasPrefix:@"section_menu://"] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
-    NSLog(@"ScreenManager::getStyleSheetiPad:: section_menu:[%@]", sheet);
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     
-  }
-  
   if( [url hasPrefix:@"menu://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_MENU_STYLESHEET];
   }
