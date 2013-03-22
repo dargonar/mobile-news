@@ -303,6 +303,33 @@ BOOL isShowingLandscapeView = NO;
   
 }
 
+-(void) rotateHTML:(UIWebView*)webView{
+  if([app_delegate isiPad])
+    return;
+  
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if(isShowingLandscapeView==YES){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px'; 
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+}
+
+
 -(void)positionate{
   
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
@@ -318,6 +345,7 @@ BOOL isShowingLandscapeView = NO;
     [self positionatePortrait];
   }
   
+  [self rotateHTML:self.mainUIWebView];
   [self reLoadIndex];
 
 }
@@ -475,9 +503,6 @@ bool menuLoaded = NO;
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
-  NSLog(@"WEBVIEW[%@] didFailLoadWithError Error: %@ %@", webDesc, error, [error userInfo]);
-  //[webView setScalesPageToFit:NO];
   [self onNothing];
   if(webView.tag == MAIN_VIEW_TAG){
     webView.hidden = NO;
@@ -494,18 +519,15 @@ bool showUpdatedAt = NO;
     {
       [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
       [self showUpdatedAt];
-    /*NSString *jsString = @"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');";
-    
-    [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    */
     }
     webView.hidden = NO;
+    if(![app_delegate isiPad])
+    {
+      [self rotateHTML:self.mainUIWebView];
+    }
   }
-  
-  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
-  NSLog(@"WEBVIEW[%@] webViewDidFinishLoad", webDesc);
-  
 }
+
 
 -(void)showUpdatedAt{
   

@@ -487,13 +487,41 @@ UIActionSheet* actionSheet;
   else{
   }
   */
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  if(![app_delegate isiPad])
+  {
+    viewportWidth = @"320";
+    viewportInitScale = @"1.0";
+    viewportMaxScale = @"1.0";
+    if(isLandscapeView==YES){
+      viewportWidth = @"320";
+      viewportInitScale = @"1.5";
+      viewportMaxScale = @"1.5";
+    }
+  }
+  else{
+    viewportWidth = @"1020";
+    viewportInitScale = @"0.7";
+    viewportMaxScale = @"1";
+    if(isLandscapeView==YES){
+      viewportInitScale = @"0.7";
+      viewportMaxScale = @"0.9";
+      viewportWidth = @"660";
+    }
+  }
   
-  NSString *jsString = @"document.body.style.width = '1020px';metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
-    //width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;
+  /*
+   NSString *jsString = @"document.body.style.width = '1020px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
   if(isLandscapeView==YES)
   {
-    jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
+    jsString = @"document.body.style.width = '660px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
   }
+   */
+  
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportWidth, viewportInitScale, viewportMaxScale  ];
+  
   
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
@@ -745,6 +773,7 @@ BOOL isLandscapeView = NO;
 
 -(void)positionate{
   UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+   
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isLandscapeView)
@@ -757,12 +786,12 @@ BOOL isLandscapeView = NO;
     [self positionatePortrait];
   }
   
-  [self loadSectionNews];
+  if([app_delegate isiPad])
+  {
+    [self loadSectionNews];
+    [self.mainUIWebView reload];
+  }
   [self rotateHTML:self.mainUIWebView];
-  //[self rotateHTML:self.menu_webview];
-  [self.mainUIWebView reload];
-  //[self.menu_webview reload];
-
 }
 -(void)positionateLandscape{
 
