@@ -143,7 +143,7 @@ BOOL mIsIpad=NO;
   else
     _UIWebView=self.secondaryUIWebView;
 
-  NSLog(@"onImageDownloaded - WebView:[%s] prefix:[%s]", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
+  NSLog(@"onImageDownloaded - WebView:[%s] prefix:[%@]", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
   if(_UIWebView==nil)
     return;
   

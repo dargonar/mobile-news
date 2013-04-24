@@ -35,9 +35,7 @@
   if (self) {
     networkGallery = nil;
     self->currentSection=nil;
-    self.primaryUIWebView= self.mainUIWebView;
-    self.secondaryUIWebView= self.menu_webview;
-    
+        
   }
   return self;
 }
@@ -45,6 +43,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
   
   mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
   mWindow.viewToObserve = mainUIWebView;
@@ -60,6 +61,11 @@
   if ([app_delegate isiPad]) {
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
+  }
+  else{
+    [self mainUIWebView].multipleTouchEnabled = NO;
+    //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+    
   }
   
   // Do any additional setup after loading the view from its nib.
@@ -480,31 +486,27 @@ UIActionSheet* actionSheet;
 
 
 -(void) rotateHTML:(UIWebView*)webView{
-  /*
-   if (webView.tag!=MAIN_VIEW_TAG) {
-    NSString *jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;');";
-    
-    if(isLandscapeView==YES)
-      jsString = @"var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;');";
-    
-    NSString* result =[self.menu_webview stringByEvaluatingJavaScriptFromString:jsString];
-    NSLog(@" -|- EvaluateJS:[%@] result:[%@]",jsString, result);
-  }
-  else{
-  }
-  */
   NSString *viewportWidth = @"";
   NSString *viewportInitScale = @"";
+  NSString *viewportMinScale = @"";
   NSString *viewportMaxScale = @"";
+  
+  NSString *extra = @"";
   if(![app_delegate isiPad])
   {
     viewportWidth = @"320";
     viewportInitScale = @"1.0";
     viewportMaxScale = @"1.0";
+    viewportMinScale = @"1.0";
+    
+    extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)removeClass(tmp_element[0], 'imagen_iphone_landscape'); ";
     if(isLandscapeView==YES){
-      viewportWidth = @"320";
-      viewportInitScale = @"1.5";
-      viewportMaxScale = @"1.5";
+      viewportWidth = @"480";
+      viewportInitScale = @"1.0";
+      viewportMaxScale = @"1.0";
+      viewportMinScale = @"1.0";
+      extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)addClass(tmp_element[0], 'imagen_iphone_landscape'); ";
+
     }
   }
   else{
@@ -516,17 +518,10 @@ UIActionSheet* actionSheet;
       viewportMaxScale = @"0.9";
       viewportWidth = @"660";
     }
+    viewportMinScale=viewportInitScale;
   }
-  
-  /*
-   NSString *jsString = @"document.body.style.width = '1020px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=1020; minimum-scale=0.7; maximum-scale=1; user-scalable=no;');";
-  if(isLandscapeView==YES)
-  {
-    jsString = @"document.body.style.width = '660px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=660; minimum-scale=0.7; maximum-scale=0.9; user-scalable=no;');";
-  }
-   */
-  
-  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportWidth, viewportInitScale, viewportMaxScale  ];
+ 
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; init-scale=%@; maximum-scale=%@; user-scalable=no;');%@",viewportWidth, viewportWidth, viewportMinScale,viewportInitScale, viewportMaxScale, extra  ];
   
   
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
@@ -793,10 +788,11 @@ BOOL isLandscapeView = NO;
   if([app_delegate isiPad])
   {
     [self loadSectionNews];
-    [self.mainUIWebView reload];
   }
+
+  //[self.mainUIWebView reload];
   [self rotateHTML:self.mainUIWebView];
-  
+  [self.mainUIWebView reload];
   
   NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
           , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"

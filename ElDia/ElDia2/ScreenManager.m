@@ -63,7 +63,7 @@ BOOL isIpad=NO;
 
 
 +(BOOL)isMainScreenPrefix:(NSString*)prefix{
-  if(prefix==@"a" || prefix==@"s")
+  if([prefix isEqualToString:@"a"] || [prefix isEqualToString:@"a"])
     return YES;
   return NO;
 }
