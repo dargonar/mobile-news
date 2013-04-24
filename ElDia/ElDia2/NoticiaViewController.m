@@ -29,6 +29,58 @@
 @synthesize pageControl, pageIndicator, shareBtn;
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    networkGallery = nil;
+    self->currentSection=nil;
+    self.primaryUIWebView= self.mainUIWebView;
+    self.secondaryUIWebView= self.menu_webview;
+    
+  }
+  return self;
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
+  mWindow.viewToObserve = mainUIWebView;
+  mWindow.controllerThatObserves = self;
+  
+  self.mainUIWebView.delegate = self;
+  self.mainUIWebView.hidden = NO;
+  self.mainUIWebView.tag=MAIN_VIEW_TAG;
+  
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [[self menu_webview] setScalesPageToFit:NO];
+  
+  if ([app_delegate isiPad]) {
+    self.menu_webview.delegate = self;
+    self.menu_webview.hidden = NO;
+  }
+  
+  // Do any additional setup after loading the view from its nib.
+  [self addGestureRecognizers];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+  
+  app_delegate.navigationController.navigationBar.hidden=YES;
+  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
+  networkCaptions = nil;
+  networkImages = nil;
+  networkGallery = nil;
+  
+  [self positionate];
+  
+}
+
+
+
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -205,15 +257,6 @@ UIActionSheet* actionSheet;
   
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      networkGallery = nil;
-      self->currentSection=nil;
-    }
-    return self;
-}
 
 -(void)loadBlank{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
@@ -395,43 +438,6 @@ UIActionSheet* actionSheet;
   }
 }
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
-  mWindow.viewToObserve = mainUIWebView;
-  mWindow.controllerThatObserves = self;
-
-  self.mainUIWebView.delegate = self;
-  self.mainUIWebView.hidden = NO;
-  self.mainUIWebView.tag=MAIN_VIEW_TAG;
-  
-  [[self mainUIWebView] setScalesPageToFit:NO];
-  [[self menu_webview] setScalesPageToFit:NO];
-  
-  if ([app_delegate isiPad]) {
-    self.menu_webview.delegate = self;
-    self.menu_webview.hidden = NO;
-  }
-  
-  // Do any additional setup after loading the view from its nib.
-  [self addGestureRecognizers];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-  
-  app_delegate.navigationController.navigationBar.hidden=YES;
-  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
-  networkCaptions = nil;
-  networkImages = nil;
-  networkGallery = nil;
-  
-  [self positionate];
-  
-}
-  
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
 {
 	//NSLog(@"finished zooming");
@@ -772,16 +778,14 @@ BOOL isLandscapeView = NO;
 }
 
 -(void)positionate{
-  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-   
+  //UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
-  if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
-      !isLandscapeView)
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) && !isLandscapeView)
   {
     [self positionateLandscape];
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
-           isLandscapeView)
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && isLandscapeView)
   {
     [self positionatePortrait];
   }
@@ -792,6 +796,11 @@ BOOL isLandscapeView = NO;
     [self.mainUIWebView reload];
   }
   [self rotateHTML:self.mainUIWebView];
+  
+  
+  NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
+          , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"
+          , isLandscapeView?@"Landscape":@"Portrait");
 }
 -(void)positionateLandscape{
 

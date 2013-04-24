@@ -46,6 +46,9 @@ NSLock *menuLock;
 {
   [super viewDidLoad];
   
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
+  
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
   
@@ -332,7 +335,7 @@ BOOL isShowingLandscapeView = NO;
 
 -(void)positionate{
   
-  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isShowingLandscapeView)

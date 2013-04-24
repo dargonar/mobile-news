@@ -59,8 +59,9 @@ int cache_size = 2; //30;
 }
 
 -(BOOL)isLandscape{
-  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
-  
+  //  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
   return UIDeviceOrientationIsLandscape(orientation);// ? @"Landscape" : @"Portrait";
 
 }

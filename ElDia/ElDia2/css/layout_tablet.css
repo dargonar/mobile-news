@@ -247,10 +247,12 @@ body.menu{
 	padding-top:1px;
 }
 
+/*
 #index .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #index .menu li a:active {
 	text-decoration:none;
@@ -350,10 +352,12 @@ body.landscape.padded{
   height: 215px;
 }
 
+/*
 #landscape .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #landscape .menu li a:active {
 	text-decoration:none;
@@ -436,10 +440,12 @@ MENU PRINCIPAL
 	border-bottom:#252525 solid 1px;
 }
 
+/*
 #menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #menu li a:active {
 	text-decoration:none;

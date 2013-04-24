@@ -18,7 +18,8 @@
 
 @property (nonatomic, retain) ScreenManager *mScreenManager;
 @property (nonatomic, retain) NSString* currentUrl;
-@property (nonatomic, retain) UIWebView* myUIWebView;
+@property (nonatomic, retain) UIWebView* primaryUIWebView;
+@property (nonatomic, retain) UIWebView* secondaryUIWebView;
 
 -(void)configureToast;
 -(BOOL)isOld:(NSDate*)date;

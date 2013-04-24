@@ -61,6 +61,13 @@ BOOL isIpad=NO;
   return self;
 }
 
+
++(BOOL)isMainScreenPrefix:(NSString*)prefix{
+  if(prefix==@"a" || prefix==@"s")
+    return YES;
+  return NO;
+}
+
 -(NSDate*) sectionDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
@@ -230,26 +237,28 @@ BOOL isIpad=NO;
   {
     //Rebuildeamos el xml
     XMLParser *parser = [[XMLParser alloc] init];
-    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error];
+    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error prefix:prefix];
+    /*
+     // Por que voy a retornar? si no tiene imagenes, no tiene imagenes!
     if (mobi_images == nil) {
       return nil;
     }
+     */
+    if (mobi_images != nil) {
+      
+      //Serializamos las imagenes a un NSData
+      NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
+      if (tmp == nil) {
+        return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
+      }
     
-    //Serializamos las imagenes a un NSData
-    NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
-    if (tmp == nil) {
-      return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
-    }
-    
-    //Las guardamos en cache
-    if(![cache put:key data:tmp prefix:@"mi"]) {
-      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      //Las guardamos en cache
+      if(![cache put:key data:tmp prefix:@"mi"]) {
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      }
     }
   }
-  
-  // Test encoding.
-  //[cache put:key data:xml prefix:@"xml"];
-  
+    
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   
