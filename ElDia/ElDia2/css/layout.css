@@ -284,6 +284,10 @@ div.main_img_container, div.main_foto {
   display: block;
 }
 
+.imagen_iphone_landscape{
+height:270px;width:480px;
+}
+
 
 .img_container img , .img_loader{
   background-color:#FFFFFF;
