@@ -67,6 +67,8 @@ BOOL mIsIpad=NO;
 }
 
 /*****/
+
+// self.trackedViewName = @"About Screen";
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
   if(isError)
     [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
