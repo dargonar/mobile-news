@@ -65,7 +65,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "298"
          endingLineNumber = "298"
-         landmarkName = "-loadNoticia:section:"
+         landmarkName = "-setPageIndicatorIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -338,7 +338,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "441"
          endingLineNumber = "441"
-         landmarkName = "-webView:zoomingEndedWithTouches:event:"
+         landmarkName = "-handleRightSwipe:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
