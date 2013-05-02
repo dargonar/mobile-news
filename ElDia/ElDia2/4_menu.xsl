@@ -29,12 +29,11 @@
               <li><a href="section://{guid}"><xsl:value-of disable-output-escaping="yes" select="title" /></a></li>
             </xsl:for-each>
             
-            <li>
-              <a class="vip2" href="page://clasificados">Clasificados</a>
-            </li>
-            <li>
-              <a class="vip2" href="page://funebres">Fúnebres</a>
-            </li>
+            <li><a class="vip2" href="page://clasificados">Clasificados</a></li>
+            <li><a class="vip2" href="page://funebres">Fúnebres</a></li>
+            <li><a class="vip2" href="page://farmacias">Farmacias de turno</a></li>
+            <li><a class="vip2" href="page://cartelera">Cartelera de cine</a></li>
+
             <li class="vip2_close"></li>
             
           </ul>

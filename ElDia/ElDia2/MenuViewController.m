@@ -170,7 +170,7 @@ NSLock *lock;
   NSInteger _width = 276;
   if([app_delegate isiPad])
   {
-    _width = 480;
+    _width = 256;
   }
   
   [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -328,6 +328,13 @@ NSLock *lock;
     return NO;
   }
   else
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"]) && [app_delegate isiPad])
+    {
+      [app_delegate loadService:url];
+      [self slideThenHide];
+      return NO;
+    }
+    else
     if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"clasificados"]) // por ahora page://clasificados
     {
       [self slideThenHideShowMenuClasificados];
@@ -348,6 +355,8 @@ NSLock *lock;
           [self slideThenHideShowClasificados];
           return NO;
         }
+  
+  
   
   return YES;
   

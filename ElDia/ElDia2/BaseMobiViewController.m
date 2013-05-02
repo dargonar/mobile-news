@@ -20,7 +20,7 @@
 
 @implementation BaseMobiViewController
 
-@synthesize mScreenManager, currentUrl, myUIWebView;
+@synthesize mScreenManager, currentUrl, primaryUIWebView, secondaryUIWebView;
 
 BOOL mIsIpad=NO;
 
@@ -34,7 +34,8 @@ BOOL mIsIpad=NO;
       mIsIpad = [app_delegate isiPad];
       
       self.mScreenManager = [[ScreenManager alloc] init];
-      self.myUIWebView=nil;
+      self.primaryUIWebView=nil;
+      self.secondaryUIWebView=nil;
     }
   
     return self;
@@ -66,6 +67,8 @@ BOOL mIsIpad=NO;
 }
 
 /*****/
+
+// self.trackedViewName = @"About Screen";
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
   if(isError)
     [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];
@@ -100,13 +103,11 @@ BOOL mIsIpad=NO;
             textEncodingName:@"utf-8"
             baseURL:[[DiskCache defaultCache] getFolderUrl]];
 
-  //if(self.myUIWebView==nil)
-  //  self.myUIWebView=webView;
   if(url!=nil)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       NSError *err;
       NSArray *mobi_images = [self.mScreenManager getPendingImages:url error:&err];
-
+      NSLog(@" --BaseMobiViewController::setHTML url=[%@]",url);
       if (mobi_images != nil) {
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", nil];
       
@@ -132,23 +133,27 @@ BOOL mIsIpad=NO;
   }
   
   NSString *url = [userInfo objectForKey:@"url"];
-  NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
+  //NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
   
-  NSLog(@"BaseMobiView::currentUrl [%@]", self.currentUrl);
+  //NSLog(@"BaseMobiView::currentUrl [%@]", self.currentUrl);
   if(self.currentUrl != url)
-  {
-    NSLog(@"URL distintas: %@ != %@", self.currentUrl, url);
     return;
-  }
+  BOOL do_update_main_webview = [ScreenManager isMainScreenPrefix:[mobi_image prefix]];
+  UIWebView* _UIWebView = nil;
+  if(do_update_main_webview)
+    _UIWebView=self.primaryUIWebView;
+  else
+    _UIWebView=self.secondaryUIWebView;
+
+  NSLog(@"onImageDownloaded - WebView:[%s] prefix:[%@]", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
+  if(_UIWebView==nil)
+    return;
   
   __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@')"
                                  , mobi_image.local_uri];
   
-  NSLog(@"Update Image JS: %@ [%@]", jsString, url);
   dispatch_async(dispatch_get_main_queue(), ^{
-    if(self.myUIWebView==nil)
-      return;
-    [self.myUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    [_UIWebView stringByEvaluatingJavaScriptFromString:jsString];
     jsString=nil;
   });
   

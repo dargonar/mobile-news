@@ -63,6 +63,9 @@ INDEX
   overflow-x:hidden;
 }
 
+.global #index {
+	width:auto !important;
+}
 #index a{text-decoration:none;color:inherit;}
 
 /* NOTA PRINCIPAL */
@@ -244,10 +247,12 @@ body.menu{
 	padding-top:1px;
 }
 
+/*
 #index .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #index .menu li a:active {
 	text-decoration:none;
@@ -347,10 +352,12 @@ body.landscape.padded{
   height: 215px;
 }
 
+/*
 #landscape .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #landscape .menu li a:active {
 	text-decoration:none;
@@ -378,6 +385,8 @@ body.landscape.padded{
 	width:180px;
 	height:120px;
 	margin:10px;
+  background-size: cover;
+  background-position: center;
   position:relative;
 }
 
@@ -408,6 +417,7 @@ MENU PRINCIPAL
   width:256px; 
   /*width:100%;*/
   overflow-x:hidden;
+  height:auto;
 }
 
 #menu ul {
@@ -430,10 +440,12 @@ MENU PRINCIPAL
 	border-bottom:#252525 solid 1px;
 }
 
+/*
 #menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #menu li a:active {
 	text-decoration:none;

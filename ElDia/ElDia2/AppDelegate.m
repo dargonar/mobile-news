@@ -22,6 +22,7 @@
 #import "MySHKConfigurator.h"
 #import "SHKConfiguration.h"
 #import "SHKFacebook.h"
+#import "GAI.h"
 
 @implementation AppDelegate
 
@@ -58,9 +59,21 @@ int cache_size = 2; //30;
   
 }
 
+-(void)initGAI{
+  // Optional: automatically send uncaught exceptions to Google Analytics.
+  [GAI sharedInstance].trackUncaughtExceptions = NO;
+  // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+  [GAI sharedInstance].dispatchInterval = 60;
+  // Optional: set debug to YES for extra debugging information.
+  [GAI sharedInstance].debug = NO;
+  // Create tracker instance.
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-32663760-1"];
+}
+
 -(BOOL)isLandscape{
-  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
-  
+  //  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
   return UIDeviceOrientationIsLandscape(orientation);// ? @"Landscape" : @"Portrait";
 
 }
@@ -77,6 +90,7 @@ int cache_size = 2; //30;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [self initGAI];
   [BugSenseController sharedControllerWithBugSenseAPIKey:@"c80eb89d"];
 
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -177,6 +191,9 @@ int cache_size = 2; //30;
   [self.menuViewController loadUrl:useCache];
 }
 
+-(void)loadService:(NSURL*)url{
+  [self loadSectionNews:url];
+}
 -(void)loadSectionNews:(NSURL*)url{
   self.mainViewController.currentUrl = [url absoluteString];
   [self.mainViewController loadUrlAndLoading:self.mainViewController.currentUrl useCache:YES];

@@ -117,6 +117,7 @@
 		CE5D11A6163E3158002E34F5 /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
 		CE5D11A9163E38D0002E34F5 /* NewsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A8163E38D0002E34F5 /* NewsManager.m */; };
 		CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */; };
+		CE763EEE1731B06E00180B24 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE763EED1731B06E00180B24 /* CoreData.framework */; };
 		CE78799715F7FA88009AA708 /* FGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799215F7FA88009AA708 /* FGalleryPhoto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE78799815F7FA88009AA708 /* FGalleryPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799415F7FA88009AA708 /* FGalleryPhotoView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE78799915F7FA88009AA708 /* FGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799615F7FA88009AA708 /* FGalleryViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -138,6 +139,7 @@
 		CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE7D339115EE8F2700935444 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; };
 		CE7D339315EE8F3800935444 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE7D339215EE8F3800935444 /* README.md */; };
+		CE7FE477172E9F1300A3CFD7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		CE83717216128D9800FC8269 /* layout.css in Resources */ = {isa = PBXBuildFile; fileRef = CE83715A16128D9800FC8269 /* layout.css */; };
 		CE83717316128D9800FC8269 /* ajax_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE83715C16128D9800FC8269 /* ajax_loader.gif */; };
 		CE83717416128D9800FC8269 /* ico_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83715D16128D9800FC8269 /* ico_audio.png */; };
@@ -670,6 +672,7 @@
 		CE5D11A7163E38CF002E34F5 /* NewsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsManager.h; sourceTree = "<group>"; };
 		CE5D11A8163E38D0002E34F5 /* NewsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsManager.m; sourceTree = "<group>"; };
 		CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticiaViewController_iPad.xib; sourceTree = "<group>"; };
+		CE763EED1731B06E00180B24 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE78798315F7FA56009AA708 /* photo-gallery-edit-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-edit-caption.png"; sourceTree = "<group>"; };
 		CE78798415F7FA56009AA708 /* photo-gallery-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-left.png"; sourceTree = "<group>"; };
 		CE78798515F7FA56009AA708 /* photo-gallery-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-gallery-left@2x.png"; sourceTree = "<group>"; };
@@ -723,6 +726,13 @@
 		CE7D338F15EE8F2700935444 /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
 		CE7D339015EE8F2700935444 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		CE7D339215EE8F3800935444 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		CE7FE470172E9F1300A3CFD7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		CE7FE471172E9F1300A3CFD7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		CE7FE472172E9F1300A3CFD7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		CE7FE476172E9F1300A3CFD7 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
 		CE83715A16128D9800FC8269 /* layout.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = layout.css; sourceTree = "<group>"; };
 		CE83715C16128D9800FC8269 /* ajax_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ajax_loader.gif; sourceTree = "<group>"; };
 		CE83715D16128D9800FC8269 /* ico_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio.png; sourceTree = "<group>"; };
@@ -887,6 +897,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE763EEE1731B06E00180B24 /* CoreData.framework in Frameworks */,
 				CE2E30761654A87100260455 /* BugSense-iOS.framework in Frameworks */,
 				78E5B9441652E45800C7ACCD /* libz.1.2.5.dylib in Frameworks */,
 				78E5B93A1652D94500C7ACCD /* Twitter.framework in Frameworks */,
@@ -908,6 +919,7 @@
 				CE8E727B15EBEDB8007E6F09 /* UIKit.framework in Frameworks */,
 				CE8E727D15EBEDB8007E6F09 /* Foundation.framework in Frameworks */,
 				CE8E727F15EBEDB8007E6F09 /* CoreGraphics.framework in Frameworks */,
+				CE7FE477172E9F1300A3CFD7 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1044,7 @@
 		CE16EBF915ED5B8A00EC8210 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE7FE46F172E9F1300A3CFD7 /* GoogleAnalyticsLib */,
 				7888385116AEF85A00517A5F /* Base64 */,
 				CE2E304B165499EB00260455 /* iVersion */,
 				78E5B94D1652EB4700C7ACCD /* Reachability */,
@@ -1256,6 +1269,20 @@
 			name = itoast;
 			sourceTree = "<group>";
 		};
+		CE7FE46F172E9F1300A3CFD7 /* GoogleAnalyticsLib */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FE470172E9F1300A3CFD7 /* GAI.h */,
+				CE7FE471172E9F1300A3CFD7 /* GAITrackedViewController.h */,
+				CE7FE472172E9F1300A3CFD7 /* GAITracker.h */,
+				CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */,
+				CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */,
+				CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */,
+				CE7FE476172E9F1300A3CFD7 /* libGoogleAnalytics_debug.a */,
+			);
+			path = GoogleAnalyticsLib;
+			sourceTree = "<group>";
+		};
 		CE83715916128D9800FC8269 /* css */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,6 +1322,7 @@
 		CE8E726B15EBEDB8007E6F09 = {
 			isa = PBXGroup;
 			children = (
+				CE763EED1731B06E00180B24 /* CoreData.framework */,
 				788A1DAB169DE28A007DCDD3 /* Default-Landscape@2x~ipad.png */,
 				788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */,
 				78D656FA165ACD210063B8FF /* Default.png */,
@@ -2286,6 +2314,10 @@
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2316,6 +2348,10 @@
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

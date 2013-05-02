@@ -61,10 +61,30 @@ BOOL isIpad=NO;
   return self;
 }
 
+
++(BOOL)isMainScreenPrefix:(NSString*)prefix{
+  if([prefix isEqualToString:@"a"] || [prefix isEqualToString:@"a"])
+    return YES;
+  return NO;
+}
+
 -(NSDate*) sectionDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
   return [cache createdAt:key prefix:@"s"];
+}
+
+-(NSDate*) funebresDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"f"];
+}
+
+
+-(NSDate*) clasificadosDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"c"];
 }
 
 /**/
@@ -211,30 +231,34 @@ BOOL isIpad=NO;
     xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"] || [url hasPrefix:@"section://"] || [url hasPrefix:@"clasificados://"])];
   }
   
+  //<clasificado rubro="ALQUILER DE HABITACIONES">
+  
   if(processImages && downloaded==YES)
   {
     //Rebuildeamos el xml
     XMLParser *parser = [[XMLParser alloc] init];
-    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error];
+    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error prefix:prefix];
+    /*
+     // Por que voy a retornar? si no tiene imagenes, no tiene imagenes!
     if (mobi_images == nil) {
       return nil;
     }
+     */
+    if (mobi_images != nil) {
+      
+      //Serializamos las imagenes a un NSData
+      NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
+      if (tmp == nil) {
+        return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
+      }
     
-    //Serializamos las imagenes a un NSData
-    NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
-    if (tmp == nil) {
-      return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
-    }
-    
-    //Las guardamos en cache
-    if(![cache put:key data:tmp prefix:@"mi"]) {
-      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      //Las guardamos en cache
+      if(![cache put:key data:tmp prefix:@"mi"]) {
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      }
     }
   }
-  
-  // Test encoding.
-  //[cache put:key data:xml prefix:@"xml"];
-  
+    
   //Generamos el html con el xml rebuildeado
   HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
   
@@ -346,6 +370,17 @@ BOOL isIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
+  if( [url hasPrefix:@"section_menu://"] ) {
+    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+    
+  }
+  
+  if( [url hasPrefix:@"ls_menu_section://main"] ) {
+    NSString* sheet = iPad_MAIN_NEWS_LS_STYLESHEET; //app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
+  }
+  
   if( [url hasPrefix:@"ls_menu_section://"] ) {
     NSString* sheet = iPad_SECTION_NEWS_LS_STYLESHEET; 
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
@@ -353,11 +388,6 @@ BOOL isIpad=NO;
   
   if( [url hasPrefix:@"section://main"] ) {
     NSString* sheet = iPad_MAIN_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"ls_section://main"] ) {
-    NSString* sheet = MAIN_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
@@ -394,14 +424,7 @@ BOOL isIpad=NO;
   if( [url hasPrefix:@"funebres://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FUNEBRES_STYLESHEET];
   }
-  
-  if( [url hasPrefix:@"section_menu://"] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
-    NSLog(@"ScreenManager::getStyleSheetiPad:: section_menu:[%@]", sheet);
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     
-  }
-  
   if( [url hasPrefix:@"menu://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_MENU_STYLESHEET];
   }

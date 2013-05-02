@@ -17,7 +17,7 @@
 
 
 // Parseo el xml en busca de imagenes, las retorno en un array y modifico el path de la imagen.
--(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError **)error{
+-(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError **)error prefix:(NSString*)prefix{
   
   NSMutableArray *mobi_images = [[NSMutableArray alloc] init];
   
@@ -52,7 +52,8 @@
     
     MobiImage* mobiImage = [MobiImage initWithData:_url
                                       _local_uri: _local_uri
-                                      _noticia_id:[self firstElementAsString:temp]];
+                                      _noticia_id:[self firstElementAsString:temp]
+                                      _prefix:prefix];
     
     [mobi_images addObject:mobiImage];
     

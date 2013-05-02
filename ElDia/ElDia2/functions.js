@@ -1,3 +1,5 @@
+var metayi;
+var tmp_element;
 function hasClass(el, name) {
   return new RegExp('(\\s|^)'+name+'(\\s|$)').test(el.className);
 }
@@ -17,6 +19,8 @@ function indexToLandscape(){
   removeClass(el, 'padded');
   addClass(el, 'padded_landscape');
 }
+
+
 function indexToLandscape(){
   var el = document.getElementById('index');
   removeClass(el, 'padded_landscape');

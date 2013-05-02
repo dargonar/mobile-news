@@ -284,6 +284,10 @@ div.main_img_container, div.main_foto {
   display: block;
 }
 
+.imagen_iphone_landscape{
+height:270px;width:480px;
+}
+
 
 .img_container img , .img_loader{
   background-color:#FFFFFF;
@@ -495,9 +499,6 @@ CLASIFICADOS
   /*width:100% !important;*/
   overflow-x:hidden;
   overflow-y:auto;
-}
-
-#clasificados {
 	width:320px;
 }
 
@@ -515,7 +516,10 @@ CLASIFICADOS
 }
 
 #clasificados .columna.ex, #clasificados .columna.exsimple{
-  padding-top:0px !important;
+  width:320px;
+	float:left;
+	padding:0px 0px 0px 0px;
+
 }
 
 #clasificados .columna .aviso {

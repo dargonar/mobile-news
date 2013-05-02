@@ -59,6 +59,32 @@ BOOL mViewDidLoad=NO;
 
 }
 
+-(void) rotateHTML{
+  if([app_delegate isiPad])
+    return;
+  return;
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if([app_delegate isLandscape]){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px';
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+}
+
 // HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -88,7 +114,8 @@ BOOL mViewDidLoad=NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
-  [mainUIWebView reload];
+  [self rotateHTML];
+  //[mainUIWebView reload];
 }
 
 /* **** */
@@ -165,6 +192,7 @@ BOOL mViewDidLoad=NO;
 
 -(void)loadFunebres:(NSURL *)url{
   
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypeNone;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
@@ -188,7 +216,7 @@ BOOL mViewDidLoad=NO;
 
 
 -(void)loadClasificados:(NSURL *)url{
-  
+    self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
@@ -259,9 +287,15 @@ BOOL mViewDidLoad=NO;
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
+  [self rotateHTML];
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+  if(![app_delegate isiPad])
+  {
+    [self rotateHTML];
+  }
+
   [self changeFontSize:0];
   [self onLoading:NO];
   

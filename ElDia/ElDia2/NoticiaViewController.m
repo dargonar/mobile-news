@@ -29,6 +29,64 @@
 @synthesize pageControl, pageIndicator, shareBtn;
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    networkGallery = nil;
+    self->currentSection=nil;
+        
+  }
+  return self;
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
+  
+  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
+  mWindow.viewToObserve = mainUIWebView;
+  mWindow.controllerThatObserves = self;
+  
+  self.mainUIWebView.delegate = self;
+  self.mainUIWebView.hidden = NO;
+  self.mainUIWebView.tag=MAIN_VIEW_TAG;
+  
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [[self menu_webview] setScalesPageToFit:NO];
+  
+  if ([app_delegate isiPad]) {
+    self.menu_webview.delegate = self;
+    self.menu_webview.hidden = NO;
+  }
+  else{
+    [self mainUIWebView].multipleTouchEnabled = NO;
+    //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+    
+  }
+  
+  // Do any additional setup after loading the view from its nib.
+  [self addGestureRecognizers];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+  
+  app_delegate.navigationController.navigationBar.hidden=YES;
+  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
+  networkCaptions = nil;
+  networkImages = nil;
+  networkGallery = nil;
+  
+  [self positionate];
+  
+}
+
+
+
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -205,15 +263,6 @@ UIActionSheet* actionSheet;
   
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      networkGallery = nil;
-      self->currentSection=nil;
-    }
-    return self;
-}
 
 -(void)loadBlank{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
@@ -395,42 +444,6 @@ UIActionSheet* actionSheet;
   }
 }
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
-  mWindow.viewToObserve = mainUIWebView;
-  mWindow.controllerThatObserves = self;
-
-  self.mainUIWebView.delegate = self;
-  self.mainUIWebView.hidden = NO;
-  self.mainUIWebView.tag=MAIN_VIEW_TAG;
-  
-  [[self mainUIWebView] setScalesPageToFit:YES];
-
-  if ([app_delegate isiPad]) {
-    self.menu_webview.delegate = self;
-    self.menu_webview.hidden = NO;
-    if([app_delegate isLandscape])
-    {
-      [self positionateLandscape];
-    }
-  }
-  // Do any additional setup after loading the view from its nib.
-  [self addGestureRecognizers];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-  app_delegate.navigationController.navigationBar.hidden=YES;
-  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
-  networkCaptions = nil;
-  networkImages = nil;
-  networkGallery = nil;
-  
-}
-  
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
 {
 	//NSLog(@"finished zooming");
@@ -472,32 +485,57 @@ UIActionSheet* actionSheet;
 }
 
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self onLoading:NO];
+-(void) rotateHTML:(UIWebView*)webView{
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMinScale = @"";
+  NSString *viewportMaxScale = @"";
   
-  
-  if (webView.tag!=MAIN_VIEW_TAG) {
-    return;
-  }
-  
-  //[[self mainUIWebView] setScalesPageToFit:YES];
-  [self changeFontSize:0];
-  
-   if (!app_delegate.isiPad){
-     return;
-   }
-  
-  
-  [self.mainUIWebView reload];
-  NSString *jsString =     jsString = @"document.body.style.width = '1020px !important';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:1020; user-scalable=YES;');metayi.setAttribute('content','width:1020; user-scalable=NO;');";
+  NSString *extra = @"";
+  if(![app_delegate isiPad])
+  {
+    viewportWidth = @"320";
+    viewportInitScale = @"1.0";
+    viewportMaxScale = @"1.0";
+    viewportMinScale = @"1.0";
+    
+    extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)removeClass(tmp_element[0], 'imagen_iphone_landscape'); ";
+    if(isLandscapeView==YES){
+      viewportWidth = @"480";
+      viewportInitScale = @"1.0";
+      viewportMaxScale = @"1.0";
+      viewportMinScale = @"1.0";
+      extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)addClass(tmp_element[0], 'imagen_iphone_landscape'); ";
 
-  if(isLandscapeView==YES)
-    jsString = @"document.body.style.width = '660px';var metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width:660; user-scalable=YES;');metayi.setAttribute('content','width:660; user-scalable=NO;');";
+    }
+  }
+  else{
+    viewportWidth = @"1020";
+    viewportInitScale = @"0.7";
+    viewportMaxScale = @"1";
+    if(isLandscapeView==YES){
+      viewportInitScale = @"0.7";
+      viewportMaxScale = @"0.9";
+      viewportWidth = @"660";
+    }
+    viewportMinScale=viewportInitScale;
+  }
+ 
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; init-scale=%@; maximum-scale=%@; user-scalable=no;');%@",viewportWidth, viewportWidth, viewportMinScale,viewportInitScale, viewportMaxScale, extra  ];
+  
   
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  NSLog(@" EvaluateJS:[%@] result:[%@]",jsString, result);
+  NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
   
-  //[self.mainUIWebView ]
+
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+  if (webView.tag==MAIN_VIEW_TAG) {
+    [self onLoading:NO];
+    [self rotateHTML:webView];
+    [self changeFontSize:0];
+  }
 }
 
 
@@ -731,21 +769,35 @@ BOOL is_loading = YES;
 BOOL isLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  [self positionate];
+}
+
+-(void)positionate{
+  //UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
-  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-  
-  if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
-      !isLandscapeView)
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) && !isLandscapeView)
   {
     [self positionateLandscape];
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
-           isLandscapeView)
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && isLandscapeView)
   {
     [self positionatePortrait];
   }
-}
+  
+  if([app_delegate isiPad])
+  {
+    [self loadSectionNews];
+  }
 
+  //[self.mainUIWebView reload];
+  [self rotateHTML:self.mainUIWebView];
+  [self.mainUIWebView reload];
+  
+  NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
+          , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"
+          , isLandscapeView?@"Landscape":@"Portrait");
+}
 -(void)positionateLandscape{
 
   isLandscapeView = YES;
@@ -760,7 +812,7 @@ BOOL isLandscapeView = NO;
     //[self.mainUIWebView reload];
   
     self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
-    [[self menu_webview] setScalesPageToFit:YES];
+    //[[self menu_webview] setScalesPageToFit:YES];
   
     self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
   
@@ -770,10 +822,9 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   
-    [self loadSectionNews];
   }
   //[self reLoadNoticia];
-  [mainUIWebView reload];
+  //[mainUIWebView reload];
 }
 
 -(void)positionatePortrait{
@@ -787,7 +838,7 @@ BOOL isLandscapeView = NO;
     self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
     //[self.mainUIWebView reload];
   
-    [[self menu_webview] setScalesPageToFit:NO];
+    //[[self menu_webview] setScalesPageToFit:NO];
     self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
     self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
@@ -798,10 +849,9 @@ BOOL isLandscapeView = NO;
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
     //[self reLoadNoticia];
-    [self loadSectionNews];
 
   }
-    [mainUIWebView reload];
+  //[mainUIWebView reload];
 }
 
 

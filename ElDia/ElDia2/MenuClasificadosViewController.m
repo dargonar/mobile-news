@@ -44,6 +44,38 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self rotateHTML];
+}
+
+
+-(void) rotateHTML{
+  if([app_delegate isiPad])
+    return;
+  return;
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if([app_delegate isLandscape]){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px';
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@;initial-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  [self.mainUIWebView reload];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -81,7 +113,8 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
-  [mainUIWebView reload];
+  [self rotateHTML];
+  //[mainUIWebView reload];
 }
 
 -(void) onLoading:(BOOL)started{
@@ -93,7 +126,11 @@
   
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+  if(![app_delegate isiPad])
+  {
+    [self rotateHTML];
+  }
   [self onLoading:NO];
 }
 

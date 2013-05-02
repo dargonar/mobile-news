@@ -35,6 +35,8 @@ NSLock *menuLock;
       refreshingOn=NO;
       self.btnOptions.enabled=NO;
       menuLock = [[NSLock alloc] init];
+      self.mainUIWebView.delegate=self;
+      self.menu_webview.delegate=self;
     }
   
   return self;
@@ -44,15 +46,23 @@ NSLock *menuLock;
 {
   [super viewDidLoad];
   
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
+  
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];
   
   mainUIWebView.tag=MAIN_VIEW_TAG;
-  //if ([app_delegate isiPad]) {
-    [[self mainUIWebView] setScalesPageToFit:YES];
-    [[self menu_webview] setScalesPageToFit:YES];
-    
-  //}
+  
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [self mainUIWebView].multipleTouchEnabled = NO;
+  self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+  
+  
+  if ([app_delegate isiPad]) {
+    [[self menu_webview] setScalesPageToFit:NO];
+    [self menu_webview].multipleTouchEnabled = NO;
+  }
   if([app_delegate isLandscape])
   {
     [self positionateLandscape];
@@ -76,6 +86,9 @@ NSLock *menuLock;
 
 -(void)reLoadIndex{
   NSString*uri=[self currentUrl];
+  [self loadUrl:uri useCache:YES];
+  
+  /*
   if([self.mScreenManager sectionExists:uri])
   {
     NSError *err;
@@ -86,6 +99,7 @@ NSLock *menuLock;
   {
     [self loadUrl:uri useCache:YES];
   }
+   */
 }
 
 -(void)loadMenu:(BOOL)useCache{
@@ -101,19 +115,28 @@ NSLock *menuLock;
   [app_delegate loadMenu:useCache];
   
 }
+
+
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
   NSString* url = [self.currentUrl copy];
   
-  NSDate * date =[self.mScreenManager sectionDate:url];
+  NSDate * date = [self getDate:url];
+  
   // Main list es muy viejo?
   if( ![self isOld:date])
     return;
   
   // Lo traemos de nuevo
-  [self loadUrl:url useCache:NO reloadMenu:YES];
+  [self loadUrl:url useCache:NO reloadMenu:([url hasPrefix:@"section://"])];
   
+}
+
+
+-(void)loadClasificadosAndLoading:(NSString*)url useCache:(BOOL)useCache{
+  [self onRefreshing:YES];
+  [self loadUrl:url useCache:useCache reloadMenu:NO];
 }
 
 -(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache{
@@ -125,12 +148,50 @@ NSLock *menuLock;
   [self loadUrl:url useCache:useCache reloadMenu:NO];
 }
 
+-(NSString*)getType:(NSString*)url{
+  if( [url hasPrefix:@"clasificados://" ] ) {
+    return @"clasificados";
+  }
+  else
+    if( [url hasPrefix:@"funebres://" ] ) {
+      return @"funebres";
+    }
+  return @"section";
+  
+}
+
+-(NSDate*)getDate:(NSString*)url{
+  if( [url hasPrefix:@"clasificados://" ] ) {
+    return[self.mScreenManager clasificadosDate:url];
+  }
+  else
+    if( [url hasPrefix:@"funebres://" ] ) {
+      return[self.mScreenManager funebresDate:url];
+    }
+  return[self.mScreenManager sectionDate:url];
+}
+
+
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache reloadMenu:(BOOL)reloadMenu {
+  
+  showUpdatedAt = YES;
+  NSString*type= [self getType:url];
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
-    __block NSData *data = [self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
-
+    __block NSData *data = nil;
+    if([type isEqualToString:@"clasificados"])
+    {
+      data=[self.mScreenManager getClasificados:self.currentUrl useCache:useCache error:&err];
+    }
+    else
+      if([type isEqualToString:@"funebres"])
+      {
+        data=[self.mScreenManager getFunebres:self.currentUrl useCache:useCache error:&err];
+      }
+      else{
+      data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
       
       if(data==nil)
@@ -158,7 +219,7 @@ NSLock *menuLock;
         {
           [self showMessage:@"No hay conexión de red.\nNo podemos actualizar la aplicación." isError:YES];
         }
-        
+        NSLog(@"%d", [err code]);
         return;
       }
       
@@ -173,6 +234,7 @@ NSLock *menuLock;
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  [self positionate];
 }
 
 - (void)viewDidUnload
@@ -240,7 +302,40 @@ BOOL isShowingLandscapeView = NO;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
-  UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  [self positionate];
+  
+}
+
+-(void) rotateHTML:(UIWebView*)webView{
+  if([app_delegate isiPad])
+    return;
+  
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if(isShowingLandscapeView==YES){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px'; 
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+}
+
+
+-(void)positionate{
+  
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isShowingLandscapeView)
@@ -253,7 +348,9 @@ BOOL isShowingLandscapeView = NO;
     [self positionatePortrait];
   }
   
+  [self rotateHTML:self.mainUIWebView];
   [self reLoadIndex];
+
 }
 
 -(void)positionateLandscape{
@@ -276,7 +373,11 @@ BOOL isShowingLandscapeView = NO;
     self.menu_webview.frame=CGRectMake(0, 44, 256, height-44);
     self.menu_webview.hidden = NO;
     [self.menu_webview reload];
-    [self loadMenu];
+    if(menuLoaded==NO)
+    {
+      menuLoaded=YES;
+      [self loadMenu];
+    }
   }
   else{
     
@@ -284,6 +385,8 @@ BOOL isShowingLandscapeView = NO;
   
   [self.mainUIWebView reload];
 }
+
+bool menuLoaded = NO;
 
 
 -(void)positionatePortrait{
@@ -388,29 +491,54 @@ BOOL isShowingLandscapeView = NO;
   [self onLoading:NO];
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+  
+  //[webView setScalesPageToFit:YES];
+  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
+  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
+  
+  if(webView.tag == MAIN_VIEW_TAG){
+    webView.hidden = YES;
+  }
+  
+}
+
 // UIWebView Delegate
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-  NSLog(@"WEBVIEW: end load with error");
-  NSLog(@"Error: %@ %@", error, [error userInfo]);
-
   [self onNothing];
+  if(webView.tag == MAIN_VIEW_TAG){
+    webView.hidden = NO;
+  }
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-  NSLog(@"WEBVIEW: start load");
-}
-
+bool showUpdatedAt = NO;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
-  [self showUpdatedAt];
-  [self onNothing];
-  //[self showMessage:@"Esto es una prueba.\nNo pretendemos ser dios." isError:YES];
+
+  if(webView.tag == MAIN_VIEW_TAG )
+  {
+    [self onNothing];
+    if([current_url hasPrefix:@"section"])
+    {
+      [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"update_all_images()"];
+      [self showUpdatedAt];
+    }
+    webView.hidden = NO;
+    if(![app_delegate isiPad])
+    {
+      [self rotateHTML:self.mainUIWebView];
+    }
+  }
 }
+
 
 -(void)showUpdatedAt{
   
-  NSDate * date =[self.mScreenManager sectionDate:self.currentUrl];
+  if(showUpdatedAt==NO)
+    return;
+  showUpdatedAt=NO;
+  
+  NSDate * date =[self getDate:self.currentUrl];
   NSString *jsString  = [NSString  stringWithFormat:@"show_actualizado('%@')", [Utils timeAgoFromUnixTime:[date timeIntervalSince1970]]];
   
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
@@ -438,7 +566,7 @@ BOOL isShowingLandscapeView = NO;
     
       [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-      NSLog(@" call load noticia: %@", [url absoluteString]);
+      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
       [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
       return NO;
@@ -451,9 +579,12 @@ BOOL isShowingLandscapeView = NO;
       return NO;
     }
     else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"]))
       {
-        [app_delegate loadClasificados:url];
+        //[app_delegate loadClasificados:url];
+        [self setCurrentUrl:[url absoluteString]];
+        [self loadUrlAndLoading:[url absoluteString] useCache:YES];
+        
         return NO;
       }
   }
