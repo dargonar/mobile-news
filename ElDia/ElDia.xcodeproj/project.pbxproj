@@ -29,6 +29,8 @@
 		78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
 		78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
+		7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */; };
+		7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */; };
 		788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
 		788A1DAA169DE285007DCDD3 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */; };
 		788A1DAC169DE28B007DCDD3 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAB169DE28A007DCDD3 /* Default-Landscape@2x~ipad.png */; };
@@ -557,6 +559,8 @@
 		78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_tablet_clasificados.xsl; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 7_tablet_farmacias.xsl; sourceTree = "<group>"; };
+		7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 8_tablet_cartelera.xsl; sourceTree = "<group>"; };
 		788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_section_list.xsl; sourceTree = "<group>"; };
 		788A1DA9169DE285007DCDD3 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		788A1DAB169DE28A007DCDD3 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
@@ -989,6 +993,8 @@
 				78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */,
 				78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */,
 				788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */,
+				7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */,
+				7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */,
 			);
 			name = xsl_tablets;
 			sourceTree = "<group>";
@@ -2080,6 +2086,8 @@
 				788AC03716F8E86B00FDACF6 /* 6_tablet_funebres.xsl in Resources */,
 				78845AF917342B3100FDF750 /* 7_farmacias.xsl in Resources */,
 				78845AFA17342B3100FDF750 /* 8_cartelera.xsl in Resources */,
+				7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */,
+				7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -156,6 +156,14 @@ NSLock *menuLock;
     if( [url hasPrefix:@"funebres://" ] ) {
       return @"funebres";
     }
+    else
+      if( [url hasPrefix:@"farmacia://" ] ) {
+        return @"farmacia";
+      }
+      else
+        if( [url hasPrefix:@"cartelera://" ] ) {
+          return @"cartelera";
+        }
   return @"section";
   
 }
@@ -168,6 +176,14 @@ NSLock *menuLock;
     if( [url hasPrefix:@"funebres://" ] ) {
       return[self.mScreenManager funebresDate:url];
     }
+    else
+      if( [url hasPrefix:@"farmacia://" ] ) {
+        return[self.mScreenManager farmaciaDate:url];
+      }
+      else
+        if( [url hasPrefix:@"cartelera://" ] ) {
+          return[self.mScreenManager carteleraDate:url];
+        }
   return[self.mScreenManager sectionDate:url];
 }
 
@@ -189,6 +205,16 @@ NSLock *menuLock;
       {
         data=[self.mScreenManager getFunebres:self.currentUrl useCache:useCache error:&err];
       }
+      else
+        if([type isEqualToString:@"farmacia"])
+        {
+          data=[self.mScreenManager getFarmacia:self.currentUrl useCache:useCache error:&err];
+        }
+        else
+          if([type isEqualToString:@"cartelera"])
+          {
+            data=[self.mScreenManager getCartelera:self.currentUrl useCache:useCache error:&err];
+          }
       else{
       data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
     }
@@ -582,9 +608,13 @@ bool showUpdatedAt = NO;
       return NO;
     }
     else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"]))
+      if (UIWebViewNavigationTypeLinkClicked == navigationType
+          && ([[url scheme]isEqualToString:@"clasificados"]
+              || [[url scheme]isEqualToString:@"funebres"]
+              || [[url scheme]isEqualToString:@"farmacia"]
+              || [[url scheme]isEqualToString:@"cartelera"]))
       {
-        //[app_delegate loadClasificados:url];
+        NSLog(@" main clicked: %@", url);
         [self setCurrentUrl:[url absoluteString]];
         [self loadUrlAndLoading:[url absoluteString] useCache:YES];
         

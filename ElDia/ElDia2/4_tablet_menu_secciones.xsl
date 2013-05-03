@@ -73,7 +73,7 @@
 
             <li class="seccion">Varios</li>
             <li><a href="funebres://full">Fúnebres</a></li>
-            <li><a href="farmacias://full">Farmacias de turno</a></li>
+            <li><a href="farmacia://full">Farmacias de turno</a></li>
             <li><a href="cartelera://full">Cartelera de cine</a></li>
           </ul>
         </div>

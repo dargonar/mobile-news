@@ -42,6 +42,8 @@ NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_
 NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones.xsl";
 NSString * const iPad_CLASIFICADOS_STYLESHEET         = @"5_tablet_clasificados.xsl";
 NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl";
+NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
+NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
 NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
 NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
@@ -482,6 +484,14 @@ BOOL isIpad=NO;
     
   if( [url hasPrefix:@"menu://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_MENU_STYLESHEET];
+  }
+  
+  if( [url hasPrefix:@"farmacia://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FARMACIAS_STYLESHEET];
+  }
+  
+  if( [url hasPrefix:@"cartelera://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_CARTELERA_STYLESHEET];
   }
   
   return nil;

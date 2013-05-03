@@ -593,6 +593,10 @@ CLASIFICADOS
 	border-right:#ccc solid 1px;
 }
 
+#clasificados .columna.big {
+    width:100%;
+    min-width:960sdpx;
+}
 #clasificados .columna .aviso {
 	border-bottom:#ccc solid 1px;
 	margin:10px;

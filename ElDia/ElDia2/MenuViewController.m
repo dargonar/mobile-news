@@ -348,7 +348,7 @@ NSLock *lock;
     return NO;
   }
   else
-    if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"]) && [app_delegate isiPad])
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"] || [[url scheme]isEqualToString:@"farmacia"] || [[url scheme]isEqualToString:@"cartelera"]) && [app_delegate isiPad])
     {
       [app_delegate loadService:url];
       [self slideThenHide];
