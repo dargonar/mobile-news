@@ -190,15 +190,57 @@ BOOL mViewDidLoad=NO;
   self.bottomUIView.hidden = YES;
 }
 
+-(void)loadFarmacia:(NSURL *)url{
+  
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager farmaciaDate:uri];
+  if([self.mScreenManager farmaciaExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getFarmacia:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"farmacia"];
+}
+
+-(void)loadCartelera:(NSURL *)url{
+  
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager carteleraDate:uri];
+  if([self.mScreenManager farmaciaExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getCartelera:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"cartelera"];
+}
+
 -(void)loadFunebres:(NSURL *)url{
   
   self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypeNone;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
-  NSDate * date =[self.mScreenManager sectionDate:uri];
-  // Clasificado es muy viejo, o no existe?
-  //if(![self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  NSDate * date =[self.mScreenManager funebresDate:uri];
   if([self.mScreenManager funebresExists:uri])
   {
     NSError *err;
@@ -220,9 +262,7 @@ BOOL mViewDidLoad=NO;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
-  NSDate * date =[self.mScreenManager sectionDate:uri];
-  // Clasificado es muy viejo, o no existe?
-  //if(![self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  NSDate * date =[self.mScreenManager clasificadosDate:uri];
   if([self.mScreenManager clasificadosExists:uri])
   {
     NSError *err;
@@ -246,8 +286,15 @@ BOOL mViewDidLoad=NO;
     if([type isEqualToString:@"funebres"])
       data = [self.mScreenManager getFunebres:url useCache:useCache error:&err];
     else
+      if([type isEqualToString:@"farmacia"])
+    data = [self.mScreenManager getFarmacia:url useCache:useCache error:&err];
+    else
+      if([type isEqualToString:@"cartelera"])
+        data = [self.mScreenManager getCartelera:url useCache:useCache error:&err];
+      else
       if([type isEqualToString:@"clasificados"])
         data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       
       if(data==nil)

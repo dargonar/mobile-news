@@ -22,4 +22,6 @@
 
 - (void)loadClasificados:(NSURL *)url;
 -(void)loadFunebres:(NSURL *)url;
+-(void)loadFarmacia:(NSURL *)url;
+-(void)loadCartelera:(NSURL *)url;
 @end

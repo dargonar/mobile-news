@@ -16,7 +16,13 @@
 -(BOOL) clasificadosExists:(NSString*)url;
 -(BOOL) funebresExists:(NSString*)url;
 
+-(BOOL) farmaciaExists:(NSString*)url;
+-(BOOL) carteleraExists:(NSString*)url;
+
 -(BOOL) sectionMenuExists:(NSString*)url;
+
+-(NSData *)getFarmacia:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
+-(NSData *)getCartelera:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
 -(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error;
@@ -29,6 +35,9 @@
 -(NSDate*) sectionDate:(NSString*)url;  
 -(NSDate*) clasificadosDate:(NSString*)url ;
 -(NSDate*) funebresDate:(NSString*)url ;
+
+-(NSDate*) farmaciaDate:(NSString*)url ;
+-(NSDate*) carteleraDate:(NSString*)url ;
 
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error;
 

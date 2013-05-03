@@ -148,6 +148,10 @@ int cache_size = 2; //30;
   self.menuClasificadosViewController = [[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
   self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
 
+  self.farmaciaViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+  self.carteleraViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+
+  
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
   
@@ -211,6 +215,14 @@ int cache_size = 2; //30;
   [navigationController pushViewController:self.clasificadosViewController animated:YES ];
 }
 
+-(void)loadFarmacia:(NSURL*)url{
+  [self.farmaciaViewController loadFarmacia:url];
+}
+
+-(void)loadCartelera:(NSURL*)url{
+  [self.carteleraViewController loadCartelera:url];
+}
+
 -(void)showSideMenu
 {
   // before swaping the views, we'll take a "screenshot" of the current view
@@ -227,6 +239,16 @@ int cache_size = 2; //30;
   self.menuViewController.screenShotImage = image;
   //self.window.rootViewController = self.menuViewController; //HACKED
   [navigationController pushViewController:self.menuViewController animated:NO ];
+}
+
+-(void)hideSideMenuPushCartelera{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.carteleraViewController animated:YES ];
+}
+
+-(void)hideSideMenuPushFarmacia{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.farmaciaViewController animated:YES ];
 }
 
 -(void)hideSideMenuPushFunebres{

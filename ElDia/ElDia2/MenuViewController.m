@@ -213,6 +213,26 @@ NSLock *lock;
                    completion:^(BOOL finished){ [app_delegate hideSideMenuPushClasificados]; }];
 }
 
+-(void) slideThenHideShowFarmacia
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushFarmacia]; }];
+}
+
+-(void) slideThenHideShowCartelera
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushCartelera]; }];
+}
+
 
 // HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -355,6 +375,23 @@ NSLock *lock;
           [self slideThenHideShowClasificados];
           return NO;
         }
+        else
+          if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"farmacia"]) // por ahora page://clasificados
+          {
+            
+            [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://full" ]];
+            [self slideThenHideShowFarmacia];
+            return NO;
+          }
+          else
+            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"cartelera"]) // por ahora page://clasificados
+            {
+              
+              [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://full" ]];
+              [self slideThenHideShowCartelera];
+              return NO;
+            }
+  
   
   
   

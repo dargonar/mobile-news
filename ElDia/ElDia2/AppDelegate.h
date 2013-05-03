@@ -24,6 +24,8 @@
 @property (strong, nonatomic) MenuViewController *menuViewController;
 @property (strong, nonatomic) MenuClasificadosViewController *menuClasificadosViewController;
 @property (strong, nonatomic) ClasificadosViewController *clasificadosViewController;
+@property (strong, nonatomic) ClasificadosViewController *farmaciaViewController;
+@property (strong, nonatomic) ClasificadosViewController *carteleraViewController;
 @property (strong, nonatomic) UINavigationController * navigationController;
 @property (strong, nonatomic) NSOperationQueue *download_queue;;
 
@@ -32,6 +34,10 @@
 - (void)hideSideMenuPushMenuClasificados;
 - (void)hideSideMenuPushClasificados;
 - (void)hideSideMenuPushFunebres;
+
+- (void)hideSideMenuPushFarmacia;
+- (void)hideSideMenuPushCartelera;
+
 //- (void)downloadImages:(NSArray *)mobi_images obj:(id)obj request_url:(NSString*)request_url;
 - (void)requestDone:(ASIHTTPRequest *)request;
 - (void)requestWentWrong:(ASIHTTPRequest *)request;
@@ -41,6 +47,8 @@
 - (void)loadMenu:(BOOL)useCache;
 - (void)loadClasificados:(NSURL*)url;
 - (void)loadFunebres:(NSURL*)url;
+- (void)loadFarmacia:(NSURL*)url;
+- (void)loadCartelera:(NSURL*)url;
 - (void)showClasificados;
 
 - (BOOL)isiPad;

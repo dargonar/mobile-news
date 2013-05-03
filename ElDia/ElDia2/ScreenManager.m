@@ -24,6 +24,8 @@ NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
 NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 NSString * const FUNEBRES_STYLESHEET      = @"6_funebres.xsl";
+NSString * const FARMACIAS_STYLESHEET     = @"7_farmacias.xsl";
+NSString * const CARTELERA_STYLESHEET      = @"8_cartelera.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
 NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
@@ -48,6 +50,9 @@ NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.
 //NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
 NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
 NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
+
+NSString * const CARTELERA_URL     = @"http://www.eldia.com.ar/extras/carteleradecine_txt.aspx";
+NSString * const FARMACIAS_URL     = @"http://www.eldia.com.ar/extras/farmacias_txt.aspx";
 
 @implementation ScreenManager
 
@@ -87,6 +92,18 @@ BOOL isIpad=NO;
   return [cache createdAt:key prefix:@"c"];
 }
 
+-(NSDate*) farmaciaDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"farm"];
+}
+
+-(NSDate*) carteleraDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"car"];
+}
+
 /**/
 -(BOOL) menuExists{
   return [self screenExists:@"menu://" prefix:@"m"];
@@ -98,6 +115,14 @@ BOOL isIpad=NO;
 
 -(BOOL) funebresExists:(NSString*)url {
   return [self screenExists:url prefix:@"f"];
+}
+
+-(BOOL) farmaciaExists:(NSString*)url {
+  return [self screenExists:url prefix:@"far"];
+}
+
+-(BOOL) carteleraExists:(NSString*)url {
+  return [self screenExists:url prefix:@"car"];
 }
 
 -(BOOL) sectionExists:(NSString*)url {
@@ -140,6 +165,14 @@ BOOL isIpad=NO;
 
 -(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:url useCache:useCache processImages:NO prefix:@"f" error:error];
+}
+
+-(NSData *)getFarmacia:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"far" error:error];
+}
+
+-(NSData *)getCartelera:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"car" error:error];
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -215,9 +248,9 @@ BOOL isIpad=NO;
   }
   
   //Lo bajo
-  BOOL downloaded = (xml==nil);
-  if(downloaded)
-    xml=[self downloadUrl:url error:error];
+  BOOL downloaded = (xml!=nil);
+  if(downloaded==NO)
+    xml=[self downloadUrl:url error:error hack_xml:([url hasPrefix:@"farmacia://"] || [url hasPrefix:@"cartelera://"])];
   
   //Problemas downloading?
   if (xml == nil) {	
@@ -230,8 +263,6 @@ BOOL isIpad=NO;
   {
     xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"] || [url hasPrefix:@"section://"] || [url hasPrefix:@"clasificados://"])];
   }
-  
-  //<clasificado rubro="ALQUILER DE HABITACIONES">
   
   if(processImages && downloaded==YES)
   {
@@ -301,7 +332,7 @@ BOOL isIpad=NO;
 }
 
 
--(NSData *)downloadUrl:(NSString*)surl error:(NSError**)error {
+-(NSData *)downloadUrl:(NSString*)surl error:(NSError**)error hack_xml:(BOOL)hack_xml {
   
   NSURL *url = [self getXmlHttpUrl:surl];
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -325,6 +356,18 @@ BOOL isIpad=NO;
     return [ErrorBuilder build:error desc:@"request null" code:ERR_REQUEST_NULL];
   }
  
+  if(hack_xml)
+  {
+    NSString *xml = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
+    NSString *date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
+   // NSLog(@"DateObject : %@", date);
+    
+    NSString *hacked_xml = @"<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:news=\"http://www.diariosmoviles.com.ar/news-rss/\" version=\"2.0\"><channel><pubDate>%@ -0300</pubDate><item>%@</item></channel></rss>";
+    response = [[NSString stringWithFormat:hacked_xml,date, xml] dataUsingEncoding:NSUTF8StringEncoding];
+  }
   return response;
 }
 
@@ -360,6 +403,15 @@ BOOL isIpad=NO;
   if( [url hasPrefix:@"menu://"] ) {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MENU_STYLESHEET];
   }
+  
+  if( [url hasPrefix:@"farmacia://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:FARMACIAS_STYLESHEET];
+  }
+
+  if( [url hasPrefix:@"cartelera://"] ) {
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CARTELERA_STYLESHEET];
+  }
+
   return nil;
 }
 
@@ -460,6 +512,14 @@ BOOL isIpad=NO;
   
   if( [url hasPrefix:@"funebres://"] ) {
     return [NSURL URLWithString:FUNEBRES_URL];
+  }
+
+  if( [url hasPrefix:@"farmacia://"] ) {
+    return [NSURL URLWithString:FARMACIAS_URL];
+  }
+
+  if( [url hasPrefix:@"cartelera://"] ) {
+    return [NSURL URLWithString:CARTELERA_URL];
   }
 
   return nil;
