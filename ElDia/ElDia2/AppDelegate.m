@@ -67,7 +67,9 @@ int cache_size = 2; //30;
   // Optional: set debug to YES for extra debugging information.
   [GAI sharedInstance].debug = NO;
   // Create tracker instance.
-  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-32663760-1"]; //   UA-39206160-1
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-39206160-1"];
+  // ELDIA UA-39206160-1
+  // TESTING UA-32663760-1
 }
 
 -(BOOL)isLandscape{

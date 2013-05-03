@@ -69,6 +69,7 @@ BOOL mIsIpad=NO;
 */
 
 -(void)initAd{
+  return;
   //728x90  / 468x60 | 320x50 
   self.adUIWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
   self.adUIWebView.tag = 0x1114;
@@ -83,7 +84,7 @@ BOOL mIsIpad=NO;
   
 }
 -(void)positionateAd:(UIDeviceOrientation) deviceOrientation imInLandscape:(BOOL)imInLandscape{
-  
+  return;
   //UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   if(self.adUIWebView == nil)
     [self initAd];
@@ -109,7 +110,7 @@ BOOL mIsIpad=NO;
       ad_size = @"728x90";
     }
     else{
-      self.adUIWebView.frame=CGRectMake(0, 430, 320, 480);
+      self.adUIWebView.frame=CGRectMake(0, 430-44, 320, 480);
       ad_size = @"320x50";
     }
   }

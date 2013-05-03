@@ -390,7 +390,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "131"
          endingLineNumber = "131"
-         landmarkName = "-onImageDownloaded:"
+         landmarkName = "-positionateAd:imInLandscape:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -403,8 +403,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "141"
          endingLineNumber = "141"
-         landmarkName = "-onImageDownloaded:"
-         landmarkType = "5">
+         landmarkName = "@implementation BaseMobiViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -416,7 +416,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "151"
          endingLineNumber = "151"
-         landmarkName = "-onImageDownloaded:"
+         landmarkName = "-setCurrentUrl:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,7 +429,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "111"
          endingLineNumber = "111"
-         landmarkName = "-setHTML:url:webView:"
+         landmarkName = "-positionateAd:imInLandscape:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -442,7 +442,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "127"
          endingLineNumber = "127"
-         landmarkName = "-onImageDownloaded:"
+         landmarkName = "-positionateAd:imInLandscape:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -455,7 +455,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "128"
          endingLineNumber = "128"
-         landmarkName = "-onImageDownloaded:"
+         landmarkName = "-positionateAd:imInLandscape:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -970,11 +970,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/AppDelegate.m"
-         timestampString = "389299268.534953"
+         timestampString = "389306461.658946"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
          landmarkName = "-loadMenu:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -983,11 +983,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/AppDelegate.m"
-         timestampString = "389299268.534953"
+         timestampString = "389306461.658946"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
+         startingLineNumber = "192"
+         endingLineNumber = "192"
          landmarkName = "@implementation AppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1027,7 +1027,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "356"
          endingLineNumber = "356"
-         landmarkName = "-positionateLandscape"
+         landmarkName = "-positionate"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

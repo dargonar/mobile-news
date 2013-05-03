@@ -248,8 +248,8 @@ BOOL isIpad=NO;
   }
   
   //Lo bajo
-  BOOL downloaded = (xml!=nil);
-  if(downloaded==NO)
+  BOOL downloaded = (xml==nil);
+  if(downloaded)
     xml=[self downloadUrl:url error:error hack_xml:([url hasPrefix:@"farmacia://"] || [url hasPrefix:@"cartelera://"])];
   
   //Problemas downloading?
