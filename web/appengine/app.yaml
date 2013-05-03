@@ -1,5 +1,5 @@
 application: testsdavento
-version: 1-0-3
+version: 1-0-4
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -18,6 +18,10 @@ handlers:
   static_files: static/html/\1
   upload: static/html/(.*)
 
+- url: /apps/eldia/(.*)
+  static_files: static/apps/eldia/\1
+  upload: static/apps/eldia/(.*)
+  
 - url: /googlebf512d3ebbc1cfaf\.html
   static_files: static/googlebf512d3ebbc1cfaf.html
   upload: static/googlebf512d3ebbc1cfaf.html

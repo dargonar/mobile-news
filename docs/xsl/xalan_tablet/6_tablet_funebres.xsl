@@ -28,20 +28,26 @@
               <div class="clear"></div>
             </div><!-- encabezado -->
 
-            <xsl:call-template name="clasificados_primer_columna">
+            <xsl:call-template name="clasificados_columna">
               <xsl:with-param name="Nodes" select="rss/channel/item"/>
+              <xsl:with-param name="From" select="1"/>
+              <xsl:with-param name="To" select="round(count(rss/channel/item) div 3)"/>
             </xsl:call-template>
           </div><!-- columna -->
 
           <div class="columna">
-            <xsl:call-template name="clasificados_segunda_columna">
+            <xsl:call-template name="clasificados_columna">
               <xsl:with-param name="Nodes" select="rss/channel/item"/>
+              <xsl:with-param name="From" select="round(count(rss/channel/item) div 3)"/>
+              <xsl:with-param name="To" select="round(count(rss/channel/item) div 3)*2"/>
             </xsl:call-template>
           </div><!-- columna -->
 
           <div class="columna">
-            <xsl:call-template name="clasificados_tercer_columna">
+            <xsl:call-template name="clasificados_columna">
               <xsl:with-param name="Nodes" select="rss/channel/item"/>
+              <xsl:with-param name="From" select="round(count(rss/channel/item) div 3)*2"/>
+              <xsl:with-param name="To" select="count(rss/channel/item)"/>
             </xsl:call-template>
           </div><!-- columna -->
         </div><!-- clasificados -->
@@ -49,37 +55,17 @@
     </html>
   </xsl:template>
   
-  <xsl:template name="clasificados_tercer_columna">
+  <xsl:template name="clasificados_columna">
   <xsl:param name="Nodes" />
+  <xsl:param name="From" />
+  <xsl:param name="To" />
     <xsl:for-each select="$Nodes">
-      <xsl:if test="(position() mod 3)=0 and position() &lt; count($Nodes)">
+      <xsl:if test="(position() &gt;= $From) and position() &lt; $To">
         <xsl:call-template name="aviso_clasificado">
           <xsl:with-param name="Node" select="."/>
         </xsl:call-template>
       </xsl:if>
       </xsl:for-each>
-  </xsl:template>
-  
-  <xsl:template name="clasificados_segunda_columna">
-  <xsl:param name="Nodes" />
-    <xsl:for-each select="$Nodes">
-      <xsl:if test="(position() mod 3)=2 and position() &lt; count($Nodes)">
-        <xsl:call-template name="aviso_clasificado">
-          <xsl:with-param name="Node" select="."/>
-        </xsl:call-template>
-      </xsl:if>
-      </xsl:for-each>
-  </xsl:template>
-  
-  <xsl:template name="clasificados_primer_columna">
-  <xsl:param name="Nodes" />
-    <xsl:for-each select="$Nodes">
-      <xsl:if test="(position() mod 3)=1 and position() &lt; count($Nodes)">
-        <xsl:call-template name="aviso_clasificado">
-          <xsl:with-param name="Node" select="."/>
-        </xsl:call-template>
-      </xsl:if>
-    </xsl:for-each>
   </xsl:template>
   
   <xsl:template name="aviso_clasificado">

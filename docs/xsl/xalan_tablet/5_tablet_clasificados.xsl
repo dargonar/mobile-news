@@ -23,24 +23,24 @@
           <div class="columna">
             <div class="encabezado">
               <div class="titulo">Clasificados</div>
-              <div class="rubro"><xsl:value-of select="clasificado/@rubro"/></div>
+              <div class="rubro"><xsl:value-of select="rss/channel/item[1]/title"/></div>
 
               <p></p> <!-- Seleccionar otra fecha -->
               <div class="calendario">
                 <xsl:call-template name="ParseDate">
-                  <xsl:with-param name="DateTime" select="clasificado/rss/channel/pubDate"/>
+                  <xsl:with-param name="DateTime" select="rss/channel/pubDate"/>
                   <xsl:with-param name="DatePart" select="'day'"/>
                 </xsl:call-template>
               </div>
               <div class="calendario">
                 <xsl:call-template name="ParseDate">
-                  <xsl:with-param name="DateTime" select="clasificado/rss/channel/pubDate"/>
+                  <xsl:with-param name="DateTime" select="rss/channel/pubDate"/>
                   <xsl:with-param name="DatePart" select="'month'"/>
                 </xsl:call-template>
               </div>
               <div class="calendario">
                 <xsl:call-template name="ParseDate">
-                  <xsl:with-param name="DateTime" select="clasificado/rss/channel/pubDate"/>
+                  <xsl:with-param name="DateTime" select="rss/channel/pubDate"/>
                   <xsl:with-param name="DatePart" select="'year'"/>
                 </xsl:call-template>
               </div>
@@ -48,19 +48,19 @@
             </div><!-- encabezado -->
 
             <xsl:call-template name="clasificados_primer_columna">
-              <xsl:with-param name="Nodes" select="clasificado/rss/channel/item"/>
+              <xsl:with-param name="Nodes" select="rss/channel/item"/>
             </xsl:call-template>
           </div><!-- columna -->
 
           <div class="columna">
             <xsl:call-template name="clasificados_segunda_columna">
-              <xsl:with-param name="Nodes" select="clasificado/rss/channel/item"/>
+              <xsl:with-param name="Nodes" select="rss/channel/item"/>
             </xsl:call-template>
           </div><!-- columna -->
 
           <div class="columna">
             <xsl:call-template name="clasificados_tercer_columna">
-              <xsl:with-param name="Nodes" select="clasificado/rss/channel/item"/>
+              <xsl:with-param name="Nodes" select="rss/channel/item"/>
             </xsl:call-template>
           </div><!-- columna -->
         </div><!-- clasificados -->

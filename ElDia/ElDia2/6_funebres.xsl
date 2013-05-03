@@ -15,7 +15,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=320;user-scalable=no;" />
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
-        <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>FUNEBRES</title>
       </head>
       <body>
@@ -30,14 +29,7 @@
             
             <xsl:for-each select="rss/channel/item">
               <xsl:variable name="pos" select="position()-1" />
-              <!-- 
-              before-pos:<xsl:value-of disable-output-escaping="yes" select="$pos" /> <br />
-              sorto:<xsl:value-of disable-output-escaping="yes" select="preceding-sibling::item[1]/category"/> <br />
-              preceding-sibling:<xsl:value-of disable-output-escaping="yes" select="preceding-sibling::*/category" /> <br />
-              before:<xsl:value-of disable-output-escaping="yes" select="rss/channel/item[$pos]" /> <br />
-              current:<xsl:value-of disable-output-escaping="yes" select="./category" />
-              -->
-              <xsl:if test="position() != last()">
+                <xsl:if test="position() != last()">
                 <xsl:if test="position()=1 or preceding-sibling::item[1]/category != ./category">
                   <div class="rubro">
                     <xsl:value-of disable-output-escaping="yes" select="normalize-space(./category)" />
@@ -48,19 +40,7 @@
             </xsl:for-each>
           </div>  
         </div>
-        
-        <!--div id="clasificados">
-          <div class="menu-header">
-            <xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/title" />
-          </div>
-          <ul id="clasificados_container">
-            <xsl:for-each select="rss/channel/item">
-              <li> <div> <xsl:value-of disable-output-escaping="yes" select="description" /> </div> </li>
-            </xsl:for-each>
-          </ul>
-        </div-->
-        
-      </body>
+              </body>
     </html>
   </xsl:template>
   

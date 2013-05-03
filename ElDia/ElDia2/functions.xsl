@@ -513,6 +513,8 @@
     </xsl:choose>
   </xsl:template>
 
+  <!-- ACA INICIA TABLET -->
+  
   <xsl:template name="tablet_index_portrait_main">
     <xsl:param name="Node" />
       <xsl:variable name="encoded_url" >
