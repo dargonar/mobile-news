@@ -337,6 +337,8 @@ BOOL isShowingLandscapeView = NO;
   
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
+  [self positionateAd:deviceOrientation imInLandscape:isShowingLandscapeView];
+  
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isShowingLandscapeView)
   {
@@ -350,6 +352,7 @@ BOOL isShowingLandscapeView = NO;
   
   [self rotateHTML:self.mainUIWebView];
   [self reLoadIndex];
+  
 
 }
 

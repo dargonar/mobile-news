@@ -20,7 +20,7 @@
 
 @implementation BaseMobiViewController
 
-@synthesize mScreenManager, currentUrl, primaryUIWebView, secondaryUIWebView;
+@synthesize mScreenManager, currentUrl, primaryUIWebView, secondaryUIWebView, adUIWebView;
 
 BOOL mIsIpad=NO;
 
@@ -36,6 +36,7 @@ BOOL mIsIpad=NO;
       self.mScreenManager = [[ScreenManager alloc] init];
       self.primaryUIWebView=nil;
       self.secondaryUIWebView=nil;
+      self.adUIWebView = nil;
     }
   
     return self;
@@ -61,14 +62,98 @@ BOOL mIsIpad=NO;
 
 }
 
+/*- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self positionateAd];
+}
+*/
+
+-(void)initAd{
+  //728x90  / 468x60 | 320x50 
+  self.adUIWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
+  self.adUIWebView.tag = 0x1114;
+  self.adUIWebView.hidden=YES;
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ad_dummy" ofType:@"html"];
+  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
+  [self.adUIWebView loadData:htmlData
+                    MIMEType:@"text/html"
+                    textEncodingName:@"utf-8"
+                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
+   [self.view addSubview:self.adUIWebView ];
+  
+}
+-(void)positionateAd:(UIDeviceOrientation) deviceOrientation imInLandscape:(BOOL)imInLandscape{
+  
+  //UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  if(self.adUIWebView == nil)
+    [self initAd];
+
+  BOOL isVisible = YES;
+  
+  NSString* ad_size = @"320x50";
+  if (UIDeviceOrientationIsLandscape(deviceOrientation)) // && !imInLandscape)
+  {
+    //[self positionateAdLandscape];
+    if ([app_delegate isiPad]) {
+      
+      ad_size = @"468x60";
+    }
+    else{
+      isVisible=NO;
+    }
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation)) // && imInLandscape)
+  {
+    //[self positionateAdPortrait];
+    if ([app_delegate isiPad]) {
+      ad_size = @"728x90";
+    }
+    else{
+      self.adUIWebView.frame=CGRectMake(0, 430, 320, 480);
+      ad_size = @"320x50";
+    }
+  }
+  
+  if(isVisible==NO)
+  {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.adUIWebView.hidden=YES;
+    });
+    return;
+  }
+  
+  __block NSString *jsString  = [NSString stringWithFormat:@"eplAD4M('%@')"
+                                 , ad_size];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.adUIWebView.hidden=NO;
+    [self.adUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    jsString=nil;
+    [self.view bringSubviewToFront:self.adUIWebView];
+    
+  });
+  
+}
+/*
+-(void)positionateAdLandscape{
+  }
+
+-(void)positionateAdPortrait{
+  }
+*/
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 /*****/
+- (void) setCurrentUrl:(id)_url
+{
+  self->currentUrl = _url;
+  self.trackedViewName = _url; //@"About Screen";
+}
 
-// self.trackedViewName = @"About Screen";
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
   if(isError)
     [[[iToast makeText:message] setGravity:iToastGravityCenter offsetLeft:0 offsetTop:0] show:iToastTypeWarning];

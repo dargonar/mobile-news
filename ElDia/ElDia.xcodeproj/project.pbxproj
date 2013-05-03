@@ -139,6 +139,9 @@
 		CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE7D339115EE8F2700935444 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; };
 		CE7D339315EE8F3800935444 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE7D339215EE8F3800935444 /* README.md */; };
+		CE7F071A1731C14700661632 /* ad.js in Sources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
+		CE7F073D1731CA8D00661632 /* ad_dummy.html in Resources */ = {isa = PBXBuildFile; fileRef = CE7F073C1731CA8D00661632 /* ad_dummy.html */; };
+		CE7F073E1731D1C800661632 /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
 		CE7FE477172E9F1300A3CFD7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		CE83717216128D9800FC8269 /* layout.css in Resources */ = {isa = PBXBuildFile; fileRef = CE83715A16128D9800FC8269 /* layout.css */; };
 		CE83717316128D9800FC8269 /* ajax_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE83715C16128D9800FC8269 /* ajax_loader.gif */; };
@@ -726,6 +729,8 @@
 		CE7D338F15EE8F2700935444 /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
 		CE7D339015EE8F2700935444 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		CE7D339215EE8F3800935444 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		CE7F07191731C14700661632 /* ad.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ad.js; sourceTree = "<group>"; };
+		CE7F073C1731CA8D00661632 /* ad_dummy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ad_dummy.html; sourceTree = "<group>"; };
 		CE7FE470172E9F1300A3CFD7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		CE7FE471172E9F1300A3CFD7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		CE7FE472172E9F1300A3CFD7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -939,6 +944,7 @@
 		602230D2163B61B30091D201 /* js */ = {
 			isa = PBXGroup;
 			children = (
+				CE7F07191731C14700661632 /* ad.js */,
 				602230D4163B61CB0091D201 /* functions.js */,
 			);
 			name = js;
@@ -1253,6 +1259,7 @@
 				CE83715916128D9800FC8269 /* css */,
 				CE83715B16128D9800FC8269 /* img */,
 				CE2E30731654A30B00260455 /* versions.plist */,
+				CE7F073C1731CA8D00661632 /* ad_dummy.html */,
 				78E3F002164DAD5200C7EB24 /* menu_clasificados.html */,
 				CED344241630A4A300C77C79 /* menu_dummy.html */,
 			);
@@ -1937,6 +1944,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78E5B9381652D89500C7ACCD /* ShareKit.bundle in Resources */,
+				CE7F073E1731D1C800661632 /* ad.js in Resources */,
 				7801CCEF169CEB32009E2539 /* layout_tablet.css in Resources */,
 				78526B41169CD7BA00C96AD8 /* 1_tablet_main_list.xsl in Resources */,
 				788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */,
@@ -2036,6 +2044,7 @@
 				CEC82FD7162F12DF0085FF54 /* offline@2x.png in Resources */,
 				CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */,
 				CED344251630A4A300C77C79 /* menu_dummy.html in Resources */,
+				CE7F073D1731CA8D00661632 /* ad_dummy.html in Resources */,
 				CED3442A1630AA5F00C77C79 /* loading_indicator_big_blue.gif in Resources */,
 				CED3442B1630AA5F00C77C79 /* loading_indicator_big.gif in Resources */,
 				602230D6163B64B50091D201 /* functions.js in Resources */,
@@ -2177,6 +2186,7 @@
 				602230D5163B61CB0091D201 /* functions.js in Sources */,
 				CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */,
 				78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */,
+				CE7F071A1731C14700661632 /* ad.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

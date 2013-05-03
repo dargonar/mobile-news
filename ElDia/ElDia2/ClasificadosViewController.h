@@ -21,5 +21,5 @@
 - (IBAction) btnFontSizeMinusClick: (id)param;
 
 - (void)loadClasificados:(NSURL *)url;
--(void)loadFunebres:(NSURL *)url;
+- (void)loadFunebres:(NSURL *)url;
 @end
