@@ -356,7 +356,7 @@ BOOL isIpad=NO;
     return [ErrorBuilder build:error desc:@"request null" code:ERR_REQUEST_NULL];
   }
  
-  if(hack_xml)
+  if(hack_xml==YES)
   {
     NSString *xml = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
     
@@ -365,7 +365,10 @@ BOOL isIpad=NO;
     NSString *date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
    // NSLog(@"DateObject : %@", date);
     
-    NSString *hacked_xml = @"<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:news=\"http://www.diariosmoviles.com.ar/news-rss/\" version=\"2.0\"><channel><pubDate>%@ -0300</pubDate><item>%@</item></channel></rss>";
+    NSString *hacked_xml = @"<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:news=\"http://www.diariosmoviles.com.ar/news-rss/\" version=\"2.0\"><channel><pubDate>%@ -0300</pubDate><item><![CDATA[%@]]></item></channel></rss>";
+    
+    NSLog(@" hacked xml surl[%@] data[%@]", surl, xml);
+    
     response = [[NSString stringWithFormat:hacked_xml,date, xml] dataUsingEncoding:NSUTF8StringEncoding];
   }
   return response;
