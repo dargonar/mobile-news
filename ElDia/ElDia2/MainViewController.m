@@ -363,7 +363,7 @@ BOOL isShowingLandscapeView = NO;
   
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
-  [self positionateAd:deviceOrientation imInLandscape:isShowingLandscapeView];
+  [self positionateAdMainScreen:deviceOrientation];
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isShowingLandscapeView)

@@ -334,6 +334,9 @@ BOOL mViewDidLoad=NO;
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
+  
+  [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
+  
   [self rotateHTML];
 }
 
