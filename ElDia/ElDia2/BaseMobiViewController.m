@@ -147,8 +147,8 @@ BOOL mIsIpad=NO;
       }
       else{
         // x y width height
-        self.adUIWebView.frame=CGRectMake(width/2, height-90, width/2, 90);
-        ad_size = @"468x60";
+        self.adUIWebView.frame=CGRectMake(0, height-90, width, 90);
+        ad_size = @"728x90";
       }
       //ad_size = @"728x90";
     }
