@@ -101,3 +101,4 @@ class DiariosCsv(FrontendHandler):
     query = DiarioIVC.all()
     diarios = query.fetch(1000)
     return self.render_response('frontend/_csv.html', diarios=diarios)
+    

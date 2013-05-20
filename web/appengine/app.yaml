@@ -1,5 +1,5 @@
 application: testsdavento
-version: 1-0-4
+version: 1-0-6
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -18,9 +18,15 @@ handlers:
   static_files: static/html/\1
   upload: static/html/(.*)
 
-- url: /apps/eldia/(.*)
+- url: /apps/eldia/(.*\.(jad))
   static_files: static/apps/eldia/\1
-  upload: static/apps/eldia/(.*)
+  upload: /static/apps/eldia/(.*\.(jad))
+  mime_type: text/vnd.sun.j2me.app-descriptor
+   
+- url: /apps/eldia/(.*\.(cod))
+  static_files: static/apps/eldia/\1
+  upload: /static/apps/eldia/(.*\.(cod))
+  mime_type: application/vnd.rim.cod
   
 - url: /googlebf512d3ebbc1cfaf\.html
   static_files: static/googlebf512d3ebbc1cfaf.html

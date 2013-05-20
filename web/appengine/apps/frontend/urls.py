@@ -18,6 +18,7 @@ def get_rules():
         Route('/m/perfil',                name='frontend/perfil',             handler='apps.frontend.home.Profile'),
         Route('/diarios/csv',             name='frontend/csv',                handler='apps.frontend.home.DiariosCsv'),
       ]),
+      
       PathPrefixRoute('/demo/service2', [
         Route('/2/',                        name='frontend2/home',               handler='apps.frontend.handlers.Index'),
         Route('/2/fullversion',             name='frontend2/home/fullversion',   handler='apps.frontend.handlers.Index:fullversion'),
@@ -26,6 +27,7 @@ def get_rules():
         Route('/2/m/secciones/<category>',  name='frontend2/secciones/category', handler='apps.frontend.handlers.Index:get_seccion_articles'),
         
       ]),
+      
       PathPrefixRoute('/demo/service3', [
         Route('/3/',                        name='frontend3/home',               handler='apps.frontend.handlers2.Index'),
         Route('/3/fullversion',             name='frontend3/home/fullversion',   handler='apps.frontend.handlers2.Index:fullversion'),
