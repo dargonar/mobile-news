@@ -773,8 +773,11 @@ BOOL isLandscapeView = NO;
 }
 
 -(void)positionate{
-  //UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+  
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  
+  [self positionateAdNoticiaScreen:deviceOrientation];
+  
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) && !isLandscapeView)
   {

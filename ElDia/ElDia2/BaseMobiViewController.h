@@ -32,5 +32,9 @@
 //-(void)showMessage:(NSString*)message;
 -(void)showMessage:(NSString*)message isError:(BOOL)isError;
 
--(void)positionateAd:(UIDeviceOrientation) deviceOrientation imInLandscape:(BOOL)imInLandscape;
+//-(void)positionateAd:(UIDeviceOrientation) deviceOrientation imInLandscape:(BOOL)imInLandscape screen:(NSString*)screen;
+-(void)positionateAdMainScreen:(UIDeviceOrientation) deviceOrientation;
+-(void)positionateAdNoticiaScreen:(UIDeviceOrientation) deviceOrientation;
+-(void)positionateAdOtherScreen:(UIDeviceOrientation) deviceOrientation;
+-(void)hideAd;
 @end
