@@ -578,6 +578,7 @@ CLASIFICADOS
 ********************************************/
 #clasificados {
 	width:960px;
+   min-height: 768px;
 }
 
 #clasificados .fecha { color:#0066cc;}
@@ -591,6 +592,7 @@ CLASIFICADOS
 	float:left;
 	padding:10px 8px 10px 10px;
 	border-right:#ccc solid 1px;
+   min-height: 768px; 
 }
 
 #clasificados .columna.big {

@@ -23,7 +23,8 @@ NSString * const OTHER_SCREEN         = @"OTHER_SCREEN";
 
 @implementation BaseMobiViewController
 
-@synthesize mScreenManager, currentUrl, primaryUIWebView, secondaryUIWebView, adUIWebView;
+@synthesize mScreenManager, currentUrl, primaryUIWebView, secondaryUIWebView, adUIImageView;
+@synthesize mAdManager;
 
 BOOL mIsIpad=NO;
 
@@ -37,9 +38,10 @@ BOOL mIsIpad=NO;
       mIsIpad = [app_delegate isiPad];
       
       self.mScreenManager = [[ScreenManager alloc] init];
+      mAdManager = [[AdManager alloc] init];
       self.primaryUIWebView=nil;
       self.secondaryUIWebView=nil;
-      self.adUIWebView = nil;
+      self.adUIImageView = nil;
     }
   
     return self;
@@ -47,7 +49,7 @@ BOOL mIsIpad=NO;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 
   [[NSNotificationCenter defaultCenter] addObserver:self 
                                            selector:@selector(onImageDownloaded:) 
@@ -75,22 +77,30 @@ BOOL mIsIpad=NO;
   
   //return;
   //728x90  / 468x60 | 320x50 
-  self.adUIWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
-  self.adUIWebView.tag = 0x1114;
-  self.adUIWebView.hidden=YES;
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ad_dummy" ofType:@"html"];
-  NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
-  [self.adUIWebView loadData:htmlData
-                    MIMEType:@"text/html"
-                    textEncodingName:@"utf-8"
-                    baseURL:[[DiskCache defaultCache] getFolderUrl]];
-   [self.view addSubview:self.adUIWebView ];
+  self.adUIImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
+  self.adUIImageView.hidden=YES;
+  [self.view addSubview:self.adUIImageView];
+  adUIImageView.userInteractionEnabled = YES;
   
 }
 
+-(BOOL)adStatus{
+  if(self.adUIImageView==nil)
+    return NO;
+  return [self.adUIImageView isHidden];
+}
+
+-(NSInteger)adHeight{
+  if(self.adUIImageView==nil)
+    return 0;
+  return  lrintf(self.adUIImageView.frame.size.height);
+}
+
 -(void)hideAd{
+  if(self.adUIImageView==nil)
+    return;
   dispatch_async(dispatch_get_main_queue(), ^{
-    self.adUIWebView.hidden=YES;
+    self.adUIImageView.hidden=YES;
   });
   return;
 }
@@ -105,77 +115,99 @@ BOOL mIsIpad=NO;
     [self positionateAd:deviceOrientation screen:OTHER_SCREEN];
 }
 
+NSString* click_url =@"";
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  
+  UITouch *touch = [touches anyObject];
+  
+  if ([touch view] == adUIImageView && [click_url length]>0)
+  {
+    NSURL *url = [NSURL URLWithString:click_url];
+    [[UIApplication sharedApplication] openURL:url];
+  }
+  
+}
+
 -(void)positionateAd:(UIDeviceOrientation) deviceOrientation screen:(NSString*)screen{
   
   // x y width height
   
-  if(self.adUIWebView == nil)
+  if(self.adUIImageView == nil)
     [self initAd];
 
-  BOOL isVisible = YES;
   NSString* ad_size = @"320x50";
   
   NSInteger  height=self.view.frame.size.height;
   NSInteger  width=self.view.frame.size.width;
   
+  __block NSDictionary*data=nil;
+  
+  // x y width height
   if (UIDeviceOrientationIsLandscape(deviceOrientation))
   {
     if ([app_delegate isiPad]) {
       if ([screen isEqualToString:MAIN_SCREEN]) {
-        self.adUIWebView.frame=CGRectMake(256, height-90, width-256, 90);
+        self.adUIImageView.frame=CGRectMake(256, height-90, width-256, 90);
+        data = [mAdManager getLAdImage];
         ad_size = @"728x90";
       }
       else{
-        // x y width height
-        self.adUIWebView.frame=CGRectMake(width/2, height-90, width/2, 90);
-        //self.adUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
+
+        self.adUIImageView.frame=CGRectMake(width/2, height-90, width/2, 90);
+        data = [mAdManager getMAdImage];
         ad_size = @"468x60";
       }
     }
     else{
-      self.adUIWebView.frame=CGRectMake(0, height-60, width, 60);
+      self.adUIImageView.frame=CGRectMake(0, height-60, width, 60);
+      data = [mAdManager getMAdImage];
       ad_size = @"468x60";
     }
   }
   else if (UIDeviceOrientationIsPortrait(deviceOrientation))
   {
-    //[self positionateAdPortrait];
     if ([app_delegate isiPad]) {
       if ([screen isEqualToString:MAIN_SCREEN]) {
-        self.adUIWebView.frame=CGRectMake(0, height-90, width, 90);
+        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
+        data = [mAdManager getLAdImage];
         ad_size = @"728x90";
       }
       else{
-        // x y width height
-        self.adUIWebView.frame=CGRectMake(0, height-90, width, 90);
+        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
+        data = [mAdManager getLAdImage];
         ad_size = @"728x90";
       }
-      //ad_size = @"728x90";
     }
     else{
-      self.adUIWebView.frame=CGRectMake(0, height-50, width, 50);
+      self.adUIImageView.frame=CGRectMake(0, height-50, width, 50);
+      data = [mAdManager getSAdImage];
       ad_size = @"320x50";
     }
   }
   
-  if(isVisible==NO)
+  if(data==nil)
   {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self.adUIWebView.hidden=YES;
-    });
+    click_url=@"";
+    [self hideAd];
     return;
   }
   
-  __block NSString *jsString  = [NSString stringWithFormat:@"eplAD4M('%@');"
-                                 , ad_size];
+  click_url = [mAdManager getClickUrl:data];
   
-  dispatch_async(dispatch_get_main_queue(), ^{
-    self.adUIWebView.hidden=NO;
-    [self.adUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-    jsString=nil;
-    [self.view bringSubviewToFront:self.adUIWebView];
-    
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    __block NSData * image_data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:[mAdManager getImageUrl:data]]];
+    if ( image_data == nil )
+    {
+      [self hideAd];
+      return;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.adUIImageView setImage:[UIImage imageWithData: image_data]];
+      self.adUIImageView.hidden=NO;
+    });
   });
+  
   
 }
 /*

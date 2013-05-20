@@ -28,6 +28,7 @@
 		78845AFA17342B3100FDF750 /* 8_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF817342B3100FDF750 /* 8_cartelera.xsl */; };
 		78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
 		78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
+		788517AF174A550200CF7DCF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788517AE174A550200CF7DCF /* AdManager.m */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
 		7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */; };
 		7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */; };
@@ -557,6 +558,8 @@
 		78845AF817342B3100FDF750 /* 8_cartelera.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 8_cartelera.xsl; sourceTree = "<group>"; };
 		78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_global.xsl; sourceTree = "<group>"; };
 		78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_tablet_clasificados.xsl; sourceTree = "<group>"; };
+		788517AD174A550200CF7DCF /* AdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdManager.h; sourceTree = "<group>"; };
+		788517AE174A550200CF7DCF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 7_tablet_farmacias.xsl; sourceTree = "<group>"; };
@@ -1623,6 +1626,8 @@
 				CE5D11A8163E38D0002E34F5 /* NewsManager.m */,
 				785463EF16B1DA8C008F027F /* TapDetectingWindow.h */,
 				785463F016B1DA8C008F027F /* TapDetectingWindow.m */,
+				788517AD174A550200CF7DCF /* AdManager.h */,
+				788517AE174A550200CF7DCF /* AdManager.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2203,6 +2208,7 @@
 				CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */,
 				78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */,
 				CE7F071A1731C14700661632 /* ad.js in Sources */,
+				788517AF174A550200CF7DCF /* AdManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

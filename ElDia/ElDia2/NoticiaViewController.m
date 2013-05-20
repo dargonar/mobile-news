@@ -85,8 +85,6 @@
   
 }
 
-
-
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
@@ -129,8 +127,6 @@
 }
 
 - (void)playVideo:(NSURL *)_url{
-  
-  
   [self onLoading:YES];
   // Deshabilitamos el cache.
   
@@ -172,7 +168,6 @@
         [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
         [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
         [mp setWantsFullScreenLayout:YES];
-        //[self presentModalViewController:mp animated:NO];
         [self presentViewController:mp animated:NO completion:nil];
         
         [mp.moviePlayer prepareToPlay];
@@ -197,10 +192,9 @@
   MPMoviePlayerViewController* mpviewController = nil;
   
   mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:cleaned_url]];
-  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
+  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
   mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
 
-  //[self presentModalViewController:mpviewController animated:YES];
   [self presentViewController:mpviewController animated:YES completion:nil];
   
   [[mpviewController moviePlayer] prepareToPlay];
@@ -767,6 +761,7 @@ BOOL is_loading = YES;
 }
 
 BOOL isLandscapeView = NO;
+BOOL justLoaded = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   [self positionate];
@@ -783,7 +778,7 @@ BOOL isLandscapeView = NO;
   {
     [self positionateLandscape];
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && isLandscapeView)
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView || justLoaded))
   {
     [self positionatePortrait];
   }
@@ -800,6 +795,7 @@ BOOL isLandscapeView = NO;
   NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
           , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"
           , isLandscapeView?@"Landscape":@"Portrait");
+  justLoaded=NO;
 }
 -(void)positionateLandscape{
 
@@ -811,19 +807,31 @@ BOOL isLandscapeView = NO;
     NSInteger  height=self.view.frame.size.height;
     // x y width height
   
-    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
+    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight]);
     //[self.mainUIWebView reload];
   
     self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
     //[[self menu_webview] setScalesPageToFit:YES];
   
-    self.optionsBottomMenu.frame = CGRectMake(width/2, height-self.optionsBottomMenu.frame.size.height, width/2, optionsBottomMenu.frame.size.height);
+    self.optionsBottomMenu.frame = CGRectMake(width/2,
+                                              height-self.optionsBottomMenu.frame.size.height-[self adHeight],
+                                              width/2,
+                                              optionsBottomMenu.frame.size.height);
   
-    self.pageControl.frame = CGRectMake(width/2, height-self.pageControl.frame.size.height, width/2, pageControl.frame.size.height);
+    self.pageControl.frame = CGRectMake(width/2
+                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , width/2
+                                        , pageControl.frame.size.height);
   
-    self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+    self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , pageIndicator.frame.size.height);
   
-    self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2), height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
+    self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2)
+                                              , height/2
+                                              , self.loading_indicator.frame.size.width
+                                              , loading_indicator.frame.size.height);
   
   }
   //[self reLoadNoticia];
@@ -838,17 +846,26 @@ BOOL isLandscapeView = NO;
     NSInteger  width=self.view.frame.size.width;
     NSInteger  height=self.view.frame.size.height;
     // x y width height
-    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246);
+    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246-[self adHeight]);
     //[self.mainUIWebView reload];
   
     //[[self menu_webview] setScalesPageToFit:NO];
     self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
-    self.optionsBottomMenu.frame = CGRectMake(0, height-self.optionsBottomMenu.frame.size.height, width, optionsBottomMenu.frame.size.height);
+    self.optionsBottomMenu.frame = CGRectMake(0
+                                              , height-self.optionsBottomMenu.frame.size.height-[self adHeight]
+                                              , width
+                                              , optionsBottomMenu.frame.size.height);
   
-    self.pageControl.frame = CGRectMake(0, height-self.pageControl.frame.size.height, width, pageControl.frame.size.height);
+    self.pageControl.frame = CGRectMake(0
+                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , width
+                                        , pageControl.frame.size.height);
   
-    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2), height-self.pageIndicator.frame.size.height-8, self.pageIndicator.frame.size.width, pageIndicator.frame.size.height);
+    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , pageIndicator.frame.size.height);
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
     //[self reLoadNoticia];

@@ -9,22 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "ScreenManager.h"
 #import "MobiImage.h"
-
+#import "AdManager.h"
 
 #import "GAITrackedViewController.h"
 
 #define MAIN_VIEW_TAG    0x6969
 
-@interface BaseMobiViewController : GAITrackedViewController{ //UIViewController{
+@interface BaseMobiViewController : GAITrackedViewController{ 
   ScreenManager   *mScreenManager;
+  AdManager *mAdManager;
 }
 
 @property (nonatomic, retain) ScreenManager *mScreenManager;
+@property (nonatomic, retain) AdManager *mAdManager;
 @property (nonatomic, retain) NSString* currentUrl;
 @property (nonatomic, retain) UIWebView* primaryUIWebView;
 @property (nonatomic, retain) UIWebView* secondaryUIWebView;
 
-@property (nonatomic, retain)  IBOutlet UIWebView *adUIWebView;
+@property (nonatomic, retain)  IBOutlet UIImageView *adUIImageView;
 
 -(void)configureToast;
 -(BOOL)isOld:(NSDate*)date;
@@ -37,4 +39,6 @@
 -(void)positionateAdNoticiaScreen:(UIDeviceOrientation) deviceOrientation;
 -(void)positionateAdOtherScreen:(UIDeviceOrientation) deviceOrientation;
 -(void)hideAd;
+-(BOOL)adStatus;
+-(NSInteger)adHeight;
 @end

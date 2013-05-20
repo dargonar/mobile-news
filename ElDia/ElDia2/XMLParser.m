@@ -16,6 +16,34 @@
 @implementation XMLParser
 
 
+-(NSDictionary* )getAdImageAndUrl:(NSData**)xml_data error:(NSError **)error{
+  
+  if (xml_data == nil || *xml_data == nil) {
+    return [ErrorBuilder  build:error desc:@"invalid xml to parse" code:ERR_INVALID_XML];
+  }
+  
+  //rss/channel/item/media:thumbnail@url
+  
+  GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:*xml_data options:0 error:error];
+  if (doc == nil)
+    return nil;
+  
+  NSArray *images = [doc nodesForXPath:@"//EplanningAds/Space/Ad/AdURL" error:nil];
+  if (images == nil || [images count]<=0)
+    return nil;
+  NSString *ad_url = [self firstElementAsString:images];
+  
+  NSArray *urls = [doc nodesForXPath:@"//EplanningAds/Space/Ad/ClickThroughURL" error:nil];
+  NSString *click_url = @"";
+  if (urls != nil && [urls count]>0)
+    click_url = [self firstElementAsString:urls];
+  
+  return [[NSDictionary alloc] initWithObjectsAndKeys:
+            ad_url, @"ad_url",
+            click_url, @"click_url",
+            nil];
+}
+
 // Parseo el xml en busca de imagenes, las retorno en un array y modifico el path de la imagen.
 -(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError **)error prefix:(NSString*)prefix{
   

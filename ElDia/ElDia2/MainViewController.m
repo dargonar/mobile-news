@@ -63,10 +63,11 @@ NSLock *menuLock;
     [[self menu_webview] setScalesPageToFit:NO];
     [self menu_webview].multipleTouchEnabled = NO;
   }
-  if([app_delegate isLandscape])
+  
+  /*if([app_delegate isLandscape])
   {
     [self positionateLandscape];
-  }
+  }*/
   
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
@@ -324,7 +325,8 @@ NSInteger soto = 0;
   return UIInterfaceOrientationPortrait ;
 }
 
-BOOL isShowingLandscapeView = NO;
+BOOL isLandscapeView_ = NO;
+BOOL isLoading_ = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   
@@ -343,7 +345,7 @@ BOOL isShowingLandscapeView = NO;
   viewportWidth = @"320";
   viewportInitScale = @"1.0";
   viewportMaxScale = @"1.0";
-  if(isShowingLandscapeView==YES){
+  if(isLandscapeView_==YES){
     //viewportWidth = @"480";
     viewportInitScale = @"1.5";
     viewportMaxScale = @"1.5";
@@ -366,25 +368,24 @@ BOOL isShowingLandscapeView = NO;
   [self positionateAdMainScreen:deviceOrientation];
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
-      !isShowingLandscapeView)
+      !isLandscapeView_)
   {
     [self positionateLandscape];
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) &&
-           isShowingLandscapeView)
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView_ || isLoading_))
   {
     [self positionatePortrait];
   }
   
   [self rotateHTML:self.mainUIWebView];
   [self reLoadIndex];
-  
+  isLoading_=NO;
 
 }
 
 -(void)positionateLandscape{
   
-  isShowingLandscapeView = YES;
+  isLandscapeView_ = YES;
   
   if ([app_delegate isiPad]) {
     //NSInteger  width=self.view.frame.size.width;
@@ -392,7 +393,7 @@ BOOL isShowingLandscapeView = NO;
     // x y width height
 
     //self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
-    self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44);
+    self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44-[self adHeight]);
     
     
     self.btnOptions.hidden=YES;
@@ -419,13 +420,13 @@ bool menuLoaded = NO;
 
 
 -(void)positionatePortrait{
-  isShowingLandscapeView = NO;
+  isLandscapeView_ = NO;
   
   if ([app_delegate isiPad]) {
     NSInteger  width=self.view.frame.size.width;
     NSInteger  height=self.view.frame.size.height;
     // x y width height
-    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44);
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
     [self.mainUIWebView reload];
   
     self.menu_webview.hidden = YES;

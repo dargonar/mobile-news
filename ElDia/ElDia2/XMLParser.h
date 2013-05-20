@@ -12,4 +12,5 @@
 
 -(NSArray*)extractImagesAndRebuild:(NSData**)xml_data error:(NSError **)error prefix:(NSString*)prefix;
 -(NSArray*)extractNewsUrls:(NSData*)xml_data error:(NSError **)error;
+-(NSDictionary* )getAdImageAndUrl:(NSData**)xml_data error:(NSError **)error;
 @end
