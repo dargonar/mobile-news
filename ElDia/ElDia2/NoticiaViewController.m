@@ -800,18 +800,15 @@ BOOL justLoaded = YES;
 -(void)positionateLandscape{
 
   isLandscapeView = YES;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
   
   if([app_delegate isiPad])
   {
-    NSInteger  width=self.view.frame.size.width;
-    NSInteger  height=self.view.frame.size.height;
-    // x y width height
-  
     self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight]);
-    //[self.mainUIWebView reload];
   
     self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
-    //[[self menu_webview] setScalesPageToFit:YES];
   
     self.optionsBottomMenu.frame = CGRectMake(width/2,
                                               height-self.optionsBottomMenu.frame.size.height-[self adHeight],
@@ -834,6 +831,23 @@ BOOL justLoaded = YES;
                                               , loading_indicator.frame.size.height);
   
   }
+  else{
+    self.optionsBottomMenu.frame = CGRectMake(0,
+                                              height-self.optionsBottomMenu.frame.size.height-[self adHeight],
+                                              width,
+                                              optionsBottomMenu.frame.size.height);
+    
+    self.pageControl.frame = CGRectMake(0
+                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , 0
+                                        , pageControl.frame.size.height);
+    
+    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , pageIndicator.frame.size.height);
+    
+  }
   //[self reLoadNoticia];
   //[mainUIWebView reload];
 }
@@ -841,37 +855,33 @@ BOOL justLoaded = YES;
 -(void)positionatePortrait{
   
   isLandscapeView = NO;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
   if([app_delegate isiPad])
   {
-    NSInteger  width=self.view.frame.size.width;
-    NSInteger  height=self.view.frame.size.height;
-    // x y width height
     self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246-[self adHeight]);
-    //[self.mainUIWebView reload];
-  
-    //[[self menu_webview] setScalesPageToFit:NO];
     self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
-    self.optionsBottomMenu.frame = CGRectMake(0
+    self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
+  }
+
+  self.optionsBottomMenu.frame = CGRectMake(0
                                               , height-self.optionsBottomMenu.frame.size.height-[self adHeight]
                                               , width
                                               , optionsBottomMenu.frame.size.height);
-  
-    self.pageControl.frame = CGRectMake(0
+    
+  self.pageControl.frame = CGRectMake(0
                                         , height-self.pageControl.frame.size.height-[self adHeight]
                                         , width
                                         , pageControl.frame.size.height);
-  
-    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
+    
+  self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
                                           , height-self.pageIndicator.frame.size.height-8-[self adHeight]
                                           , self.pageIndicator.frame.size.width
                                           , pageIndicator.frame.size.height);
-  
-    self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
-    //[self reLoadNoticia];
+    
 
-  }
-  //[mainUIWebView reload];
 }
 
 
