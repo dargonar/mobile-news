@@ -832,6 +832,7 @@ BOOL justLoaded = YES;
   
   }
   else{
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
     self.optionsBottomMenu.frame = CGRectMake(0,
                                               height-self.optionsBottomMenu.frame.size.height-[self adHeight],
                                               width,
@@ -865,7 +866,10 @@ BOOL justLoaded = YES;
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
   }
-
+  else
+  {
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+  }
   self.optionsBottomMenu.frame = CGRectMake(0
                                               , height-self.optionsBottomMenu.frame.size.height-[self adHeight]
                                               , width

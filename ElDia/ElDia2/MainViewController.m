@@ -88,19 +88,6 @@ NSLock *menuLock;
 -(void)reLoadIndex{
   NSString*uri=[self currentUrl];
   [self loadUrl:uri useCache:YES];
-  
-  /*
-  if([self.mScreenManager sectionExists:uri])
-  {
-    NSError *err;
-    NSData*lastData = [self.mScreenManager getSection:uri useCache:YES error:&err];
-    [self setHTML:lastData url:uri webView:self.mainUIWebView];
-  }
-  else
-  {
-    [self loadUrl:uri useCache:YES];
-  }
-   */
 }
 
 -(void)loadMenu:(BOOL)useCache{
@@ -367,18 +354,25 @@ BOOL isLoading_ = YES;
   
   [self positionateAdMainScreen:deviceOrientation];
   
+  BOOL hasRotated = NO;
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
       !isLandscapeView_)
   {
     [self positionateLandscape];
+    hasRotated = YES;
   }
   else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView_ || isLoading_))
   {
     [self positionatePortrait];
+    hasRotated = YES;
   }
   
   [self rotateHTML:self.mainUIWebView];
-  [self reLoadIndex];
+  
+  //HACK Testing
+  if(hasRotated == YES)
+    [self reLoadIndex];
+
   isLoading_=NO;
 
 }
@@ -386,20 +380,17 @@ BOOL isLoading_ = YES;
 -(void)positionateLandscape{
   
   isLandscapeView_ = YES;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
   
   if ([app_delegate isiPad]) {
-    //NSInteger  width=self.view.frame.size.width;
-    NSInteger  height=self.view.frame.size.height;
     // x y width height
 
-    //self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44);
     self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44-[self adHeight]);
-    
     
     self.btnOptions.hidden=YES;
     self.btnOptions.enabled=NO;
     
-    //self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
     self.menu_webview.frame=CGRectMake(0, 44, 256, height-44);
     self.menu_webview.hidden = NO;
     [self.menu_webview reload];
@@ -410,9 +401,10 @@ BOOL isLoading_ = YES;
     }
   }
   else{
-    
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
+  // HACK testing
   [self.mainUIWebView reload];
 }
 
@@ -421,23 +413,21 @@ bool menuLoaded = NO;
 
 -(void)positionatePortrait{
   isLandscapeView_ = NO;
-  
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
   if ([app_delegate isiPad]) {
-    NSInteger  width=self.view.frame.size.width;
-    NSInteger  height=self.view.frame.size.height;
     // x y width height
     self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
-    [self.mainUIWebView reload];
-  
     self.menu_webview.hidden = YES;
   
     self.btnOptions.hidden=NO;
     self.btnOptions.enabled=YES;
   }
   else{
-    
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
+  // HACK testing
   [self.mainUIWebView reload];
 
 }
