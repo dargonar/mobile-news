@@ -550,8 +550,8 @@ div.main_img_container {
 ul.portrait_news_list{height: 210px;width:auto; min-width:960px;display:inline-block;}
 ul.portrait_news_list li {float:left;}
 
-.landscape .menu ul li a .info p {font-size: 1.3em;line-height: 1.1em;}
-.landscape .menu ul li a .subheader p {font-size: 1.1em;line-height: 1.1em;}
+.landscape .menu ul li a .info p {font-size: 1.3em !important;line-height: 1.1em !important;}
+.landscape .menu ul li a .subheader p {font-size: 1.1em !important;line-height: 1.1em !important;}
 
 ul.portrait_news_list .info p {font-size: 1.3em;line-height: 1.1em;}
 ul.portrait_news_list .subheader p {font-size: 1.1em;line-height: 1.1em;}
