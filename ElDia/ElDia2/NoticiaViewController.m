@@ -88,6 +88,8 @@
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
+  if([app_delegate isiPad])
+    textFontSize = 1.5;
   NSString *_textFontSize = [ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE];
   if(_textFontSize!=nil)
   {
