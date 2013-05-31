@@ -347,6 +347,7 @@ UIActionSheet* actionSheet;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
       __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
+      NSLog(@"%@", self->currentSection);
       dispatch_async(dispatch_get_main_queue(), ^{
         if(data==nil)
         {
@@ -799,6 +800,8 @@ BOOL justLoaded = YES;
           , isLandscapeView?@"Landscape":@"Portrait");
   justLoaded=NO;
 }
+
+int pageControlHeigth = 36;
 -(void)positionateLandscape{
 
   isLandscapeView = YES;
@@ -808,7 +811,7 @@ BOOL justLoaded = YES;
   
   if([app_delegate isiPad])
   {
-    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight]);
+    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight] - pageControlHeigth);
   
     self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
   
@@ -818,9 +821,9 @@ BOOL justLoaded = YES;
                                               optionsBottomMenu.frame.size.height);
   
     self.pageControl.frame = CGRectMake(width/2
-                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , height-pageControlHeigth-[self adHeight]
                                         , width/2
-                                        , pageControl.frame.size.height);
+                                        , pageControlHeigth);
   
     self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2)
                                           , height-self.pageIndicator.frame.size.height-8-[self adHeight]
@@ -841,14 +844,14 @@ BOOL justLoaded = YES;
                                               optionsBottomMenu.frame.size.height);
     
     self.pageControl.frame = CGRectMake(0
-                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , height-36-[self adHeight]
                                         , 0
-                                        , pageControl.frame.size.height);
+                                        , 0); // pageControlHeigth);
     
     self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
                                           , height-self.pageIndicator.frame.size.height-8-[self adHeight]
                                           , self.pageIndicator.frame.size.width
-                                          , pageIndicator.frame.size.height);
+                                          , 0); //  pageIndicator.frame.size.height);
     
   }
   //[self reLoadNoticia];
@@ -863,7 +866,7 @@ BOOL justLoaded = YES;
   // x y width height
   if([app_delegate isiPad])
   {
-    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246-[self adHeight]);
+    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246-[self adHeight]-pageControlHeigth);
     self.menu_webview.frame=CGRectMake(0, 44, width, 246);
   
     self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
@@ -880,7 +883,7 @@ BOOL justLoaded = YES;
   self.pageControl.frame = CGRectMake(0
                                         , height-self.pageControl.frame.size.height-[self adHeight]
                                         , width
-                                        , pageControl.frame.size.height);
+                                        , pageControlHeigth);
     
   self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
                                           , height-self.pageIndicator.frame.size.height-8-[self adHeight]

@@ -105,7 +105,7 @@
   
   <xsl:template name="aviso_clasificado">
     <xsl:param name="Node" />
-    <div class="aviso">
+    <div class="aviso clasi">
       <!-- label class="fecha">
        <xsl:call-template name="FormatDate">
        <xsl:with-param name="DateTime" select="$Node/pubDate"/>

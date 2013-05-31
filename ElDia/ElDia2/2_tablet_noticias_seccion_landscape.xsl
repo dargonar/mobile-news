@@ -25,7 +25,7 @@
         <div id="landscape">
           <div class="seccion list"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
           <div class="menu">
-              <ul>
+              <ul class="landscape_news_list">
                 <xsl:call-template name="tablet_news_list_landscape">
                   <xsl:with-param name="Nodes" select="rss/channel/item"/>
                 </xsl:call-template>

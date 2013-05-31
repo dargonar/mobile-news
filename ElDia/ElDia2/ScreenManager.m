@@ -189,7 +189,7 @@ BOOL isIpad=NO;
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   
   NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
+  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -427,7 +427,7 @@ BOOL isIpad=NO;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
   }
   
-  if( [url hasPrefix:@"section_menu://"] ) {
+  if( [url hasPrefix:@"menu_section://"] ) {
     NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
     

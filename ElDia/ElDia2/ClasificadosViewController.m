@@ -59,7 +59,44 @@ BOOL mViewDidLoad=NO;
 
 }
 
+-(void)positionate{
+  
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  
+  [self positionateAdNoticiaScreen:deviceOrientation];
+
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  
+  
+  if (UIDeviceOrientationIsLandscape(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      // x y width height
+      self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44-[self adHeight]);
+    }
+    else{
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    }
+
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      // x y width height
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+          }
+    else{
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    }
+
+  }
+  
+}
+
+
 -(void) rotateHTML{
+  [self positionate];
   if([app_delegate isiPad])
     return;
   return;
@@ -119,6 +156,7 @@ BOOL mViewDidLoad=NO;
 }
 
 /* **** */
+
 
 
 -(void)changeFontSize:(NSInteger)delta{

@@ -79,7 +79,7 @@
           <xsl:value-of disable-output-escaping="yes" select="normalize-space(./category)" />
         </div>
       </xsl:if>
-      <div class="aviso">
+      <div class="aviso fune">
         <p><xsl:value-of disable-output-escaping="yes" select="$Node/description" /></p>
       </div>
     </xsl:if>

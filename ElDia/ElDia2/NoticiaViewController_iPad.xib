@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -165,18 +165,27 @@
 					</object>
 					<object class="IBUIPageControl" id="927127762">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">1293</int>
+						<int key="NSvFlags">1325</int>
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 968}, {768, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1064691172"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="523454203"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">2</int>
 						<int key="IBUINumberOfPages">3</int>
+						<object class="NSColor" key="IBUIPageIndicatorTintColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuNDc0NTA5ODAzOSAwLjc4ODIzNTI5NDEgMC41MgA</bytes>
+						</object>
+						<object class="NSColor" key="IBUICurrentPageIndicatorTintColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuNDc0NTA5ODAzOSAwLjc4ODIzNTI5NDEAA</bytes>
+						</object>
 					</object>
 					<object class="IBUILabel" id="1064691172">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -184,6 +193,7 @@
 						<string key="NSFrame">{{349, 975}, {70, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -725,10 +735,29 @@
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">BaseMobiViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">GAITrackedViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">adUIImageView</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">adUIImageView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">adUIImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BaseMobiViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GAITrackedViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GAITrackedViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -833,7 +862,7 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1552" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
@@ -846,6 +875,6 @@
 			<string key="offline.png">{36, 36}</string>
 			<string key="share.png">{32, 32}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

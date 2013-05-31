@@ -27,7 +27,6 @@ NSString * const OTHER_SCREEN         = @"OTHER_SCREEN";
 @synthesize mAdManager;
 
 BOOL mIsIpad=NO;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

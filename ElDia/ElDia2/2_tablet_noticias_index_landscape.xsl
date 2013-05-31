@@ -26,7 +26,7 @@
         <div id="landscape">
           <div class="seccion list">Principal</div>
           <div class="menu">
-              <ul>
+            <ul class="landscape_news_list">
                 <xsl:call-template name="tablet_news_list_landscape">
                   <xsl:with-param name="Nodes" select="rss/channel/item"/>
                 </xsl:call-template>
