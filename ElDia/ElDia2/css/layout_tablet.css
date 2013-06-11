@@ -429,6 +429,20 @@ MENU PRINCIPAL
 	border-bottom:#252525 solid 1px;
 }
 
+#menu ul.invisible{
+  display:none;
+}
+
+#menu li a.no_style {
+	display:block;
+	font-size:18px;
+	color:#fff;
+	text-decoration:none;
+	padding:0;
+	border:none;
+
+}
+
 /*
 #menu li a:hover {
 	text-decoration:none;
@@ -678,3 +692,24 @@ CLASIFICADOS
   min-width:600px; 
   max-width:900px; overflow-x:hidden;}
 
+
+/* --- */
+
+#menu li a.vip2 , #clasificados .columna li a.vip2{
+  color: /*black*/#333;
+  border-top: #C3C3C3 solid 1px;
+  border-bottom: #EAEAEA solid 1px;
+  background-color: /*#E0E0E0*/#EFEFEF;
+}
+#clasificados .columna li a.vip2.first{
+  border-top:none;
+}
+
+#menu li a.vip2:active , #clasificados .columna li a.vip2:active{
+	background-color:#C3C3C3;
+	text-decoration:none;
+}
+#menu .vip2_close , #clasificados .columna .vip2_close{
+	border-top:#C3C3C3 solid 1px;
+	border-bottom:none;
+}  
