@@ -519,7 +519,8 @@ div.main_img_container {
   margin-top:8px;
   height:30px;
 }
-.media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
+
+.media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria , .media_link .ico_plus {
   width:50px; /*width:30px;*/
 	background-color:#0066cc;
   height:30px;
@@ -542,6 +543,11 @@ div.main_img_container {
 .media_link .ico_galeria {
   /*background-image:url(../img/../img/ico_galeria.png);*/
   background-image:url(../img/ico_galeria.png);
+}
+
+.media_link .ico_plus {
+	/*background-image:url(../img/../img/ico_audio.png);*/
+	background-image:url(../img/ico_plus.png);
 }
 
 #index.portrait_news_list_container {

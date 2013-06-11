@@ -431,7 +431,7 @@ height:270px;width:480px;
   margin-top:8px;
   height:30px;
 }
-.media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria {
+.media_link .ico_video, .media_link .ico_audio, .media_link .ico_galeria , .media_link .ico_plus {
   width:50px; /*width:30px;*/
 	background-color:#0066cc;
   height:30px;
@@ -444,6 +444,11 @@ height:270px;width:480px;
 .media_link .ico_video {
   /*background-image:url(../img/../img/ico_video.png);*/
   background-image:url(../img/ico_video.png);
+}
+
+.media_link .ico_plus {
+	/*background-image:url(../img/../img/ico_audio.png);*/
+	background-image:url(../img/ico_plus.png);
 }
 
 .media_link .ico_audio {
