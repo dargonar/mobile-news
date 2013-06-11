@@ -15,7 +15,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout_tablet.css" / -->
-        <meta name="viewport" content="width=600;user-scalable=no;" />
+        <!-- meta name="viewport" content="width=600;user-scalable=no;" / -->
+        <meta name="viewport" content="width=device-width; minimum-scale=0.5; maximum-scale=1.0; user-scalable=no;" />
         <title>NOTICIAS DE SECCION</title>
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
@@ -24,7 +25,7 @@
         <div id="landscape">
           <div class="seccion list"><xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/category" /></div>
           <div class="menu">
-              <ul>
+              <ul class="landscape_news_list">
                 <xsl:call-template name="tablet_news_list_landscape">
                   <xsl:with-param name="Nodes" select="rss/channel/item"/>
                 </xsl:call-template>

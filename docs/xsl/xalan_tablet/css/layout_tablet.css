@@ -5,10 +5,8 @@ body {
 	margin:0 !important;
 	padding:0 !important;
 	color:#333;
-	/* font-size:12px; */
 	font-size:14px;
 	font-family:Arial, Helvetica, sans-serif;
-  /*width:960px !important;*/
   
   -webkit-touch-callout: none;
   -moz-user-select: -moz-none;
@@ -28,15 +26,7 @@ div.padded, #index.padded{
 #index.padded{min-height:1100px !important;} /* 1100 */
 #index.padded_landscape{min-height:1400px !important;}
 
-/*#index.top_padded{padding-top:30px !important;}*/
-
 .top_padded{padding-top:30px !important;}
-
-/*
-p { font-size:12px; line-height:18px; margin:0 0 10px 0;}
-h1 { font-size:30px; line-height:32px; margin:0 0 10px 0;}
-h2 { font-size:24px; line-height:26px; margin:0 0 10px 0;}
-*/
 
 p { font-size:1em; line-height:1.5em; margin:0 0 10px 0;}
 h1 { font-size:2.5em; line-height:1.1em; margin:0 0 10px 0;}
@@ -47,10 +37,7 @@ h2 { font-size:2em; line-height:1.1em; margin:0 0 10px 0;}
 .subtitulo { font-weight:bold; font-size:1.5em; line-height:1.5em;}
 .contenido{ font-weight:normal; font-size:1.5em; line-height:1.5em;}
 .separador { clear:both; height:20px;}
-/*.separador { clear:both; height:1.667em;}*/
-
 .video { background-image:url(../img/ico_video.png); width:18px; height:18px; display:block;}
-
 
 /********************************************
 INDEX
@@ -63,6 +50,9 @@ INDEX
   overflow-x:hidden;
 }
 
+.global #index {
+	width:auto !important;
+}
 #index a{text-decoration:none;color:inherit;}
 
 /* NOTA PRINCIPAL */
@@ -244,10 +234,12 @@ body.menu{
 	padding-top:1px;
 }
 
+/*
 #index .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #index .menu li a:active {
 	text-decoration:none;
@@ -347,10 +339,12 @@ body.landscape.padded{
   height: 215px;
 }
 
+/*
 #landscape .menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #landscape .menu li a:active {
 	text-decoration:none;
@@ -378,6 +372,8 @@ body.landscape.padded{
 	width:180px;
 	height:120px;
 	margin:10px;
+  background-size: cover;
+  background-position: center;
   position:relative;
 }
 
@@ -390,6 +386,8 @@ body.landscape.padded{
   line-height:1.2em;
   margin: 0;
 }
+
+
 
 #landscape .menu .subheader, #index .menu .subheader{
   padding:5px 10px 5px 10px;
@@ -408,6 +406,7 @@ MENU PRINCIPAL
   width:256px; 
   /*width:100%;*/
   overflow-x:hidden;
+  height:auto;
 }
 
 #menu ul {
@@ -430,10 +429,26 @@ MENU PRINCIPAL
 	border-bottom:#252525 solid 1px;
 }
 
+#menu ul.invisible{
+  display:none;
+}
+
+#menu li a.no_style {
+	display:block;
+	font-size:18px;
+	color:#fff;
+	text-decoration:none;
+	padding:0;
+	border:none;
+
+}
+
+/*
 #menu li a:hover {
 	text-decoration:none;
 	background-color:#0066cc;
 }
+*/
 
 #menu li a:active {
 	text-decoration:none;
@@ -549,6 +564,13 @@ div.main_img_container {
 ul.portrait_news_list{height: 210px;width:auto; min-width:960px;display:inline-block;}
 ul.portrait_news_list li {float:left;}
 
+ul.landscape_news_list li .info p {font-size: 1.7em !important;line-height: 1.1em !important;}
+ul.landscape_news_list li .subheader p {font-size: 1.3em !important;line-height: 1.1em !important;}
+
+ul.portrait_news_list .info p {font-size: 1.3em;line-height: 1.1em;}
+ul.portrait_news_list .subheader p {font-size: 1.2em !important;line-height: 1.1em;}
+
+
 /* cartel actualizado */
 .updated{
   text-shadow: 0px 1px 0px #999999;height:auto;font-size:0.8em;
@@ -566,6 +588,7 @@ CLASIFICADOS
 ********************************************/
 #clasificados {
 	width:960px;
+   min-height: 768px;
 }
 
 #clasificados .fecha { color:#0066cc;}
@@ -579,12 +602,24 @@ CLASIFICADOS
 	float:left;
 	padding:10px 8px 10px 10px;
 	border-right:#ccc solid 1px;
+   min-height: 768px; 
 }
 
+#clasificados .columna.big {
+    width:100%;
+    min-width:960sdpx;
+}
 #clasificados .columna .aviso {
 	border-bottom:#ccc solid 1px;
 	margin:10px;
+  font-size:1.05em;
 }
+
+#clasificados .columna #farmacia_list.aviso.two_columns {
+  font-size:1.5em;
+}
+
+#clasificados .columna .aviso.clasi p, #clasificados .columna .aviso.fune p{ font-size:1.5em;}
 
 #clasificados .columna .encabezado {
 	border-bottom:#ccc solid 1px;
@@ -593,8 +628,8 @@ CLASIFICADOS
 
 #clasificados .columna .encabezado .titulo {
 	color:#0066cc;
-	font-size:18px;
-	line-height:18px;
+	font-size:1.3em;
+	line-height:1.3em;
 }
 
 #clasificados .columna .encabezado .rubro {
@@ -617,8 +652,8 @@ CLASIFICADOS
 	background-color:#333;
 	color:#fff;
 	float:left;
-	font-size:18px;
-	margin-top:-8px;
+	font-size:1.3em;
+/*	margin-top:-8px;*/
 }
 
 #clasificados .columna .encabezado .calendario:hover {
@@ -657,3 +692,24 @@ CLASIFICADOS
   min-width:600px; 
   max-width:900px; overflow-x:hidden;}
 
+
+/* --- */
+
+#menu li a.vip2 , #clasificados .columna li a.vip2{
+  color: /*black*/#333;
+  border-top: #C3C3C3 solid 1px;
+  border-bottom: #EAEAEA solid 1px;
+  background-color: /*#E0E0E0*/#EFEFEF;
+}
+#clasificados .columna li a.vip2.first{
+  border-top:none;
+}
+
+#menu li a.vip2:active , #clasificados .columna li a.vip2:active{
+	background-color:#C3C3C3;
+	text-decoration:none;
+}
+#menu .vip2_close , #clasificados .columna .vip2_close{
+	border-top:#C3C3C3 solid 1px;
+	border-bottom:none;
+}  

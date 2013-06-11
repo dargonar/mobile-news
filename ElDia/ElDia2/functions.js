@@ -14,6 +14,19 @@ function removeClass(el, name)
   }
 }
 
+function toggle(el_id, el_class){
+  var el = document.getElementById(el_id);
+  if(el==null)
+    return false;
+  if (!hasClass(el, el_class))
+  {
+    addClass(el, el_class);
+    return false;
+  }
+  removeClass(el, el_class);
+  return false;
+}
+
 function indexToLandscape(){
   var el = document.getElementById('index');
   removeClass(el, 'padded');
