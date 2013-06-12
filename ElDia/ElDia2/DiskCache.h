@@ -26,4 +26,6 @@
 
 -(NSString*) getFolder;
 -(NSURL*)    getFolderUrl;
+
+-(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix;
 @end

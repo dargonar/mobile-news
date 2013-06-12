@@ -70,7 +70,7 @@ BOOL isIpad=NO;
 
 
 +(BOOL)isMainScreenPrefix:(NSString*)prefix{
-  if([prefix isEqualToString:@"a"] || [prefix isEqualToString:@"a"])
+  if([prefix isEqualToString:@"a"] || [prefix isEqualToString:@"s"])
     return YES;
   return NO;
 }

@@ -315,7 +315,6 @@
         
         // start on first image
         [self gotoImageByIndex:_currentIndex animated:NO];
-        
         // layout
         [self layoutViews];
     }
@@ -768,8 +767,14 @@
 // creates all the image views for this gallery
 - (void)buildViews
 {
-	NSUInteger i, count = [_photoSource numberOfPhotosForPhotoGallery:self];
-	for (i = 0; i < count; i++) {
+  NSUInteger i, count = [_photoSource numberOfPhotosForPhotoGallery:self];
+	if (count==1)
+  {
+    [self setUseThumbnailView:NO];
+    _toolbar.hidden = YES;
+    [self setHideTitle:YES]; // META HACK
+  }
+  for (i = 0; i < count; i++) {
 		FGalleryPhotoView *photoView = [[FGalleryPhotoView alloc] initWithFrame:CGRectZero];
 		photoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		photoView.autoresizesSubviews = YES;

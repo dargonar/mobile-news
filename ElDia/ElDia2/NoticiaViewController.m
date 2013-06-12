@@ -35,7 +35,9 @@
   if (self) {
     networkGallery = nil;
     self->currentSection=nil;
-        
+    self.primaryUIWebView= self.mainUIWebView;
+    self.secondaryUIWebView= self.menu_webview;
+
   }
   return self;
 }
@@ -44,8 +46,6 @@
 {
   [super viewDidLoad];
   
-  self.primaryUIWebView= self.mainUIWebView;
-  self.secondaryUIWebView= self.menu_webview;
   
   mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
   mWindow.viewToObserve = mainUIWebView;
@@ -80,7 +80,7 @@
   networkCaptions = nil;
   networkImages = nil;
   networkGallery = nil;
-  
+  self.bottomUIView.hidden = YES;
   [self positionate];
   
 }
@@ -347,7 +347,7 @@ UIActionSheet* actionSheet;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
       __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
-      NSLog(@"%@", self->currentSection);
+      //NSLog(@"%@", self->currentSection);
       dispatch_async(dispatch_get_main_queue(), ^{
         if(data==nil)
         {
@@ -459,6 +459,12 @@ UIActionSheet* actionSheet;
 */
 - (void)singleTapWebView {
   
+  NSLog(@" -- singleTapWebView");
+  //if ((self.isViewLoaded && self.view.window)==NO) {
+  //  self.bottomUIView.hidden = YES;
+  //  return;
+  //}
+  
   if([self.bottomUIView isHidden]==NO)
     [UIView animateWithDuration:.5
                    animations: ^ {
@@ -522,7 +528,7 @@ UIActionSheet* actionSheet;
   
   
   NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
+  //NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
   
 
 }
@@ -547,6 +553,7 @@ UIActionSheet* actionSheet;
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType{
   
+  NSLog(@" -- webView::shouldStartLoadWithRequest");
   NSURL* url = [request URL];
   
   //validar URL
@@ -592,6 +599,8 @@ UIActionSheet* actionSheet;
   return YES;
 }
 
+FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeNetwork;
+
 -(void) loadPhotoGallery:(NSURL *)url{
   
   if(networkGallery!=nil)
@@ -623,10 +632,12 @@ UIActionSheet* actionSheet;
     //NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
     return;
   }
+  
   //NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
+   
     NSString *escapedURL = [Utils cleanUrl:((NSString *)object)];
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path
@@ -637,6 +648,21 @@ UIActionSheet* actionSheet;
       //  - a host (like stackoverflow.com)
       [_array addObject:escapedURL];
     }
+    else
+    {
+      //candidateURL = [NSURL URLWithString:((NSString *)object)]; //No toma "file://" sino como "file//". No sirve.
+      escapedURL = ((NSString *)object);
+      
+      //NSLog(@" candidateURL : %@", ((NSString *)object));
+
+      if([escapedURL hasPrefix:@"file//"])
+      {
+        mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeLocal;
+        escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file//" withString:@""] prefix:@"i" ];
+        [_array addObject:escapedURL];
+      }
+      
+    }
     candidateURL=nil;
     escapedURL=nil;
   }
@@ -646,7 +672,7 @@ UIActionSheet* actionSheet;
   
   networkGallery = [[FGalleryViewController alloc] initWithPhotoSource:self];
   networkGallery.tagID = self.noticia_id;
-  
+
   [app_delegate.navigationController  pushViewController:networkGallery animated:YES];
   app_delegate.navigationController.navigationBar.hidden=NO;
   
@@ -673,7 +699,8 @@ UIActionSheet* actionSheet;
 
 - (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
 {
-  return FGalleryPhotoSourceTypeNetwork;
+  //return FGalleryPhotoSourceTypeNetwork;
+  return mFGalleryPhotoSourceType;
 }
 
 - (NSString*)photoGallery:(FGalleryViewController *)gallery captionForPhotoAtIndex:(NSUInteger)index
@@ -691,6 +718,11 @@ UIActionSheet* actionSheet;
   //if(index< 0)
   //  return [networkImages objectAtIndex:([networkImages count]-1)];
   
+  return [networkImages objectAtIndex:index];
+}
+
+- (NSString*)photoGallery:(FGalleryViewController*)gallery filePathForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index{
+  //NSLog(@" --- filePathForPhotoSize %@", [networkImages objectAtIndex:index]);
   return [networkImages objectAtIndex:index];
 }
 

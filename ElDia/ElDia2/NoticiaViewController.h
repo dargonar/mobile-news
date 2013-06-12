@@ -13,6 +13,7 @@
 #import "BaseMobiViewController.h"
 #import "YoutubeViewController.h"
 #import "TapDetectingWindow.h"
+#import "DiskCache.h"
 
 
 

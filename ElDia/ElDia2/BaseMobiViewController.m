@@ -38,8 +38,8 @@ BOOL mIsIpad=NO;
       
       self.mScreenManager = [[ScreenManager alloc] init];
       mAdManager = [[AdManager alloc] init];
-      self.primaryUIWebView=nil;
-      self.secondaryUIWebView=nil;
+      //self.primaryUIWebView=nil;
+      //self.secondaryUIWebView=nil;
       self.adUIImageView = nil;
     }
   
@@ -299,6 +299,7 @@ NSString* click_url =@"";
   if(self.currentUrl != url)
     return;
   BOOL do_update_main_webview = [ScreenManager isMainScreenPrefix:[mobi_image prefix]];
+  NSLog(@" downloaded image prefix [%@]", [mobi_image prefix]);
   UIWebView* _UIWebView = nil;
   if(do_update_main_webview)
     _UIWebView=self.primaryUIWebView;

@@ -38,6 +38,7 @@
 		788A1DAE169DF0E7007DCDD3 /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
 		788A3F4B16B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */; };
 		788A3F4C16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */; };
+		788A74F8176823E50084B60F /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
 		788AC01416F8E86300FDACF6 /* 6_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC01316F8E86300FDACF6 /* 6_funebres.xsl */; };
 		788AC03716F8E86B00FDACF6 /* 6_tablet_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */; };
 		78D656FB165ACD210063B8FF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D656FA165ACD210063B8FF /* Default.png */; };
@@ -570,6 +571,7 @@
 		788A1DAD169DF0E7007DCDD3 /* functions.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = functions.xsl; sourceTree = "<group>"; };
 		788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_landscape.xsl; sourceTree = "<group>"; };
 		788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_portrait.xsl; sourceTree = "<group>"; };
+		788A74F7176823E50084B60F /* ico_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus.png; sourceTree = "<group>"; };
 		788AC01316F8E86300FDACF6 /* 6_funebres.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 6_funebres.xsl; sourceTree = "<group>"; };
 		788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 6_tablet_funebres.xsl; sourceTree = "<group>"; };
 		78D656FA165ACD210063B8FF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1332,6 +1334,7 @@
 				CE83716416128D9800FC8269 /* ico_gallery_blue.png */,
 				CE83716516128D9800FC8269 /* ico_gallery_blue2.png */,
 				CE83716616128D9800FC8269 /* ico_gallery_white.png */,
+				788A74F7176823E50084B60F /* ico_plus.png */,
 				CE83716716128D9800FC8269 /* ico_video.png */,
 				CE83716816128D9800FC8269 /* ico_video_black.png */,
 				CE83716916128D9800FC8269 /* ico_video_blue.png */,
@@ -2093,6 +2096,7 @@
 				78845AFA17342B3100FDF750 /* 8_cartelera.xsl in Resources */,
 				7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */,
 				7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */,
+				788A74F8176823E50084B60F /* ico_plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

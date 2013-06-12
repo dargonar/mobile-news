@@ -363,7 +363,10 @@
         </xsl:if>
         
         <xsl:if test="not($Node/media:group/media:content) and not(not($Node/media:thumbnail))">
-          <a href="galeria://{$Node/media:thumbnail/@url}" title="galeria" class="ico_plus"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+          <!-- xsl:variable name="tmp">
+            <xsl:value-of select="file://"/>
+          </xsl:variable -->
+          <a href="galeria://file://{$Node/media:thumbnail/@url}" title="galeria" class="ico_plus"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
         
         <xsl:if test="$Node/media:content[@type='video']">
