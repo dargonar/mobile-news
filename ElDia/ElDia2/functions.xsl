@@ -362,8 +362,8 @@
           <a href="galeria://{$gallery}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if>
         
-        <!--xsl:if test="$Node/media:thumbnail">
-          <a href="galeria://{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url};{$Node/media:thumbnail/@url}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
+        <xsl:if test="!$Node/media:group/media:content and $Node/media:thumbnail">
+          <a href="galeria://{$Node/media:thumbnail/@url}" title="galeria" class="ico_plus"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
         </xsl:if-->
         
         <xsl:if test="$Node/media:content[@type='video']">
