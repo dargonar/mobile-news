@@ -15,6 +15,10 @@
 #import "NewsManager.h"
 #import "XMLParser.h"
 
+#import "RegexKitLite.h"
+#import "GTMNSString+HTML.h"
+#import "NSString+HTML.h"
+
 @implementation MainViewController
 @synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, welcome_indicator;
 @synthesize mainUIWebView, menu_webview;
@@ -275,11 +279,32 @@ NSLock *menuLock;
   [menuLock unlock];
 }
 
+-(void)testCMLValidation{
+  NSString *cleanedXML = @"";
+  
+  NSString *xml = @"<b>BTAG</b>HODOR<span><spen style=\"esssta;\"><spin class=\"esssta;\">OSSSTORG</spon>";
+  
+  NSLog(@" -(1)- original: [%@]", xml);
+  
+  NSString *htmlAttributesRegex = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
+  
+  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
+  
+  NSLog(@" -(2)- regex: [%@]", cleanedXML);
+  
+  cleanedXML = [cleanedXML stringByDecodingHTMLEntities];
+  
+  NSLog(@" -(3)- decoded: [%@]", cleanedXML);
+  
+}
+
 NSInteger soto = 0;
 - (IBAction) btnRefreshClick: (id)param{
-
+  //BEGIN QUITAR META TEST HACK
+  // [self testXMLValidation];
+  //END QUITAR META TEST HACK
+  
   [self onRefreshing:YES];
-  //ToDo
   NSString* url = [self.currentUrl copy];
   [self loadUrl:url useCache:NO reloadMenu:YES];
 }

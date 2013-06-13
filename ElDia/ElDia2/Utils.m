@@ -68,7 +68,7 @@
   //NSCharacterSet *invalidChars = [NSCharacterSet characterSetWithCharactersInString:invalidCharsString];
   //cleanedXML =[cleanedXML stringByTrimmingCharactersInSet:invalidChars];
 
-  cleanedXML = [Utils validXMLString:cleanedXML ];
+  cleanedXML = [Utils validXMLCharacterSet:cleanedXML ];
   
   if(unescaping_html_entities)
   {
@@ -79,7 +79,7 @@
   NSString *undecodedAmpersandRegex = @"&(?![a-zA-Z0-9#]+;)" ; //@"/&(?![a-z#]+;)/i";
   //Limpiamos otras mierdas
   //cleanedXML = [cleanedXML stringByReplacingOccurrencesOfString:@" & " withString:@" &amp;"];
-  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
+  cleanedXML = [cleanedXML stringByReplacingOccurrencesOfRegex:undecodedAmpersandRegex withString:@"&amp;"];
   
   htmlAttributesRegex = nil;
   undecodedAmpersandRegex = nil;
@@ -90,7 +90,7 @@
   return [cleanedXML dataUsingEncoding:NSUTF8StringEncoding] ;
 }
 
-+ (NSString *)validXMLString:(NSString*)xml
++ (NSString *)validXMLCharacterSet:(NSString*)xml
 {
     static NSCharacterSet *invalidXMLCharacterSet = nil;
   
