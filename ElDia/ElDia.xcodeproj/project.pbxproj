@@ -750,7 +750,6 @@
 		CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
 		CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
-		CE7FE476172E9F1300A3CFD7 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
 		CE83715A16128D9800FC8269 /* layout.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = layout.css; sourceTree = "<group>"; };
 		CE83715C16128D9800FC8269 /* ajax_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ajax_loader.gif; sourceTree = "<group>"; };
 		CE83715D16128D9800FC8269 /* ico_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio.png; sourceTree = "<group>"; };
@@ -1302,7 +1301,6 @@
 				CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */,
 				CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */,
 				CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */,
-				CE7FE476172E9F1300A3CFD7 /* libGoogleAnalytics_debug.a */,
 			);
 			path = GoogleAnalyticsLib;
 			sourceTree = "<group>";
@@ -2401,7 +2399,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2410,7 +2409,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A53BD757-6EC9-453E-9472-3C5CEC69590C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A53BD757-6EC9-453E-9472-3C5CEC69590C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2530,7 +2530,7 @@
 				788AAF491756638100780534 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = AdHoc;
+			defaultConfigurationName = Release;
 		};
 		CE8E72A315EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDia" */ = {
 			isa = XCConfigurationList;
@@ -2540,7 +2540,7 @@
 				788AAF4A1756638100780534 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = AdHoc;
+			defaultConfigurationName = Release;
 		};
 		CE8E72A615EBEDB9007E6F09 /* Build configuration list for PBXNativeTarget "ElDiaTests" */ = {
 			isa = XCConfigurationList;
@@ -2550,7 +2550,7 @@
 				788AAF4B1756638100780534 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = AdHoc;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
