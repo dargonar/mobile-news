@@ -2310,7 +2310,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
 					"\"$(SRCROOT)/frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2424,7 +2423,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
 					"\"$(SRCROOT)/frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2458,7 +2456,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/libs/Socialize.embeddedframework\"",
 					"\"$(SRCROOT)/frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
