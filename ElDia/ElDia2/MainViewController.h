@@ -58,21 +58,7 @@
 // ~/Library/Application Support/iPhone Simulator/
 // ~/Library/Developer/Xcode/DerivedData
 /*
-Agregamos nuevos servicios: 
-
-* Farmacias de turno, 
-* Cartelera de cine, 
-* Avisos Fúnebres.
-
-Hicimos más fácil la navegación de las noticias: una vez abierta una noticia, podés navegar el resto con el dedo, sin necesidad de volver al listado.
-
-Además solucionamos algunos errores y la hicimos un poco mas rápida.
-
-Y ahora también podés leernos en tu iPad!
-
-Todo para que tengas una experiencia más linda al leer El Dia!
- 
-
+http://www.cocoawithlove.com/2009/01/multiple-virtual-pages-in-uiscrollview.html
 */
 
 

@@ -108,6 +108,17 @@ int cache_size = 2; //30;
   NSString* cssFolder = [cache_folder stringByAppendingPathComponent:@"css"];
   NSString* imgFolder = [cache_folder stringByAppendingPathComponent:@"img"];
   NSString* jsFolder  = [cache_folder stringByAppendingPathComponent:@"js"];
+  //NSString* versionFile = [jsFolder stringByAppendingPathComponent:@"version_1_3_10.txt"];
+  
+  NSString *linkDestination = [fileManager destinationOfSymbolicLinkAtPath:jsFolder error:NULL];
+  // Si existe la carpeta y no existe el archivo, aniquilo los links.
+  if(![fileManager fileExistsAtPath:jsFolder] || ![fileManager fileExistsAtPath:linkDestination])
+  {
+    NSError *error;
+    [fileManager removeItemAtPath:imgFolder error:&err];
+    [fileManager removeItemAtPath:cssFolder error:&err];
+    [fileManager removeItemAtPath:jsFolder error:&err];
+  }
   
   if (![fileManager fileExistsAtPath:cssFolder]) {
     [fileManager createSymbolicLinkAtPath:cssFolder withDestinationPath:appFolder error:&err];
@@ -123,7 +134,7 @@ int cache_size = 2; //30;
     [fileManager createSymbolicLinkAtPath:jsFolder withDestinationPath:appFolder error:&err];
     NSLog(@"Error3: %@", err != nil ? [err description] : @"NIL");
   }
-
+  
   [[NSNotificationCenter defaultCenter] addObserver:self 
                                            selector:@selector(onDownloadImages:) 
                                                name:@"com.diventi.mobipaper.download_images" 
