@@ -9,7 +9,7 @@
 #import "MobiImage.h"
 
 @implementation MobiImage
-@synthesize url, local_uri, noticia_id;
+@synthesize url, local_uri, noticia_id, prefix;
 
 - (id)init {
   

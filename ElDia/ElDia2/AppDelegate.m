@@ -27,7 +27,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize mainViewController, menuClasificadosViewController, menuViewController, clasificadosViewController;
+@synthesize mainViewController, menuClasificadosViewController, menuViewController, clasificadosViewController, farmaciaViewController, carteleraViewController;
 @synthesize navigationController;
 @synthesize download_queue;
 

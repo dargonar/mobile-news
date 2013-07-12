@@ -16,7 +16,7 @@
 
 @implementation MenuClasificadosViewController
 
-@synthesize mainUIWebView, loading_indicator;
+@synthesize mainUIWebView, loading_indicator, clasificadosViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
