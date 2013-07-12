@@ -315,7 +315,7 @@ NSString* click_url =@"";
   if(_UIWebView==nil)
     return;
   */
-  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@')"
+  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
                                  , mobi_image.local_uri];
   
   dispatch_async(dispatch_get_main_queue(), ^{
