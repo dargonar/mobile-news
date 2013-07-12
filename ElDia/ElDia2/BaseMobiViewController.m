@@ -298,23 +298,32 @@ NSString* click_url =@"";
   //NSLog(@"BaseMobiView::currentUrl [%@]", self.currentUrl);
   if(self.currentUrl != url)
     return;
-  BOOL do_update_main_webview = [ScreenManager isMainScreenPrefix:[mobi_image prefix]];
-  NSLog(@" downloaded image prefix [%@]", [mobi_image prefix]);
+  
+  /*
+   BOOL do_update_main_webview = [ScreenManager isMainScreenPrefix:[mobi_image prefix]];
+  NSLog(@" #onImageDownloaded image prefix [%@]", [mobi_image prefix]);
   UIWebView* _UIWebView = nil;
   if(do_update_main_webview)
+  {
     _UIWebView=self.primaryUIWebView;
+    NSLog(@" ##onImageDownloaded - primaryview:[%s]; ", self.primaryUIWebView==nil?"NIL":"NOT NIL");
+  }
   else
     _UIWebView=self.secondaryUIWebView;
 
-  NSLog(@"onImageDownloaded - WebView:[%s] prefix:[%@]", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
+  NSLog(@" #onImageDownloaded - primaryview:[%s]; WebView:[%s] prefix:[%@]", self.primaryUIWebView==nil?"NIL":"NOT NIL", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
   if(_UIWebView==nil)
     return;
-  
+  */
   __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@')"
                                  , mobi_image.local_uri];
   
   dispatch_async(dispatch_get_main_queue(), ^{
-    [_UIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    //[_UIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    if(self.primaryUIWebView!=nil)
+      [self.primaryUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+    if(self.secondaryUIWebView!=nil)
+      [self.secondaryUIWebView stringByEvaluatingJavaScriptFromString:jsString];
     jsString=nil;
   });
   

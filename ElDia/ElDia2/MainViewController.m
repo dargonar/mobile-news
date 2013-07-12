@@ -42,9 +42,6 @@ NSLock *menuLock;
       self.mainUIWebView.delegate=self;
       self.menu_webview.delegate=self;
   
-      self.primaryUIWebView= self.mainUIWebView;
-      self.secondaryUIWebView= self.menu_webview;
-      
     }
   
   return self;
@@ -54,6 +51,8 @@ NSLock *menuLock;
 {
   [super viewDidLoad];
   
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
   
   NSString *mainUrl = @"section://main";
   [self setCurrentUrl:mainUrl];

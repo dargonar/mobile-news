@@ -35,9 +35,7 @@
   if (self) {
     networkGallery = nil;
     self->currentSection=nil;
-    self.primaryUIWebView= self.mainUIWebView;
-    self.secondaryUIWebView= self.menu_webview;
-
+    
   }
   return self;
 }
@@ -46,7 +44,9 @@
 {
   [super viewDidLoad];
   
-  
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
+
   mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
   mWindow.viewToObserve = mainUIWebView;
   mWindow.controllerThatObserves = self;
