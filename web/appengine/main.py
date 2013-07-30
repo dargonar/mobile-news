@@ -32,7 +32,7 @@ config['mobipaper']['app_version']    = fullver[0:fullver.rfind('.')]
 
 # Instanciamos la aplicacion.
 app = webapp2.WSGIApplication(routes=get_rules(config), debug=debug, config=config)
-enable_jinja2_debugging()
+#enable_jinja2_debugging()
 
 def main():
     app.run()

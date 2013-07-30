@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import logging
 import urllib
+import urlparse
+
+from HTMLParser import HTMLParser
+from dateutil.parser import parser
+
 from re import *
 
 from google.appengine.ext import db
@@ -24,6 +29,44 @@ def do_slugify(value):
   value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
   value = unicode(_slugify_strip_re.sub('', value).strip().lower())
   return _slugify_hyphenate_re.sub('-', value)
+
+def format_datetime(value, format='medium'):
+    p = parser()
+    return p.parse(value, default=None, ignoretz=True).strftime('%H:%m')
+
+def if_not_none(value):
+  if not value:
+    return ''
+
+  return value
+
+def noticia_link(node):
+  return 'noticia://%s?url=%s&title=%s&header=%s' % (node.guid.value, url_fix(node.link), url_fix(node.title), url_fix(node.description))
+
+def url_fix(s, charset='utf-8'):
+    """Sometimes you get an URL by a user that just isn't a real
+    URL because it contains unsafe characters like ' ' and so on.  This
+    function can fix some of the problems in a similar way browsers
+    handle data entered by the user:
+
+    >>> url_fix(u'http://de.wikipedia.org/wiki/Elf (Begriffsklärung)')
+    'http://de.wikipedia.org/wiki/Elf%20%28Begriffskl%C3%A4rung%29'
+
+    :param charset: The target charset for the URL if the url was
+                    given as unicode string.
+    """
+
+    if s is None:
+      return ''
+
+    h = HTMLParser()
+    s = h.unescape(s)
+    if isinstance(s, unicode):
+        s = s.encode(charset, 'ignore')
+    scheme, netloc, path, qs, anchor = urlparse.urlsplit(s)
+    path = urllib.quote(path, '/%')
+    qs = urllib.quote_plus(qs, ':&=')
+    return urlparse.urlunsplit((scheme, netloc, path, qs, anchor))
   
 def get_or_404(key):
   try:
@@ -80,6 +123,11 @@ class Jinja2Mixin(object):
       env.globals['flash'] = flashes[0][0] if len(flashes) and len(flashes[0]) else None
     
     env.globals['session']     = self.session
+    
+    env.filters['urlencode']   = url_fix
+    env.filters['datetime']    = format_datetime
+    env.filters['noticia_link'] = noticia_link
+    env.filters['if_not_none'] = if_not_none
     
     pass
           

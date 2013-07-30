@@ -1,5 +1,5 @@
 application: testsdavento
-version: 1-0-3
+version: 1_0_4
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -37,6 +37,6 @@ handlers:
   
 libraries:
 - name: webapp2
-  version: "2.5.1"
+  version: "2.5.2"
 - name: jinja2
   version: "2.6"
