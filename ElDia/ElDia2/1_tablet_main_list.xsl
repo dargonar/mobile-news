@@ -15,38 +15,41 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/layout_tablet.css" />
         <title>LISTADO PRINCIPAL</title>
-        <meta name="viewport" content="width=device-width,user-scalable=no" />
+        <!--meta name="viewport" content="width=1020;user-scalable=NO;" / -->
+        <meta name="viewport" content="width=device-width; minimum-scale=0.5; maximum-scale=0.8; user-scalable=no;');" />
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
       
       <body onload="update_all_images()" class="portrait padded">
         <div id="updated_msg" class="updated hidden">Actualizado hace 1 segundo</div>
-        <div id="index" class="padded">
-          
           <xsl:if test="not(rss/channel/item[1]/media:thumbnail)" >
-            <xsl:call-template name="tablet_index_portrait_secondary">
-              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 0 and position() &lt; 3]"/>
-            </xsl:call-template>
-            
-            <xsl:call-template name="tablet_index_portrait_terciary">
-              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 2]"/>
-            </xsl:call-template>
+            <div id="index" class="padded_landscape top_padded">
+              <xsl:call-template name="tablet_index_portrait_secondary">
+                <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 0 and position() &lt; 3]"/>
+              </xsl:call-template>
+              
+              <xsl:call-template name="tablet_index_portrait_terciary">
+                <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 2]"/>
+              </xsl:call-template>
+            </div>
           </xsl:if>
           
           <xsl:if test="not(not(rss/channel/item[1]/media:thumbnail))" >
-            <xsl:call-template name="tablet_index_portrait_main">
-              <xsl:with-param name="Node" select="rss/channel/item[1]"/>
-            </xsl:call-template>
-            
-            <xsl:call-template name="tablet_index_portrait_secondary">
-              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 4]"/>
-            </xsl:call-template>
-            
-            <xsl:call-template name="tablet_index_portrait_terciary">
-              <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 3]"/>
-            </xsl:call-template>
+            <div id="index" class="padded_landscape">
+              <xsl:call-template name="tablet_index_portrait_main">
+                <xsl:with-param name="Node" select="rss/channel/item[1]"/>
+              </xsl:call-template>
+              
+              <xsl:call-template name="tablet_index_portrait_secondary">
+                <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 1 and position() &lt; 4]"/>
+              </xsl:call-template>
+              
+              <xsl:call-template name="tablet_index_portrait_terciary">
+                <xsl:with-param name="Nodes" select="rss/channel/item[position() &gt; 3]"/>
+              </xsl:call-template>
+            </div>
           </xsl:if>
-        </div>
+        
       </body>
     </html>
   </xsl:template>

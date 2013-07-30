@@ -22,11 +22,12 @@
 #import "MySHKConfigurator.h"
 #import "SHKConfiguration.h"
 #import "SHKFacebook.h"
+#import "GAI.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize mainViewController, menuClasificadosViewController, menuViewController, clasificadosViewController;
+@synthesize mainViewController, menuClasificadosViewController, menuViewController, clasificadosViewController, farmaciaViewController, carteleraViewController;
 @synthesize navigationController;
 @synthesize download_queue;
 
@@ -58,9 +59,23 @@ int cache_size = 2; //30;
   
 }
 
+-(void)initGAI{
+  // Optional: automatically send uncaught exceptions to Google Analytics.
+  [GAI sharedInstance].trackUncaughtExceptions = NO;
+  // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+  [GAI sharedInstance].dispatchInterval = 60;
+  // Optional: set debug to YES for extra debugging information.
+  [GAI sharedInstance].debug = NO;
+  // Create tracker instance.
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-39206160-1"];
+  // ELDIA UA-39206160-1
+  // TESTING UA-32663760-1
+}
+
 -(BOOL)isLandscape{
-  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
-  
+  //  UIDeviceOrientation   orientation = [UIDevice currentDevice].orientation;
+  UIDeviceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
   return UIDeviceOrientationIsLandscape(orientation);// ? @"Landscape" : @"Portrait";
 
 }
@@ -77,6 +92,7 @@ int cache_size = 2; //30;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [self initGAI];
   [BugSenseController sharedControllerWithBugSenseAPIKey:@"c80eb89d"];
 
   NSString* rootFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -92,6 +108,17 @@ int cache_size = 2; //30;
   NSString* cssFolder = [cache_folder stringByAppendingPathComponent:@"css"];
   NSString* imgFolder = [cache_folder stringByAppendingPathComponent:@"img"];
   NSString* jsFolder  = [cache_folder stringByAppendingPathComponent:@"js"];
+  //NSString* versionFile = [jsFolder stringByAppendingPathComponent:@"version_1_3_10.txt"];
+  
+  NSString *linkDestination = [fileManager destinationOfSymbolicLinkAtPath:jsFolder error:NULL];
+  // Si existe la carpeta y no existe el archivo, aniquilo los links.
+  if(![fileManager fileExistsAtPath:jsFolder] || ![fileManager fileExistsAtPath:linkDestination])
+  {
+    NSError *error;
+    [fileManager removeItemAtPath:imgFolder error:&err];
+    [fileManager removeItemAtPath:cssFolder error:&err];
+    [fileManager removeItemAtPath:jsFolder error:&err];
+  }
   
   if (![fileManager fileExistsAtPath:cssFolder]) {
     [fileManager createSymbolicLinkAtPath:cssFolder withDestinationPath:appFolder error:&err];
@@ -107,7 +134,7 @@ int cache_size = 2; //30;
     [fileManager createSymbolicLinkAtPath:jsFolder withDestinationPath:appFolder error:&err];
     NSLog(@"Error3: %@", err != nil ? [err description] : @"NIL");
   }
-
+  
   [[NSNotificationCenter defaultCenter] addObserver:self 
                                            selector:@selector(onDownloadImages:) 
                                                name:@"com.diventi.mobipaper.download_images" 
@@ -134,21 +161,20 @@ int cache_size = 2; //30;
   self.menuClasificadosViewController = [[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
   self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
 
+  self.farmaciaViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+  self.carteleraViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+
+  
   navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
   self.navigationController.navigationBar.hidden = YES;
-  //[navigationController pushViewController:self.mainViewController animated:NO];
-  //[self.mainViewController release];
-  //  self.mainViewController = navigationController;
-  [self.window addSubview:self.navigationController.view];
+  
+  //[self.window addSubview:self.navigationController.view];
+  [self.window setRootViewController:self.navigationController];
   [self.window makeKeyAndVisible];//HACKED
   
   
   DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
   [SHKConfiguration sharedInstanceWithConfigurator:configurator];
-  
-  //HACK SACAR ANTES DE RELEASE
-  //[NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-  //id sharedServer = [NSClassFromString(@"WebView") performSelector:@selector(sharedWebInspectorServer)];
   
   [self checkCacheSize];
   return YES;
@@ -182,13 +208,32 @@ int cache_size = 2; //30;
   [self.menuViewController loadUrl:useCache];
 }
 
+-(void)loadService:(NSURL*)url{
+  [self loadSectionNews:url];
+}
 -(void)loadSectionNews:(NSURL*)url{
   self.mainViewController.currentUrl = [url absoluteString];
   [self.mainViewController loadUrlAndLoading:self.mainViewController.currentUrl useCache:YES];
 }
 
--(void)loadClasificadosMenu:(NSURL*)url{
-  //[self.menuClasificadosViewController loadClasificados];
+-(void)loadClasificados:(NSURL*)url{
+  [self.clasificadosViewController loadClasificados:url];
+}
+
+-(void)loadFunebres:(NSURL*)url{
+  [self.clasificadosViewController loadFunebres:url];
+}
+
+-(void)showClasificados{
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+}
+
+-(void)loadFarmacia:(NSURL*)url{
+  [self.farmaciaViewController loadFarmacia:url];
+}
+
+-(void)loadCartelera:(NSURL*)url{
+  [self.carteleraViewController loadCartelera:url];
 }
 
 -(void)showSideMenu
@@ -209,14 +254,31 @@ int cache_size = 2; //30;
   [navigationController pushViewController:self.menuViewController animated:NO ];
 }
 
--(void)hideSideMenu3{
+-(void)hideSideMenuPushCartelera{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.carteleraViewController animated:YES ];
+}
+
+-(void)hideSideMenuPushFarmacia{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.farmaciaViewController animated:YES ];
+}
+
+-(void)hideSideMenuPushFunebres{
   [navigationController popToViewController:mainViewController animated:NO];
   [navigationController pushViewController:self.clasificadosViewController animated:YES ];
 }
--(void)hideSideMenu2{
+
+-(void)hideSideMenuPushClasificados{
+  [navigationController popToViewController:mainViewController animated:NO];
+  [navigationController pushViewController:self.clasificadosViewController animated:YES ];
+}
+
+-(void)hideSideMenuPushMenuClasificados{
   [navigationController popToViewController:mainViewController animated:NO];
   [navigationController pushViewController:self.menuClasificadosViewController animated:YES ];
 }
+
 -(void)hideSideMenu
 {
   // all animation takes place elsewhere. When this gets called just swap the contentViewController in

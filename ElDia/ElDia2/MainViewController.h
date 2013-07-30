@@ -26,11 +26,15 @@
   NSString* current_url;
 }
 
+@property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
+
 @property (nonatomic, retain)  IBOutlet UIWebView *mainUIWebView;
+@property (nonatomic, retain)  IBOutlet UIWebView *menu_webview;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnOptions;
 @property (nonatomic, retain) IBOutlet UIButton *btnRefreshClick;
-@property (nonatomic, retain) NoticiaViewController *myNoticiaViewController;
+@property (nonatomic, retain) IBOutlet UIImageView *header;
+@property (nonatomic, retain) IBOutlet UIImageView *logo;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
@@ -51,8 +55,11 @@
 
 -(void)loadUrlAndLoading:(NSString*)url useCache:(BOOL)useCache;
 
-//~/Library/Application Support/iPhone Simulator/
-
+// ~/Library/Application Support/iPhone Simulator/
+// ~/Library/Developer/Xcode/DerivedData
+/*
+http://www.cocoawithlove.com/2009/01/multiple-virtual-pages-in-uiscrollview.html
+*/
 
 
   

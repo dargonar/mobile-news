@@ -1,3 +1,19 @@
+  768x90 el primero sin caché, el segundo con:
+http://ads.e-planning.net/eb/4/88a3/889762e18e482ea0?o=f&rnd=$RANDOM&th=6b666a3291cf192c&ma=1
+http://ads.e-planning.net/eb/4/88a3/889762e18e482ea0?o=f&rnd=$RANDOM&th=6b666a3291cf192c&ma=1&fc=1
+ 
+  468x60 el primero sin caché, el segundo con:
+http://ads.e-planning.net/eb/4/88a3/ac9674bc2892e561?o=f&rnd=$RANDOM&th=f0f8f5c29dd7a5a7&ma=1
+http://ads.e-planning.net/eb/4/88a3/ac9674bc2892e561?o=f&rnd=$RANDOM&th=f0f8f5c29dd7a5a7&ma=1&fc=1
+ 
+  320x50 el primero sin caché, el segundo con:
+http://ads.e-planning.net/eb/4/88a3/cf1589bbf69edd4b?o=f&rnd=$RANDOM&th=c74668cd981c555c&ma=1
+http://ads.e-planning.net/eb/4/88a3/cf1589bbf69edd4b?o=f&rnd=$RANDOM&th=c74668cd981c555c&ma=1&fc=1
+ 
+ &nru=1&ip&1.1.1.1&ua=&
+
+
+-----------------------
 Primero "arrastra" el archivo .mobileprovision a Applications (iTunes de tu iPad) y luego instala el .ipa.
 Fijate como hacen acá: http://www.innerfence.com/howto/install-iphone-application-ad-hoc-distribution
 

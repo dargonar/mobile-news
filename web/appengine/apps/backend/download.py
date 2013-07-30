@@ -18,6 +18,7 @@ from webapp2 import RequestHandler
 from models  import Category, Article, cats as feeds, DiarioIVC, Kato, ArticlesGallery
 
 from utils import do_slugify
+from utils import FrontendHandler, get_or_404
 
 class ElDia(RequestHandler):
   def download(self, **kwargs):
@@ -136,15 +137,22 @@ class ElDia(RequestHandler):
     tmp = parsedate(str)
     return datetime(tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5])
 
+
 # =======================================================
 # =======================================================
-class IVC(RequestHandler):
+class IVCViewer(FrontendHandler):
+  def list(self, **kwargs):
+    self.request.charset = 'utf-8'
+    diarios = DiarioIVC.all()
+    return self.render_response('backend/_ivc_diarios.html', diarios=diarios, **kwargs)
+			
+class IVC(RequestHandler):			
   def download(self, **kwargs):
     items = [
             {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=1&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'diarios_pagos'},
-            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=2&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'diarios_gratis'},
-            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=3&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_pagos'},
-            {'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=4&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_gratis'}
+            #{'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=2&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'diarios_gratis'},
+            #{'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=3&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_pagos'},
+            #{'url':u'http://www.ivc.org.ar/consulta?op=f&empresa_id=&tipo_medio_id=4&provincia_id=&medio_edicion_id=&x=38&y=2', 'category':'revistas_gratis'}
           ]
     for item in items:
       taskqueue.add(url='/download/ivc/feed', params={'feed':item['url'], 'category':item['category']})
@@ -220,7 +228,7 @@ class IVC(RequestHandler):
       
       index=0    
       for tipo_promedio in tipos_promedio:
-        setattr(medio, do_slugify(tipo_promedio.text).replace('-', '_'), float(datillos[index]));
+        setattr(medio, do_slugify(tipo_promedio.text).replace('-', '_'), float(datillos[index].replace('.', '')));
         index+=1
     
     medio.put()

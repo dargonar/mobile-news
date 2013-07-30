@@ -1,3 +1,45 @@
+var metayi;
+var tmp_element;
+function hasClass(el, name) {
+  return new RegExp('(\\s|^)'+name+'(\\s|$)').test(el.className);
+}
+function addClass(el, name)
+{
+  if (!hasClass(el, name)) { el.className += (el.className ? ' ' : '') +name; }
+}
+function removeClass(el, name)
+{
+  if (hasClass(el, name)) {
+    el.className=el.className.replace(new RegExp('(\\s|^)'+name+'(\\s|$)'),' ').replace(/^\s+|\s+$/g, '');
+  }
+}
+
+function toggle(el_id, el_class){
+  var el = document.getElementById(el_id);
+  if(el==null)
+    return false;
+  if (!hasClass(el, el_class))
+  {
+    addClass(el, el_class);
+    return false;
+  }
+  removeClass(el, el_class);
+  return false;
+}
+
+function indexToLandscape(){
+  var el = document.getElementById('index');
+  removeClass(el, 'padded');
+  addClass(el, 'padded_landscape');
+}
+
+
+function indexToLandscape(){
+  var el = document.getElementById('index');
+  removeClass(el, 'padded_landscape');
+  addClass(el, 'padded');
+}
+
 function update_image(img) {
   var el = document.getElementById(img);
   if(el==null)
@@ -10,6 +52,7 @@ function update_image(img) {
 }
 
 function update_all_images() {
+  refresh_background(document.getElementsByClassName('imagen'));
   refresh_background(document.getElementsByClassName('imagen_principal'));
   refresh_background(document.getElementsByClassName('imagen_secundaria'));
 }
@@ -25,18 +68,21 @@ function refresh_background(imgs) {
 
 function update_nota_abierta_image(img){
   var el = document.getElementById('img_'+img);
-  el.src = '';
-  el.src = 'url(i_' + img + ')';
+  //el.src = '';
+  //el.src = 'url(i_' + img + ')';
+  refresh_background([el]);
 }
 
 function update_imagen_nota_abierta(){
   var imgs = document.getElementsByClassName('imagenNotaAbierta');
-  for (var i = 0; i < imgs.length; ++i) {
+  refresh_background(imgs);
+  /*for (var i = 0; i < imgs.length; ++i) {
     var img = imgs[i];
     var url = img.src;
     img.src = '';
     img.src = url;
-  }
+    
+  }*/
 }
 
 var timeout_var=null;

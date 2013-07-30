@@ -16,11 +16,11 @@
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"My App Name";
+	return @"El Dia Movil";
 }
 
 - (NSString*)appURL {
-	return @"http://example.com";
+	return @"http://www.eldia.com.ar";
 }
 
 /*

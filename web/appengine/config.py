@@ -27,3 +27,13 @@ config['webapp2_extras.jinja2'] = {
 
 config['mobipaper'] = {
 }
+
+import mimetypes 
+#add webfonts mimetypes
+mimetypes.add_type("application/vnd.ms-fontobject", ".eot")
+mimetypes.add_type("application/x-font-ttf", ".ttc")
+mimetypes.add_type("application/x-font-ttf", ".ttf")
+mimetypes.add_type("font/opentype", ".otf")
+mimetypes.add_type("application/x-font-woff", ".woff")
+mimetypes.add_type("text/vnd.sun.j2me.app-descriptor", ".jad")
+mimetypes.add_type("application/vnd.rim.cod", ".cod")

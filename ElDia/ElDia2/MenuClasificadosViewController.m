@@ -16,7 +16,7 @@
 
 @implementation MenuClasificadosViewController
 
-@synthesize mainUIWebView, loading_indicator;
+@synthesize mainUIWebView, loading_indicator, clasificadosViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,13 +33,48 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+  [[self mainUIWebView] setScalesPageToFit:YES];
   
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu_clasificados" ofType:@"html"];
   NSData*htmlData=  [NSData dataWithContentsOfFile:filePath];
   [self setHTML:htmlData url:nil webView:self.mainUIWebView];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self hideAd];
+  [self rotateHTML];
+}
+
+
+-(void) rotateHTML{
+  if([app_delegate isiPad])
+    return;
+  return;
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if([app_delegate isLandscape]){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px';
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@;initial-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  [self.mainUIWebView reload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +87,37 @@
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
+// HACK: Estaba comentado
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+  return YES;
+}
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+  
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  [self rotateHTML];
+  //[mainUIWebView reload];
+}
+
 -(void) onLoading:(BOOL)started{
   self.loading_indicator.hidden = !started;
   if(started)
@@ -61,7 +127,11 @@
   
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+  if(![app_delegate isiPad])
+  {
+    [self rotateHTML];
+  }
   [self onLoading:NO];
 }
 

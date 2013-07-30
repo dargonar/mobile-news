@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" xmlns:media="http://search.yahoo.com/mrss/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link href="css/layout.css" type="text/css" rel="stylesheet">
+<title>Farmacias</title>
+<!-- style type="text/css">
+  .aviso{color:#ffffff !important; }
+  .aviso b{color:#000000;}
+  .aviso p{color:#000000;}
+</style -->
+</head>
+<body>
+<div id="clasificados">
+<div class="columna">
+<div class="encabezado">
+<!-- div class="titulo">Farmacias</div -->
+<div class="rubro">Farmacias de turno</div>
+<div class="clear"></div>
+<div class="titulo">&nbsp;</div>
+<div class="calendario">20</div>
+<div class="calendario">Mar</div>
+<div class="calendario">2013</div>
+<div class="clear"></div>
+</div>
+
+<!--div class="encabezado">
+<div class="titulo">Farmacias de turno</div>
+<p></p>
+<div class="clear"></div>
+</div-->
+<!--div class="rubro"></div -->
+<div class="aviso" id="farmacia_list">
+Desde las 8:30 de hoy:
+<b>LA PLATA</b>
+
+4 y 51
+7 e/61 y 62
+7 e/91 y 92
+8 y 42
+10 e/520 y 521
+21 y 68
+30 y 63
+32 e/11 y 12
+32 e/131 y 132
+38 y 20
+38 e/120 y 121
+44 e/14 y 15
+44 y 28
+49 e/138 y 139
+56 e/12 y 13
+57 e/25 y 26
+68 e/3 y 4
+122 y 76
+Dg.74 y 115
+
+<b>LOS HORNOS</b>
+
+66 y 157.
+
+<b>GONNET</b>
+
+489 e/25 y 26.
+
+<b>CITY BELL</b>
+
+11 e/17 y Sarmiento.
+
+<b>VILLA ELISA</b>
+
+Cno.Centenario y 36.
+
+<b>ENSENADA</b>
+
+La Merced 380.
+
+<b>BERISSO</b>
+
+8 Nº 3609 esq.158.
+Montevideo 2438 e/26 y 26 E. 
+
+
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+  //alert(document.getElementById('farmacia_list').innerHTML);
+  var texti = document.getElementById('farmacia_list').innerHTML.replace(/\r\n/g, "<br />");
+  texti = texti.replace(/\n/g, "<br />");
+  document.getElementById('farmacia_list').innerHTML = texti;
+  
+</script>
+</body>
+</html>

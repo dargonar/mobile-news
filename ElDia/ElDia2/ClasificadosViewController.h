@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseMobiViewController.h"
-#import "PSWebView.h"
 
 @interface ClasificadosViewController : BaseMobiViewController<UIWebViewDelegate>
 
-@property (nonatomic, retain) IBOutlet PSWebView *mainUIWebView;
+@property (nonatomic, retain) IBOutlet UIWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
 
@@ -22,5 +21,7 @@
 - (IBAction) btnFontSizeMinusClick: (id)param;
 
 - (void)loadClasificados:(NSURL *)url;
-
+-(void)loadFunebres:(NSURL *)url;
+-(void)loadFarmacia:(NSURL *)url;
+-(void)loadCartelera:(NSURL *)url;
 @end

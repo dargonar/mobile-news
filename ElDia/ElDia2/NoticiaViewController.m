@@ -22,17 +22,74 @@
 
 @implementation NoticiaViewController
 
-@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenuUIImageView;
+@synthesize mainUIWebView, menu_webview, bottomUIView, optionsBottomMenu;
 @synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
 @synthesize myYoutubeViewController, headerUIImageView, offline_view;
 @synthesize noticia_id, noticia_url, noticia_title, noticia_header;
-@synthesize pageControl, pageIndicator;
+@synthesize pageControl, pageIndicator, shareBtn;
 
-int MAIN_VIEW_TAG = 9669;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    networkGallery = nil;
+    self->currentSection=nil;
+    
+  }
+  return self;
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.primaryUIWebView= self.mainUIWebView;
+  self.secondaryUIWebView= self.menu_webview;
+
+  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
+  mWindow.viewToObserve = mainUIWebView;
+  mWindow.controllerThatObserves = self;
+  
+  self.mainUIWebView.delegate = self;
+  self.mainUIWebView.hidden = NO;
+  self.mainUIWebView.tag=MAIN_VIEW_TAG;
+  
+  [[self mainUIWebView] setScalesPageToFit:NO];
+  [[self menu_webview] setScalesPageToFit:NO];
+  
+  if ([app_delegate isiPad]) {
+    self.menu_webview.delegate = self;
+    self.menu_webview.hidden = NO;
+  }
+  else{
+    [self mainUIWebView].multipleTouchEnabled = NO;
+    //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+    
+  }
+  
+  // Do any additional setup after loading the view from its nib.
+  [self addGestureRecognizers];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+  
+  app_delegate.navigationController.navigationBar.hidden=YES;
+  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
+  networkCaptions = nil;
+  networkImages = nil;
+  networkGallery = nil;
+  self.bottomUIView.hidden = YES;
+  [self positionate];
+  
+}
 
 -(void)changeFontSize:(NSInteger)delta{
   
   CGFloat textFontSize = 1.0;
+  if([app_delegate isiPad])
+    textFontSize = 1.5;
   NSString *_textFontSize = [ConfigHelper getSettingValue:CFG_NOTICIA_FONTSIZE];
   if(_textFontSize!=nil)
   {
@@ -47,11 +104,6 @@ int MAIN_VIEW_TAG = 9669;
     if(delta>0) {
       textFontSize = (textFontSize < 2.6) ? textFontSize +0.05 : textFontSize;
       fontChanged=YES;
-    }
-    else
-    {
-      
-      NSLog(@"NoticiaViewController::changeFontSize delta=0 ");
     }
   
   NSMutableString *partial_jsString = [[NSMutableString alloc] initWithFormat:@"document.getElementById('informacion').style.fontSize= '%fem';", textFontSize];
@@ -77,8 +129,6 @@ int MAIN_VIEW_TAG = 9669;
 }
 
 - (void)playVideo:(NSURL *)_url{
-  
-  
   [self onLoading:YES];
   // Deshabilitamos el cache.
   
@@ -120,7 +170,6 @@ int MAIN_VIEW_TAG = 9669;
         [mp.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
         [mp.moviePlayer setScalingMode:MPMovieScalingModeAspectFill];
         [mp setWantsFullScreenLayout:YES];
-        //[self presentModalViewController:mp animated:NO];
         [self presentViewController:mp animated:NO completion:nil];
         
         [mp.moviePlayer prepareToPlay];
@@ -145,10 +194,9 @@ int MAIN_VIEW_TAG = 9669;
   MPMoviePlayerViewController* mpviewController = nil;
   
   mpviewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:cleaned_url]];
-  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;//MPMovieSourceTypeStreaming;
+  mpviewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
   mpviewController.moviePlayer.controlStyle =MPMovieControlStyleFullscreen;
 
-  //[self presentModalViewController:mpviewController animated:YES];
   [self presentViewController:mpviewController animated:YES completion:nil];
   
   [[mpviewController moviePlayer] prepareToPlay];
@@ -177,6 +225,7 @@ int MAIN_VIEW_TAG = 9669;
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
+UIActionSheet* actionSheet;
 - (IBAction) btnShareClick: (id)param{
   
   if(![Utils areWeConnectedToInternet])
@@ -185,32 +234,31 @@ int MAIN_VIEW_TAG = 9669;
     return;
   }
   
+  if (actionSheet) {
+    [actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+    actionSheet = nil;
+    return;
+  }
   
   //NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
   NSURL *url = [NSURL URLWithString:self.noticia_url];
   
-  NSLog(@" RAW title: %@", self.noticia_title );
   SHKItem *item = [SHKItem URL:url
                         title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title]
                         contentType:SHKURLContentTypeWebpage];
 
 	// Get the ShareKit action sheet
-	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-  
+	//SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+  actionSheet = [SHKActionSheet actionSheetForItem:item];
+
 	// Display the action sheet
-	[actionSheet showFromToolbar:self.navigationController.toolbar];
-
+	if([app_delegate isiPad])
+    [actionSheet showFromRect:shareBtn.frame inView:self.view animated:YES];
+  else
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+  
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      networkGallery = nil;
-      self->currentSection=nil;
-    }
-    return self;
-}
 
 -(void)loadBlank{
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
@@ -254,9 +302,6 @@ int MAIN_VIEW_TAG = 9669;
  
   NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
   
-  //NSLog(@" URL 1: %@", urlString);
-  //NSLog(@" URL 2: %@", [urlString gtm_stringByUnescapingFromHTML]);
-  
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
@@ -265,7 +310,24 @@ int MAIN_VIEW_TAG = 9669;
   
   NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
   
-  NSLog(@"URI: %@", uri);
+  // Para ver si podemos recibir imagen updated.
+  [self setCurrentUrl:uri];
+  
+  [self loadNoticia];
+  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
+    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+    return;
+  }
+  self->currentSection = section;
+  [self loadSectionNews];
+}
+
+-(void)reLoadNoticia{
+  [self loadNoticia];
+}
+
+-(void)loadNoticia{
+  NSString*uri=[self currentUrl];
   if([self.mScreenManager articleExists:uri])
   {
     NSError *err;
@@ -274,23 +336,18 @@ int MAIN_VIEW_TAG = 9669;
   }
   else
   {
-    [self loadUrl:uri useCache:NO];
+    [self loadUrl:uri useCache:YES];
   }
-  
-  if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
-    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
-    return;
-  }
-  
-  self->currentSection = section;
-  [self loadSectionNews];
 }
 
 -(void)loadSectionNews{
+  //HACK!
+  //return;
   if ([app_delegate isiPad]) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
       __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
+      //NSLog(@"%@", self->currentSection);
       dispatch_async(dispatch_get_main_queue(), ^{
         if(data==nil)
         {
@@ -384,42 +441,9 @@ int MAIN_VIEW_TAG = 9669;
   }
 }
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
-  mWindow.viewToObserve = mainUIWebView;
-  mWindow.controllerThatObserves = self;
-
-
-  self.mainUIWebView.delegate = self;
-  self.mainUIWebView.hidden = NO;
-  self.mainUIWebView.tag=MAIN_VIEW_TAG;
-  
-  if ([app_delegate isiPad]) {
-    self.menu_webview.delegate = self;
-    self.menu_webview.hidden = NO;
-    
-    [[self mainUIWebView] setScalesPageToFit:YES];
-  }
-  // Do any additional setup after loading the view from its nib.
-  [self addGestureRecognizers];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-  app_delegate.navigationController.navigationBar.hidden=YES;
-  [self.headerUIImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0)];
-  networkCaptions = nil;
-  networkImages = nil;
-  networkGallery = nil;
-  
-}
-  
 - (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
 {
-	NSLog(@"finished zooming");
+	//NSLog(@"finished zooming");
 }
 
 - (void)userDidTapWebView:(id)tapPoint{
@@ -434,7 +458,12 @@ int MAIN_VIEW_TAG = 9669;
 }
 */
 - (void)singleTapWebView {
-  //self.bottomUIView.hidden = !self.bottomUIView.hidden;
+  
+  NSLog(@" -- singleTapWebView");
+  //if ((self.isViewLoaded && self.view.window)==NO) {
+  //  self.bottomUIView.hidden = YES;
+  //  return;
+  //}
   
   if([self.bottomUIView isHidden]==NO)
     [UIView animateWithDuration:.5
@@ -459,43 +488,56 @@ int MAIN_VIEW_TAG = 9669;
 }
 
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
-  [self onLoading:NO];
-  [self changeFontSize:0];
+-(void) rotateHTML:(UIWebView*)webView{
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMinScale = @"";
+  NSString *viewportMaxScale = @"";
   
-  if (app_delegate.isiPad){
-  
-    if (webView.tag==MAIN_VIEW_TAG) {
-      
-      /*
-       CGFloat contentHeight = [[webView stringByEvaluatingJavaScriptFromString:
-       @"document.documentElement.scrollHeight"] floatValue];
-       webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y,
-       webView.frame.size.width, contentHeight);
-       */
-      
-      /*
-      CGSize contentSize = webView.scrollView.contentSize;
-      CGSize viewSize = self.mainUIWebView.bounds.size;
-      
-      float rw =viewSize.width / contentSize.width;
-      
-      webView.scrollView.minimumZoomScale = rw;
-      webView.scrollView.maximumZoomScale = rw;
-      webView.scrollView.zoomScale = rw;
-      */
-      
-      //[webView sizeThatFits:CGSizeZero];
-      
-      //[webView.scrollView sizeToFit];
-      //webView.scrollView.scrollEnabled = NO;
-       
-      
-    }
+  NSString *extra = @"";
+  if(![app_delegate isiPad])
+  {
+    viewportWidth = @"320";
+    viewportInitScale = @"1.0";
+    viewportMaxScale = @"1.0";
+    viewportMinScale = @"1.0";
     
-    if (webView.tag!=MAIN_VIEW_TAG) {
-      
+    extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)removeClass(tmp_element[0], 'imagen_iphone_landscape'); ";
+    if(isLandscapeView==YES){
+      viewportWidth = @"480";
+      viewportInitScale = @"1.0";
+      viewportMaxScale = @"1.0";
+      viewportMinScale = @"1.0";
+      extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)addClass(tmp_element[0], 'imagen_iphone_landscape'); ";
+
     }
+  }
+  else{
+    viewportWidth = @"1020";
+    viewportInitScale = @"0.7";
+    viewportMaxScale = @"1";
+    if(isLandscapeView==YES){
+      viewportInitScale = @"0.7";
+      viewportMaxScale = @"0.9";
+      viewportWidth = @"660";
+    }
+    viewportMinScale=viewportInitScale;
+  }
+ 
+  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; init-scale=%@; maximum-scale=%@; user-scalable=no;');%@",viewportWidth, viewportWidth, viewportMinScale,viewportInitScale, viewportMaxScale, extra  ];
+  
+  
+  NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  //NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
+  
+
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+  if (webView.tag==MAIN_VIEW_TAG) {
+    [self onLoading:NO];
+    [self rotateHTML:webView];
+    [self changeFontSize:0];
   }
 }
 
@@ -511,6 +553,7 @@ int MAIN_VIEW_TAG = 9669;
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType{
   
+  NSLog(@" -- webView::shouldStartLoadWithRequest");
   NSURL* url = [request URL];
   
   //validar URL
@@ -556,6 +599,8 @@ int MAIN_VIEW_TAG = 9669;
   return YES;
 }
 
+FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeNetwork;
+
 -(void) loadPhotoGallery:(NSURL *)url{
   
   if(networkGallery!=nil)
@@ -587,10 +632,12 @@ int MAIN_VIEW_TAG = 9669;
     //NSLog(@"loadPhotoGallery: [[_images_src count]<1] HAS NO PHOTO!");
     return;
   }
-   NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
+  
+  //NSLog(@" Cantidad de imagenes en _images_src: %d", [_images_src count]);
   NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:[_images_src count]];
   //for (int *i = 0; i < [_images_src count]; i++) {
   for (id object in _images_src) {
+   
     NSString *escapedURL = [Utils cleanUrl:((NSString *)object)];
     NSURL *candidateURL = [NSURL URLWithString:escapedURL];
     // WARNING > "test" is an URL according to RFCs, being just a path
@@ -601,6 +648,21 @@ int MAIN_VIEW_TAG = 9669;
       //  - a host (like stackoverflow.com)
       [_array addObject:escapedURL];
     }
+    else
+    {
+      //candidateURL = [NSURL URLWithString:((NSString *)object)]; //No toma "file://" sino como "file//". No sirve.
+      escapedURL = ((NSString *)object);
+      
+      //NSLog(@" candidateURL : %@", ((NSString *)object));
+
+      if([escapedURL hasPrefix:@"file//"])
+      {
+        mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeLocal;
+        escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file//" withString:@""] prefix:@"i" ];
+        [_array addObject:escapedURL];
+      }
+      
+    }
     candidateURL=nil;
     escapedURL=nil;
   }
@@ -610,7 +672,7 @@ int MAIN_VIEW_TAG = 9669;
   
   networkGallery = [[FGalleryViewController alloc] initWithPhotoSource:self];
   networkGallery.tagID = self.noticia_id;
-  
+
   [app_delegate.navigationController  pushViewController:networkGallery animated:YES];
   app_delegate.navigationController.navigationBar.hidden=NO;
   
@@ -637,7 +699,8 @@ int MAIN_VIEW_TAG = 9669;
 
 - (FGalleryPhotoSourceType)photoGallery:(FGalleryViewController *)gallery sourceTypeForPhotoAtIndex:(NSUInteger)index
 {
-  return FGalleryPhotoSourceTypeNetwork;
+  //return FGalleryPhotoSourceTypeNetwork;
+  return mFGalleryPhotoSourceType;
 }
 
 - (NSString*)photoGallery:(FGalleryViewController *)gallery captionForPhotoAtIndex:(NSUInteger)index
@@ -655,6 +718,11 @@ int MAIN_VIEW_TAG = 9669;
   //if(index< 0)
   //  return [networkImages objectAtIndex:([networkImages count]-1)];
   
+  return [networkImages objectAtIndex:index];
+}
+
+- (NSString*)photoGallery:(FGalleryViewController*)gallery filePathForPhotoSize:(FGalleryPhotoSize)size atIndex:(NSUInteger)index{
+  //NSLog(@" --- filePathForPhotoSize %@", [networkImages objectAtIndex:index]);
   return [networkImages objectAtIndex:index];
 }
 
@@ -686,7 +754,7 @@ BOOL is_loading = YES;
   // e.g. self.myOutlet = nil;
   self.bottomUIView=nil;
   self.mainUIWebView=nil;
-  self.optionsBottomMenuUIImageView=nil;
+  self.optionsBottomMenu=nil;
   self.btnFontSizePlus=nil;
   self.btnFontSizeMinus=nil;
   self.loading_indicator=nil;
@@ -700,9 +768,162 @@ BOOL is_loading = YES;
   
 }
 
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  
+  return YES;
+  
 }
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+BOOL isLandscapeView = NO;
+BOOL justLoaded = YES;
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  [self positionate];
+}
+
+-(void)positionate{
+  
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  
+  [self positionateAdNoticiaScreen:deviceOrientation];
+  
+  
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) && !isLandscapeView)
+  {
+    [self positionateLandscape];
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView || justLoaded))
+  {
+    [self positionatePortrait];
+  }
+  
+  if([app_delegate isiPad])
+  {
+    [self loadSectionNews];
+  }
+
+  //[self.mainUIWebView reload];
+  [self rotateHTML:self.mainUIWebView];
+  [self.mainUIWebView reload];
+  
+  NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
+          , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"
+          , isLandscapeView?@"Landscape":@"Portrait");
+  justLoaded=NO;
+}
+
+int pageControlHeigth = 36;
+-(void)positionateLandscape{
+
+  isLandscapeView = YES;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
+  
+  if([app_delegate isiPad])
+  {
+    self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight] - pageControlHeigth);
+  
+    self.menu_webview.frame=CGRectMake(0, 44, width/2, height-44);
+  
+    self.optionsBottomMenu.frame = CGRectMake(width/2,
+                                              height-self.optionsBottomMenu.frame.size.height-[self adHeight],
+                                              width/2,
+                                              optionsBottomMenu.frame.size.height);
+  
+    self.pageControl.frame = CGRectMake(width/2
+                                        , height-pageControlHeigth-[self adHeight]
+                                        , width/2
+                                        , pageControlHeigth);
+  
+    self.pageIndicator.frame = CGRectMake((width/2+width/2/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , pageIndicator.frame.size.height);
+  
+    self.loading_indicator.frame = CGRectMake( (width/2+width/2/2-self.loading_indicator.frame.size.width/2)
+                                              , height/2
+                                              , self.loading_indicator.frame.size.width
+                                              , loading_indicator.frame.size.height);
+  
+  }
+  else{
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    self.optionsBottomMenu.frame = CGRectMake(0,
+                                              height-self.optionsBottomMenu.frame.size.height-[self adHeight],
+                                              width,
+                                              optionsBottomMenu.frame.size.height);
+    
+    self.pageControl.frame = CGRectMake(0
+                                        , height-36-[self adHeight]
+                                        , 0
+                                        , 0); // pageControlHeigth);
+    
+    self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , 0); //  pageIndicator.frame.size.height);
+    
+  }
+  //[self reLoadNoticia];
+  //[mainUIWebView reload];
+}
+
+-(void)positionatePortrait{
+  
+  isLandscapeView = NO;
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  // x y width height
+  if([app_delegate isiPad])
+  {
+    self.mainUIWebView.frame=CGRectMake(0, 44+246, width, height-44-246-[self adHeight]-pageControlHeigth);
+    self.menu_webview.frame=CGRectMake(0, 44, width, 246);
+  
+    self.loading_indicator.frame = CGRectMake(width/2, height/2, self.loading_indicator.frame.size.width, loading_indicator.frame.size.height);
+  }
+  else
+  {
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+  }
+  self.optionsBottomMenu.frame = CGRectMake(0
+                                              , height-self.optionsBottomMenu.frame.size.height-[self adHeight]
+                                              , width
+                                              , optionsBottomMenu.frame.size.height);
+    
+  self.pageControl.frame = CGRectMake(0
+                                        , height-self.pageControl.frame.size.height-[self adHeight]
+                                        , width
+                                        , pageControlHeigth);
+    
+  self.pageIndicator.frame = CGRectMake((width/2-self.pageIndicator.frame.size.width/2)
+                                          , height-self.pageIndicator.frame.size.height-8-[self adHeight]
+                                          , self.pageIndicator.frame.size.width
+                                          , pageIndicator.frame.size.height);
+    
+
+}
+
 
 @end

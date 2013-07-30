@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) NSString *local_uri;
 @property (nonatomic, retain) NSString *noticia_id;
+@property (nonatomic, retain) NSString *prefix;
 
-+(MobiImage*)initWithData:(NSString*)_url _local_uri:(NSString*)_local_uri _noticia_id:(NSString*)_noticia_id;
++(MobiImage*)initWithData:(NSString*)_url _local_uri:(NSString*)_local_uri _noticia_id:(NSString*)_noticia_id _prefix:(NSString*)_prefix;
 @end

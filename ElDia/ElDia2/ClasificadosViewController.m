@@ -40,6 +40,7 @@ BOOL mViewDidLoad=NO;
 
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
+  [[self mainUIWebView] setScalesPageToFit:YES];
   if(notLoadedData != nil)
   {
     [self setHTML:notLoadedData url:nil webView:self.mainUIWebView];
@@ -58,12 +59,104 @@ BOOL mViewDidLoad=NO;
 
 }
 
+-(void)positionate{
+  
+  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  
+  [self positionateAdNoticiaScreen:deviceOrientation];
+
+  NSInteger  width=self.view.frame.size.width;
+  NSInteger  height=self.view.frame.size.height;
+  
+  
+  if (UIDeviceOrientationIsLandscape(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      // x y width height
+      self.mainUIWebView.frame=CGRectMake(256, 44, 1024-256, height-44-[self adHeight]);
+    }
+    else{
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    }
+
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      // x y width height
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+          }
+    else{
+      self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    }
+
+  }
+  
+}
+
+
+-(void) rotateHTML{
+  [self positionate];
+  if([app_delegate isiPad])
+    return;
+  return;
+  NSString *viewportWidth = @"";
+  NSString *viewportInitScale = @"";
+  NSString *viewportMaxScale = @"";
+  
+  viewportWidth = @"320";
+  viewportInitScale = @"1.0";
+  viewportMaxScale = @"1.0";
+  if([app_delegate isLandscape]){
+    //viewportWidth = @"480";
+    viewportInitScale = @"1.5";
+    viewportMaxScale = @"1.5";
+    
+  }
+  
+  //document.body.style.width = '%@px';
+  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
+  
+  NSLog(@"%@",jsString);
+  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  
+}
+
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  
+  return YES;
+  
+}
+
+/* rotation handling */
+- (BOOL) shouldAutorotate
+{
+  return YES; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+  
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  
+  [self rotateHTML];
+  //[mainUIWebView reload];
 }
 
 /* **** */
+
 
 
 -(void)changeFontSize:(NSInteger)delta{
@@ -135,14 +228,79 @@ BOOL mViewDidLoad=NO;
   self.bottomUIView.hidden = YES;
 }
 
--(void)loadClasificados:(NSURL *)url{
+-(void)loadFarmacia:(NSURL *)url{
   
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
-  NSDate * date =[self.mScreenManager sectionDate:uri];
-  // Clasificado es muy viejo, o no existe?
-  //if(![self isOld:date])   //if([self.mScreenManager clasificadosExists:uri])
+  NSDate * date =[self.mScreenManager farmaciaDate:uri];
+  if([self.mScreenManager farmaciaExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getFarmacia:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"farmacia"];
+}
+
+-(void)loadCartelera:(NSURL *)url{
+  
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager carteleraDate:uri];
+  if([self.mScreenManager farmaciaExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getCartelera:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"cartelera"];
+}
+
+-(void)loadFunebres:(NSURL *)url{
+  
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypeNone;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager funebresDate:uri];
+  if([self.mScreenManager funebresExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getFunebres:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"funebres"];
+}
+
+
+-(void)loadClasificados:(NSURL *)url{
+    self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager clasificadosDate:uri];
   if([self.mScreenManager clasificadosExists:uri])
   {
     NSError *err;
@@ -155,14 +313,25 @@ BOOL mViewDidLoad=NO;
     if(![self isOld:date])
       return;
   }
-  [self loadUrl:uri useCache:NO];
+  [self loadUrl:uri useCache:NO type:@"clasificados"];
 }
 
--(void)loadUrl:(NSString*)url useCache:(BOOL)useCache {
-  [self onLoading:YES];
+-(void)loadUrl:(NSString*)url useCache:(BOOL)useCache type:(NSString*)type{
+  //[self onLoading:YES];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
-    __block NSData *data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
+    __block NSData *data = nil;
+    if([type isEqualToString:@"funebres"])
+      data = [self.mScreenManager getFunebres:url useCache:useCache error:&err];
+    else
+      if([type isEqualToString:@"farmacia"])
+    data = [self.mScreenManager getFarmacia:url useCache:useCache error:&err];
+    else
+      if([type isEqualToString:@"cartelera"])
+        data = [self.mScreenManager getCartelera:url useCache:useCache error:&err];
+      else
+      if([type isEqualToString:@"clasificados"])
+        data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       
@@ -203,53 +372,28 @@ BOOL mViewDidLoad=NO;
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
-}
-
-- (void)webView:(UIWebView*)sender zoomingEndedWithTouches:(NSSet*)touches event:(UIEvent*)event
-{
-	NSLog(@"finished zooming");
-}
-
-- (void)webView:(UIWebView*)sender tappedWithTouch:(UITouch*)touch event:(UIEvent*)event
-{
-	NSLog(@"tapped");
-  [self singleTapWebView];
-}
-
-- (void)singleTapWebView {
-  //self.bottomUIView.hidden = !self.bottomUIView.hidden;
   
-  if([self.bottomUIView isHidden]==NO)
-    [UIView animateWithDuration:.5
-                     animations: ^ {
-                       [self.bottomUIView setAlpha:0];
-                     }
-                     completion: ^ (BOOL finished) {
-                       self.bottomUIView.hidden = YES;
-                     }];
-  else if([self.bottomUIView isHidden]==YES)
-  {
-    [self.bottomUIView setAlpha:0];
-    self.bottomUIView.hidden = NO;
-    [UIView animateWithDuration:.5
-                     animations: ^ {
-                       [self.bottomUIView setAlpha:1];
-                     }
-                     completion: ^ (BOOL finished) {
-                       //self.bottomUIView.hidden = YES;
-                     }];
-  }
+  [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
+  
+  [self rotateHTML];
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+  if(![app_delegate isiPad])
+  {
+    [self rotateHTML];
+  }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
   [self changeFontSize:0];
   [self onLoading:NO];
+  
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+  NSLog(@"%@", error);
+  [self onLoading:NO];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request

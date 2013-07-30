@@ -19,8 +19,9 @@ def enable_jinja2_debugging():
     """Enables blacklisted modules that help Jinja2 debugging."""
     if not debug:
         return
-    from google.appengine.tools.dev_appserver import HardenedModulesHook
-    HardenedModulesHook._WHITE_LIST_C_MODULES += ['_ctypes', 'gestalt']
+    # HACKED BY TUTI
+    # from google.appengine.tools.dev_appserver import HardenedModulesHook
+    # HardenedModulesHook._WHITE_LIST_C_MODULES += ['_ctypes', 'gestalt']
 
 # Corriendo en debug?
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')

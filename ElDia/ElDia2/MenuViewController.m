@@ -36,9 +36,7 @@ NSLock *lock;
 {
   [super viewDidLoad];
   
-  //self.webView.scrollView.bounces = NO;
-  //self.webView.scrollView.bouncesZoom = NO;
-  self.webView.scrollView.alwaysBounceHorizontal = NO;
+  //self.webView.scrollView.alwaysBounceHorizontal = NO;
   self.webView.hidden=NO;
   [self loadGesturesRecognizers];
   
@@ -160,15 +158,23 @@ NSLock *lock;
   [screenShotImageView setImage:self.screenShotImage];
   [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   
-  //self.view.frame.size.width
-  [self adjustWebViewWidth:(320.0)];
+  //[self adjustWebViewWidth:(320.0-44.0)];
+  //[self adjustWebViewWidth:(320.0)];
+  //[self adjustWebViewWidth:(480.0)];
   
   // now we'll animate it across to the right over 0.2 seconds with an Ease In and Out curve
   // this uses blocks to do the animation. Inside the block the frame of the UIImageView has its
   // x value changed to where it will end up with the animation is complete.
   // this animation doesn't require any action when completed so the block is left empty
+  
+  NSInteger _width = 276;
+  if([app_delegate isiPad])
+  {
+    _width = 256;
+  }
+  
   [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-    [screenShotImageView setFrame:CGRectMake(265, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [screenShotImageView setFrame:CGRectMake(_width, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
                    completion:^(BOOL finished){  }];
 }
@@ -187,22 +193,74 @@ NSLock *lock;
                    completion:^(BOOL finished){ [app_delegate hideSideMenu]; }];
 }
 
--(void) slideThenHide2
+-(void) slideThenHideShowMenuClasificados
 {
   // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
   // it tells the app delegate using the completion block of the animation
   [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
     [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   }
-                   completion:^(BOOL finished){ [app_delegate hideSideMenu2]; }];
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushMenuClasificados]; }];
+}
+
+-(void) slideThenHideShowClasificados
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushClasificados]; }];
+}
+
+-(void) slideThenHideShowFarmacia
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushFarmacia]; }];
+}
+
+-(void) slideThenHideShowCartelera
+{
+  // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+  // it tells the app delegate using the completion block of the animation
+  [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [screenShotImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  }
+                   completion:^(BOOL finished){ [app_delegate hideSideMenuPushCartelera]; }];
 }
 
 
+// HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  return NO;
 }
+
+- (BOOL) shouldAutorotate
+{
+  return NO; //[app_delegate isiPad];
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
+  //return UIInterfaceOrientationMaskAll;
+  return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+  return UIInterfaceOrientationPortrait ;
+}
+
+//BOOL isShowingLandscapeView = NO;
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  }
 
 - (void)singleTapScreenShot:(UITapGestureRecognizer *)gestureRecognizer
 {
@@ -286,26 +344,56 @@ NSLock *lock;
   if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"section"])
   {
     [app_delegate loadSectionNews:url];
-    //ToDo -> llamar al main view
     [self slideThenHide];
     return NO;
   }
   else
-    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"]) // por ahora page://clasificados
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"] || [[url scheme]isEqualToString:@"farmacia"] || [[url scheme]isEqualToString:@"cartelera"]) && [app_delegate isiPad])
     {
-      [app_delegate loadClasificadosMenu:url];
-      //ToDo -> llamar al main view
-      [self slideThenHide2];
+      [app_delegate loadService:url];
+      [self slideThenHide];
       return NO;
     }
     else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"]) // por ahora page://clasificados
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"clasificados"]) // por ahora page://clasificados
+    {
+      [self slideThenHideShowMenuClasificados];
+      return NO;
+    }
+    else
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
       {
-        [app_delegate loadClasificadosMenu:url];
-        //ToDo -> llamar al main view
-        [self slideThenHide2];
+        [app_delegate loadClasificados:url];
+        [self slideThenHideShowClasificados];
         return NO;
       }
+      else
+        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"funebres"]) // por ahora page://clasificados
+        {
+          
+          [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://full" ]];
+          [self slideThenHideShowClasificados];
+          return NO;
+        }
+        else
+          if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"farmacia"]) // por ahora page://clasificados
+          {
+            
+            [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://full" ]];
+            [self slideThenHideShowFarmacia];
+            return NO;
+          }
+          else
+            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"cartelera"]) // por ahora page://clasificados
+            {
+              
+              [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://full" ]];
+              [self slideThenHideShowCartelera];
+              return NO;
+            }
+  
+  
+  
   
   return YES;
   

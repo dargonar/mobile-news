@@ -13,25 +13,31 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <!-- meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" / -->
+        <meta name="viewport" content="width=320;user-scalable=no;" /> 
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
-        <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
         <title>CLASIFICADOS</title>
       </head>
-      
       <body>
+
         <div id="clasificados">
-          <div class="menu-header">
-            <xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/title" />
-          </div>
-          <ul id="clasificados_container">
+          <div class="columna">
+            <div class="encabezado">
+              <div class="titulo">Clasificados</div>
+              <div class="rubro">
+                <xsl:value-of disable-output-escaping="yes" select="rss/channel/item[1]/title" />
+              </div>
+              <p></p>
+              <div class="clear"></div>
+            </div>
             <xsl:for-each select="rss/channel/item">
-              <li> <div> <xsl:value-of disable-output-escaping="yes" select="description" /> </div> </li>
+              <xsl:if test="position() != last()">
+                <div class="aviso"> <p> <xsl:value-of disable-output-escaping="yes" select="description" /> </p>
+                </div>
+              </xsl:if>
             </xsl:for-each>
-          </ul>
+          </div>  
         </div>
-        
-      </body>
+     </body>
     </html>
   </xsl:template>
   

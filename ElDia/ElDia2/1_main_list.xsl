@@ -13,9 +13,8 @@
     <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <!-- meta name="viewport" content="width=device-width,user-scalable=no" / -->
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
-        <!-- link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="css/layout.css" / -->
+        <meta name="viewport" content="width=320;user-scalable=no;" /> <!-- HACK: NO ESTABA -->
         <title>LISTADO PRINCIPAL</title>
         <script type="text/javascript" src="js/functions.js"></script>
       </head>
