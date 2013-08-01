@@ -1,4 +1,54 @@
+{% macro tablet_open_new_global(node) -%}
+<div id="index" class="padded top_padded">
+  <div class="nota_abierta">
+    {{ DateSectionLabel(node, 'fecha') }}
+    <h1>{{node.title}}</h1>
+    {% if node.subheader %}
+    <p class="subtitulo" id="bajada">{{node.subheader.value}}</p>
+    {% endif %}
+    <div class="separador">&nbsp;</div>
+    
+    <div class="fila">
+      {% if node.thumbnail %}
+        <div class="main_img_container">
+          <div class="imagen" id="{{node.thumbnail.attrs.url}}" style="background-image:url({{node.thumbnail.attrs.url}}.i);">
+            {{ MediaLink(node, 'video_over_photo')}}
+          </div>
+        </div>
+      {% endif %}
+      <div id="informacion" class="contenido">
+        {{node|content('html')}}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro %}
+
 {% macro NoticiaRelacionada(item) -%}
+    <li>
+      <a href="{{item|related_link}}" title="">
+        <div class="titular {{'full_width' if item.attrs.thumbnail == '' else ''}}">
+          <div class="header">
+            <label class="date">{{item.attrs.pubDate|datetime}}</label>
+            {% if item.attrs.category != '' %}
+              &nbsp;|&nbsp;
+              <label class="seccion">{{ 'Información Gral' if item.attrs.category == 'Información General' else item.attrs.category }}
+              </label>
+            {% endif %}
+          </div>
+          <br />
+          <label class="titulo">{{item.value}}</label>
+        </div>
+        
+        {% if item.attrs.thumbnail != '' %}
+          <div class="foto img_container">
+            <div class="imagen_secundaria" id="{{item.attrs.thumbnail}}" style="background-image:url({{item.attrs.thumbnail}}.i) !important;"></div>
+            <div class="img_loader">&nbsp;</div>
+          </div>
+        {% endif %}        
+      </a>
+      <div class="separador">&nbsp;</div>
+    </li>
 {%- endmacro %}
 
 {% macro ListadoNoticiasRelacionadas(items) -%}
@@ -56,7 +106,7 @@
       <br />
       <h1>{{node.title}}</h1>
       </div>
-      {% if node.subheader != '' %}
+      {% if node.subheader %}
         <div class="bajada" id="bajada">
           {{node.subheader.value}}
         </div>
@@ -103,8 +153,8 @@
   <div id="updated_msg" class="updated hidden">Actualizado hace 1 segundo</div>
 {%- endmacro %}
 
-{% macro DateSectionLabel(node) -%}    
-  <label class="date">{{node.pubDate|datetime}}</label>
+{% macro DateSectionLabel(node, class='date') -%}    
+  <label class="{{class}}">{{node.pubDate|datetime}}</label>
   {% if node.category %}
   &nbsp;|&nbsp;<label class="seccion">{{ 'Información Gral' if node.category == 'Información 
   General' else node.category }}
@@ -142,18 +192,17 @@
         </a>
         <div class="separador">&nbsp;</div>
     </li>
-
 {%- endmacro %}
 
 {% macro MediaAttach(meta) -%}
     <div class="ico_container">
-      {% if meta.has_gallery == 'True' or meta.has_gallery == 'true' %}
+      {% if meta|meta_has('gallery') %}
       <div class="ico_galeria">&nbsp;</div>
       {% endif %}
-      {% if meta.has_video == 'True' or meta.has_video == 'true' %}
+      {% if meta|meta_has('video') %}
       <div class="ico_video">&nbsp;</div>
       {% endif %}
-      {% if meta.has_audio == 'True' or meta.has_audio == 'true' %}
+      {% if meta|meta_has('audio') %}
       <div class="ico_audio">&nbsp;</div>
       {% endif %}
     &nbsp;
@@ -176,10 +225,10 @@
         {% endif %}
         <div class="contenido">
           <div id="titulo">
-            {% if node.pubDate %}
+            {# % if node.pubDate %}
             <label>{{node.pubDate|datetime}}</label> | <label class="seccion">{{node.category}}</label>
             <br />
-            {% endif %}
+            {% endif % #}
             <h1>{{node.title}}</h1>
           </div>
         </div>

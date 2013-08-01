@@ -50,7 +50,7 @@ mapping = {
     },
     'templates-big': {
       'section://main'  : {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'},
-      'noticia://'      : {'pt': '3_new.xsl',                               'ls': '3_new.xsl'},
+      'noticia://'      : {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'},
       'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
       'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
       'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
@@ -68,14 +68,14 @@ class ScreenController(FrontendHandler):
     
     _mapping = mapping
     # Parametros del request
-    # appid = self.request.GET['appid'] # nombre de la app
-    # url   = self.request.GET['url']   # url interna
-    # size  = self.request.GET['size']  # small, big
-    # ptls  = self.request.GET['ptls']  # pt, ls
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
-    size  = self.request.POST['size']  # small, big
-    ptls  = self.request.POST['ptls']  # pt, ls
+    appid = self.request.GET['appid'] # nombre de la app
+    url   = self.request.GET['url']   # url interna
+    size  = self.request.GET['size']  # small, big
+    ptls  = self.request.GET['ptls']  # pt, ls
+    # appid = self.request.POST['appid'] # nombre de la app
+    # url   = self.request.POST['url']   # url interna
+    # size  = self.request.POST['size']  # small, big
+    # ptls  = self.request.POST['ptls']  # pt, ls
     
     if apps_id[appid] not in _mapping:
       import importlib
@@ -86,8 +86,6 @@ class ScreenController(FrontendHandler):
     template_map = _mapping[ apps_id[appid] ]['templates-%s' % size]
 
     # Armamos la direccion del xml
-    logging.error('url_map %s' % url_map)
-    logging.error('url %s' % url)
     httpurl = ''
     for k in url_map:
       if url.startswith(k):
@@ -105,7 +103,6 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    logging.error('httpurl %s' % httpurl)
 
     if httpurl.startswith('X:'):
       import importlib
@@ -114,18 +111,13 @@ class ScreenController(FrontendHandler):
     else:
       result = urllib2.urlopen(httpurl).read()
 
+    #return self.response.write(result)
     result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
-    logging.error(result)
-
     r = xml.fromstring(result)
 
-    # HACK
-    # self.response.write(result)
-    # return
-    
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
-
+    
     if type(r.rss.channel.item) == type([]):
       items = r.rss.channel.item
     else:
@@ -138,6 +130,9 @@ class ScreenController(FrontendHandler):
         imgs.append(img)
 
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel} )
+    
+    return self.response.write(rv.encode('utf-8'))
+    #return self.response.write(result)
     
     # Set up headers for browser to correctly recognize ZIP file
     self.response.headers['Content-Type'] ='application/zip'

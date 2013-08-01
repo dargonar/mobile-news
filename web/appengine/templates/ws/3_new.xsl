@@ -6,7 +6,7 @@
 
     {% if data.item.related %}
       {{ cc.TituloSeccionONotisRelac('Noticias relacionadas') }}
-      {{ cc.ListadoNoticiasRelacionadas(data.item.related) }}
+      {{ cc.ListadoNoticiasRelacionadas(data.item.related|build_list) }}
     {% endif %}
   </body>
 </html>
