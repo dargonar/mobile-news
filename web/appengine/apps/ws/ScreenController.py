@@ -5,6 +5,7 @@ import urllib2
 import re
 import importlib
 
+from datetime import datetime, timedelta
 from HTMLParser import HTMLParser
 
 from hashlib import sha1
@@ -52,9 +53,9 @@ mapping = {
       'section://main'  : {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'},
       'noticia://'      : {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'},
       'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
-      'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
+      'clasificados://' : {'pt': '5_tablet_clasificados.xsl',               'ls': '5_tablet_clasificados.xsl'},
       'menu://'         : {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'},
-      'funebres://'     : {'pt': '6_funebres.xsl',                          'ls': '6_funebres.xsl'},
+      'funebres://'     : {'pt': '6_tablet_funebres.xsl',                   'ls': '6_tablet_funebres.xsl'},
       'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
       'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
     },
@@ -129,6 +130,9 @@ class ScreenController(FrontendHandler):
           httpurl = httpurl % url[url.index('//')+2:]
         break
 
+    if httpurl == '':
+      raise('Invalid url %s' % url)
+
     # Obtenemos el template
     template = ''
     for k in template_map:
@@ -143,7 +147,19 @@ class ScreenController(FrontendHandler):
       i = importlib.import_module(httpurl.split()[1])
       result = i.get_xml().encode('utf-8')
     else:
+      logging.error('------------------------------------------')
+      logging.error(httpurl)
+      logging.error('------------------------------------------')
       result = urllib2.urlopen(httpurl).read()
+
+      # HACKO el DIA:
+      if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
+        now = datetime.now()+timedelta(hours=-3)
+        result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+                      xmlns:media="http://search.yahoo.com/mrss/" 
+                      xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
+                      version="2.0"><channel>
+                      <pubDate>%s</pubDate><item>%s</item></channel></rss>""" % (now.strftime("%a, %d %b %Y %H:%M:%S"), result)
 
     result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
     r = xml.fromstring(result)

@@ -29,6 +29,7 @@ def do_slugify(value):
   value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
   value = unicode(_slugify_strip_re.sub('', value).strip().lower())
   return _slugify_hyphenate_re.sub('-', value)
+
 def empty(value):
   return value is None or value == ''
 
@@ -98,11 +99,11 @@ def build_list(value):
 
   return [value]
 
-def format_datetime(value, format='medium'):
+def format_datetime(value, part='%H:%m'):
     if value is None:
       return ''
     p = parser()
-    return p.parse(value, default=None, ignoretz=True).strftime('%H:%m')
+    return p.parse(value, default=None, ignoretz=True).strftime(part)
 
 def if_not_none(value):
   if not value:
