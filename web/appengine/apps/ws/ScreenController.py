@@ -3,6 +3,7 @@ import logging
 import StringIO
 import urllib2
 import re
+import importlib
 
 from HTMLParser import HTMLParser
 
@@ -52,10 +53,16 @@ mapping = {
       'noticia://'      : {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'},
       'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
       'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
-      'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
+      'menu://'         : {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'},
       'funebres://'     : {'pt': '6_funebres.xsl',                          'ls': '6_funebres.xsl'},
       'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
       'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
+    },
+    'extras': {
+      'has_clasificados' : False,
+      'has_funebres'     : False,
+      'has_farmacia'     : False,
+      'has_cartelera'    : True,
     },
   },
 
@@ -85,11 +92,17 @@ mapping = {
       'noticia://'      : {'pt': '3_new.xsl',                               'ls': '3_new.xsl'},
       'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
       'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
-      'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
+      'menu://'         : {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'},
       'funebres://'     : {'pt': '6_funebres.xsl',                          'ls': '6_funebres.xsl'},
       'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
       'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
     },
+    'extras': {
+      'has_clasificados' : False,
+      'has_funebres'     : False,
+      'has_farmacia'     : False,
+      'has_cartelera'    : False,
+    }, 
   }
 }
 
@@ -105,6 +118,7 @@ class ScreenController(FrontendHandler):
 
     url_map = mapping[ apps_id[appid] ]['httpurl']
     template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    extras_map = mapping[ apps_id[appid] ]['extras']
 
     # Armamos la direccion del xml
     httpurl = ''
@@ -126,7 +140,6 @@ class ScreenController(FrontendHandler):
     xml = XML2Dict()
 
     if httpurl.startswith('X:'):
-      import importlib
       i = importlib.import_module(httpurl.split()[1])
       result = i.get_xml().encode('utf-8')
     else:
@@ -149,7 +162,11 @@ class ScreenController(FrontendHandler):
         i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
         imgs.append(img)
 
-    rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel} )
+    if extras_map['has_clasificados'] == True:
+      i = importlib.import_module(apps_id[appid]+'.extras')
+      extras_map['clasificados'] = i.get_classifieds()
+
+    rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     
     # Set up headers for browser to correctly recognize ZIP file
     self.response.headers['Content-Type'] ='application/zip'
