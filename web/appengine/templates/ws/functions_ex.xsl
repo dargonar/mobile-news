@@ -1,4 +1,4 @@
-{% macro DateMonthYear(item) -%}
+{% macro DayMonthYear(item) -%}
   <div class="calendario">{{item.pubDate|datetime('%d')}}</div>
   <div class="calendario">{{item.pubDate|datetime('%m')}}</div>
   <div class="calendario">{{item.pubDate|datetime('%Y')}}</div>

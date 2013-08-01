@@ -8,7 +8,7 @@
           <div class="rubro">Farmacias de turno</div>
           <div class="clear"></div>
           <div class="titulo"></div>
-          {{ cc.DateMonthYear(data) }}
+          {{ cc.DayMonthYear(data) }}
           <div class="clear"></div>
         </div>
 
