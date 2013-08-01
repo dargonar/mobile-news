@@ -1,100 +1,73 @@
-{% macro NotaAbierta(node, container_type) -%}
-    {% if node.thumbnail or
-          node.group or
-          node.content == 'audio' or 
-          node.content == 'audio/mpeg' or 
-          node.content == 'video' %}
-      
-      <div class="media_link {{container_type}}">
-        {% if node.content == 'audio' %}
-        <a class="ico_audio" href="audio://{$Node/content[@type='audio'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        {% endif %}
-        <xsl:if test="$Node/content[@type='audio']">
-          
-        </xsl:if>
-        <xsl:if test="$Node/content[@type='audio/mpeg']">
-          <a class="ico_audio" href="audio://{$Node/content[@type='audio/mpeg'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
-        
-        <xsl:if test="$Node/group/content">
-          <xsl:variable name="gallery">
-            <xsl:for-each select="$Node/group/content">
-              <xsl:value-of select="concat(@url, ';')"/>
-            </xsl:for-each>
-          </xsl:variable>
-          <a href="galeria://{$gallery}" title="galeria" class="ico_galeria"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
-        
-        <xsl:if test="not($Node/group/content) and not(not($Node/thumbnail))">
-          <!-- xsl:variable name="tmp">
-            <xsl:value-of select="file://"/>
-          </xsl:variable -->
-          <a href="galeria://file://{$Node/thumbnail/@url}" title="galeria" class="ico_plus"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
-        
-        <xsl:if test="$Node/content[@type='video']">
-          <a class="ico_video" href="video://{$Node/content[@type='video'][1]/@url}" title=""><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></a>
-        </xsl:if>
-        
-        
-        <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-      
-      </div>
-    </xsl:if>
-  </xsl:template>
+{% macro NoticiaRelacionada(item) -%}
 {%- endmacro %}
 
+{% macro ListadoNoticiasRelacionadas(items) -%}
+    <div id="listado" style="display:block;">
+      <ul class="main_list">
+        {% for item in items %}
+        {{ NoticiaRelacionada(item) }}
+        {% endfor %}
+      </ul>
+    </div>
+{%- endmacro %}
+
+{% macro TituloSeccionONotisRelac(title) -%}
+    <div id="titulo_seccion">
+      <label class="lbl_titulo_seccion">{{title}}</label>
+    </div>
+{%- endmacro %}
+
+{% macro MediaLink(node, container_type) -%}
+  {% if node|has_content('any_media') or node.group or node.thumbnail %}
+    <div class="media_link {{container_type}}">
+    {% if node|has_content('audio') %}
+      <a class="ico_audio" href="audio://{{node|content('audio')}}" title="">&nbsp;</a>
+    {% endif %}
+    {% if node|has_content('audio/mpeg') %}    
+      <a class="ico_audio" href="audio://{{node|content('audio/mpeg')}}" title="">&nbsp;</a>
+    {% endif %}
+    {% if node.group %}
+      <a href="galeria://{{node|gallery}}" title="galeria" class="ico_galeria">&nbsp;</a>
+    {% endif %}
+    {% if not node.group and node.thumbnail %}
+      <a href="galeria://file://{{node.thumbnail.attrs.url}}" title="galeria" class="ico_plus">&nbsp;</a>
+    {% endif %}
+    {% if node|has_content('video') %}
+      <a class="ico_video" href="video://{{node|content('video')}}" title="">&nbsp;</a>
+    {% endif %}
+    &nbsp;
+    </div>
+  {% endif %}
+{%- endmacro %}
 
 {% macro NotaAbierta(node) -%}
   <div id="nota">
-  {% if node.thumbnail %}
-    <div class="main_img_container">
-      <div class="imagen_principal" id="{{node.thumbnail.value.attrs.url}}" style="background-image:url({{node.thumbnail.value.attrs.url}}.i);">
-        {{ cc.MediaLink(node, 'video_over_photo') }}
-        <xsl:variable name="container_type">video_over_photo</xsl:variable>
-        <xsl:call-template name="MediaLink">
-          <xsl:with-param name="Node" select="$Node"/>
-          <xsl:with-param name="container_type" select="$container_type"/>
-        </xsl:call-template>
-
+    {% if node.thumbnail %}
+      <div class="main_img_container">
+      {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+      </div>
+    {% else %}
+      {{ MediaLink(node, 'no_photo') }}
+    {% endif %}
+    
+    <div class="contenido">
+      <div id="titulo">
+      {{ DateSectionLabel(node) }}
+      <br />
+      <h1>{{node.title}}</h1>
+      </div>
+      {% if node.subheader != '' %}
+        <div class="bajada" id="bajada">
+          {{node.subheader.value}}
+        </div>
+      {% endif %}
+      <div id="informacion" style="display:block;">
+        {{node|content('html')|if_not_none}}
       </div>
     </div>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:variable name="container_type">no_photo</xsl:variable>
-          <xsl:call-template name="MediaLink">
-            <xsl:with-param name="Node" select="$Node"/>
-            <xsl:with-param name="container_type" select="$container_type"/>
-          </xsl:call-template>
-        </xsl:otherwise>
-      </xsl:choose>
-      
-      <div class="contenido">
-        <div id="titulo">
-            <label class="date">
-              <xsl:call-template name="FormatDate">
-                <xsl:with-param name="DateTime" select="$Node/pubDate"/>
-              </xsl:call-template>
-            </label> | <label class="seccion">
-              <xsl:call-template name="ReplaceInfoGral">
-                <xsl:with-param name="seccion" select="$Node/category"/>
-              </xsl:call-template>
-            </label>
-          <br />
-          <h1><xsl:value-of disable-output-escaping="yes" select="$Node/title" /></h1>
-        </div>
-        <xsl:if test="$Node/news:subheader and $Node/news:subheader!=''">
-          <div class="bajada" id="bajada">
-            <xsl:value-of disable-output-escaping="yes" select="$Node/news:subheader" />
-          </div>
-        </xsl:if>
-        <div id="informacion" style="display:block;">
-          <xsl:value-of disable-output-escaping="yes" select="$Node/news:content" />
-        </div>
-      </div>
-    </div>
-  </xsl:template>
+  </div>
 {%- endmacro %}
+
 
 {% macro tablet_news_list_landscape(nodes) -%}
   {% for node in nodes %}
@@ -106,7 +79,7 @@
   <li>  
     <a href="{{node|noticia_link}}" title="principal">
       {% if node.thumbnail %}
-      {{ ImagenNoticiaDestacada(node.thumbnail.value.attrs.url, node.meta) }}
+      {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
       {% endif %}
       <div class="info"><p>{{node.title}}</p></div>
       {% if not node.thumbnail %}
@@ -131,8 +104,13 @@
 {%- endmacro %}
 
 {% macro DateSectionLabel(node) -%}    
-  <label class="date">{{node.pubDate|datetime}}</label>&nbsp;|&nbsp;
-  <label class="seccion">{{ 'Información Gral' if node.category == 'Información General' else node.category }}</label>
+  <label class="date">{{node.pubDate|datetime}}</label>
+  {% if node.category %}
+  &nbsp;|&nbsp;<label class="seccion">{{ 'Información Gral' if node.category == 'Información 
+  General' else node.category }}
+  {% endif %}
+  </label>
+
 {%- endmacro %}
 
 {% macro NoticiaEnListado(node) -%}    
@@ -151,7 +129,7 @@
             {% if node.meta %}
               {{ MediaAttach(node.meta) }}
             {% endif %}          
-            <div class="imagen_secundaria" id="{{node.thumbnail.value.attrs.url}}" style="background-image:url({{node.thumbnail.value.attrs.url}}.i) !important;">&nbsp;</div>
+            <div class="imagen_secundaria" id="{{node.thumbnail.attrs.url}}" style="background-image:url({{node.thumbnail.attrs.url}}.i) !important;">&nbsp;</div>
             <div class="img_loader">&nbsp;</div>
           </div>
         {% else %}
@@ -183,7 +161,7 @@
 {%- endmacro %}
 
 {% macro ImagenNoticiaDestacada(url, meta) -%}
-    <div class="imagen" id="{{url}}" style="background-image:url({{url}}.i);">
+    <div class="imagen_principal" id="{{url}}" style="background-image:url({{url}}.i);">
       <div class="media_link video_over_photo">
         {{ MediaAttach(meta) }}
       </div>
@@ -194,12 +172,14 @@
     <div id="nota">
       <a href="{{node|noticia_link}}" title="principal">
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.value.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
         {% endif %}
         <div class="contenido">
           <div id="titulo">
+            {% if node.pubDate %}
             <label>{{node.pubDate|datetime}}</label> | <label class="seccion">{{node.category}}</label>
             <br />
+            {% endif %}
             <h1>{{node.title}}</h1>
           </div>
         </div>
@@ -231,7 +211,7 @@
           </div>
         </div>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.value.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
         {% endif %}
       </div>
     </a>
@@ -251,7 +231,7 @@
         {{ DateSectionLabel(node) }}
         <h1>{{node.title}}</h1>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.value.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
         {% else %}
         <div class="info">
           <p>{{node.description|if_not_none}}</p>
@@ -276,7 +256,7 @@
         {{ DateSectionLabel(node) }}
         <h2>{{node.title}}</h2>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.value.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
         {% else %}
         <div class="info">
           <p>{{node.description|if_not_none}}</p>

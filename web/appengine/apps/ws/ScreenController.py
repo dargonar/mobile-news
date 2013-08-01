@@ -2,6 +2,8 @@
 import logging
 import StringIO
 import urllib2
+import re
+
 from HTMLParser import HTMLParser
 
 from hashlib import sha1
@@ -19,13 +21,47 @@ from lhammer.xml2dict import XML2Dict
 
 apps_id = { 
   'com.diventi.eldia'     : 'eldia',
-  'com.diventi.mobipaper' : 'eldia' 
+  'com.diventi.mobipaper' : 'eldia',
+  'com.diventi.pregon'    : 'pregon',
 }
 
 mapping = { 
   'eldia' : {
     'httpurl' : {
       'section://main'  : 'http://www.eldia.com.ar/rss/index.aspx' ,
+      'noticia://'      : 'http://www.eldia.com.ar/rss/noticia.aspx?id=%s',
+      'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
+      'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
+      'menu://'         : 'http://www.eldia.com.ar/rss/secciones.aspx',
+      'funebres://'     : 'http://www.eldia.com.ar/mc/fune_rss_utf8.aspx',
+      'farmacia://'     : 'http://www.eldia.com.ar/extras/farmacias_txt.aspx',
+      'cartelera://'    : 'http://www.eldia.com.ar/extras/carteleradecine_txt.aspx',
+    }, 
+    'templates-small': {
+      'section://main'  : {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'},
+      'noticia://'      : {'pt': '3_new.xsl',          'ls': '3_new.xsl'},
+      'section://'      : {'pt': '2_section_list.xsl', 'ls': '2_section_list.xsl'},
+      'clasificados://' : {'pt': '5_clasificados.xsl', 'ls': '5_clasificados.xsl'},
+      'menu://'         : {'pt': '4_menu.xsl',         'ls': '4_menu.xsl'},
+      'funebres://'     : {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'},
+      'farmacia://'     : {'pt': '7_farmacias.xsl',    'ls': '7_farmacias.xsl'},
+      'cartelera://'    : {'pt': '8_cartelera.xsl',    'ls': '8_cartelera.xsl'},
+    },
+    'templates-big': {
+      'section://main'  : {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'},
+      'noticia://'      : {'pt': '3_new.xsl',                               'ls': '3_new.xsl'},
+      'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
+      'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
+      'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
+      'funebres://'     : {'pt': '6_funebres.xsl',                          'ls': '6_funebres.xsl'},
+      'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
+      'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
+    },
+  },
+
+  'pregon' : {
+    'httpurl' : {
+      'section://main'  : 'X: pregon.rss_index' ,
       'noticia://'      : 'http://www.eldia.com.ar/rss/noticia.aspx?id=%s',
       'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
       'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
@@ -91,15 +127,32 @@ class ScreenController(FrontendHandler):
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
     logging.error('httpurl %s' % httpurl)
-    result = urllib2.urlopen(httpurl).read()
+
+    if httpurl.startswith('X:'):
+      import importlib
+      i = importlib.import_module(httpurl.split()[1])
+      result = i.get_xml().encode('utf-8')
+    else:
+      result = urllib2.urlopen(httpurl).read()
+
+    result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
+    logging.error(result)
+
     r = xml.fromstring(result)
+
 
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
-    for i in r.rss.channel.item:
+
+    if type(r.rss.channel.item) == type([]):
+      items = r.rss.channel.item
+    else:
+      items = [r.rss.channel.item]
+
+    for i in items:
       if hasattr(i, 'thumbnail'):
-        img = i.thumbnail.value.attrs.url
-        i.thumbnail.value.attrs.url = sha1(img).digest().encode('hex')
+        img = i.thumbnail.attrs.url
+        i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
         imgs.append(img)
 
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel} )

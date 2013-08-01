@@ -30,7 +30,57 @@ def do_slugify(value):
   value = unicode(_slugify_strip_re.sub('', value).strip().lower())
   return _slugify_hyphenate_re.sub('-', value)
 
+def gallery(node):
+  if node is None or node.group is None:
+    return ''
+  urls = []
+  for c in node.group.content:
+    urls.append(c.attrs.url.strip())
+  return ';'.join(urls)
+
+def has_content(node, content_type='any_media'):
+  if node is None or node.content is None:
+    return False
+  if content_type == 'any_media':
+    content_to_check = ['audio', 'audio/mpeg', 'video']
+  else:
+    content_to_check = [content_type]
+  ret = False
+
+  if type(node.content) != type([]):
+    contents = [node.content]
+  else:
+    contents = node.content
+
+  for content in contents:
+    if content.attrs.type in content_to_check:
+      ret = True
+      break
+  return ret
+
+def get_content(node, content_type):
+
+  if node is None or node.content is None:
+    return ''
+
+  if type(node.content) != type([]):
+    contents = [node.content]
+  else:
+    contents = node.content
+
+  res = ''
+  for content in contents:
+    if content.attrs.type == content_type:
+      if content_type == 'html':
+        res = content.value
+      else:
+        res = content.attrs.url
+      break
+  return res
+
 def format_datetime(value, format='medium'):
+    if value is None:
+      return ''
     p = parser()
     return p.parse(value, default=None, ignoretz=True).strftime('%H:%m')
 
@@ -128,6 +178,10 @@ class Jinja2Mixin(object):
     env.filters['datetime']    = format_datetime
     env.filters['noticia_link'] = noticia_link
     env.filters['if_not_none'] = if_not_none
+    env.filters['has_content']   = has_content
+    env.filters['content']   = get_content
+    env.filters['gallery']   = gallery
+    
     
     pass
           
