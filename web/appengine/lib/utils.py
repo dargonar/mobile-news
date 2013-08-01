@@ -29,6 +29,20 @@ def do_slugify(value):
   value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
   value = unicode(_slugify_strip_re.sub('', value).strip().lower())
   return _slugify_hyphenate_re.sub('-', value)
+def empty(value):
+  return value is None or value == ''
+
+def related_link(item):
+  return 'noticia://%s?url=%s&title=%sheader=' % (item.attrs.guid, url_fix(item.attrs.url), url_fix(item.value))
+
+def meta_has(meta, media_type):
+  if meta is None or meta.attrs is None or not hasattr(meta.attrs, 'has_' + media_type):
+    return False
+
+  if getattr(meta.attrs, 'has_' + media_type).lower() != 'true':
+    return False
+  
+  return True
 
 def gallery(node):
   if node is None or node.group is None:
@@ -77,6 +91,12 @@ def get_content(node, content_type):
         res = content.attrs.url
       break
   return res
+
+def build_list(value):
+  if type(value) == type([]):
+    return value
+
+  return [value]
 
 def format_datetime(value, format='medium'):
     if value is None:
@@ -181,9 +201,12 @@ class Jinja2Mixin(object):
     env.filters['has_content']   = has_content
     env.filters['content']   = get_content
     env.filters['gallery']   = gallery
+    env.filters['meta_has']   = meta_has
+    env.filters['related_link']   = related_link
+    env.filters['build_list']   = build_list
+    env.filters['is_empty']   = empty
     
-    
-    pass
+
           
   def render_response(self, _template, **context):
     # Renders a template and writes the result to the response.

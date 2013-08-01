@@ -49,7 +49,7 @@ mapping = {
     },
     'templates-big': {
       'section://main'  : {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'},
-      'noticia://'      : {'pt': '3_new.xsl',                               'ls': '3_new.xsl'},
+      'noticia://'      : {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'},
       'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
       'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
       'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
@@ -107,8 +107,6 @@ class ScreenController(FrontendHandler):
     template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
 
     # Armamos la direccion del xml
-    logging.error('url_map %s' % url_map)
-    logging.error('url %s' % url)
     httpurl = ''
     for k in url_map:
       if url.startswith(k):
@@ -126,7 +124,6 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    logging.error('httpurl %s' % httpurl)
 
     if httpurl.startswith('X:'):
       import importlib
@@ -136,10 +133,7 @@ class ScreenController(FrontendHandler):
       result = urllib2.urlopen(httpurl).read()
 
     result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
-    logging.error(result)
-
     r = xml.fromstring(result)
-
 
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
