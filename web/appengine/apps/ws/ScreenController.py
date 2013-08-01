@@ -20,9 +20,10 @@ from utils import FrontendHandler, get_or_404
 from lhammer.xml2dict import XML2Dict
 
 apps_id = { 
-  'com.diventi.eldia'     : 'eldia',
-  'com.diventi.mobipaper' : 'eldia',
-  'com.diventi.pregon'    : 'pregon',
+  'com.diventi.eldia'       : 'eldia',
+  'com.diventi.mobipaper'   : 'eldia',
+  'com.diventi.pregon'      : 'pregon',
+  'com.diventi.castellanos' : 'castellanos',
 }
 
 mapping = { 
@@ -57,54 +58,32 @@ mapping = {
       'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
       'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
     },
-  },
-
-  'pregon' : {
-    'httpurl' : {
-      'section://main'  : 'X: pregon.rss_index' ,
-      'noticia://'      : 'http://www.eldia.com.ar/rss/noticia.aspx?id=%s',
-      'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
-      'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
-      'menu://'         : 'http://www.eldia.com.ar/rss/secciones.aspx',
-      'funebres://'     : 'http://www.eldia.com.ar/mc/fune_rss_utf8.aspx',
-      'farmacia://'     : 'http://www.eldia.com.ar/extras/farmacias_txt.aspx',
-      'cartelera://'    : 'http://www.eldia.com.ar/extras/carteleradecine_txt.aspx',
-    }, 
-    'templates-small': {
-      'section://main'  : {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'},
-      'noticia://'      : {'pt': '3_new.xsl',          'ls': '3_new.xsl'},
-      'section://'      : {'pt': '2_section_list.xsl', 'ls': '2_section_list.xsl'},
-      'clasificados://' : {'pt': '5_clasificados.xsl', 'ls': '5_clasificados.xsl'},
-      'menu://'         : {'pt': '4_menu.xsl',         'ls': '4_menu.xsl'},
-      'funebres://'     : {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'},
-      'farmacia://'     : {'pt': '7_farmacias.xsl',    'ls': '7_farmacias.xsl'},
-      'cartelera://'    : {'pt': '8_cartelera.xsl',    'ls': '8_cartelera.xsl'},
-    },
-    'templates-big': {
-      'section://main'  : {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'},
-      'noticia://'      : {'pt': '3_new.xsl',                               'ls': '3_new.xsl'},
-      'section://'      : {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'},
-      'clasificados://' : {'pt': '5_clasificados.xsl',                      'ls': '5_clasificados.xsl'},
-      'menu://'         : {'pt': '4_menu.xsl',                              'ls': '4_menu.xsl'},
-      'funebres://'     : {'pt': '6_funebres.xsl',                          'ls': '6_funebres.xsl'},
-      'farmacia://'     : {'pt': '7_farmacias.xsl',                         'ls': '7_farmacias.xsl'},
-      'cartelera://'    : {'pt': '8_cartelera.xsl',                         'ls': '8_cartelera.xsl'},
-    },
   }
+
 }
 
 class ScreenController(FrontendHandler):
   
   def get_screen(self, **kwargs):
     
+    _mapping = mapping
     # Parametros del request
+    # appid = self.request.GET['appid'] # nombre de la app
+    # url   = self.request.GET['url']   # url interna
+    # size  = self.request.GET['size']  # small, big
+    # ptls  = self.request.GET['ptls']  # pt, ls
     appid = self.request.POST['appid'] # nombre de la app
     url   = self.request.POST['url']   # url interna
     size  = self.request.POST['size']  # small, big
     ptls  = self.request.POST['ptls']  # pt, ls
-
-    url_map = mapping[ apps_id[appid] ]['httpurl']
-    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    
+    if apps_id[appid] not in _mapping:
+      import importlib
+      i = importlib.import_module(apps_id[appid]+u'.mapping')
+      _mapping = i.get_mapping() #.encode('utf-8')
+      
+    url_map = _mapping[ apps_id[appid] ]['httpurl']
+    template_map = _mapping[ apps_id[appid] ]['templates-%s' % size]
 
     # Armamos la direccion del xml
     logging.error('url_map %s' % url_map)
@@ -140,7 +119,10 @@ class ScreenController(FrontendHandler):
 
     r = xml.fromstring(result)
 
-
+    # HACK
+    # self.response.write(result)
+    # return
+    
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
 
