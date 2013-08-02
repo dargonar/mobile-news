@@ -1,3 +1,44 @@
+{% macro DayMonthYear(item) -%}
+  <div class="calendario">{{item.pubDate|datetime('%d')}}</div>
+  <div class="calendario">{{item.pubDate|datetime('%m')}}</div>
+  <div class="calendario">{{item.pubDate|datetime('%Y')}}</div>
+{%- endmacro %}
+
+{% macro avisos_clasificados(items, columna) -%}
+  {% for item in items %}
+  {% if loop.index0 % 3 == columna and not loop.last %}
+  {{ aviso_clasificado(item) }}
+  {% endif %}
+  {% endfor %}
+{%- endmacro %}
+
+{% macro avisos_funebres(items, last_category, columna) -%}
+  {% set last_category = '' %}
+  {% for item in items %}
+  {% if loop.index0 % 3 == columna and not loop.last %}
+  {{ aviso_funebre(item, last_category) }}
+  {% endif %}
+  {% set last_category = item.category %}
+  {% endfor %}
+{%- endmacro %}
+
+{% macro aviso_funebre(item, last_category) -%}
+  {% if last_category != item.category %}
+  <div class="rubro">
+  {{item.category}}
+  </div>
+  {% endif %}
+  <div class="aviso fune">
+    <p>{{item.description}}</p>
+  </div>
+{%- endmacro %}
+
+{% macro aviso_clasificado(item) -%}
+  <div class="aviso clasi">
+    <p>{{item.description}}</p>
+  </div>
+{%- endmacro %}
+ 
 {% macro tablet_open_new_global(node) -%}
 <div id="index" class="padded top_padded">
   <div class="nota_abierta">
