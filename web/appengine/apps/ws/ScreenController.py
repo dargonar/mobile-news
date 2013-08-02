@@ -33,14 +33,14 @@ class ScreenController(FrontendHandler):
   def get_screen(self, **kwargs):
     
     # Parametros del request
-    appid = self.request.GET['appid'] # nombre de la app
-    url   = self.request.GET['url']   # url interna
-    size  = self.request.GET['size']  # small, big
-    ptls  = self.request.GET['ptls']  # pt, ls
-    # appid = self.request.POST['appid'] # nombre de la app
-    # url   = self.request.POST['url']   # url interna
-    # size  = self.request.POST['size']  # small, big
-    # ptls  = self.request.POST['ptls']  # pt, ls
+    # appid = self.request.GET['appid'] # nombre de la app
+    # url   = self.request.GET['url']   # url interna
+    # size  = self.request.GET['size']  # small, big
+    # ptls  = self.request.GET['ptls']  # pt, ls
+    appid = self.request.POST['appid'] # nombre de la app
+    url   = self.request.POST['url']   # url interna
+    size  = self.request.POST['size']  # small, big
+    ptls  = self.request.POST['ptls']  # pt, ls
     
     i = importlib.import_module(apps_id[appid]+u'.mapping')
     mapping = i.get_mapping() #.encode('utf-8')
@@ -111,7 +111,7 @@ class ScreenController(FrontendHandler):
 
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     
-    return self.response.write(rv.encode('utf-8'))
+    #return self.response.write(rv.encode('utf-8'))
     #return self.response.write(result)
     
     # Set up headers for browser to correctly recognize ZIP file
