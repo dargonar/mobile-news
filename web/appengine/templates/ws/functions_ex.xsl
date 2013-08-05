@@ -170,7 +170,7 @@
   <li>  
     <a href="{{node|noticia_link}}" title="principal">
       {% if node.thumbnail %}
-      {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+      {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta, 'imagen') }}
       {% endif %}
       <div class="info"><p>{{node.title}}</p></div>
       {% if not node.thumbnail %}
@@ -250,8 +250,8 @@
     </div>    
 {%- endmacro %}
 
-{% macro ImagenNoticiaDestacada(url, meta) -%}
-    <div class="imagen_principal" id="{{url}}" style="background-image:url({{url}}.i);">
+{% macro ImagenNoticiaDestacada(url, meta, class='imagen_principal') -%}
+    <div class="{{class}}" id="{{url}}" style="background-image:url({{url}}.i);">
       <div class="media_link video_over_photo">
         {{ MediaAttach(meta) }}
       </div>
@@ -301,7 +301,7 @@
           </div>
         </div>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta, 'imagen') }}
         {% endif %}
       </div>
     </a>
@@ -321,7 +321,7 @@
         {{ DateSectionLabel(node) }}
         <h1>{{node.title}}</h1>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta, 'imagen') }}
         {% else %}
         <div class="info">
           <p>{{node.description|if_not_none}}</p>
@@ -346,7 +346,7 @@
         {{ DateSectionLabel(node) }}
         <h2>{{node.title}}</h2>
         {% if node.thumbnail %}
-          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+          {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta, 'imagen') }}
         {% else %}
         <div class="info">
           <p>{{node.description|if_not_none}}</p>

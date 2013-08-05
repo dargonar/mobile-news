@@ -5,7 +5,7 @@ def get_mapping():
   'castellanos' : {
     'httpurl' : {
       'section://main'  : 'X: castellanos.rss_index' ,
-      'noticia://'      : 'http://www.eldia.com.ar/rss/noticia.aspx?id=%s',
+      'noticia://'      : 'X: castellanos.rss_noticia',
       'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
       'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
       'menu://'         : 'http://www.eldia.com.ar/rss/secciones.aspx',
