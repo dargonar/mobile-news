@@ -12,38 +12,14 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date
+from utils import get_datetime, get_date, get_header, get_footer
 
 def get_xml(kwargs):
   
   noticias = []
   
-  header = u"""<?xml version="1.0" encoding="UTF-8" ?>
-  <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
-  <channel>
-   <title>DIARIO CASTELLANOS</title>
-   <link>http://www.diariocastellanos.net/</link>
-   <description>El diario de Rafaela, Argentina - Con la verdad no ofendo ni temo</description>
-   <copyright>2013, Editora del Centro, Propiedad Intelectual N84.363, todos los derechos reservados</copyright>
-   <pubDate>Tue, 04 Sep 2012 20:20:18 GMT</pubDate>
-   <image>
-     <title>DiarioCastellanos - RSS</title>
-     <url>http://www.diariocastellanos.net/images/header/castellanos.png</url>
-     <link>http://www.diariocastellanos.net</link>
-   </image>
-   <ttl>10</ttl>
-   <atom:link href="http://www.diariocastellanos.net/simu.rss" rel="self  " type="application/rss+xml"/>
-
-  """
-
-  footer = u"""
-   </channel>
-  </rss>
-  """
-
   output = StringIO.StringIO()
-  output.write(header)
+  output.write(get_header)
 
   link = u'http://www.diariocastellanos.net/Default.aspx'
   content = urlopen(link).read()
@@ -209,6 +185,6 @@ def get_xml(kwargs):
       if i > 0: 
         put_link_item(items[i])
 
-  output.write(footer)
+  output.write(get_footer)
 
   return output.getvalue()

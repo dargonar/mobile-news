@@ -64,8 +64,9 @@ class ScreenController(FrontendHandler):
       if url.startswith(k):
         httpurl = url_map[k]
         #HARKU
-        if '?' in url:
+        if '//' in url:
           args['host'] = url[url.index('//')+2:url.index('?')]
+        if '?' in url:
           for i in url[url.index('?')+1:].split('&'):
             tmp = i.split('=')
             args[tmp[0]]=tmp[1]
