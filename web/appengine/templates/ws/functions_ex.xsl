@@ -266,10 +266,10 @@
         {% endif %}
         <div class="contenido">
           <div id="titulo">
-            {% if node.pubDate %}
+            {# % if node.pubDate %}
             <label>{{node.pubDate|datetime}}</label> | <label class="seccion">{{node.category}}</label>
             <br />
-            {% endif %}
+            {% endif % #}
             <h1>{{node.title}}</h1>
           </div>
         </div>

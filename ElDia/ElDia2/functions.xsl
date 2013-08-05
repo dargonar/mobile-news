@@ -434,11 +434,11 @@
                   <xsl:with-param name="DateTime" select="$Item/@pubDate"/>
                 </xsl:call-template>
               </label>
-            <xsl:if test="$Item/@lead!=''">
+            <xsl:if test="$Item/@category!=''">
               <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>|<xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
               <label class="seccion">
                 <xsl:call-template name="ReplaceInfoGral">
-                  <xsl:with-param name="seccion" select="$Item/@lead"/>
+                  <xsl:with-param name="seccion" select="$Item/@category"/>
                 </xsl:call-template>
                 <!--xsl:value-of disable-output-escaping="yes" select="$Item/@lead" /--></label>
             </xsl:if>
@@ -449,22 +449,15 @@
         
         <xsl:if test="not(not($has_image))">
           <div class="foto img_container">
-            <xsl:call-template name="MediaAttach">
+            <!--xsl:call-template name="MediaAttach">
               <xsl:with-param name="MetaTag" select="$Item/news:meta"/>
-            </xsl:call-template>
-            <xsl:if test="not(not($Item/@thumbnail))">
-              <xsl:if test="$Item/@thumbnail!=''">
-                <div class="imagen_secundaria" id="{$Item/@thumbnail}" style="background-image:url(i_{$Item/@thumbnail}) !important;"></div>
-                <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
-              </xsl:if>
-            </xsl:if>
-            <!--xsl:if test="not($Item/@thumbnail) or $Item/@thumbnail=''">
-              <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
-            </xsl:if-->
+            </xsl:call-template-->
+            <div class="imagen_secundaria" id="{$Item/@thumbnail}" style="background-image:url(i_{$Item/@thumbnail}) !important;"></div>
+            <div class="img_loader"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
           </div>
         </xsl:if>
         
-        <xsl:if test="not($has_image)">
+        <!-- xsl:if test="not($has_image)">
           <xsl:if test="not(not($Item/news:meta))">
             <div class="right_ico_container">
               <xsl:call-template name="MediaAttach">
@@ -472,7 +465,7 @@
               </xsl:call-template>
             </div>
           </xsl:if>
-        </xsl:if>
+        </xsl:if -->
       </a>
       <div class="separador"><xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text></div>
     </li>
