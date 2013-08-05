@@ -29,8 +29,10 @@ extra_paths = [
     os.path.join(gae_path, 'lib', 'antlr3'),
     os.path.join(gae_path, 'lib', 'django'),
     os.path.join(gae_path, 'lib', 'ipaddr'),
-    os.path.join(gae_path, 'lib', 'webob'),
+    os.path.join(gae_path, 'lib', 'webob-1.2.3'),
+    os.path.join(gae_path, 'lib', 'webapp2-2.5.2'),
     os.path.join(gae_path, 'lib', 'webapp2'),
+    os.path.join(gae_path, 'lib', 'jinja2-2.6'),
     os.path.join(gae_path, 'lib', 'yaml', 'lib'),
 ]
 
@@ -160,22 +162,18 @@ def compile_templates(argv=None):
     env = jinja2.get_jinja2(app=app).environment
     # from myfilters import do_currencyfy, do_statusfy, do_pricefy, do_addressify, do_descriptify, do_headlinify, do_slugify, do_operationfy, do_totalareafy, do_expensasfy, do_add_days, do_realestate_linkfy, do_ownerify, do_oper_labelify, do_email_to_png
 
-    # env.filters['currencyfy']         = do_currencyfy
-    # env.filters['statusfy']           = do_statusfy
-    # env.filters['pricefy']            = do_pricefy
-    # env.filters['addressify']         = do_addressify
-    # env.filters['descriptify']        = do_descriptify
-    # env.filters['headlinify']         = do_headlinify
-    # env.filters['slugify']            = do_slugify
-    # env.filters['operationfy']        = do_operationfy
-    # env.filters['totalareafy']        = do_totalareafy
-    # env.filters['expensasfy']         = do_expensasfy
-    # env.filters['realestate_linkfy']  = do_realestate_linkfy
-    # env.filters['add_days']           = do_add_days
-    # env.filters['ownerify']           = do_ownerify
-    # env.filters['oper_labelify']      = do_oper_labelify
-    # env.filters['email_to_png']       = do_email_to_png
-
+    from utils import url_fix,format_datetime,noticia_link,if_not_none,has_content,get_content,gallery,meta_has,related_link,build_list,empty
+    env.filters['urlencode']    = url_fix
+    env.filters['datetime']     = format_datetime
+    env.filters['noticia_link'] = noticia_link
+    env.filters['if_not_none']  = if_not_none
+    env.filters['has_content']  = has_content
+    env.filters['content']      = get_content
+    env.filters['gallery']      = gallery
+    env.filters['meta_has']     = meta_has
+    env.filters['related_link'] = related_link
+    env.filters['build_list']   = build_list
+    env.filters['is_empty']     = empty
     env.compile_templates(target, extensions=None,
         filter_func=filter_templates, zip=zip_cfg, log_function=logger,
         ignore_errors=False, py_compile=False)
