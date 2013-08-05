@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 def get_mapping():
   return {
   'castellanos' : {

@@ -41,7 +41,7 @@ def meta_has(meta, media_type):
     return False
 
   if getattr(meta.attrs, 'has_' + media_type).lower() != 'true':
-    return False
+    return False  
   
   return True
 

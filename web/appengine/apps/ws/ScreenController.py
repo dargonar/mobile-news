@@ -71,23 +71,24 @@ class ScreenController(FrontendHandler):
     
   def get_xml(self, **kwargs):  
     
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
     
     httpurl = self.get_httpurl(appid, url, mapping=None)
     #return self.response.write(httpurl)
     r = self.build_xml_string(url, httpurl)
     
-    self.response.headers['Content-Type'] ='application/rss+xml'
+    #self.response.headers['Content-Type'] ='application/rss+xml'
+    self.response.headers['Content-Type'] ='text/xml'
     
     return self.response.write(r) # .encode('utf-8')
     
   def get_screen(self, **kwargs):  
     # Parametros del request
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
-    size  = self.request.POST['size']  # small, big
-    ptls  = self.request.POST['ptls']  # pt, ls
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
+    size  = self.request.params['size']  # small, big
+    ptls  = self.request.params['ptls']  # pt, ls
     
     mapping = self.get_mapping(appid)
     
