@@ -282,6 +282,7 @@ div.main_img_container, div.main_foto {
   background-size: cover;
   background-position: center;
   display: block;
+  position: relative;
 }
 
 .imagen_iphone_landscape{

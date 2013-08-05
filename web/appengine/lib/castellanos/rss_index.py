@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
-#http://www.pregon.com.ar/
+#http://www.diarioscastellanos.net/
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from urllib2 import urlopen
 from datetime import datetime, timedelta
 
+from hashlib import sha1
+
 import cgi
 import re
 import StringIO
 
 def get_xml():
+  
+  noticias = []
+  
 
   today_date = ""
 
@@ -70,7 +75,6 @@ def get_xml():
     output.write(u'\t' + strx + u'\n')
 
   def get_main():
-    
     title = getOne("#Content .ColumnaA .Noticia.Destacada h3 a")
     if title is None: 
       output_write( u'<!-- NO TITLE -->')
@@ -80,7 +84,12 @@ def get_xml():
     if desc is None: 
       output_write( u'<!-- NO DESC -->')
       return None
-
+    
+    href = sha1(title['href']).digest().encode('hex')
+    if href in noticias:
+      return None
+    noticias.append(href)
+    
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
     output_write( u'<description>%s</description>' % desc.text )
@@ -111,7 +120,12 @@ def get_xml():
   def put_item(noticia):
     
     title = noticia.select('h3 a')[0]
-
+    
+    href = sha1(title['href']).digest().encode('hex')
+    if href in noticias:
+      return None
+    noticias.append(href)
+    
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
     output_write( u'<description>%s</description>' % noticia.p.text) #cgi.escape(noticia.p) )
@@ -138,11 +152,29 @@ def get_xml():
 
     output_write( u'</item>')
   
-  # box = soup.select('div.C1 div.box')
-  # for i in xrange(len(box)):
-  #   #box[i].p.span.next_sibling
-  #   print box[i].p.find_all('span')
-  #   #print x.unicode()
+  def put_link_item(noticia):
+    
+    href = sha1(noticia['href']).digest().encode('hex')
+    if href in noticias:
+      return None
+    noticias.append(href)
+    
+    output_write( u'<item>')
+    output_write( u'<title>%s</title>' % noticia.text )
+    output_write( u'<description>%s</description>' % u'') #cgi.escape(noticia.p) )
+    output_write( u'<link>%s</link>' % noticia['href'] )
+    output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(noticia['href'])[0] )
+    
+    #No tiene fecha la destacada
+    output_write( u'<pubDate>%s</pubDate>' % datetime.now())#getDate(spans[0].strong.text) )
+    output_write( u'<author></author>' )
+    output_write( u'<category></category>' )
+
+    output_write( u'<news:lead type="plain" meta="volanta"></news:lead>')
+    output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+
+    output_write( u'</item>')
 
   get_main()
   
@@ -155,12 +187,31 @@ def get_xml():
     for i in xrange(len(items)): 
       if u'Destacada' not in items[i]['class']:
         put_item(items[i])
-
   
-  # h1 = soup.select('div.C2 h1 a')
-  # box = soup.select('div.C2 div.box')
-  # for i in xrange(len(h1)): put_item(h1[i], box[i])
-    
+  selectors = [ u'#Content .ColumnaAB .NoticiasAB.<Deportes|Actualidad> ul li a'
+                , u'#Content .SideBar .UltimoMomento ul li a'
+                #, u'#Content .SideBar .Ranking ul li a'
+                ]
+  
+  for selector in selectors:
+    items = soup.select(selector)
+    for i in xrange(len(items)): 
+      put_link_item(items[i])
+      
+  items = soup.select(u'#Content .SideBar .Ranking ul li')
+  for i in xrange(len(items)): 
+    a_tag = items[i].a
+    items[i].a.strong.decompose()
+    put_link_item(a_tag)
+  
+  
+  uls = soup.select(u'#Content .NoticiasFoot ul')
+  for ul in uls:
+    items = ul.select(u'li a')
+    for i in xrange(len(items)): 
+      if i > 0: 
+        put_link_item(items[i])
+
   output.write(footer)
 
   return output.getvalue()

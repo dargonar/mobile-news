@@ -30,48 +30,7 @@ apps_id = {
 
 class ScreenController(FrontendHandler):
   
-  def get_screen(self, **kwargs):
-    
-    # Parametros del request
-    # appid = self.request.GET['appid'] # nombre de la app
-    # url   = self.request.GET['url']   # url interna
-    # size  = self.request.GET['size']  # small, big
-    # ptls  = self.request.GET['ptls']  # pt, ls
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
-    size  = self.request.POST['size']  # small, big
-    ptls  = self.request.POST['ptls']  # pt, ls
-    
-    i = importlib.import_module(apps_id[appid]+u'.mapping')
-    mapping = i.get_mapping() #.encode('utf-8')
-      
-    url_map = mapping[ apps_id[appid] ]['httpurl']
-    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
-    extras_map = mapping[ apps_id[appid] ]['extras']
-
-    # Armamos la direccion del xml
-    httpurl = ''
-    for k in url_map:
-      if url.startswith(k):
-        httpurl = url_map[k]
-        if '%s' in httpurl:
-          httpurl = httpurl % url[url.index('//')+2:]
-        break
-
-    # Obtenemos el template
-    template = ''
-    for k in template_map:
-      if url.startswith(k):
-        template = template_map[k][ptls]
-        break
-
-    if httpurl == '' or template == '':
-      logging.error('Something is wrong => [%s]' % (url))
-      raise('8-(')
-
-    # Traemos el xml y lo transformamos en un dict
-    xml = XML2Dict()
-
+  def build_xml_string(self, url, httpurl):
     if httpurl.startswith('X:'):
       i = importlib.import_module(httpurl.split()[1])
       result = i.get_xml().encode('utf-8')
@@ -85,11 +44,77 @@ class ScreenController(FrontendHandler):
         result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
                       xmlns:media="http://search.yahoo.com/mrss/" 
                       xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
-                      version="2.0"><channel>
+                      version="2.0" encoding="UTF-8"><channel>
                       <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now.strftime("%a, %d %b %Y %H:%M:%S"), result)
 
     result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
-    r = xml.fromstring(result)
+    return result
+  
+  def get_httpurl(self, appid, url, mapping=None):  
+    if mapping is None:
+      mapping = self.get_mapping(appid)
+    # Armamos la direccion del xml
+    url_map = mapping[ apps_id[appid] ]['httpurl']
+    httpurl = ''
+    for k in url_map:
+      if url.startswith(k):
+        httpurl = url_map[k]
+        if '%s' in httpurl:
+          httpurl = httpurl % url[url.index('//')+2:]
+        break
+    return httpurl
+
+  
+  def get_mapping(self, appid):
+    i = importlib.import_module(apps_id[appid]+u'.mapping')
+    return i.get_mapping() #.encode('utf-8')
+    
+  def get_xml(self, **kwargs):  
+    
+    appid = self.request.POST['appid'] # nombre de la app
+    url   = self.request.POST['url']   # url interna
+    
+    httpurl = self.get_httpurl(appid, url, mapping=None)
+    #return self.response.write(httpurl)
+    r = self.build_xml_string(url, httpurl)
+    
+    self.response.headers['Content-Type'] ='application/rss+xml'
+    
+    return self.response.write(r) # .encode('utf-8')
+    
+  def get_screen(self, **kwargs):  
+    # Parametros del request
+    # appid = self.request.GET['appid'] # nombre de la app
+    # url   = self.request.GET['url']   # url interna
+    # size  = self.request.GET['size']  # small, big
+    # ptls  = self.request.GET['ptls']  # pt, ls
+    appid = self.request.POST['appid'] # nombre de la app
+    url   = self.request.POST['url']   # url interna
+    size  = self.request.POST['size']  # small, big
+    ptls  = self.request.POST['ptls']  # pt, ls
+    
+    mapping = self.get_mapping(appid)
+    
+    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    extras_map = mapping[ apps_id[appid] ]['extras']
+    
+    # Armamos la direccion del xml    
+    httpurl = self.get_httpurl(appid, url, mapping)
+    
+    # Obtenemos el template
+    template = ''
+    for k in template_map:
+      if url.startswith(k):
+        template = template_map[k][ptls]
+        break
+
+    if httpurl == '' or template == '':
+      logging.error('Something is wrong => [%s]' % (url))
+      raise('8-(')
+
+    # Traemos el xml y lo transformamos en un dict
+    xml = XML2Dict()
+    r = xml.fromstring(self.build_xml_string(url, httpurl))
 
     # Reemplazamos las imagenes por el sha1 de la url
     imgs = []
