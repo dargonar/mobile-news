@@ -30,11 +30,14 @@ apps_id = {
 
 class ScreenController(FrontendHandler):
   
-  def build_xml_string(self, url, httpurl):
+  def build_xml_string(self, url, httpurl, kwargs):
     if httpurl.startswith('X:'):
       i = importlib.import_module(httpurl.split()[1])
-      result = i.get_xml().encode('utf-8')
+      logging.error('--modulo:%s'%httpurl.split()[1])
+      result = i.get_xml(kwargs).encode('utf-8')
     else:
+      if '%s' in httpurl:
+        httpurl = httpurl % kwargs['host']
       result = urllib2.urlopen(httpurl).read()
 
       # HACKO el DIA:
@@ -56,13 +59,19 @@ class ScreenController(FrontendHandler):
     # Armamos la direccion del xml
     url_map = mapping[ apps_id[appid] ]['httpurl']
     httpurl = ''
+    args = {}
     for k in url_map:
       if url.startswith(k):
         httpurl = url_map[k]
-        if '%s' in httpurl:
-          httpurl = httpurl % url[url.index('//')+2:]
+        #HARKU
+        if '?' in url:
+          args['host'] = url[url.index('//')+2:url.index('?')]
+          for i in url[url.index('?')+1:].split('&'):
+            tmp = i.split('=')
+            args[tmp[0]]=tmp[1]
+
         break
-    return httpurl
+    return httpurl, args
 
   
   def get_mapping(self, appid):
@@ -71,23 +80,26 @@ class ScreenController(FrontendHandler):
     
   def get_xml(self, **kwargs):  
     
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
     
-    httpurl = self.get_httpurl(appid, url, mapping=None)
-    #return self.response.write(httpurl)
-    r = self.build_xml_string(url, httpurl)
+    httpurl, args = self.get_httpurl(appid, url, mapping=None)
     
-    self.response.headers['Content-Type'] ='application/rss+xml'
+    # return self.response.write(args)
+    
+    r = self.build_xml_string(url, httpurl, args)
+    
+    #self.response.headers['Content-Type'] ='application/rss+xml'
+    self.response.headers['Content-Type'] ='text/xml'
     
     return self.response.write(r) # .encode('utf-8')
     
   def get_screen(self, **kwargs):  
     # Parametros del request
-    appid = self.request.POST['appid'] # nombre de la app
-    url   = self.request.POST['url']   # url interna
-    size  = self.request.POST['size']  # small, big
-    ptls  = self.request.POST['ptls']  # pt, ls
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
+    size  = self.request.params['size']  # small, big
+    ptls  = self.request.params['ptls']  # pt, ls
     
     mapping = self.get_mapping(appid)
     
@@ -95,7 +107,7 @@ class ScreenController(FrontendHandler):
     extras_map = mapping[ apps_id[appid] ]['extras']
     
     # Armamos la direccion del xml    
-    httpurl = self.get_httpurl(appid, url, mapping)
+    httpurl, args = self.get_httpurl(appid, url, mapping)
     
     # Obtenemos el template
     template = ''
@@ -110,7 +122,7 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    r = xml.fromstring(self.build_xml_string(url, httpurl))
+    r = xml.fromstring(self.build_xml_string(url, httpurl, args ))
 
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []

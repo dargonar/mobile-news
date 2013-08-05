@@ -12,13 +12,12 @@ import cgi
 import re
 import StringIO
 
-def get_xml():
+from utils import get_datetime, get_date
+
+def get_xml(kwargs):
   
   noticias = []
   
-
-  today_date = ""
-
   header = u"""<?xml version="1.0" encoding="UTF-8" ?>
   <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
   xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
@@ -51,18 +50,8 @@ def get_xml():
   
   soup = BeautifulSoup(content)
   
-  months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
-  tmp = soup.select('div.clima div')
-
-  # 31 de Julio de 2013
-  # parts = tmp[len(tmp)-1].text.split()
-  # inx = months.index(parts[3].lower())
-  today_date = datetime.now() #datetime(int(parts[5]), inx+1, int(parts[1]) )
-
-  def getDate(hhmm):
-    parts = hhmm.split(':')
-    tmp = today_date + timedelta(0,0,0,0,int(parts[1]),int(parts[0]))
-    return tmp.strftime("%a, %d %b %Y %H:%M:%S")
+  date        = soup.select('#TopHeader #Fecha')
+  today_date  = get_datetime(date)  
 
   def getOne(path):
     s = soup.select(path)
@@ -74,8 +63,13 @@ def get_xml():
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
 
+  def get_description(soap_element):
+    soap_element.strong.decompose()
+    return soap_element.text
+    
   def get_main():
-    title = getOne("#Content .ColumnaA .Noticia.Destacada h3 a")
+    noticia = getOne("#Content .ColumnaA .Noticia.Destacada")
+    title = noticia.select(" h3 a")[0]
     if title is None: 
       output_write( u'<!-- NO TITLE -->')
       return None
@@ -92,12 +86,13 @@ def get_xml():
     
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
-    output_write( u'<description>%s</description>' % desc.text )
+    #output_write( u'<description>%s</description>' % get_description(desc) )
+    output_write( u'<description></description>')
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
-    #No tiene fecha la destacada
-    output_write( u'<pubDate></pubDate>' )
+    output_write( u'<pubDate>%s</pubDate>' % get_date((noticia.select('strong.Time')[0].text if noticia.select('strong.Time') else '00:00'), today_date) )
+    #output_write( u'<pubDate></pubDate>' )
     output_write( u'<author></author>' )
     output_write( u'<category></category>' )
 
@@ -105,7 +100,7 @@ def get_xml():
     if lead is not None:
       output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead.text )
     
-    output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % get_description(desc))
 
     img = getOne("#Content .ColumnaA .Noticia.Destacada .Foto img")
     if img is not None:
@@ -113,7 +108,7 @@ def get_xml():
       output_write( u'<media:text type="plain"></media:text>' )
       output_write( u'<media:credit role="publishing company">Diario Castellanos</media:credit>' )
 
-    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+    output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
 
     output_write( u'</item>')
 
@@ -128,27 +123,29 @@ def get_xml():
     
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
-    output_write( u'<description>%s</description>' % noticia.p.text) #cgi.escape(noticia.p) )
+    #output_write( u'<description>%s</description>' % get_description(noticia.p))
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % datetime.now())#getDate(spans[0].strong.text) )
+    time = noticia.select('strong.Time')[0].text if len(noticia.select('strong.Time'))>0 else '00:00'
+    output_write( u'<pubDate>%s</pubDate>' % get_date(time, today_date))
     output_write( u'<author></author>' )
     output_write( u'<category></category>' )
 
     lead = noticia.select('h4 a')
     output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead[0].contents if len(lead)>0 else '')
     
-    output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
-
+    #output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % get_description(noticia.p))
+    
     img = noticia.select('.Foto img')
     if img is not None and len(img)>0:
       output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img[0]['src'] )
       output_write( u'<media:text type="plain"></media:text>' )
       output_write( u'<media:credit role="publishing company">Castellanos</media:credit>' )
 
-    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+    output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
 
     output_write( u'</item>')
   
@@ -166,13 +163,13 @@ def get_xml():
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(noticia['href'])[0] )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % datetime.now())#getDate(spans[0].strong.text) )
+    output_write( u'<pubDate>%s</pubDate>' % get_date((noticia.select('strong.Time')[0].text if noticia.select('strong.Time') else '00:00'), today_date))
     output_write( u'<author></author>' )
     output_write( u'<category></category>' )
 
     output_write( u'<news:lead type="plain" meta="volanta"></news:lead>')
     output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
-    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+    output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
 
     output_write( u'</item>')
 
