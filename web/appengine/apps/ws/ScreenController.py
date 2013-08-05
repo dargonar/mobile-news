@@ -64,8 +64,9 @@ class ScreenController(FrontendHandler):
       if url.startswith(k):
         httpurl = url_map[k]
         #HARKU
+        args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else -1) ]
+        
         if '?' in url:
-          args['host'] = url[url.index('//')+2:url.index('?')]
           for i in url[url.index('?')+1:].split('&'):
             tmp = i.split('=')
             args[tmp[0]]=tmp[1]
@@ -85,7 +86,8 @@ class ScreenController(FrontendHandler):
     
     httpurl, args = self.get_httpurl(appid, url, mapping=None)
     
-    #self.response.headers['Content-Type'] ='application/rss+xml'
+    r = self.build_xml_string(url, httpurl, args)
+    
     self.response.headers['Content-Type'] ='text/xml'
     
     return self.response.write(r) # .encode('utf-8')

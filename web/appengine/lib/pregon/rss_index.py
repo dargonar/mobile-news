@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-def get_xml():
+def get_xml(args):
 
   today_date = ""
 
@@ -93,7 +93,7 @@ def get_xml():
     if lead is not None:
       output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead.text )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' desc.text )
+    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % desc.text )
 
     img = getOne("div.destacadasbox100 div.box100-foto img")
     if img is not None:
