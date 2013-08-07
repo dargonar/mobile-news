@@ -32,6 +32,10 @@ BOOL      init_ok = NO;
   return [NSString stringWithFormat:@"%@/%@_%@", cache_folder, prefix, key];
 }
 
+-(NSString*)getFileName2:(NSString*)key postfix:(NSString*)postfix{
+  return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, postfix];
+}
+
 -(NSData*)get:(NSString*)key prefix:(NSString*)prefix{
   if(!init_ok) return nil;
 
@@ -54,6 +58,17 @@ BOOL      init_ok = NO;
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager createFileAtPath:file contents:data attributes:nil];
 }
+
+
+-(BOOL)put2:(NSString*)key data:(NSData*)data postfix:(NSString*)postfix{
+  if(!init_ok) return NO;
+  
+  NSString* file=[self getFileName2:key postfix:postfix];
+  
+  NSFileManager *fileManager= [NSFileManager defaultManager];
+  return [fileManager createFileAtPath:file contents:data attributes:nil];
+}
+//[[DiskCache defaultCache] put2:image.local_uri data:data postfix:@".i"];
 
 -(BOOL)remove:(NSString*)key prefix:(NSString*)prefix{
   if(!init_ok) return NO;

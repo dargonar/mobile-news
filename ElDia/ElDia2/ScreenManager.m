@@ -50,25 +50,15 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-//NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
-//NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
-//NSString * const SECTIONS_URL         = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
-//NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.aspx";
-////NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
-//NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
-//NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
-//NSString * const CARTELERA_URL     = @"http://www.eldia.com.ar/extras/carteleradecine_txt.aspx";
-//NSString * const FARMACIAS_URL     = @"http://www.eldia.com.ar/extras/farmacias_txt.aspx";
-
-
-NSString * const MAIN_URL             = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.%s&size=%s&ptls=pt&url=section://main";
-NSString * const NOTICIA_URL          = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.%s&size=%s&ptls=pt&url=noticia://%@";
-NSString * const SECTIONS_URL         = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.%s&size=%s&ptls=pt&url=section://%@";
-NSString * const MENU_URL             = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.%s&size=%s&ptls=pt&url=menu://";
-NSString * const CLASIFICADOS_URL     = @"";
-NSString * const FUNEBRES_URL         = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.castellanos&size=small&ptls=pt&url=funebres://";
-NSString * const CARTELERA_URL        = @"http://www.rafaela.gov.ar/cine/";
-NSString * const FARMACIAS_URL        = @"http://circulorafaela.com.ar/farmacias.htm";
+NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
+NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
+NSString * const SECTIONS_URL         = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
+NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.aspx";
+//NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
+NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
+NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
+NSString * const CARTELERA_URL     = @"http://www.eldia.com.ar/extras/carteleradecine_txt.aspx";
+NSString * const FARMACIAS_URL     = @"http://www.eldia.com.ar/extras/farmacias_txt.aspx";
 
 
 @implementation ScreenManager
@@ -256,28 +246,33 @@ BOOL isIpad=NO;
   
   //Lo bajo
   NSError *my_err;
-  NSArray *response =[self downloadUrl2:[self getXmlHttpUrl2:url] err:&my_err];
+//  NSURL *the_url = [self getXmlHttpUrl2:url];
+  NSArray *response_array =[self downloadUrl2:url error:&my_err];
 
   // response[0] -> html
   // response[1] -> CSImages_urls
 
+  NSData* html = (NSData*)[response_array objectAtIndex:0];
   //Lo guardamos y retornamos
-  if(![cache put:key data:(NSData*)[response objectAtIndex:0] prefix:composedHtmlPrefix]) {
+  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
 
-  //Las guardamos en cache
-  if(![cache put:key data:tmp prefix:@"mi"]) {
-    return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+  //Las imagenes a descargar.guardamos en cache
+  if([response_array count]>1)
+  {
+    NSData* images= (NSData*)[response_array objectAtIndex:1];
+    if (images != nil)
+      if(![cache put:key data:images prefix:@"mi"]) {
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      }
   }
-  
 //  if(processNavigation)
 //  {
 //    [self processNewsForGestureNavigation:xml dummy:NO];
 //  }
   
-  /** END **/
-  /*********/
+  
   
   return html;
 }
@@ -298,9 +293,13 @@ BOOL isIpad=NO;
   //  :(NSData**)xml_data error:(NSError **)error{
 }
 
--(NSData *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
+-(NSArray *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
   
   NSURL *url = [self getXmlHttpUrl2:surl];
+  NSLog(@" ----------------- ");
+  NSLog(@" downloadUrl2: [%@] param:[%@]", [url absoluteString], surl);
+  NSLog(@" ----------------- ");
+  
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
   
   [request setNumberOfTimesToRetryOnTimeout:1];
@@ -352,8 +351,12 @@ BOOL isIpad=NO;
   }
   [unzipFile close];
   
-  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
-  ;
+//  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
+  NSMutableArray* ret = [[NSMutableArray alloc] initWithObjects:content,nil];
+  if(extra != nil)
+    [ret addObject:extra];
+  return  [NSArray arrayWithArray:ret];
+  
 }
 
 
@@ -521,12 +524,16 @@ BOOL isIpad=NO;
 }
 
 -(NSURL*) getXmlHttpUrl2:(NSString*)url {
-  NSString* tmp = @"http://192.168.0.11:8090/ws/screen?appid=com.diventi.castellanos&size=%s&ptls=%s&url=%s";
-  return [NSURL URLWithString:[NSString stringWithFormat:tmp,
-                               [app_delegate isiPad]?@"big":@"small",
-                               [app_delegate isLandscape]?@"ls":@"pt",
-                               url
-                              ]];
+  NSString* tmp = [NSString stringWithFormat:@"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@",
+                      ([app_delegate isiPad]?@"big":@"small"),
+                      ([app_delegate isLandscape]?@"ls":@"pt"),
+                      url
+                   ];
+  NSLog(@"-------------BEGIN");
+  NSLog(@"getXmlHttpUrl2:: [%@]", tmp);
+  NSLog(@"-------------END");
+  
+  return [NSURL URLWithString:tmp];
 
 }
 
@@ -604,11 +611,23 @@ BOOL isIpad=NO;
     return nil;
   }
   
-  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  if (mobi_images == nil) {
+//  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+  
+  NSArray *mobi_images_raw = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] componentsSeparatedByString:@","];
+  
+  if (mobi_images_raw == nil || [mobi_images_raw count]==0) {
     return [ErrorBuilder build:error desc:@"unarchive failed" code:ERR_DESERIALIZING_MI];
   }
-
+  
+  NSMutableArray *mobi_images = [[NSMutableArray alloc]init];
+  
+  for (int i=0; i<[mobi_images_raw count]; i++) {
+    NSString *img_url= (NSString*)[mobi_images_raw objectAtIndex:i];
+    MobiImage *image = [MobiImage initWithData:img_url _local_uri: [CryptoUtil sha1:img_url] _noticia_id:@"" _prefix:@"i"];
+    if( ![cache exists:image.local_uri prefix:@"i"] )
+      [mobi_images addObject:image];
+  }
   return mobi_images;
 }
 

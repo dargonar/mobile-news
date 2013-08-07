@@ -115,9 +115,9 @@ int cache_size = 2; //30;
   if(![fileManager fileExistsAtPath:jsFolder] || ![fileManager fileExistsAtPath:linkDestination])
   {
     NSError *error;
-    [fileManager removeItemAtPath:imgFolder error:&err];
-    [fileManager removeItemAtPath:cssFolder error:&err];
-    [fileManager removeItemAtPath:jsFolder error:&err];
+    [fileManager removeItemAtPath:imgFolder error:&error];
+    [fileManager removeItemAtPath:cssFolder error:&error];
+    [fileManager removeItemAtPath:jsFolder error:&error];
   }
   
   if (![fileManager fileExistsAtPath:cssFolder]) {
@@ -371,7 +371,8 @@ int cache_size = 2; //30;
   NSData *data = [request responseData];
   
   if (data != nil) {
-    [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
+//    [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
+    [[DiskCache defaultCache] put2:image.local_uri data:data postfix:@"i"];
   }
   
   [[NSNotificationCenter defaultCenter] 

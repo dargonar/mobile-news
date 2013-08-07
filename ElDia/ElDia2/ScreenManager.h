@@ -41,7 +41,5 @@
 
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error;
 
--(NSData *)downloadUrl2:(NSString*)surl error:(NSError**)error ;
-
 +(BOOL)isMainScreenPrefix:(NSString*)prefix;
 @end
