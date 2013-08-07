@@ -118,6 +118,15 @@
 		CE16EC8115ED766A00EC8210 /* HTMLGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EC8415ED770C00EC8210 /* CryptoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC7315ED5C1200EC8210 /* CryptoUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE1C1FE516307C1A00A18162 /* Icon@2x_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */; };
+		CE1EBC1C17B2CF7C00EF6753 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC0917B2CF7B00EF6753 /* ioapi.c */; };
+		CE1EBC1D17B2CF7C00EF6753 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC0B17B2CF7B00EF6753 /* mztools.c */; };
+		CE1EBC1E17B2CF7C00EF6753 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC0D17B2CF7B00EF6753 /* unzip.c */; };
+		CE1EBC1F17B2CF7C00EF6753 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC0F17B2CF7C00EF6753 /* zip.c */; };
+		CE1EBC2017B2CF7C00EF6753 /* FileInZipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC1317B2CF7C00EF6753 /* FileInZipInfo.m */; };
+		CE1EBC2117B2CF7C00EF6753 /* ZipException.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC1517B2CF7C00EF6753 /* ZipException.m */; };
+		CE1EBC2217B2CF7C00EF6753 /* ZipFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC1717B2CF7C00EF6753 /* ZipFile.m */; };
+		CE1EBC2317B2CF7C00EF6753 /* ZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC1917B2CF7C00EF6753 /* ZipReadStream.m */; };
+		CE1EBC2417B2CF7C00EF6753 /* ZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1EBC1B17B2CF7C00EF6753 /* ZipWriteStream.m */; };
 		CE2E304F165499EB00260455 /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2E304C165499EB00260455 /* iVersion.bundle */; };
 		CE2E3050165499EB00260455 /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E304E165499EB00260455 /* iVersion.m */; };
 		CE2E30741654A30B00260455 /* versions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E30731654A30B00260455 /* versions.plist */; };
@@ -684,6 +693,24 @@
 		CE16EC7515ED5C1200EC8210 /* HTMLGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLGenerator.m; sourceTree = "<group>"; };
 		CE1C1FE116307C1A00A18162 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		CE1C1FE216307C1A00A18162 /* Icon@2x_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x_ipad.png"; sourceTree = "<group>"; };
+		CE1EBC0917B2CF7B00EF6753 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		CE1EBC0A17B2CF7B00EF6753 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		CE1EBC0B17B2CF7B00EF6753 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		CE1EBC0C17B2CF7B00EF6753 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		CE1EBC0D17B2CF7B00EF6753 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		CE1EBC0E17B2CF7B00EF6753 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		CE1EBC0F17B2CF7C00EF6753 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		CE1EBC1017B2CF7C00EF6753 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		CE1EBC1217B2CF7C00EF6753 /* FileInZipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInZipInfo.h; sourceTree = "<group>"; };
+		CE1EBC1317B2CF7C00EF6753 /* FileInZipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileInZipInfo.m; sourceTree = "<group>"; };
+		CE1EBC1417B2CF7C00EF6753 /* ZipException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipException.h; sourceTree = "<group>"; };
+		CE1EBC1517B2CF7C00EF6753 /* ZipException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipException.m; sourceTree = "<group>"; };
+		CE1EBC1617B2CF7C00EF6753 /* ZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipFile.h; sourceTree = "<group>"; };
+		CE1EBC1717B2CF7C00EF6753 /* ZipFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipFile.m; sourceTree = "<group>"; };
+		CE1EBC1817B2CF7C00EF6753 /* ZipReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipReadStream.h; sourceTree = "<group>"; };
+		CE1EBC1917B2CF7C00EF6753 /* ZipReadStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipReadStream.m; sourceTree = "<group>"; };
+		CE1EBC1A17B2CF7C00EF6753 /* ZipWriteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipWriteStream.h; sourceTree = "<group>"; };
+		CE1EBC1B17B2CF7C00EF6753 /* ZipWriteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipWriteStream.m; sourceTree = "<group>"; };
 		CE2E304C165499EB00260455 /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
 		CE2E304D165499EB00260455 /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
 		CE2E304E165499EB00260455 /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
@@ -1072,6 +1099,7 @@
 		CE16EBF915ED5B8A00EC8210 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE1EBBE617B2CF6800EF6753 /* zip */,
 				CE7FE46F172E9F1300A3CFD7 /* GoogleAnalyticsLib */,
 				7888385116AEF85A00517A5F /* Base64 */,
 				CE2E304B165499EB00260455 /* iVersion */,
@@ -1162,6 +1190,47 @@
 				CE16EC4315ED5B8A00EC8210 /* xsltwin32config.h.in */,
 			);
 			path = libxslt;
+			sourceTree = "<group>";
+		};
+		CE1EBBE617B2CF6800EF6753 /* zip */ = {
+			isa = PBXGroup;
+			children = (
+				CE1EBC0817B2CF7B00EF6753 /* MiniZip */,
+				CE1EBC1117B2CF7C00EF6753 /* Objective-Zip */,
+			);
+			name = zip;
+			sourceTree = "<group>";
+		};
+		CE1EBC0817B2CF7B00EF6753 /* MiniZip */ = {
+			isa = PBXGroup;
+			children = (
+				CE1EBC0917B2CF7B00EF6753 /* ioapi.c */,
+				CE1EBC0A17B2CF7B00EF6753 /* ioapi.h */,
+				CE1EBC0B17B2CF7B00EF6753 /* mztools.c */,
+				CE1EBC0C17B2CF7B00EF6753 /* mztools.h */,
+				CE1EBC0D17B2CF7B00EF6753 /* unzip.c */,
+				CE1EBC0E17B2CF7B00EF6753 /* unzip.h */,
+				CE1EBC0F17B2CF7C00EF6753 /* zip.c */,
+				CE1EBC1017B2CF7C00EF6753 /* zip.h */,
+			);
+			path = MiniZip;
+			sourceTree = "<group>";
+		};
+		CE1EBC1117B2CF7C00EF6753 /* Objective-Zip */ = {
+			isa = PBXGroup;
+			children = (
+				CE1EBC1217B2CF7C00EF6753 /* FileInZipInfo.h */,
+				CE1EBC1317B2CF7C00EF6753 /* FileInZipInfo.m */,
+				CE1EBC1417B2CF7C00EF6753 /* ZipException.h */,
+				CE1EBC1517B2CF7C00EF6753 /* ZipException.m */,
+				CE1EBC1617B2CF7C00EF6753 /* ZipFile.h */,
+				CE1EBC1717B2CF7C00EF6753 /* ZipFile.m */,
+				CE1EBC1817B2CF7C00EF6753 /* ZipReadStream.h */,
+				CE1EBC1917B2CF7C00EF6753 /* ZipReadStream.m */,
+				CE1EBC1A17B2CF7C00EF6753 /* ZipWriteStream.h */,
+				CE1EBC1B17B2CF7C00EF6753 /* ZipWriteStream.m */,
+			);
+			path = "Objective-Zip";
 			sourceTree = "<group>";
 		};
 		CE2E304B165499EB00260455 /* iVersion */ = {
@@ -2223,6 +2292,15 @@
 				78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */,
 				CE7F071A1731C14700661632 /* ad.js in Sources */,
 				788517AF174A550200CF7DCF /* AdManager.m in Sources */,
+				CE1EBC1C17B2CF7C00EF6753 /* ioapi.c in Sources */,
+				CE1EBC1D17B2CF7C00EF6753 /* mztools.c in Sources */,
+				CE1EBC1E17B2CF7C00EF6753 /* unzip.c in Sources */,
+				CE1EBC1F17B2CF7C00EF6753 /* zip.c in Sources */,
+				CE1EBC2017B2CF7C00EF6753 /* FileInZipInfo.m in Sources */,
+				CE1EBC2117B2CF7C00EF6753 /* ZipException.m in Sources */,
+				CE1EBC2217B2CF7C00EF6753 /* ZipFile.m in Sources */,
+				CE1EBC2317B2CF7C00EF6753 /* ZipReadStream.m in Sources */,
+				CE1EBC2417B2CF7C00EF6753 /* ZipWriteStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
