@@ -87,6 +87,7 @@ class BeautifulSoup(Tag):
         is fed into the underlying parser."""
 
         if 'convertEntities' in kwargs:
+            del kwargs['convertEntities']
             warnings.warn(
                 "BS4 does not respect the convertEntities argument to the "
                 "BeautifulSoup constructor. Entities are always converted "

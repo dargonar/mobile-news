@@ -7,7 +7,7 @@ from email.utils import parsedate
 from datetime import datetime
 
 from urllib2 import urlopen
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 
 from google.appengine.api import files, taskqueue
 

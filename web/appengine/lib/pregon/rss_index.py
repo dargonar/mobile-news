@@ -42,11 +42,7 @@ def get_xml(args):
 
   link = "http://www.pregon.com.ar/"
   content = urlopen(link).read()
-  #fp = open('pregon.html', 'w')
-  #fp.write(content) 
-  #fp.close()
   soup = BeautifulSoup(content)
-  #soup = BeautifulSoup(open('pregon.html','r').read())
 
   months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
   tmp = soup.select('div.clima div')

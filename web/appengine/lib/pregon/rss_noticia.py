@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #http://www.pregon.com.ar/
-
+import logging
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from urllib2 import urlopen
@@ -40,7 +40,7 @@ def get_xml(args):
   output = StringIO.StringIO()
   output.write(header)
 
-  link = args.get('url')
+  link = 'http://www.pregon.com.ar/vernoticia.asp?id=%s' % args.get('host')
   content = urlopen(link).read()
   soup = BeautifulSoup(content)
 
