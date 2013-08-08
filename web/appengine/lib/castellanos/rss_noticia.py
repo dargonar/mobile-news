@@ -13,42 +13,17 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date
+from utils import get_datetime, get_date, get_header, get_footer
 
 def get_xml(kwargs):
   
   noticia_id = kwargs['host']
   today_date = ""
 
-  header = u"""<?xml version="1.0" encoding="UTF-8" ?>
-  <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
-  <channel>
-   <title>DIARIO CASTELLANOS</title>
-   <link>http://www.diariocastellanos.net/</link>
-   <description>El diario de Rafaela, Argentina - Con la verdad no ofendo ni temo</description>
-   <copyright>2013, Editora del Centro, Propiedad Intelectual N84.363, todos los derechos reservados</copyright>
-   <pubDate>Tue, 04 Sep 2012 20:20:18 GMT</pubDate>
-   <image>
-     <title>DiarioCastellanos - RSS</title>
-     <url>http://www.diariocastellanos.net/images/header/castellanos.png</url>
-     <link>http://www.diariocastellanos.net</link>
-   </image>
-   <ttl>10</ttl>
-   <atom:link href="http://www.diariocastellanos.net/simu.rss" rel="self  " type="application/rss+xml"/>
-
-  """
-
-  footer = u"""
-   </channel>
-  </rss>
-  """
-
   output = StringIO.StringIO()
-  output.write(header)
+  output.write(get_header())
 
   link = u'http://www.diariocastellanos.net/%s-dummy.note.aspx' % noticia_id
-  logging.error('link:%s'%link)
   content = urlopen(link).read()
   
   soup = BeautifulSoup(content)
@@ -87,7 +62,7 @@ def get_xml(kwargs):
       bajada.strong.decompose()
       output_write( u'<description>%s</description>' % bajada.text )
     else:
-      output_write( u'<description></description>')
+      output_write( u'<description><![CDATA[&nbsp;]]></description>')
     
     output_write( u'<link>%s</link>' % link )
     output_write( u'<guid isPermaLink="false">%s</guid>' % noticia_id )
@@ -135,6 +110,6 @@ def get_xml(kwargs):
     output_write( u'</item>')
   
   get_noticia()
-  output.write(footer)
+  output.write(get_footer())
 
   return output.getvalue()

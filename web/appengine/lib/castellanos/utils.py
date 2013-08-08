@@ -18,7 +18,7 @@ def get_date(hhmm, today_date):
   parts = hhmm.split(':')
   if len(parts)<2:
     parts = [0,0]
-  tmp = today_date + timedelta(0,0,0,0,int(parts[1]),int(parts[0]))
+  tmp = today_date + timedelta(minutes=int(parts[1]), hours=int(parts[0]))
   return tmp.strftime("%a, %d %b %Y %H:%M:%S")
 
 def get_header():
@@ -42,7 +42,7 @@ def get_header():
   """
 
 def get_footer():
-  u"""
+  return u"""
    </channel>
   </rss>
   """

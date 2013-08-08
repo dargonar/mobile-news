@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-def get_xml():
+def get_xml(args):
 
   today_date = ""
 
@@ -80,7 +80,7 @@ def get_xml():
 
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
-    output_write( u'<description>%s</description>' % desc.text )
+    output_write( u'<description></description>' )
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
@@ -93,7 +93,7 @@ def get_xml():
     if lead is not None:
       output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead.text )
     
-    output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % desc.text )
 
     img = getOne("div.destacadasbox100 div.box100-foto img")
     if img is not None:
@@ -101,7 +101,7 @@ def get_xml():
       output_write( u'<media:text type="plain"></media:text>' )
       output_write( u'<media:credit role="publishing company">Pregon</media:credit>' )
 
-    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+    output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
 
     output_write( u'</item>')
 
@@ -111,7 +111,7 @@ def get_xml():
 
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
-    output_write( u'<description>%s</description>' % spans[1].text )
+    output_write( u'<description></description>' )
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
@@ -123,7 +123,7 @@ def get_xml():
 
     output_write( u'<news:lead type="plain" meta="volanta"></news:lead>' )
     
-    output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % spans[1].text )
 
     img = box.div.img
     if img is not None:
@@ -131,7 +131,7 @@ def get_xml():
       output_write( u'<media:text type="plain"></media:text>' )
       output_write( u'<media:credit role="publishing company">Pregon</media:credit>' )
 
-    output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
+    output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
 
     output_write( u'</item>')
 

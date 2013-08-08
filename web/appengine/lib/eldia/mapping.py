@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
-mapping = {
+def get_mapping():
+  return {
   'eldia' : {
     'httpurl' : {
       'section://main'  : 'http://www.eldia.com.ar/rss/index.aspx' ,
@@ -46,5 +46,5 @@ mapping = {
       'has_farmacia'     : False,
       'has_cartelera'    : True,
     },
-   }
+  }
 }

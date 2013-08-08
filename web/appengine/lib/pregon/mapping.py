@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
-mapping = {
+def get_mapping():
+  return {
   'pregon' : {
     'httpurl' : {
       'section://main'  : 'X: pregon.rss_index' ,
-      'noticia://'      : 'http://www.eldia.com.ar/rss/noticia.aspx?id=%s',
+      'noticia://'      : 'X: pregon.rss_noticia',
       'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
       'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
       'menu://'         : 'http://www.eldia.com.ar/rss/secciones.aspx',
