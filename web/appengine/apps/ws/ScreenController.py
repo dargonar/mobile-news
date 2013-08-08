@@ -66,15 +66,7 @@ class ScreenController(FrontendHandler):
       if url.startswith(k):
         httpurl = url_map[k]
         #HARKU
-        logging.error('------------------------------')
-        logging.error(url)
-        logging.error('------------------------------')
-
         args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
-
-        logging.error('------------------------------')
-        logging.error(args)
-        logging.error('------------------------------')
         
         if '?' in url:
           for i in url[url.index('?')+1:].split('&'):
