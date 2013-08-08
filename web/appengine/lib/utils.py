@@ -99,11 +99,11 @@ def build_list(value):
 
   return [value]
 
-def format_datetime(value, part='%H:%m'):
+def format_datetime(value, part='%H:%M'):
     if value is None:
       return ''
     p = parser()
-    return p.parse(value, default=None, ignoretz=True).strftime(part)
+    return p.parse(value, default=None, ignoretz=True).strftime(part) #str(value) #
 
 def if_not_none(value):
   if not value:
