@@ -99,7 +99,7 @@ NSLock *menuLock;
   
   if([self.mScreenManager menuExists])
   {
-    NSLog(@"MainViewController::loadMenu menu exists!");
+//    NSLog(@"MainViewController::loadMenu menu exists!");
     self.btnOptions.enabled=YES;
     if(useCache)
       return;
@@ -113,6 +113,7 @@ NSLock *menuLock;
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
 
+  /*
   NSString* url = [self.currentUrl copy];
   
   NSDate * date = [self getDate:url];
@@ -123,7 +124,7 @@ NSLock *menuLock;
   
   // Lo traemos de nuevo
   [self loadUrl:url useCache:NO reloadMenu:([url hasPrefix:@"section://"])];
-  
+  */
 }
 
 
@@ -278,24 +279,6 @@ NSLock *menuLock;
   [menuLock unlock];
 }
 
--(void)testCMLValidation{
-  NSString *cleanedXML = @"";
-  
-  NSString *xml = @"<b>BTAG</b>HODOR<span><spen style=\"esssta;\"><spin class=\"esssta;\">OSSSTORG</spon>";
-  
-  NSLog(@" -(1)- original: [%@]", xml);
-  
-  NSString *htmlAttributesRegex = @"(?<=<)([^/>]+)(\\s(style|class)=['\"][^'\"]+?['\"])([^/>]*)(?=/?>|\\s)";
-  
-  cleanedXML = [xml stringByReplacingOccurrencesOfRegex:htmlAttributesRegex withString:@"$1"];
-  
-  NSLog(@" -(2)- regex: [%@]", cleanedXML);
-  
-  cleanedXML = [cleanedXML stringByDecodingHTMLEntities];
-  
-  NSLog(@" -(3)- decoded: [%@]", cleanedXML);
-  
-}
 
 NSInteger soto = 0;
 - (IBAction) btnRefreshClick: (id)param{
@@ -368,7 +351,7 @@ BOOL isLoading_ = YES;
   //document.body.style.width = '%@px'; 
   NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
   
-  NSLog(@"%@",jsString);
+//  NSLog(@"%@",jsString);
   [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
   
 }
@@ -541,7 +524,7 @@ bool menuLoaded = NO;
   
   //[webView setScalesPageToFit:YES];
   NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
-  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
+//  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
   
   if(webView.tag == MAIN_VIEW_TAG){
     webView.hidden = YES;
@@ -612,7 +595,7 @@ bool showUpdatedAt = NO;
     
       [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
+//      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
       [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
       return NO;
@@ -631,7 +614,7 @@ bool showUpdatedAt = NO;
               || [[url scheme]isEqualToString:@"farmacia"]
               || [[url scheme]isEqualToString:@"cartelera"]))
       {
-        NSLog(@" main clicked: %@", url);
+//        NSLog(@" main clicked: %@", url);
         [self setCurrentUrl:[url absoluteString]];
         [self loadUrlAndLoading:[url absoluteString] useCache:YES];
         

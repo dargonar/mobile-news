@@ -272,8 +272,6 @@ BOOL isIpad=NO;
 //    [self processNewsForGestureNavigation:xml dummy:NO];
 //  }
   
-  
-  
   return html;
 }
 
@@ -331,30 +329,47 @@ BOOL isIpad=NO;
 
   ZipFile *unzipFile= [[ZipFile alloc] initWithFileName:zipFilename mode:ZipFileModeUnzip];
   NSArray *infos= [unzipFile listFileInZipInfos];
-  NSMutableArray *file_sizes = [[NSMutableArray alloc] init];
-  for (FileInZipInfo *info in infos) {
-    [file_sizes addObject: [NSString stringWithFormat:@"%d", info.size ]];
-//    NSString *fileInfo= [NSString stringWithFormat:@"- %@ %@ %d (%d)", info.name, info.date, info.size, info.level];
-  }
+  
+//  NSMutableArray *file_sizes = [[NSMutableArray alloc] init];
+//  for (FileInZipInfo *info in infos) {
+//    [file_sizes addObject: [NSString stringWithFormat:@"%d", info.size ]];
+//  }
+  
+  BOOL first_file_is_html = [[((FileInZipInfo*)[infos objectAtIndex:0]) name] hasSuffix:@"html"];
   
   [unzipFile goToFirstFileInZip];
   ZipReadStream *read1= [unzipFile readCurrentFileInZip];
-  NSData* content = [read1 readDataOfLength:[((NSString*)[file_sizes objectAtIndex:0])intValue]];
+  NSData* file1 = [read1 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:0]) length]];
   [read1 finishedReading];
   
-  NSData* extra = nil;
+  NSData* file2 = nil;
   if ([unzipFile goToNextFileInZip])
   {
     ZipReadStream *read2= [unzipFile readCurrentFileInZip];
-    extra = [read2 readDataOfLength: [((NSString*)[file_sizes objectAtIndex:1])intValue]];
+    file2 = [read2 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:1]) length]];
     [read2 finishedReading];
   }
   [unzipFile close];
   
 //  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
-  NSMutableArray* ret = [[NSMutableArray alloc] initWithObjects:content,nil];
-  if(extra != nil)
-    [ret addObject:extra];
+  NSMutableArray* ret = [[NSMutableArray alloc] init];
+  if(file2 != nil)
+  {
+    if(first_file_is_html)
+    {
+      [ret addObject:file1];
+      [ret addObject:file2];
+    }
+    else
+    {
+      [ret addObject:file2];
+      [ret addObject:file1];
+    }
+  
+  }
+  else
+    [ret addObject:file1];
+
   return  [NSArray arrayWithArray:ret];
   
 }
@@ -529,10 +544,6 @@ BOOL isIpad=NO;
                       ([app_delegate isLandscape]?@"ls":@"pt"),
                       url
                    ];
-  NSLog(@"-------------BEGIN");
-  NSLog(@"getXmlHttpUrl2:: [%@]", tmp);
-  NSLog(@"-------------END");
-  
   return [NSURL URLWithString:tmp];
 
 }

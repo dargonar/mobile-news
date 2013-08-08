@@ -29,11 +29,7 @@ BOOL      init_ok = NO;
 }
 
 -(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix{
-  return [NSString stringWithFormat:@"%@/%@_%@", cache_folder, prefix, key];
-}
-
--(NSString*)getFileName2:(NSString*)key postfix:(NSString*)postfix{
-  return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, postfix];
+  return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, prefix];
 }
 
 -(NSData*)get:(NSString*)key prefix:(NSString*)prefix{
@@ -41,10 +37,8 @@ BOOL      init_ok = NO;
 
   if(![self exists:key prefix:prefix])
   {
-    NSLog(@" NO GET [%@_%@]", prefix, key);
     return nil;
   }
-  NSLog(@" SI GET [%@_%@]", prefix, key);
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager contentsAtPath:[self getFileName:key prefix:prefix]];
 }
@@ -52,23 +46,12 @@ BOOL      init_ok = NO;
 -(BOOL)put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix{
   if(!init_ok) return NO;
 
-  NSLog(@" SAVED [%@_%@]", prefix, key);
+//  NSLog(@" SAVED [%@_%@]", prefix, key);
   NSString* file=[self getFileName:key prefix:prefix];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager createFileAtPath:file contents:data attributes:nil];
 }
-
-
--(BOOL)put2:(NSString*)key data:(NSData*)data postfix:(NSString*)postfix{
-  if(!init_ok) return NO;
-  
-  NSString* file=[self getFileName2:key postfix:postfix];
-  
-  NSFileManager *fileManager= [NSFileManager defaultManager];
-  return [fileManager createFileAtPath:file contents:data attributes:nil];
-}
-//[[DiskCache defaultCache] put2:image.local_uri data:data postfix:@".i"];
 
 -(BOOL)remove:(NSString*)key prefix:(NSString*)prefix{
   if(!init_ok) return NO;
@@ -86,7 +69,7 @@ BOOL      init_ok = NO;
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
   BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
-  NSLog(@" %@ EXISTS [%@_%@]",(serungo==YES?@"SI":@"NO"), prefix, key);
+//  NSLog(@" %@ EXISTS [%@_%@]",(serungo==YES?@"SI":@"NO"), prefix, key);
   return serungo;
 }
 
@@ -247,7 +230,7 @@ BOOL      init_ok = NO;
   for(NSDictionary* file in sortedFiles) {
     NSString *fileName = (NSString *)[file objectForKey:@"path"];
     NSString *fileCreateDate = (NSString *)[file objectForKey:@"lastModDate"];
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] || [fileName hasPrefix:@"c_"]) {
+    if ([fileName hasSuffix:@".i"] || [fileName hasSuffix:@".a"] || [fileName hasSuffix:@".mi"] || [fileName hasSuffix:@".c"] || [fileName hasSuffix:@".zip"]) {
       NSDictionary *fileDictionary = [manager attributesOfItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];
       totalDeletedSize += [fileDictionary fileSize];
       [manager removeItemAtPath:[expandedPath stringByAppendingPathComponent:fileName] error:nil];

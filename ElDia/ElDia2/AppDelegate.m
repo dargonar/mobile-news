@@ -351,13 +351,12 @@ int cache_size = 2; //30;
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: [NSURL URLWithString:mobi_image.url]];
 
     [request setUserInfo:params];
-
-    //[request setNumberOfTimesToRetryOnTimeout:2];
-    //[request setTimeOutSeconds:NSTimeIn]
-    
     [request setDelegate:self];
     [request setDidFinishSelector:@selector(requestDone:)];
     [request setDidFailSelector:@selector(requestWentWrong:)];
+    
+    NSLog(@"---------------------------------");
+    NSLog(@"-- A Descargar %@", [[request url] absoluteString]);
     
     [self.download_queue addOperation:request];  
   }
@@ -367,13 +366,15 @@ int cache_size = 2; //30;
 {
   NSDictionary *params = [request userInfo];
   MobiImage *image = [params objectForKey:@"mi"];
-  
   NSData *data = [request responseData];
   
   if (data != nil) {
-//    [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
-    [[DiskCache defaultCache] put2:image.local_uri data:data postfix:@"i"];
+    [[DiskCache defaultCache] put:image.local_uri data:data prefix:@"i"];
   }
+  
+  
+  NSLog(@"---------------------------------");
+  NSLog(@"-- requestDone %@", [[request url] absoluteString]);
   
   [[NSNotificationCenter defaultCenter] 
     postNotificationName:@"com.diventi.mobipaper.image_downloaded" 
@@ -385,7 +386,8 @@ int cache_size = 2; //30;
 - (void)requestWentWrong:(ASIHTTPRequest *)request
 {
   NSDictionary *params = [request userInfo];
-
+  NSLog(@"---------------------------------");
+  NSLog(@"-- requestWentWrong %@", [[request url] absoluteString]);
   [[NSNotificationCenter defaultCenter] 
     postNotificationName:@"com.diventi.mobipaper.image_downloaded" 
                   object:nil
