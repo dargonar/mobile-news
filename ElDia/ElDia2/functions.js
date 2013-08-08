@@ -33,8 +33,7 @@ function indexToLandscape(){
   addClass(el, 'padded_landscape');
 }
 
-
-function indexToLandscape(){
+function indexToPortrait(){
   var el = document.getElementById('index');
   removeClass(el, 'padded_landscape');
   addClass(el, 'padded');
@@ -48,7 +47,7 @@ function update_image(img) {
     return;
   }
   el.style.backgroundImage = '';
-  el.style.backgroundImage = 'url(i_' + img + ')';
+  el.style.backgroundImage = 'url(' + img + '.i)';
 }
 
 function update_all_images() {
@@ -68,8 +67,6 @@ function refresh_background(imgs) {
 
 function update_nota_abierta_image(img){
   var el = document.getElementById('img_'+img);
-  //el.src = '';
-  //el.src = 'url(i_' + img + ')';
   refresh_background([el]);
 }
 

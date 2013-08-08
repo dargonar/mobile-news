@@ -30,7 +30,7 @@ apps_id = {
 
 class ScreenController(FrontendHandler):
   
-  def build_xml_string(self, url, httpurl, kwargs):
+  def build_xml_string(self, url, httpurl, kwargs, clear_namespaces=False):
     if httpurl.startswith('X:'):
       i = importlib.import_module(httpurl.split()[1])
       logging.error('--modulo:%s'%httpurl.split()[1])
@@ -50,7 +50,8 @@ class ScreenController(FrontendHandler):
                       version="2.0" encoding="UTF-8"><channel>
                       <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now.strftime("%a, %d %b %Y %H:%M:%S"), result)
 
-    result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
+    if clear_namespaces:
+      result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
     return result
   
   def get_httpurl(self, appid, url, mapping=None):  
@@ -95,7 +96,7 @@ class ScreenController(FrontendHandler):
     
     httpurl, args = self.get_httpurl(appid, url, mapping=None)
     
-    r = self.build_xml_string(url, httpurl, args)
+    r = self.build_xml_string(url, httpurl, args, clear_namespaces=False)
     
     self.response.headers['Content-Type'] ='text/xml'
     
@@ -129,7 +130,7 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    r = xml.fromstring(self.build_xml_string(url, httpurl, args ))
+    r = xml.fromstring(self.build_xml_string(url, httpurl, args, clear_namespaces=True ))
 
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
@@ -149,6 +150,7 @@ class ScreenController(FrontendHandler):
       i = importlib.import_module(apps_id[appid]+'.extras')
       extras_map['clasificados'] = i.get_classifieds()
 
+    #return self.render_response('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     
     # Set up headers for browser to correctly recognize ZIP file

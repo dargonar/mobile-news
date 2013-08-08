@@ -18,6 +18,12 @@
 #import "NewsManager.h"
 #import "AppDelegate.h"
 
+#import "ZipFile.h"
+#import "ZipException.h"
+#import "FileInZipInfo.h"
+#import "ZipWriteStream.h"
+#import "ZipReadStream.h"
+
 NSString * const MAIN_STYLESHEET          = @"1_main_list.xsl";
 NSString * const NOTICIA_STYLESHEET       = @"3_new.xsl";
 NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
@@ -51,9 +57,9 @@ NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.
 //NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
 NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
 NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
-
 NSString * const CARTELERA_URL     = @"http://www.eldia.com.ar/extras/carteleradecine_txt.aspx";
 NSString * const FARMACIAS_URL     = @"http://www.eldia.com.ar/extras/farmacias_txt.aspx";
+
 
 @implementation ScreenManager
 
@@ -217,7 +223,6 @@ BOOL isIpad=NO;
   
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  //NSString  *xml_key   = [CryptoUtil sha1:url];
   
   NSLog(@" url[%@]; prefix:[%@].", url, composedHtmlPrefix);
   
@@ -226,15 +231,12 @@ BOOL isIpad=NO;
 
     NSData *html = [cache get:key prefix:composedHtmlPrefix];
     if (html != nil) {
-      if(processNavigation)
-      {
-        [self processNewsForGestureNavigation:key];
-        //[self processNewsForGestureNavigation:xml_key];
-      }
-      
+//      if(processNavigation)
+//      {
+//        [self processNewsForGestureNavigation:key];
+//      }
       return html;
     }
-
   }
   
   if(![Utils areWeConnectedToInternet])
@@ -242,76 +244,33 @@ BOOL isIpad=NO;
     return [ErrorBuilder build:error desc:@"no internet conection" code:ERR_NO_INTERNET_CONNECTION];
   }
   
-  NSData *xml = nil;
-  // Esto significa que me piden de cache pero el html no esta cacheado, pero si lo esta el xml.
-  if (useCache && html_prefix!=nil) {
-    xml = [cache get:key prefix:@"xml"];
-  }
-  
   //Lo bajo
-  BOOL downloaded = (xml==nil);
-  if(downloaded)
-    xml=[self downloadUrl:url error:error hack_xml:([url hasPrefix:@"farmacia://"] || [url hasPrefix:@"cartelera://"])];
-  
-  //Problemas downloading?
-  if (xml == nil) {	
-    return nil;
-  }
-  
-  //No sanitizamos clasificados porque viene en formato !UTF8.
-  //if( ![url hasPrefix:@"clasificados://"] && downloaded==YES)
-  if( downloaded==YES)
-  {
-    xml = [Utils sanitizeXML:xml unescaping_html_entities:([url hasPrefix:@"noticia://"] || [url hasPrefix:@"section://"] || [url hasPrefix:@"clasificados://"])];
-  }
-  
-  if(processImages && downloaded==YES)
-  {
-    //Rebuildeamos el xml
-    XMLParser *parser = [[XMLParser alloc] init];
-    NSArray *mobi_images = [parser extractImagesAndRebuild:&xml error:error prefix:prefix];
-    /*
-     // Por que voy a retornar? si no tiene imagenes, no tiene imagenes!
-    if (mobi_images == nil) {
-      return nil;
-    }
-     */
-    if (mobi_images != nil) {
-      
-      //Serializamos las imagenes a un NSData
-      NSData *tmp = [NSKeyedArchiver archivedDataWithRootObject:mobi_images];
-      if (tmp == nil) {
-        return [ErrorBuilder build:error desc:@"archive mobiimages" code:ERR_SERIALIZING_MI];
-      }
-    
-      //Las guardamos en cache
-      if(![cache put:key data:tmp prefix:@"mi"]) {
-        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
-      }
-    }
-  }
-    
-  //Generamos el html con el xml rebuildeado
-  HTMLGenerator *htmlGen = [[HTMLGenerator alloc] init];
-  
-  NSData *html = [htmlGen generate:xml xslt_file:[self getStyleSheet:prefixedUrl] error:error];
-  
-  if (html == nil) {
-    return nil;
-  }
-  
+  NSError *my_err;
+//  NSURL *the_url = [self getXmlHttpUrl2:url];
+  NSArray *response_array =[self downloadUrl2:url error:&my_err];
+
+  // response[0] -> html
+  // response[1] -> CSImages_urls
+
+  NSData* html = (NSData*)[response_array objectAtIndex:0];
   //Lo guardamos y retornamos
   if(![cache put:key data:html prefix:composedHtmlPrefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
-  
-  if(([url hasPrefix:@"section://"] || [url hasPrefix:@"noticia://"]) && downloaded)
-    [cache put:key data:xml prefix:@"xml"];
-  
-  if(processNavigation)
+
+  //Las imagenes a descargar.guardamos en cache
+  if([response_array count]>1)
   {
-    [self processNewsForGestureNavigation:xml dummy:NO];
+    NSData* images= (NSData*)[response_array objectAtIndex:1];
+    if (images != nil)
+      if(![cache put:key data:images prefix:@"mi"]) {
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+      }
   }
+//  if(processNavigation)
+//  {
+//    [self processNewsForGestureNavigation:xml dummy:NO];
+//  }
   
   return html;
 }
@@ -330,6 +289,89 @@ BOOL isIpad=NO;
   NSArray* array = [parser extractNewsUrls:xml error:&error];
   [[NewsManager defaultNewsManager] setURLs:array];
   //  :(NSData**)xml_data error:(NSError **)error{
+}
+
+-(NSArray *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
+  
+  NSURL *url = [self getXmlHttpUrl2:surl];
+  NSLog(@" ----------------- ");
+  NSLog(@" downloadUrl2: [%@] param:[%@]", [url absoluteString], surl);
+  NSLog(@" ----------------- ");
+  
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+  
+  [request setNumberOfTimesToRetryOnTimeout:1];
+  [request setTimeOutSeconds:15];
+  [request setCachePolicy:ASIDoNotWriteToCacheCachePolicy|ASIDoNotReadFromCacheCachePolicy];
+  request.timeOutSeconds=15;
+  [request setShouldAttemptPersistentConnection:NO];
+  
+  [request startSynchronous];
+  
+  NSError *request_error = [request error];
+  if (request_error != nil) {
+    if (error != nil) *error = request_error;
+    return nil;
+  }
+  
+  NSData *response = [request responseData];
+  if (response == nil) {
+    return [ErrorBuilder build:error desc:@"request null" code:ERR_REQUEST_NULL];
+  }
+  
+  NSString  *key   = [CryptoUtil sha1:[url absoluteString]];
+  DiskCache *cache = [DiskCache defaultCache];
+  
+  if(![cache put:key data:response prefix:@"zip"])
+    return nil;
+
+  NSString* zipFilename = [cache getFileName:key prefix:@"zip"];
+
+  ZipFile *unzipFile= [[ZipFile alloc] initWithFileName:zipFilename mode:ZipFileModeUnzip];
+  NSArray *infos= [unzipFile listFileInZipInfos];
+  
+//  NSMutableArray *file_sizes = [[NSMutableArray alloc] init];
+//  for (FileInZipInfo *info in infos) {
+//    [file_sizes addObject: [NSString stringWithFormat:@"%d", info.size ]];
+//  }
+  
+  BOOL first_file_is_html = [[((FileInZipInfo*)[infos objectAtIndex:0]) name] hasSuffix:@"html"];
+  
+  [unzipFile goToFirstFileInZip];
+  ZipReadStream *read1= [unzipFile readCurrentFileInZip];
+  NSData* file1 = [read1 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:0]) length]];
+  [read1 finishedReading];
+  
+  NSData* file2 = nil;
+  if ([unzipFile goToNextFileInZip])
+  {
+    ZipReadStream *read2= [unzipFile readCurrentFileInZip];
+    file2 = [read2 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:1]) length]];
+    [read2 finishedReading];
+  }
+  [unzipFile close];
+  
+//  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
+  NSMutableArray* ret = [[NSMutableArray alloc] init];
+  if(file2 != nil)
+  {
+    if(first_file_is_html)
+    {
+      [ret addObject:file1];
+      [ret addObject:file2];
+    }
+    else
+    {
+      [ret addObject:file2];
+      [ret addObject:file1];
+    }
+  
+  }
+  else
+    [ret addObject:file1];
+
+  return  [NSArray arrayWithArray:ret];
+  
 }
 
 
@@ -496,6 +538,15 @@ BOOL isIpad=NO;
   return nil;
 }
 
+-(NSURL*) getXmlHttpUrl2:(NSString*)url {
+  NSString* tmp = [NSString stringWithFormat:@"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@",
+                      ([app_delegate isiPad]?@"big":@"small"),
+                      ([app_delegate isLandscape]?@"ls":@"pt"),
+                      url
+                   ];
+  return [NSURL URLWithString:tmp];
+
+}
 
 -(NSURL*) getXmlHttpUrl:(NSString*)url {
   
@@ -571,11 +622,23 @@ BOOL isIpad=NO;
     return nil;
   }
   
-  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  if (mobi_images == nil) {
+//  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+  
+  NSArray *mobi_images_raw = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] componentsSeparatedByString:@","];
+  
+  if (mobi_images_raw == nil || [mobi_images_raw count]==0) {
     return [ErrorBuilder build:error desc:@"unarchive failed" code:ERR_DESERIALIZING_MI];
   }
-
+  
+  NSMutableArray *mobi_images = [[NSMutableArray alloc]init];
+  
+  for (int i=0; i<[mobi_images_raw count]; i++) {
+    NSString *img_url= (NSString*)[mobi_images_raw objectAtIndex:i];
+    MobiImage *image = [MobiImage initWithData:img_url _local_uri: [CryptoUtil sha1:img_url] _noticia_id:@"" _prefix:@"i"];
+    if( ![cache exists:image.local_uri prefix:@"i"] )
+      [mobi_images addObject:image];
+  }
   return mobi_images;
 }
 

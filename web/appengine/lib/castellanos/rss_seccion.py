@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 from hashlib import sha1
 
+import logging
 import cgi
 import re
 import StringIO
@@ -17,11 +18,15 @@ from utils import get_datetime, get_date, get_header, get_footer
 def get_xml(kwargs):
   
   noticias = []
+  section_id = kwargs['host']
   
   output = StringIO.StringIO()
   output.write(get_header())
-
-  link = u'http://www.diariocastellanos.net/Default.aspx'
+  
+  link = u'http://www.diariocastellanos.net/%s' % section_id
+  logging.error('-----------------------------')
+  logging.error('link:%s'%link)
+  logging.error('-----------------------------')
   content = urlopen(link).read()
   
   soup = BeautifulSoup(content)
@@ -45,30 +50,29 @@ def get_xml(kwargs):
     return soap_element.text
     
   def get_main():
-    noticia = getOne("#Content .ColumnaA .Noticia.Destacada")
-    
-    title = noticia.select("h3 a")[0]
+    noticia = getOne("#Content .ColumnaAB .Noticia.Principal")
+    title = noticia.select("h2 a")[0]
     href = sha1(title['href']).digest().encode('hex')
-    
     if href in noticias:
       return None
     noticias.append(href)
     
     desc = noticia.select("p")[0]
+    
     _time = desc.select('strong.Time')
-    time = _time[0].text if len(_time)>0 else '00:00'
+    my_time = _time[0].text if len(_time)>0 else '00:00'
     
     _section = noticia.select("h4 a")
     section = _section[0].text if len(_section)>0 else ''
     
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
-    #output_write( u'<description>%s</description>' % section)
+    #output_write( u'<description>%s</description>' % get_text_sin_strong(desc) )
     output_write( u'<description><![CDATA[&nbsp;]]></description>')
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
-    output_write( u'<pubDate>%s</pubDate>' % get_date((time), today_date) )
+    output_write( u'<pubDate>%s</pubDate>' % get_date((my_time), today_date) )
     #output_write( u'<pubDate></pubDate>' )
     output_write( u'<author></author>' )
     output_write( u'<category>%s</category>' % section)
@@ -100,11 +104,11 @@ def get_xml(kwargs):
     noticias.append(href)
     
     desc = noticia.select("p")[0]
-    _time = desc.select('strong.Time')
-    time = _time[0].text if len(_time)>0 else '00:00'
+    _time = desc.select('strong')
+    my_time = _time[0].text if len(_time)>0 else '00:00'
     
     _section = noticia.select("h4 a")
-    section = _section[0].text if len(_section)>0 else ''
+    section = _section[0].text if len(_section)>0 else '<![CDATA[&nbsp;]]>'
     
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title.text )
@@ -113,7 +117,7 @@ def get_xml(kwargs):
     output_write( u'<link>%s</link>' % title['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
-    output_write( u'<pubDate>%s</pubDate>' % get_date(time, today_date))
+    output_write( u'<pubDate>%s</pubDate>' % get_date(my_time, today_date))
     output_write( u'<author></author>' )
     output_write( u'<category>%s</category>' % section)
 
@@ -162,40 +166,39 @@ def get_xml(kwargs):
 
   get_main()
   
-  selectors = [ u'#Content .ColumnaA .Noticia'
-                , u'#Content .ColumnaB .Noticia'
-                , u'#Content .ColumnaAB .NoticiasAB .Noticia']
+  selectors = [ u'#Content .ColumnaAB .Noticia'
+                # , u'#Content .ColumnaB .Noticia'
+                # , u'#Content .ColumnaAB .NoticiasAB .Noticia'
+                ]
                 
   for selector in selectors:
     items = soup.select(selector)
     for i in xrange(len(items)): 
-      if u'Destacada' not in items[i]['class']:
+      if u'Principal' not in items[i]['class']:
         put_item(items[i])
   
-  selectors = [ u'#Content .SideBar .UltimoMomento ul li a'
-                ,u'#Content .ColumnaAB .NoticiasAB.Deportes ul li a'
-                ,u'#Content .ColumnaAB .NoticiasAB.Actualidad ul li a'
-                #, u'#Content .SideBar .Ranking ul li a'
-                ]
+  # selectors = [ u'#Content .SideBar .UltimoMomento ul li a'
+                # ,u'#Content .ColumnaAB .NoticiasAB.Deportes ul li a'
+                # ,u'#Content .ColumnaAB .NoticiasAB.Actualidad ul li a'
+                # ]
   
-  for selector in selectors:
-    items = soup.select(selector)
-    for i in xrange(len(items)): 
-      put_link_item(items[i])
+  # for selector in selectors:
+    # items = soup.select(selector)
+    # for i in xrange(len(items)): 
+      # put_link_item(items[i])
       
-  items = soup.select(u'#Content .SideBar .Ranking ul li')
-  for i in xrange(len(items)): 
-    a_tag = items[i].a
-    items[i].a.strong.decompose()
-    put_link_item(a_tag)
+  # items = soup.select(u'#Content .SideBar .Ranking ul li')
+  # for i in xrange(len(items)): 
+    # a_tag = items[i].a
+    # items[i].a.strong.decompose()
+    # put_link_item(a_tag)
   
-  
-  uls = soup.select(u'#Content .NoticiasFoot ul')
-  for ul in uls:
-    items = ul.select(u'li a')
-    for i in xrange(len(items)): 
-      if i > 0: 
-        put_link_item(items[i])
+  # uls = soup.select(u'#Content .NoticiasFoot ul')
+  # for ul in uls:
+    # items = ul.select(u'li a')
+    # for i in xrange(len(items)): 
+      # if i > 0: 
+        # put_link_item(items[i])
 
   output.write(get_footer())
 

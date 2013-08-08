@@ -5,10 +5,10 @@ def get_mapping():
     'httpurl' : {
       'section://main'  : 'X: castellanos.rss_index' ,
       'noticia://'      : 'X: castellanos.rss_noticia',
-      'section://'      : 'http://www.eldia.com.ar/rss/index.aspx?seccion=%s',
-      'clasificados://' : 'http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%s&app=1',
-      'menu://'         : 'http://www.eldia.com.ar/rss/secciones.aspx',
-      'funebres://'     : 'http://www.eldia.com.ar/mc/fune_rss_utf8.aspx',
+      'section://'      : 'X: castellanos.rss_seccion',
+      'clasificados://' : '',
+      'menu://'         : 'X: castellanos.rss_menu' ,
+      'funebres://'     : 'X: castellanos.rss_funebres' ,
       'farmacia://'     : 'http://www.eldia.com.ar/extras/farmacias_txt.aspx',
       'cartelera://'    : 'http://www.eldia.com.ar/extras/carteleradecine_txt.aspx',
     }, 
@@ -34,9 +34,9 @@ def get_mapping():
     },
     'extras': {
       'has_clasificados' : False,
-      'has_funebres'     : False,
-      'has_farmacia'     : False,
+      'has_funebres'     : True,
+      'has_farmacia'     : True,
       'has_cartelera'    : True,
     },
   }
-}
+}      
