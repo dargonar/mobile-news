@@ -9,45 +9,15 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
+from ecosdiarios import utils
+
+
 def get_xml(args):
-
-  header = u"""<?xml version="1.0" encoding="UTF-8" ?>
-  <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
-  <channel>
-   <title>PREGON - SIMURSS</title>
-   <link>http://www.pregon.com.ar/</link>
-   <description>El diario de Jujuy - Argentina</description>
-   <copyright>2013, Pregon, todos los derechos reservados</copyright>
-   <pubDate>Tue, 04 Sep 2012 20:20:18 GMT</pubDate>
-   <image>
-     <title>Pregon - RSS</title>
-     <url>http://www.pregon.com.ar/img/LOGOPREGON.png</url>
-     <link>http://www.pregon.com.ar</link>
-   </image>
-   <ttl>10</ttl>
-   <atom:link href="http://www.pregon.com.ar/simu.rss" rel="self" type="application/rss+xml"/>
-
-  """
-
-  footer = u"""
-   </channel>
-  </rss>
-  """
 
   output = StringIO.StringIO()
   output.write(header)
 
-  link = 'http://www.pregon.com.ar/subseccion/4/%s/dummy.html' % args.get('host')
-  content = urlopen(link).read()
-  
-  #HACKO --- limpiar HTML
-  from lxml import etree
-  parser = etree.HTMLParser()
-  tree   = etree.parse(StringIO.StringIO(content), parser)
-  content = etree.tostring(tree.getroot(), pretty_print=True, method="html")
-  #HACKO --- limpiar HTML
-
+  content = read_clean('%s/index.php?option=com_content&view=category&layout=blog&id=%s&Itemid=3' % (utils.link, args.get('host')))
   soup = BeautifulSoup(content)
 
   global_cat = soup.select('h1.antetituloNormal')[0].text.split()[2]

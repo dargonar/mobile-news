@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout') }}  
-  <body>
+  <body onload="onLoad('{{page_name}}')">
     <div id="clasificados">
       <div class="columna">
         <div class="encabezado">

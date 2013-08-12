@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout') }}
-  <body onload="update_imagen_nota_abierta()">
+  <body onload="onLoad('{{page_name}}')">
     {{ cc.NotaAbierta(data.item) }}
 
     {% if data.item.related %}

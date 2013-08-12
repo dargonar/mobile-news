@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout_tablet') }}
-  <body class="menu landscape" onload="update_all_images()">
+  <body class="menu landscape" onload="onLoad('{{page_name}}')">
     <div id="landscape">
       <div class="seccion list">Principal</div>
       <div class="menu">

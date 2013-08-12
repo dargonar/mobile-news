@@ -9,9 +9,9 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-def get_xml(args):
+from pregon.utils import get_today_date, get_date
 
-  today_date = ""
+def get_xml(args):
 
   header = u"""<?xml version="1.0" encoding="UTF-8" ?>
   <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
@@ -44,26 +44,8 @@ def get_xml(args):
   content = urlopen(link).read()
   soup = BeautifulSoup(content)
 
-  months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
-  tmp = soup.select('div.clima div')
-
-  # 31 de Julio de 2013
-  parts = tmp[len(tmp)-1].text.split()
-  inx = months.index(parts[3].lower())
-  today_date = datetime(int(parts[5]), inx+1, int(parts[1]) )
-
-  def getDate(hhmm):
-    parts = hhmm.split(':')
-    tmp = today_date + timedelta(0,0,0,0,int(parts[1]),int(parts[0]))
-    return tmp.strftime("%a, %d %b %Y %H:%M:%S")
-
-  def getOne(path):
-    s = soup.select(path)
-    if len(s):
-      return s[0]
-
-    return None
-
+  today_date = get_today_date(soup)
+  
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
 
@@ -76,7 +58,7 @@ def get_xml(args):
     output_write( u'<guid isPermaLink="false">%s</guid>' % guid )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % getDate('00:00') )
+    output_write( u'<pubDate>%s</pubDate>' % get_date(today_date, '00:00') )
     output_write( u'<category>%s</category>' % desc )
 
     output_write( u'</item>')

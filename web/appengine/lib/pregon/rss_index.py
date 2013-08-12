@@ -9,9 +9,9 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-def get_xml(args):
+from pregon.utils import get_today_date, get_date, get_one
 
-  today_date = ""
+def get_xml(args):
 
   header = u"""<?xml version="1.0" encoding="UTF-8" ?>
   <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
@@ -44,34 +44,16 @@ def get_xml(args):
   content = urlopen(link).read()
   soup = BeautifulSoup(content)
 
-  months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
-  tmp = soup.select('div.clima div')
-
-  # 31 de Julio de 2013
-  parts = tmp[len(tmp)-1].text.split()
-  inx = months.index(parts[3].lower())
-  today_date = datetime(int(parts[5]), inx+1, int(parts[1]) )
-
-  def getDate(hhmm):
-    parts = hhmm.split(':')
-    tmp = today_date + timedelta(0,0,0,0,int(parts[1]),int(parts[0]))
-    return tmp.strftime("%a, %d %b %Y %H:%M:%S")
-
-  def getOne(path):
-    s = soup.select(path)
-    if len(s):
-      return s[0]
-
-    return None
+  today_date = get_today_date(soup)
 
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
 
   def get_main():
-    title = getOne("div.destacadasbox100 h1.box100-titulo a")
+    title = get_one(soup, "div.destacadasbox100 h1.box100-titulo a")
     if title is None: return None
 
-    desc = getOne("div.destacadasbox100 p")
+    desc = get_one(soup, "div.destacadasbox100 p")
     if desc is None: return None
 
     output_write( u'<item>')
@@ -85,13 +67,13 @@ def get_xml(args):
     output_write( u'<author></author>' )
     output_write( u'<category></category>' )
 
-    lead = getOne("div.destacadasbox100 h2.box100-antetitulo")
+    lead = get_one(soup, "div.destacadasbox100 h2.box100-antetitulo")
     if lead is not None:
       output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead.text )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % desc.text )
+    output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % desc.text )
 
-    img = getOne("div.destacadasbox100 div.box100-foto img")
+    img = get_one(soup, "div.destacadasbox100 div.box100-foto img")
     if img is not None:
       output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img['src'] )
       output_write( u'<media:text type="plain"></media:text>' )
@@ -112,14 +94,14 @@ def get_xml(args):
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(title['href'])[0] )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % getDate(spans[0].strong.text) )
+    output_write( u'<pubDate>%s</pubDate>' % get_date(today_date, spans[0].strong.text) )
     output_write( u'<author></author>' )
     output_write( u'<category></category>' )
 
 
     output_write( u'<news:lead type="plain" meta="volanta"></news:lead>' )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % spans[1].text )
+    output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % spans[1].text )
 
     img = box.div.img
     if img is not None:
