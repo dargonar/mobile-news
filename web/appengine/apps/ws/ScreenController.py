@@ -26,6 +26,7 @@ apps_id = {
   'com.diventi.mobipaper'   : 'eldia',
   'com.diventi.pregon'      : 'pregon',
   'com.diventi.castellanos' : 'castellanos',
+  'com.diventi.ecosdiarios' : 'ecosdiarios',
 }
 
 class ScreenController(FrontendHandler):
@@ -59,13 +60,14 @@ class ScreenController(FrontendHandler):
       mapping = self.get_mapping(appid)
     # Armamos la direccion del xml
     url_map = mapping[ apps_id[appid] ]['httpurl']
+    
     httpurl = ''
     args = {}
     for k in url_map:
       if url.startswith(k):
         httpurl = url_map[k]
         #HARKU
-        args['host'] = url.split('//')[1].split('?')[0] # [url.index('//')+2: (url.index('?') if '?' in url else -1) ]
+        args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
         
         if '?' in url:
           for i in url[url.index('?')+1:].split('&'):
@@ -93,25 +95,18 @@ class ScreenController(FrontendHandler):
     
     return self.response.write(r) # .encode('utf-8')
     
-  def get_screen(self, **kwargs):  
-    # Parametros del request
-    appid = self.request.params['appid'] # nombre de la app
-    url   = self.request.params['url']   # url interna
-    size  = self.request.params['size']  # small, big
-    ptls  = self.request.params['ptls']  # pt, ls
-    
-    mapping = self.get_mapping(appid)
-    
-    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
-    extras_map = mapping[ apps_id[appid] ]['extras']
+  def build_html_and_images(self, appid, url, mapping, template_map, extras_map, ptls):
     
     # Armamos la direccion del xml    
     httpurl, args = self.get_httpurl(appid, url, mapping)
     
+    # 
+    page_name = ''
     # Obtenemos el template
     template = ''
     for k in template_map:
       if url.startswith(k):
+        page_name = k
         template = template_map[k][ptls]
         break
 
@@ -142,7 +137,23 @@ class ScreenController(FrontendHandler):
       extras_map['clasificados'] = i.get_classifieds()
 
     #return self.render_response('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
-    rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
+    rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name } )
+
+    return imgs, rv
+
+  def get_screen(self, **kwargs):  
+    # Parametros del request
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
+    size  = self.request.params['size']  # small, big
+    ptls  = self.request.params['ptls']  # pt, ls
+    
+    mapping = self.get_mapping(appid)
+    
+    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    extras_map = mapping[ apps_id[appid] ]['extras']
+    
+    imgs, rv = self.build_html_and_images(appid, url, mapping, template_map, extras_map, ptls)
     
     # Set up headers for browser to correctly recognize ZIP file
     self.response.headers['Content-Type'] ='application/zip'
@@ -157,6 +168,12 @@ class ScreenController(FrontendHandler):
       outfile.writestr('images.txt', ','.join(imgs))
     
     outfile.writestr('content.html', rv.encode('utf-8'))
+
+    # Incluimos menu si es section://main
+    # if url == 'section://main':
+    #   xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+    #   outfile.writestr('menu.html', menu.encode('utf-8'))
+
     outfile.close()
     
     self.response.out.write(output.getvalue())

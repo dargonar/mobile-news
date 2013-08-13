@@ -195,9 +195,17 @@
 {%- endmacro %}
 
 {% macro DateSectionLabel(node, class='date') -%}    
-  <label class="{{class}}">{{node.pubDate|datetime}}</label>
+  {% set thedate = node.pubDate|datetime %}
+  {% if thedate != '' %}
+  <label class="{{class}}">{{thedate}}</label>
+  {% endif %}
+
+  {% if node.category and thedate != '' %}
+  &nbsp;|&nbsp;
+  {% endif %}
+  
   {% if node.category %}
-  &nbsp;|&nbsp;<label class="seccion">{{ 'Información Gral' if node.category == 'Información 
+  <label class="seccion">{{ 'Información Gral' if node.category == 'Información 
   General' else node.category }}
   {% endif %}
   </label>

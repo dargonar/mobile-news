@@ -45,6 +45,13 @@ import traceback
 import types
 import wsgiref.handlers
 
+if 'lib' not in sys.path:
+  # Add /lib as primary libraries directory, with fallback to /distlib
+  # and optionally to distlib loaded using zipimport.
+  sys.path[0:0] = ['lib', 'distlib']
+  import bs4
+  sys.modules['BeautifulSoup'] = bs4
+
 try:
   from google.appengine.api import users
   from google.appengine.ext import db
@@ -310,12 +317,12 @@ class StatementHandler(webapp.RequestHandler):
     session.put()
 
 
-def main():
-  application = webapp.WSGIApplication(
+app = webapp.WSGIApplication(
     [('/shell', FrontPageHandler),
      ('/shell.do', StatementHandler)], debug=_DEBUG)
-  wsgiref.handlers.CGIHandler().run(application)
-
+ 
+def main():
+  return app.run()
 
 if __name__ == '__main__':
   main()

@@ -3,13 +3,14 @@ from collections import OrderedDict
 
 def get_mapping():
   return {
-  'pregon' : {
+  'ecosdiarios' : {
     'httpurl' : OrderedDict([
-      ('section://main' , 'X: pregon.rss_index') ,
-      ('noticia://'     , 'X: pregon.rss_noticia') ,
-      ('section://'     , 'X: pregon.rss_section') ,
-      ('menu://'        , 'X: pregon.rss_menu') ,
-      ('funebres://'    , 'X: pregon.rss_funebres') ,
+      ('section://main' , 'X: ecosdiarios.rss_index') ,
+      ('noticia://'     , 'X: ecosdiarios.rss_noticia') ,
+      ('section://'     , 'X: ecosdiarios.rss_section') ,
+      ('menu://'        , 'X: ecosdiarios.rss_menu') ,
+      ('farmacia://'    , 'X: ecosdiarios.rss_farmacia') ,
+      ('farmacia://'    , 'X: ecosdiarios.rss_farmacia') ,
     ]), 
     'templates-small': OrderedDict([
       ('section://main' , {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'}),
@@ -35,8 +36,8 @@ def get_mapping():
     ]),
     'extras': {
       'has_clasificados' : False,
-      'has_funebres'     : True,
-      'has_farmacia'     : False,
+      'has_funebres'     : False,
+      'has_farmacia'     : True,
       'has_cartelera'    : False,
     }, 
   }

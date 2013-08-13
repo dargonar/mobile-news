@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#http://www.pregon.com.ar/
+
 import logging
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -8,8 +8,6 @@ from datetime import datetime, timedelta
 
 import re
 import StringIO
-
-from pregon.utils import get_today_date, get_date, get_one
 
 def get_xml(args):
 
@@ -40,71 +38,61 @@ def get_xml(args):
   output = StringIO.StringIO()
   output.write(header)
 
-  link = 'http://www.pregon.com.ar/vernoticia.asp?id=%s' % args.get('host')
+  link = 'http://www.pregon.com.ar/subseccion/4/%s/dummy.html' % args.get('host')
   content = urlopen(link).read()
+  
+  #HACKO --- limpiar HTML
+  from lxml import etree
+  parser = etree.HTMLParser()
+  tree   = etree.parse(StringIO.StringIO(content), parser)
+  content = etree.tostring(tree.getroot(), pretty_print=True, method="html")
+  #HACKO --- limpiar HTML
+
   soup = BeautifulSoup(content)
 
-  today_date = get_today_date(soup)
+  global_cat = soup.select('h1.antetituloNormal')[0].text.split()[2]
 
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
 
-  def put_item(realurl):
-    
-    category = get_one(soup, 'h2.antetituloNormal')
-    if category is None: 
-      category = ''
-    else:
-      category = category.text
-
-    hhmm = get_one(soup, 'div.col1 strong')
-    if hhmm is None: 
-      hhmm = '00:00'
-    else:
-      hhmm = hhmm.text.split('|')[1].strip().split()[0]
-
-    title = get_one(soup, 'div.col1 h1.tituloAzulNota').text
-    descr = get_one(soup, 'div.col1 h3.bajada').text
+  def put_item(div):
 
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title )
+    output_write( u'<title>%s</title>' % div.h1.text )
     output_write( u'<description></description>' )
-    output_write( u'<link>%s</link>' % realurl )
-    output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(realurl)[0] )
+    output_write( u'<link>%s</link>' % div.a['href'] )
+    output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(div.a['href'])[0] )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % get_date(today_date, hhmm) )
+    output_write( u'<pubDate></pubDate>' )
     output_write( u'<author></author>' )
-    output_write( u'<category>%s</category>' % category )
-
-
-    output_write( u'<news:lead type="plain" meta="volanta"></news:lead>' )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % descr)
-
-    content = get_one(soup, 'div.col1 div.cc2 p')
-    if content is not None: 
-      content = content.text
+    cat = div.h2
+    if cat is not None:
+      cat = div.h2.text
     else:
-      content = ''
+      cat = ''
 
-    output_write( u'<news:content type="html" meta="contenido"><![CDATA[%s]]></news:content>' % content)
+    output_write( u'<category>%s</category>' % global_cat )
 
-    img = get_one(soup, 'div.contfotonota img')
+
+    output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % global_cat )
+    output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % div.p.text )
+
+    img = div.img
     if img is not None:
-      output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img.attrs['src'] )
+      output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img['src'] )
     
     output_write( u'<media:text type="plain"></media:text>' )
     output_write( u'<media:credit role="publishing company">Pregon</media:credit>' )
 
-    output_write( u'<media:text type="plain"></media:text>' )
-
     output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
-
     output_write( u'</item>')
 
-  put_item(link)
-    
+  divs=soup.select('div.contLineaTitulo')
+  for div in divs:
+    put_item(div)
+
   output.write(footer)
 
   return output.getvalue()
