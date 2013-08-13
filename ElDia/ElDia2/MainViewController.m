@@ -336,8 +336,7 @@ BOOL isLoading_ = YES;
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
   [self positionateAdMainScreen:deviceOrientation];
-  [self zoomToFit];
-  return;
+  //  return;
 
   
   BOOL hasRotated = NO;
@@ -352,6 +351,8 @@ BOOL isLoading_ = YES;
     [self positionatePortrait];
     hasRotated = YES;
   }
+  
+  [self zoomToFit];
   
   //HACK Testing
   if(hasRotated == YES)

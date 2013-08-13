@@ -92,42 +92,14 @@ BOOL mViewDidLoad=NO;
 
   }
   
-}
-
-
--(void) rotateHTML{
-  [self positionate];
-  if([app_delegate isiPad])
-    return;
-  return;
-  NSString *viewportWidth = @"";
-  NSString *viewportInitScale = @"";
-  NSString *viewportMaxScale = @"";
-  
-  viewportWidth = @"320";
-  viewportInitScale = @"1.0";
-  viewportMaxScale = @"1.0";
-  if([app_delegate isLandscape]){
-    //viewportWidth = @"480";
-    viewportInitScale = @"1.5";
-    viewportMaxScale = @"1.5";
-    
-  }
-  
-  //document.body.style.width = '%@px';
-  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
-  
-  NSLog(@"%@",jsString);
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  [self zoomToFit];
   
 }
 
 // HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  
   return YES;
-  
 }
 
 /* rotation handling */
@@ -150,9 +122,7 @@ BOOL mViewDidLoad=NO;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  
-  [self rotateHTML];
-  //[mainUIWebView reload];
+  [self positionate];
 }
 
 /* **** */
@@ -375,14 +345,12 @@ BOOL mViewDidLoad=NO;
   
   [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
   
-  [self rotateHTML];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  if(![app_delegate isiPad])
-  {
-    [self rotateHTML];
-  }
+  
+  [self zoomToFit];
+  
 
   [self changeFontSize:0];
   [self onLoading:NO];
