@@ -52,8 +52,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "163"
          endingLineNumber = "163"
-         landmarkName = "@implementation MainViewController"
-         landmarkType = "3">
+         landmarkName = "-getType:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -442,8 +442,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "258"
          endingLineNumber = "258"
-         landmarkName = "@implementation MainViewController"
-         landmarkType = "3">
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -468,7 +468,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "408"
          endingLineNumber = "408"
-         landmarkName = "-positionateLandscape"
+         landmarkName = "-positionatePortrait"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -481,8 +481,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "207"
          endingLineNumber = "207"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
-         landmarkType = "5">
+         landmarkName = "@implementation ScreenManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -494,7 +494,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "210"
          endingLineNumber = "210"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-getScreen:useCache:processImages:prefix:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -520,7 +520,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "204"
          endingLineNumber = "204"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:"
+         landmarkName = "-getArticle:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -533,7 +533,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "278"
          endingLineNumber = "278"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-processNewsForGestureNavigation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -546,7 +546,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "282"
          endingLineNumber = "282"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-processNewsForGestureNavigation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -559,7 +559,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "283"
          endingLineNumber = "283"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-processNewsForGestureNavigation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -572,7 +572,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "189"
          endingLineNumber = "189"
-         landmarkName = "-getSectionMenu:useCache:error:"
+         landmarkName = "-getSection:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -598,8 +598,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "521"
          endingLineNumber = "521"
-         landmarkName = "-onWelcome:"
-         landmarkType = "5">
+         landmarkName = "@implementation MainViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -670,26 +670,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "ElDia2/MenuClasificadosViewController.m"
-         timestampString = "390497332.088962"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
-         landmarkName = "-didRotateFromInterfaceOrientation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ElDia2/ClasificadosViewController.m"
          timestampString = "391666405.284179"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "154"
          endingLineNumber = "154"
-         landmarkName = "-didRotateFromInterfaceOrientation:"
+         landmarkName = "-changeFontSize:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -715,7 +702,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "367"
          endingLineNumber = "367"
-         landmarkName = "-onLoading:"
+         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -728,7 +715,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "364"
          endingLineNumber = "364"
-         landmarkName = "-onLoading:"
+         landmarkName = "-webView:didFailLoadWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -740,9 +727,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "389"
-         endingLineNumber = "389"
-         landmarkName = "-webViewDidFinishLoad:"
-         landmarkType = "5">
+         endingLineNumber = "389">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -754,7 +739,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "301"
          endingLineNumber = "301"
-         landmarkName = "-loadClasificados:"
+         landmarkName = "-loadUrl:useCache:type:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -767,7 +752,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "353"
          endingLineNumber = "353"
-         landmarkName = "-loadUrl:useCache:type:"
+         landmarkName = "-webViewDidFinishLoad:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -792,9 +777,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "397"
-         endingLineNumber = "397"
-         landmarkName = "-webView:didFailLoadWithError:"
-         landmarkType = "5">
+         endingLineNumber = "397">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -806,7 +789,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "288"
          endingLineNumber = "288"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-processNewsForGestureNavigation:dummy:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -819,8 +802,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "293"
          endingLineNumber = "293"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
-         landmarkType = "5">
+         landmarkName = "@implementation ScreenManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -910,7 +893,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "294"
          endingLineNumber = "294"
-         landmarkName = "-loadFunebres:"
+         landmarkName = "-loadUrl:useCache:type:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -962,7 +945,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "556"
          endingLineNumber = "556"
-         landmarkName = "-webView:didFailLoadWithError:"
+         landmarkName = "-showUpdatedAt"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -975,7 +958,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "403"
          endingLineNumber = "403"
-         landmarkName = "-positionate"
+         landmarkName = "-positionatePortrait"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1003,19 +986,6 @@
          endingLineNumber = "489"
          landmarkName = "@implementation NoticiaViewController"
          landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "392754564.361987"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491"
-         landmarkName = "-rotateHTML:"
-         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1066,7 +1036,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "366"
          endingLineNumber = "366"
-         landmarkName = "-rotateHTML:"
+         landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1079,20 +1049,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "368"
          endingLineNumber = "368"
-         landmarkName = "-rotateHTML:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/MenuClasificadosViewController.m"
-         timestampString = "390497332.088962"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-rotateHTML"
+         landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1131,7 +1088,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "423"
          endingLineNumber = "423"
-         landmarkName = "-getStyleSheetiPad:"
+         landmarkName = "-getStyleSheet:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1156,9 +1113,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "635"
-         endingLineNumber = "635"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-         landmarkType = "5">
+         endingLineNumber = "635">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -1287,7 +1242,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "346"
          endingLineNumber = "346"
-         landmarkName = "-didRotateFromInterfaceOrientation:"
+         landmarkName = "-positionate"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
