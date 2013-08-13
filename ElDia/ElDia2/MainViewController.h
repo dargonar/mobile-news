@@ -20,7 +20,7 @@
  Default LanguageSpanish
  */
 
-@interface MainViewController : BaseMobiViewController<UIWebViewDelegate>
+@interface MainViewController : BaseMobiViewController<UIWebViewDelegate, UIScrollViewDelegate>
 {
   NoticiaViewController *myNoticiaViewController;
   NSString* current_url;

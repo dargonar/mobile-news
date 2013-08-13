@@ -299,22 +299,6 @@ NSString* click_url =@"";
   if(self.currentUrl != url)
     return;
   
-  /*
-   BOOL do_update_main_webview = [ScreenManager isMainScreenPrefix:[mobi_image prefix]];
-  NSLog(@" #onImageDownloaded image prefix [%@]", [mobi_image prefix]);
-  UIWebView* _UIWebView = nil;
-  if(do_update_main_webview)
-  {
-    _UIWebView=self.primaryUIWebView;
-    NSLog(@" ##onImageDownloaded - primaryview:[%s]; ", self.primaryUIWebView==nil?"NIL":"NOT NIL");
-  }
-  else
-    _UIWebView=self.secondaryUIWebView;
-
-  NSLog(@" #onImageDownloaded - primaryview:[%s]; WebView:[%s] prefix:[%@]", self.primaryUIWebView==nil?"NIL":"NOT NIL", _UIWebView==nil?"NIL":"NOT NIL", mobi_image.prefix);
-  if(_UIWebView==nil)
-    return;
-  */
   __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
                                  , mobi_image.local_uri];
   
@@ -328,5 +312,35 @@ NSString* click_url =@"";
   });
   
 }
+
+-(void)zoomToFit
+{
+  if([app_delegate isiPad])
+    return;
+  
+  if ([[self primaryUIWebView] respondsToSelector:@selector(scrollView)])
+  {
+    //float zoom=[self mainUIWebView].bounds.size.width/scroll.contentSize.width;
+    float zoom=[self primaryUIWebView].bounds.size.width/320.0;
+    
+    //    [[self mainUIWebView].scrollView zoomToRect:CGRectMake(0, 0, [self mainUIWebView].scrollView.contentSize.width, [self mainUIWebView].scrollView.contentSize.height) animated:YES];
+    
+    //    [[self mainUIWebView].scrollView setZoomScale:1.0 animated:YES];
+    //    [self mainUIWebView].scrollView.minimumZoomScale = zoom;
+    //    [self mainUIWebView].scrollView.maximumZoomScale = zoom;
+    //    [self mainUIWebView].scrollView.zoomScale = zoom;
+    
+    NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
+    [[self primaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+    
+  }
+}
+
+//-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+//  float x_offset=(scrollView.contentSize.width - self.view.frame.size.width)/2;
+//  if (scrollView.contentOffset.x!=x_offset) {
+//    scrollView.contentOffset = CGPointMake(x_offset, scrollView.contentOffset.y);
+//  }
+//}
 
 @end

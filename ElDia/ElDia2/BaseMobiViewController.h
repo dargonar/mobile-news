@@ -41,4 +41,6 @@
 -(void)hideAd;
 -(BOOL)adStatus;
 -(NSInteger)adHeight;
+
+-(void)zoomToFit;
 @end

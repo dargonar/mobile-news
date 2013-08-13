@@ -315,7 +315,7 @@ UIActionSheet* actionSheet;
   
   [self loadNoticia];
   if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
-    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+    //[self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
   self->currentSection = section;
