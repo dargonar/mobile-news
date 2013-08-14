@@ -71,9 +71,9 @@ def get_xml(kwargs):
     
     step = 3 if len(items)>3 and items[3].contents!='<o:p>&nbsp;</o:p>' else 4
     
-    logging.error('------')
-    logging.error('%s %s' % (link, str(step)))
-    logging.error('------')
+    # logging.error('------')
+    # logging.error('%s %s' % (link, str(step)))
+    # logging.error('------')
     for i in range(0, len(items)-1, step): 
       if len(items) < i+2+1:
         break

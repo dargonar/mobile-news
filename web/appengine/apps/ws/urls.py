@@ -9,6 +9,7 @@ def get_rules():
         PathPrefixRoute('/ws', [ NamePrefixRoute('ws-', [ HandlerPrefixRoute('apps.ws.ScreenController', [
           Route('/screen',    name='get_screen',    handler='.ScreenController:get_screen'),
           Route('/xml',       name='get_xml',       handler='.ScreenController:get_xml'),
+          Route('/html',      name='get_html',      handler='.ScreenController:get_html'),
         ]) ]) ]),
 
     ]
