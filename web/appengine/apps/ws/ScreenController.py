@@ -31,7 +31,7 @@ apps_id = {
 
 class ScreenController(FrontendHandler):
   
-  def build_xml_string(self, url, httpurl, kwargs, clear_namespaces=False):
+  def build_xml_string(self, url, httpurl, kwargs, appid, clear_namespaces=False):
     if httpurl.startswith('X:'):
       i = importlib.import_module(httpurl.split()[1])
       logging.error('--modulo:%s'%httpurl.split()[1])
@@ -42,7 +42,7 @@ class ScreenController(FrontendHandler):
       result = urllib2.urlopen(httpurl).read()
 
       # HACKO el DIA:
-      if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
+      if (url.startswith('farmacia://') or url.startswith('cartelera://')) and apps_id[appid] == 'eldia':
         now = datetime.now()+timedelta(hours=-3)
         result = re.sub(r'\r?\n', '</br>', result)
         result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
@@ -89,7 +89,7 @@ class ScreenController(FrontendHandler):
     
     httpurl, args = self.get_httpurl(appid, url, mapping=None)
     
-    r = self.build_xml_string(url, httpurl, args, clear_namespaces=False)
+    r = self.build_xml_string(url, httpurl, args, appid, clear_namespaces=False)
     
     self.response.headers['Content-Type'] ='text/xml'
     
@@ -116,11 +116,13 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    r = xml.fromstring(self.build_xml_string(url, httpurl, args, clear_namespaces=True ))
-
+    r = xml.fromstring(self.build_xml_string(url, httpurl, args, appid, clear_namespaces=True))
+    
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
-
+    items = []
+    
+    # if 'rss' in r:
     if type(r.rss.channel.item) == type([]):
       items = r.rss.channel.item
     else:
@@ -133,14 +135,33 @@ class ScreenController(FrontendHandler):
         imgs.append(img)
 
     if extras_map['has_clasificados'] == True:
-      i = importlib.import_module(apps_id[appid]+'.extras')
+      i = importlib.import_module(apps_id[appid]+'.rss_clasificados')
       extras_map['clasificados'] = i.get_classifieds()
 
     #return self.render_response('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name } )
-
+    
     return imgs, rv
-
+  
+  def get_html(self, **kwargs):  
+    # Parametros del request
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
+    size  = self.request.params['size']  # small, big
+    ptls  = self.request.params['ptls']  # pt, ls
+    
+    mapping = self.get_mapping(appid)
+    
+    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    extras_map = mapping[ apps_id[appid] ]['extras']
+    
+    imgs, rv = self.build_html_and_images(appid, url, mapping, template_map, extras_map, ptls)
+    
+    # Set up headers for browser to correctly recognize ZIP file
+    self.response.headers['Content-Type'] ='text/html'
+    self.response.write(rv)
+    return
+    
   def get_screen(self, **kwargs):  
     # Parametros del request
     appid = self.request.params['appid'] # nombre de la app
@@ -169,10 +190,10 @@ class ScreenController(FrontendHandler):
     
     outfile.writestr('content.html', rv.encode('utf-8'))
 
-    # Incluimos menu si es section://main
-    # if url == 'section://main':
-    #   xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-    #   outfile.writestr('menu.html', menu.encode('utf-8'))
+    #Incluimos menu si es section://main
+    if url == 'section://main':
+      xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+      outfile.writestr('menu.html', menu.encode('utf-8'))
 
     outfile.close()
     

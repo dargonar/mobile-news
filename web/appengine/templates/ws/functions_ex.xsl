@@ -136,10 +136,12 @@
     {% if node.thumbnail %}
       <div class="main_img_container">
       {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta) }}
+      {{ MediaLink(node, 'video_over_photo') }}
       </div>
-    {% else %}
+    {%else%}
       {{ MediaLink(node, 'no_photo') }}
     {% endif %}
+    
     
     <div class="contenido">
       <div id="titulo">
