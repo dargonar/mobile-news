@@ -50,7 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.eldia&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
