@@ -498,10 +498,6 @@ bool menuLoaded = NO;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
   
-  //[webView setScalesPageToFit:YES];
-  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
-//  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
-  
   if(webView.tag == MAIN_VIEW_TAG){
     webView.hidden = YES;
   }

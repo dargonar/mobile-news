@@ -31,7 +31,7 @@ NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 NSString * const FUNEBRES_STYLESHEET      = @"6_funebres.xsl";
 NSString * const FARMACIAS_STYLESHEET     = @"7_farmacias.xsl";
-NSString * const CARTELERA_STYLESHEET      = @"8_cartelera.xsl";
+NSString * const CARTELERA_STYLESHEET     = @"8_cartelera.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
 NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
@@ -50,6 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
+NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.eldia&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -82,6 +83,11 @@ BOOL isIpad=NO;
   return [cache createdAt:key prefix:@"f"];
 }
 
+-(NSDate*) menuClasificadosDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"mc"];
+}
 
 -(NSDate*) clasificadosDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
@@ -106,6 +112,10 @@ BOOL isIpad=NO;
   return [self screenExists:@"menu://" prefix:@"m"];
 }
 
+-(BOOL) menuClasificadosExists:(NSString*)url{
+  return [self screenExists:url prefix:@"mc"];
+}
+
 -(BOOL) clasificadosExists:(NSString*)url {
   return [self screenExists:url prefix:@"c"];
 }
@@ -123,16 +133,10 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) sectionExists:(NSString*)url {
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"s", html_prefix];
-  //return [self screenExists:url prefix:composedPrefix];
   return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) articleExists:(NSString*)url {
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"a", html_prefix];
-  //return [self screenExists:url prefix:composedPrefix];
   return [self screenExists:url prefix:@"a"];
 }
 
@@ -154,6 +158,10 @@ BOOL isIpad=NO;
 
 -(NSData *)getMenu:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:@"menu://" useCache:useCache processImages:NO prefix:@"m" error:error];
+}
+
+-(NSData *)getMenuClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"mc" error:error];
 }
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -236,30 +244,35 @@ BOOL isIpad=NO;
   
   //Lo bajo
   NSError *my_err;
-  NSArray *response_array =[self downloadUrl2:url error:&my_err];
+  NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
 
-  // response[0] -> html
-  // response[1] -> CSImages_urls
+  // -> content.html
+  // -> images.txt
+  // -> menu.html
 
-  NSData* html = (NSData*)[response_array objectAtIndex:0];
+  NSData* html = (NSData*)[response_dict objectForKey:@"content.html"];
   //Lo guardamos y retornamos
   if(![cache put:key data:html prefix:composedHtmlPrefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
 
   //Las imagenes a descargar.guardamos en cache
-  if([response_array count]>1)
-  {
-    NSData* images= (NSData*)[response_array objectAtIndex:1];
-    if (images != nil)
-      if(![cache put:key data:images prefix:@"mi"]) {
+  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
+  if(images!=nil)
+    if(![cache put:key data:images prefix:@"mi"])
+      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+  
+  
+  NSData *menu = (NSData*)[response_dict objectForKey:@"menu.html"];
+  if(menu!=nil){
+    NSString  *menu_key   = [CryptoUtil sha1:@"menu://"];
+    if(![cache put:menu_key data:menu prefix:@"m"])
         return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
-      }
   }
-//  if(processNavigation)
-//  {
-//    [self processNewsForGestureNavigation:xml dummy:NO];
-//  }
+  //  if(processNavigation)
+  //  {
+  //    [self processNewsForGestureNavigation:xml dummy:NO];
+  //  }
   
   return html;
 }
@@ -280,7 +293,7 @@ BOOL isIpad=NO;
   //  :(NSData**)xml_data error:(NSError **)error{
 }
 
--(NSArray *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
+-(NSDictionary *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
   
   NSURL *url = [self getXmlHttpUrl2:surl];
   NSLog(@" ----------------- ");
@@ -324,42 +337,34 @@ BOOL isIpad=NO;
 //    [file_sizes addObject: [NSString stringWithFormat:@"%d", info.size ]];
 //  }
   
-  BOOL first_file_is_html = [[((FileInZipInfo*)[infos objectAtIndex:0]) name] hasSuffix:@"html"];
-  
   [unzipFile goToFirstFileInZip];
   ZipReadStream *read1= [unzipFile readCurrentFileInZip];
   NSData* file1 = [read1 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:0]) length]];
   [read1 finishedReading];
   
+  NSMutableDictionary *mdict = [[NSMutableDictionary alloc]init];
+  [mdict setObject:file1 forKey:[((FileInZipInfo*)[infos objectAtIndex:0]) name]];
+  
   NSData* file2 = nil;
+  NSData* file3 = nil;
   if ([unzipFile goToNextFileInZip])
   {
     ZipReadStream *read2= [unzipFile readCurrentFileInZip];
     file2 = [read2 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:1]) length]];
     [read2 finishedReading];
+    [mdict setObject:file2 forKey:[((FileInZipInfo*)[infos objectAtIndex:1]) name]];
+    if ([unzipFile goToNextFileInZip])
+    {
+      ZipReadStream *read3= [unzipFile readCurrentFileInZip];
+      file3 = [read3 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:2]) length]];
+      [read3 finishedReading];
+      [mdict setObject:file3 forKey:[((FileInZipInfo*)[infos objectAtIndex:2]) name]];
+    }
+    
   }
   [unzipFile close];
   
-//  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
-  NSMutableArray* ret = [[NSMutableArray alloc] init];
-  if(file2 != nil)
-  {
-    if(first_file_is_html)
-    {
-      [ret addObject:file1];
-      [ret addObject:file2];
-    }
-    else
-    {
-      [ret addObject:file2];
-      [ret addObject:file1];
-    }
-  
-  }
-  else
-    [ret addObject:file1];
-
-  return  [NSArray arrayWithArray:ret];
+  return  mdict;
   
 }
 
@@ -487,7 +492,7 @@ BOOL isIpad=NO;
 }
 
 -(NSURL*) getXmlHttpUrl2:(NSString*)url {
-  NSString* tmp = [NSString stringWithFormat:@"http://192.168.1.101:8095/ws/screen?appid=com.diventi.eldia&size=%@&ptls=%@&url=%@",
+  NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
                       ([app_delegate isiPad]?@"big":@"small"),
                       ([app_delegate isLandscape]?@"ls":@"pt"),
                       url
