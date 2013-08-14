@@ -41,9 +41,9 @@ def get_mapping():
       'cartelera://'            : {'pt': '8_tablet_cartelera.xsl',                  'ls': '8_tablet_cartelera.xsl'},
     },
     'extras': {
-      'has_clasificados' : False,
-      'has_funebres'     : False,
-      'has_farmacia'     : False,
+      'has_clasificados' : True,
+      'has_funebres'     : True,
+      'has_farmacia'     : True,
       'has_cartelera'    : True,
     },
   }

@@ -12,6 +12,9 @@
 #import "DiskCache.h"
 #import "iToast.h"
 
+#import "MainViewController.h"
+
+
 NSString * const MAIN_SCREEN          = @"MAIN_SCREEN";
 NSString * const NOTICIA_SCREEN       = @"NOTICIA_SCREEN";
 NSString * const OTHER_SCREEN         = @"OTHER_SCREEN";
@@ -315,6 +318,9 @@ NSString* click_url =@"";
 
 -(void)zoomToFit
 {
+  NSLog(@"=======================================");
+  NSLog(@"Is a kind of MainViewController: %@", ([[self classForCoder] isSubclassOfClass:[MainViewController class]])? @"Yes" : @"No");
+  
   if([app_delegate isiPad])
     return;
   
