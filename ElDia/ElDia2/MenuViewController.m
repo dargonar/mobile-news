@@ -348,6 +348,7 @@ NSLock *lock;
     return NO;
   }
   else
+    // iPad
     if (UIWebViewNavigationTypeLinkClicked == navigationType && ([[url scheme]isEqualToString:@"clasificados"] || [[url scheme]isEqualToString:@"funebres"] || [[url scheme]isEqualToString:@"farmacia"] || [[url scheme]isEqualToString:@"cartelera"]) && [app_delegate isiPad])
     {
       [app_delegate loadService:url];
@@ -355,39 +356,43 @@ NSLock *lock;
       return NO;
     }
     else
-    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"clasificados"]) // por ahora page://clasificados
+    // iPhone/iPod
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"] && [[url host]isEqualToString:@"list"]) // antes: page://clasificados
     {
+      [app_delegate loadMenuClasificados:url];
       [self slideThenHideShowMenuClasificados];
       return NO;
     }
-    else
+    /*else
       if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
       {
-        [app_delegate loadClasificados:url];
+        [app_delegate c];
         [self slideThenHideShowClasificados];
         return NO;
-      }
+      }*/
       else
-        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"funebres"]) // por ahora page://clasificados
+        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"funebres://"]) // antes: page://funebres
         {
           
-          [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://full" ]];
+          [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://" ]];
           [self slideThenHideShowClasificados];
           return NO;
         }
         else
-          if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"farmacia"]) // por ahora page://clasificados
+          //if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"farmacia"])
+          if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"farmacia://"])
           {
             
-            [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://full" ]];
+            [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://" ]];
             [self slideThenHideShowFarmacia];
             return NO;
           }
           else
-            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"cartelera"]) // por ahora page://clasificados
+//            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"cartelera"])
+            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"cartelera://"])
             {
               
-              [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://full" ]];
+              [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://" ]];
               [self slideThenHideShowCartelera];
               return NO;
             }

@@ -158,7 +158,8 @@ int cache_size = 2; //30;
   }
   self.menuViewController         = [[MenuViewController alloc] initWithNibName:menuNibName bundle:nil];
   self.mainViewController         = [[MainViewController alloc] initWithNibName:mainNibName bundle:nil];
-  self.menuClasificadosViewController = [[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
+  self.menuClasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
+  //[[MenuClasificadosViewController alloc] initWithNibName:menuClasificadosNibName bundle:nil];
   self.clasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
 
   self.farmaciaViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
@@ -218,6 +219,10 @@ int cache_size = 2; //30;
 
 -(void)loadClasificados:(NSURL*)url{
   [self.clasificadosViewController loadClasificados:url];
+}
+
+-(void)loadMenuClasificados:(NSURL*)url{
+  [self.menuClasificadosViewController loadMenuClasificados:url];
 }
 
 -(void)loadFunebres:(NSURL*)url{
