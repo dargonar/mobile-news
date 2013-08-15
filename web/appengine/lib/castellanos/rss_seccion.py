@@ -13,7 +13,8 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date, get_header, get_footer
+from utils import read_clean
+from xutils import get_datetime, get_date, get_header, get_footer
 
 def get_xml(kwargs):
   
@@ -24,10 +25,11 @@ def get_xml(kwargs):
   output.write(get_header())
   
   link = u'http://www.diariocastellanos.net/%s' % section_id
-  logging.error('-----------------------------')
-  logging.error('link:%s'%link)
-  logging.error('-----------------------------')
-  content = urlopen(link).read()
+  content = read_clean(link, args.get('inner_url'), use_cache=args.get('use_cache'))
+  # logging.error('-----------------------------')
+  # logging.error('link:%s'%link)
+  # logging.error('-----------------------------')
+  # content = urlopen(link).read()
   
   soup = BeautifulSoup(content)
   
