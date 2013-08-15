@@ -50,7 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL            = @"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -262,13 +262,27 @@ BOOL isIpad=NO;
     if(![cache put:key data:images prefix:@"mi"])
       return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
   
+//  NSDictionary*mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                          @"menu://", @"menu.html",
+//                          @"menu_section://main", @"menu_section_main.html",
+//                          @"menu_section://", @"menu_section.html",
+//                          @"ls_menu_section://main", @"ls_menu_section_main.html",
+//                          @"ls_menu_section://", @"ls_menu_section.html",
+//                          nil];
   
-  NSData *menu = (NSData*)[response_dict objectForKey:@"menu.html"];
-  if(menu!=nil){
-    NSString  *menu_key   = [CryptoUtil sha1:@"menu://"];
-    if(![cache put:menu_key data:menu prefix:@"m"])
-        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+  for(NSString* key in response_dict)
+  {
+    if ([key rangeOfString:@"menu"].location == NSNotFound) {
+      continue;
+    }
+    NSData *menu = (NSData*)[response_dict objectForKey:key];
+    if(menu!=nil){
+      NSString  *menu_key   = [CryptoUtil sha1:[key componentsSeparatedByString:@"."][0]];
+      if(![cache put:menu_key data:menu prefix:[key componentsSeparatedByString:@"."][1]])
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_HTML];
+    }
   }
+  
   //  if(processNavigation)
   //  {
   //    [self processNewsForGestureNavigation:xml dummy:NO];
@@ -497,6 +511,8 @@ BOOL isIpad=NO;
                       ([app_delegate isLandscape]?@"ls":@"pt"),
                       url
                    ];
+  NSLog(@"----------------------------");
+  NSLog(@"getXmlHttpUrl2: %@", tmp);
   return [NSURL URLWithString:tmp];
 
 }

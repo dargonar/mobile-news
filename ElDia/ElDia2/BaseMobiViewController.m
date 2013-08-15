@@ -322,7 +322,9 @@ NSString* click_url =@"";
   NSLog(@"Is a kind of MainViewController: %@", ([[self classForCoder] isSubclassOfClass:[MainViewController class]])? @"Yes" : @"No");
   
   if([app_delegate isiPad])
+  {
     return;
+  }
   
   if ([[self primaryUIWebView] respondsToSelector:@selector(scrollView)])
   {
