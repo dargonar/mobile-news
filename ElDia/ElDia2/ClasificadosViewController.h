@@ -14,13 +14,15 @@
 @property (nonatomic, retain) IBOutlet UIWebView *mainUIWebView;
 @property (nonatomic, retain) IBOutlet UIView *bottomUIView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading_indicator;
+@property (strong, nonatomic) ClasificadosViewController *childClasificadosViewController;
 
 - (IBAction) btnBackClick: (id)param;
 - (IBAction) btnShareClick: (id)param;
 - (IBAction) btnFontSizePlusClick: (id)param;
 - (IBAction) btnFontSizeMinusClick: (id)param;
 
-- (void)loadClasificados:(NSURL *)url;
+-(void)loadMenuClasificados:(NSURL *)url;
+-(void)loadClasificados:(NSURL *)url;
 -(void)loadFunebres:(NSURL *)url;
 -(void)loadFarmacia:(NSURL *)url;
 -(void)loadCartelera:(NSURL *)url;

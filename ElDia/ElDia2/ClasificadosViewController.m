@@ -18,7 +18,7 @@
 
 @implementation ClasificadosViewController
 
-@synthesize mainUIWebView, bottomUIView, loading_indicator;
+@synthesize mainUIWebView, bottomUIView, loading_indicator, childClasificadosViewController;
 
 NSData*notLoadedData = nil;
 BOOL mViewDidLoad=NO;
@@ -26,9 +26,9 @@ BOOL mViewDidLoad=NO;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
       notLoadedData = nil;
       mViewDidLoad = NO;
+      
     }
     return self;
 }
@@ -38,9 +38,11 @@ BOOL mViewDidLoad=NO;
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
 
+  self.primaryUIWebView= self.mainUIWebView;
+  
   self.mainUIWebView.delegate = self;
   self.mainUIWebView.hidden = NO;
-  [[self mainUIWebView] setScalesPageToFit:YES];
+  [[self mainUIWebView] setScalesPageToFit:NO];
   if(notLoadedData != nil)
   {
     [self setHTML:notLoadedData url:nil webView:self.mainUIWebView];
@@ -63,8 +65,9 @@ BOOL mViewDidLoad=NO;
   
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
-  [self positionateAdNoticiaScreen:deviceOrientation];
-
+//  [self positionateAdNoticiaScreen:deviceOrientation];
+  [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
+  
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
   
@@ -89,57 +92,25 @@ BOOL mViewDidLoad=NO;
     else{
       self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
     }
-
   }
-  
-}
-
-
--(void) rotateHTML{
-  [self positionate];
-  if([app_delegate isiPad])
-    return;
-  return;
-  NSString *viewportWidth = @"";
-  NSString *viewportInitScale = @"";
-  NSString *viewportMaxScale = @"";
-  
-  viewportWidth = @"320";
-  viewportInitScale = @"1.0";
-  viewportMaxScale = @"1.0";
-  if([app_delegate isLandscape]){
-    //viewportWidth = @"480";
-    viewportInitScale = @"1.5";
-    viewportMaxScale = @"1.5";
-    
-  }
-  
-  //document.body.style.width = '%@px';
-  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
-  
-  NSLog(@"%@",jsString);
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
+  [self zoomToFit];
   
 }
 
 // HACK: Estaba comentado
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  
   return YES;
-  
 }
 
 /* rotation handling */
 - (BOOL) shouldAutorotate
 {
-  return YES; //[app_delegate isiPad];
+  return YES; 
 }
 
 -(NSUInteger)supportedInterfaceOrientations
 {
-  //return UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft;
-  //return UIInterfaceOrientationMaskAll;
   return UIInterfaceOrientationPortrait|UIInterfaceOrientationPortraitUpsideDown|UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
   
 }
@@ -150,9 +121,7 @@ BOOL mViewDidLoad=NO;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  
-  [self rotateHTML];
-  //[mainUIWebView reload];
+  [self positionate];
 }
 
 /* **** */
@@ -295,8 +264,29 @@ BOOL mViewDidLoad=NO;
 }
 
 
--(void)loadClasificados:(NSURL *)url{
+-(void)loadMenuClasificados:(NSURL *)url{
     self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+  [self loadBlank];
+  [self onLoading:YES];
+  NSString *uri = [url absoluteString];
+  NSDate * date =[self.mScreenManager menuClasificadosDate:uri];
+  if([self.mScreenManager menuClasificadosExists:uri])
+  {
+    NSError *err;
+    NSData *data = [self.mScreenManager getMenuClasificados:uri useCache:YES error:&err];
+    if(mViewDidLoad==NO)
+      notLoadedData=data;
+    else
+      [self setHTML:data url:nil webView:self.mainUIWebView];
+    
+    if(![self isOld:date])
+      return;
+  }
+  [self loadUrl:uri useCache:NO type:@"menu_clasificados"];
+}
+
+-(void)loadClasificados:(NSURL *)url{
+  self.mainUIWebView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
   [self loadBlank];
   [self onLoading:YES];
   NSString *uri = [url absoluteString];
@@ -325,13 +315,16 @@ BOOL mViewDidLoad=NO;
       data = [self.mScreenManager getFunebres:url useCache:useCache error:&err];
     else
       if([type isEqualToString:@"farmacia"])
-    data = [self.mScreenManager getFarmacia:url useCache:useCache error:&err];
-    else
-      if([type isEqualToString:@"cartelera"])
-        data = [self.mScreenManager getCartelera:url useCache:useCache error:&err];
+        data = [self.mScreenManager getFarmacia:url useCache:useCache error:&err];
       else
-      if([type isEqualToString:@"clasificados"])
-        data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
+        if([type isEqualToString:@"cartelera"])
+          data = [self.mScreenManager getCartelera:url useCache:useCache error:&err];
+        else
+          if([type isEqualToString:@"clasificados"])
+            data = [self.mScreenManager getClasificados:url useCache:useCache error:&err];
+          else
+            if([type isEqualToString:@"menu_clasificados"])
+              data = [self.mScreenManager getMenuClasificados:url useCache:useCache error:&err];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       
@@ -373,16 +366,13 @@ BOOL mViewDidLoad=NO;
 	[super viewWillAppear:animated];
   app_delegate.navigationController.navigationBar.hidden=YES;
   
-  [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
-  
-  [self rotateHTML];
+  [self positionate];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  if(![app_delegate isiPad])
-  {
-    [self rotateHTML];
-  }
+  
+  [self zoomToFit];
+  
 
   [self changeFontSize:0];
   [self onLoading:NO];
@@ -396,6 +386,7 @@ BOOL mViewDidLoad=NO;
   [self onLoading:NO];
 }
 
+/*
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType{
   
@@ -404,6 +395,45 @@ BOOL mViewDidLoad=NO;
     return NO;
   
   return YES;
+}
+ */
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType{
+  
+  
+  NSURL* url = [request URL];
+  if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+  {
+    [self loadChildScreen];
+    [app_delegate.navigationController pushViewController:self.childClasificadosViewController animated:YES];
+    
+    [self.childClasificadosViewController loadClasificados:url];
+    NSLog(@" --------------------");
+    NSLog(@" -- url: %@", [url absoluteString]);
+    return NO;
+  }
+  else
+    if (UIWebViewNavigationTypeLinkClicked == navigationType && ![[request.URL absoluteString] hasPrefix:@"tel"])
+    {
+      return NO;
+    }
+    else{
+      [[UIApplication sharedApplication] openURL:url];
+    }
+  
+  return YES;
+  
+}
+
+-(void)loadChildScreen{
+  if(self.childClasificadosViewController!=nil)
+    return;
+  NSString *clasificadosNibName   = @"ClasificadosViewController";
+  if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+    clasificadosNibName  = @"ClasificadosViewController_iPad"; // NO EXISTE!
+  }
+  self.childClasificadosViewController = [[ClasificadosViewController alloc] initWithNibName:clasificadosNibName bundle:nil];
 }
 
 

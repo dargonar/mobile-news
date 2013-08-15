@@ -31,7 +31,7 @@ NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
 NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
 NSString * const FUNEBRES_STYLESHEET      = @"6_funebres.xsl";
 NSString * const FARMACIAS_STYLESHEET     = @"7_farmacias.xsl";
-NSString * const CARTELERA_STYLESHEET      = @"8_cartelera.xsl";
+NSString * const CARTELERA_STYLESHEET     = @"8_cartelera.xsl";
 
 NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
 NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
@@ -50,16 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const MAIN_URL             = @"http://www.eldia.com.ar/rss/index.aspx";
-NSString * const NOTICIA_URL          = @"http://www.eldia.com.ar/rss/noticia.aspx?id=%@";
-NSString * const SECTIONS_URL         = @"http://www.eldia.com.ar/rss/index.aspx?seccion=%@";
-NSString * const MENU_URL             = @"http://www.eldia.com.ar/rss/secciones.aspx";
-//NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss.aspx?idr=%@&app=1";
-NSString * const CLASIFICADOS_URL     = @"http://www.eldia.com.ar/mc/clasi_rss_utf8.aspx?idr=%@&app=1";
-NSString * const FUNEBRES_URL         = @"http://www.eldia.com.ar/mc/fune_rss_utf8.aspx";
-NSString * const CARTELERA_URL     = @"http://www.eldia.com.ar/extras/carteleradecine_txt.aspx";
-NSString * const FARMACIAS_URL     = @"http://www.eldia.com.ar/extras/farmacias_txt.aspx";
-
+NSString * const SERVICE_URL            = @"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -92,6 +83,11 @@ BOOL isIpad=NO;
   return [cache createdAt:key prefix:@"f"];
 }
 
+-(NSDate*) menuClasificadosDate:(NSString*)url {
+  DiskCache *cache = [DiskCache defaultCache];
+  NSString  *key   = [CryptoUtil sha1:url];
+  return [cache createdAt:key prefix:@"mc"];
+}
 
 -(NSDate*) clasificadosDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
@@ -116,6 +112,10 @@ BOOL isIpad=NO;
   return [self screenExists:@"menu://" prefix:@"m"];
 }
 
+-(BOOL) menuClasificadosExists:(NSString*)url{
+  return [self screenExists:url prefix:@"mc"];
+}
+
 -(BOOL) clasificadosExists:(NSString*)url {
   return [self screenExists:url prefix:@"c"];
 }
@@ -133,16 +133,10 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) sectionExists:(NSString*)url {
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"s", html_prefix];
-  //return [self screenExists:url prefix:composedPrefix];
   return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) articleExists:(NSString*)url {
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"_ls_"):(@"");
-  //NSString *composedPrefix = [NSString stringWithFormat:@"%@%@",@"a", html_prefix];
-  //return [self screenExists:url prefix:composedPrefix];
   return [self screenExists:url prefix:@"a"];
 }
 
@@ -164,6 +158,10 @@ BOOL isIpad=NO;
 
 -(NSData *)getMenu:(BOOL)useCache error:(NSError **)error{
   return [self getScreen:@"menu://" useCache:useCache processImages:NO prefix:@"m" error:error];
+}
+
+-(NSData *)getMenuClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"mc" error:error];
 }
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -246,31 +244,49 @@ BOOL isIpad=NO;
   
   //Lo bajo
   NSError *my_err;
-//  NSURL *the_url = [self getXmlHttpUrl2:url];
-  NSArray *response_array =[self downloadUrl2:url error:&my_err];
+  NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
 
-  // response[0] -> html
-  // response[1] -> CSImages_urls
+  // -> content.html
+  // -> images.txt
+  // -> menu.html
 
-  NSData* html = (NSData*)[response_array objectAtIndex:0];
+  NSData* html = (NSData*)[response_dict objectForKey:@"content.html"];
   //Lo guardamos y retornamos
   if(![cache put:key data:html prefix:composedHtmlPrefix]) {
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
 
   //Las imagenes a descargar.guardamos en cache
-  if([response_array count]>1)
+  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
+  if(images!=nil)
+    if(![cache put:key data:images prefix:@"mi"])
+      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+  
+//  NSDictionary*mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                          @"menu://", @"menu.html",
+//                          @"menu_section://main", @"menu_section_main.html",
+//                          @"menu_section://", @"menu_section.html",
+//                          @"ls_menu_section://main", @"ls_menu_section_main.html",
+//                          @"ls_menu_section://", @"ls_menu_section.html",
+//                          nil];
+  
+  for(NSString* key in response_dict)
   {
-    NSData* images= (NSData*)[response_array objectAtIndex:1];
-    if (images != nil)
-      if(![cache put:key data:images prefix:@"mi"]) {
-        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
-      }
+    if ([key rangeOfString:@"menu"].location == NSNotFound) {
+      continue;
+    }
+    NSData *menu = (NSData*)[response_dict objectForKey:key];
+    if(menu!=nil){
+      NSString  *menu_key   = [CryptoUtil sha1:[key componentsSeparatedByString:@"."][0]];
+      if(![cache put:menu_key data:menu prefix:[key componentsSeparatedByString:@"."][1]])
+        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_HTML];
+    }
   }
-//  if(processNavigation)
-//  {
-//    [self processNewsForGestureNavigation:xml dummy:NO];
-//  }
+  
+  //  if(processNavigation)
+  //  {
+  //    [self processNewsForGestureNavigation:xml dummy:NO];
+  //  }
   
   return html;
 }
@@ -291,7 +307,7 @@ BOOL isIpad=NO;
   //  :(NSData**)xml_data error:(NSError **)error{
 }
 
--(NSArray *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
+-(NSDictionary *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
   
   NSURL *url = [self getXmlHttpUrl2:surl];
   NSLog(@" ----------------- ");
@@ -335,87 +351,38 @@ BOOL isIpad=NO;
 //    [file_sizes addObject: [NSString stringWithFormat:@"%d", info.size ]];
 //  }
   
-  BOOL first_file_is_html = [[((FileInZipInfo*)[infos objectAtIndex:0]) name] hasSuffix:@"html"];
-  
   [unzipFile goToFirstFileInZip];
   ZipReadStream *read1= [unzipFile readCurrentFileInZip];
   NSData* file1 = [read1 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:0]) length]];
   [read1 finishedReading];
   
+  NSMutableDictionary *mdict = [[NSMutableDictionary alloc]init];
+  [mdict setObject:file1 forKey:[((FileInZipInfo*)[infos objectAtIndex:0]) name]];
+  
   NSData* file2 = nil;
+  NSData* file3 = nil;
   if ([unzipFile goToNextFileInZip])
   {
     ZipReadStream *read2= [unzipFile readCurrentFileInZip];
     file2 = [read2 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:1]) length]];
     [read2 finishedReading];
+    [mdict setObject:file2 forKey:[((FileInZipInfo*)[infos objectAtIndex:1]) name]];
+    if ([unzipFile goToNextFileInZip])
+    {
+      ZipReadStream *read3= [unzipFile readCurrentFileInZip];
+      file3 = [read3 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:2]) length]];
+      [read3 finishedReading];
+      [mdict setObject:file3 forKey:[((FileInZipInfo*)[infos objectAtIndex:2]) name]];
+    }
+    
   }
   [unzipFile close];
   
-//  return  [NSArray arrayWithArray:[[NSMutableArray alloc] initWithObjects:content, extra, nil]];
-  NSMutableArray* ret = [[NSMutableArray alloc] init];
-  if(file2 != nil)
-  {
-    if(first_file_is_html)
-    {
-      [ret addObject:file1];
-      [ret addObject:file2];
-    }
-    else
-    {
-      [ret addObject:file2];
-      [ret addObject:file1];
-    }
-  
-  }
-  else
-    [ret addObject:file1];
-
-  return  [NSArray arrayWithArray:ret];
+  return  mdict;
   
 }
 
 
--(NSData *)downloadUrl:(NSString*)surl error:(NSError**)error hack_xml:(BOOL)hack_xml {
-  
-  NSURL *url = [self getXmlHttpUrl:surl];
-  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-  
-  [request setNumberOfTimesToRetryOnTimeout:1];
-  [request setTimeOutSeconds:15];
-  [request setCachePolicy:ASIDoNotWriteToCacheCachePolicy|ASIDoNotReadFromCacheCachePolicy];
-  request.timeOutSeconds=15;
-  [request setShouldAttemptPersistentConnection:NO];
-  
-  [request startSynchronous];
-  
-  NSError *request_error = [request error];
-  if (request_error != nil) {
-    if (error != nil) *error = request_error;
-    return nil;
-  }
-
-  NSData *response = [request responseData];
-  if (response == nil) {
-    return [ErrorBuilder build:error desc:@"request null" code:ERR_REQUEST_NULL];
-  }
- 
-  if(hack_xml==YES)
-  {
-    NSString *xml = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
-    NSString *date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
-   // NSLog(@"DateObject : %@", date);
-    
-    NSString *hacked_xml = @"<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:news=\"http://www.diariosmoviles.com.ar/news-rss/\" version=\"2.0\"><channel><pubDate>%@ -0300</pubDate><item><![CDATA[%@]]></item></channel></rss>";
-    
-    //NSLog(@" hacked xml surl[%@] data[%@]", surl, xml);
-    
-    response = [[NSString stringWithFormat:hacked_xml,date, xml] dataUsingEncoding:NSUTF8StringEncoding];
-  }
-  return response;
-}
 
 
 -(NSString*)getStyleSheet:(NSString*)url {
@@ -539,53 +506,15 @@ BOOL isIpad=NO;
 }
 
 -(NSURL*) getXmlHttpUrl2:(NSString*)url {
-  NSString* tmp = [NSString stringWithFormat:@"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@",
+  NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
                       ([app_delegate isiPad]?@"big":@"small"),
                       ([app_delegate isLandscape]?@"ls":@"pt"),
                       url
                    ];
+  NSLog(@"----------------------------");
+  NSLog(@"getXmlHttpUrl2: %@", tmp);
   return [NSURL URLWithString:tmp];
 
-}
-
--(NSURL*) getXmlHttpUrl:(NSString*)url {
-  
-  if( [url hasPrefix:@"section://main"] ) {
-    return [NSURL URLWithString:MAIN_URL];
-  }
-  
-  if( [url hasPrefix:@"noticia://" ] ) {  
-    NSURL *tmp = [NSURL URLWithString:url];
-    return [NSURL URLWithString:[NSString stringWithFormat:NOTICIA_URL,[tmp host]]];
-  }
-  
-  if( [url hasPrefix:@"section://"] ) {
-    NSURL *tmp = [NSURL URLWithString:url];
-    return [NSURL URLWithString:[NSString stringWithFormat:SECTIONS_URL,[tmp host]]];
-  }
-
-  if( [url hasPrefix:@"clasificados://"] ) {
-    NSURL *tmp = [NSURL URLWithString:url];
-    return [NSURL URLWithString:[NSString stringWithFormat:CLASIFICADOS_URL,[tmp host]]];
-  }
-
-  if( [url hasPrefix:@"menu://"] ) {
-    return [NSURL URLWithString:MENU_URL];
-  }
-  
-  if( [url hasPrefix:@"funebres://"] ) {
-    return [NSURL URLWithString:FUNEBRES_URL];
-  }
-
-  if( [url hasPrefix:@"farmacia://"] ) {
-    return [NSURL URLWithString:FARMACIAS_URL];
-  }
-
-  if( [url hasPrefix:@"cartelera://"] ) {
-    return [NSURL URLWithString:CARTELERA_URL];
-  }
-
-  return nil;
 }
 
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error {
@@ -621,9 +550,6 @@ BOOL isIpad=NO;
   if(data == nil) {
     return nil;
   }
-  
-//  NSArray *mobi_images = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
   
   NSArray *mobi_images_raw = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] componentsSeparatedByString:@","];
   

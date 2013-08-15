@@ -138,14 +138,33 @@ class ScreenController(FrontendHandler):
         imgs.append(img)
 
     if extras_map['has_clasificados'] == True:
-      i = importlib.import_module(apps_id[appid]+'.extras')
+      i = importlib.import_module(apps_id[appid]+'.rss_clasificados')
       extras_map['clasificados'] = i.get_classifieds()
 
     #return self.render_response('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map } )
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name } )
-
+    
     return imgs, rv
-
+  
+  def get_html(self, **kwargs):  
+    # Parametros del request
+    appid = self.request.params['appid'] # nombre de la app
+    url   = self.request.params['url']   # url interna
+    size  = self.request.params['size']  # small, big
+    ptls  = self.request.params['ptls']  # pt, ls
+    
+    mapping = self.get_mapping(appid)
+    
+    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
+    extras_map = mapping[ apps_id[appid] ]['extras']
+    
+    imgs, rv = self.build_html_and_images(appid, url, mapping, template_map, extras_map, ptls)
+    
+    # Set up headers for browser to correctly recognize ZIP file
+    self.response.headers['Content-Type'] ='text/html'
+    self.response.write(rv)
+    return
+    
   def get_screen(self, **kwargs):  
     # Parametros del request
     appid = self.request.params['appid'] # nombre de la app
@@ -174,11 +193,19 @@ class ScreenController(FrontendHandler):
     
     outfile.writestr('content.html', rv.encode('utf-8'))
 
-    # Incluimos menu si es section://main
+    #Incluimos menu si es section://main
     if url == 'section://main':
       xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-      outfile.writestr('menu.html', menu.encode('utf-8'))
+      outfile.writestr('menu://.m', menu.encode('utf-8'))
+    
+    #Incluimos menu si es section://main
+    if url.startswith('noticia://') and size=='big':
+      logging.error('------------------------')
+      logging.error('------------------------ %s' % url)
+      # xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+      # outfile.writestr('menu.html', menu.encode('utf-8'))
 
+      
     outfile.close()
     
     self.response.out.write(output.getvalue())

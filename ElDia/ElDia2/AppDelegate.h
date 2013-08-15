@@ -22,7 +22,8 @@
 
 @property (strong, nonatomic) MainViewController *mainViewController;
 @property (strong, nonatomic) MenuViewController *menuViewController;
-@property (strong, nonatomic) MenuClasificadosViewController *menuClasificadosViewController;
+//@property (strong, nonatomic) MenuClasificadosViewController *menuClasificadosViewController;
+@property (strong, nonatomic) ClasificadosViewController *menuClasificadosViewController;
 @property (strong, nonatomic) ClasificadosViewController *clasificadosViewController;
 @property (strong, nonatomic) ClasificadosViewController *farmaciaViewController;
 @property (strong, nonatomic) ClasificadosViewController *carteleraViewController;
@@ -49,6 +50,8 @@
 - (void)loadFunebres:(NSURL*)url;
 - (void)loadFarmacia:(NSURL*)url;
 - (void)loadCartelera:(NSURL*)url;
+- (void)loadMenuClasificados:(NSURL*)url;
+
 - (void)showClasificados;
 
 - (BOOL)isiPad;

@@ -59,13 +59,13 @@
   [[self menu_webview] setScalesPageToFit:NO];
   
   if ([app_delegate isiPad]) {
+    [[self mainUIWebView] setScalesPageToFit:YES];
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
   }
   else{
     [self mainUIWebView].multipleTouchEnabled = NO;
     //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
-    
   }
   
   // Do any additional setup after loading the view from its nib.
@@ -315,7 +315,7 @@ UIActionSheet* actionSheet;
   
   [self loadNoticia];
   if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
-    [self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+    //[self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
   self->currentSection = section;
@@ -342,7 +342,7 @@ UIActionSheet* actionSheet;
 
 -(void)loadSectionNews{
   //HACK!
-  //return;
+  return;
   if ([app_delegate isiPad]) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
@@ -488,55 +488,10 @@ UIActionSheet* actionSheet;
 }
 
 
--(void) rotateHTML:(UIWebView*)webView{
-  NSString *viewportWidth = @"";
-  NSString *viewportInitScale = @"";
-  NSString *viewportMinScale = @"";
-  NSString *viewportMaxScale = @"";
-  
-  NSString *extra = @"";
-  if(![app_delegate isiPad])
-  {
-    viewportWidth = @"320";
-    viewportInitScale = @"1.0";
-    viewportMaxScale = @"1.0";
-    viewportMinScale = @"1.0";
-    
-    extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)removeClass(tmp_element[0], 'imagen_iphone_landscape'); ";
-    if(isLandscapeView==YES){
-      viewportWidth = @"480";
-      viewportInitScale = @"1.0";
-      viewportMaxScale = @"1.0";
-      viewportMinScale = @"1.0";
-      extra=@" tmp_element=document.getElementsByClassName('imagen_principal');if(tmp_element!=null)addClass(tmp_element[0], 'imagen_iphone_landscape'); ";
-
-    }
-  }
-  else{
-    viewportWidth = @"1020";
-    viewportInitScale = @"0.7";
-    viewportMaxScale = @"1";
-    if(isLandscapeView==YES){
-      viewportInitScale = @"0.7";
-      viewportMaxScale = @"0.9";
-      viewportWidth = @"660";
-    }
-    viewportMinScale=viewportInitScale;
-  }
- 
-  NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.width = '%@px'; metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; init-scale=%@; maximum-scale=%@; user-scalable=no;');%@",viewportWidth, viewportWidth, viewportMinScale,viewportInitScale, viewportMaxScale, extra  ];
-  
-  
-  NSString* result =[self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  //NSLog(@" -|- EvaluateJS:[%@] result:[%@] isLandscape:[%@]",jsString, result, (isLandscapeView?@"YES":@"NO"));
-  
-
-}
-
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   if (webView.tag==MAIN_VIEW_TAG) {
     [self onLoading:NO];
-    [self rotateHTML:webView];
+    [self zoomToFit];
     [self changeFontSize:0];
   }
 }
@@ -823,13 +778,8 @@ BOOL justLoaded = YES;
     [self loadSectionNews];
   }
 
-  //[self.mainUIWebView reload];
-  [self rotateHTML:self.mainUIWebView];
-  [self.mainUIWebView reload];
+  [self zoomToFit];
   
-  NSLog(@"NoticiaScreen::positionate() UIDeviceOrientation:[%@] myOrientation:[%@]"
-          , UIDeviceOrientationIsLandscape(deviceOrientation)?@"Landscape":@"Portrait"
-          , isLandscapeView?@"Landscape":@"Portrait");
   justLoaded=NO;
 }
 

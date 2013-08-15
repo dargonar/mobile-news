@@ -59,12 +59,14 @@ NSLock *menuLock;
   
   mainUIWebView.tag=MAIN_VIEW_TAG;
   
-  [[self mainUIWebView] setScalesPageToFit:NO];
+  //[[self mainUIWebView] setScalesPageToFit:NO];
   [self mainUIWebView].multipleTouchEnabled = NO;
-  self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
+  //HACKO: self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
   
+  [self mainUIWebView].scrollView.delegate = self;
   
   if ([app_delegate isiPad]) {
+    [[self primaryUIWebView] setScalesPageToFit:YES];
     [[self menu_webview] setScalesPageToFit:NO];
     [self menu_webview].multipleTouchEnabled = NO;
   }
@@ -325,43 +327,16 @@ BOOL isLandscapeView_ = NO;
 BOOL isLoading_ = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  
   [self positionate];
-  
 }
-
--(void) rotateHTML:(UIWebView*)webView{
-  if([app_delegate isiPad])
-    return;
-  
-  NSString *viewportWidth = @"";
-  NSString *viewportInitScale = @"";
-  NSString *viewportMaxScale = @"";
-  
-  viewportWidth = @"320";
-  viewportInitScale = @"1.0";
-  viewportMaxScale = @"1.0";
-  if(isLandscapeView_==YES){
-    //viewportWidth = @"480";
-    viewportInitScale = @"1.5";
-    viewportMaxScale = @"1.5";
-    
-  }
-  
-  //document.body.style.width = '%@px'; 
-  NSString *jsString = [[NSString alloc] initWithFormat:@"metayi = document.querySelector('meta[name=viewport]'); metayi.setAttribute('content','width=%@; minimum-scale=%@; maximum-scale=%@; user-scalable=no;');",viewportWidth, viewportInitScale, viewportMaxScale  ];
-  
-//  NSLog(@"%@",jsString);
-  [self.mainUIWebView stringByEvaluatingJavaScriptFromString:jsString];
-  
-}
-
 
 -(void)positionate{
   
   UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   
   [self positionateAdMainScreen:deviceOrientation];
+  //  return;
+
   
   BOOL hasRotated = NO;
   if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
@@ -376,7 +351,7 @@ BOOL isLoading_ = YES;
     hasRotated = YES;
   }
   
-  [self rotateHTML:self.mainUIWebView];
+  [self zoomToFit];
   
   //HACK Testing
   if(hasRotated == YES)
@@ -410,11 +385,11 @@ BOOL isLoading_ = YES;
     }
   }
   else{
-    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+//    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
   // HACK testing
-  [self.mainUIWebView reload];
+//  [self.mainUIWebView reload];
 }
 
 bool menuLoaded = NO;
@@ -433,11 +408,11 @@ bool menuLoaded = NO;
     self.btnOptions.enabled=YES;
   }
   else{
-    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+//    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
   // HACK testing
-  [self.mainUIWebView reload];
+//  [self.mainUIWebView reload];
 
 }
 
@@ -522,10 +497,6 @@ bool menuLoaded = NO;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
   
-  //[webView setScalesPageToFit:YES];
-  NSString*webDesc = webView.tag==MAIN_VIEW_TAG?@"menuWebView":@"mainWebView";
-//  NSLog(@"WEBVIEW[%@] webViewDidStartLoad", webDesc);
-  
   if(webView.tag == MAIN_VIEW_TAG){
     webView.hidden = YES;
   }
@@ -541,6 +512,7 @@ bool menuLoaded = NO;
   }
 }
 
+
 bool showUpdatedAt = NO;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
 
@@ -553,10 +525,24 @@ bool showUpdatedAt = NO;
       [self showUpdatedAt];
     }
     webView.hidden = NO;
-    if(![app_delegate isiPad])
-    {
-      [self rotateHTML:self.mainUIWebView];
-    }
+    
+    [self zoomToFit];
+    
+//    CGRect newBounds = webView.bounds;
+//    newBounds.size.width = webView.scrollView.contentSize.height;
+//    webView.bounds = newBounds;
+
+//    CGRect frame = webView.frame;
+//    frame.size.width= 1;
+//    webView.frame = frame;
+//    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+//    frame.size = fittingSize;
+//    webView.frame = frame;
+    
+//    if(![app_delegate isiPad])
+//    {
+//      [self rotateHTML:self.mainUIWebView];
+//    }
   }
 }
 
