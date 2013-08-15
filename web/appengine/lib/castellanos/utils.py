@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 
 def get_datetime(soup_element):  
   months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
-  
   soup_element[0].strong.decompose()
   parts  = soup_element[0].text.split()
   # Lunes 05 Agosto 2013

@@ -193,8 +193,16 @@ class ScreenController(FrontendHandler):
     #Incluimos menu si es section://main
     if url == 'section://main':
       xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-      outfile.writestr('menu.html', menu.encode('utf-8'))
+      outfile.writestr('menu://.m', menu.encode('utf-8'))
+    
+    #Incluimos menu si es section://main
+    if url.startswith('noticia://') and size=='big':
+      logging.error('------------------------')
+      logging.error('------------------------ %s' % url)
+      # xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+      # outfile.writestr('menu.html', menu.encode('utf-8'))
 
+      
     outfile.close()
     
     self.response.out.write(output.getvalue())
