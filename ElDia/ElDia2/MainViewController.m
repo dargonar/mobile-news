@@ -59,13 +59,14 @@ NSLock *menuLock;
   
   mainUIWebView.tag=MAIN_VIEW_TAG;
   
-  //HACKO: [[self mainUIWebView] setScalesPageToFit:NO];
+  //[[self mainUIWebView] setScalesPageToFit:NO];
   [self mainUIWebView].multipleTouchEnabled = NO;
   //HACKO: self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
   
   [self mainUIWebView].scrollView.delegate = self;
   
   if ([app_delegate isiPad]) {
+    [[self primaryUIWebView] setScalesPageToFit:YES];
     [[self menu_webview] setScalesPageToFit:NO];
     [self menu_webview].multipleTouchEnabled = NO;
   }
@@ -326,9 +327,7 @@ BOOL isLandscapeView_ = NO;
 BOOL isLoading_ = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  
   [self positionate];
-  
 }
 
 -(void)positionate{

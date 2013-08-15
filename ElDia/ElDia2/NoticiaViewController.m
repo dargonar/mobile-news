@@ -59,13 +59,13 @@
   [[self menu_webview] setScalesPageToFit:NO];
   
   if ([app_delegate isiPad]) {
+    [[self mainUIWebView] setScalesPageToFit:YES];
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
   }
   else{
     [self mainUIWebView].multipleTouchEnabled = NO;
     //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
-    
   }
   
   // Do any additional setup after loading the view from its nib.
@@ -342,7 +342,7 @@ UIActionSheet* actionSheet;
 
 -(void)loadSectionNews{
   //HACK!
-  //return;
+  return;
   if ([app_delegate isiPad]) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       __block NSError *err;
