@@ -57,11 +57,11 @@ def get_xml(args):
     href = link
     
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title.text )
+    output_write( u'<title><![CDATA[%s]]></title>' % title.text )
     if bajada is not None:
       hour = bajada.strong.text
       bajada.strong.decompose()
-      output_write( u'<description>%s</description>' % bajada.text )
+      output_write( u'<description><![CDATA[%s]]></description>' % bajada.text )
     else:
       output_write( u'<description><![CDATA[&nbsp;]]></description>')
     
@@ -75,25 +75,25 @@ def get_xml(args):
     
     output_write( u'<author></author>' )
     if seccion is not None:
-      output_write( u'<category>%s</category>' % seccion.text)
-      output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % seccion.text )
+      output_write( u'<category><![CDATA[%s]]></category>' % seccion.text)
+      output_write( u'<news:lead type="plain" meta="volanta"><![CDATA[%s]]></news:lead>' % seccion.text )
     else:
-      output_write( u'<category></category>')
+      output_write( u'<category><![CDATA[&nbsp;]]></category>')
     
     if bajada is not None:    
-      output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % bajada.text )
+      output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % bajada.text )
     else:
-      output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
+      output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[&nbsp;]]></news:subheader>' )
     
     if contenido is not None:    
-      output_write( u'<news:content type="html" meta="contenido">%s</news:content>' % contenido.text )
+      output_write( u'<news:content type="html" meta="contenido"><![CDATA[%s]]></news:content>' % contenido.text )
     else:
-      output_write( u'<news:content type="html" meta="contenido"></news:content>')
+      output_write( u'<news:content type="html" meta="contenido"><![CDATA[&nbsp;]]></news:content>')
     
     img = getOne("#Content .ColumnaAB .NotaFotos .Foto img")
     if img is not None:
       output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img['src'] )
-      output_write( u'<media:text type="plain"></media:text>' )
+      output_write( u'<media:text type="plain"><![CDATA[&nbsp;]]></media:text>' )
       output_write( u'<media:credit role="publishing company">Diario Castellanos</media:credit>' )
     
     imgs = soup.select(u'#Content .ColumnaAB .NotaFotos #gallery ul.ad-thumb-list li a img')
@@ -101,7 +101,7 @@ def get_xml(args):
       output_write( u'<media:group>')
       for i in xrange(len(imgs)): 
         output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % imgs[i]['src'] )
-        output_write( u'<media:text type="plain"></media:text>' )
+        output_write( u'<media:text type="plain"><![CDATA[&nbsp;]]></media:text>' )
         output_write( u'<media:credit role="publishing company">Diario Castellanos</media:credit>' )
       output_write( u'</media:group>')
       output_write( u'<news:meta has_gallery="true" has_video="false" has_audio="false" />' )
