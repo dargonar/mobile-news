@@ -72,10 +72,10 @@ class DownloadAll(RequestHandler):
     # por que hay dos appid para ElDia (x ej)
     inverted = dict((v,k) for k,v in apps_id.iteritems())
     for name, appid in inverted.items():
-      #if name != 'ecosdiarios': continue
+      if name != 'castellanos': continue
       #logging.error('----> a bajar newspaper ' + appid)
       taskqueue.add(queue_name='download', url='/download/newspaper', params={'appid':appid})
-      #break
+      break
 
 class ElDia(RequestHandler):
   def download(self, **kwargs):

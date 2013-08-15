@@ -16,7 +16,7 @@ import StringIO
 from utils import read_clean
 from xutils import get_datetime, get_date, get_header, get_footer
 
-def get_xml(kwargs):
+def get_xml(args):
   
   output = StringIO.StringIO()
   output.write(get_header())
