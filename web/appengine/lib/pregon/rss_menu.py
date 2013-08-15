@@ -9,39 +9,16 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-from pregon.utils import get_today_date, get_date
+from utils import read_clean
+from pregon.xutils import *
 
 def get_xml(args):
-
-  header = u"""<?xml version="1.0" encoding="UTF-8" ?>
-  <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
-  <channel>
-   <title>PREGON - SIMURSS</title>
-   <link>http://www.pregon.com.ar/</link>
-   <description>El diario de Jujuy - Argentina</description>
-   <copyright>2013, Pregon, todos los derechos reservados</copyright>
-   <pubDate>Tue, 04 Sep 2012 20:20:18 GMT</pubDate>
-   <image>
-     <title>Pregon - RSS</title>
-     <url>http://www.pregon.com.ar/img/LOGOPREGON.png</url>
-     <link>http://www.pregon.com.ar</link>
-   </image>
-   <ttl>10</ttl>
-   <atom:link href="http://www.pregon.com.ar/simu.rss" rel="self" type="application/rss+xml"/>
-
-  """
-
-  footer = u"""
-   </channel>
-  </rss>
-  """
 
   output = StringIO.StringIO()
   output.write(header)
 
   link = "http://www.pregon.com.ar/"
-  content = urlopen(link).read()
+  content = read_clean(link, args.get('inner_url'), use_cache=args.get('use_cache'))
   soup = BeautifulSoup(content)
 
   today_date = get_today_date(soup)

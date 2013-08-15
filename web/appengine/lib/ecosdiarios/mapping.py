@@ -10,14 +10,13 @@ def get_mapping():
       ('section://'     , 'X: ecosdiarios.rss_section') ,
       ('menu://'        , 'X: ecosdiarios.rss_menu') ,
       ('farmacia://'    , 'X: ecosdiarios.rss_farmacia') ,
-      ('farmacia://'    , 'X: ecosdiarios.rss_farmacia') ,
     ]), 
     'templates-small': OrderedDict([
       ('section://main' , {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'}),
       ('noticia://'     , {'pt': '3_new.xsl',          'ls': '3_new.xsl'}),
       ('section://'     , {'pt': '2_section_list.xsl', 'ls': '2_section_list.xsl'}),
       ('menu://'        , {'pt': '4_menu.xsl',         'ls': '4_menu.xsl'}),
-      ('funebres://'    , {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'}),
+      ('farmacia://'    , {'pt': '7_farmacias.xsl',    'ls': '7_farmacias.xsl'}),
     ]),
     'templates-big': OrderedDict([
       ('section://main'          , {'pt': '1_tablet_main_list.xsl',                  'ls': '1_tablet_main_list.xsl'}),

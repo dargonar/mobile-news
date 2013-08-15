@@ -9,15 +9,16 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-from ecosdiarios import utils
+from utils import read_clean
+from ecosdiarios import xutils
 
 def get_xml(args):
 
   output = StringIO.StringIO()
-  output.write(utils.header)
+  output.write(xutils.header)
 
-  soup = BeautifulSoup(utils.read_clean(utils.link))
-  today_date = utils.get_today_date(soup)
+  soup = BeautifulSoup(read_clean(xutils.link, args.get('inner_url'), use_cache=args.get('use_cache')))
+  today_date = xutils.get_today_date(soup)
   
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
@@ -31,7 +32,7 @@ def get_xml(args):
     output_write( u'<guid isPermaLink="false">%s</guid>' % guid )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % utils.get_date(today_date, '00:00') )
+    output_write( u'<pubDate>%s</pubDate>' % xutils.get_date(today_date, '00:00') )
     output_write( u'<category>%s</category>' % desc )
 
     output_write( u'</item>')
@@ -44,6 +45,6 @@ def get_xml(args):
 
     put_item(desc, url, guid)
     
-  output.write(utils.footer)
+  output.write(xutils.footer)
 
   return output.getvalue()
