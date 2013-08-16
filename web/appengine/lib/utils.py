@@ -7,11 +7,63 @@ from HTMLParser import HTMLParser
 from dateutil.parser import parser
 
 from re import *
+from hashlib import sha256
+
+from lxml import etree
+from urllib2 import urlopen
+from StringIO import StringIO
+
+from models import CachedContent
 
 from google.appengine.ext import db
+from google.appengine.api import memcache
 
 from webapp2 import abort, cached_property, RequestHandler, Response, HTTPException, uri_for as url_for, get_app
 from webapp2_extras import jinja2, sessions, json
+
+apps_id = { 
+  'com.diventi.eldia'       : 'eldia',
+  'com.diventi.mobipaper'   : 'eldia',
+  'com.diventi.pregon'      : 'pregon',
+  'com.diventi.castellanos' : 'castellanos',
+  'com.diventi.ecosdiarios' : 'ecosdiarios',
+}
+
+def build_inner_url(appid, inner_url):
+  inx = '?' in inner_url and inner_url.index('?')
+  if inx: inner_url = inner_url[0:inx]
+  return '%s|%s' % (appid, inner_url)
+
+def read_url_clean(httpurl):
+  content = urlopen(httpurl, timeout=25).read()  
+  parser = etree.HTMLParser()
+  tree   = etree.parse(StringIO(content), parser)
+  content = etree.tostring(tree.getroot(), pretty_print=True, method="html")
+  return content  
+
+def in_cache(inner_url):
+  key = sha256(inner_url).digest().encode('hex')
+  dbkey = db.Key.from_path('CachedContent', key)
+  return CachedContent.all(keys_only=True).filter('__key__', dbkey).get() is not None
+
+def read_clean(httpurl, inner_url, fnc=read_url_clean, use_cache=True):
+  key = sha256(inner_url).digest().encode('hex')
+  dbkey = db.Key.from_path('CachedContent', key)
+
+  content = memcache.get(key) if use_cache else None
+  
+  if content is None:    
+    tmp = CachedContent.get(dbkey) if use_cache else None
+    if tmp is None:
+      logging.info('URL not in cache: %s' % inner_url)
+      content = fnc(httpurl)      
+      tmp = CachedContent(key=dbkey, inner_url=inner_url, content=db.Text(arg=content, encoding='utf-8'))
+      tmp.put()
+    
+    content = tmp.content.encode('utf-8')
+    memcache.set(key, content)
+  
+  return content
 
 _slugify_strip_re = compile(r'[^\w\s-]')
 _slugify_hyphenate_re = compile(r'[-\s]+')

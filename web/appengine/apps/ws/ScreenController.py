@@ -16,80 +16,85 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from google.appengine.ext import db
 from google.appengine.api import mail
 from google.appengine.api import taskqueue
+from google.appengine.api import memcache
 
 from webapp2 import cached_property
-from utils import FrontendHandler, get_or_404
+from utils import FrontendHandler, get_or_404, read_clean
 from lhammer.xml2dict import XML2Dict
 
-apps_id = { 
-  'com.diventi.eldia'       : 'eldia',
-  'com.diventi.mobipaper'   : 'eldia',
-  'com.diventi.pregon'      : 'pregon',
-  'com.diventi.castellanos' : 'castellanos',
-  'com.diventi.ecosdiarios' : 'ecosdiarios',
-}
+from utils import apps_id, build_inner_url
+
+def my_read_url(url):
+  logging.info('Not in cache .. reading (%s)' % url)
+  return urllib2.urlopen(url, timeout=15).read()
+
+def get_mapping(appid):
+  i = importlib.import_module(apps_id[appid]+u'.mapping')
+  return i.get_mapping()
+
+def get_httpurl(appid, url, mapping=None):  
+  if mapping is None:
+    mapping = get_mapping(appid)
+  # Armamos la direccion del xml
+  url_map = mapping[ apps_id[appid] ]['httpurl']
+  
+  httpurl = ''
+  args = {}
+  for k in url_map:
+    if url.startswith(k):
+      httpurl = url_map[k]
+      #HARKU
+      args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
+      
+      if '?' in url:
+        for i in url[url.index('?')+1:].split('&'):
+          tmp = i.split('=')
+          args[tmp[0]]=tmp[1]
+
+      break
+  return httpurl, args
+
+def build_xml_string(url, httpurl, kwargs, appid, clear_namespaces=False, use_cache=True):
+  if httpurl.startswith('X:'):
+    i = importlib.import_module(httpurl.split()[1])
+    #logging.error('--modulo : %s'%httpurl.split()[1])
+    kwargs['inner_url'] = build_inner_url(appid,url)
+    kwargs['use_cache'] = use_cache
+    result = i.get_xml(kwargs).encode('utf-8')
+  else:
+    if '%s' in httpurl:
+      httpurl = httpurl % kwargs['host']
+    
+    result = read_clean(httpurl, build_inner_url(appid,url), fnc=my_read_url, use_cache=use_cache)
+
+    # HACKO el DIA:
+    if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
+      now = datetime.now()+timedelta(hours=-3)
+      result = re.sub(r'\r?\n', '</br>', result)
+      result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+                    xmlns:media="http://search.yahoo.com/mrss/" 
+                    xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
+                    version="2.0" encoding="UTF-8"><channel>
+                    <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now.strftime("%a, %d %b %Y %H:%M:%S"), result)
+
+  if clear_namespaces:
+    result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
+  return result
+
+ 
+def get_xml(appid, url, use_cache=True):
+  httpurl, args = get_httpurl(appid, url, mapping=None)
+  r = build_xml_string(url, httpurl, args, appid, clear_namespaces=False, use_cache=use_cache)
+  return r
 
 class ScreenController(FrontendHandler):
   
-  def build_xml_string(self, url, httpurl, kwargs, appid, clear_namespaces=False):
-    if httpurl.startswith('X:'):
-      i = importlib.import_module(httpurl.split()[1])
-      logging.error('--modulo:%s'%httpurl.split()[1])
-      result = i.get_xml(kwargs).encode('utf-8')
-    else:
-      if '%s' in httpurl:
-        httpurl = httpurl % kwargs['host']
-      result = urllib2.urlopen(httpurl).read()
-
-      # HACKO el DIA:
-      if (url.startswith('farmacia://') or url.startswith('cartelera://')) and apps_id[appid] == 'eldia':
-        now = datetime.now()+timedelta(hours=-3)
-        result = re.sub(r'\r?\n', '</br>', result)
-        result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
-                      xmlns:media="http://search.yahoo.com/mrss/" 
-                      xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
-                      version="2.0" encoding="UTF-8"><channel>
-                      <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now.strftime("%a, %d %b %Y %H:%M:%S"), result)
-
-    if clear_namespaces:
-      result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
-    return result
-  
-  def get_httpurl(self, appid, url, mapping=None):  
-    if mapping is None:
-      mapping = self.get_mapping(appid)
-    # Armamos la direccion del xml
-    url_map = mapping[ apps_id[appid] ]['httpurl']
-    
-    httpurl = ''
-    args = {}
-    for k in url_map:
-      if url.startswith(k):
-        httpurl = url_map[k]
-        #HARKU
-        args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
-        
-        if '?' in url:
-          for i in url[url.index('?')+1:].split('&'):
-            tmp = i.split('=')
-            args[tmp[0]]=tmp[1]
-
-        break
-    return httpurl, args
-
-  
-  def get_mapping(self, appid):
-    i = importlib.import_module(apps_id[appid]+u'.mapping')
-    return i.get_mapping() #.encode('utf-8')
-    
   def get_xml(self, **kwargs):  
     
     appid = self.request.params['appid'] # nombre de la app
     url   = self.request.params['url']   # url interna
-    
-    httpurl, args = self.get_httpurl(appid, url, mapping=None)
-    
-    r = self.build_xml_string(url, httpurl, args, appid, clear_namespaces=False)
+
+    r = get_xml(appid, url)    
     
     self.response.headers['Content-Type'] ='text/xml'
     
@@ -98,7 +103,7 @@ class ScreenController(FrontendHandler):
   def build_html_and_images(self, appid, url, mapping, template_map, extras_map, ptls):
     
     # Armamos la direccion del xml    
-    httpurl, args = self.get_httpurl(appid, url, mapping)
+    httpurl, args = get_httpurl(appid, url, mapping)
     
     # 
     page_name = ''
@@ -116,13 +121,11 @@ class ScreenController(FrontendHandler):
 
     # Traemos el xml y lo transformamos en un dict
     xml = XML2Dict()
-    r = xml.fromstring(self.build_xml_string(url, httpurl, args, appid, clear_namespaces=True))
-    
+    r = xml.fromstring(build_xml_string(url, httpurl, args, appid, clear_namespaces=True ))
+
     # Reemplazamos las imagens por el sha1 de la url
     imgs = []
-    items = []
-    
-    # if 'rss' in r:
+
     if type(r.rss.channel.item) == type([]):
       items = r.rss.channel.item
     else:
@@ -169,7 +172,7 @@ class ScreenController(FrontendHandler):
     size  = self.request.params['size']  # small, big
     ptls  = self.request.params['ptls']  # pt, ls
     
-    mapping = self.get_mapping(appid)
+    mapping = get_mapping(appid)
     
     template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
     extras_map = mapping[ apps_id[appid] ]['extras']
@@ -193,8 +196,16 @@ class ScreenController(FrontendHandler):
     #Incluimos menu si es section://main
     if url == 'section://main':
       xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-      outfile.writestr('menu.html', menu.encode('utf-8'))
+      outfile.writestr('menu://.m', menu.encode('utf-8'))
+    
+    #Incluimos menu si es section://main
+    if url.startswith('noticia://') and size=='big':
+      logging.error('------------------------')
+      logging.error('------------------------ %s' % url)
+      # xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+      # outfile.writestr('menu.html', menu.encode('utf-8'))
 
+      
     outfile.close()
     
     self.response.out.write(output.getvalue())

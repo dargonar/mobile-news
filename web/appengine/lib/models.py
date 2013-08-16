@@ -49,10 +49,6 @@ cats = [
           
         ]
           
-        
-          
-class NewsPaper(db.Model):
-  name         = db.StringProperty()
 
 class Category(db.Model):
   name         = db.StringProperty()
@@ -106,7 +102,10 @@ class ArticlesGallery(db.Model):
   has_gallery       = db.IntegerProperty()
   rss           = db.TextProperty()
 
-
+class CachedContent(db.Model):
+  content            = db.TextProperty()
+  inner_url          = db.StringProperty()
+  created_at         = db.DateTimeProperty(auto_now_add=True)
 
 class RegisteredEditor(db.Model):
   created_at         = db.DateTimeProperty(auto_now_add=True)

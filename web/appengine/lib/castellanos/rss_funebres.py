@@ -12,16 +12,16 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date, get_header, get_footer
+from utils import read_clean
+from xutils import get_datetime, get_date, get_header, get_footer
 
-def get_xml(kwargs):
+def get_xml(args):
   
   output = StringIO.StringIO()
   output.write(get_header())
 
   link = u'http://www.diariocastellanos.net/funebres.aspx'
-  content = urlopen(link).read()
-  
+  content = read_clean(link, args.get('inner_url'), use_cache=args.get('use_cache'))
   soup = BeautifulSoup(content)
   
   date        = soup.select('#TopHeader #Fecha')
@@ -55,7 +55,7 @@ def get_xml(kwargs):
       if isinstance(_content, Tag):
         my_content = my_content + _content.prettify().replace(u'<o:p></o:p>', '')
     
-    print_item(title, '<![CDATA[%s]]>' % my_content, link)
+    print_item(title, my_content, link)
   
   def __get_page_and_print_items(link):
     
@@ -87,12 +87,12 @@ def get_xml(kwargs):
       
   def print_item(title, description, link):
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title )
-    output_write( u'<description>%s</description>' % description if description is not None and len(description)>0 else '<![CDATA[&nbsp;]]>')
+    output_write( u'<title><![CDATA[%s]]></title>' % title )
+    output_write( u'<description><![CDATA[%s]]></description>' % description if description is not None and len(description)>0 else '<![CDATA[&nbsp;]]>')
     output_write( u'<link>%s</link>' % link )
     output_write( u'<guid isPermaLink="false">%s</guid>' % link )
     output_write( u'<pubDate>%s</pubDate>' % get_date('00:00', today_date))
-    output_write( u'<category>%s</category>' % title)
+    output_write( u'<category><![CDATA[%s]]></category>' % title)
     output_write( u'</item>')
   
   #get_page_and_print_items

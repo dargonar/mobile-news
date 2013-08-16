@@ -10,15 +10,16 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-from ecosdiarios import utils
+from utils import read_clean
+from ecosdiarios import xutils
 
 def get_xml(args):
 
   output = StringIO.StringIO()
-  output.write(utils.header)
+  output.write(xutils.header)
   
-  soup = BeautifulSoup(utils.read_clean(utils.link))
-  today_date = utils.get_today_date(soup)
+  soup = BeautifulSoup(read_clean(xutils.link, args.get('inner_url'),use_cache=args.get('use_cache')))
+  today_date = xutils.get_today_date(soup)
 
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
@@ -26,14 +27,14 @@ def get_xml(args):
   def put_item(art0, art1):
 
     title    = art0.tr.a.text.strip()
-    href     = '%s%s' % (utils.link, art0.tr.a['href'])
+    href     = '%s%s' % (xutils.link, art0.tr.a['href'])
     guid     = re.compile('&id=(\d+)').findall(href)[0]
     category = art1.tr.td.span.text.strip()
 
     img = None
     pes = art1.find_all('p')
     if len(pes) > 1:
-      if pes[0].img is not None: img = '%s%s' % (utils.link, pes[0].img['src'])
+      if pes[0].img is not None: img = '%s%s' % (xutils.link, pes[0].img['src'])
       bajada = pes[1].text
     else:
       bajada = pes[0].text
@@ -64,8 +65,9 @@ def get_xml(args):
 
 
   arts=soup.select('table.blog table.contentpaneopen')
-  for i in xrange(len(arts)/2): put_item(arts[2*i], arts[2*i+1])
+  for i in xrange(len(arts)/2): 
+    put_item(arts[2*i], arts[2*i+1])
 
-  output.write(utils.footer)
+  output.write(xutils.footer)
 
   return output.getvalue()

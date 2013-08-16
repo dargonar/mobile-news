@@ -13,15 +13,16 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date, get_header, get_footer
+from utils import read_clean
+from xutils import get_datetime, get_date, get_header, get_footer
 
-def get_xml(kwargs):
+def get_xml(args):
   
   output = StringIO.StringIO()
   output.write(get_header())
 
   link = u'http://www.diariocastellanos.net/Default.aspx'
-  content = urlopen(link).read()
+  content = read_clean(link, args.get('inner_url'), use_cache=args.get('use_cache'))
   
   soup = BeautifulSoup(content)
   
@@ -39,13 +40,13 @@ def get_xml(kwargs):
 
   def print_item(title, href):
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title )
-    output_write( u'<description></description>')
+    output_write( u'<title><![CDATA[%s]]></title>' % title )
+    output_write( u'<description><![CDATA[&nbsp;]]></description>')
     output_write( u'<link>%s</link>' % href )
     output_write( u'<guid isPermaLink="false">%s</guid>' % href.split('/')[-1:][0] )
     output_write( u'<pubDate>%s</pubDate>' % get_date('00:00', today_date))
     output_write( u'<author></author>' )
-    output_write( u'<category>%s</category>' % title)
+    output_write( u'<category><![CDATA[%s]]></category>' % title)
     output_write( u'</item>')
   
   def put_item(menu_item):

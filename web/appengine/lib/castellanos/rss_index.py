@@ -12,9 +12,10 @@ import cgi
 import re
 import StringIO
 
-from utils import get_datetime, get_date, get_header, get_footer
+from utils import read_clean
+from xutils import get_datetime, get_date, get_header, get_footer
 
-def get_xml(kwargs):
+def get_xml(args):
   
   noticias = []
   
@@ -22,8 +23,8 @@ def get_xml(kwargs):
   output.write(get_header())
 
   link = u'http://www.diariocastellanos.net/Default.aspx'
-  content = urlopen(link).read()
-  
+  content = read_clean(link, args.get('inner_url'), use_cache=args.get('use_cache'))
+
   soup = BeautifulSoup(content)
   
   date        = soup.select('#TopHeader #Fecha')
@@ -62,7 +63,7 @@ def get_xml(kwargs):
     section = _section[0].text if len(_section)>0 else ''
     
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title.text )
+    output_write( u'<title><![CDATA[%s]]></title>' % title.text )
     #output_write( u'<description>%s</description>' % section)
     output_write( u'<description><![CDATA[&nbsp;]]></description>')
     output_write( u'<link>%s</link>' % title['href'] )
@@ -71,18 +72,18 @@ def get_xml(kwargs):
     output_write( u'<pubDate>%s</pubDate>' % get_date((time), today_date) )
     #output_write( u'<pubDate></pubDate>' )
     output_write( u'<author></author>' )
-    output_write( u'<category>%s</category>' % section)
+    output_write( u'<category><![CDATA[%s]]></category>' % section)
 
     lead = getOne("#Content .ColumnaA .Noticia.Destacada H4 a")
     if lead is not None:
-      output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead.text )
+      output_write( u'<news:lead type="plain" meta="volanta"><![CDATA[%s]]></news:lead>' % lead.text )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % get_text_sin_strong(desc))
+    output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % get_text_sin_strong(desc))
 
     img = getOne("#Content .ColumnaA .Noticia.Destacada .Foto img")
     if img is not None:
       output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img['src'] )
-      output_write( u'<media:text type="plain"></media:text>' )
+      output_write( u'<media:text type="plain"><![CDATA[&nbsp;]]></media:text>' )
       output_write( u'<media:credit role="publishing company">Diario Castellanos</media:credit>' )
 
     output_write( u'<news:meta has_gallery="false" has_video="false" has_audio="false" />' )
@@ -107,7 +108,7 @@ def get_xml(kwargs):
     section = _section[0].text if len(_section)>0 else ''
     
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % title.text )
+    output_write( u'<title><![CDATA[%s]]></title>' % title.text )
     #output_write( u'<description>%s</description>' % get_text_sin_strong(noticia.p))
     output_write( u'<description><![CDATA[&nbsp;]]></description>')
     output_write( u'<link>%s</link>' % title['href'] )
@@ -115,13 +116,12 @@ def get_xml(kwargs):
     
     output_write( u'<pubDate>%s</pubDate>' % get_date(time, today_date))
     output_write( u'<author></author>' )
-    output_write( u'<category>%s</category>' % section)
+    output_write( u'<category><![CDATA[%s]]></category>' % section)
 
     lead = noticia.select('h4 a')
-    output_write( u'<news:lead type="plain" meta="volanta">%s</news:lead>' % lead[0].contents if len(lead)>0 else '')
+    output_write( u'<news:lead type="plain" meta="volanta"><![CDATA[%s]]></news:lead>' % lead[0].contents if len(lead)>0 else '')
     
-    #output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>' )
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % get_text_sin_strong(noticia.p))
+    output_write( u'<news:subheader type="plain" meta="bajada"><![CDATA[%s]]></news:subheader>' % get_text_sin_strong(noticia.p))
     
     img = noticia.select('.Foto img')
     if img is not None and len(img)>0:
@@ -144,7 +144,7 @@ def get_xml(kwargs):
     time = _time[0].text if len(_time)>0 else '00:00'
     
     output_write( u'<item>')
-    output_write( u'<title>%s</title>' % get_text_sin_strong(noticia) )
+    output_write( u'<title><![CDATA[%s]]></title>' % get_text_sin_strong(noticia) )
     output_write( u'<description>%s</description>' % u'') #cgi.escape(noticia.p) )
     output_write( u'<link>%s</link>' % noticia['href'] )
     output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(noticia['href'])[0] )

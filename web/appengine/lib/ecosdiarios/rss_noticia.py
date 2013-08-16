@@ -9,93 +9,64 @@ from datetime import datetime, timedelta
 import re
 import StringIO
 
-from pregon.utils import get_today_date, get_date, get_one
+from utils import read_clean
+from ecosdiarios import xutils
 
 def get_xml(args):
 
-  header = u"""<?xml version="1.0" encoding="UTF-8" ?>
-  <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" version="2.0">
-  <channel>
-   <title>PREGON - SIMURSS</title>
-   <link>http://www.pregon.com.ar/</link>
-   <description>El diario de Jujuy - Argentina</description>
-   <copyright>2013, Pregon, todos los derechos reservados</copyright>
-   <pubDate>Tue, 04 Sep 2012 20:20:18 GMT</pubDate>
-   <image>
-     <title>Pregon - RSS</title>
-     <url>http://www.pregon.com.ar/img/LOGOPREGON.png</url>
-     <link>http://www.pregon.com.ar</link>
-   </image>
-   <ttl>10</ttl>
-   <atom:link href="http://www.pregon.com.ar/simu.rss" rel="self" type="application/rss+xml"/>
-
-  """
-
-  footer = u"""
-   </channel>
-  </rss>
-  """
-
   output = StringIO.StringIO()
-  output.write(header)
+  output.write(xutils.header)
 
-  link = 'http://www.pregon.com.ar/vernoticia.asp?id=%s' % args.get('host')
-  content = urlopen(link).read()
+  full_url = u'http://www.ecosdiariosweb.com.ar/index.php?option=com_content&view=article&id=%s' % args.get('host')
+
+  content = read_clean(full_url, args.get('inner_url'),use_cache=args.get('use_cache'))
   soup = BeautifulSoup(content)
-
-  today_date = get_today_date(soup)
 
   def output_write(strx):
     output.write(u'\t' + strx + u'\n')
 
-  def put_item(realurl):
+  def put_item():
     
-    category = get_one(soup, 'h2.antetituloNormal')
-    if category is None: 
-      category = ''
-    else:
-      category = category.text
+    arts=soup.select('table#majtable table.contentpaneopen')
+    
+    title    = arts[0].tr.td.text
+    rawdate  = arts[1].tr.td.text
+    category = ''
 
-    hhmm = get_one(soup, 'div.col1 strong')
-    if hhmm is None: 
-      hhmm = '00:00'
-    else:
-      hhmm = hhmm.text.split('|')[1].strip().split()[0]
+    img = None
+    pe = arts[1].find_all('tr')[1].td.p
+    if pe is not None and pe.img is not None: 
+      img = '%s%s' % (xutils.link, pe.img['src'])
 
-    title = get_one(soup, 'div.col1 h1.tituloAzulNota').text
-    descr = get_one(soup, 'div.col1 h3.bajada').text
+    content = ''
+    for p in arts[1].find_all('tr')[1].td.find_all('p'): 
+      content = content + p.__repr__()
+
+    content = xutils.remove_img_tags(unicode(content.decode('utf-8')))
 
     output_write( u'<item>')
     output_write( u'<title>%s</title>' % title )
     output_write( u'<description></description>' )
-    output_write( u'<link>%s</link>' % realurl )
-    output_write( u'<guid isPermaLink="false">%s</guid>' % re.compile('\d+').findall(realurl)[0] )
+    output_write( u'<link><![CDATA[%s]]></link>' % full_url )
+    output_write( u'<guid isPermaLink="false">%s</guid>' % args.get('host') )
     
     #No tiene fecha la destacada
-    output_write( u'<pubDate>%s</pubDate>' % get_date(today_date, hhmm) )
+    output_write( u'<pubDate>%s</pubDate>' % xutils.get_date_from_string(rawdate) )
     output_write( u'<author></author>' )
     output_write( u'<category>%s</category>' % category )
 
 
     output_write( u'<news:lead type="plain" meta="volanta"></news:lead>' )
     
-    output_write( u'<news:subheader type="plain" meta="bajada">%s</news:subheader>' % descr)
-
-    content = get_one(soup, 'div.col1 div.cc2 p')
-    if content is not None: 
-      content = content.text
-    else:
-      content = ''
+    #output_write( u'<news:subheader type="plain" meta="bajada"></news:subheader>')
 
     output_write( u'<news:content type="html" meta="contenido"><![CDATA[%s]]></news:content>' % content)
 
-    img = get_one(soup, 'div.contfotonota img')
     if img is not None:
-      output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img.attrs['src'] )
+      output_write( u'<media:thumbnail url="%s"></media:thumbnail>' % img )
     
     output_write( u'<media:text type="plain"></media:text>' )
-    output_write( u'<media:credit role="publishing company">Pregon</media:credit>' )
+    output_write( u'<media:credit role="publishing company">EcosDiarios</media:credit>' )
 
     output_write( u'<media:text type="plain"></media:text>' )
 
@@ -103,8 +74,8 @@ def get_xml(args):
 
     output_write( u'</item>')
 
-  put_item(link)
+  put_item()
     
-  output.write(footer)
+  output.write(xutils.footer)
 
   return output.getvalue()
