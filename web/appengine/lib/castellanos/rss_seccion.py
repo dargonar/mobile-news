@@ -21,6 +21,10 @@ def get_xml(args):
   noticias = []
   section_id = args['host']
   
+  if section_id.lower()=='default.aspx':
+    import rss_index 
+    return rss_index.get_xml(args)
+    
   output = StringIO.StringIO()
   output.write(get_header())
   
@@ -53,6 +57,8 @@ def get_xml(args):
     
   def get_main():
     noticia = getOne("#Content .ColumnaAB .Noticia.Principal")
+    if noticia is None or len(noticia)==0:
+      return
     title = noticia.select("h2 a")[0]
     href = sha1(title['href']).digest().encode('hex')
     if href in noticias:

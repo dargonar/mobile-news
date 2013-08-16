@@ -163,8 +163,13 @@ def if_not_none(value):
 
   return value
 
-def noticia_link(node):
-  return 'noticia://%s?url=%s&title=%s&header=%s' % (node.guid.value, url_fix(node.link), url_fix(node.title), url_fix(node.description))
+def noticia_link(node, section_url=None):
+  section = ''
+  if section_url is not None and section_url.startswith('section://'):
+    section_id = url_fix(section_url.split('://')[1])
+    section = u'&section=%s' % (section_id if len(section_id)>0 else 'main')
+  
+  return 'noticia://%s?url=%s&title=%s&header=%s%s' % (node.guid.value, url_fix(node.link), url_fix(node.title), url_fix(node.description).strip(), section)
 
 def url_fix(s, charset='utf-8'):
     """Sometimes you get an URL by a user that just isn't a real
