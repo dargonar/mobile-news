@@ -581,7 +581,7 @@ bool showUpdatedAt = NO;
     
       [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-//      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
+      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
       [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
       return NO;

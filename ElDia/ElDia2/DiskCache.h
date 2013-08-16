@@ -18,7 +18,7 @@
 -(BOOL)      put:(NSString*)key data:(NSData*)data prefix:(NSString*)prefix;
 -(BOOL)      remove:(NSString*)key prefix:(NSString*)prefix;
 -(BOOL)      exists:(NSString*)key prefix:(NSString*)prefix;
-
+-(BOOL)      put2:(NSString*)filename data:(NSData*)data;
 -(NSDate *)createdAt:(NSString*)key prefix:(NSString*)prefix;
 
 -(unsigned long long) size;
