@@ -14,12 +14,16 @@ from urllib2 import urlopen
 from StringIO import StringIO
 
 from models import CachedContent
+from datetime import timedelta
 
 from google.appengine.ext import db
 from google.appengine.api import memcache
+from google.appengine.api import urlfetch
 
 from webapp2 import abort, cached_property, RequestHandler, Response, HTTPException, uri_for as url_for, get_app
 from webapp2_extras import jinja2, sessions, json
+
+months = ['enero', 'febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']
 
 apps_id = { 
   'com.diventi.eldia'       : 'eldia',
@@ -29,41 +33,75 @@ apps_id = {
   'com.diventi.ecosdiarios' : 'ecosdiarios',
 }
 
+def multi_fetch(urls, handle_result):
+  
+  def create_callback(rpc, url):
+    return lambda: handle_result(rpc, url)
+
+  rpcs = []
+  for url in urls:
+    rpc = urlfetch.create_rpc()
+    rpc.callback = create_callback(rpc, url)
+    urlfetch.make_fetch_call(rpc, url)
+    rpcs.append(rpc)
+
+  # Finish all RPCs, and let callbacks process the results.
+  for rpc in rpcs:
+    rpc.wait()
+
+def date2iso(date):
+  return date.strftime("%a, %d %b %Y %H:%M:%S")
+  
+def date_add_str(today_date, hhmm):
+  parts = hhmm.split(':')
+  if len(parts)<2: parts = [0,0]
+  tmp = today_date + timedelta(minutes=int(parts[1]), hours=int(parts[0]))
+  return tmp.strftime("%a, %d %b %Y %H:%M:%S")
+
 def build_inner_url(appid, inner_url):
   inx = '?' in inner_url and inner_url.index('?')
   if inx: inner_url = inner_url[0:inx]
   return '%s|%s' % (appid, inner_url)
 
-def read_url_clean(httpurl):
-  content = urlopen(httpurl, timeout=25).read()  
+def clean_content(content):
   parser = etree.HTMLParser()
   tree   = etree.parse(StringIO(content), parser)
   content = etree.tostring(tree.getroot(), pretty_print=True, method="html")
-  return content  
+  return content
+
+def read_url_clean(httpurl):
+  return clean_content(urlopen(httpurl, timeout=25).read())
 
 def in_cache(inner_url):
   key = sha256(inner_url).digest().encode('hex')
   dbkey = db.Key.from_path('CachedContent', key)
   return CachedContent.all(keys_only=True).filter('__key__', dbkey).get() is not None
 
-def read_clean(httpurl, inner_url, fnc=read_url_clean, use_cache=True):
-  key = sha256(inner_url).digest().encode('hex')
-  dbkey = db.Key.from_path('CachedContent', key)
-
-  content = memcache.get(key) if use_cache else None
-  
-  if content is None:    
-    tmp = CachedContent.get(dbkey) if use_cache else None
-    if tmp is None:
-      logging.info('URL not in cache: %s' % inner_url)
-      content = fnc(httpurl)      
-      tmp = CachedContent(key=dbkey, inner_url=inner_url, content=db.Text(arg=content, encoding='utf-8'))
-      tmp.put()
-    
-    content = tmp.content.encode('utf-8')
-    memcache.set(key, content)
-  
+def read_clean(httpurl):
+  content = memcache.get(httpurl)  
+  if content is None:
+    content = read_url_clean(httpurl)
+    memcache.set(httpurl, content)
   return content
+
+# def read_clean(httpurl, inner_url, fnc=read_url_clean, use_cache=True):
+#   key = sha256(inner_url).digest().encode('hex')
+#   dbkey = db.Key.from_path('CachedContent', key)
+
+#   content = memcache.get(key) if use_cache else None
+  
+#   if content is None:    
+#     tmp = CachedContent.get(dbkey) if use_cache else None
+#     if tmp is None:
+#       logging.info('URL not in cache: %s' % inner_url)
+#       content = fnc(httpurl)      
+#       tmp = CachedContent(key=dbkey, inner_url=inner_url, content=db.Text(arg=content, encoding='utf-8'))
+#       tmp.put()
+    
+#     content = tmp.content.encode('utf-8')
+#     memcache.set(key, content)
+  
+#   return content
 
 _slugify_strip_re = compile(r'[^\w\s-]')
 _slugify_hyphenate_re = compile(r'[-\s]+')

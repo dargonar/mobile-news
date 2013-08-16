@@ -25,18 +25,18 @@ from lhammer.xml2dict import XML2Dict
 from utils import apps_id, build_inner_url
 
 def my_read_url(url):
-  logging.info('Not in cache .. reading (%s)' % url)
+  #logging.info('Not in cache .. reading (%s)' % url)
   return urllib2.urlopen(url, timeout=15).read()
 
 def get_mapping(appid):
-  i = importlib.import_module(apps_id[appid]+u'.mapping')
-  return i.get_mapping()
+  fnc = getattr(importlib.import_module(apps_id[appid]),'get_mapping')
+  return fnc()
 
 def get_httpurl(appid, url, mapping=None):  
   if mapping is None:
     mapping = get_mapping(appid)
   # Armamos la direccion del xml
-  url_map = mapping[ apps_id[appid] ]['httpurl']
+  url_map = mapping['httpurl']
   
   httpurl = ''
   args = {}
@@ -54,13 +54,14 @@ def get_httpurl(appid, url, mapping=None):
       break
   return httpurl, args
 
+def import_from(module, name):
+    module = __import__(module, fromlist=[name])
+    return getattr(module, name)
+
 def build_xml_string(url, httpurl, kwargs, appid, clear_namespaces=False, use_cache=True):
   if httpurl.startswith('X:'):
-    i = importlib.import_module(httpurl.split()[1])
-    #logging.error('--modulo : %s'%httpurl.split()[1])
-    kwargs['inner_url'] = build_inner_url(appid,url)
-    kwargs['use_cache'] = use_cache
-    result = i.get_xml(kwargs).encode('utf-8')
+    fnc = getattr(importlib.import_module(apps_id[appid]), httpurl.split()[1])
+    result = fnc(kwargs).encode('utf-8')
   else:
     if '%s' in httpurl:
       httpurl = httpurl % kwargs['host']
@@ -137,6 +138,12 @@ class ScreenController(FrontendHandler):
         i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
         imgs.append(img)
 
+      if hasattr(i, 'group'):
+        for ct in i.group.content:
+          img = ct.attrs.url
+          ct.attrs.url = sha1(img).digest().encode('hex')
+          imgs.append(img)
+
     if extras_map['has_clasificados'] == True:
       i = importlib.import_module(apps_id[appid]+'.rss_clasificados')
       extras_map['clasificados'] = i.get_classifieds()
@@ -155,8 +162,8 @@ class ScreenController(FrontendHandler):
     
     mapping = self.get_mapping(appid)
     
-    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
-    extras_map = mapping[ apps_id[appid] ]['extras']
+    template_map = mapping['templates-%s' % size]
+    extras_map = mapping['extras']
     
     imgs, rv = self.build_html_and_images(appid, url, mapping, template_map, extras_map, ptls)
     
@@ -174,8 +181,8 @@ class ScreenController(FrontendHandler):
     
     mapping = get_mapping(appid)
     
-    template_map = mapping[ apps_id[appid] ]['templates-%s' % size]
-    extras_map = mapping[ apps_id[appid] ]['extras']
+    template_map = mapping['templates-%s' % size]
+    extras_map = mapping['extras']
     
     imgs, rv = self.build_html_and_images(appid, url, mapping, template_map, extras_map, ptls)
     
@@ -196,7 +203,7 @@ class ScreenController(FrontendHandler):
     #Incluimos menu si es section://main
     if url == 'section://main':
       xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-      outfile.writestr('menu://.m', menu.encode('utf-8'))
+      outfile.writestr('menu.html', menu.encode('utf-8'))
     
     #Incluimos menu si es section://main
     if url.startswith('noticia://') and size=='big':
