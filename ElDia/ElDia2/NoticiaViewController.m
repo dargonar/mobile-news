@@ -82,6 +82,7 @@
   networkGallery = nil;
   self.bottomUIView.hidden = YES;
   [self positionate];
+  [self loadSectionNews];
   
 }
 
@@ -271,6 +272,10 @@ UIActionSheet* actionSheet;
 }
 
 -(void)initPageIndicators:(NSInteger)count index:(NSInteger)index{
+  //HACK
+  [self invalidatePageIndicators];
+  return;
+  
   if(count>20)
   {
     pageIndicator.hidden=NO;
@@ -289,6 +294,8 @@ UIActionSheet* actionSheet;
 }
 
 -(void)setPageIndicatorIndex:(NSInteger)index{
+  //HACK
+  return;
   pageControl.currentPage = index;
   [pageIndicator setText:[[NSString alloc] initWithFormat:@"%i / %i", (index+1),   pageIndicator.tag]];
 
@@ -308,17 +315,19 @@ UIActionSheet* actionSheet;
   [self setNoticia_header:[parser valueForVariable:@"header"]];
   parser=nil;
   
-  NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
-  
-  // Para ver si podemos recibir imagen updated.
-  [self setCurrentUrl:uri];
+//  NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
+//  [self setCurrentUrl:uri];
+  [self setCurrentUrl:[url absoluteString]];
   
   [self loadNoticia];
   if([app_delegate isiPad]==NO || (self->currentSection!=nil && [self->currentSection isEqualToString:section])) {
+    //HACK
     //[self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
   self->currentSection = section;
+  
+  //HACK
   [self loadSectionNews];
 }
 
@@ -341,28 +350,24 @@ UIActionSheet* actionSheet;
 }
 
 -(void)loadSectionNews{
-  //HACK!
-  return;
-  if ([app_delegate isiPad]) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      __block NSError *err;
-      __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
-      //NSLog(@"%@", self->currentSection);
-      dispatch_async(dispatch_get_main_queue(), ^{
-        if(data==nil)
-        {
-          // data = dummy;
-        }
-        else
-        {
-          [self setHTML:data url:nil webView:self.menu_webview];
-          [self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
-          
-        }
-        data=nil;
-      });
-    });
+  
+  if ([app_delegate isiPad]==NO) {
+    return;
   }
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    __block NSError *err;
+    __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
+    //NSLog(@"%@", self->currentSection);
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if(data!=nil)
+      {
+        [self setHTML:data url:nil webView:self.menu_webview];
+        //[self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+      }
+      data=nil;
+    });
+  });
+  
 }
 
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache{
@@ -387,7 +392,6 @@ UIActionSheet* actionSheet;
       
       [self setHTML:data url:url webView:self.mainUIWebView];
       data=nil;
-      
       
     });
   });
@@ -755,6 +759,7 @@ BOOL justLoaded = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   [self positionate];
+  [self loadSectionNews];
 }
 
 -(void)positionate{
@@ -773,11 +778,7 @@ BOOL justLoaded = YES;
     [self positionatePortrait];
   }
   
-  if([app_delegate isiPad])
-  {
-    [self loadSectionNews];
-  }
-
+  
   [self zoomToFit];
   
   justLoaded=NO;
@@ -836,8 +837,6 @@ int pageControlHeigth = 36;
                                           , 0); //  pageIndicator.frame.size.height);
     
   }
-  //[self reLoadNoticia];
-  //[mainUIWebView reload];
 }
 
 -(void)positionatePortrait{

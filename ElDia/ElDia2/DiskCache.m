@@ -32,6 +32,10 @@ BOOL      init_ok = NO;
   return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, prefix];
 }
 
+-(NSString*)getFileName2:(NSString*)filename{
+  return [NSString stringWithFormat:@"%@/%@", cache_folder, filename];
+}
+
 -(NSData*)get:(NSString*)key prefix:(NSString*)prefix{
   if(!init_ok) return nil;
 
@@ -48,6 +52,16 @@ BOOL      init_ok = NO;
 
 //  NSLog(@" SAVED [%@_%@]", prefix, key);
   NSString* file=[self getFileName:key prefix:prefix];
+  
+  NSFileManager *fileManager= [NSFileManager defaultManager];
+  return [fileManager createFileAtPath:file contents:data attributes:nil];
+}
+
+-(BOOL)put2:(NSString*)filename data:(NSData*)data{
+  if(!init_ok) return NO;
+  
+  //  NSLog(@" SAVED [%@_%@]", prefix, key);
+  NSString* file=[self getFileName2:filename];
   
   NSFileManager *fileManager= [NSFileManager defaultManager];
   return [fileManager createFileAtPath:file contents:data attributes:nil];

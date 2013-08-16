@@ -80,7 +80,7 @@ BOOL isIpad=NO;
 -(NSDate*) funebresDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"f"];
+  return [cache createdAt:key prefix:@"fun"];
 }
 
 -(NSDate*) menuClasificadosDate:(NSString*)url {
@@ -121,7 +121,7 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) funebresExists:(NSString*)url {
-  return [self screenExists:url prefix:@"f"];
+  return [self screenExists:url prefix:@"fun"];
 }
 
 -(BOOL) farmaciaExists:(NSString*)url {
@@ -149,7 +149,8 @@ BOOL isIpad=NO;
 
 // para iPad
 -(BOOL) sectionMenuExists:(NSString*)url {
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+//  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
   NSString *composedPrefix = [NSString stringWithFormat:@"%@_%@",@"sm", html_prefix];
   return [self screenExists:url prefix:composedPrefix];
 }
@@ -169,7 +170,7 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"f" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"fun" error:error];
 }
 
 -(NSData *)getFarmacia:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
@@ -191,7 +192,10 @@ BOOL isIpad=NO;
 // para iPAd
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
+  NSLog(@" ---------------------------- ");
+  NSLog(@" getSectionMenu() url:[%@] html_prefix:[%@]", url, html_prefix );
   return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
 }
 
@@ -222,7 +226,10 @@ BOOL isIpad=NO;
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
   
-  NSLog(@" url[%@]; prefix:[%@].", url, composedHtmlPrefix);
+  NSLog(@"----------------getScreen");
+  NSLog(@" key[%@]; url[%@]; prefix:[%@].", key, url, composedHtmlPrefix);
+  
+  
   
   //Si piden ver la cache
   if (useCache) {
@@ -256,31 +263,38 @@ BOOL isIpad=NO;
     return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
   }
 
-  //Las imagenes a descargar.guardamos en cache
-  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
-  if(images!=nil)
-    if(![cache put:key data:images prefix:@"mi"])
-      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
+//  //Las imagenes a descargar.guardamos en cache
+//  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
+//  if(images!=nil)
+//    if(![cache put:key data:images prefix:@"mi"])
+//      return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_MI];
   
-//  NSDictionary*mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                          @"menu://", @"menu.html",
-//                          @"menu_section://main", @"menu_section_main.html",
-//                          @"menu_section://", @"menu_section.html",
-//                          @"ls_menu_section://main", @"ls_menu_section_main.html",
-//                          @"ls_menu_section://", @"ls_menu_section.html",
-//                          nil];
-  
+  NSLog(@"------------------");
+  NSLog(@" iterando contenidos de zipfiles");
   for(NSString* key in response_dict)
   {
-    if ([key rangeOfString:@"menu"].location == NSNotFound) {
+    NSLog(@"--> file: %@", key);
+    if ([key rangeOfString:@"content.html"].location != NSNotFound) {
       continue;
     }
-    NSData *menu = (NSData*)[response_dict objectForKey:key];
-    if(menu!=nil){
-      NSString  *menu_key   = [CryptoUtil sha1:[key componentsSeparatedByString:@"."][0]];
-      if(![cache put:menu_key data:menu prefix:[key componentsSeparatedByString:@"."][1]])
-        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_HTML];
+    NSData *data = (NSData*)[response_dict objectForKey:key];
+    if(data!=nil){
+      if(![cache put2:key data:data])
+        return [ErrorBuilder build:error desc:@"cache file" code:ERR_CACHING_HTML];
+      NSLog(@"--> SAVED %@", key);
     }
+    else{
+      NSLog(@"--> NOT SAVED %@", key);
+    }
+//    if ([key rangeOfString:@"menu"].location == NSNotFound) {
+//      continue;
+//    }
+//    NSData *menu = (NSData*)[response_dict objectForKey:key];
+//    if(menu!=nil){
+//      NSString  *menu_key   = [CryptoUtil sha1:[key componentsSeparatedByString:@"."][0]];
+//      if(![cache put:menu_key data:menu prefix:[key componentsSeparatedByString:@"."][1]])
+//        return [ErrorBuilder build:error desc:@"cache mobimages" code:ERR_CACHING_HTML];
+//    }
   }
   
   //  if(processNavigation)
@@ -310,9 +324,9 @@ BOOL isIpad=NO;
 -(NSDictionary *)downloadUrl2:(NSString*)surl error:(NSError**)error  {
   
   NSURL *url = [self getXmlHttpUrl2:surl];
-  NSLog(@" ----------------- ");
-  NSLog(@" downloadUrl2: [%@] param:[%@]", [url absoluteString], surl);
-  NSLog(@" ----------------- ");
+//  NSLog(@" ----------------- ");
+//  NSLog(@" downloadUrl2: [%@] param:[%@]", [url absoluteString], surl);
+//  NSLog(@" ----------------- ");
   
   ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
   
@@ -359,22 +373,13 @@ BOOL isIpad=NO;
   NSMutableDictionary *mdict = [[NSMutableDictionary alloc]init];
   [mdict setObject:file1 forKey:[((FileInZipInfo*)[infos objectAtIndex:0]) name]];
   
-  NSData* file2 = nil;
-  NSData* file3 = nil;
-  if ([unzipFile goToNextFileInZip])
-  {
-    ZipReadStream *read2= [unzipFile readCurrentFileInZip];
-    file2 = [read2 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:1]) length]];
-    [read2 finishedReading];
-    [mdict setObject:file2 forKey:[((FileInZipInfo*)[infos objectAtIndex:1]) name]];
-    if ([unzipFile goToNextFileInZip])
-    {
-      ZipReadStream *read3= [unzipFile readCurrentFileInZip];
-      file3 = [read3 readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:2]) length]];
-      [read3 finishedReading];
-      [mdict setObject:file3 forKey:[((FileInZipInfo*)[infos objectAtIndex:2]) name]];
-    }
-    
+  NSInteger index = 1;
+  while ([unzipFile goToNextFileInZip]) {
+    ZipReadStream *read= [unzipFile readCurrentFileInZip];
+    NSData*file = [read readDataOfLength:[((FileInZipInfo*)[infos objectAtIndex:index]) length]];
+    [read finishedReading];
+    [mdict setObject:file forKey:[((FileInZipInfo*)[infos objectAtIndex:index]) name]];
+    index=index+1;
   }
   [unzipFile close];
   
@@ -509,9 +514,10 @@ BOOL isIpad=NO;
   NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
                       ([app_delegate isiPad]?@"big":@"small"),
                       ([app_delegate isLandscape]?@"ls":@"pt"),
-                      url
+                      [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                    ];
   NSLog(@"----------------------------");
+  NSLog(@"getXmlHttpUrl2: url[%@] encoded_url[%@]",url, [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
   NSLog(@"getXmlHttpUrl2: %@", tmp);
   return [NSURL URLWithString:tmp];
 
