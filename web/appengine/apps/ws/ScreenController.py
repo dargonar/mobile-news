@@ -221,8 +221,8 @@ class ScreenController(FrontendHandler):
       filename =  '%s.mi' % get_request_megakey(url,encode_sha1=True)
       outfile.writestr(filename, ','.join(imgs))
     
-    # outfile.writestr(get_filename(url, page_name), rv.encode('utf-8'))
-    outfile.writestr('content.html', rv.encode('utf-8'))
+    outfile.writestr(get_filename(url, page_name), rv.encode('utf-8'))
+    #outfile.writestr('content.html', rv.encode('utf-8'))
     
     #Incluimos menu si es section://main
     if url == 'section://main':
