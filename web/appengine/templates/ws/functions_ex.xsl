@@ -162,15 +162,15 @@
 {%- endmacro %}
 
 
-{% macro tablet_news_list_landscape(nodes) -%}
+{% macro tablet_news_list_landscape(nodes, raw_url) -%}
   {% for node in nodes %}
-  {{ tablet_news_list_landscape_item(node) }}
+  {{ tablet_news_list_landscape_item(node, raw_url) }}
   {% endfor %}
 {%- endmacro %}
 
-{% macro tablet_news_list_landscape_item(node) -%}
+{% macro tablet_news_list_landscape_item(node, raw_url) -%}
   <li>  
-    <a href="{{node|noticia_link}}" title="principal">
+    <a href="{{node|noticia_link(raw_url)}}" title="principal">
       {% if node.thumbnail %}
       {{ ImagenNoticiaDestacada(node.thumbnail.attrs.url, node.meta, 'imagen') }}
       {% endif %}
@@ -300,8 +300,8 @@
     
 {%- endmacro %}
 
-{% macro tablet_index_portrait_main(node) -%}
-    <a href="{{node|noticia_link}}" title="principal">
+{% macro tablet_index_portrait_main(node, raw_url) -%}
+    <a href="{{node|noticia_link(raw_url)}}" title="principal">
       <div class="nota_principal">
         <div class="info">
           <div class="encabezado">
@@ -318,15 +318,15 @@
     <div class="separador">&nbsp;</div>
 {%- endmacro %}
 
-{% macro tablet_index_portrait_secondary(nodes) -%}
+{% macro tablet_index_portrait_secondary(nodes, raw_url) -%}
     {% for node in nodes %}
-      {{ tablet_index_portrait_secondary_item(node, 'last' if loop.last else '') }}
+      {{ tablet_index_portrait_secondary_item(node, 'last' if loop.last else '', raw_url) }}
     {% endfor %}
     <div class="separador">&nbsp;</div>
 {%- endmacro %}
 
-{% macro tablet_index_portrait_secondary_item(node, class) -%}
-    <a href="{{node|noticia_link}}" title="principal">
+{% macro tablet_index_portrait_secondary_item(node, class, raw_url) -%}
+    <a href="{{node|noticia_link(raw_url)}}" title="principal">
       <div class="nota_secundaria {{class}}">
         {{ DateSectionLabel(node) }}
         <h1>{{node.title}}</h1>
@@ -341,17 +341,17 @@
     </a>
 {%- endmacro %}
 
-{% macro tablet_index_portrait_terciary(nodes) -%}
+{% macro tablet_index_portrait_terciary(nodes, raw_url) -%}
     {% for node in nodes %}
-      {{ tablet_index_portrait_terciary_item(node, 'last' if loop.index % 3 == 0 else '') }}
+      {{ tablet_index_portrait_terciary_item(node, 'last' if loop.index % 3 == 0 else '', raw_url) }}
       {% if loop.index % 3 == 0 %}
       <div class="separador">&nbsp;</div>
       {% endif %}
     {% endfor %}
 {%- endmacro %}
 
-{% macro tablet_index_portrait_terciary_item(node, class) -%}
-    <a href="{{node|noticia_link}}" title="principal">
+{% macro tablet_index_portrait_terciary_item(node, class, raw_url) -%}
+    <a href="{{node|noticia_link(raw_url)}}" title="principal">
       <div class="nota_terciaria {{class}}">
         {{ DateSectionLabel(node) }}
         <h2>{{node.title}}</h2>

@@ -59,11 +59,14 @@ class DownloadAll(RequestHandler):
 
     # Iteramos todas las secciones y las mandamos a bajar    
     xml = XML2Dict().fromstring(get_xml(appid, 'menu://', use_cache=False))
+    index=0
     for i in xml.rss.channel.item:
       #logging.error('----> a bajar section ' + i.guid.value)
       taskqueue.add(queue_name='download', url='/download/section', params={'appid': appid, 'section': i.guid.value})
-      #break
-
+      if index==3:
+        break
+      index=index+1
+      
     # Refrescamos el main
     get_xml(appid, 'section://main', use_cache=False)
 
