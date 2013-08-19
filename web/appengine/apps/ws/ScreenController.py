@@ -67,9 +67,14 @@ def get_httpurl(appid, url, mapping=None):
   # Armamos la direccion del xml
   url_map = mapping['httpurl']
   
+  # logging.error(u'-----------------------')
+  # logging.error(u' url_map: %s', str(url_map))
+  # logging.error(u' url: %s', url)
+  
   httpurl = ''
   args = {}
   for k in url_map:
+    #logging.error(u' k: %s', k)
     if url.startswith(k):
       httpurl             = url_map[k]
       args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
@@ -132,8 +137,8 @@ class ScreenController(FrontendHandler):
   def build_html_and_images(self, appid, url, mapping, template_map, extras_map, ptls):
     # Armamos la direccion del xml    
     httpurl, args = get_httpurl(appid, url, mapping)
-    # 
     page_name = ''
+    
     # Obtenemos el template
     template = ''
     for k in template_map:
@@ -142,7 +147,7 @@ class ScreenController(FrontendHandler):
         template = template_map[k][ptls]
         break
     
-    logging.error('url %s, appid %s, page_name %s, template %s'%(url, appid, page_name, template))
+    logging.error('httpurl %s, url %s, appid %s, page_name %s, template %s' % (httpurl, url, appid, page_name, template))
     
     if httpurl == '' or template == '':
       logging.error('Something is wrong => [%s]' % (url))
@@ -175,7 +180,10 @@ class ScreenController(FrontendHandler):
     if extras_map['has_clasificados'] == True:
       i = importlib.import_module(apps_id[appid]+'.rss_clasificados')
       extras_map['clasificados'] = i.get_classifieds()
-
+    
+    logging.error('-------------- build_html_and_images')
+    logging.error('-------------- raw_url [%s]' % (url))
+    
     rv = self.render_template('ws/%s' % template, **{'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url } )
     
     return page_name, imgs, rv
@@ -226,8 +234,8 @@ class ScreenController(FrontendHandler):
     
     #Incluimos menu si es section://main
     if url == 'section://main':
-      pagename, xx , menu = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
-      filename =  get_filename('menu://', 'menu://')
+      pagename, xx , menu   = self.build_html_and_images(appid, 'menu://', mapping, template_map, extras_map, ptls)
+      filename              =  get_filename('menu://', 'menu://')
       outfile.writestr(filename, menu.encode('utf-8'))
     
     #Incluimos tira de noticias de navegacion para nota abiera en iPad
@@ -237,13 +245,14 @@ class ScreenController(FrontendHandler):
         section = self.request.params['section']
       else:
         section = args['section']
-      
       # armo la key, porque el pedido real es de la section
-      mega_key          = 'section://%s'%section
-      encoded_mega_key  = get_request_megakey(mega_key,encode_sha1=True)
+      mega_key                      = u'section://%s' % section
+      encoded_mega_key              = get_request_megakey(mega_key,encode_sha1=True)
       # con la mega key de la seccion, armo el pedido para el menu ls y pt.
-      page_name, img_pt , menu_pt = self.build_html_and_images(appid, ('menu_%s'%mega_key), mapping, template_map, extras_map, 'pt')
-      page_name, img_ls , menu_ls = self.build_html_and_images(appid, ('menu_%s'%mega_key), mapping, template_map, extras_map, 'ls')
+      page_name, img_pt , menu_pt   = self.build_html_and_images(appid, (u'menu_%s' % mega_key), mapping, template_map, extras_map, 'pt')
+      page_name, img_ls , menu_ls   = self.build_html_and_images(appid, (u'menu_%s' % mega_key), mapping, template_map, extras_map, 'ls')
+      # page_name, img_pt , menu_pt   = self.build_html_and_images(appid, (u'menu_%s?section=%s' % (mega_key,section) ), mapping, template_map, extras_map, 'pt')
+      # page_name, img_ls , menu_ls   = self.build_html_and_images(appid, (u'menu_%s?section=%s' % (mega_key,section) ), mapping, template_map, extras_map, 'ls')
       
       outfile.writestr('%s.sm_pt' % encoded_mega_key, menu_pt.encode('utf-8'))
       if len(img_ls):
