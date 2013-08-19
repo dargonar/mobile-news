@@ -82,9 +82,10 @@ BOOL      init_ok = NO;
   
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
+  return [fileManager fileExistsAtPath:file isDirectory:nil];
+//  BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
 //  NSLog(@" %@ EXISTS [%@_%@]",(serungo==YES?@"SI":@"NO"), prefix, key);
-  return serungo;
+//  return serungo;
 }
 
 -(NSString*)getFolder{

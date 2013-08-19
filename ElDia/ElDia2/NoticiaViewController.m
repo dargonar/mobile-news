@@ -68,9 +68,11 @@
     //self.mainUIWebView.contentMode = UIViewContentModeScaleAspectFit;
   }
   
+  [self invalidatePageIndicators];
   // Do any additional setup after loading the view from its nib.
-  [self addGestureRecognizers];
+//  [self addGestureRecognizers];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
@@ -81,6 +83,10 @@
   networkImages = nil;
   networkGallery = nil;
   self.bottomUIView.hidden = YES;
+
+  if(justLoaded)
+    return;
+  
   [self positionate];
   [self loadSectionNews];
   
@@ -325,10 +331,11 @@ UIActionSheet* actionSheet;
     //[self setPageIndicatorIndex:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
     return;
   }
+
   self->currentSection = section;
   
   //HACK
-  [self loadSectionNews];
+  justLoaded=NO;
 }
 
 -(void)reLoadNoticia{
@@ -342,6 +349,7 @@ UIActionSheet* actionSheet;
     NSError *err;
     NSData*lastData = [self.mScreenManager getArticle:uri useCache:YES error:&err];
     [self setHTML:lastData url:uri webView:self.mainUIWebView];
+    [self loadSectionNews];
   }
   else
   {
@@ -352,26 +360,31 @@ UIActionSheet* actionSheet;
 -(void)loadSectionNews{
   
   if ([app_delegate isiPad]==NO) {
+    justLoaded=NO;
+    return;
+  }// Si no existe no se trae papa.
+  
+  if([self.mScreenManager sectionMenuExists:self->currentSection]==NO)
+  {
     return;
   }
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
     __block NSData *data = [self.mScreenManager getSectionMenu:self->currentSection useCache:YES error:&err];
     //NSLog(@"%@", self->currentSection);
     dispatch_async(dispatch_get_main_queue(), ^{
-      if(data!=nil)
-      {
-        [self setHTML:data url:nil webView:self.menu_webview];
-        //[self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
-      }
+      if(data==nil)
+        return;
+      [self setHTML:data url:nil webView:self.menu_webview];
+      //[self initPageIndicators:[[NewsManager defaultNewsManager] getCount ] index:[[NewsManager defaultNewsManager] getIndex:noticia_id]];
+      justLoaded=NO;
       data=nil;
     });
   });
-  
 }
 
 -(void)loadUrl:(NSString*)url useCache:(BOOL)useCache{
-  
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     __block NSError *err;
@@ -392,6 +405,8 @@ UIActionSheet* actionSheet;
       
       [self setHTML:data url:url webView:self.mainUIWebView];
       data=nil;
+      // cargo las noticias una vez que descargue, jajajaja! putos!
+      [self loadSectionNews];
       
     });
   });
@@ -614,10 +629,10 @@ FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeNetwor
       
       //NSLog(@" candidateURL : %@", ((NSString *)object));
 
-      if([escapedURL hasPrefix:@"file//"])
+      if([escapedURL hasPrefix:@"file://"])
       {
         mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeLocal;
-        escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file//" withString:@""] prefix:@"i" ];
+        escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file://" withString:@""] prefix:@"i" ];
         [_array addObject:escapedURL];
       }
       
