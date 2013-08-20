@@ -34,6 +34,7 @@ extra_paths = [
     os.path.join(gae_path, 'lib', 'webapp2'),
     os.path.join(gae_path, 'lib', 'jinja2-2.6'),
     os.path.join(gae_path, 'lib', 'yaml', 'lib'),
+    os.path.join(gae_path, 'lib', 'lxml-2.3'),
 ]
 
 sys.path = extra_paths + sys.path
