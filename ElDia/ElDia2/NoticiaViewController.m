@@ -627,14 +627,9 @@ FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeNetwor
       //candidateURL = [NSURL URLWithString:((NSString *)object)]; //No toma "file://" sino como "file//". No sirve.
       escapedURL = ((NSString *)object);
       
-      //NSLog(@" candidateURL : %@", ((NSString *)object));
-
-      if([escapedURL hasPrefix:@"file://"])
-      {
-        mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeLocal;
-        escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file://" withString:@""] prefix:@"i" ];
-        [_array addObject:escapedURL];
-      }
+      escapedURL = [[DiskCache defaultCache] getFileName:[escapedURL stringByReplacingOccurrencesOfString:@"file://" withString:@""] prefix:@"i" ];
+      NSLog(@" --- img : [%@]", escapedURL);
+      [_array addObject:escapedURL];
       
     }
     candidateURL=nil;

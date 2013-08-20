@@ -31,6 +31,9 @@ BOOL      init_ok = NO;
 -(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix{
   return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, prefix];
 }
+//-(NSString*)getFileName2:(NSString*)key postfix:(NSString*)postfix{
+//  return [self getFileName2:[NSString stringWithFormat:@"%@.%@", key, postfix]];
+//}
 
 -(NSString*)getFileName2:(NSString*)filename{
   return [NSString stringWithFormat:@"%@/%@", cache_folder, filename];
