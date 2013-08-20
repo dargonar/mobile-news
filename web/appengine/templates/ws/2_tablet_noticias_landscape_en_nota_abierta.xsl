@@ -3,10 +3,10 @@
   {{ cc.Head('layout_tablet') }}
   <body class="menu landscape" onload="onLoad('{{page_name}}')">
     <div id="landscape">
-      <div class="seccion list">{{data.item.0.category}}</div>
+      <div class="seccion list">{{'Principal' if '://main' in page_name else data.item.0.category }}</div>
       <div class="menu">
         <ul class="landscape_news_list">
-        {{ cc.tablet_news_list_landscape(data.item) }}
+        {{ cc.tablet_news_list_landscape(data.item, raw_url) }}
         </ul>
       </div>
     </div>
