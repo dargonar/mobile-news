@@ -121,7 +121,7 @@
       <a href="galeria://{{node|gallery}}" title="galeria" class="ico_galeria">&nbsp;</a>
     {% endif %}
     {% if not node.group and node.thumbnail %}
-      <a href="galeria://file://{{node.thumbnail.attrs.url}}" title="galeria" class="ico_plus">&nbsp;</a>
+      <a href="galeria://{{node.thumbnail.attrs.url}}" title="galeria" class="ico_plus">&nbsp;</a>
     {% endif %}
     {% if node|has_content('video') %}
       <a class="ico_video" href="video://{{node|content('video')}}" title="">&nbsp;</a>
