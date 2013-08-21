@@ -152,6 +152,11 @@ BOOL isIpad=NO;
 //  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
   NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
   NSString *composedPrefix = [NSString stringWithFormat:@"%@_%@",@"sm", html_prefix];
+  
+  NSLog(@" ----------------------------  sectionMenuExists()");
+  NSLog(@" url:[%@] html_prefix:[%@] essiste:[%@]", url, composedPrefix , ([self screenExists:url prefix:composedPrefix]?@"SI":@"NO"));
+  
+  
   return [self screenExists:url prefix:composedPrefix];
 }
 
@@ -194,8 +199,8 @@ BOOL isIpad=NO;
   
   //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
   NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
-  NSLog(@" ---------------------------- ");
-  NSLog(@" getSectionMenu() url:[%@] html_prefix:[%@]", url, html_prefix );
+  NSLog(@" ----------------------------  getSectionMenu()");
+  NSLog(@" url:[%@] html_prefix:[%@]", url, html_prefix );
   return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
 }
 
@@ -215,21 +220,18 @@ BOOL isIpad=NO;
   
   // urlPrefix es para utilizar el mismo xml que 'url', pero generar otro HTML.
   
-  NSString* prefixedUrl = url;
   NSString* composedHtmlPrefix = prefix;
   if(html_prefix!=nil)
   {
-    prefixedUrl = [NSString stringWithFormat:@"%@%@",html_prefix, url];
     composedHtmlPrefix = [NSString stringWithFormat:@"%@_%@",prefix, html_prefix];
   }
   
   DiskCache *cache = [DiskCache defaultCache];
-  NSString  *key   = [CryptoUtil sha1:url];
+  NSString  *key   = [CryptoUtil sha1: [[url componentsSeparatedByString:@"?"] objectAtIndex:0] ];
   
-  NSLog(@"----------------getScreen");
+  NSLog(@"---------------- getScreen");
   NSLog(@" key[%@]; url[%@]; prefix:[%@].", key, url, composedHtmlPrefix);
-  
-  
+  NSLog(@" useCache[%@].", useCache?@"SI":@"NOR");
   
   //Si piden ver la cache
   if (useCache) {
@@ -253,15 +255,14 @@ BOOL isIpad=NO;
   NSError *my_err;
   NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
 
-  // -> content.html
-  // -> images.txt
-  // -> menu.html
-
-  NSData* html = (NSData*)[response_dict objectForKey:@"content.html"];
-  //Lo guardamos y retornamos
-  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
-    return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
-  }
+  NSString *requestedHTML = [key stringByAppendingFormat:@".%@" ,composedHtmlPrefix];
+  NSData* html = (NSData*)[response_dict objectForKey:requestedHTML];
+  NSLog(@" requestedHTML[%@] is nil -> %@", requestedHTML, (html==nil)?@"SI":@"NOR");
+  
+//  //Lo guardamos y retornamos
+//  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
+//    return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
+//  }
 
 //  //Las imagenes a descargar.guardamos en cache
 //  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
@@ -271,20 +272,20 @@ BOOL isIpad=NO;
   
   NSLog(@"------------------");
   NSLog(@" iterando contenidos de zipfiles");
-  for(NSString* key in response_dict)
+  for(NSString* _key in response_dict)
   {
-    NSLog(@"--> file: %@", key);
-    if ([key rangeOfString:@"content.html"].location != NSNotFound) {
-      continue;
-    }
-    NSData *data = (NSData*)[response_dict objectForKey:key];
+//    NSLog(@"--> file: %@", key);
+//    if ([key rangeOfString:@"content.html"].location != NSNotFound) {
+//      continue;
+//    }
+    NSData *data = (NSData*)[response_dict objectForKey:_key];
     if(data!=nil){
-      if(![cache put2:key data:data])
+      if(![cache put2:_key data:data])
         return [ErrorBuilder build:error desc:@"cache file" code:ERR_CACHING_HTML];
-      NSLog(@"--> SAVED %@", key);
+      NSLog(@"--> SAVED %@", _key);
     }
     else{
-      NSLog(@"--> NOT SAVED %@", key);
+      NSLog(@"--> NOT SAVED %@", _key);
     }
 //    if ([key rangeOfString:@"menu"].location == NSNotFound) {
 //      continue;
@@ -525,7 +526,8 @@ BOOL isIpad=NO;
 
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error {
   
-  NSString *key = [CryptoUtil sha1:url];
+//  NSString *key = [CryptoUtil sha1:url];
+  NSString *key = [CryptoUtil sha1:[[url componentsSeparatedByString:@"?"] objectAtIndex:0]];
   NSArray *images = [self getImages:key error:error];
   if (images == nil) {
     return nil;

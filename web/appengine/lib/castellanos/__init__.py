@@ -97,7 +97,8 @@ def rss_seccion(args):
   return builder.get_value()
 
 def rss_noticia(args):
-  
+
+  logging.error(' ---------------- rss_noticia args: %s' % str(args))
   soup = BeautifulSoup(read_clean('http://www.diariocastellanos.net/%s-dummy.note.aspx' % args['host']))
   today_date = get_header_date(soup.select('p#Fecha')[0].text)
 
@@ -186,8 +187,12 @@ def get_mapping():
       ('menu://'         , 'X: rss_menu'),
       ('funebres://'     , 'X: rss_funebres'),
       
-      ('menu_section://main'  , 'X: rss_index'),
+      ('menu_section://main'      , 'X: rss_index'),
+      ('ls_menu_section://main'   , 'X: rss_index'),
+      
       ('menu_section://'      , 'X: rss_seccion'),
+      ('ls_menu_section://'   , 'X: rss_seccion'),
+      
     ]), 
     'templates-small': OrderedDict([
       ('section://main'  , {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'}),
@@ -197,18 +202,15 @@ def get_mapping():
       ('funebres://'     , {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'}),
     ]),
     'templates-big': OrderedDict([
-      ('section://main'          , {'pt': '1_tablet_main_list.xsl',                  'ls': '1_tablet_main_list.xsl'}),
+      ('section://main'           , {'pt': '1_tablet_main_list.xsl',                  'ls': '1_tablet_main_list.xsl'}),
       
-      ('menu://'                 , {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'}),
-      ('section://'              , {'pt': '1_tablet_section_list.xsl',               'ls': '1_tablet_section_list.xsl'}),
-      ('noticia://'              , {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'}),
+      ('menu://'                  , {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'}),
+      ('section://'               , {'pt': '1_tablet_section_list.xsl',               'ls': '1_tablet_section_list.xsl'}),
+      ('noticia://'               , {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'}),
       
-      ('menu_section://main'     , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
-      ('menu_section://'         , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
-      # ('menu_section://main'     , {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_portrait.xsl'}),
-      # ('menu_section://'         , {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_index_portrait.xsl'}),
-      # ('ls_menu_section://main'  , {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_landscape.xsl'}),
-      # ('ls_menu_section://'      , {'pt': '2_tablet_noticias_seccion_portrait.xsl',  'ls': '2_tablet_noticias_seccion_landscape.xsl'}),
+      ('menu_section://'          , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
+      ('ls_menu_section://'       , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
+      
       ('ls_section://'           , {'pt': '2_section_list.xsl',                      'ls': '2_section_list.xsl'}),          # q es esto?
       ('ls_noticia://'           , {'pt': '3_tablet_new_landscape.xsl',              'ls': '3_tablet_new_landscape.xsl'}),  # q es esto?
 

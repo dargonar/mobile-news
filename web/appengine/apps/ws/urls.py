@@ -10,6 +10,7 @@ def get_rules():
           Route('/screen',    name='get_screen',    handler='.ScreenController:get_screen'),
           Route('/xml',       name='get_xml',       handler='.ScreenController:get_xml'),
           Route('/html',      name='get_html',      handler='.ScreenController:get_html'),
+          Route('/test',      name='test',          handler='.ScreenController:test'),
         ]) ]) ]),
 
     ]

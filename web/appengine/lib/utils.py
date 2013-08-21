@@ -2,12 +2,15 @@
 import logging
 import urllib
 import urlparse
+import importlib
+import re
 
 from HTMLParser import HTMLParser
 from dateutil.parser import parser
 
 from re import *
 from hashlib import sha256
+from hashlib import sha1
 
 from lxml import etree
 from urllib2 import urlopen
@@ -15,6 +18,8 @@ from StringIO import StringIO
 
 from models import CachedContent
 from datetime import timedelta
+
+from lhammer.xml2dict import XML2Dict
 
 from google.appengine.ext import db
 from google.appengine.api import memcache
@@ -69,18 +74,22 @@ def clean_content(content):
   content = etree.tostring(tree.getroot(), pretty_print=True, method="html")
   return content
 
-def read_url_clean(httpurl):
-  return clean_content(urlopen(httpurl, timeout=25).read())
+def read_url_clean(httpurl, clean=True):
+  content = urlopen(httpurl, timeout=25).read()
+  if clean:
+    return clean_content(content)
+
+  return content
 
 def in_cache(inner_url):
   key = sha256(inner_url).digest().encode('hex')
   dbkey = db.Key.from_path('CachedContent', key)
   return CachedContent.all(keys_only=True).filter('__key__', dbkey).get() is not None
 
-def read_clean(httpurl):
+def read_clean(httpurl, clean=True):
   content = memcache.get(httpurl)  
   if content is None:
-    content = read_url_clean(httpurl)
+    content = read_url_clean(httpurl, clean=clean)
     memcache.set(httpurl, content)
   return content
 
@@ -272,6 +281,113 @@ class FlashBuildMixin(object):
     
   def build_warning(self, msg):
     return { 'type':'warning', 'message':msg }
+
+def get_mapping(appid):
+  fnc = getattr(importlib.import_module(apps_id[appid]),'get_mapping')
+  return fnc()
+  
+def get_httpurl(appid, url, size='small', ptls='pt'):  
+
+  logging.error('-----------------------get_httpurl')
+  logging.error('url[%s]', url)
+  
+  mapping = get_mapping(appid)
+
+  template_map = mapping['templates-%s' % size]
+  extras_map   = mapping['extras']
+  url_map      = mapping['httpurl']
+  
+  httpurl = ''
+  args = {}
+  for k in url_map:
+    if url.startswith(k):
+      httpurl = url_map[k]
+      args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
+      
+      if '?' in url:
+        for i in url[url.index('?')+1:].split('&'):
+          tmp = i.split('=')
+          args[tmp[0]]=tmp[1]
+
+      break
+
+  # Obtenemos el template
+  page_name = ''  
+  template  = ''
+  for k in template_map:
+    if url.startswith(k):
+      page_name = k
+      template = template_map[k][ptls]
+      break
+      
+  logging.error(' --------------------------------------- ')
+  logging.error(' - httpurl => [%s] || template => [%s] || url => [%s]' % (httpurl, template, url))
+  if httpurl == '' or template == '':
+    logging.error('Something is wrong => [%s]' % (url))
+    raise('8-(')
+
+  return httpurl, args, template, page_name, extras_map
+
+def build_xml_string(url, httpurl, kwargs, appid, clear_namespaces=False):
+  
+  if httpurl.startswith('X:'):
+    fnc = getattr(importlib.import_module(apps_id[appid]), httpurl.split()[1])
+    result = fnc(kwargs).encode('utf-8')
+  else:
+    if '%s' in httpurl: httpurl = httpurl % kwargs['host']
+    result = read_clean(httpurl, clean=False)
+
+    # HACKO el DIA:
+    if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
+      now = date2iso(datetime.now()+timedelta(hours=-3))
+      result = re.sub(r'\r?\n', '</br>', result)
+      result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+                    xmlns:media="http://search.yahoo.com/mrss/" 
+                    xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
+                    version="2.0" encoding="UTF-8"><channel>
+                    <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now, result)
+
+  if clear_namespaces:
+    result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
+  return result
+
+
+class HtmlBuilderMixing(object):
+  
+  def build_html_and_images(self, appid, url, size, ptls):
+    # Armamos la direccion del xml    
+    httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
+
+    # Traemos el xml y lo transformamos en un dict
+    xml = XML2Dict()
+    r = xml.fromstring(build_xml_string(url, httpurl, args, appid, clear_namespaces=True ))
+
+    # Reemplazamos las imagens por el sha1 de la url
+    imgs = []
+
+    if type(r.rss.channel.item) == type([]):
+      items = r.rss.channel.item
+    else:
+      items = [r.rss.channel.item]
+
+    for i in items:
+      if hasattr(i, 'thumbnail'):
+        img = i.thumbnail.attrs.url
+        i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
+        imgs.append(img)
+
+      if hasattr(i, 'group'):
+        for ct in i.group.content:
+          img = ct.attrs.url
+          ct.attrs.url = sha1(img).digest().encode('hex')
+          imgs.append(img)
+    
+    logging.error('----------- build_html_and_images url:[%s]' % url)
+    args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
+
+    content = self.render_template('ws/%s' % template, **args )
+    return content, imgs
+
     
 class Jinja2Mixin(object):
   
@@ -293,19 +409,18 @@ class Jinja2Mixin(object):
     
     env.globals['session']     = self.session
     
-    env.filters['urlencode']   = url_fix
-    env.filters['datetime']    = format_datetime
+    env.filters['urlencode']    = url_fix
+    env.filters['datetime']     = format_datetime
     env.filters['noticia_link'] = noticia_link
-    env.filters['if_not_none'] = if_not_none
-    env.filters['has_content']   = has_content
-    env.filters['content']   = get_content
-    env.filters['gallery']   = gallery
-    env.filters['meta_has']   = meta_has
-    env.filters['related_link']   = related_link
+    env.filters['if_not_none']  = if_not_none
+    env.filters['has_content']  = has_content
+    env.filters['content']      = get_content
+    env.filters['gallery']      = gallery
+    env.filters['meta_has']     = meta_has
+    env.filters['related_link'] = related_link
     env.filters['build_list']   = build_list
-    env.filters['is_empty']   = empty
+    env.filters['is_empty']     = empty
     
-
           
   def render_response(self, _template, **context):
     # Renders a template and writes the result to the response.
