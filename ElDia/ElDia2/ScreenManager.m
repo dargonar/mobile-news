@@ -50,7 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -149,15 +149,10 @@ BOOL isIpad=NO;
 
 // para iPad
 -(BOOL) sectionMenuExists:(NSString*)url {
-//  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
-  NSString *composedPrefix = [NSString stringWithFormat:@"%@_%@",@"sm", html_prefix];
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *newUrl = [html_prefix stringByAppendingString:url];
   
-  NSLog(@" ----------------------------  sectionMenuExists()");
-  NSLog(@" url:[%@] html_prefix:[%@] essiste:[%@]", url, composedPrefix , ([self screenExists:url prefix:composedPrefix]?@"SI":@"NO"));
-  
-  
-  return [self screenExists:url prefix:composedPrefix];
+  return [self screenExists:newUrl prefix:@"m"];
 }
 
 /***********************************************************************************/
@@ -187,21 +182,22 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):nil;
-  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:html_prefix];
-  
   return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
 }
 
 // para iPAd
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
-  NSLog(@" ----------------------------  getSectionMenu()");
-  NSLog(@" url:[%@] html_prefix:[%@]", url, html_prefix );
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
+//  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+//  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
+//  NSLog(@" ----------------------------  getSectionMenu()");
+//  NSLog(@" url:[%@] html_prefix:[%@]", url, html_prefix );
+//  return [self getScreen:url useCache:useCache processImages:YES prefix:@"m" error:error processNavigation:NO html_prefix:html_prefix];
+  
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *newUrl = [html_prefix stringByAppendingString:url];
+  return [self getScreen:newUrl useCache:useCache processImages:YES prefix:@"m" error:error];
+
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -511,14 +507,26 @@ BOOL isIpad=NO;
   return nil;
 }
 
+
 -(NSURL*) getXmlHttpUrl2:(NSString*)url {
+  
+  NSString *newUrl = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)url, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+  
+  
+//  NSString *escaped_url = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+//                                                                              (CFStringRef)url,
+//                                                                              NULL,
+//                                                                              CFSTR("!*'();:@&=+$,/?%#[]"),
+//                                                                              kCFStringEncodingUTF8);
+  
   NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
-                      ([app_delegate isiPad]?@"big":@"small"),
-                      ([app_delegate isLandscape]?@"ls":@"pt"),
-                      [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                   ([app_delegate isiPad]?@"big":@"small"),
+                   ([app_delegate isLandscape]?@"ls":@"pt"),
+                   newUrl //[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                    ];
+  
+
   NSLog(@"----------------------------");
-  NSLog(@"getXmlHttpUrl2: url[%@] encoded_url[%@]",url, [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
   NSLog(@"getXmlHttpUrl2: %@", tmp);
   return [NSURL URLWithString:tmp];
 
