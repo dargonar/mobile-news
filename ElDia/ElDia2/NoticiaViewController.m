@@ -573,7 +573,7 @@ UIActionSheet* actionSheet;
   return YES;
 }
 
-FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeNetwork;
+FGalleryPhotoSourceType mFGalleryPhotoSourceType = FGalleryPhotoSourceTypeLocal;
 
 -(void) loadPhotoGallery:(NSURL *)url{
   
