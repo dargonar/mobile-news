@@ -233,7 +233,10 @@ def noticia_link(node, section_url=None):
   if section_url is not None and section_url.startswith('section://'):
     section_id = url_fix(section_url.split('://')[1])
     section = u'&section=%s' % (section_id if len(section_id)>0 else 'main')
-  
+  else:
+    if section_url is not None and section_url.startswith('menu_section://'):
+      section_id = url_fix(section_url.split('://')[1])
+      section = u'&section=%s' % (section_id if len(section_id)>0 else 'main')
   return 'noticia://%s?url=%s&title=%s&header=%s%s' % (node.guid.value, url_fix(node.link), url_fix(node.title), url_fix(node.description).strip(), section)
 
 def url_fix(s, charset='utf-8'):
@@ -303,6 +306,9 @@ def get_mapping(appid):
 
 def get_httpurl(appid, url, size='small', ptls='pt'):  
 
+  logging.error('-----------------------get_httpurl')
+  logging.error('url[%s]', url)
+  
   mapping = get_mapping(appid)
 
   # Obtenemos el template
@@ -326,7 +332,9 @@ def get_httpurl(appid, url, size='small', ptls='pt'):
       else:
         template = None
       break
-  
+      
+  logging.error(' --------------------------------------- ')
+  logging.error(' - httpurl => [%s] || template => [%s] || url => [%s]' % (httpurl, template, url))
   if httpurl == '' or template == '':
     logging.error('Something is wrong => [%s]' % (url))
     raise('8-(')

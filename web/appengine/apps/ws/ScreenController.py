@@ -65,11 +65,11 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
     size  = self.request.params['size']  # small, big
     ptls  = self.request.params['ptls']  # pt, ls
     
-    page_name, imgs, rv = self.build_html_and_images(appid, url, size, ptls)
+    content, images = self.build_html_and_images(appid, url, size, ptls)
     
     # Set up headers for browser to correctly recognize HTML
     self.response.headers['Content-Type'] ='text/html'
-    self.response.write(rv)
+    self.response.write(content)
     return
     
   def add_screen(self, outfile, appid, url, size, ptls):

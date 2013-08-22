@@ -28,8 +28,8 @@
 -(NSURL*)    getFolderUrl;
 
 -(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix;
-
--(NSString*)getFileName2:(NSString*)key postfix:(NSString*)postfix;
+-(NSString*)getFileName2:(NSString*)key;
+//-(NSString*)getFileName2:(NSString*)filename postfix:(NSString*)postfix;
 -(BOOL)put2:(NSString*)key data:(NSData*)data postfix:(NSString*)postfix;
 
 @end

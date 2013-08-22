@@ -50,7 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.1.103:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -149,10 +149,10 @@ BOOL isIpad=NO;
 
 // para iPad
 -(BOOL) sectionMenuExists:(NSString*)url {
-//  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
-  NSString *composedPrefix = [NSString stringWithFormat:@"%@_%@",@"sm", html_prefix];
-  return [self screenExists:url prefix:composedPrefix];
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *newUrl = [html_prefix stringByAppendingString:url];
+  
+  return [self screenExists:newUrl prefix:@"m"];
 }
 
 /***********************************************************************************/
@@ -182,21 +182,22 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_"):nil;
-  //return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:html_prefix];
-  
   return [self getScreen:url useCache:useCache processImages:YES prefix:@"s" error:error processNavigation:YES html_prefix:nil];
 }
 
 // para iPAd
 -(NSData *)getSectionMenu:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
   
-  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
-  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
-  NSLog(@" ---------------------------- ");
-  NSLog(@" getSectionMenu() url:[%@] html_prefix:[%@]", url, html_prefix );
-  return [self getScreen:url useCache:useCache processImages:YES prefix:@"sm" error:error processNavigation:NO html_prefix:html_prefix];
+//  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+//  //NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls"):(@"pt");
+//  NSLog(@" ----------------------------  getSectionMenu()");
+//  NSLog(@" url:[%@] html_prefix:[%@]", url, html_prefix );
+//  return [self getScreen:url useCache:useCache processImages:YES prefix:@"m" error:error processNavigation:NO html_prefix:html_prefix];
+  
+  NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
+  NSString *newUrl = [html_prefix stringByAppendingString:url];
+  return [self getScreen:newUrl useCache:useCache processImages:YES prefix:@"m" error:error];
+
 }
 
 -(NSData *)getArticle:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error {
@@ -215,21 +216,18 @@ BOOL isIpad=NO;
   
   // urlPrefix es para utilizar el mismo xml que 'url', pero generar otro HTML.
   
-  NSString* prefixedUrl = url;
   NSString* composedHtmlPrefix = prefix;
   if(html_prefix!=nil)
   {
-    prefixedUrl = [NSString stringWithFormat:@"%@%@",html_prefix, url];
     composedHtmlPrefix = [NSString stringWithFormat:@"%@_%@",prefix, html_prefix];
   }
   
   DiskCache *cache = [DiskCache defaultCache];
-  NSString  *key   = [CryptoUtil sha1:url];
+  NSString  *key   = [CryptoUtil sha1: [[url componentsSeparatedByString:@"?"] objectAtIndex:0] ];
   
-  NSLog(@"----------------getScreen");
+  NSLog(@"---------------- getScreen");
   NSLog(@" key[%@]; url[%@]; prefix:[%@].", key, url, composedHtmlPrefix);
-  
-  
+  NSLog(@" useCache[%@].", useCache?@"SI":@"NOR");
   
   //Si piden ver la cache
   if (useCache) {
@@ -253,15 +251,14 @@ BOOL isIpad=NO;
   NSError *my_err;
   NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
 
-  // -> content.html
-  // -> images.txt
-  // -> menu.html
-
-  NSData* html = (NSData*)[response_dict objectForKey:@"content.html"];
-  //Lo guardamos y retornamos
-  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
-    return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
-  }
+  NSString *requestedHTML = [key stringByAppendingFormat:@".%@" ,composedHtmlPrefix];
+  NSData* html = (NSData*)[response_dict objectForKey:requestedHTML];
+  NSLog(@" requestedHTML[%@] is nil -> %@", requestedHTML, (html==nil)?@"SI":@"NOR");
+  
+//  //Lo guardamos y retornamos
+//  if(![cache put:key data:html prefix:composedHtmlPrefix]) {
+//    return [ErrorBuilder build:error desc:@"cache html" code:ERR_CACHING_HTML];
+//  }
 
 //  //Las imagenes a descargar.guardamos en cache
 //  NSData *images = (NSData*)[response_dict objectForKey:@"images.txt"];
@@ -271,20 +268,20 @@ BOOL isIpad=NO;
   
   NSLog(@"------------------");
   NSLog(@" iterando contenidos de zipfiles");
-  for(NSString* key in response_dict)
+  for(NSString* _key in response_dict)
   {
-    NSLog(@"--> file: %@", key);
-    if ([key rangeOfString:@"content.html"].location != NSNotFound) {
-      continue;
-    }
-    NSData *data = (NSData*)[response_dict objectForKey:key];
+//    NSLog(@"--> file: %@", key);
+//    if ([key rangeOfString:@"content.html"].location != NSNotFound) {
+//      continue;
+//    }
+    NSData *data = (NSData*)[response_dict objectForKey:_key];
     if(data!=nil){
-      if(![cache put2:key data:data])
+      if(![cache put2:_key data:data])
         return [ErrorBuilder build:error desc:@"cache file" code:ERR_CACHING_HTML];
-      NSLog(@"--> SAVED %@", key);
+      NSLog(@"--> SAVED %@", _key);
     }
     else{
-      NSLog(@"--> NOT SAVED %@", key);
+      NSLog(@"--> NOT SAVED %@", _key);
     }
 //    if ([key rangeOfString:@"menu"].location == NSNotFound) {
 //      continue;
@@ -510,14 +507,26 @@ BOOL isIpad=NO;
   return nil;
 }
 
+
 -(NSURL*) getXmlHttpUrl2:(NSString*)url {
+  
+  NSString *newUrl = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)url, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+  
+  
+//  NSString *escaped_url = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+//                                                                              (CFStringRef)url,
+//                                                                              NULL,
+//                                                                              CFSTR("!*'();:@&=+$,/?%#[]"),
+//                                                                              kCFStringEncodingUTF8);
+  
   NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
-                      ([app_delegate isiPad]?@"big":@"small"),
-                      ([app_delegate isLandscape]?@"ls":@"pt"),
-                      [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                   ([app_delegate isiPad]?@"big":@"small"),
+                   ([app_delegate isLandscape]?@"ls":@"pt"),
+                   newUrl //[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                    ];
+  
+
   NSLog(@"----------------------------");
-  NSLog(@"getXmlHttpUrl2: url[%@] encoded_url[%@]",url, [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
   NSLog(@"getXmlHttpUrl2: %@", tmp);
   return [NSURL URLWithString:tmp];
 
@@ -525,7 +534,8 @@ BOOL isIpad=NO;
 
 -(NSArray *)getPendingImages:(NSString*)url error:(NSError**)error {
   
-  NSString *key = [CryptoUtil sha1:url];
+//  NSString *key = [CryptoUtil sha1:url];
+  NSString *key = [CryptoUtil sha1:[[url componentsSeparatedByString:@"?"] objectAtIndex:0]];
   NSArray *images = [self getImages:key error:error];
   if (images == nil) {
     return nil;

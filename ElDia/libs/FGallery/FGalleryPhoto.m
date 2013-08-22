@@ -124,8 +124,13 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] bundlePath], _fullsizeUrl];
-	if([[NSFileManager defaultManager] fileExistsAtPath:path]==NO)
+	NSLog(@" -------------- ");
+	NSLog(@" FGalleryPhoto loadFullsizeInThread path:%@ ", path);
+  if([[NSFileManager defaultManager] fileExistsAtPath:path]==NO)
+  {
+    NSLog(@" FGalleryPhoto loadFullsizeInThread path:%@ NO EXISTE", path);  
     path = _fullsizeUrl;
+  }
   _fullsize = [[UIImage imageWithContentsOfFile:path] retain];
 	
 	_hasFullsizeLoaded = YES;
@@ -142,6 +147,9 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] bundlePath], _thumbUrl];
+  NSLog(@" -------------- ");
+	NSLog(@" FGalleryPhoto loadThumbnailInThread path:%@ ", path);
+
 	if([[NSFileManager defaultManager] fileExistsAtPath:path]==NO)
     path = _fullsizeUrl;
   _thumbnail = [[UIImage imageWithContentsOfFile:path] retain];

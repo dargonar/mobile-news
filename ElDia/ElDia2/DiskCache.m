@@ -31,6 +31,9 @@ BOOL      init_ok = NO;
 -(NSString*)getFileName:(NSString*)key prefix:(NSString*)prefix{
   return [NSString stringWithFormat:@"%@/%@.%@", cache_folder, key, prefix];
 }
+//-(NSString*)getFileName2:(NSString*)key postfix:(NSString*)postfix{
+//  return [self getFileName2:[NSString stringWithFormat:@"%@.%@", key, postfix]];
+//}
 
 -(NSString*)getFileName2:(NSString*)filename{
   return [NSString stringWithFormat:@"%@/%@", cache_folder, filename];
@@ -82,9 +85,10 @@ BOOL      init_ok = NO;
   
   NSString* file=[self getFileName:key prefix:prefix];
   NSFileManager *fileManager= [NSFileManager defaultManager];
-  BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
+  return [fileManager fileExistsAtPath:file isDirectory:nil];
+//  BOOL serungo = [fileManager fileExistsAtPath:file isDirectory:nil];
 //  NSLog(@" %@ EXISTS [%@_%@]",(serungo==YES?@"SI":@"NO"), prefix, key);
-  return serungo;
+//  return serungo;
 }
 
 -(NSString*)getFolder{
