@@ -9,6 +9,7 @@ from datetime import date, datetime , timedelta
 class CachedContent(db.Model):
   content            = db.TextProperty()
   images             = db.TextProperty()
+  appid              = db.StringProperty()
   inner_url          = db.StringProperty()
   created_at         = db.DateTimeProperty(auto_now_add=True)
 

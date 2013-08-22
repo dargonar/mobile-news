@@ -9,7 +9,6 @@ from HTMLParser import HTMLParser
 from dateutil.parser import parser
 
 from re import *
-from hashlib import sha256
 from hashlib import sha1
 
 from lxml import etree
@@ -63,10 +62,10 @@ def date_add_str(today_date, hhmm):
   tmp = today_date + timedelta(minutes=int(parts[1]), hours=int(parts[0]))
   return tmp.strftime("%a, %d %b %Y %H:%M:%S")
 
-def build_inner_url(appid, inner_url):
-  inx = '?' in inner_url and inner_url.index('?')
-  if inx: inner_url = inner_url[0:inx]
-  return '%s|%s' % (appid, inner_url)
+def build_inner_url(ctype, appid, url, size=None):
+  inx = '?' in url and url.index('?')
+  if inx: url = url[0:inx]
+  return '%s:%s|%s;%s' % (ctype, appid, url, (size or '') )
 
 def clean_content(content):
   parser = etree.HTMLParser()
@@ -78,39 +77,58 @@ def read_url_clean(httpurl, clean=True):
   content = urlopen(httpurl, timeout=25).read()
   if clean:
     return clean_content(content)
-
   return content
 
+def drop_cache(inner_url):
+  memcache.delete(inner_url)
+  memcache.delete(inner_url[:inner_url.rindex(';')])
+  cc = CachedContent.get_by_key_name(inner_url)
+  if cc: cc.delete()
+
+def set_cache(inner_url, content, mem_only=False):
+  
+  logging.error('** CACHE SET ** for %s' % inner_url)
+
+  if type(content[0]) != type(unicode()):
+    content = (content[0].decode('utf-8'), content[1])
+
+  memcache.set(inner_url, content)
+
+  if not mem_only:      
+    cc = CachedContent(key       =  db.Key.from_path('CachedContent', inner_url), 
+                       content   =  db.Text(content[0]),
+                       images    =  db.Text(content[1]),
+                       inner_url =  inner_url )
+    cc.put()
+
 def in_cache(inner_url):
-  key = sha256(inner_url).digest().encode('hex')
-  dbkey = db.Key.from_path('CachedContent', key)
+  dbkey = db.Key.from_path('CachedContent', inner_url)
   return CachedContent.all(keys_only=True).filter('__key__', dbkey).get() is not None
 
-def read_clean(httpurl, clean=True):
-  content = memcache.get(httpurl)  
+def read_cache(inner_url, mem_only=False):
+  content = memcache.get(inner_url)
+  if content is None and not mem_only:
+    tmp = CachedContent.get(db.Key.from_path('CachedContent', inner_url))
+    if tmp is None:
+      logging.info('*** NOT USING cache for %s' % inner_url)
+      return None
+    content = (tmp.content, tmp.images)
+    #Lo levanto a memoria, no estaba pero si estaba en disco
+    set_cache(inner_url, content, mem_only=True) 
+  logging.info('using cache for %s' % inner_url)
+  return content
+
+def read_clean(httpurl, clean=True, use_cache=True):
+  content = None
+  
+  if use_cache:
+    content = memcache.get(httpurl)  
+
   if content is None:
     content = read_url_clean(httpurl, clean=clean)
     memcache.set(httpurl, content)
+  
   return content
-
-# def read_clean(httpurl, inner_url, fnc=read_url_clean, use_cache=True):
-#   key = sha256(inner_url).digest().encode('hex')
-#   dbkey = db.Key.from_path('CachedContent', key)
-
-#   content = memcache.get(key) if use_cache else None
-  
-#   if content is None:    
-#     tmp = CachedContent.get(dbkey) if use_cache else None
-#     if tmp is None:
-#       logging.info('URL not in cache: %s' % inner_url)
-#       content = fnc(httpurl)      
-#       tmp = CachedContent(key=dbkey, inner_url=inner_url, content=db.Text(arg=content, encoding='utf-8'))
-#       tmp.put()
-    
-#     content = tmp.content.encode('utf-8')
-#     memcache.set(key, content)
-  
-#   return content
 
 _slugify_strip_re = compile(r'[^\w\s-]')
 _slugify_hyphenate_re = compile(r'[-\s]+')
@@ -282,102 +300,133 @@ class FlashBuildMixin(object):
 def get_mapping(appid):
   fnc = getattr(importlib.import_module(apps_id[appid]),'get_mapping')
   return fnc()
-  
+
 def get_httpurl(appid, url, size='small', ptls='pt'):  
 
   mapping = get_mapping(appid)
 
-  template_map = mapping['templates-%s' % size]
-  extras_map   = mapping['extras']
-  url_map      = mapping['httpurl']
-  
-  httpurl = ''
+  # Obtenemos el template
+  page_name = ''  
+  template  = ''
+  httpurl   = ''
+
   args = {}
-  for k in url_map:
+  for k in mapping['map']:
     if url.startswith(k):
-      httpurl = url_map[k]
+      httpurl = mapping['map'][k]['url']
       args['host'] = url[url.index('//')+2: (url.index('?') if '?' in url else None) ]
       
       if '?' in url:
         for i in url[url.index('?')+1:].split('&'):
           tmp = i.split('=')
           args[tmp[0]]=tmp[1]
-
-      break
-
-  # Obtenemos el template
-  page_name = ''  
-  template  = ''
-  for k in template_map:
-    if url.startswith(k):
-      page_name = k
-      template = template_map[k][ptls]
+      
+      if mapping['map'][k][size]:
+        template = mapping['map'][k][size][ptls]
+      else:
+        template = None
       break
   
   if httpurl == '' or template == '':
     logging.error('Something is wrong => [%s]' % (url))
     raise('8-(')
 
-  return httpurl, args, template, page_name, extras_map
+  return httpurl, args, template, page_name, mapping['extras']
 
-def build_xml_string(url, httpurl, kwargs, appid, clear_namespaces=False):
+def get_xml(appid, url, use_cache=False):
   
-  if httpurl.startswith('X:'):
-    fnc = getattr(importlib.import_module(apps_id[appid]), httpurl.split()[1])
-    result = fnc(kwargs).encode('utf-8')
-  else:
-    if '%s' in httpurl: httpurl = httpurl % kwargs['host']
-    result = read_clean(httpurl, clean=False)
+  inner_url = build_inner_url('xml', appid, url)
+ 
+  result = None
+  if use_cache: 
+    result = read_cache(inner_url, mem_only=True)
+    
+  if not result:
 
-    # HACKO el DIA:
-    if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
-      now = date2iso(datetime.now()+timedelta(hours=-3))
-      result = re.sub(r'\r?\n', '</br>', result)
-      result = """<rss xmlns:atom="http://www.w3.org/2005/Atom" 
-                    xmlns:media="http://search.yahoo.com/mrss/" 
-                    xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
-                    version="2.0" encoding="UTF-8"><channel>
-                    <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now, result)
+    httpurl, args, _, _, _ = get_httpurl(appid, url)
+    
+    if httpurl.startswith('X:'):
+      fnc = getattr(importlib.import_module(apps_id[appid]), httpurl.split()[1])
+      result = fnc(args)
+    else:
+      if '%s' in httpurl: httpurl = httpurl % args['host']
+      result = read_clean(httpurl, clean=False, use_cache=use_cache)
 
-  if clear_namespaces:
-    result=re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', result)
-  return result
+      # HACKO el DIA:
+      if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
+        now = date2iso(datetime.now()+timedelta(hours=-3))
+        result = re.sub(r'\r?\n', '</br>', result)
+        result = u"""<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+                      xmlns:media="http://search.yahoo.com/mrss/" 
+                      xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
+                      version="2.0" encoding="UTF-8"><channel>
+                      <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now, result)
+    
+    if type(result) != type(unicode()):
+      result = result.decode('utf-8')
 
+    result = (result, None)
+    set_cache(inner_url, result, mem_only=True)
+
+  return result[0]
 
 class HtmlBuilderMixing(object):
   
-  def build_html_and_images(self, appid, url, size, ptls):
-    # Armamos la direccion del xml    
-    httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
+  def re_build_html_and_images(self, appid, url, size, ptls):
+    
+    inner_url = build_inner_url('html', appid, url, size)
+    drop_cache(inner_url)
 
-    # Traemos el xml y lo transformamos en un dict
-    xml = XML2Dict()
-    r = xml.fromstring(build_xml_string(url, httpurl, args, appid, clear_namespaces=True ))
+    return self.build_html_and_images(appid, url, size, ptls, use_cache=False)
 
-    # Reemplazamos las imagens por el sha1 de la url
-    imgs = []
 
-    if type(r.rss.channel.item) == type([]):
-      items = r.rss.channel.item
-    else:
-      items = [r.rss.channel.item]
+  def build_html_and_images(self, appid, url, size, ptls, use_cache=True):
+    
+    inner_url = build_inner_url('html', appid, url, size)
 
-    for i in items:
-      if hasattr(i, 'thumbnail'):
-        img = i.thumbnail.attrs.url
-        i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
-        imgs.append(img)
+    result = None
+    if use_cache:
+      result = read_cache(inner_url)
 
-      if hasattr(i, 'group'):
-        for ct in i.group.content:
-          img = ct.attrs.url
-          ct.attrs.url = sha1(img).digest().encode('hex')
+    if result is None:
+      # Traemos el xml, le quitamos los namespaces 
+      xml = get_xml(appid, url, use_cache=use_cache)
+      xml = re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', xml)
+
+      # Y lo transformamos en un dict
+      r = XML2Dict().fromstring(xml.encode('utf-8'))
+
+      # Reemplazamos las imagens por el sha1 de la url
+      imgs = []
+
+      if type(r.rss.channel.item) == type([]):
+        items = r.rss.channel.item
+      else:
+        items = [r.rss.channel.item]
+
+      for i in items:
+        if hasattr(i, 'thumbnail'):
+          img = unicode(i.thumbnail.attrs.url)
+          i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
           imgs.append(img)
 
-    args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
+        if hasattr(i, 'group'):
+          for ct in i.group.content:
+            img = unicode(ct.attrs.url)
+            ct.attrs.url = sha1(img).digest().encode('hex')
+            imgs.append(img)
 
-    content = self.render_template('ws/%s' % template, **args )
-    return content, imgs
+      # Armamos la direccion del xml    
+      httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
+
+      args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
+      content = self.render_template('ws/%s' % template, **args)
+
+      result = (content, u','.join(imgs))
+      set_cache(inner_url, result, mem_only=False)
+
+    imgs = result[1].split(',') if result[1] else []
+    return result[0], imgs
 
     
 class Jinja2Mixin(object):
@@ -394,11 +443,12 @@ class Jinja2Mixin(object):
   def setup_jinja_enviroment(self, env):
     env.globals['url_for'] = self.uri_for
     
-    if hasattr(self.session, 'get_flashes'):
-      flashes = self.session.get_flashes()
-      env.globals['flash'] = flashes[0][0] if len(flashes) and len(flashes[0]) else None
-    
-    env.globals['session']     = self.session
+    if hasattr(self, 'session'):
+      env.globals['session'] = self.session
+
+      if hasattr(self.session, 'get_flashes'):
+        flashes = self.session.get_flashes()
+        env.globals['flash'] = flashes[0][0] if len(flashes) and len(flashes[0]) else None
     
     env.filters['urlencode']    = url_fix
     env.filters['datetime']     = format_datetime

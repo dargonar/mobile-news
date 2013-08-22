@@ -19,9 +19,7 @@ from google.appengine.api import taskqueue
 from google.appengine.api import memcache
 
 from webapp2 import cached_property
-from utils import FrontendHandler, HtmlBuilderMixing, get_or_404, read_clean, date2iso
-
-
+from utils import FrontendHandler, HtmlBuilderMixing, get_or_404, read_clean, date2iso, get_xml
 from utils import apps_id, build_inner_url, get_mapping, get_httpurl
 
 extension_dict = {
@@ -32,12 +30,11 @@ extension_dict = {
     'funebres://'            : 'fun',
     'farmacia://'            : 'far',
     'cartelera://'           : 'car',
-    'menu_section://'        : 'm',
-    'ls_menu_section://'     : 'm',
+    'menu_section://'        : 'ms',
+    'ls_menu_section://'     : 'ms',
 }
 
 def get_filenames(url):
-
   name = sha1(url[0:(url.index('?') if '?' in url else None)]).digest().encode('hex')
   extension = extension_dict[ url[0:url.index('/')+2] ]
 
@@ -46,11 +43,6 @@ def get_filenames(url):
   
   return names
 
- 
-def get_xml(appid, url):
-  httpurl, args, _, _, _ = get_httpurl(appid, url)
-  r = build_xml_string(url, httpurl, args, appid, clear_namespaces=False)
-  return r
 
 class ScreenController(FrontendHandler, HtmlBuilderMixing):  
   # def test(self, **kwargs):
@@ -61,7 +53,7 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
     appid = self.request.params['appid'] # nombre de la app
     url   = self.request.params['url']   # url interna
 
-    r = get_xml(appid, url)    
+    r = get_xml(appid, url, use_cache=True)
     
     self.response.headers['Content-Type'] ='text/xml'
     
@@ -106,7 +98,9 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
       self.add_screen(outfile, appid, 'menu://', size, ptls)
 
     if url.startswith('noticia://') and size == 'big':
-      section = filter(lambda a: a[0] =='section', [x.split('=') for x in url[url.index('?')+1:].split('&')])[0][1]
+      match = re.compile('section=(\w+)').findall(url)
+      section = match[0] if len(match) else 'main'
+
       self.add_screen(outfile, appid, 'menu_section://%s' % section, size, 'pt' )
       self.add_screen(outfile, appid, 'ls_menu_section://%s' % section, size, 'ls' )
     
