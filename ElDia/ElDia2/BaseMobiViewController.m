@@ -316,32 +316,55 @@ NSString* click_url =@"";
   
 }
 
+-(void)zoomToFitBig{
+
+  if([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]])
+  {
+    if ([self secondaryUIWebView]==nil){
+      return;
+    }
+    
+    if ([[self secondaryUIWebView] isLoading]){
+      return;
+    }
+    
+    if ([[self secondaryUIWebView] respondsToSelector:@selector(scrollView)])
+    {
+      float zoom=[self secondaryUIWebView].bounds.size.width/600.0;
+      if([app_delegate isLandscape]==NO)
+        zoom=1.0;
+      NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
+      [[self secondaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+    }
+    
+    return;
+  }
+  
+  
+}
+
+-(void)zoomToFitSmall{
+  if ([[self primaryUIWebView] respondsToSelector:@selector(scrollView)])
+  {
+    float zoom=[self primaryUIWebView].bounds.size.width/320.0;
+    NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
+    [[self primaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+  }
+}
+
 -(void)zoomToFit
 {
-//  NSLog(@"=======================================");
+ 
 //  NSLog(@"Is a kind of MainViewController: %@", ([[self classForCoder] isSubclassOfClass:[MainViewController class]])? @"Yes" : @"No");
   
   if([app_delegate isiPad])
   {
+    [self zoomToFitBig];
     return;
   }
+
+  [self zoomToFitSmall];
   
-  if ([[self primaryUIWebView] respondsToSelector:@selector(scrollView)])
-  {
-    //float zoom=[self mainUIWebView].bounds.size.width/scroll.contentSize.width;
-    float zoom=[self primaryUIWebView].bounds.size.width/320.0;
-    
-    //    [[self mainUIWebView].scrollView zoomToRect:CGRectMake(0, 0, [self mainUIWebView].scrollView.contentSize.width, [self mainUIWebView].scrollView.contentSize.height) animated:YES];
-    
-    //    [[self mainUIWebView].scrollView setZoomScale:1.0 animated:YES];
-    //    [self mainUIWebView].scrollView.minimumZoomScale = zoom;
-    //    [self mainUIWebView].scrollView.maximumZoomScale = zoom;
-    //    [self mainUIWebView].scrollView.zoomScale = zoom;
-    
-    NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
-    [[self primaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
-    
-  }
 }
 
 //-(void) scrollViewDidScroll:(UIScrollView *)scrollView{

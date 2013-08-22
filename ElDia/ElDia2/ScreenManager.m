@@ -50,7 +50,7 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.0.212:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL            = @"http://192.168.1.101:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -152,7 +152,7 @@ BOOL isIpad=NO;
   NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
   NSString *newUrl = [html_prefix stringByAppendingString:url];
   
-  return [self screenExists:newUrl prefix:@"m"];
+  return [self screenExists:newUrl prefix:@"ms"];
 }
 
 /***********************************************************************************/
@@ -196,7 +196,7 @@ BOOL isIpad=NO;
   
   NSString *html_prefix= (isIpad && app_delegate.isLandscape)?(@"ls_menu_"):(@"menu_");
   NSString *newUrl = [html_prefix stringByAppendingString:url];
-  return [self getScreen:newUrl useCache:useCache processImages:YES prefix:@"m" error:error];
+  return [self getScreen:newUrl useCache:useCache processImages:YES prefix:@"ms" error:error];
 
 }
 
