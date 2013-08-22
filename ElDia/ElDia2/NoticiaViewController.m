@@ -60,6 +60,8 @@
   
   if ([app_delegate isiPad]) {
     [[self mainUIWebView] setScalesPageToFit:YES];
+    
+    [self menu_webview].multipleTouchEnabled = NO;
     self.menu_webview.delegate = self;
     self.menu_webview.hidden = NO;
   }

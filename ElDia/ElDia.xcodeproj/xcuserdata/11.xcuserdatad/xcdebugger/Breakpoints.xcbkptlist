@@ -60,20 +60,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "356"
-         endingLineNumber = "356"
-         landmarkName = "-loadNoticia"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "358"
@@ -86,11 +73,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "398"
-         endingLineNumber = "398"
+         startingLineNumber = "360"
+         endingLineNumber = "360"
+         landmarkName = "-loadNoticia"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/NoticiaViewController.m"
+         timestampString = "398873739.11903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "400"
+         endingLineNumber = "400"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "408"
-         endingLineNumber = "408"
+         startingLineNumber = "410"
+         endingLineNumber = "410"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,20 +203,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "319"
-         endingLineNumber = "319"
-         landmarkName = "-loadNoticia:section:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "321"
@@ -229,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "328"
-         endingLineNumber = "328"
+         startingLineNumber = "323"
+         endingLineNumber = "323"
          landmarkName = "-loadNoticia:section:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +229,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "330"
+         endingLineNumber = "330"
+         landmarkName = "-loadNoticia:section:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/NoticiaViewController.m"
+         timestampString = "398873739.11903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "392"
+         endingLineNumber = "392"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "394"
-         endingLineNumber = "394"
+         startingLineNumber = "396"
+         endingLineNumber = "396"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
+         startingLineNumber = "402"
+         endingLineNumber = "402"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "412"
-         endingLineNumber = "412"
+         startingLineNumber = "414"
+         endingLineNumber = "414"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "403"
-         endingLineNumber = "403"
+         startingLineNumber = "405"
+         endingLineNumber = "405"
          landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "414"
-         endingLineNumber = "414"
+         startingLineNumber = "416"
+         endingLineNumber = "416"
          landmarkName = "@implementation NoticiaViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "440"
-         endingLineNumber = "440"
+         startingLineNumber = "442"
+         endingLineNumber = "442"
          landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "238"
-         endingLineNumber = "238"
+         startingLineNumber = "240"
+         endingLineNumber = "240"
          landmarkName = "-btnShareClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -468,19 +468,6 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "206"
          endingLineNumber = "206"
-         landmarkName = "@implementation ScreenManager"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398628610.070708"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
          landmarkName = "-getArticle:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -492,9 +479,22 @@
          timestampString = "398628610.070708"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "209"
+         endingLineNumber = "209"
+         landmarkName = "@implementation ScreenManager"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/ScreenManager.m"
+         timestampString = "398628610.070708"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "212"
          endingLineNumber = "212"
-         landmarkName = "-getArticle:useCache:error:"
+         landmarkName = "-getScreen:useCache:processImages:prefix:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -520,7 +520,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "185"
          endingLineNumber = "185"
-         landmarkName = "-getCartelera:useCache:error:"
+         landmarkName = "-getSection:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -533,8 +533,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "213"
          endingLineNumber = "213"
-         landmarkName = "@implementation ScreenManager"
-         landmarkType = "3">
+         landmarkName = "-getScreen:useCache:processImages:prefix:error:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -737,7 +737,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "306"
          endingLineNumber = "306"
-         landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
+         landmarkName = "-processNewsForGestureNavigation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -750,8 +750,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "311"
          endingLineNumber = "311"
-         landmarkName = "-processNewsForGestureNavigation:"
-         landmarkType = "5">
+         landmarkName = "@implementation ScreenManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -888,11 +888,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "438"
-         endingLineNumber = "438"
+         startingLineNumber = "440"
+         endingLineNumber = "440"
          landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -901,11 +901,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "508"
-         endingLineNumber = "508"
+         startingLineNumber = "510"
+         endingLineNumber = "510"
          landmarkName = "@implementation NoticiaViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -914,11 +914,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "758"
-         endingLineNumber = "758"
+         startingLineNumber = "760"
+         endingLineNumber = "760"
          landmarkName = "-supportedInterfaceOrientations"
          landmarkType = "5">
       </FileBreakpoint>
@@ -940,11 +940,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "291"
+         endingLineNumber = "291"
          landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -979,11 +979,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "783"
-         endingLineNumber = "783"
+         startingLineNumber = "785"
+         endingLineNumber = "785"
          landmarkName = "-positionate"
          landmarkType = "5">
       </FileBreakpoint>
@@ -992,11 +992,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "787"
-         endingLineNumber = "787"
+         startingLineNumber = "789"
+         endingLineNumber = "789"
          landmarkName = "-positionate"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1010,8 +1010,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "391"
          endingLineNumber = "391"
-         landmarkName = "@implementation ScreenManager"
-         landmarkType = "3">
+         landmarkName = "-getStyleSheet:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1120,11 +1120,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "778"
-         endingLineNumber = "778"
+         startingLineNumber = "780"
+         endingLineNumber = "780"
          landmarkName = "-positionate"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1237,11 +1237,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "868"
-         endingLineNumber = "868"
+         startingLineNumber = "870"
+         endingLineNumber = "870"
          landmarkName = "-positionatePortrait"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1250,11 +1250,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "296"
-         endingLineNumber = "296"
+         startingLineNumber = "298"
+         endingLineNumber = "298"
          landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1263,11 +1263,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "292"
-         endingLineNumber = "292"
+         startingLineNumber = "294"
+         endingLineNumber = "294"
          landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1276,11 +1276,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "361"
-         endingLineNumber = "361"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
          landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1289,20 +1289,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "374"
-         endingLineNumber = "374"
-         landmarkName = "-loadSectionNews"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "376"
@@ -1315,11 +1302,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "375"
-         endingLineNumber = "375"
+         startingLineNumber = "378"
+         endingLineNumber = "378"
+         landmarkName = "-loadSectionNews"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/NoticiaViewController.m"
+         timestampString = "398873739.11903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
          landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1341,11 +1341,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "297"
-         endingLineNumber = "297"
+         startingLineNumber = "299"
+         endingLineNumber = "299"
          landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1354,11 +1354,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "380"
-         endingLineNumber = "380"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
          landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1367,11 +1367,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "303"
-         endingLineNumber = "303"
+         startingLineNumber = "305"
+         endingLineNumber = "305"
          landmarkName = "-setPageIndicatorIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1380,11 +1380,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "874"
-         endingLineNumber = "874"
+         startingLineNumber = "876"
+         endingLineNumber = "876"
          landmarkName = "-positionatePortrait"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1393,11 +1393,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "816"
-         endingLineNumber = "816"
+         startingLineNumber = "818"
+         endingLineNumber = "818"
          landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1406,11 +1406,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1432,11 +1432,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "605"
-         endingLineNumber = "605"
+         startingLineNumber = "607"
+         endingLineNumber = "607"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1445,11 +1445,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "398181253.993162"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "319"
-         endingLineNumber = "319"
+         startingLineNumber = "355"
+         endingLineNumber = "355"
          landmarkName = "-zoomToFit"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1458,11 +1458,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "398264323.778831"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "329"
-         endingLineNumber = "329"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
          landmarkName = "-zoomToFit"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1510,11 +1510,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "613"
-         endingLineNumber = "613"
+         startingLineNumber = "615"
+         endingLineNumber = "615"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1523,11 +1523,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "604"
-         endingLineNumber = "604"
+         startingLineNumber = "606"
+         endingLineNumber = "606"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1536,11 +1536,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "639"
-         endingLineNumber = "639"
+         startingLineNumber = "641"
+         endingLineNumber = "641"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1549,11 +1549,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "684"
-         endingLineNumber = "684"
+         startingLineNumber = "686"
+         endingLineNumber = "686"
          landmarkName = "-photoGallery:urlForPhotoSize:atIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1562,11 +1562,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "665"
-         endingLineNumber = "665"
+         startingLineNumber = "667"
+         endingLineNumber = "667"
          landmarkName = "-numberOfPhotosForPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1575,11 +1575,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "666"
-         endingLineNumber = "666"
+         startingLineNumber = "668"
+         endingLineNumber = "668"
          landmarkName = "-numberOfPhotosForPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1588,11 +1588,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "642"
-         endingLineNumber = "642"
+         startingLineNumber = "644"
+         endingLineNumber = "644"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1601,11 +1601,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "619"
-         endingLineNumber = "619"
+         startingLineNumber = "621"
+         endingLineNumber = "621"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1614,11 +1614,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "672"
-         endingLineNumber = "672"
+         startingLineNumber = "674"
+         endingLineNumber = "674"
          landmarkName = "-photoGallery:sourceTypeForPhotoAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1688,7 +1688,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libs/FGallery/FGalleryViewController.m"
@@ -1705,11 +1705,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398641553.738297"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "695"
-         endingLineNumber = "695"
+         startingLineNumber = "697"
+         endingLineNumber = "697"
          landmarkName = "-photoGallery:filePathForPhotoSize:atIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1899,45 +1899,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "398264323.778831"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "332"
-         endingLineNumber = "332"
-         landmarkName = "-zoomToFit"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "398264323.778831"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "334"
-         endingLineNumber = "334"
-         landmarkName = "-zoomToFit"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "398264323.778831"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "335"
-         endingLineNumber = "335"
-         landmarkName = "-zoomToFit"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
          timestampString = "398629162.418851"
          startingColumnNumber = "9223372036854775807"
@@ -1970,7 +1931,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "194"
          endingLineNumber = "194"
-         landmarkName = "-getSection:useCache:error:"
+         landmarkName = "-getSectionMenu:useCache:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1991,11 +1952,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634334.872283"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "367"
-         endingLineNumber = "367"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
          landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2004,11 +1965,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398634969.64899"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "587"
-         endingLineNumber = "587"
+         startingLineNumber = "589"
+         endingLineNumber = "589"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2030,25 +1991,64 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398649206.036837"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "631"
-         endingLineNumber = "631"
+         startingLineNumber = "633"
+         endingLineNumber = "633"
          landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/NoticiaViewController.m"
-         timestampString = "398649214.759633"
+         timestampString = "398873739.11903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "632"
-         endingLineNumber = "632"
+         startingLineNumber = "634"
+         endingLineNumber = "634"
          landmarkName = "-loadPhotoGallery:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/BaseMobiViewController.m"
+         timestampString = "398873465.648246"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "-zoomToFitBig"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/BaseMobiViewController.m"
+         timestampString = "398873739.11903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
+         landmarkName = "-zoomToFitBig"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ElDia2/BaseMobiViewController.m"
+         timestampString = "398874159.805159"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "333"
+         endingLineNumber = "333"
+         landmarkName = "-zoomToFitBig"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
