@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout_tablet') }}
-  <body class="menu landscape" onload="onLoad('{{page_name}}')">
+  <body class="landscape" onload="onLoad('{{page_name}}')">
     <div id="landscape">
       <div class="seccion list">{{'Principal' if '://main' in page_name else data.item.0.category }}</div>
       <div class="menu">

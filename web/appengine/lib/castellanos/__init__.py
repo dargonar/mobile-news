@@ -180,44 +180,61 @@ def rss_funebres(args):
 
 def get_mapping():
   return {
-    'httpurl' : OrderedDict([
-      ('section://main'  , 'X: rss_index'),
-      ('noticia://'      , 'X: rss_noticia'),
-      ('section://'      , 'X: rss_seccion'),
-      ('menu://'         , 'X: rss_menu'),
-      ('funebres://'     , 'X: rss_funebres'),
+    'map':
+    OrderedDict([
+      ('section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : {'pt': '1_main_list.xsl',              'ls': '1_main_list.xsl'},
+        'big'    : {'pt': '1_tablet_main_list.xsl',       'ls': '1_tablet_main_list.xsl'},
+      }),
       
-      ('menu_section://main'      , 'X: rss_index'),
-      ('ls_menu_section://main'   , 'X: rss_index'),
-      
-      ('menu_section://'      , 'X: rss_seccion'),
-      ('ls_menu_section://'   , 'X: rss_seccion'),
-      
-    ]), 
-    'templates-small': OrderedDict([
-      ('section://main'  , {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'}),
-      ('noticia://'      , {'pt': '3_new.xsl',          'ls': '3_new.xsl'}),
-      ('section://'      , {'pt': '2_section_list.xsl', 'ls': '2_section_list.xsl'}),
-      ('menu://'         , {'pt': '4_menu.xsl',         'ls': '4_menu.xsl'}),
-      ('funebres://'     , {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'}),
-    ]),
-    'templates-big': OrderedDict([
-      ('section://main'           , {'pt': '1_tablet_main_list.xsl',                  'ls': '1_tablet_main_list.xsl'}),
-      
-      ('menu://'                  , {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'}),
-      ('section://'               , {'pt': '1_tablet_section_list.xsl',               'ls': '1_tablet_section_list.xsl'}),
-      ('noticia://'               , {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'}),
-      
-      ('menu_section://'          , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
-      ('ls_menu_section://'       , {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'}),
-      
-      ('ls_section://'           , {'pt': '2_section_list.xsl',                      'ls': '2_section_list.xsl'}),          # q es esto?
-      ('ls_noticia://'           , {'pt': '3_tablet_new_landscape.xsl',              'ls': '3_tablet_new_landscape.xsl'}),  # q es esto?
+      ('noticia://' , {
+        'url'    : 'X: rss_noticia',
+        'small'  : {'pt': '3_new.xsl',                    'ls': '3_new.xsl'},
+        'big'    : {'pt': '3_tablet_new_global.xsl',      'ls': '3_tablet_new_global.xsl'},
+      }),
 
-      ('clasificados://'         , {'pt': '5_tablet_clasificados.xsl',               'ls': '5_tablet_clasificados.xsl'}),      
-      ('funebres://'             , {'pt': '6_tablet_funebres.xsl',                   'ls': '6_tablet_funebres.xsl'}),
-      ('farmacia://'             , {'pt': '7_tablet_farmacias.xsl',                  'ls': '7_tablet_farmacias.xsl'}),
-      ('cartelera://'            , {'pt': '8_tablet_cartelera.xsl',                  'ls': '8_tablet_cartelera.xsl'}),      
+      ('section://' , {
+        'url'    : 'X: rss_seccion',
+        'small'  : {'pt': '2_section_list.xsl',           'ls': '2_section_list.xsl'},
+        'big'    : {'pt': '1_tablet_section_list.xsl',    'ls': '1_tablet_section_list.xsl'},
+      }),
+
+      ('menu://' , {
+        'url'    : 'X: rss_menu',
+        'small'  : {'pt': '4_menu.xsl',                   'ls': '4_menu.xsl'},
+        'big'    : {'pt': '4_tablet_menu_secciones.xsl',  'ls': '4_tablet_menu_secciones.xsl'},
+      }),
+
+      ('funebres://' , {
+        'url'    : 'X: rss_funebres',
+        'small'  : {'pt': '6_funebres.xsl',               'ls': '6_funebres.xsl'},
+        'big'    : {'pt': '6_tablet_funebres.xsl',        'ls': '6_tablet_funebres.xsl'},
+      }),
+
+      ('menu_section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_portrait_en_nota_abierta.xsl'},
+      }),
+
+      ('ls_menu_section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_landscape_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'},
+      }),
+
+      ('menu_section://' , {
+        'url'    : 'X: rss_seccion',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_portrait_en_nota_abierta.xsl'},
+      }),
+
+      ('ls_menu_section://' , {
+        'url'    : 'X: rss_seccion',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_landscape_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'},
+      }),
     ]),
     'extras': {
       'has_clasificados' : False,
@@ -225,4 +242,4 @@ def get_mapping():
       'has_farmacia'     : True,
       'has_cartelera'    : True,
     },
-  }
+  } 
