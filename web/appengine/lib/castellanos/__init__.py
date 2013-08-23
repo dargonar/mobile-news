@@ -151,10 +151,13 @@ def rss_funebres(args):
       soup = BeautifulSoup(clean_content(result.content))
       content = soup.select('div.NotaData')[0].__repr__().decode('utf-8')
       content = re.sub(r'<([a-z][a-z0-9]*)([^>])*?(/?)>', r'<\1>', content)
-
-      tmp = [int(a) for a in soup.select('strong.Time')[0].text.split('/')+[datetime.now().year]]
-      tmp = datetime(tmp[2], tmp[1], tmp[0])
-
+      
+      txt = soup.select('strong.Time')[0].text
+      if '/' in txt:
+        tmp = [int(a) for a in txt.split('/') +[datetime.now().year]]
+        tmp = datetime(year=tmp[2], month=tmp[1], day=tmp[0])
+      else:
+        tmp = datetime.now()
       item = {}
       item['title']       = 'Funebres %s' % tmp.strftime('%d/%m')
       item['description'] = content
