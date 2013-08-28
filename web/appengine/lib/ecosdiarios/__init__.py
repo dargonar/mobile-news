@@ -224,5 +224,10 @@ def get_mapping():
       'has_funebres'     : True,
       'has_farmacia'     : True,
       'has_cartelera'    : False,
-    }, 
+    },
+    'config': {
+        'android': { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] },
+        'iphone':  { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] },
+        'ipad':    { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] }
+    }
   }
