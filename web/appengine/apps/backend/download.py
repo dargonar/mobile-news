@@ -43,7 +43,7 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     appid   = self.request.params.get('appid')
     section = self.request.params.get('section')
 
-    logging.error('>> DOWNLOADING SECTION %s' % section)
+    # logging.error('>> DOWNLOADING SECTION %s' % section)
     # Borro las "decoraciones" seccion y las rearmo
     self.re_build_html_and_images(appid,    'menu_section://%s' % section, 'big', 'pt')
     self.re_build_html_and_images(appid, 'ls_menu_section://%s' % section, 'big', 'ls')
@@ -53,11 +53,10 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     self.re_build_html_and_images(appid, 'section://%s' % section, 'small', 'pt')
 
     # Iteramos todas las noticias de la seccion y las mandamos a bajar
-    # xmlstr = get_xml(appid, 'section://%s' % section, use_cache=True)
-    # xml = XML2Dict().fromstring(xmlstr.encode('utf-8'))
-    # for i in xml.rss.channel.item:
-    #   taskqueue.add(queue_name='download', url='/download/article', params={'appid': appid, 'article': i.guid.value})
-    #   #break
+    xmlstr = get_xml(appid, 'section://%s' % section, use_cache=True)
+    xml = XML2Dict().fromstring(xmlstr.encode('utf-8'))
+    for i in xml.rss.channel.item:
+      taskqueue.add(queue_name='download', url='/download/article', params={'appid': appid, 'article': i.guid.value})
 
   def download_newspaper(self, **kwargs):
     
@@ -82,5 +81,4 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     # por que hay dos appid para ElDia (x ej)
     inverted = dict((v,k) for k,v in apps_id.iteritems())
     for name, appid in inverted.items():
-      if name != 'pregon': continue
       taskqueue.add(queue_name='download', url='/download/newspaper', params={'appid':appid})

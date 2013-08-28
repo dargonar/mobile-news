@@ -87,7 +87,7 @@ def drop_cache(inner_url):
 
 def set_cache(inner_url, content, mem_only=False):
   
-  logging.error('** CACHE SET ** for %s' % inner_url)
+  # logging.error('** CACHE SET ** for %s' % inner_url)
 
   if type(content[0]) != type(unicode()):
     content = (content[0].decode('utf-8'), content[1])
@@ -110,12 +110,12 @@ def read_cache(inner_url, mem_only=False):
   if content is None and not mem_only:
     tmp = CachedContent.get(db.Key.from_path('CachedContent', inner_url))
     if tmp is None:
-      logging.info('*** NOT USING cache for %s' % inner_url)
+      # logging.info('*** NOT USING cache for %s' % inner_url)
       return None
     content = (tmp.content, tmp.images)
     #Lo levanto a memoria, no estaba pero si estaba en disco
     set_cache(inner_url, content, mem_only=True) 
-  logging.info('using cache for %s' % inner_url)
+  # logging.info('using cache for %s' % inner_url)
   return content
 
 def read_clean(httpurl, clean=True, use_cache=True):
@@ -306,8 +306,8 @@ def get_mapping(appid):
 
 def get_httpurl(appid, url, size='small', ptls='pt'):  
 
-  logging.error('-----------------------get_httpurl')
-  logging.error('url[%s]', url)
+  # logging.error('-----------------------get_httpurl')
+  # logging.error('url[%s]', url)
   
   mapping = get_mapping(appid)
 
@@ -333,13 +333,18 @@ def get_httpurl(appid, url, size='small', ptls='pt'):
         template = None
       break
       
-  logging.error(' --------------------------------------- ')
-  logging.error(' - httpurl => [%s] || template => [%s] || url => [%s]' % (httpurl, template, url))
+  #logging.error(' --------------------------------------- ')
+  #logging.error(' - httpurl => [%s] || template => [%s] || url => [%s]' % (httpurl, template, url))
   if httpurl == '' or template == '':
-    logging.error('Something is wrong => [%s]' % (url))
+    # logging.error('Something is wrong => [%s]' % (url))
     raise('8-(')
 
-  return httpurl, args, template, page_name, mapping['extras']
+  extras = mapping['extras']
+  if extras['has_clasificados']:
+    fnc = getattr(importlib.import_module(apps_id[appid]),'get_classifieds')
+    extras['clasificados'] = fnc()
+
+  return httpurl, args, template, page_name, extras
 
 def get_xml(appid, url, use_cache=False):
   
