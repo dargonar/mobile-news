@@ -30,7 +30,7 @@ def rss_index(args):
   for n in soup.select('div.Noticia'):
     item = {}
     item['title']     = n.h3.text
-    logging.error(' ************ %s' % n.h3.text)
+    #logging.error(' ************ %s' % n.h3.text)
     item['link']      = n.h3.a['href'] # n.div.a['href']
     item['guid']      = re.compile('\d+').findall(item['link'])[0]
     item['category']  = n.h4.text
@@ -98,7 +98,7 @@ def rss_seccion(args):
 
 def rss_noticia(args):
 
-  logging.error(' ---------------- rss_noticia args: %s' % str(args))
+  # logging.error(' ---------------- rss_noticia args: %s' % str(args))
   soup = BeautifulSoup(read_clean('http://www.diariocastellanos.net/%s-dummy.note.aspx' % args['host']))
   today_date = get_header_date(soup.select('p#Fecha')[0].text)
 
