@@ -25,7 +25,7 @@ from utils import apps_id, build_inner_url, get_mapping, get_httpurl
 extension_dict = {
     'noticia://'             : 'a',
     'section://'             : 's',
-    'clasificados://'        : 'c',
+    'clasificados://'        : 's',
     'menu://'                : 'm',
     'funebres://'            : 's',
     'farmacia://'            : 's',
