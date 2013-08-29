@@ -57,4 +57,9 @@
 - (BOOL)isiPad;
 - (BOOL)isLandscape;
 
+-(BOOL)isAdMob;
+-(NSString*)getAdMobPublisherId;
+
++ (NSString*) getBundleId;
+
 @end

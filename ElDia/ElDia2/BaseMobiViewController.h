@@ -12,12 +12,14 @@
 #import "AdManager.h"
 
 #import "GAITrackedViewController.h"
+#import "GADBannerView.h"
 
 #define MAIN_VIEW_TAG    0x6969
 
-@interface BaseMobiViewController : GAITrackedViewController{ 
+@interface BaseMobiViewController : GAITrackedViewController<GADBannerViewDelegate>{
   ScreenManager   *mScreenManager;
   AdManager *mAdManager;
+  GADBannerView *bannerView_;
 }
 
 @property (nonatomic, retain) ScreenManager *mScreenManager;
