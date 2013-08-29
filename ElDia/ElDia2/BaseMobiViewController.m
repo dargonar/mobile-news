@@ -13,7 +13,7 @@
 #import "iToast.h"
 #import "GAI.h"
 
-//#import "MainViewController.h"
+#import "MainViewController.h"
 
 
 NSString * const MAIN_SCREEN          = @"MAIN_SCREEN";
@@ -298,13 +298,18 @@ NSString* click_url =@"";
   
   //self.trackedViewName = _url; //@"About Screen";
   
+  NSArray * tracking_codes = [app_delegate getGATrackingCodes];
+  if (tracking_codes==nil)
+    return;
   
   // Send a screen view to the first property.
-  id tracker1 = [[GAI sharedInstance] trackerWithTrackingId:@"UA-XXXX-Y"];
+  id tracker1 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:0]];
   [tracker1 sendView:[_url absoluteString]];
   
+  if([tracking_codes count]==1)
+    return;
   // Send another screen view to the second property.
-  id tracker2 = [[GAI sharedInstance] trackerWithTrackingId:@"UA-XXXX-Z"];
+  id tracker2 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:1]];
   [tracker2 sendView:[_url absoluteString]];
 }
 

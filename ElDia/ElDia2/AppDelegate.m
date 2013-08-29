@@ -14,6 +14,8 @@
 #import "MenuClasificadosViewController.h"
 #import "MobiImage.h"
 #import "DiskCache.h"
+#import "ConfigHelper.h"
+
 
 #import "iVersion.h"
 //#import <BugSense-iOS.framework/BugSenseCrashController.h> //dSYM
@@ -59,15 +61,21 @@ int cache_size = 2; //30;
 }
 
 -(BOOL)isAdMob{
-  return YES;
-  
+  return [ConfigHelper isConfigured];
 }
+
 -(NSString*)getAdMobPublisherId{
-  return @"a1521debeb75556";
+  return [ConfigHelper getAdMobId];
+  //@"a1521debeb75556";
+}
+
+-(NSArray*)getGATrackingCodes{
+  return [ConfigHelper getGATrackingCodes];
 }
 
 
 -(void)initGAI{
+  return;
   // Optional: automatically send uncaught exceptions to Google Analytics.
   [GAI sharedInstance].trackUncaughtExceptions = NO;
   // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.

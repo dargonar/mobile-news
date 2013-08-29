@@ -101,7 +101,6 @@ NSLock *menuLock;
   
   if([self.mScreenManager menuExists])
   {
-//    NSLog(@"MainViewController::loadMenu menu exists!");
     self.btnOptions.enabled=YES;
     if(useCache)
       return;
@@ -213,7 +212,9 @@ NSLock *menuLock;
           }
       else{
       data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
+        [ConfigHelper configure];
     }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       
       if(data==nil)
@@ -354,8 +355,8 @@ BOOL isLoading_ = YES;
   [self zoomToFit];
   
   //HACK Testing
-  if(hasRotated == YES)
-    [self reLoadIndex];
+//  if(hasRotated == YES)
+//    [self reLoadIndex];
 
   isLoading_=NO;
 

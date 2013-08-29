@@ -16,4 +16,9 @@
 +(NSString *)getSettingValue:(NSString*)key;
 +(void)setSettingValue:(NSString*)key value:(NSString*)value;
 
++(NSArray *)getGATrackingCodes;
++(NSString *)getAdMobId;
++(void)configure;
++(BOOL)isConfigured;
+
 @end

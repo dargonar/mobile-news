@@ -161,7 +161,7 @@ BOOL      init_ok = NO;
   
   while (fileName = [filesEnumerator nextObject]) {
 
-    if ([fileName hasPrefix:@"i_"] || [fileName hasPrefix:@"a_"] || [fileName hasPrefix:@"mi_"] || [fileName hasPrefix:@"c_"]) {
+    if ([fileName hasSuffix:@".i"] || [fileName hasSuffix:@".a"] || [fileName hasSuffix:@".mi"]) {
       NSDictionary *fileDictionary = [fileManager attributesOfItemAtPath:[cache_folder stringByAppendingPathComponent:fileName] error:nil];
       totalSize += [fileDictionary fileSize];
     }

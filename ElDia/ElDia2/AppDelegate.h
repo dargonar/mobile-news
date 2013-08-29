@@ -59,7 +59,8 @@
 
 -(BOOL)isAdMob;
 -(NSString*)getAdMobPublisherId;
-
+-(NSArray*)getGATrackingCodes;
+  
 + (NSString*) getBundleId;
 
 @end

@@ -51,7 +51,7 @@ NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
 
-NSString * const SERVICE_URL            = @"http://192.168.1.104:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL                          = @"http://192.168.0.45:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -81,31 +81,31 @@ BOOL isIpad=NO;
 -(NSDate*) funebresDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"fun"];
+  return [cache createdAt:key prefix:@"s"];
 }
 
 -(NSDate*) menuClasificadosDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"mc"];
+  return [cache createdAt:key prefix:@"s"];
 }
 
 -(NSDate*) clasificadosDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"c"];
+  return [cache createdAt:key prefix:@"s"];
 }
 
 -(NSDate*) farmaciaDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"farm"];
+  return [cache createdAt:key prefix:@"s"];
 }
 
 -(NSDate*) carteleraDate:(NSString*)url {
   DiskCache *cache = [DiskCache defaultCache];
   NSString  *key   = [CryptoUtil sha1:url];
-  return [cache createdAt:key prefix:@"car"];
+  return [cache createdAt:key prefix:@"s"];
 }
 
 /**/
@@ -114,23 +114,23 @@ BOOL isIpad=NO;
 }
 
 -(BOOL) menuClasificadosExists:(NSString*)url{
-  return [self screenExists:url prefix:@"mc"];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) clasificadosExists:(NSString*)url {
-  return [self screenExists:url prefix:@"c"];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) funebresExists:(NSString*)url {
-  return [self screenExists:url prefix:@"fun"];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) farmaciaExists:(NSString*)url {
-  return [self screenExists:url prefix:@"far"];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) carteleraExists:(NSString*)url {
-  return [self screenExists:url prefix:@"car"];
+  return [self screenExists:url prefix:@"s"];
 }
 
 -(BOOL) sectionExists:(NSString*)url {
@@ -163,23 +163,23 @@ BOOL isIpad=NO;
 }
 
 -(NSData *)getMenuClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"mc" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"s" error:error];
 }
 
 -(NSData *)getClasificados:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"c" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"s" error:error];
 }
 
 -(NSData *)getFunebres:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"fun" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"s" error:error];
 }
 
 -(NSData *)getFarmacia:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"far" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"s" error:error];
 }
 
 -(NSData *)getCartelera:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
-  return [self getScreen:url useCache:useCache processImages:NO prefix:@"car" error:error];
+  return [self getScreen:url useCache:useCache processImages:NO prefix:@"s" error:error];
 }
 
 -(NSData *)getSection:(NSString*)url useCache:(BOOL)useCache error:(NSError **)error{
