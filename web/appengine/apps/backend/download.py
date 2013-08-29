@@ -55,8 +55,10 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     # Iteramos todas las noticias de la seccion y las mandamos a bajar
     xmlstr = get_xml(appid, 'section://%s' % section, use_cache=True)
     xml = XML2Dict().fromstring(xmlstr.encode('utf-8'))
-    for i in xml.rss.channel.item:
-      taskqueue.add(queue_name='download', url='/download/article', params={'appid': appid, 'article': i.guid.value})
+    if 'item' in xml.rss.channel:
+      for i in xml.rss.channel.item:
+        if appid != 'ecosdiarios': continue
+        taskqueue.add(queue_name='download2', url='/download/article', params={'appid': appid, 'article': i.guid.value})
 
   def download_newspaper(self, **kwargs):
     
@@ -74,11 +76,11 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     sections = [i.guid.value for i in xml.rss.channel.item] + ['main']
     #sections = ['main']
     for section in sections:
-     taskqueue.add(queue_name='download', url='/download/section', params={'appid': appid, 'section': section})
+     taskqueue.add(queue_name='download2', url='/download/section', params={'appid': appid, 'section': section})
       
   def download_all(self, **kwargs):    
     # Mantenemos una lista de lo que fuimos mandando a bajar
     # por que hay dos appid para ElDia (x ej)
     inverted = dict((v,k) for k,v in apps_id.iteritems())
     for name, appid in inverted.items():
-      taskqueue.add(queue_name='download', url='/download/newspaper', params={'appid':appid})
+      taskqueue.add(queue_name='download2', url='/download/newspaper', params={'appid':appid})

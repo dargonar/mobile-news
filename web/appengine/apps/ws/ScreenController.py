@@ -26,11 +26,11 @@ from utils import apps_id, build_inner_url, get_mapping, get_httpurl
 extension_dict = {
     'noticia://'             : 'a',
     'section://'             : 's',
-    'clasificados://'        : 'c',
+    'clasificados://'        : 's',
     'menu://'                : 'm',
-    'funebres://'            : 'fun',
-    'farmacia://'            : 'far',
-    'cartelera://'           : 'car',
+    'funebres://'            : 's',
+    'farmacia://'            : 's',
+    'cartelera://'           : 's',
     'menu_section://'        : 'ms',
     'ls_menu_section://'     : 'ms',
 }
