@@ -19,6 +19,7 @@ from google.appengine.api import taskqueue
 from google.appengine.api import memcache
 
 from webapp2 import cached_property
+from webapp2_extras import json
 from utils import FrontendHandler, HtmlBuilderMixing, get_or_404, read_clean, date2iso, get_xml
 from utils import apps_id, build_inner_url, get_mapping, get_httpurl
 
@@ -67,6 +68,9 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
     
     content, images = self.build_html_and_images(appid, url, size, ptls)
     
+    # self.response.write(get_mapping(appid)['config'])
+    # return
+    
     # Set up headers for browser to correctly recognize HTML
     self.response.headers['Content-Type'] ='text/html'
     self.response.write(content)
@@ -96,6 +100,8 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
     
     if url == 'section://main':
       self.add_screen(outfile, appid, 'menu://', size, ptls)
+      fnc = get_mapping(appid)
+      outfile.writestr('config.json', json.encode(fnc['config']).encode('utf-8'))
 
     if url.startswith('noticia://') and size == 'big':
       match = re.compile('section=(\w+)').findall(url)
