@@ -98,6 +98,7 @@ def rss_section(args):
     item['thumbnail'] = ('%s/%s' % (main_url, p[0].img['src'])) if len(p) > 1 and p[0].img is not None else None
     item['pubDate']   = date2iso(get_section_date(body.tr.td.text))
     item['subheader'] = p[-1].text
+    builder.add_item(item)
 
   return builder.get_value()
 

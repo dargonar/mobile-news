@@ -16,7 +16,7 @@ from urllib2 import urlopen
 from StringIO import StringIO
 
 from models import CachedContent
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from lhammer.xml2dict import XML2Dict
 
@@ -87,9 +87,10 @@ def drop_cache(inner_url):
 
 def set_cache(inner_url, content, mem_only=False):
   
-  # logging.error('** CACHE SET ** for %s' % inner_url)
+  # logging.info('** CACHE SET ** for %s' % inner_url)
+  # logging.info('** typeofcontent %s ' % str(type(content[0])) )
 
-  if type(content[0]) != type(unicode()):
+  if type(content[0]) != type(unicode()) and type(content[0]) != type(db.Text()):
     content = (content[0].decode('utf-8'), content[1])
 
   memcache.set(inner_url, content)
@@ -110,7 +111,7 @@ def read_cache(inner_url, mem_only=False):
   if content is None and not mem_only:
     tmp = CachedContent.get(db.Key.from_path('CachedContent', inner_url))
     if tmp is None:
-      # logging.info('*** NOT USING cache for %s' % inner_url)
+      logging.info('*** NOT IN cache for %s' % inner_url)
       return None
     content = (tmp.content, tmp.images)
     #Lo levanto a memoria, no estaba pero si estaba en disco
@@ -395,52 +396,62 @@ class HtmlBuilderMixing(object):
 
   def build_html_and_images(self, appid, url, size, ptls, use_cache=True):
     
-    inner_url = build_inner_url('html', appid, url, size)
+    try: 
+      inner_url = build_inner_url('html', appid, url, size)
 
-    result = None
-    if use_cache:
-      result = read_cache(inner_url)
+      result = None
+      if use_cache:
+        result = read_cache(inner_url)
 
-    if result is None:
-      # Traemos el xml, le quitamos los namespaces 
-      xml = get_xml(appid, url, use_cache=use_cache)
-      xml = re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', xml)
+      if result is None:
+        # Traemos el xml, le quitamos los namespaces 
+        xml = get_xml(appid, url, use_cache=use_cache)
+        xml = re.sub(r'<(/?)\w+:(\w+/?)', r'<\1\2', xml)
 
-      # Y lo transformamos en un dict
-      r = XML2Dict().fromstring(xml.encode('utf-8'))
+        # Y lo transformamos en un dict
+        r = XML2Dict().fromstring(xml.encode('utf-8'))
 
-      # Reemplazamos las imagens por el sha1 de la url
-      imgs = []
+        # Reemplazamos las imagens por el sha1 de la url
+        imgs = []
+        items = [] 
+  
+        if 'item' in r.rss.channel:
+          if type(r.rss.channel.item) == type([]):
+            items = r.rss.channel.item
+          else:
+            items = [r.rss.channel.item]
 
-      if type(r.rss.channel.item) == type([]):
-        items = r.rss.channel.item
-      else:
-        items = [r.rss.channel.item]
-
-      for i in items:
-        if hasattr(i, 'thumbnail'):
-          img = unicode(i.thumbnail.attrs.url)
-          i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
-          imgs.append(img)
-
-        if hasattr(i, 'group'):
-          for ct in i.group.content:
-            img = unicode(ct.attrs.url)
-            ct.attrs.url = sha1(img).digest().encode('hex')
+        for i in items:
+          if hasattr(i, 'thumbnail'):
+            img = unicode(i.thumbnail.attrs.url)
+            i.thumbnail.attrs.url = sha1(img).digest().encode('hex')
             imgs.append(img)
 
-      # Armamos la direccion del xml    
-      httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
+          if hasattr(i, 'group'):
+            for ct in i.group.content:
+              img = unicode(ct.attrs.url)
+              ct.attrs.url = sha1(img).digest().encode('hex')
+              imgs.append(img)
 
-      args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
-      content = self.render_template('ws/%s' % template, **args)
+        # Armamos la direccion del xml    
+        httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
 
-      result = (content, u','.join(imgs))
-      set_cache(inner_url, result, mem_only=False)
+        args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
+        content = self.render_template('ws/%s' % template, **args)
 
-    imgs = result[1].split(',') if result[1] else []
-    return result[0], imgs
+        result = (content, u','.join(imgs))
+        set_cache(inner_url, result, mem_only=False)
 
+      imgs = result[1].split(',') if result[1] else []
+      return result[0], imgs
+
+    except Exception as e:
+        import sys
+        mymsg = 'build_html_and_images => %s %s %s %s %s => ' % (appid, url, size, ptls, use_cache)
+        logging.error(mymsg)
+        # xx = type(e)
+        # xx.message = mymsg + e.message
+        raise type(e), e, sys.exc_info()[2]
     
 class Jinja2Mixin(object):
   

@@ -27,9 +27,9 @@ extension_dict = {
     'section://'             : 's',
     'clasificados://'        : 'c',
     'menu://'                : 'm',
-    'funebres://'            : 'fun',
-    'farmacia://'            : 'far',
-    'cartelera://'           : 'car',
+    'funebres://'            : 's',
+    'farmacia://'            : 's',
+    'cartelera://'           : 's',
     'menu_section://'        : 'ms',
     'ls_menu_section://'     : 'ms',
 }
