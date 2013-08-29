@@ -25,6 +25,10 @@
 }
 */
 
++(void)configure:(NSData*)data{
+
+}
+
 +(NSString *)getSettingValue:(NSString*)key{
   return (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
