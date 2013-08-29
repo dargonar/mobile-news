@@ -96,7 +96,7 @@ def rss_section(args):
     item['guid']      = re.compile('&id=(\d+)').findall(item['link'])[0]
     item['category']  = category
     item['thumbnail'] = ('%s/%s' % (main_url, p[0].img['src'])) if len(p) > 1 and p[0].img is not None else None
-    item['pubDate']   = date_to_str(get_section_date(body.tr.td.text))
+    item['pubDate']   = date2iso(get_section_date(body.tr.td.text))
     item['subheader'] = p[-1].text
 
   return builder.get_value()
@@ -188,41 +188,66 @@ def rss_farmacia(args):
 
 def get_mapping():
   return {
-    'httpurl' : OrderedDict([
-      ('section://main' , 'X: rss_index') ,
-      ('noticia://'     , 'X: rss_noticia') ,
-      ('section://'     , 'X: rss_section') ,
-      ('menu://'        , 'X: rss_menu') ,
-      ('farmacia://'    , 'X: rss_farmacia') ,
-      ('funebres://'    , 'X: rss_funebres'),      
-    ]), 
-    'templates-small': OrderedDict([
-      ('section://main' , {'pt': '1_main_list.xsl',    'ls': '1_main_list.xsl'}),
-      ('noticia://'     , {'pt': '3_new.xsl',          'ls': '3_new.xsl'}),
-      ('section://'     , {'pt': '2_section_list.xsl', 'ls': '2_section_list.xsl'}),
-      ('menu://'        , {'pt': '4_menu.xsl',         'ls': '4_menu.xsl'}),
-      ('funebres://'    , {'pt': '6_funebres.xsl',     'ls': '6_funebres.xsl'}),
-      ('farmacia://'    , {'pt': '7_farmacias.xsl',    'ls': '7_farmacias.xsl'}),
-    ]),
-    'templates-big': OrderedDict([
-      ('section://main'          , {'pt': '1_tablet_main_list.xsl',                  'ls': '1_tablet_main_list.xsl'}),
+    'map':
+    OrderedDict([
+      ('section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : {'pt': '1_main_list.xsl',              'ls': '1_main_list.xsl'},
+        'big'    : {'pt': '1_tablet_main_list.xsl',       'ls': '1_tablet_main_list.xsl'},
+      }),
       
-      ('menu_section://main'     , {'pt': '2_tablet_noticias_index_portrait.xsl',    'ls': '2_tablet_noticias_index_portrait.xsl'}),
-      ('menu://'                 , {'pt': '4_tablet_menu_secciones.xsl',             'ls': '4_tablet_menu_secciones.xsl'}),
-      ('section://'              , {'pt': '1_tablet_section_list.xsl',               'ls': '1_tablet_section_list.xsl'}),
-      ('noticia://'              , {'pt': '3_tablet_new_global.xsl',                 'ls': '3_tablet_new_global.xsl'}),
-      
-      ('ls_menu_section://main'  , {'pt': '2_tablet_noticias_index_landscape.xsl',   'ls': '2_tablet_noticias_index_landscape.xsl'}),
-      ('ls_menu_section://'      , {'pt': '2_tablet_noticias_seccion_landscape.xsl', 'ls': '2_tablet_noticias_seccion_landscape.xsl'}),
-      ('ls_section://'           , {'pt': '2_section_list.xsl',                      'ls': '2_section_list.xsl'}),
-      ('ls_noticia://'           , {'pt': '3_tablet_new_landscape.xsl',              'ls': '3_tablet_new_landscape.xsl'}),
+      ('noticia://' , {
+        'url'    : 'X: rss_noticia',
+        'small'  : {'pt': '3_new.xsl',                    'ls': '3_new.xsl'},
+        'big'    : {'pt': '3_tablet_new_global.xsl',      'ls': '3_tablet_new_global.xsl'},
+      }),
 
-      ('funebres://'             , {'pt': '6_tablet_funebres.xsl',                   'ls': '6_tablet_funebres.xsl'}),
+      ('section://' , {
+        'url'    : 'X: rss_section',
+        'small'  : {'pt': '2_section_list.xsl',           'ls': '2_section_list.xsl'},
+        'big'    : {'pt': '1_tablet_section_list.xsl',    'ls': '1_tablet_section_list.xsl'},
+      }),
+
+      ('menu://' , {
+        'url'    : 'X: rss_menu',
+        'small'  : {'pt': '4_menu.xsl',                   'ls': '4_menu.xsl'},
+        'big'    : {'pt': '4_tablet_menu_secciones.xsl',  'ls': '4_tablet_menu_secciones.xsl'},
+      }),
+
+      ('funebres://' , {
+        'url'    : 'X: rss_funebres',
+        'small'  : {'pt': '6_funebres.xsl',               'ls': '6_funebres.xsl'},
+        'big'    : {'pt': '6_tablet_funebres.xsl',        'ls': '6_tablet_funebres.xsl'},
+      }),
+
+      ('menu_section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_portrait_en_nota_abierta.xsl'},
+      }),
+
+      ('ls_menu_section://main' , {
+        'url'    : 'X: rss_index',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_landscape_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'},
+      }),
+
+      ('menu_section://' , {
+        'url'    : 'X: rss_section',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_portrait_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_portrait_en_nota_abierta.xsl'},
+      }),
+
+      ('ls_menu_section://' , {
+        'url'    : 'X: rss_section',
+        'small'  : None,
+        'big'    : {'pt': '2_tablet_noticias_landscape_en_nota_abierta.xsl',  'ls': '2_tablet_noticias_landscape_en_nota_abierta.xsl'},
+      }),
     ]),
     'extras': {
       'has_clasificados' : False,
       'has_funebres'     : True,
       'has_farmacia'     : True,
       'has_cartelera'    : False,
-    }, 
-  }
+    },
+  } 
