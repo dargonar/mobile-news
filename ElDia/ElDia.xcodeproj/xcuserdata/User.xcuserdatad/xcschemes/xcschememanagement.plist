@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>36</integer>
 		</dict>
+		<key>ElDia copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>37</integer>
+		</dict>
 		<key>ElDia2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7841644717CE203100F9B5FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE8A02D117CFF1600088ECED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
