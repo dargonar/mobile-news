@@ -11,8 +11,9 @@
 #import "AppDelegate.h"
 #import "DiskCache.h"
 #import "iToast.h"
+#import "GAI.h"
 
-#import "MainViewController.h"
+//#import "MainViewController.h"
 
 
 NSString * const MAIN_SCREEN          = @"MAIN_SCREEN";
@@ -57,6 +58,48 @@ BOOL mIsIpad=NO;
                                            selector:@selector(onImageDownloaded:) 
                                                name:@"com.diventi.mobipaper.image_downloaded" 
                                              object:nil];
+  [self initAdMob];
+}
+
+-(void)initAdMob{
+  
+  if([app_delegate isAdMob]==NO)
+    return;
+  
+  // Create a view of the standard size at the top of the screen.
+  // Available AdSize constants are explained in GADAdSize.h.
+  bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+  // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
+  bannerView_.adUnitID = [app_delegate getAdMobPublisherId];
+    
+  // Let the runtime know which UIViewController to restore after taking
+  // the user wherever the ad goes and add it to the view hierarchy.
+  bannerView_.rootViewController = self;
+  [bannerView_ setDelegate:self];
+  [self.view addSubview:bannerView_];
+  
+  GADRequest *request = [GADRequest request];
+  
+  // Make the request for a test ad. Put in an identifier for
+  // the simulator as well as any devices you want to receive test ads.
+  request.testDevices = [NSArray arrayWithObjects:
+                         @"YOUR_SIMULATOR_IDENTIFIER",
+                         @"YOUR_DEVICE_IDENTIFIER",
+                         nil];
+  // Initiate a generic request to load it with an ad.
+  [bannerView_ loadRequest:[GADRequest request]];
+  
+}
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
+  [UIView beginAnimations:@"BannerSlide" context:nil];
+  bannerView.frame = CGRectMake(0.0,
+                                self.view.frame.size.height -
+                                bannerView.frame.size.height,
+                                bannerView.frame.size.width,
+                                bannerView.frame.size.height);
+  [UIView commitAnimations];
 }
 
 - (void)viewDidUnload
@@ -75,15 +118,16 @@ BOOL mIsIpad=NO;
 }
 */
 
--(void)initAd{
+-(BOOL)initAd{
   
-  //return;
+  if([app_delegate isAdMob])
+    return NO;
   //728x90  / 468x60 | 320x50 
   self.adUIImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
   self.adUIImageView.hidden=YES;
   [self.view addSubview:self.adUIImageView];
   adUIImageView.userInteractionEnabled = YES;
-  
+  return YES;
 }
 
 -(BOOL)adStatus{
@@ -133,61 +177,28 @@ NSString* click_url =@"";
 
 -(void)positionateAd:(UIDeviceOrientation) deviceOrientation screen:(NSString*)screen{
   
-  // x y width height
+  //AdMob
+  if([app_delegate isAdMob])
+  {
+    [self positionateAdView:deviceOrientation screen:screen view:bannerView_ ];
+    return;
+  }
   
+  
+  //Comscore
   if(self.adUIImageView == nil)
-    [self initAd];
-
-  NSString* ad_size = @"320x50";
-  
-  NSInteger  height=self.view.frame.size.height;
-  NSInteger  width=self.view.frame.size.width;
+    if([self initAd]==NO)
+      return;
+  NSString *ad_size = [self positionateAdView:deviceOrientation screen:screen view:self.adUIImageView ];
   
   __block NSDictionary*data=nil;
-  
-  // x y width height
-  if (UIDeviceOrientationIsLandscape(deviceOrientation))
-  {
-    if ([app_delegate isiPad]) {
-      if ([screen isEqualToString:MAIN_SCREEN]) {
-        self.adUIImageView.frame=CGRectMake(256, height-90, width-256, 90);
-        data = [mAdManager getLAdImage];
-        ad_size = @"728x90";
-      }
-      else{
-
-        self.adUIImageView.frame=CGRectMake(width/2, height-90, width/2, 90);
-        data = [mAdManager getMAdImage];
-        ad_size = @"468x60";
-      }
-    }
-    else{
-      self.adUIImageView.frame=CGRectMake(0, height-60, width, 60);
-      data = [mAdManager getMAdImage];
-      ad_size = @"468x60";
-    }
-  }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation))
-  {
-    if ([app_delegate isiPad]) {
-      if ([screen isEqualToString:MAIN_SCREEN]) {
-        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
-        data = [mAdManager getLAdImage];
-        ad_size = @"728x90";
-      }
-      else{
-        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
-        data = [mAdManager getLAdImage];
-        ad_size = @"728x90";
-      }
-    }
-    else{
-      self.adUIImageView.frame=CGRectMake(0, height-50, width, 50);
-      data = [mAdManager getSAdImage];
-      ad_size = @"320x50";
-    }
-  }
-  
+  if([ad_size isEqualToString:@"728x90"])
+    data = [mAdManager getLAdImage];
+  if([ad_size isEqualToString:@"468x60"])
+    data = [mAdManager getMAdImage];
+      if([ad_size isEqualToString:@"320x50"])
+     data = [mAdManager getSAdImage];
+     
   if(data==nil)
   {
     click_url=@"";
@@ -209,7 +220,62 @@ NSString* click_url =@"";
       self.adUIImageView.hidden=NO;
     });
   });
+
+}
+
+-(NSString*)positionateAdView:(UIDeviceOrientation) deviceOrientation screen:(NSString*)screen view:(UIView*)view{
+
+  NSString* ad_size = @"320x50";
   
+  NSInteger  height=self.view.frame.size.height;
+  NSInteger  width=self.view.frame.size.width;
+  
+  // x y width height
+  if (UIDeviceOrientationIsLandscape(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      if ([screen isEqualToString:MAIN_SCREEN]) {
+        view.frame=CGRectMake(256, height-90, width-256, 90);
+        //data = [mAdManager getLAdImage];
+        ad_size = @"728x90";
+      }
+      else{
+
+        view.frame=CGRectMake(width/2, height-90, width/2, 90);
+        //data = [mAdManager getMAdImage];
+        ad_size = @"468x60";
+      }
+    }
+    else{
+      view.frame=CGRectMake(0, height-60, width, 60);
+      //data = [mAdManager getMAdImage];
+      ad_size = @"468x60";
+    }
+  }
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation))
+  {
+    if ([app_delegate isiPad]) {
+      if ([screen isEqualToString:MAIN_SCREEN]) {
+        view.frame=CGRectMake(0, height-90, width, 90);
+        //data = [mAdManager getLAdImage];
+        ad_size = @"728x90";
+      }
+      else{
+        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
+        //data = [mAdManager getLAdImage];
+        ad_size = @"728x90";
+      }
+    }
+    else{
+      self.adUIImageView.frame=CGRectMake(0, height-50, width, 50);
+      //data = [mAdManager getSAdImage];
+      ad_size = @"320x50";
+    }
+  }
+  
+  return ad_size;
+  
+    
   
 }
 /*
@@ -229,7 +295,17 @@ NSString* click_url =@"";
 - (void) setCurrentUrl:(id)_url
 {
   self->currentUrl = _url;
-  self.trackedViewName = _url; //@"About Screen";
+  
+  //self.trackedViewName = _url; //@"About Screen";
+  
+  
+  // Send a screen view to the first property.
+  id tracker1 = [[GAI sharedInstance] trackerWithTrackingId:@"UA-XXXX-Y"];
+  [tracker1 sendView:[_url absoluteString]];
+  
+  // Send another screen view to the second property.
+  id tracker2 = [[GAI sharedInstance] trackerWithTrackingId:@"UA-XXXX-Z"];
+  [tracker2 sendView:[_url absoluteString]];
 }
 
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
@@ -366,6 +442,7 @@ NSString* click_url =@"";
   [self zoomToFitSmall];
   
 }
+
 
 //-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
 //  float x_offset=(scrollView.contentSize.width - self.view.frame.size.width)/2;

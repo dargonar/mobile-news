@@ -50,7 +50,8 @@ NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl"
 NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
-NSString * const SERVICE_URL            = @"http://192.168.1.101:8090/ws/screen?appid=com.diventi.castellanos&size=%@&ptls=%@&url=%@";
+
+NSString * const SERVICE_URL            = @"http://192.168.1.104:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
@@ -520,6 +521,7 @@ BOOL isIpad=NO;
 //                                                                              kCFStringEncodingUTF8);
   
   NSString* tmp = [NSString stringWithFormat:SERVICE_URL,
+                   [AppDelegate getBundleId],
                    ([app_delegate isiPad]?@"big":@"small"),
                    ([app_delegate isLandscape]?@"ls":@"pt"),
                    newUrl //[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]

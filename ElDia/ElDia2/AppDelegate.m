@@ -34,17 +34,16 @@
 
 + (void)initialize
 {
+
+  //  HACK
   [iVersion sharedInstance].ignoredVersion=nil;
   [iVersion sharedInstance].showOnFirstLaunch = NO;
-  
-  [iVersion sharedInstance].applicationBundleID = @"com.diventi.mobipaper";
+  [iVersion sharedInstance].applicationBundleID = [AppDelegate getBundleId];
   //[iVersion sharedInstance].appStoreID = 578331790;
-  
-  //configure iVersion. These paths are optional - if you don't set
-  //them, iVersion will just get the release notes from iTunes directly (if your app is on the store)
-//  [iVersion sharedInstance].remoteVersionsPlistURL = @"http://192.168.1.103:84/plists/versions.plist";
-//  [iVersion sharedInstance].localVersionsPlistPath = @"versions.plist";
-  
+}
+
++ (NSString*) getBundleId{
+  return [[NSBundle mainBundle] bundleIdentifier];
 }
 
 int cache_size = 2; //30;
@@ -58,6 +57,15 @@ int cache_size = 2; //30;
   return;
   
 }
+
+-(BOOL)isAdMob{
+  return YES;
+  
+}
+-(NSString*)getAdMobPublisherId{
+  return @"a1521debeb75556";
+}
+
 
 -(void)initGAI{
   // Optional: automatically send uncaught exceptions to Google Analytics.
@@ -137,7 +145,7 @@ int cache_size = 2; //30;
   
   [[NSNotificationCenter defaultCenter] addObserver:self 
                                            selector:@selector(onDownloadImages:) 
-                                               name:@"com.diventi.mobipaper.download_images" 
+                                               name:@"com.diventi.mobipaper.download_images"
                                              object:nil];
   
   
