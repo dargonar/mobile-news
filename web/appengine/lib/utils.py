@@ -369,7 +369,8 @@ def get_xml(appid, url, use_cache=False):
       # HACKO el DIA:
       if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
         now = date2iso(datetime.now()+timedelta(hours=-3))
-        result = re.sub(r'\r?\n', '</br>', result)
+        result = result.decode('utf-8')
+        result = re.sub(ur'\r?\n', u'</br>', result)
         result = u"""<rss xmlns:atom="http://www.w3.org/2005/Atom" 
                       xmlns:media="http://search.yahoo.com/mrss/" 
                       xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 

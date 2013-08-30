@@ -6,7 +6,7 @@
       <div class="columna exsimple">
         <ul class="invisible" id="ul_clasificados">
           {% for item in data.item|build_list %}
-          <li><a class="vip2 {{ 'first' if loop.first else ''}}" href="clasificados://{{item.guid}}">{{item.title}}</a></li>
+          <li><a class="vip2 {{ 'first' if loop.first else ''}}" href="clasificados://{{item.guid.value}}">{{item.title}}</a></li>
           {% endfor %}
         </ul>
       </div>
