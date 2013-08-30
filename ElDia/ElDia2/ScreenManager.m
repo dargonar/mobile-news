@@ -51,7 +51,7 @@ NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl
 NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
 
 
-NSString * const SERVICE_URL                          = @"http://192.168.0.45:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL                          = @"http://192.168.1.104:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
