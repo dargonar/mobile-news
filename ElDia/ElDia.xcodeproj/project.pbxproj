@@ -14,6 +14,8 @@
 		7801CCEF169CEB32009E2539 /* layout_tablet.css in Resources */ = {isa = PBXBuildFile; fileRef = 7801CCEE169CEB32009E2539 /* layout_tablet.css */; };
 		780499371651DFD30062C457 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499361651DFD30062C457 /* CoreLocation.framework */; };
 		780499391651DFED0062C457 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499381651DFED0062C457 /* MapKit.framework */; };
+		78197F9217D13E1C00A2196A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
+		78197F9317D13E1C00A2196A /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
 		78526B41169CD7BA00C96AD8 /* 1_tablet_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */; };
 		78526B42169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */; };
 		78526B43169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */; };
@@ -831,6 +833,8 @@
 		7801CCEE169CEB32009E2539 /* layout_tablet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = layout_tablet.css; sourceTree = "<group>"; };
 		780499361651DFD30062C457 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		780499381651DFED0062C457 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		78197F9017D13E1C00A2196A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		78197F9117D13E1C00A2196A /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_main_list.xsl; sourceTree = "<group>"; };
 		78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_seccion_portrait.xsl; sourceTree = "<group>"; };
 		78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_seccion_landscape.xsl; sourceTree = "<group>"; };
@@ -862,7 +866,7 @@
 		788B0E2117CD12D800B553AA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		788B0E2317CD169C00B553AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		78E38B7F17D10530000E95D7 /* ElDia copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ElDia copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E38B8017D10531000E95D7 /* Castellanos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Castellanos-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/Castellanos-Info.plist"; sourceTree = "<absolute>"; };
 		78E3F002164DAD5200C7EB24 /* menu_clasificados.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu_clasificados.html; sourceTree = "<group>"; };
 		78E5B8C31652D7D700C7ACCD /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
@@ -1676,7 +1680,7 @@
 			children = (
 				CE8E727615EBEDB8007E6F09 /* ElDia.app */,
 				CE8E729115EBEDB9007E6F09 /* ElDiaTests.octest */,
-				78E38B7F17D10530000E95D7 /* ElDia copy.app */,
+				78E38B7F17D10530000E95D7 /* Castellanos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1811,6 +1815,8 @@
 				CEB0462C17BC4903001E5E4F /* Icon_ipad.png */,
 				CEB0462F17BC4903001E5E4F /* list.png */,
 				CEB0463017BC4903001E5E4F /* list@2x.png */,
+				78197F9017D13E1C00A2196A /* logo.png */,
+				78197F9117D13E1C00A2196A /* logo@2x.png */,
 				CEB0463417BC4903001E5E4F /* menu_bg.png */,
 				CEB0463617BC4903001E5E4F /* offline.png */,
 				CEB0463717BC4903001E5E4F /* offline@2x.png */,
@@ -2018,7 +2024,7 @@
 			);
 			name = Castellanos;
 			productName = ElDia2;
-			productReference = 78E38B7F17D10530000E95D7 /* ElDia copy.app */;
+			productReference = 78E38B7F17D10530000E95D7 /* Castellanos.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CE8E727515EBEDB8007E6F09 /* ElDia */ = {
@@ -2632,6 +2638,8 @@
 				CEB0467C17BC4904001E5E4F /* thumbnails.png in Resources */,
 				CEB0467D17BC4904001E5E4F /* thumbnails@2x.png in Resources */,
 				CEB0467E17BC4904001E5E4F /* warning.hueco.256x256.png in Resources */,
+				78197F9217D13E1C00A2196A /* logo.png in Resources */,
+				78197F9317D13E1C00A2196A /* logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3038,7 +3046,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = Castellanos;
 				PROVISIONING_PROFILE = "44104CFD-0154-4E6C-8D76-99569911E5C8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "44104CFD-0154-4E6C-8D76-99569911E5C8";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3073,7 +3081,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = Castellanos;
 				PROVISIONING_PROFILE = "622C9F00-4E96-4E9E-9A12-10D06AFE904F";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
@@ -3107,7 +3115,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = Castellanos;
 				PROVISIONING_PROFILE = "5771E66C-C6BA-4F2D-B82F-ECDD887CA5D3";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";

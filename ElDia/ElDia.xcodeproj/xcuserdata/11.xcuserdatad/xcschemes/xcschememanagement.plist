@@ -7,9 +7,14 @@
 		<key>Castellanos.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>37</integer>
+			<integer>35</integer>
 		</dict>
 		<key>ElDia copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>36</integer>
+		</dict>
+		<key>ElDia.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>36</integer>
