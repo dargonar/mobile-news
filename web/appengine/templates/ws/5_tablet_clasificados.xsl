@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout_tablet') }}  
-  <body onload="onLoad('{{page_name}}')">
+  <body onload="onLoad('{{page_name}}')" class="{{appid}}">
     <div id="clasificados">
       {% set items = data.item|build_list %}
 
