@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7841644717CE203100F9B5FF"
-            BuildableName = "Castellanos copy.app"
+            BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
+            BuildableName = "ElDia copy.app"
             BlueprintName = "Castellanos"
             ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
@@ -69,8 +69,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7841644717CE203100F9B5FF"
-            BuildableName = "Castellanos copy.app"
+            BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
+            BuildableName = "ElDia copy.app"
             BlueprintName = "Castellanos"
             ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
