@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Castellanos copy.xcscheme</key>
+		<key>Castellanos.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>37</integer>
+			<integer>35</integer>
 		</dict>
 		<key>ElDia copy.xcscheme</key>
 		<dict>
@@ -17,7 +17,7 @@
 		<key>ElDia.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>36</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -28,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>788B0E2717CE1EB600B553AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78E38A7317D10530000E95D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE8A02D117CFF1600088ECED</key>
 		<dict>
 			<key>primary</key>
 			<true/>

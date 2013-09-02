@@ -89,7 +89,12 @@ NSLock *menuLock;
     return;
   }
   
+  NSDate * date = [self getDate:mainUrl];
+  if( ![self isOld:date])
+    return;
+
   [self onWelcome:YES];
+  [self loadUrl:mainUrl useCache:NO reloadMenu:YES];
 }
 
 -(void)reLoadIndex{

@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
-               BuildableName = "ElDia copy.app"
+               BlueprintIdentifier = "78E38A7317D10530000E95D7"
+               BuildableName = "Castellanos.app"
                BlueprintName = "Castellanos"
                ReferencedContainer = "container:ElDia.xcodeproj">
             </BuildableReference>
@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
-            BuildableName = "ElDia copy.app"
+            BlueprintIdentifier = "78E38A7317D10530000E95D7"
+            BuildableName = "Castellanos.app"
             BlueprintName = "Castellanos"
             ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
@@ -51,8 +51,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
-            BuildableName = "ElDia copy.app"
+            BlueprintIdentifier = "78E38A7317D10530000E95D7"
+            BuildableName = "Castellanos.app"
             BlueprintName = "Castellanos"
             ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>
@@ -69,8 +69,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE8A02D117CFF1600088ECED"
-            BuildableName = "ElDia copy.app"
+            BlueprintIdentifier = "78E38A7317D10530000E95D7"
+            BuildableName = "Castellanos.app"
             BlueprintName = "Castellanos"
             ReferencedContainer = "container:ElDia.xcodeproj">
          </BuildableReference>

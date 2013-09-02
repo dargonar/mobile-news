@@ -71,6 +71,9 @@
   NSString* gaTrackingCodes=(NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"google_analytics"];
   if(gaTrackingCodes==nil)
     return nil;
+  if([gaTrackingCodes isEqualToString:@""])
+    return nil;
+  
   return [gaTrackingCodes componentsSeparatedByString:@","];
 }
 
