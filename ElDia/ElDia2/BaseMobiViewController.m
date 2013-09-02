@@ -118,7 +118,9 @@ BOOL mIsIpad=NO;
 }
 */
 
--(BOOL)initAd{
+
+// No se utiliza mas.
+ -(BOOL)initAd{
   
   if([app_delegate isAdMob])
     return NO;
@@ -130,6 +132,7 @@ BOOL mIsIpad=NO;
   return YES;
 }
 
+
 -(BOOL)adStatus{
   if(self.adUIImageView==nil)
     return NO;
@@ -137,9 +140,9 @@ BOOL mIsIpad=NO;
 }
 
 -(NSInteger)adHeight{
-  if(self.adUIImageView==nil)
+  if(bannerView_==nil)
     return 0;
-  return  lrintf(self.adUIImageView.frame.size.height);
+  return  lrintf(bannerView_.frame.size.height);
 }
 
 -(void)hideAd{
@@ -183,7 +186,7 @@ NSString* click_url =@"";
     [self positionateAdView:deviceOrientation screen:screen view:bannerView_ ];
     return;
   }
-  
+  return;
   
   //Comscore
   if(self.adUIImageView == nil)
