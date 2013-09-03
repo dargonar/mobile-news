@@ -16,31 +16,10 @@
 		780499391651DFED0062C457 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499381651DFED0062C457 /* MapKit.framework */; };
 		78197F9217D13E1C00A2196A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
 		78197F9317D13E1C00A2196A /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
-		78526B41169CD7BA00C96AD8 /* 1_tablet_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */; };
-		78526B42169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */; };
-		78526B43169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */; };
-		78526B44169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */; };
-		78526B45169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */; };
-		78526B46169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */; };
-		78526B47169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */; };
-		78526B48169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */; };
-		78526B49169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */; };
 		785463F116B1DA8C008F027F /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 785463F016B1DA8C008F027F /* TapDetectingWindow.m */; };
-		78845AF917342B3100FDF750 /* 7_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF717342B3100FDF750 /* 7_farmacias.xsl */; };
-		78845AFA17342B3100FDF750 /* 8_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF817342B3100FDF750 /* 8_cartelera.xsl */; };
-		78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
-		78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
 		788517AF174A550200CF7DCF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788517AE174A550200CF7DCF /* AdManager.m */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
-		7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */; };
-		7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */; };
-		788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
-		788A1DAE169DF0E7007DCDD3 /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
-		788A3F4B16B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */; };
-		788A3F4C16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */; };
 		788A74F8176823E50084B60F /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
-		788AC01416F8E86300FDACF6 /* 6_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC01316F8E86300FDACF6 /* 6_funebres.xsl */; };
-		788AC03716F8E86B00FDACF6 /* 6_tablet_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */; };
 		788B0E2217CD12D800B553AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2117CD12D800B553AA /* AudioToolbox.framework */; };
 		788B0E2417CD169C00B553AA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2317CD169C00B553AA /* AdSupport.framework */; };
 		788B0E2617CD17FC00B553AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2517CD17FC00B553AA /* StoreKit.framework */; };
@@ -227,7 +206,6 @@
 		78E38B4217D10530000E95D7 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		78E38B4317D10530000E95D7 /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2E304C165499EB00260455 /* iVersion.bundle */; };
 		78E38B4417D10530000E95D7 /* versions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E30731654A30B00260455 /* versions.plist */; };
-		78E38B4517D10530000E95D7 /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
 		78E38B4E17D10530000E95D7 /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
 		78E38B4F17D10530000E95D7 /* align_just_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460B17BC4903001E5E4F /* align_just_icon_24.png */; };
 		78E38B5017D10530000E95D7 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460C17BC4903001E5E4F /* bg.png */; };
@@ -294,6 +272,20 @@
 		78E5B9581652FBAA00C7ACCD /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E5B9551652F16900C7ACCD /* MySHKConfigurator.m */; };
 		78E99DA0164DF27D00780D54 /* MenuClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */; };
 		78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
+		78F6332317D694CC0039DD70 /* logi.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332117D694CC0039DD70 /* logi.png */; };
+		78F6332417D694CC0039DD70 /* logi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332217D694CC0039DD70 /* logi@2x.png */; };
+		78F6334617D6954F0039DD70 /* logi.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332117D694CC0039DD70 /* logi.png */; };
+		78F6334717D695520039DD70 /* logi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332217D694CC0039DD70 /* logi@2x.png */; };
+		78F6334817D695550039DD70 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
+		78F6334917D695580039DD70 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
+		78F6334A17D695690039DD70 /* logi.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332117D694CC0039DD70 /* logi.png */; };
+		78F6334B17D6956C0039DD70 /* logi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332217D694CC0039DD70 /* logi@2x.png */; };
+		78F6334C17D6956F0039DD70 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
+		78F6334D17D695720039DD70 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
+		78F6334E17D695AD0039DD70 /* logi.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332117D694CC0039DD70 /* logi.png */; };
+		78F6334F17D695AF0039DD70 /* logi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332217D694CC0039DD70 /* logi@2x.png */; };
+		78F6335017D695B40039DD70 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
+		78F6335117D695B90039DD70 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
 		CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; };
 		CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
@@ -386,7 +378,6 @@
 		CE7A826815EC221F0061F481 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A826615EC221F0061F481 /* MenuViewController.m */; };
 		CE7A826915EC221F0061F481 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7A826715EC221F0061F481 /* MenuViewController.xib */; };
 		CE7A828E15EC244F0061F481 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A828D15EC244E0061F481 /* QuartzCore.framework */; };
-		CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */; };
 		CE7BB6E316407A0A00246713 /* ClasificadosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB6E116407A0900246713 /* ClasificadosViewController.m */; };
 		CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE7D339115EE8F2700935444 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D339015EE8F2700935444 /* iToast.m */; };
@@ -411,10 +402,6 @@
 		CE83717F16128D9800FC8269 /* ico_video_black.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716816128D9800FC8269 /* ico_video_black.png */; };
 		CE83718016128D9800FC8269 /* ico_video_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716916128D9800FC8269 /* ico_video_blue.png */; };
 		CE83718216128D9800FC8269 /* img_listado.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716B16128D9800FC8269 /* img_listado.png */; };
-		CE83718416128D9800FC8269 /* 3_new.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716D16128D9800FC8269 /* 3_new.xsl */; };
-		CE83718516128D9800FC8269 /* 4_menu.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716E16128D9800FC8269 /* 4_menu.xsl */; };
-		CE83718716128D9800FC8269 /* 1_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717016128D9800FC8269 /* 1_main_list.xsl */; };
-		CE83718816128D9800FC8269 /* 2_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717116128D9800FC8269 /* 2_section_list.xsl */; };
 		CE87650C17D4FA5E00D282AA /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
 		CE87650D17D4FA5E00D282AA /* YoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEEC0C116236C030037F329 /* YoutubeViewController.m */; };
 		CE87650E17D4FA5E00D282AA /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
@@ -534,18 +521,6 @@
 		CE87658217D4FA5E00D282AA /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		CE87658317D4FA5E00D282AA /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
 		CE87658417D4FA5E00D282AA /* layout_tablet.css in Resources */ = {isa = PBXBuildFile; fileRef = 7801CCEE169CEB32009E2539 /* layout_tablet.css */; };
-		CE87658517D4FA5E00D282AA /* 1_tablet_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */; };
-		CE87658617D4FA5E00D282AA /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
-		CE87658717D4FA5E00D282AA /* 2_tablet_noticias_seccion_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */; };
-		CE87658817D4FA5E00D282AA /* 2_tablet_noticias_seccion_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */; };
-		CE87658917D4FA5E00D282AA /* 2_tablet_noticias_index_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */; };
-		CE87658A17D4FA5E00D282AA /* 2_tablet_noticias_index_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */; };
-		CE87658B17D4FA5E00D282AA /* 3_new_relateds_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */; };
-		CE87658C17D4FA5E00D282AA /* 3_new_relateds_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */; };
-		CE87658D17D4FA5E00D282AA /* 3_tablet_new_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */; };
-		CE87658E17D4FA5E00D282AA /* 3_tablet_new_portrait_2.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */; };
-		CE87658F17D4FA5E00D282AA /* 3_tablet_new_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */; };
-		CE87659017D4FA5E00D282AA /* 4_tablet_menu_secciones.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */; };
 		CE87659117D4FA5E00D282AA /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
 		CE87659217D4FA5E00D282AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8E728315EBEDB8007E6F09 /* InfoPlist.strings */; };
 		CE87659317D4FA5E00D282AA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7A825C15EC21F00061F481 /* MainViewController.xib */; };
@@ -593,11 +568,6 @@
 		CE8765BD17D4FA5E00D282AA /* ico_video_black.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716816128D9800FC8269 /* ico_video_black.png */; };
 		CE8765BE17D4FA5E00D282AA /* ico_video_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716916128D9800FC8269 /* ico_video_blue.png */; };
 		CE8765BF17D4FA5E00D282AA /* img_listado.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716B16128D9800FC8269 /* img_listado.png */; };
-		CE8765C117D4FA5E00D282AA /* 3_new.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716D16128D9800FC8269 /* 3_new.xsl */; };
-		CE8765C217D4FA5E00D282AA /* 4_menu.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716E16128D9800FC8269 /* 4_menu.xsl */; };
-		CE8765C317D4FA5E00D282AA /* 1_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717016128D9800FC8269 /* 1_main_list.xsl */; };
-		CE8765C417D4FA5E00D282AA /* url-encode.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEF9FC9E163B472D00E45995 /* url-encode.xsl */; };
-		CE8765C517D4FA5E00D282AA /* 2_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717116128D9800FC8269 /* 2_section_list.xsl */; };
 		CE8765C617D4FA5E00D282AA /* MainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */; };
 		CE8765C717D4FA5E00D282AA /* NoticiaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */; };
 		CE8765C817D4FA5E00D282AA /* MenuViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */; };
@@ -609,22 +579,12 @@
 		CE8765CE17D4FA5E00D282AA /* functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
 		CE8765CF17D4FA5E00D282AA /* loading_indicator_small_blue.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344281630AA5E00C77C79 /* loading_indicator_small_blue.gif */; };
 		CE8765D017D4FA5E00D282AA /* loading_indicator_small.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344291630AA5F00C77C79 /* loading_indicator_small.gif */; };
-		CE8765D117D4FA5E00D282AA /* 5_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */; };
 		CE8765D217D4FA5E00D282AA /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE8765D317D4FA5E00D282AA /* CladificadosViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE5FBDB1642BE4200E5CA82 /* CladificadosViewController_iPad.xib */; };
 		CE8765D417D4FA5E00D282AA /* menu_clasificados.html in Resources */ = {isa = PBXBuildFile; fileRef = 78E3F002164DAD5200C7EB24 /* menu_clasificados.html */; };
 		CE8765D517D4FA5E00D282AA /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE8765D617D4FA5E00D282AA /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2E304C165499EB00260455 /* iVersion.bundle */; };
 		CE8765D717D4FA5E00D282AA /* versions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E30731654A30B00260455 /* versions.plist */; };
-		CE8765D817D4FA5E00D282AA /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
-		CE8765D917D4FA5E00D282AA /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
-		CE8765DA17D4FA5E00D282AA /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
-		CE8765DB17D4FA5E00D282AA /* 6_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC01316F8E86300FDACF6 /* 6_funebres.xsl */; };
-		CE8765DC17D4FA5E00D282AA /* 6_tablet_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */; };
-		CE8765DD17D4FA5E00D282AA /* 7_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF717342B3100FDF750 /* 7_farmacias.xsl */; };
-		CE8765DE17D4FA5E00D282AA /* 8_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF817342B3100FDF750 /* 8_cartelera.xsl */; };
-		CE8765DF17D4FA5E00D282AA /* 7_tablet_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */; };
-		CE8765E017D4FA5E00D282AA /* 8_tablet_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */; };
 		CE8765E117D4FA5E00D282AA /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
 		CE8765E217D4FA5E00D282AA /* align_just_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460B17BC4903001E5E4F /* align_just_icon_24.png */; };
 		CE8765E317D4FA5E00D282AA /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460C17BC4903001E5E4F /* bg.png */; };
@@ -791,18 +751,6 @@
 		CE8766B617D4FAC600D282AA /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		CE8766B717D4FAC600D282AA /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
 		CE8766B817D4FAC600D282AA /* layout_tablet.css in Resources */ = {isa = PBXBuildFile; fileRef = 7801CCEE169CEB32009E2539 /* layout_tablet.css */; };
-		CE8766B917D4FAC600D282AA /* 1_tablet_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */; };
-		CE8766BA17D4FAC600D282AA /* 1_tablet_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */; };
-		CE8766BB17D4FAC600D282AA /* 2_tablet_noticias_seccion_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */; };
-		CE8766BC17D4FAC600D282AA /* 2_tablet_noticias_seccion_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */; };
-		CE8766BD17D4FAC600D282AA /* 2_tablet_noticias_index_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */; };
-		CE8766BE17D4FAC600D282AA /* 2_tablet_noticias_index_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */; };
-		CE8766BF17D4FAC600D282AA /* 3_new_relateds_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */; };
-		CE8766C017D4FAC600D282AA /* 3_new_relateds_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */; };
-		CE8766C117D4FAC600D282AA /* 3_tablet_new_landscape.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */; };
-		CE8766C217D4FAC600D282AA /* 3_tablet_new_portrait_2.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */; };
-		CE8766C317D4FAC600D282AA /* 3_tablet_new_portrait.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */; };
-		CE8766C417D4FAC600D282AA /* 4_tablet_menu_secciones.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */; };
 		CE8766C517D4FAC600D282AA /* YoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEEC0C216236C030037F329 /* YoutubeViewController.xib */; };
 		CE8766C617D4FAC600D282AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE8E728315EBEDB8007E6F09 /* InfoPlist.strings */; };
 		CE8766C717D4FAC600D282AA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7A825C15EC21F00061F481 /* MainViewController.xib */; };
@@ -850,11 +798,6 @@
 		CE8766F117D4FAC600D282AA /* ico_video_black.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716816128D9800FC8269 /* ico_video_black.png */; };
 		CE8766F217D4FAC600D282AA /* ico_video_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716916128D9800FC8269 /* ico_video_blue.png */; };
 		CE8766F317D4FAC600D282AA /* img_listado.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83716B16128D9800FC8269 /* img_listado.png */; };
-		CE8766F517D4FAC600D282AA /* 3_new.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716D16128D9800FC8269 /* 3_new.xsl */; };
-		CE8766F617D4FAC600D282AA /* 4_menu.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83716E16128D9800FC8269 /* 4_menu.xsl */; };
-		CE8766F717D4FAC600D282AA /* 1_main_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717016128D9800FC8269 /* 1_main_list.xsl */; };
-		CE8766F817D4FAC600D282AA /* url-encode.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEF9FC9E163B472D00E45995 /* url-encode.xsl */; };
-		CE8766F917D4FAC600D282AA /* 2_section_list.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE83717116128D9800FC8269 /* 2_section_list.xsl */; };
 		CE8766FA17D4FAC600D282AA /* MainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE05EB61624E4A600FCC210 /* MainViewController_iPad.xib */; };
 		CE8766FB17D4FAC600D282AA /* NoticiaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5E364C162704EE00C3290B /* NoticiaViewController_iPad.xib */; };
 		CE8766FC17D4FAC600D282AA /* MenuViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */; };
@@ -866,22 +809,12 @@
 		CE87670217D4FAC600D282AA /* functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
 		CE87670317D4FAC600D282AA /* loading_indicator_small_blue.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344281630AA5E00C77C79 /* loading_indicator_small_blue.gif */; };
 		CE87670417D4FAC600D282AA /* loading_indicator_small.gif in Resources */ = {isa = PBXBuildFile; fileRef = CED344291630AA5F00C77C79 /* loading_indicator_small.gif */; };
-		CE87670517D4FAC600D282AA /* 5_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */; };
 		CE87670617D4FAC600D282AA /* ClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */; };
 		CE87670717D4FAC600D282AA /* CladificadosViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE5FBDB1642BE4200E5CA82 /* CladificadosViewController_iPad.xib */; };
 		CE87670817D4FAC600D282AA /* menu_clasificados.html in Resources */ = {isa = PBXBuildFile; fileRef = 78E3F002164DAD5200C7EB24 /* menu_clasificados.html */; };
 		CE87670917D4FAC600D282AA /* MenuClasificadosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */; };
 		CE87670A17D4FAC600D282AA /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2E304C165499EB00260455 /* iVersion.bundle */; };
 		CE87670B17D4FAC600D282AA /* versions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E30731654A30B00260455 /* versions.plist */; };
-		CE87670C17D4FAC600D282AA /* functions.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788A1DAD169DF0E7007DCDD3 /* functions.xsl */; };
-		CE87670D17D4FAC600D282AA /* 3_tablet_new_global.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */; };
-		CE87670E17D4FAC600D282AA /* 5_tablet_clasificados.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */; };
-		CE87670F17D4FAC600D282AA /* 6_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC01316F8E86300FDACF6 /* 6_funebres.xsl */; };
-		CE87671017D4FAC600D282AA /* 6_tablet_funebres.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */; };
-		CE87671117D4FAC600D282AA /* 7_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF717342B3100FDF750 /* 7_farmacias.xsl */; };
-		CE87671217D4FAC600D282AA /* 8_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 78845AF817342B3100FDF750 /* 8_cartelera.xsl */; };
-		CE87671317D4FAC600D282AA /* 7_tablet_farmacias.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */; };
-		CE87671417D4FAC600D282AA /* 8_tablet_cartelera.xsl in Resources */ = {isa = PBXBuildFile; fileRef = 7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */; };
 		CE87671517D4FAC600D282AA /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
 		CE87671617D4FAC600D282AA /* align_just_icon_24.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460B17BC4903001E5E4F /* align_just_icon_24.png */; };
 		CE87671717D4FAC600D282AA /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0460C17BC4903001E5E4F /* bg.png */; };
@@ -1033,7 +966,6 @@
 		CEF6A9EF162739720032052A /* MenuViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9EE162739720032052A /* MenuViewController_iPad.xib */; };
 		CEF6A9F216273CB70032052A /* YoutubeViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */; };
 		CEF9FC9C163B2EED00E45995 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9FC9B163B2EED00E45995 /* Utils.m */; };
-		CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */ = {isa = PBXBuildFile; fileRef = CEF9FC9E163B472D00E45995 /* url-encode.xsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1358,34 +1290,13 @@
 		780499381651DFED0062C457 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		78197F9017D13E1C00A2196A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		78197F9117D13E1C00A2196A /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
-		78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_main_list.xsl; sourceTree = "<group>"; };
-		78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_seccion_portrait.xsl; sourceTree = "<group>"; };
-		78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_seccion_landscape.xsl; sourceTree = "<group>"; };
-		78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_new_relateds_landscape.xsl; sourceTree = "<group>"; };
-		78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_new_relateds_portrait.xsl; sourceTree = "<group>"; };
-		78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_landscape.xsl; sourceTree = "<group>"; };
-		78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_portrait_2.xsl; sourceTree = "<group>"; };
-		78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_portrait.xsl; sourceTree = "<group>"; };
-		78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 4_tablet_menu_secciones.xsl; sourceTree = "<group>"; };
 		785463EF16B1DA8C008F027F /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
 		785463F016B1DA8C008F027F /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
-		78845AF717342B3100FDF750 /* 7_farmacias.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 7_farmacias.xsl; sourceTree = "<group>"; };
-		78845AF817342B3100FDF750 /* 8_cartelera.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 8_cartelera.xsl; sourceTree = "<group>"; };
-		78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_tablet_new_global.xsl; sourceTree = "<group>"; };
-		78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_tablet_clasificados.xsl; sourceTree = "<group>"; };
 		788517AD174A550200CF7DCF /* AdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdManager.h; sourceTree = "<group>"; };
 		788517AE174A550200CF7DCF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 7_tablet_farmacias.xsl; sourceTree = "<group>"; };
-		7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 8_tablet_cartelera.xsl; sourceTree = "<group>"; };
-		788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_tablet_section_list.xsl; sourceTree = "<group>"; };
-		788A1DAD169DF0E7007DCDD3 /* functions.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = functions.xsl; sourceTree = "<group>"; };
-		788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_landscape.xsl; sourceTree = "<group>"; };
-		788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_tablet_noticias_index_portrait.xsl; sourceTree = "<group>"; };
 		788A74F7176823E50084B60F /* ico_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus.png; sourceTree = "<group>"; };
-		788AC01316F8E86300FDACF6 /* 6_funebres.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 6_funebres.xsl; sourceTree = "<group>"; };
-		788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 6_tablet_funebres.xsl; sourceTree = "<group>"; };
 		788B0E2117CD12D800B553AA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		788B0E2317CD169C00B553AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -1413,6 +1324,8 @@
 		78E99D9D164DF27D00780D54 /* MenuClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuClasificadosViewController.h; sourceTree = "<group>"; };
 		78E99D9E164DF27D00780D54 /* MenuClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuClasificadosViewController.m; sourceTree = "<group>"; };
 		78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuClasificadosViewController.xib; sourceTree = "<group>"; };
+		78F6332117D694CC0039DD70 /* logi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logi.png; sourceTree = "<group>"; };
+		78F6332217D694CC0039DD70 /* logi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logi@2x.png"; sourceTree = "<group>"; };
 		CE02FB4E164947150049F63A /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		CE02FB4F164947150049F63A /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1558,7 +1471,6 @@
 		CE7A826615EC221F0061F481 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		CE7A826715EC221F0061F481 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		CE7A828D15EC244E0061F481 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 5_clasificados.xsl; sourceTree = "<group>"; };
 		CE7BB6E016407A0900246713 /* ClasificadosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasificadosViewController.h; sourceTree = "<group>"; };
 		CE7BB6E116407A0900246713 /* ClasificadosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasificadosViewController.m; sourceTree = "<group>"; };
 		CE7BB6E216407A0A00246713 /* ClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClasificadosViewController.xib; sourceTree = "<group>"; };
@@ -1589,10 +1501,6 @@
 		CE83716816128D9800FC8269 /* ico_video_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_black.png; sourceTree = "<group>"; };
 		CE83716916128D9800FC8269 /* ico_video_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_blue.png; sourceTree = "<group>"; };
 		CE83716B16128D9800FC8269 /* img_listado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_listado.png; sourceTree = "<group>"; };
-		CE83716D16128D9800FC8269 /* 3_new.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 3_new.xsl; sourceTree = "<group>"; };
-		CE83716E16128D9800FC8269 /* 4_menu.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 4_menu.xsl; sourceTree = "<group>"; };
-		CE83717016128D9800FC8269 /* 1_main_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 1_main_list.xsl; sourceTree = "<group>"; };
-		CE83717116128D9800FC8269 /* 2_section_list.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 2_section_list.xsl; sourceTree = "<group>"; };
 		CE87661117D4FA5E00D282AA /* Pregon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pregon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE87663417D4FAA300D282AA /* Castellanos-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Castellanos-Info.plist"; sourceTree = "<group>"; };
 		CE87663517D4FAA300D282AA /* Pregon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Pregon-Info.plist"; sourceTree = "<group>"; };
@@ -1742,7 +1650,6 @@
 		CEF6A9F116273CB70032052A /* YoutubeViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YoutubeViewController_iPad.xib; sourceTree = "<group>"; };
 		CEF9FC9A163B2EED00E45995 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		CEF9FC9B163B2EED00E45995 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		CEF9FC9E163B472D00E45995 /* url-encode.xsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "url-encode.xsl"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1902,47 +1809,6 @@
 				602230D4163B61CB0091D201 /* functions.js */,
 			);
 			name = js;
-			sourceTree = "<group>";
-		};
-		78526B36169CD72500C96AD8 /* xsl */ = {
-			isa = PBXGroup;
-			children = (
-				CE83717016128D9800FC8269 /* 1_main_list.xsl */,
-				CE83717116128D9800FC8269 /* 2_section_list.xsl */,
-				CE83716D16128D9800FC8269 /* 3_new.xsl */,
-				CE83716E16128D9800FC8269 /* 4_menu.xsl */,
-				CE7BB6DD164073FB00246713 /* 5_clasificados.xsl */,
-				788AC01316F8E86300FDACF6 /* 6_funebres.xsl */,
-				78845AF717342B3100FDF750 /* 7_farmacias.xsl */,
-				78845AF817342B3100FDF750 /* 8_cartelera.xsl */,
-				788A1DAD169DF0E7007DCDD3 /* functions.xsl */,
-				CEF9FC9E163B472D00E45995 /* url-encode.xsl */,
-			);
-			name = xsl;
-			sourceTree = "<group>";
-		};
-		78526B37169CD74E00C96AD8 /* xsl_tablets */ = {
-			isa = PBXGroup;
-			children = (
-				78526B38169CD7BA00C96AD8 /* 1_tablet_main_list.xsl */,
-				788A1DA7169DB36C007DCDD3 /* 1_tablet_section_list.xsl */,
-				788A3F4916B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl */,
-				788A3F4A16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl */,
-				78526B3A169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl */,
-				78526B39169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl */,
-				78526B3B169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl */,
-				78526B3C169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl */,
-				78847DDA16EA1E26000B0D8C /* 3_tablet_new_global.xsl */,
-				78526B3D169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl */,
-				78526B3F169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl */,
-				78526B3E169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl */,
-				78526B40169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl */,
-				78847DDB16EA1E26000B0D8C /* 5_tablet_clasificados.xsl */,
-				788AC03616F8E86B00FDACF6 /* 6_tablet_funebres.xsl */,
-				7888C2AB17347187001B7A09 /* 7_tablet_farmacias.xsl */,
-				7888C2AC17347187001B7A09 /* 8_tablet_cartelera.xsl */,
-			);
-			name = xsl_tablets;
 			sourceTree = "<group>";
 		};
 		7888385116AEF85A00517A5F /* Base64 */ = {
@@ -2195,8 +2061,6 @@
 		CE7D338815EE889500935444 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				78526B37169CD74E00C96AD8 /* xsl_tablets */,
-				78526B36169CD72500C96AD8 /* xsl */,
 				602230D2163B61B30091D201 /* js */,
 				CE83715916128D9800FC8269 /* css */,
 				CE83715B16128D9800FC8269 /* img */,
@@ -2436,6 +2300,8 @@
 				CEB0462C17BC4903001E5E4F /* Icon_ipad.png */,
 				CEB0462F17BC4903001E5E4F /* list.png */,
 				CEB0463017BC4903001E5E4F /* list@2x.png */,
+				78F6332117D694CC0039DD70 /* logi.png */,
+				78F6332217D694CC0039DD70 /* logi@2x.png */,
 				78197F9017D13E1C00A2196A /* logo.png */,
 				78197F9117D13E1C00A2196A /* logo@2x.png */,
 				CEB0463417BC4903001E5E4F /* menu_bg.png */,
@@ -3081,7 +2947,6 @@
 				78E38B4217D10530000E95D7 /* MenuClasificadosViewController.xib in Resources */,
 				78E38B4317D10530000E95D7 /* iVersion.bundle in Resources */,
 				78E38B4417D10530000E95D7 /* versions.plist in Resources */,
-				78E38B4517D10530000E95D7 /* functions.xsl in Resources */,
 				78E38B4E17D10530000E95D7 /* ico_plus.png in Resources */,
 				78E38B4F17D10530000E95D7 /* align_just_icon_24.png in Resources */,
 				78E38B5017D10530000E95D7 /* bg.png in Resources */,
@@ -3110,6 +2975,10 @@
 				78E38B6717D10530000E95D7 /* Icon_ipad.png in Resources */,
 				78E38B6817D10530000E95D7 /* list.png in Resources */,
 				78E38B6917D10530000E95D7 /* list@2x.png in Resources */,
+				78F6334E17D695AD0039DD70 /* logi.png in Resources */,
+				78F6334F17D695AF0039DD70 /* logi@2x.png in Resources */,
+				78F6335017D695B40039DD70 /* logo.png in Resources */,
+				78F6335117D695B90039DD70 /* logo@2x.png in Resources */,
 				78E38B6A17D10530000E95D7 /* menu_bg.png in Resources */,
 				78E38B6B17D10530000E95D7 /* offline.png in Resources */,
 				78E38B6C17D10530000E95D7 /* offline@2x.png in Resources */,
@@ -3136,18 +3005,6 @@
 				CE87658217D4FA5E00D282AA /* ShareKit.bundle in Resources */,
 				CE87658317D4FA5E00D282AA /* ad.js in Resources */,
 				CE87658417D4FA5E00D282AA /* layout_tablet.css in Resources */,
-				CE87658517D4FA5E00D282AA /* 1_tablet_main_list.xsl in Resources */,
-				CE87658617D4FA5E00D282AA /* 1_tablet_section_list.xsl in Resources */,
-				CE87658717D4FA5E00D282AA /* 2_tablet_noticias_seccion_portrait.xsl in Resources */,
-				CE87658817D4FA5E00D282AA /* 2_tablet_noticias_seccion_landscape.xsl in Resources */,
-				CE87658917D4FA5E00D282AA /* 2_tablet_noticias_index_landscape.xsl in Resources */,
-				CE87658A17D4FA5E00D282AA /* 2_tablet_noticias_index_portrait.xsl in Resources */,
-				CE87658B17D4FA5E00D282AA /* 3_new_relateds_landscape.xsl in Resources */,
-				CE87658C17D4FA5E00D282AA /* 3_new_relateds_portrait.xsl in Resources */,
-				CE87658D17D4FA5E00D282AA /* 3_tablet_new_landscape.xsl in Resources */,
-				CE87658E17D4FA5E00D282AA /* 3_tablet_new_portrait_2.xsl in Resources */,
-				CE87658F17D4FA5E00D282AA /* 3_tablet_new_portrait.xsl in Resources */,
-				CE87659017D4FA5E00D282AA /* 4_tablet_menu_secciones.xsl in Resources */,
 				CE87659117D4FA5E00D282AA /* YoutubeViewController.xib in Resources */,
 				CE87659217D4FA5E00D282AA /* InfoPlist.strings in Resources */,
 				CE87659317D4FA5E00D282AA /* MainViewController.xib in Resources */,
@@ -3195,11 +3052,6 @@
 				CE8765BD17D4FA5E00D282AA /* ico_video_black.png in Resources */,
 				CE8765BE17D4FA5E00D282AA /* ico_video_blue.png in Resources */,
 				CE8765BF17D4FA5E00D282AA /* img_listado.png in Resources */,
-				CE8765C117D4FA5E00D282AA /* 3_new.xsl in Resources */,
-				CE8765C217D4FA5E00D282AA /* 4_menu.xsl in Resources */,
-				CE8765C317D4FA5E00D282AA /* 1_main_list.xsl in Resources */,
-				CE8765C417D4FA5E00D282AA /* url-encode.xsl in Resources */,
-				CE8765C517D4FA5E00D282AA /* 2_section_list.xsl in Resources */,
 				CE8765C617D4FA5E00D282AA /* MainViewController_iPad.xib in Resources */,
 				CE8765C717D4FA5E00D282AA /* NoticiaViewController_iPad.xib in Resources */,
 				CE8765C817D4FA5E00D282AA /* MenuViewController_iPad.xib in Resources */,
@@ -3211,22 +3063,12 @@
 				CE8765CE17D4FA5E00D282AA /* functions.js in Resources */,
 				CE8765CF17D4FA5E00D282AA /* loading_indicator_small_blue.gif in Resources */,
 				CE8765D017D4FA5E00D282AA /* loading_indicator_small.gif in Resources */,
-				CE8765D117D4FA5E00D282AA /* 5_clasificados.xsl in Resources */,
 				CE8765D217D4FA5E00D282AA /* ClasificadosViewController.xib in Resources */,
 				CE8765D317D4FA5E00D282AA /* CladificadosViewController_iPad.xib in Resources */,
 				CE8765D417D4FA5E00D282AA /* menu_clasificados.html in Resources */,
 				CE8765D517D4FA5E00D282AA /* MenuClasificadosViewController.xib in Resources */,
 				CE8765D617D4FA5E00D282AA /* iVersion.bundle in Resources */,
 				CE8765D717D4FA5E00D282AA /* versions.plist in Resources */,
-				CE8765D817D4FA5E00D282AA /* functions.xsl in Resources */,
-				CE8765D917D4FA5E00D282AA /* 3_tablet_new_global.xsl in Resources */,
-				CE8765DA17D4FA5E00D282AA /* 5_tablet_clasificados.xsl in Resources */,
-				CE8765DB17D4FA5E00D282AA /* 6_funebres.xsl in Resources */,
-				CE8765DC17D4FA5E00D282AA /* 6_tablet_funebres.xsl in Resources */,
-				CE8765DD17D4FA5E00D282AA /* 7_farmacias.xsl in Resources */,
-				CE8765DE17D4FA5E00D282AA /* 8_cartelera.xsl in Resources */,
-				CE8765DF17D4FA5E00D282AA /* 7_tablet_farmacias.xsl in Resources */,
-				CE8765E017D4FA5E00D282AA /* 8_tablet_cartelera.xsl in Resources */,
 				CE8765E117D4FA5E00D282AA /* ico_plus.png in Resources */,
 				CE8765E217D4FA5E00D282AA /* align_just_icon_24.png in Resources */,
 				CE8765E317D4FA5E00D282AA /* bg.png in Resources */,
@@ -3255,6 +3097,10 @@
 				CE8765FA17D4FA5E00D282AA /* Icon_ipad.png in Resources */,
 				CE8765FB17D4FA5E00D282AA /* list.png in Resources */,
 				CE8765FC17D4FA5E00D282AA /* list@2x.png in Resources */,
+				78F6334617D6954F0039DD70 /* logi.png in Resources */,
+				78F6334717D695520039DD70 /* logi@2x.png in Resources */,
+				78F6334817D695550039DD70 /* logo.png in Resources */,
+				78F6334917D695580039DD70 /* logo@2x.png in Resources */,
 				CE8765FD17D4FA5E00D282AA /* menu_bg.png in Resources */,
 				CE8765FE17D4FA5E00D282AA /* offline.png in Resources */,
 				CE8765FF17D4FA5E00D282AA /* offline@2x.png in Resources */,
@@ -3281,18 +3127,6 @@
 				CE8766B617D4FAC600D282AA /* ShareKit.bundle in Resources */,
 				CE8766B717D4FAC600D282AA /* ad.js in Resources */,
 				CE8766B817D4FAC600D282AA /* layout_tablet.css in Resources */,
-				CE8766B917D4FAC600D282AA /* 1_tablet_main_list.xsl in Resources */,
-				CE8766BA17D4FAC600D282AA /* 1_tablet_section_list.xsl in Resources */,
-				CE8766BB17D4FAC600D282AA /* 2_tablet_noticias_seccion_portrait.xsl in Resources */,
-				CE8766BC17D4FAC600D282AA /* 2_tablet_noticias_seccion_landscape.xsl in Resources */,
-				CE8766BD17D4FAC600D282AA /* 2_tablet_noticias_index_landscape.xsl in Resources */,
-				CE8766BE17D4FAC600D282AA /* 2_tablet_noticias_index_portrait.xsl in Resources */,
-				CE8766BF17D4FAC600D282AA /* 3_new_relateds_landscape.xsl in Resources */,
-				CE8766C017D4FAC600D282AA /* 3_new_relateds_portrait.xsl in Resources */,
-				CE8766C117D4FAC600D282AA /* 3_tablet_new_landscape.xsl in Resources */,
-				CE8766C217D4FAC600D282AA /* 3_tablet_new_portrait_2.xsl in Resources */,
-				CE8766C317D4FAC600D282AA /* 3_tablet_new_portrait.xsl in Resources */,
-				CE8766C417D4FAC600D282AA /* 4_tablet_menu_secciones.xsl in Resources */,
 				CE8766C517D4FAC600D282AA /* YoutubeViewController.xib in Resources */,
 				CE8766C617D4FAC600D282AA /* InfoPlist.strings in Resources */,
 				CE8766C717D4FAC600D282AA /* MainViewController.xib in Resources */,
@@ -3340,11 +3174,6 @@
 				CE8766F117D4FAC600D282AA /* ico_video_black.png in Resources */,
 				CE8766F217D4FAC600D282AA /* ico_video_blue.png in Resources */,
 				CE8766F317D4FAC600D282AA /* img_listado.png in Resources */,
-				CE8766F517D4FAC600D282AA /* 3_new.xsl in Resources */,
-				CE8766F617D4FAC600D282AA /* 4_menu.xsl in Resources */,
-				CE8766F717D4FAC600D282AA /* 1_main_list.xsl in Resources */,
-				CE8766F817D4FAC600D282AA /* url-encode.xsl in Resources */,
-				CE8766F917D4FAC600D282AA /* 2_section_list.xsl in Resources */,
 				CE8766FA17D4FAC600D282AA /* MainViewController_iPad.xib in Resources */,
 				CE8766FB17D4FAC600D282AA /* NoticiaViewController_iPad.xib in Resources */,
 				CE8766FC17D4FAC600D282AA /* MenuViewController_iPad.xib in Resources */,
@@ -3356,22 +3185,12 @@
 				CE87670217D4FAC600D282AA /* functions.js in Resources */,
 				CE87670317D4FAC600D282AA /* loading_indicator_small_blue.gif in Resources */,
 				CE87670417D4FAC600D282AA /* loading_indicator_small.gif in Resources */,
-				CE87670517D4FAC600D282AA /* 5_clasificados.xsl in Resources */,
 				CE87670617D4FAC600D282AA /* ClasificadosViewController.xib in Resources */,
 				CE87670717D4FAC600D282AA /* CladificadosViewController_iPad.xib in Resources */,
 				CE87670817D4FAC600D282AA /* menu_clasificados.html in Resources */,
 				CE87670917D4FAC600D282AA /* MenuClasificadosViewController.xib in Resources */,
 				CE87670A17D4FAC600D282AA /* iVersion.bundle in Resources */,
 				CE87670B17D4FAC600D282AA /* versions.plist in Resources */,
-				CE87670C17D4FAC600D282AA /* functions.xsl in Resources */,
-				CE87670D17D4FAC600D282AA /* 3_tablet_new_global.xsl in Resources */,
-				CE87670E17D4FAC600D282AA /* 5_tablet_clasificados.xsl in Resources */,
-				CE87670F17D4FAC600D282AA /* 6_funebres.xsl in Resources */,
-				CE87671017D4FAC600D282AA /* 6_tablet_funebres.xsl in Resources */,
-				CE87671117D4FAC600D282AA /* 7_farmacias.xsl in Resources */,
-				CE87671217D4FAC600D282AA /* 8_cartelera.xsl in Resources */,
-				CE87671317D4FAC600D282AA /* 7_tablet_farmacias.xsl in Resources */,
-				CE87671417D4FAC600D282AA /* 8_tablet_cartelera.xsl in Resources */,
 				CE87671517D4FAC600D282AA /* ico_plus.png in Resources */,
 				CE87671617D4FAC600D282AA /* align_just_icon_24.png in Resources */,
 				CE87671717D4FAC600D282AA /* bg.png in Resources */,
@@ -3400,6 +3219,10 @@
 				CE87672E17D4FAC600D282AA /* Icon_ipad.png in Resources */,
 				CE87672F17D4FAC600D282AA /* list.png in Resources */,
 				CE87673017D4FAC600D282AA /* list@2x.png in Resources */,
+				78F6334A17D695690039DD70 /* logi.png in Resources */,
+				78F6334B17D6956C0039DD70 /* logi@2x.png in Resources */,
+				78F6334C17D6956F0039DD70 /* logo.png in Resources */,
+				78F6334D17D695720039DD70 /* logo@2x.png in Resources */,
 				CE87673117D4FAC600D282AA /* menu_bg.png in Resources */,
 				CE87673217D4FAC600D282AA /* offline.png in Resources */,
 				CE87673317D4FAC600D282AA /* offline@2x.png in Resources */,
@@ -3426,18 +3249,6 @@
 				78E5B9381652D89500C7ACCD /* ShareKit.bundle in Resources */,
 				CE7F073E1731D1C800661632 /* ad.js in Resources */,
 				7801CCEF169CEB32009E2539 /* layout_tablet.css in Resources */,
-				78526B41169CD7BA00C96AD8 /* 1_tablet_main_list.xsl in Resources */,
-				788A1DA8169DB36C007DCDD3 /* 1_tablet_section_list.xsl in Resources */,
-				78526B42169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_portrait.xsl in Resources */,
-				78526B43169CD7BA00C96AD8 /* 2_tablet_noticias_seccion_landscape.xsl in Resources */,
-				788A3F4B16B2F9350028CE7B /* 2_tablet_noticias_index_landscape.xsl in Resources */,
-				788A3F4C16B2F9350028CE7B /* 2_tablet_noticias_index_portrait.xsl in Resources */,
-				78526B44169CD7BA00C96AD8 /* 3_new_relateds_landscape.xsl in Resources */,
-				78526B45169CD7BA00C96AD8 /* 3_new_relateds_portrait.xsl in Resources */,
-				78526B46169CD7BA00C96AD8 /* 3_tablet_new_landscape.xsl in Resources */,
-				78526B47169CD7BA00C96AD8 /* 3_tablet_new_portrait_2.xsl in Resources */,
-				78526B48169CD7BA00C96AD8 /* 3_tablet_new_portrait.xsl in Resources */,
-				78526B49169CD7BA00C96AD8 /* 4_tablet_menu_secciones.xsl in Resources */,
 				CE5390EF162373F600497B31 /* YoutubeViewController.xib in Resources */,
 				CE8E728515EBEDB8007E6F09 /* InfoPlist.strings in Resources */,
 				CE7A825E15EC21F00061F481 /* MainViewController.xib in Resources */,
@@ -3485,11 +3296,6 @@
 				CE83717F16128D9800FC8269 /* ico_video_black.png in Resources */,
 				CE83718016128D9800FC8269 /* ico_video_blue.png in Resources */,
 				CE83718216128D9800FC8269 /* img_listado.png in Resources */,
-				CE83718416128D9800FC8269 /* 3_new.xsl in Resources */,
-				CE83718516128D9800FC8269 /* 4_menu.xsl in Resources */,
-				CE83718716128D9800FC8269 /* 1_main_list.xsl in Resources */,
-				CEF9FC9F163B472D00E45995 /* url-encode.xsl in Resources */,
-				CE83718816128D9800FC8269 /* 2_section_list.xsl in Resources */,
 				CEE05EB71624E4A600FCC210 /* MainViewController_iPad.xib in Resources */,
 				CE5E364D162704EE00C3290B /* NoticiaViewController_iPad.xib in Resources */,
 				CEF6A9EF162739720032052A /* MenuViewController_iPad.xib in Resources */,
@@ -3501,22 +3307,12 @@
 				602230D6163B64B50091D201 /* functions.js in Resources */,
 				CED3442C1630AA5F00C77C79 /* loading_indicator_small_blue.gif in Resources */,
 				CED3442D1630AA5F00C77C79 /* loading_indicator_small.gif in Resources */,
-				CE7BB6DE164073FB00246713 /* 5_clasificados.xsl in Resources */,
 				CE7BB6E416407A0A00246713 /* ClasificadosViewController.xib in Resources */,
 				CEE5FBDC1642BE4200E5CA82 /* CladificadosViewController_iPad.xib in Resources */,
 				78E3F003164DAD5200C7EB24 /* menu_clasificados.html in Resources */,
 				78E99DA1164DF27D00780D54 /* MenuClasificadosViewController.xib in Resources */,
 				CE2E304F165499EB00260455 /* iVersion.bundle in Resources */,
 				CE2E30741654A30B00260455 /* versions.plist in Resources */,
-				788A1DAE169DF0E7007DCDD3 /* functions.xsl in Resources */,
-				78847DDC16EA1E26000B0D8C /* 3_tablet_new_global.xsl in Resources */,
-				78847DDD16EA1E26000B0D8C /* 5_tablet_clasificados.xsl in Resources */,
-				788AC01416F8E86300FDACF6 /* 6_funebres.xsl in Resources */,
-				788AC03716F8E86B00FDACF6 /* 6_tablet_funebres.xsl in Resources */,
-				78845AF917342B3100FDF750 /* 7_farmacias.xsl in Resources */,
-				78845AFA17342B3100FDF750 /* 8_cartelera.xsl in Resources */,
-				7888C2AD17347187001B7A09 /* 7_tablet_farmacias.xsl in Resources */,
-				7888C2AE17347187001B7A09 /* 8_tablet_cartelera.xsl in Resources */,
 				788A74F8176823E50084B60F /* ico_plus.png in Resources */,
 				CEB0464517BC4904001E5E4F /* align_just_icon_24.png in Resources */,
 				CEB0464617BC4904001E5E4F /* bg.png in Resources */,
@@ -3578,6 +3374,8 @@
 				78E424AD17D6520300A9E776 /* ico_video_castellanos.png in Resources */,
 				78E424AE17D6520300A9E776 /* ico_video_ecosdiarios.png in Resources */,
 				78E424AF17D6520300A9E776 /* ico_video_pregon.png in Resources */,
+				78F6332317D694CC0039DD70 /* logi.png in Resources */,
+				78F6332417D694CC0039DD70 /* logi@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
