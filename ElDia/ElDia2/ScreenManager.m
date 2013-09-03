@@ -224,7 +224,9 @@ BOOL isIpad=NO;
   //Lo bajo
   NSError *my_err;
   NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
-
+  if(response_dict==nil)
+    return [ErrorBuilder build:&my_err desc:@"No se pudo descargar la informacion" code:ERR_REQUEST_NULL];
+  
   NSString *requestedHTML = [key stringByAppendingFormat:@".%@" ,composedHtmlPrefix];
   NSData* html = (NSData*)[response_dict objectForKey:requestedHTML];
   NSLog(@" requestedHTML[%@] is nil -> %@", requestedHTML, (html==nil)?@"SI":@"NOR");
@@ -310,9 +312,17 @@ BOOL isIpad=NO;
   [request startSynchronous];
   
   NSError *request_error = [request error];
-  if (request_error != nil) {
+  if (request_error) {
     if (error != nil) *error = request_error;
     return nil;
+  }
+  
+  int code = [request responseStatusCode];
+  NSLog(@" ----------------- ");
+  NSLog(@" downloadUrl2: [%@] status:[%i]", [url absoluteString], code);
+  NSLog(@" ----------------- ");
+  if (code != 200) {
+    return [ErrorBuilder build:error desc:@"server error" code:ERR_REQUEST_NULL];
   }
   
   NSData *response = [request responseData];

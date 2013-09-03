@@ -286,6 +286,18 @@
 		78F6334F17D695AF0039DD70 /* logi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6332217D694CC0039DD70 /* logi@2x.png */; };
 		78F6335017D695B40039DD70 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9017D13E1C00A2196A /* logo.png */; };
 		78F6335117D695B90039DD70 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78197F9117D13E1C00A2196A /* logo@2x.png */; };
+		78F6335217D6A70B0039DD70 /* ico_galeria_ecosdiarios.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249C17D6520300A9E776 /* ico_galeria_ecosdiarios.png */; };
+		78F6335317D6A7CA0039DD70 /* ico_audio_ecosdiarios.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249917D6520300A9E776 /* ico_audio_ecosdiarios.png */; };
+		78F6335417D6A7D40039DD70 /* ico_plus_ecosdiarios.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249F17D6520300A9E776 /* ico_plus_ecosdiarios.png */; };
+		78F6335517D6A7D90039DD70 /* ico_video_ecosdiarios.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A217D6520300A9E776 /* ico_video_ecosdiarios.png */; };
+		78F6335617D6A8040039DD70 /* ico_video_castellanos.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A117D6520300A9E776 /* ico_video_castellanos.png */; };
+		78F6335717D6A8080039DD70 /* ico_plus_castellanos.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249E17D6520300A9E776 /* ico_plus_castellanos.png */; };
+		78F6335817D6A80D0039DD70 /* ico_galeria_castellanos.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249B17D6520300A9E776 /* ico_galeria_castellanos.png */; };
+		78F6335917D6A8100039DD70 /* ico_audio_castellanos.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249817D6520300A9E776 /* ico_audio_castellanos.png */; };
+		78F6335A17D6A82D0039DD70 /* ico_audio_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249A17D6520300A9E776 /* ico_audio_pregon.png */; };
+		78F6335B17D6A8310039DD70 /* ico_galeria_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249D17D6520300A9E776 /* ico_galeria_pregon.png */; };
+		78F6335C17D6A8380039DD70 /* ico_plus_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A017D6520300A9E776 /* ico_plus_pregon.png */; };
+		78F6335D17D6A83B0039DD70 /* ico_video_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A317D6520300A9E776 /* ico_video_pregon.png */; };
 		CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; };
 		CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
@@ -2916,6 +2928,9 @@
 				78E38B1C17D10530000E95D7 /* xsltwin32config.h.in in Resources */,
 				78E38B1D17D10530000E95D7 /* layout.css in Resources */,
 				78E38B1E17D10530000E95D7 /* ajax_loader.gif in Resources */,
+				78F6335617D6A8040039DD70 /* ico_video_castellanos.png in Resources */,
+				78F6335717D6A8080039DD70 /* ico_plus_castellanos.png in Resources */,
+				78F6335817D6A80D0039DD70 /* ico_galeria_castellanos.png in Resources */,
 				78E38B1F17D10530000E95D7 /* ico_audio.png in Resources */,
 				78E38B2017D10530000E95D7 /* ico_audio_black.png in Resources */,
 				78E38B2117D10530000E95D7 /* ico_audio_blue.png in Resources */,
@@ -2940,6 +2955,7 @@
 				78E38B3A17D10530000E95D7 /* loading_indicator_big.gif in Resources */,
 				78E38B3B17D10530000E95D7 /* functions.js in Resources */,
 				78E38B3C17D10530000E95D7 /* loading_indicator_small_blue.gif in Resources */,
+				78F6335917D6A8100039DD70 /* ico_audio_castellanos.png in Resources */,
 				78E38B3D17D10530000E95D7 /* loading_indicator_small.gif in Resources */,
 				78E38B3F17D10530000E95D7 /* ClasificadosViewController.xib in Resources */,
 				78E38B4017D10530000E95D7 /* CladificadosViewController_iPad.xib in Resources */,
@@ -3070,6 +3086,7 @@
 				CE8765D617D4FA5E00D282AA /* iVersion.bundle in Resources */,
 				CE8765D717D4FA5E00D282AA /* versions.plist in Resources */,
 				CE8765E117D4FA5E00D282AA /* ico_plus.png in Resources */,
+				78F6335A17D6A82D0039DD70 /* ico_audio_pregon.png in Resources */,
 				CE8765E217D4FA5E00D282AA /* align_just_icon_24.png in Resources */,
 				CE8765E317D4FA5E00D282AA /* bg.png in Resources */,
 				CE8765E417D4FA5E00D282AA /* bg@2x.png in Resources */,
@@ -3111,6 +3128,9 @@
 				CE87660417D4FA5E00D282AA /* redo.png in Resources */,
 				CE87660517D4FA5E00D282AA /* redo@2x.png in Resources */,
 				CE87660617D4FA5E00D282AA /* refresh.png in Resources */,
+				78F6335B17D6A8310039DD70 /* ico_galeria_pregon.png in Resources */,
+				78F6335C17D6A8380039DD70 /* ico_plus_pregon.png in Resources */,
+				78F6335D17D6A83B0039DD70 /* ico_video_pregon.png in Resources */,
 				CE87660717D4FA5E00D282AA /* refresh@2x.png in Resources */,
 				CE87660817D4FA5E00D282AA /* share.png in Resources */,
 				CE87660917D4FA5E00D282AA /* share@2x.png in Resources */,
@@ -3160,6 +3180,8 @@
 				CE8766E317D4FAC600D282AA /* xsltwin32config.h.in in Resources */,
 				CE8766E417D4FAC600D282AA /* layout.css in Resources */,
 				CE8766E517D4FAC600D282AA /* ajax_loader.gif in Resources */,
+				78F6335317D6A7CA0039DD70 /* ico_audio_ecosdiarios.png in Resources */,
+				78F6335217D6A70B0039DD70 /* ico_galeria_ecosdiarios.png in Resources */,
 				CE8766E617D4FAC600D282AA /* ico_audio.png in Resources */,
 				CE8766E717D4FAC600D282AA /* ico_audio_black.png in Resources */,
 				CE8766E817D4FAC600D282AA /* ico_audio_blue.png in Resources */,
@@ -3185,6 +3207,8 @@
 				CE87670217D4FAC600D282AA /* functions.js in Resources */,
 				CE87670317D4FAC600D282AA /* loading_indicator_small_blue.gif in Resources */,
 				CE87670417D4FAC600D282AA /* loading_indicator_small.gif in Resources */,
+				78F6335417D6A7D40039DD70 /* ico_plus_ecosdiarios.png in Resources */,
+				78F6335517D6A7D90039DD70 /* ico_video_ecosdiarios.png in Resources */,
 				CE87670617D4FAC600D282AA /* ClasificadosViewController.xib in Resources */,
 				CE87670717D4FAC600D282AA /* CladificadosViewController_iPad.xib in Resources */,
 				CE87670817D4FAC600D282AA /* menu_clasificados.html in Resources */,
