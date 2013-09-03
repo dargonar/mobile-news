@@ -650,7 +650,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "367"
          endingLineNumber = "367"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -663,8 +663,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "364"
          endingLineNumber = "364"
-         landmarkName = "-webView:didFailLoadWithError:"
-         landmarkType = "5">
+         landmarkName = "@implementation ClasificadosViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -675,7 +675,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "389"
-         endingLineNumber = "389">
+         endingLineNumber = "389"
+         landmarkName = "@implementation ClasificadosViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -687,7 +689,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "301"
          endingLineNumber = "301"
-         landmarkName = "-loadUrl:useCache:type:"
+         landmarkName = "-loadClasificados:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -700,7 +702,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "353"
          endingLineNumber = "353"
-         landmarkName = "-webViewDidFinishLoad:"
+         landmarkName = "-loadUrl:useCache:type:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -725,7 +727,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "397"
-         endingLineNumber = "397">
+         endingLineNumber = "397"
+         landmarkName = "@implementation ClasificadosViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -815,7 +819,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "294"
          endingLineNumber = "294"
-         landmarkName = "-loadUrl:useCache:type:"
+         landmarkName = "-loadClasificados:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
