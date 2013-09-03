@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout') }}
-  <body onload="onLoad('{{page_name}}')">
+  <body onload="onLoad('{{page_name}}')" class="{{appid}}">
     {{ cc.NotaAbierta(data.item) }}
 
     {% if data.item.related %}

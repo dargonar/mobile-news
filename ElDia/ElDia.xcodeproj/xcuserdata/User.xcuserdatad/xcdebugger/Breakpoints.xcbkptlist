@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398200892.889571"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
          landmarkName = "-carteleraDate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "232"
-         endingLineNumber = "232"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -221,8 +221,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "286"
          endingLineNumber = "286"
-         landmarkName = "@implementation MainViewController"
-         landmarkType = "3">
+         landmarkName = "-btnOptionsClick:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "337"
-         endingLineNumber = "337"
+         startingLineNumber = "319"
+         endingLineNumber = "319"
          landmarkName = "-downloadUrl2:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "320"
-         endingLineNumber = "320"
+         startingLineNumber = "302"
+         endingLineNumber = "302"
          landmarkName = "-processNewsForGestureNavigation:dummy:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -437,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "275"
-         endingLineNumber = "275"
+         startingLineNumber = "257"
+         endingLineNumber = "257"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -450,44 +450,44 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398731096.812874"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "623"
-         endingLineNumber = "623">
+         startingLineNumber = "482"
+         endingLineNumber = "482">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398731096.812874"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "617"
-         endingLineNumber = "617">
+         startingLineNumber = "476"
+         endingLineNumber = "476">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398731096.812874"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "643"
-         endingLineNumber = "643">
+         startingLineNumber = "502"
+         endingLineNumber = "502">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398731096.812874"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "655"
-         endingLineNumber = "655">
+         startingLineNumber = "514"
+         endingLineNumber = "514">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -507,11 +507,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-downloadUrl2:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -624,11 +624,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "361"
-         endingLineNumber = "361"
+         startingLineNumber = "343"
+         endingLineNumber = "343"
          landmarkName = "-downloadUrl2:error:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -637,11 +637,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "251"
-         endingLineNumber = "251"
+         startingLineNumber = "233"
+         endingLineNumber = "233"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -650,11 +650,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "256"
-         endingLineNumber = "256"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -663,11 +663,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "258"
-         endingLineNumber = "258"
+         startingLineNumber = "240"
+         endingLineNumber = "240"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -676,11 +676,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/ScreenManager.m"
-         timestampString = "398730323.123631"
+         timestampString = "399842730.331286"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "244"
+         endingLineNumber = "244"
          landmarkName = "-getScreen:useCache:processImages:prefix:error:processNavigation:html_prefix:"
          landmarkType = "5">
       </FileBreakpoint>

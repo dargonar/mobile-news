@@ -436,7 +436,7 @@ class HtmlBuilderMixing(object):
         # Armamos la direccion del xml    
         httpurl, args, template, page_name, extras_map = get_httpurl(appid, url, size, ptls)
 
-        args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url }
+        args = {'data': r.rss.channel, 'cfg': extras_map, 'page_name': page_name, 'raw_url':url , 'appid': apps_id[appid]}
         content = self.render_template('ws/%s' % template, **args)
 
         result = (content, u','.join(imgs))
