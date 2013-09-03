@@ -29,7 +29,8 @@ def get_noticia_date(strdate):
   parts = strdate.split()
   parts = parts[0:parts.index('|')]
   parts = filter(lambda a: a!='de',parts)
-  inx = months.index(parts[1].lower())
+  month = parts[1].lower() if parts[1].lower()!='setiembre' else 'septiembre'
+  inx = months.index(month)
   return datetime(int(parts[2]), inx+1, int(parts[0]), int(hh), int(mm))
 
 def rss_index(args):
