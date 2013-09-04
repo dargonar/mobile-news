@@ -49,4 +49,4 @@ mv app.yaml.tmp appengine/app.yaml
 # git add appengine/static_realestate/css/realestate.min-$1.css
 
 # Compilamos los templates jinja2
-/c/Python26/python.exe compile_templates.py
+/c/Python27/python.exe compile_templates.py

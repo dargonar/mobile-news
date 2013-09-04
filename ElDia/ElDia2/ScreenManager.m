@@ -24,33 +24,6 @@
 #import "ZipWriteStream.h"
 #import "ZipReadStream.h"
 
-NSString * const MAIN_STYLESHEET          = @"1_main_list.xsl";
-NSString * const NOTICIA_STYLESHEET       = @"3_new.xsl";
-NSString * const SECTIONS_STYLESHEET      = @"2_section_list.xsl";
-NSString * const MENU_STYLESHEET          = @"4_menu.xsl";
-NSString * const CLASIFICADOS_STYLESHEET  = @"5_clasificados.xsl";
-NSString * const FUNEBRES_STYLESHEET      = @"6_funebres.xsl";
-NSString * const FARMACIAS_STYLESHEET     = @"7_farmacias.xsl";
-NSString * const CARTELERA_STYLESHEET     = @"8_cartelera.xsl";
-
-NSString * const iPad_MAIN_STYLESHEET                 = @"1_tablet_main_list.xsl";
-NSString * const iPad_SECTION_STYLESHEET              = @"1_tablet_section_list.xsl";
-NSString * const iPad_SECTION_NEWS_PT_STYLESHEET      = @"2_tablet_noticias_seccion_portrait.xsl";
-NSString * const iPad_SECTION_NEWS_LS_STYLESHEET      = @"2_tablet_noticias_seccion_landscape.xsl";
-NSString * const iPad_MAIN_NEWS_PT_STYLESHEET         = @"2_tablet_noticias_index_portrait.xsl";
-NSString * const iPad_MAIN_NEWS_LS_STYLESHEET         = @"2_tablet_noticias_index_landscape.xsl";
-//NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_portrait.xsl";  // NO SE USA
-NSString * const iPad_NOTICIA_PT_STYLESHEET           = @"3_tablet_new_global.xsl";
-NSString * const iPad_NOTICIA_LS_STYLESHEET           = @"3_tablet_new_landscape.xsl"; // NO SE USA
-NSString * const iPad_NOTICIAS_REL_PT_STYLESHEET      = @"3_tablet_new_relateds_portrait.xsl"; // NO SE USA
-NSString * const iPad_NOTICIAS_REL_LS_STYLESHEET      = @"3_tablet_new_relateds_landscape.xsl"; // NO SE USA
-NSString * const iPad_MENU_STYLESHEET                 = @"4_tablet_menu_secciones.xsl"; 
-NSString * const iPad_CLASIFICADOS_STYLESHEET         = @"5_tablet_clasificados.xsl";
-NSString * const iPad_FUNEBRES_STYLESHEET             = @"6_tablet_funebres.xsl";
-NSString * const iPad_FARMACIAS_STYLESHEET            = @"7_tablet_farmacias.xsl";
-NSString * const iPad_CARTELERA_STYLESHEET            = @"8_tablet_cartelera.xsl";
-
-
 NSString * const SERVICE_URL                          = @"http://www.diariosmoviles.com.ar/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
@@ -251,7 +224,9 @@ BOOL isIpad=NO;
   //Lo bajo
   NSError *my_err;
   NSDictionary *response_dict =[self downloadUrl2:url error:&my_err];
-
+  if(response_dict==nil)
+    return [ErrorBuilder build:&my_err desc:@"No se pudo descargar la informacion" code:ERR_REQUEST_NULL];
+  
   NSString *requestedHTML = [key stringByAppendingFormat:@".%@" ,composedHtmlPrefix];
   NSData* html = (NSData*)[response_dict objectForKey:requestedHTML];
   NSLog(@" requestedHTML[%@] is nil -> %@", requestedHTML, (html==nil)?@"SI":@"NOR");
@@ -337,9 +312,17 @@ BOOL isIpad=NO;
   [request startSynchronous];
   
   NSError *request_error = [request error];
-  if (request_error != nil) {
+  if (request_error) {
     if (error != nil) *error = request_error;
     return nil;
+  }
+  
+  int code = [request responseStatusCode];
+  NSLog(@" ----------------- ");
+  NSLog(@" downloadUrl2: [%@] status:[%i]", [url absoluteString], code);
+  NSLog(@" ----------------- ");
+  if (code != 200) {
+    return [ErrorBuilder build:error desc:@"server error" code:ERR_REQUEST_NULL];
   }
   
   NSData *response = [request responseData];
@@ -383,129 +366,6 @@ BOOL isIpad=NO;
   
   return  mdict;
   
-}
-
-
-
-
--(NSString*)getStyleSheet:(NSString*)url {
-  
-  if(isIpad)
-  {
-    return [self getStyleSheetiPad:url];
-  }
-  
-  if( [url hasPrefix:@"section://main"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MAIN_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"noticia://" ] ) {  
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:NOTICIA_STYLESHEET];
-  }
-  
-  
-  if( [url hasPrefix:@"clasificados://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CLASIFICADOS_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"funebres://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:FUNEBRES_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"section://"] ) {  
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SECTIONS_STYLESHEET];
-  }
-
-  if( [url hasPrefix:@"menu://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MENU_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"farmacia://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:FARMACIAS_STYLESHEET];
-  }
-
-  if( [url hasPrefix:@"cartelera://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CARTELERA_STYLESHEET];
-  }
-
-  return nil;
-}
-
--(NSString*)getStyleSheetiPad:(NSString*)url {
-  
-  if( [url hasPrefix:@"menu_section://main"] ) {
-    NSString* sheet = iPad_MAIN_NEWS_PT_STYLESHEET; //app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"menu_section://"] ) {
-    NSString* sheet = app_delegate.isLandscape ? iPad_SECTION_NEWS_LS_STYLESHEET:iPad_SECTION_NEWS_PT_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-    
-  }
-  
-  if( [url hasPrefix:@"ls_menu_section://main"] ) {
-    NSString* sheet = iPad_MAIN_NEWS_LS_STYLESHEET; //app_delegate.isLandscape ? iPad_MAIN_NEWS_LS_STYLESHEET:iPad_MAIN_NEWS_PT_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"ls_menu_section://"] ) {
-    NSString* sheet = iPad_SECTION_NEWS_LS_STYLESHEET; 
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"section://main"] ) {
-    NSString* sheet = iPad_MAIN_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"section://"] ) {
-    NSString* sheet = iPad_SECTION_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-    
-  }
-  
-  if( [url hasPrefix:@"ls_section://"] ) {
-    NSString* sheet = SECTIONS_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-    
-  }
-  
-  if( [url hasPrefix:@"noticia://" ] ) {
-    NSString* sheet = iPad_NOTICIA_PT_STYLESHEET; //app_delegate.isLandscape ? iPad_NOTICIA_LS_STYLESHEET:iPad_NOTICIA_PT_STYLESHEET;
-    NSLog(@"ScreenManager::getStyleSheetiPad:: noticia:[%@]", sheet);
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"ls_noticia://" ] ) {
-    NSString* sheet = iPad_NOTICIA_LS_STYLESHEET; 
-    NSLog(@"ScreenManager::getStyleSheetiPad:: noticia:[%@]", sheet);
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  
-  if( [url hasPrefix:@"clasificados://"] ) {
-    NSString* sheet = iPad_CLASIFICADOS_STYLESHEET;
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sheet];
-  }
-  
-  if( [url hasPrefix:@"funebres://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FUNEBRES_STYLESHEET];
-  }
-    
-  if( [url hasPrefix:@"menu://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_MENU_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"farmacia://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_FARMACIAS_STYLESHEET];
-  }
-  
-  if( [url hasPrefix:@"cartelera://"] ) {
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:iPad_CARTELERA_STYLESHEET];
-  }
-  
-  return nil;
 }
 
 

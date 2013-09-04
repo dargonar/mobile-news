@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout') }}
-  <body class="menu" style="margin:0;" onload="onLoad('{{page_name}}')">
+  <body class="menu {{appid}}" style="margin:0;" onload="onLoad('{{page_name}}')">
     <div id="menu">
       <div class="menu-header">Secciones</div>
       <ul>

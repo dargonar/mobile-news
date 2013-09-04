@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout_tablet') }}
-  <body onload="onLoad('{{page_name}}')" class="menu">
+  <body onload="onLoad('{{page_name}}')" class="menu {{appid}}">
     <div id="menu">
       <ul>
         <li class="seccion">Noticias</li>

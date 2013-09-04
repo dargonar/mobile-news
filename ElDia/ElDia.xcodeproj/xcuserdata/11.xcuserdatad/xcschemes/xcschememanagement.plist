@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>35</integer>
 		</dict>
+		<key>EcosDiarios.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>38</integer>
+		</dict>
 		<key>ElDia copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>36</integer>
+		</dict>
+		<key>Pregon.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>37</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -32,7 +42,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>78B886F817D150D900CE7EED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78B8880517D1512200CE7EED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>78E38A7317D10530000E95D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE87650617D4FA5E00D282AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE87663A17D4FAC600D282AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

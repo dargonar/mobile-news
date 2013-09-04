@@ -68,7 +68,7 @@ class ScreenController(FrontendHandler, HtmlBuilderMixing):
     
     content, images = self.build_html_and_images(appid, url, size, ptls)
     
-    # self.response.write(get_mapping(appid)['config'])
+    # self.response.write(apps_id[appid])
     # return
     
     # Set up headers for browser to correctly recognize HTML

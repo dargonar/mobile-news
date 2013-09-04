@@ -131,7 +131,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage" id="758040838">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">logo.png</string>
+							<string key="NSResourceName">logi.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="972010097">
@@ -988,7 +988,7 @@
 			<string key="Default-Portrait~ipad.png">{768, 1004}</string>
 			<string key="bg.png">{320, 44}</string>
 			<string key="list.png">{24, 24}</string>
-			<string key="logo.png">{149, 23}</string>
+			<string key="logi.png">{149, 23}</string>
 			<string key="offline.png">{36, 36}</string>
 			<string key="refresh.png">{36, 36}</string>
 			<string key="warning.hueco.256x256.png">{247, 217}</string>

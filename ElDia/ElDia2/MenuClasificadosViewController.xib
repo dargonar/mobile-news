@@ -167,7 +167,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">logo.png</string>
+							<string key="NSResourceName">logi.png</string>
 						</object>
 					</object>
 					<object class="IBUIActivityIndicatorView" id="391777324">
@@ -404,7 +404,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="bg.png">{320, 44}</string>
 			<string key="br_prev_icon_24.png">{24, 24}</string>
-			<string key="logo.png">{149, 23}</string>
+			<string key="logi.png">{149, 23}</string>
 			<string key="offline.png">{36, 36}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

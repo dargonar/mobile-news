@@ -1,7 +1,7 @@
 {% import 'ws/functions_ex.xsl' as cc %}
 <html>
   {{ cc.Head('layout_tablet') }}
-  <body onload="onLoad('{{page_name}}')" class="portrait padded">
+  <body onload="onLoad('{{page_name}}')" class="{{appid}} portrait padded">
     {{ cc.UpdatedAt() }}
     {% if not data.item.0.thumbnail %}      
       <div id="index" class="padded_landscape top_padded">
