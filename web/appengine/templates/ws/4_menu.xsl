@@ -15,15 +15,21 @@
         {% endif %}
         
         {% if cfg.has_funebres %}
-        <li><a class="vip2" href="funebres://">Fúnebres</a></li>
+          {% set inner_url = 'funebres://' %}
+          
+        <li><a class="vip2" href="{{inner_url}}">Fúnebres</a></li>
         {% endif %}
 
         {% if cfg.has_farmacia %}
-        <li><a class="vip2" href="farmacia://">Farmacias de turno</a></li>
+          {% set inner_url = 'http://circulorafaela.com.ar/farmacias.htm' if appid == 'castellanos' else 'farmacia://' %}
+          
+        <li><a class="vip2" href="{{inner_url}}">Farmacias de turno</a></li>
         {% endif %}
         
         {% if cfg.has_cartelera %}
-        <li><a class="vip2" href="cartelera://">Cartelera de cine</a></li>
+          {% set inner_url = 'http://www.rafaela.gov.ar/cine/' if appid == 'castellanos' else 'cartelera://' %}
+          
+        <li><a class="vip2" href="{{inner_url}}">Cartelera de cine</a></li>
         {% endif %}
 
         <li class="vip2_close"></li>
