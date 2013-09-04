@@ -221,6 +221,12 @@ def get_mapping():
         'big'    : {'pt': '6_tablet_funebres.xsl',        'ls': '6_tablet_funebres.xsl'},
       }),
 
+      ('farmacia://' , {
+        'url'    : 'X: rss_farmacia',
+        'small'  : {'pt': '7_farmacias.xsl',        'ls': '7_farmacias.xsl'},
+        'big'    : {'pt': '7_tablet_farmacias.xsl', 'ls': '7_tablet_farmacias.xsl'},
+      }),
+
       ('menu_section://main' , {
         'url'    : 'X: rss_index',
         'small'  : None,
