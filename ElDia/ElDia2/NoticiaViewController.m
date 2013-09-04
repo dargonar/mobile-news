@@ -15,6 +15,8 @@
 #import "NewsManager.h"
 #import "ErrorBuilder.h"
 #import "SHK.h"
+#import "SHKFacebook.h"
+#import "SHKTwitter.h"
 #import "HCYoutubeParser.h"
 
 #import "GTMNSString+HTML.h"
@@ -26,7 +28,7 @@
 @synthesize btnFontSizePlus, btnFontSizeMinus, loading_indicator;
 @synthesize myYoutubeViewController, headerUIImageView, offline_view;
 @synthesize noticia_id, noticia_url, noticia_title, noticia_header;
-@synthesize pageControl, pageIndicator, shareBtn;
+@synthesize pageControl, pageIndicator, shareBtn, twitterBtn;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -73,6 +75,12 @@
   [self invalidatePageIndicators];
   // Do any additional setup after loading the view from its nib.
 //  [self addGestureRecognizers];
+  if([[AppDelegate getBundleId]isEqualToString:@"com.diventi.eldia"]){
+    [self twitterBtn].enabled = YES;
+    [self twitterBtn].hidden = NO;
+    UIImage *_image = [UIImage imageNamed: @"facebook.png"];
+    [[self shareBtn] setImage:_image forState:UIControlStateNormal];
+  }
 }
 
 
@@ -234,6 +242,18 @@
   [[app_delegate navigationController] popViewControllerAnimated:YES];
 }
 
+- (IBAction) twitterBtnClick: (id)param{
+  NSURL *url = [NSURL URLWithString:self.noticia_url];
+  
+  SHKItem *item = [SHKItem URL:url
+                         title:[[NSString alloc] initWithFormat:@"%@ -ElDia.com.ar", self.noticia_title]
+                   contentType:SHKURLContentTypeWebpage];
+  
+  [SHKTwitter shareItem:item];
+  return;
+  
+}
+
 UIActionSheet* actionSheet;
 - (IBAction) btnShareClick: (id)param{
   
@@ -253,9 +273,14 @@ UIActionSheet* actionSheet;
   NSURL *url = [NSURL URLWithString:self.noticia_url];
   
   SHKItem *item = [SHKItem URL:url
-                        title:[[NSString alloc] initWithFormat:@"%@ - ElDia.com.ar", self.noticia_title]
+                        title:[[NSString alloc] initWithFormat:@"%@", self.noticia_title]
                         contentType:SHKURLContentTypeWebpage];
-
+  
+  if([[AppDelegate getBundleId]isEqualToString:@"com.diventi.eldia"])
+  {
+    [SHKFacebook shareItem:item];
+    return;
+  }
 	// Get the ShareKit action sheet
 	//SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
   actionSheet = [SHKActionSheet actionSheetForItem:item];
