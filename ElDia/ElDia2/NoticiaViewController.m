@@ -564,6 +564,11 @@ UIActionSheet* actionSheet;
       [self loadPhotoGallery:url];
       handled = YES;
     }
+    else if ([[url scheme]isEqualToString:@"http"])
+    {
+      [[UIApplication sharedApplication] openURL:url];
+      handled = YES;
+    }
     url=nil;
     if(handled == YES)
     {

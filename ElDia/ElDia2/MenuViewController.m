@@ -396,7 +396,11 @@ NSLock *lock;
               [self slideThenHideShowCartelera];
               return NO;
             }
-  
+            else if ([[url scheme]isEqualToString:@"http"])
+            {
+              [[UIApplication sharedApplication] openURL:url];
+              return NO;
+            }
   
   
   
