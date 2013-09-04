@@ -390,7 +390,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "295"
          endingLineNumber = "295"
-         landmarkName = "-setCurrentUrl:"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1207,8 +1207,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "228"
          endingLineNumber = "228"
-         landmarkName = "-positionateAdView:screen:view:"
-         landmarkType = "5">
+         landmarkName = "@implementation BaseMobiViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1402,7 +1402,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "369"
          endingLineNumber = "369"
-         landmarkName = "-onImageDownloaded:"
+         landmarkName = "-setHTML:url:webView:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1423,11 +1423,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "399589615.222506"
+         timestampString = "399949068.791615"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "422"
-         endingLineNumber = "422"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
          landmarkName = "-zoomToFitBig"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1436,11 +1436,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "399589615.222506"
+         timestampString = "399949068.791615"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "434"
-         endingLineNumber = "434"
+         startingLineNumber = "439"
+         endingLineNumber = "439"
          landmarkName = "-zoomToFitSmall"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2008,12 +2008,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "399589615.222506"
+         timestampString = "399949068.791615"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "402"
-         endingLineNumber = "402"
-         landmarkName = "-zoomToFitBig"
+         startingLineNumber = "407"
+         endingLineNumber = "407"
+         landmarkName = "-onImageDownloaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2021,11 +2021,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "399589615.222506"
+         timestampString = "399949068.791615"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
+         startingLineNumber = "405"
+         endingLineNumber = "405"
          landmarkName = "-onImageDownloaded:"
          landmarkType = "5">
       </FileBreakpoint>

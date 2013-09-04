@@ -391,6 +391,11 @@ NSString* click_url =@"";
   __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
                                  , mobi_image.local_uri];
   
+  NSLog(@"*************************************");
+  NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
+  NSLog(@"BaseMobi::onImageDownloaded() [%@]", jsString);
+  NSLog(@"*************************************");
+  
   dispatch_async(dispatch_get_main_queue(), ^{
     //[_UIWebView stringByEvaluatingJavaScriptFromString:jsString];
     if(self.primaryUIWebView!=nil)
