@@ -245,7 +245,6 @@ def get_mapping():
       'has_farmacia'     : True,
       'has_cartelera'    : True,
     },
-    
     'config': {
         'android': { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-3'] },
         'iphone':  { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-3'] },
