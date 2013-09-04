@@ -39,15 +39,14 @@ def rss_index(args):
 
   builder = XMLBuild(conf, today_date)
 
-  main = soup.select('div.destacadasbox100')[0]
-
-  item = {}
-  item['title']     = main.h1.text
-  item['link']      = main.a['href']
-  item['guid']      = re.compile('\d+').findall(item['link'])[0]
-  item['thumbnail'] = main.img['src'] if main.img else None
-  item['subheader'] = main.p.text
-  builder.add_item(item)
+  for main in soup.select('div.destacadasbox100')+soup.select('div.destacadasbox50'):
+    item = {}
+    item['title']     = main.h1.text
+    item['link']      = main.a['href']
+    item['guid']      = re.compile('\d+').findall(item['link'])[0]
+    item['thumbnail'] = main.img['src'] if main.img else None
+    item['subheader'] = main.p.text if main.p is not None else main.find_all('div', {'class':'box50-bajada'})[0].text
+    builder.add_item(item)
 
   headers = soup.select('div.C1 h1 a') + soup.select('div.C2 h1 a')
   bodies  = soup.select('div.C1 div.box') + soup.select('div.C2 div.box')
