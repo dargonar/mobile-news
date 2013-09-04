@@ -337,24 +337,29 @@ BOOL isLoading_ = YES;
 }
 
 -(void)positionate{
-  
-  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  [self positionate:NO];
+}
+
+-(void)positionate:(BOOL)forzar{
+  //UIDeviceOrientation - UIInterfaceOrientation
+  UIDeviceOrientation deviceOrientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
   
   [self positionateAdMainScreen:deviceOrientation];
   //  return;
 
   
   BOOL hasRotated = NO;
-  if (UIDeviceOrientationIsLandscape(deviceOrientation) &&
-      !isLandscapeView_)
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) && (forzar ||!isLandscapeView_))
   {
     [self positionateLandscape];
     hasRotated = YES;
+    NSLog(@"MainViewController::positionate() Landscape adHeight:[%d]", [self adHeight]);
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView_ || isLoading_))
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (forzar || isLandscapeView_ || isLoading_))
   {
     [self positionatePortrait];
     hasRotated = YES;
+    NSLog(@"MainViewController::positionate() Portrait adHeight:[%d]", [self adHeight]);
   }
   
   [self zoomToFit];
@@ -391,7 +396,7 @@ BOOL isLoading_ = YES;
     }
   }
   else{
-//    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
   // HACK testing
@@ -414,7 +419,7 @@ bool menuLoaded = NO;
     self.btnOptions.enabled=YES;
   }
   else{
-//    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
+    self.mainUIWebView.frame=CGRectMake(0, 44, width, height-44-[self adHeight]);
   }
   
   // HACK testing

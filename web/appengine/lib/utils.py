@@ -375,7 +375,7 @@ def get_xml(appid, url, use_cache=False):
                       xmlns:media="http://search.yahoo.com/mrss/" 
                       xmlns:news="http://www.diariosmoviles.com.ar/news-rss/" 
                       version="2.0" encoding="UTF-8"><channel>
-                      <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now, result)
+                      <pubDate>%s</pubDate><item><![CDATA[%s]]></item></channel></rss>""" % (now, result.decode('utf-8'))
     
     if type(result) != type(unicode()):
       result = result.decode('utf-8')
