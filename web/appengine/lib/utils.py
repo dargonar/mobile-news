@@ -365,7 +365,7 @@ def get_xml(appid, url, use_cache=False):
     else:
       if '%s' in httpurl: httpurl = httpurl % args['host']
       result = read_clean(httpurl, clean=False, use_cache=use_cache)
-
+      result = result.decode('utf-8')
       # HACKO el DIA:
       if url.startswith('farmacia://') or url.startswith('cartelera://') and apps_id[appid] == 'eldia':
         now = date2iso(datetime.now()+timedelta(hours=-3))

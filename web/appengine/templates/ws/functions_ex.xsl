@@ -44,7 +44,7 @@
   <div class="nota_abierta">
     {{ DateSectionLabel(node, 'fecha') }}
     <h1>{{node.title}}</h1>
-    {% if node.subheader %}
+    {% if node.subheader and node.subheader.value and node.subheader.value != 'None' %}
     <p class="subtitulo" id="bajada">{{node.subheader.value}}</p>
     {% endif %}
     <div class="separador">&nbsp;</div>
@@ -149,9 +149,9 @@
       <br />
       <h1>{{node.title}}</h1>
       </div>
-      {% if node.subheader %}
+      {% if node.subheader and node.subheader.value and node.subheader.value != 'None' %}
         <div class="bajada" id="bajada">
-          {{node.subheader.value}}
+          {{node.subheader.value}} 
         </div>
       {% endif %}
       <div id="informacion" style="display:block;">
