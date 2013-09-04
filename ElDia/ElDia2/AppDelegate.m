@@ -45,7 +45,7 @@
 }
 
 + (NSString*) getBundleId{
-  return [[NSBundle mainBundle] bundleIdentifier];
+  return [[[NSBundle mainBundle] bundleIdentifier] stringByReplacingOccurrencesOfString:@"mobipaper" withString:@"eldia"];
 }
 
 int cache_size = 2; //30;
