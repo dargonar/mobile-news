@@ -36,7 +36,6 @@
 
 + (void)initialize
 {
-
   //  HACK
   [iVersion sharedInstance].ignoredVersion=nil;
   [iVersion sharedInstance].showOnFirstLaunch = NO;
@@ -50,14 +49,10 @@
 
 int cache_size = 2; //30;
 -(void)checkCacheSize{
-  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
     [[DiskCache defaultCache] purge];
-    
   });
   return;
-  
 }
 
 -(BOOL)isAdMob{
