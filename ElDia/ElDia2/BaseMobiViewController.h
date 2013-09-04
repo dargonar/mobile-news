@@ -44,5 +44,8 @@
 -(BOOL)adStatus;
 -(NSInteger)adHeight;
 
+-(void)positionate:(BOOL)forzar;
+-(void)positionate;
+
 -(void)zoomToFit;
 @end

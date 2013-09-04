@@ -62,9 +62,13 @@ BOOL mViewDidLoad=NO;
 }
 
 -(void)positionate{
+  [self positionate:NO];
+}
+
+-(void)positionate:(BOOL)forzar{
   
-  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
-  
+  UIDeviceOrientation deviceOrientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
+
 //  [self positionateAdNoticiaScreen:deviceOrientation];
   [self positionateAdOtherScreen:[UIApplication sharedApplication].statusBarOrientation];
   

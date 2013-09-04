@@ -775,17 +775,21 @@ BOOL justLoaded = YES;
 }
 
 -(void)positionate{
+  [self positionate:NO];
+}
+
+-(void)positionate:(BOOL)forzar{
   
-  UIDeviceOrientation deviceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+  UIDeviceOrientation deviceOrientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
   
   [self positionateAdNoticiaScreen:deviceOrientation];
   
   
-  if (UIDeviceOrientationIsLandscape(deviceOrientation) && !isLandscapeView)
+  if (UIDeviceOrientationIsLandscape(deviceOrientation) && (forzar || !isLandscapeView ))
   {
     [self positionateLandscape];
   }
-  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (isLandscapeView || justLoaded))
+  else if (UIDeviceOrientationIsPortrait(deviceOrientation) && (forzar || isLandscapeView || justLoaded))
   {
     [self positionatePortrait];
   }

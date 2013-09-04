@@ -14,7 +14,7 @@
 #import "GAI.h"
 
 #import "MainViewController.h"
-
+#import "ClasificadosViewController.h"
 
 NSString * const MAIN_SCREEN          = @"MAIN_SCREEN";
 NSString * const NOTICIA_SCREEN       = @"NOTICIA_SCREEN";
@@ -66,6 +66,9 @@ BOOL mIsIpad=NO;
   if([app_delegate isAdMob]==NO)
     return;
   
+  if(([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]] || [[self classForCoder] isSubclassOfClass:[MainViewController class]] || [[self classForCoder] isSubclassOfClass:[ClasificadosViewController class]] )==NO)
+    return;
+  
   // Create a view of the standard size at the top of the screen.
   // Available AdSize constants are explained in GADAdSize.h.
   bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -93,13 +96,14 @@ BOOL mIsIpad=NO;
 }
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
-  [UIView beginAnimations:@"BannerSlide" context:nil];
-  bannerView.frame = CGRectMake(0.0,
-                                self.view.frame.size.height -
-                                bannerView.frame.size.height,
-                                bannerView.frame.size.width,
-                                bannerView.frame.size.height);
-  [UIView commitAnimations];
+//  [UIView beginAnimations:@"BannerSlide" context:nil];
+//  bannerView.frame = CGRectMake(0.0,
+//                                self.view.frame.size.height -
+//                                bannerView.frame.size.height,
+//                                bannerView.frame.size.width,
+//                                bannerView.frame.size.height);
+//  [UIView commitAnimations];
+  [self positionate:YES];
 }
 
 - (void)viewDidUnload
@@ -264,13 +268,13 @@ NSString* click_url =@"";
         ad_size = @"728x90";
       }
       else{
-        self.adUIImageView.frame=CGRectMake(0, height-90, width, 90);
+        view.frame=CGRectMake(0, height-90, width, 90);
         //data = [mAdManager getLAdImage];
         ad_size = @"728x90";
       }
     }
     else{
-      self.adUIImageView.frame=CGRectMake(0, height-50, width, 50);
+      view.frame=CGRectMake(0, height-50, width, 50);
       //data = [mAdManager getSAdImage];
       ad_size = @"320x50";
     }
@@ -306,7 +310,7 @@ NSString* click_url =@"";
   if (tracking_codes==nil)
     return;
   
-  NSLog(@" tracking code [%@]", (NSString*)[tracking_codes objectAtIndex:0]);
+  //NSLog(@" tracking code [%@]", (NSString*)[tracking_codes objectAtIndex:0]);
   // Send a screen view to the first property.
   id tracker1 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:0]];
   [tracker1 sendView:[_url absoluteString]];
@@ -388,9 +392,10 @@ NSString* click_url =@"";
   if(self.currentUrl != url)
     return;
   
-  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
-                                 , mobi_image.local_uri];
-  
+//  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
+//                                 , mobi_image.local_uri];
+  __block NSString *jsString  = [NSString stringWithFormat:@"update_all_images();"];
+
   NSLog(@"*************************************");
   NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
   NSLog(@"BaseMobi::onImageDownloaded() [%@]", jsString);
