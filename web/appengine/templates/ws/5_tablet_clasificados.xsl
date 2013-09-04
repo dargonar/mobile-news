@@ -10,7 +10,7 @@
           <div class="titulo">Clasificados</div>
           <div class="rubro">{{items.0.title}}</div>
           <p></p>
-          {{ cc.DayMonthYear(item.0) }}
+          {{ cc.DayMonthYear(items.0) }}
           <div class="clear"></div>
         </div>
         
