@@ -48,6 +48,8 @@
 @property (nonatomic, retain) IBOutlet UIView *optionsBottomMenu;
 @property (nonatomic, retain) IBOutlet UIImageView *headerUIImageView;
 @property (nonatomic, retain) IBOutlet UIButton *shareBtn;
+@property (nonatomic, retain) IBOutlet UIButton *twitterBtn;
+
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizePlus;
 @property (nonatomic, retain) IBOutlet UIButton *btnFontSizeMinus;
 
@@ -62,6 +64,7 @@
 - (IBAction) btnShareClick: (id)param;
 - (IBAction) btnFontSizePlusClick: (id)param;
 - (IBAction) btnFontSizeMinusClick: (id)param;
+- (IBAction) twitterBtnClick: (id)param;
 
 - (void)loadNoticia:(NSURL *)url section:(NSString*)section;
 - (void)loadBlank;

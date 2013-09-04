@@ -294,6 +294,10 @@
 		78F6335B17D6A8310039DD70 /* ico_galeria_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4249D17D6520300A9E776 /* ico_galeria_pregon.png */; };
 		78F6335C17D6A8380039DD70 /* ico_plus_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A017D6520300A9E776 /* ico_plus_pregon.png */; };
 		78F6335D17D6A83B0039DD70 /* ico_video_pregon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E424A317D6520300A9E776 /* ico_video_pregon.png */; };
+		78F6336217D7C85E0039DD70 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6335E17D7C85E0039DD70 /* facebook.png */; };
+		78F6336317D7C85E0039DD70 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6335F17D7C85E0039DD70 /* facebook@2x.png */; };
+		78F6336417D7C85E0039DD70 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6336017D7C85E0039DD70 /* twitter.png */; };
+		78F6336517D7C85E0039DD70 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F6336117D7C85E0039DD70 /* twitter@2x.png */; };
 		CE02FB50164947150049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; };
 		CE02FB5216494C7F0049F63A /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CE02FB4F164947150049F63A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE16EBEF15ED5AFD00EC8210 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */; };
@@ -1325,6 +1329,10 @@
 		78E99D9F164DF27D00780D54 /* MenuClasificadosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuClasificadosViewController.xib; sourceTree = "<group>"; };
 		78F6332117D694CC0039DD70 /* logi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logi.png; sourceTree = "<group>"; };
 		78F6332217D694CC0039DD70 /* logi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logi@2x.png"; sourceTree = "<group>"; };
+		78F6335E17D7C85E0039DD70 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		78F6335F17D7C85E0039DD70 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		78F6336017D7C85E0039DD70 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		78F6336117D7C85E0039DD70 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		CE02FB4E164947150049F63A /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		CE02FB4F164947150049F63A /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		CE16EBEE15ED5AFD00EC8210 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -2284,6 +2292,10 @@
 				CEB0461A17BC4903001E5E4F /* Default@2x.png */,
 				CEB0461D17BC4903001E5E4F /* Default_ipad.png */,
 				CEB0461E17BC4903001E5E4F /* Default_ipad@2x.png */,
+				78F6335E17D7C85E0039DD70 /* facebook.png */,
+				78F6335F17D7C85E0039DD70 /* facebook@2x.png */,
+				78F6336017D7C85E0039DD70 /* twitter.png */,
+				78F6336117D7C85E0039DD70 /* twitter@2x.png */,
 				CEB0462317BC4903001E5E4F /* font_size_icon_16.png */,
 				CEB0462417BC4903001E5E4F /* font_size_icon_16@2x.png */,
 				CEB0462517BC4903001E5E4F /* font_size_icon_24.png */,
@@ -3370,6 +3382,10 @@
 				78E424AF17D6520300A9E776 /* ico_video_pregon.png in Resources */,
 				78F6332317D694CC0039DD70 /* logi.png in Resources */,
 				78F6332417D694CC0039DD70 /* logi@2x.png in Resources */,
+				78F6336217D7C85E0039DD70 /* facebook.png in Resources */,
+				78F6336317D7C85E0039DD70 /* facebook@2x.png in Resources */,
+				78F6336417D7C85E0039DD70 /* twitter.png in Resources */,
+				78F6336517D7C85E0039DD70 /* twitter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
