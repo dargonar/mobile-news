@@ -58,9 +58,36 @@ BOOL mIsIpad=NO;
                                            selector:@selector(onImageDownloaded:) 
                                                name:@"com.diventi.mobipaper.image_downloaded" 
                                              object:nil];
+  [self colorizeGUIObjects];
   [self initAdMob];
 }
 
+/*
+ - (void)viewWillAppear:(BOOL)animated {
+ [super viewWillAppear:animated];
+ //[self positionateAd];
+  
+ }
+*/
+
+-(void)colorizeGUIObjects{
+  return;
+  NSDictionary *colors = [[NSDictionary alloc]initWithObjectsAndKeys:
+                          [UIColor colorWithRed:0.0 green:16.0/255.0 blue:31.0/255.0 alpha:1.0] , @"com.diventi.castelanos",
+                          [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
+                          [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
+                          [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon"
+                          , nil];
+  for(UIView *subView in [self.view subviews]){
+    if([[subView classForCoder] isSubclassOfClass:[UIActivityIndicatorView class]]==NO)
+      continue;
+
+    NSLog(@"colorizing: [%@] [%@]", [AppDelegate getBundleId], (UIColor*)[colors objectForKey:[AppDelegate getBundleId]]);
+          
+    [((UIActivityIndicatorView*)subView) setColor:(UIColor*)[colors objectForKey:[AppDelegate getBundleId]]];
+  }
+  
+}
 -(void)initAdMob{
   
   if([app_delegate isAdMob]==NO)
@@ -82,7 +109,8 @@ BOOL mIsIpad=NO;
   [bannerView_ setDelegate:self];
   [self.view addSubview:bannerView_];
   
-  GADRequest *request = [GADRequest request];
+  /*
+   GADRequest *request = [GADRequest request];
   
   // Make the request for a test ad. Put in an identifier for
   // the simulator as well as any devices you want to receive test ads.
@@ -90,6 +118,8 @@ BOOL mIsIpad=NO;
                          @"YOUR_SIMULATOR_IDENTIFIER",
                          @"YOUR_DEVICE_IDENTIFIER",
                          nil];
+  */
+  
   // Initiate a generic request to load it with an ad.
   [bannerView_ loadRequest:[GADRequest request]];
   
@@ -115,13 +145,6 @@ BOOL mIsIpad=NO;
                                              object:nil];
 
 }
-
-/*- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  [self positionateAd];
-}
-*/
-
 
 // No se utiliza mas.
  -(BOOL)initAd{
