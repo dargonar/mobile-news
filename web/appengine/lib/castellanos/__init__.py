@@ -64,7 +64,7 @@ def rss_menu(args):
     item['guid']      = item['link'][item['link'].rfind('/')+1:]
     item['pubDate']   = date_add_str(today_date, '00:00')
     
-    if item['guid'] not in sections:
+    if item['guid'] != 'archivo.aspx' and item['guid'] not in sections:
       builder.add_section(item)
       sections.add(item['guid'])
 
@@ -246,7 +246,7 @@ def get_mapping():
       'has_cartelera'    : True,
     },
     'config': {
-        'android': { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-3'] },
+        'android': { 'ad_mob': '', 'google_analytics' : ['UA-32663760-3'] },
         'iphone':  { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-3'] },
         'ipad':    { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-3'] }
     }

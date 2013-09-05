@@ -70,8 +70,8 @@ def rss_menu(args):
     item['guid']      = re.compile('&id=(\d+)').findall(item['link'])[0]
     item['pubDate']   = date_add_str(today_date, '00:00')
     
-    # No incluimos funebres
-    if int(item['guid']) != 7:
+    # No incluimos 'Fúnebres' ni 'Línea Directa'
+    if int(item['guid']) != 7 and int(item['guid']) != 34:
         builder.add_section(item)
 
   return builder.get_value()
