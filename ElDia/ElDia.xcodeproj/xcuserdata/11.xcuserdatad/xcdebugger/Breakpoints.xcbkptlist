@@ -65,7 +65,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "358"
          endingLineNumber = "358"
-         landmarkName = "-loadNoticia"
+         landmarkName = "-loadNoticia:section:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -78,7 +78,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "360"
          endingLineNumber = "360"
-         landmarkName = "-loadNoticia"
+         landmarkName = "-loadNoticia:section:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -91,7 +91,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "400"
          endingLineNumber = "400"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -104,7 +104,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "410"
          endingLineNumber = "410"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -208,7 +208,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "321"
          endingLineNumber = "321"
-         landmarkName = "-loadNoticia:section:"
+         landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -221,7 +221,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "323"
          endingLineNumber = "323"
-         landmarkName = "-loadNoticia:section:"
+         landmarkName = "-initPageIndicators:index:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -234,7 +234,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "330"
          endingLineNumber = "330"
-         landmarkName = "-loadNoticia:section:"
+         landmarkName = "-setPageIndicatorIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -247,7 +247,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "392"
          endingLineNumber = "392"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -260,7 +260,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "396"
          endingLineNumber = "396"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -286,7 +286,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "402"
          endingLineNumber = "402"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -325,7 +325,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "405"
          endingLineNumber = "405"
-         landmarkName = "-loadUrl:useCache:"
+         landmarkName = "-loadSectionNews"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -338,8 +338,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "416"
          endingLineNumber = "416"
-         landmarkName = "@implementation NoticiaViewController"
-         landmarkType = "3">
+         landmarkName = "-loadUrl:useCache:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -351,7 +351,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "442"
          endingLineNumber = "442"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkName = "-addGestureRecognizers"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -364,8 +364,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "240"
          endingLineNumber = "240"
-         landmarkName = "-btnShareClick:"
-         landmarkType = "5">
+         landmarkName = "@implementation NoticiaViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -897,7 +897,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "440"
          endingLineNumber = "440"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkName = "-loadUrl:useCache:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -910,8 +910,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "510"
          endingLineNumber = "510"
-         landmarkName = "@implementation NoticiaViewController"
-         landmarkType = "3">
+         landmarkName = "-singleTapWebView"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -923,7 +923,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "765"
          endingLineNumber = "765"
-         landmarkName = "-supportedInterfaceOrientations"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -949,7 +949,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "291"
          endingLineNumber = "291"
-         landmarkName = "-initPageIndicators:index:"
+         landmarkName = "-btnShareClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -988,7 +988,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "794"
          endingLineNumber = "794"
-         landmarkName = "-positionate:"
+         landmarkName = "-preferredInterfaceOrientationForPresentation"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1001,8 +1001,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "798"
          endingLineNumber = "798"
-         landmarkName = "-positionate:"
-         landmarkType = "5">
+         landmarkName = "@implementation NoticiaViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1129,7 +1129,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "789"
          endingLineNumber = "789"
-         landmarkName = "-positionate:"
+         landmarkName = "-supportedInterfaceOrientations"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1220,7 +1220,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "879"
          endingLineNumber = "879"
-         landmarkName = "-positionatePortrait"
+         landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1233,7 +1233,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "298"
          endingLineNumber = "298"
-         landmarkName = "-initPageIndicators:index:"
+         landmarkName = "-loadBlank"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1246,7 +1246,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "294"
          endingLineNumber = "294"
-         landmarkName = "-initPageIndicators:index:"
+         landmarkName = "-btnShareClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1259,7 +1259,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "363"
          endingLineNumber = "363"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-loadNoticia:section:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1272,7 +1272,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "376"
          endingLineNumber = "376"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-loadNoticia"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1285,7 +1285,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "378"
          endingLineNumber = "378"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-loadNoticia"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1298,7 +1298,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "377"
          endingLineNumber = "377"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-loadNoticia"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1324,7 +1324,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "299"
          endingLineNumber = "299"
-         landmarkName = "-initPageIndicators:index:"
+         landmarkName = "-loadBlank"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1337,7 +1337,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "382"
          endingLineNumber = "382"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-loadNoticia"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1350,7 +1350,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "305"
          endingLineNumber = "305"
-         landmarkName = "-setPageIndicatorIndex:"
+         landmarkName = "-invalidatePageIndicators"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1363,7 +1363,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "885"
          endingLineNumber = "885"
-         landmarkName = "-positionatePortrait"
+         landmarkName = "-positionateLandscape"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1376,7 +1376,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "827"
          endingLineNumber = "827"
-         landmarkName = "-positionateLandscape"
+         landmarkName = "-positionate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1389,8 +1389,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "295"
          endingLineNumber = "295"
-         landmarkName = "-initPageIndicators:index:"
-         landmarkType = "5">
+         landmarkName = "@implementation NoticiaViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1532,8 +1532,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "691"
          endingLineNumber = "691"
-         landmarkName = "-photoGallery:urlForPhotoSize:atIndex:"
-         landmarkType = "5">
+         landmarkName = "@implementation NoticiaViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1545,7 +1545,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "672"
          endingLineNumber = "672"
-         landmarkName = "-numberOfPhotosForPhotoGallery:"
+         landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1558,7 +1558,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "673"
          endingLineNumber = "673"
-         landmarkName = "-numberOfPhotosForPhotoGallery:"
+         landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1597,7 +1597,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "679"
          endingLineNumber = "679"
-         landmarkName = "-photoGallery:sourceTypeForPhotoAtIndex:"
+         landmarkName = "-loadPhotoGallery:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1688,7 +1688,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "702"
          endingLineNumber = "702"
-         landmarkName = "-photoGallery:filePathForPhotoSize:atIndex:"
+         landmarkName = "-photoGallery:sourceTypeForPhotoAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1935,7 +1935,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "369"
          endingLineNumber = "369"
-         landmarkName = "-loadSectionNews"
+         landmarkName = "-reLoadNoticia"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1948,7 +1948,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "594"
          endingLineNumber = "594"
-         landmarkName = "-loadPhotoGallery:"
+         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
