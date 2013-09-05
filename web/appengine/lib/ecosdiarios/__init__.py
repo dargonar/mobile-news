@@ -70,8 +70,8 @@ def rss_menu(args):
     item['guid']      = re.compile('&id=(\d+)').findall(item['link'])[0]
     item['pubDate']   = date_add_str(today_date, '00:00')
     
-    # No incluimos funebres
-    if int(item['guid']) != 7:
+    # No incluimos 'Fúnebres' ni 'Línea Directa'
+    if int(item['guid']) != 7 and int(item['guid']) != 34:
         builder.add_section(item)
 
   return builder.get_value()
@@ -219,6 +219,12 @@ def get_mapping():
         'url'    : 'X: rss_funebres',
         'small'  : {'pt': '6_funebres.xsl',               'ls': '6_funebres.xsl'},
         'big'    : {'pt': '6_tablet_funebres.xsl',        'ls': '6_tablet_funebres.xsl'},
+      }),
+
+      ('farmacia://' , {
+        'url'    : 'X: rss_farmacia',
+        'small'  : {'pt': '7_farmacias.xsl',        'ls': '7_farmacias.xsl'},
+        'big'    : {'pt': '7_tablet_farmacias.xsl', 'ls': '7_tablet_farmacias.xsl'},
       }),
 
       ('menu_section://main' , {

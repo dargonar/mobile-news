@@ -74,7 +74,7 @@ class DownloadAll(RequestHandler, HtmlBuilderMixing, Jinja2Mixin):
     xml = XML2Dict().fromstring(xmlstr.encode('utf-8'))
 
     sections = [i.guid.value for i in xml.rss.channel.item] + ['main']
-    #sections = ['main']
+
     for section in sections:
      taskqueue.add(queue_name='download2', url='/download/section', params={'appid': appid, 'section': section})
       
