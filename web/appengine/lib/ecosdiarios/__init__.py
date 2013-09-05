@@ -186,7 +186,9 @@ def rss_farmacia(args):
   builder.add_raw(tmp)
   return builder.get_value()
 
-
+def get_classifieds():
+  return {}
+  
 def get_mapping():
   return {
     'map':
@@ -252,7 +254,7 @@ def get_mapping():
       }),
     ]),
     'extras': {
-      'has_clasificados' : False,
+      'has_clasificados' : True,
       'has_funebres'     : True,
       'has_farmacia'     : True,
       'has_cartelera'    : False,
