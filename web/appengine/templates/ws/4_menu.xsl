@@ -11,7 +11,9 @@
         {% endfor %}
         
         {% if cfg.has_clasificados %}
-        <li><a class="vip2" href="clasificados://list">Clasificados</a></li>
+          {% set inner_url = 'http://www.ecosdiariosweb.com.ar/clasificados/clasificados.pdf' if appid == 'ecosdiarios' else 'clasificados://list' %}
+         
+        <li><a class="vip2" href="{{inner_url}}">Clasificados</a></li>
         {% endif %}
         
         {% if cfg.has_funebres %}

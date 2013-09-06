@@ -10,16 +10,22 @@
         <li><a href="section://{{item.guid.value}}">{{item.title}}</a></li>
         {% endfor %}
        
-        {% if cfg.has_clasificados %} 
-        <li class="seccion"> <a class="no_style" href="#" onclick="return toggle('ul_clasificados', 'invisible');" >Clasificados</a></li>
+        {% if cfg.has_clasificados %}
+          {% if appid == 'ecosdiarios'%}
+            <li class="seccion"> <a class="no_style" href="http://www.ecosdiariosweb.com.ar/clasificados/clasificados.pdf" >Clasificados</a></li>
+          {% else %}
+            <li class="seccion"> <a class="no_style" href="#" onclick="return toggle('ul_clasificados', 'invisible');" >Clasificados</a></li>
+          {% endif %}
         {% endif %}
       </ul>
       {% if cfg.has_clasificados %} 
-      <ul class="invisible" id="ul_clasificados">
-        {% for id, desc in cfg.clasificados.iteritems() %}
-        <li><a class="vip2" href="clasificados://{{id}}">{{desc}}</a></li>
-        {% endfor %}
-      </ul>
+        {% if appid != 'ecosdiarios'%}
+          <ul class="invisible" id="ul_clasificados">
+            {% for id, desc in cfg.clasificados.iteritems() %}
+            <li><a class="vip2" href="clasificados://{{id}}">{{desc}}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endif %}
 
       {% if cfg.has_funebres or cfg.has_farmacia or cfg.has_cartelera %}      
