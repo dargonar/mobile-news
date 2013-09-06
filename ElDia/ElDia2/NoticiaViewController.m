@@ -340,13 +340,21 @@ UIActionSheet* actionSheet;
 
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
+  NSLog(@" ---------------------- ");
+  NSLog(@" -- loadNoticia 1.- [%@] ", [url absoluteString]);
+  
   NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
+  
+  NSLog(@" -- loadNoticia 2.- [%@] ", urlString);
   
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
   [self setNoticia_header:[parser valueForVariable:@"header"]];
   parser=nil;
+  
+  NSLog(@" -- loadNoticia 3.- [%@] [%@] ", [self noticia_title], [self noticia_header]);
+  
   
 //  NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
 //  [self setCurrentUrl:uri];

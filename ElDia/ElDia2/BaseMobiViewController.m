@@ -70,15 +70,52 @@ BOOL mIsIpad=NO;
  }
 */
 
+
+-(NSDictionary*)getBGColours{
+  return [[NSDictionary alloc]initWithObjectsAndKeys:
+          [UIColor colorWithRed:232.0/255.0 green:232.0/255.0 blue:232.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
+          [UIColor colorWithRed:12.0/255.0 green:118.0/255.0 blue:217.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
+          [UIColor colorWithRed:47.0/255.0 green:112.0/255.0 blue:180.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
+          [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon"
+          , nil];
+  
+}
+
+-(NSDictionary*)getAppColours{
+  return [[NSDictionary alloc]initWithObjectsAndKeys:
+                                  [UIColor colorWithRed:0.0 green:16.0/255.0 blue:31.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
+                                  [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon"
+                                  , nil];
+
+}
+
+ 
+
+-(void)setColor:(UIView*)obj{
+  NSDictionary *colors = [self getAppColours];
+  UIColor* colorio = ((UIColor*)[colors objectForKey:[AppDelegate getBundleId]]);
+  if([[obj classForCoder] isSubclassOfClass:[UIActivityIndicatorView class]])
+    [((UIActivityIndicatorView*)obj) setColor:colorio];
+  
+  if([[obj classForCoder] isSubclassOfClass:[UILabel class]])
+    [((UILabel*)obj) setTextColor:colorio];
+  
+}
+
+-(void)setBackgroundColor:(UIView*)view{
+  NSDictionary *colors = [self getBGColours];
+  UIColor* colorio = ((UIColor*)[colors objectForKey:[AppDelegate getBundleId]]);
+//  NSLog(@"BaseMobiViewController::setBackgroundColor color:[%@]", [BaseMobiViewController colorToWeb:colorio]);
+  [view setBackgroundColor:colorio];
+}
+
 -(void)colorizeGUIObjects{
-  return;
-  NSDictionary *colors = [[NSDictionary alloc]initWithObjectsAndKeys:
-                          [UIColor colorWithRed:0.0 green:16.0/255.0 blue:31.0/255.0 alpha:1.0] , @"com.diventi.castelanos",
-                          [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
-                          [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
-                          [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon"
-                          , nil];
-  for(UIView *subView in [self.view subviews]){
+
+  NSDictionary *colors = [self getAppColours];
+   for(UIView *subView in [self.view subviews]){
+    
     if([[subView classForCoder] isSubclassOfClass:[UIActivityIndicatorView class]]==NO)
       continue;
 
@@ -86,6 +123,24 @@ BOOL mIsIpad=NO;
           
     [((UIActivityIndicatorView*)subView) setColor:(UIColor*)[colors objectForKey:[AppDelegate getBundleId]]];
   }
+  
+  if([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]])
+  {
+
+  }
+  
+  if([[self classForCoder] isSubclassOfClass:[MainViewController class]])
+  {
+    [self setBackgroundColor:[((MainViewController*)self) error_view]];
+    [self setBackgroundColor:[((MainViewController*)self) welcome_view]];
+    [self setColor:[((MainViewController*)self) error_label]];
+  }
+  
+  if([[self classForCoder] isSubclassOfClass:[ClasificadosViewController class]])
+  {}
+
+
+  
   
 }
 -(void)initAdMob{

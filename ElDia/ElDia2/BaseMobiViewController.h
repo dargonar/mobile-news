@@ -48,4 +48,6 @@
 -(void)positionate;
 
 -(void)zoomToFit;
+
+-(void)setBackgroundColor:(UIView*)view;
 @end

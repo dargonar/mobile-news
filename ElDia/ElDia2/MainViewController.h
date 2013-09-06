@@ -45,6 +45,7 @@
 @property (nonatomic, retain) IBOutlet UIView *welcome_view;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *welcome_indicator;
 @property (nonatomic, retain) IBOutlet UIView *error_view;
+@property (nonatomic, retain) IBOutlet UILabel *error_label;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnRefresh2;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *refresh_loading_indicator2;

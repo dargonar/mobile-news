@@ -22,7 +22,7 @@
 @implementation MainViewController
 @synthesize myNoticiaViewController, refresh_loading_indicator, btnRefreshClick,btnOptions, loading_indicator, logo_imgvw_alpha, welcome_view, offline_view, error_view, btnRefresh2, refresh_loading_indicator2, welcome_indicator;
 @synthesize mainUIWebView, menu_webview;
-@synthesize header, logo;
+@synthesize header, logo, error_label;
 
 BOOL splashOn=NO;
 BOOL errorOn=NO;
@@ -293,6 +293,8 @@ NSInteger soto = 0;
   //BEGIN QUITAR META TEST HACK
   // [self testXMLValidation];
   //END QUITAR META TEST HACK
+
+  //[self onError:YES];
   
   [self onRefreshing:YES];
   NSString* url = [self.currentUrl copy];
@@ -361,6 +363,7 @@ BOOL isLoading_ = YES;
     hasRotated = YES;
     NSLog(@"MainViewController::positionate() Portrait adHeight:[%d]", [self adHeight]);
   }
+  
   
   [self zoomToFit];
   
