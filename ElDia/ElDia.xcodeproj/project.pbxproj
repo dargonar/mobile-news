@@ -19,6 +19,11 @@
 		785463F116B1DA8C008F027F /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 785463F016B1DA8C008F027F /* TapDetectingWindow.m */; };
 		788517AF174A550200CF7DCF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788517AE174A550200CF7DCF /* AdManager.m */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
+		788A606717DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
+		788A606817DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
+		788A606917DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
+		788A606A17DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
+		788A606B17DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
 		788A74F8176823E50084B60F /* ico_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A74F7176823E50084B60F /* ico_plus.png */; };
 		788B0E2217CD12D800B553AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2117CD12D800B553AA /* AudioToolbox.framework */; };
 		788B0E2417CD169C00B553AA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2317CD169C00B553AA /* AdSupport.framework */; };
@@ -137,7 +142,6 @@
 		78E38AE917D10530000E95D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A828D15EC244E0061F481 /* QuartzCore.framework */; };
 		78E38AEA17D10530000E95D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727A15EBEDB8007E6F09 /* UIKit.framework */; };
 		78E38AEB17D10530000E95D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727C15EBEDB8007E6F09 /* Foundation.framework */; };
-		78E38AEC17D10530000E95D7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		78E38AED17D10530000E95D7 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE695AC917CFC1BE000A5F72 /* libGoogleAdMobAds.a */; };
 		78E38AEF17D10530000E95D7 /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		78E38AF017D10530000E95D7 /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
@@ -396,7 +400,6 @@
 		CE7D339315EE8F3800935444 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE7D339215EE8F3800935444 /* README.md */; };
 		CE7F071A1731C14700661632 /* ad.js in Sources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
 		CE7F073E1731D1C800661632 /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
-		CE7FE477172E9F1300A3CFD7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		CE83717216128D9800FC8269 /* layout.css in Resources */ = {isa = PBXBuildFile; fileRef = CE83715A16128D9800FC8269 /* layout.css */; };
 		CE83717316128D9800FC8269 /* ajax_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE83715C16128D9800FC8269 /* ajax_loader.gif */; };
 		CE83717416128D9800FC8269 /* ico_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = CE83715D16128D9800FC8269 /* ico_audio.png */; };
@@ -527,7 +530,6 @@
 		CE87657C17D4FA5E00D282AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A828D15EC244E0061F481 /* QuartzCore.framework */; };
 		CE87657D17D4FA5E00D282AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727A15EBEDB8007E6F09 /* UIKit.framework */; };
 		CE87657E17D4FA5E00D282AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727C15EBEDB8007E6F09 /* Foundation.framework */; };
-		CE87657F17D4FA5E00D282AA /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		CE87658017D4FA5E00D282AA /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE695AC917CFC1BE000A5F72 /* libGoogleAdMobAds.a */; };
 		CE87658217D4FA5E00D282AA /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		CE87658317D4FA5E00D282AA /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
@@ -754,7 +756,6 @@
 		CE8766B017D4FAC600D282AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A828D15EC244E0061F481 /* QuartzCore.framework */; };
 		CE8766B117D4FAC600D282AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727A15EBEDB8007E6F09 /* UIKit.framework */; };
 		CE8766B217D4FAC600D282AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8E727C15EBEDB8007E6F09 /* Foundation.framework */; };
-		CE8766B317D4FAC600D282AA /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */; };
 		CE8766B417D4FAC600D282AA /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE695AC917CFC1BE000A5F72 /* libGoogleAdMobAds.a */; };
 		CE8766B617D4FAC600D282AA /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78E5B8F21652D7D900C7ACCD /* ShareKit.bundle */; };
 		CE8766B717D4FAC600D282AA /* ad.js in Resources */ = {isa = PBXBuildFile; fileRef = CE7F07191731C14700661632 /* ad.js */; };
@@ -1300,6 +1301,15 @@
 		788517AE174A550200CF7DCF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		788A603117DA55EF008A0ADD /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		788A603217DA55EF008A0ADD /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		788A603317DA55EF008A0ADD /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		788A603417DA55EF008A0ADD /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		788A603517DA55EF008A0ADD /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		788A603617DA55EF008A0ADD /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		788A603717DA55EF008A0ADD /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		788A603817DA55EF008A0ADD /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		788A74F7176823E50084B60F /* ico_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus.png; sourceTree = "<group>"; };
 		788B0E2117CD12D800B553AA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		788B0E2317CD169C00B553AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -1485,12 +1495,6 @@
 		CE7D339015EE8F2700935444 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		CE7D339215EE8F3800935444 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CE7F07191731C14700661632 /* ad.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ad.js; sourceTree = "<group>"; };
-		CE7FE470172E9F1300A3CFD7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		CE7FE471172E9F1300A3CFD7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		CE7FE472172E9F1300A3CFD7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
-		CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
-		CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		CE83715A16128D9800FC8269 /* layout.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = layout.css; sourceTree = "<group>"; };
 		CE83715C16128D9800FC8269 /* ajax_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ajax_loader.gif; sourceTree = "<group>"; };
 		CE83715D16128D9800FC8269 /* ico_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio.png; sourceTree = "<group>"; };
@@ -1687,8 +1691,8 @@
 				78E38AE917D10530000E95D7 /* QuartzCore.framework in Frameworks */,
 				78E38AEA17D10530000E95D7 /* UIKit.framework in Frameworks */,
 				78E38AEB17D10530000E95D7 /* Foundation.framework in Frameworks */,
-				78E38AEC17D10530000E95D7 /* libGoogleAnalytics.a in Frameworks */,
 				78E38AED17D10530000E95D7 /* libGoogleAdMobAds.a in Frameworks */,
+				788A606917DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1721,8 +1725,8 @@
 				CE87657C17D4FA5E00D282AA /* QuartzCore.framework in Frameworks */,
 				CE87657D17D4FA5E00D282AA /* UIKit.framework in Frameworks */,
 				CE87657E17D4FA5E00D282AA /* Foundation.framework in Frameworks */,
-				CE87657F17D4FA5E00D282AA /* libGoogleAnalytics.a in Frameworks */,
 				CE87658017D4FA5E00D282AA /* libGoogleAdMobAds.a in Frameworks */,
+				788A606A17DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,8 +1759,8 @@
 				CE8766B017D4FAC600D282AA /* QuartzCore.framework in Frameworks */,
 				CE8766B117D4FAC600D282AA /* UIKit.framework in Frameworks */,
 				CE8766B217D4FAC600D282AA /* Foundation.framework in Frameworks */,
-				CE8766B317D4FAC600D282AA /* libGoogleAnalytics.a in Frameworks */,
 				CE8766B417D4FAC600D282AA /* libGoogleAdMobAds.a in Frameworks */,
+				788A606B17DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1789,8 +1793,8 @@
 				CE7A828E15EC244F0061F481 /* QuartzCore.framework in Frameworks */,
 				CE8E727B15EBEDB8007E6F09 /* UIKit.framework in Frameworks */,
 				CE8E727D15EBEDB8007E6F09 /* Foundation.framework in Frameworks */,
-				CE7FE477172E9F1300A3CFD7 /* libGoogleAnalytics.a in Frameworks */,
 				CE695ACB17CFC1BE000A5F72 /* libGoogleAdMobAds.a in Frameworks */,
+				788A606717DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1801,6 +1805,7 @@
 				CE8E729315EBEDB9007E6F09 /* SenTestingKit.framework in Frameworks */,
 				CE8E729415EBEDB9007E6F09 /* UIKit.framework in Frameworks */,
 				CE8E729515EBEDB9007E6F09 /* Foundation.framework in Frameworks */,
+				788A606817DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2087,12 +2092,15 @@
 		CE7FE46F172E9F1300A3CFD7 /* GoogleAnalyticsLib */ = {
 			isa = PBXGroup;
 			children = (
-				CE7FE470172E9F1300A3CFD7 /* GAI.h */,
-				CE7FE471172E9F1300A3CFD7 /* GAITrackedViewController.h */,
-				CE7FE472172E9F1300A3CFD7 /* GAITracker.h */,
-				CE7FE473172E9F1300A3CFD7 /* GAITransaction.h */,
-				CE7FE474172E9F1300A3CFD7 /* GAITransactionItem.h */,
-				CE7FE475172E9F1300A3CFD7 /* libGoogleAnalytics.a */,
+				788A603117DA55EF008A0ADD /* GAI.h */,
+				788A603217DA55EF008A0ADD /* GAITrackedViewController.h */,
+				788A603317DA55EF008A0ADD /* GAITracker.h */,
+				788A603417DA55EF008A0ADD /* GAIDictionaryBuilder.h */,
+				788A603517DA55EF008A0ADD /* GAIFields.h */,
+				788A603617DA55EF008A0ADD /* GAILogger.h */,
+				788A603717DA55EF008A0ADD /* GAITransaction.h */,
+				788A603817DA55EF008A0ADD /* GAITransactionItem.h */,
+				788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */,
 			);
 			path = GoogleAnalyticsLib;
 			sourceTree = "<group>";
@@ -3967,6 +3975,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
 				);
 				PRODUCT_NAME = ElDiaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -4400,6 +4409,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
 				);
 				PRODUCT_NAME = ElDiaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -4421,6 +4431,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
 				);
 				PRODUCT_NAME = ElDiaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";

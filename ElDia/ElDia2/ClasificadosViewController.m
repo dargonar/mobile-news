@@ -413,17 +413,20 @@ BOOL mViewDidLoad=NO;
     [app_delegate.navigationController pushViewController:self.childClasificadosViewController animated:YES];
     
     [self.childClasificadosViewController loadClasificados:url];
-    NSLog(@" --------------------");
-    NSLog(@" -- url: %@", [url absoluteString]);
+//    NSLog(@" --------------------");
+//    NSLog(@" -- url: %@", [url absoluteString]);
+    [BaseMobiViewController trackClick:[url absoluteString]];
     return NO;
   }
   else
     if (UIWebViewNavigationTypeLinkClicked == navigationType && ![[request.URL absoluteString] hasPrefix:@"tel"])
     {
+      [BaseMobiViewController trackClick:[url absoluteString]];
       return NO;
     }
     else{
       [[UIApplication sharedApplication] openURL:url];
+      [BaseMobiViewController trackClick:[url absoluteString]];
     }
   
   return YES;

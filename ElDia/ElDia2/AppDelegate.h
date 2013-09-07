@@ -57,9 +57,6 @@
 - (BOOL)isiPad;
 - (BOOL)isLandscape;
 
--(BOOL)isAdMob;
--(NSString*)getAdMobPublisherId;
--(NSArray*)getGATrackingCodes;
   
 + (NSString*) getBundleId;
 

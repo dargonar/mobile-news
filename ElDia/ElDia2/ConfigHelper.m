@@ -27,8 +27,18 @@
 
 // Recibe el NSData del archivo config.json. Lo itera y por cada key lo guarda.
 
-+(BOOL)isConfigured{
++(BOOL)isAdmobConfigured{
+  if([[NSUserDefaults standardUserDefaults] objectForKey:@"ad_mob"]==nil)
+    return NO;
+  if( [((NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ad_mob"])isEqualToString:@""])
+    return NO;
+  return YES;
+}
+
++(BOOL)isGAConfigured{
   if([[NSUserDefaults standardUserDefaults] objectForKey:@"google_analytics"]==nil)
+    return NO;
+  if( [((NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"google_analytics"])isEqualToString:@""])
     return NO;
   return YES;
 }
@@ -44,6 +54,8 @@
   NSString*dartu= [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
   NSDictionary *deserializedData = [dartu objectFromJSONString];
 
+  NSLog(@" ------------------------------------- ");
+NSLog(@"ConfigHelper::configure data_received:[%@]", dartu);
 //'android': { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] },
 //'iphone':  { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] },
 //'ipad':    { 'ad_mob': 'a1521debeb75556', 'google_analytics' : ['UA-32663760-4'] }
@@ -59,8 +71,8 @@
     if([google_analytics isEqual:@""]==NO)
     {
       google_analytics=[google_analytics stringByAppendingString:@","];
-      google_analytics=[google_analytics stringByAppendingString:[ga objectAtIndex:i]];
     }
+    google_analytics=[google_analytics stringByAppendingString:[ga objectAtIndex:i]];
   }
   [ConfigHelper setSettingValue:@"admob" value:admob];
   [ConfigHelper setSettingValue:@"google_analytics" value:google_analytics];

@@ -95,10 +95,13 @@
   self.bottomUIView.hidden = YES;
 
   if(justLoaded)
+  {
+    [self positionate];
     return;
-  
-  [self positionate];
+  }
   [self loadSectionNews];
+  [self positionate];
+  
   
 }
 
@@ -340,24 +343,27 @@ UIActionSheet* actionSheet;
 
   [self setNoticia_id:[[url host] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet ]] ];
  
-  NSLog(@" ---------------------- ");
-  NSLog(@" -- loadNoticia 1.- [%@] ", [url absoluteString]);
-  
+//  NSLog(@" ---------------------- ");
+//  NSLog(@" -- loadNoticia 1.- [%@] ", [url absoluteString]);
+
   NSString* urlString = [Utils stringByDecodingURLFormat:[url absoluteString]] ;
   
-  NSLog(@" -- loadNoticia 2.- [%@] ", urlString);
+//  NSLog(@" -- loadNoticia 2.- [%@] ", urlString);
+  
+  const char *ch = [urlString cStringUsingEncoding:NSISOLatin1StringEncoding];
+  urlString = [[NSString alloc]initWithCString:ch encoding:NSUTF8StringEncoding];
+
+//  NSLog(@" -- loadNoticia 3.- [%@] ", urlString);
   
   URLParser *parser = [[URLParser alloc] initWithURLString:[urlString gtm_stringByUnescapingFromHTML]];
+  
   [self setNoticia_url:[parser valueForVariable:@"url"]];
   [self setNoticia_title:[parser valueForVariable:@"title"]];
   [self setNoticia_header:[parser valueForVariable:@"header"]];
   parser=nil;
   
-  NSLog(@" -- loadNoticia 3.- [%@] [%@] ", [self noticia_title], [self noticia_header]);
+//  NSLog(@" -- loadNoticia 4.- [%@] [%@] ", [self noticia_title], [self noticia_header]);
   
-  
-//  NSString *uri = [[NSString alloc] initWithFormat:@"%@://%@", [url scheme], [url host] ];
-//  [self setCurrentUrl:uri];
   [self setCurrentUrl:[url absoluteString]];
   
   [self loadNoticia];
@@ -602,6 +608,7 @@ UIActionSheet* actionSheet;
       [[UIApplication sharedApplication] openURL:url];
       handled = YES;
     }
+    [BaseMobiViewController trackClick:[url absoluteString]];
     url=nil;
     if(handled == YES)
     {
@@ -808,8 +815,9 @@ BOOL isLandscapeView = NO;
 BOOL justLoaded = YES;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  [self positionate];
   [self loadSectionNews];
+  [self positionate];
+  
 }
 
 -(void)positionate{

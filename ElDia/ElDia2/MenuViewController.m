@@ -345,6 +345,7 @@ NSLock *lock;
   {
     [app_delegate loadSectionNews:url];
     [self slideThenHide];
+    [BaseMobiViewController trackClick:[url absoluteString]];
     return NO;
   }
   else
@@ -353,6 +354,7 @@ NSLock *lock;
     {
       [app_delegate loadService:url];
       [self slideThenHide];
+      [BaseMobiViewController trackClick:[url absoluteString]];
       return NO;
     }
     else
@@ -361,49 +363,40 @@ NSLock *lock;
     {
       [app_delegate loadMenuClasificados:url];
       [self slideThenHideShowMenuClasificados];
+      [BaseMobiViewController trackClick:[url absoluteString]];
       return NO;
     }
-    /*else
-      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
+    else
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"funebres://"]) // antes: page://funebres
       {
-        [app_delegate c];
+        [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://" ]];
         [self slideThenHideShowClasificados];
+        [BaseMobiViewController trackClick:[url absoluteString]];
         return NO;
-      }*/
+      }
       else
-        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"funebres://"]) // antes: page://funebres
+      if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"farmacia://"])
+      {
+        [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://" ]];
+        [self slideThenHideShowFarmacia];
+        [BaseMobiViewController trackClick:[url absoluteString]];
+        return NO;
+      }
+      else
+        if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"cartelera://"])
         {
-          
-          [app_delegate loadFunebres:[[NSURL alloc]initWithString:@"funebres://" ]];
-          [self slideThenHideShowClasificados];
+          [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://" ]];
+          [self slideThenHideShowCartelera];
+          [BaseMobiViewController trackClick:[url absoluteString]];
           return NO;
         }
         else
-          //if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"farmacia"])
-          if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"farmacia://"])
+          if ([[url scheme]isEqualToString:@"http"])
           {
-            
-            [app_delegate loadFarmacia:[[NSURL alloc]initWithString:@"farmacia://" ]];
-            [self slideThenHideShowFarmacia];
+            [[UIApplication sharedApplication] openURL:url];
+            [BaseMobiViewController trackClick:[url absoluteString]];
             return NO;
           }
-          else
-//            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"page"] && [[url host]isEqualToString:@"cartelera"])
-            if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url absoluteString]isEqualToString:@"cartelera://"])
-            {
-              
-              [app_delegate loadCartelera:[[NSURL alloc]initWithString:@"cartelera://" ]];
-              [self slideThenHideShowCartelera];
-              return NO;
-            }
-            else if ([[url scheme]isEqualToString:@"http"])
-            {
-              [[UIApplication sharedApplication] openURL:url];
-              return NO;
-            }
-  
-  
-  
   return YES;
   
 }
