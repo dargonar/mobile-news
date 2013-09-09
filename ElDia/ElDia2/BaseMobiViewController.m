@@ -76,7 +76,7 @@ BOOL mIsIpad=NO;
 
 -(NSDictionary*)getBGColours{
   return [[NSDictionary alloc]initWithObjectsAndKeys:
-          [UIColor colorWithRed:232.0/255.0 green:232.0/255.0 blue:232.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
+          [UIColor colorWithRed:14.0/255.0 green:36.0/255.0 blue:64.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
           [UIColor colorWithRed:12.0/255.0 green:118.0/255.0 blue:217.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
           [UIColor colorWithRed:47.0/255.0 green:112.0/255.0 blue:180.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
           [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon"
@@ -86,7 +86,7 @@ BOOL mIsIpad=NO;
 
 -(NSDictionary*)getAppColours{
   return [[NSDictionary alloc]initWithObjectsAndKeys:
-                                  [UIColor colorWithRed:0.0 green:16.0/255.0 blue:31.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
+                                  [UIColor colorWithRed:255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
                                   [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon"
