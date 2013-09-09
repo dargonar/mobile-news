@@ -115,10 +115,12 @@
   if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"servicio"])
   {
     [app_delegate loadSectionNews:url];
-    //ToDo -> llamar al main view
+    [BaseMobiViewController trackClick:[url absoluteString]];
     return NO;
   }
   else
+  {
+    [BaseMobiViewController trackClick:[url absoluteString]];
     if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"clasificados"])
     {
       [app_delegate.navigationController pushViewController:self.clasificadosViewController animated:YES];
@@ -127,6 +129,7 @@
 
       return NO;
     }
+  }
   return YES;
   
 }

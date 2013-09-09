@@ -55,30 +55,16 @@ int cache_size = 2; //30;
   return;
 }
 
--(BOOL)isAdMob{
-  return [ConfigHelper isConfigured];
-}
-
--(NSString*)getAdMobPublisherId{
-  return [ConfigHelper getAdMobId];
-  //@"a1521debeb75556";
-}
-
--(NSArray*)getGATrackingCodes{
-  return [ConfigHelper getGATrackingCodes];
-}
-
-
 -(void)initGAI{
-  return;
+
   // Optional: automatically send uncaught exceptions to Google Analytics.
-  [GAI sharedInstance].trackUncaughtExceptions = NO;
+  [GAI sharedInstance].trackUncaughtExceptions = YES;
+  
   // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-  [GAI sharedInstance].dispatchInterval = 60;
-  // Optional: set debug to YES for extra debugging information.
-  [GAI sharedInstance].debug = NO;
-  // Create tracker instance.
-  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-39206160-1"];
+  [GAI sharedInstance].dispatchInterval = 20;
+  
+  // Optional: set Logger to VERBOSE for debug information.
+  [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
   // ELDIA UA-39206160-1
   // TESTING UA-32663760-1
 }

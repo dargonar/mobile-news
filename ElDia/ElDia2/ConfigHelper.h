@@ -19,6 +19,8 @@
 +(NSArray *)getGATrackingCodes;
 +(NSString *)getAdMobId;
 +(void)configure;
-+(BOOL)isConfigured;
+
++(BOOL)isGAConfigured;
++(BOOL)isAdmobConfigured;
 
 @end

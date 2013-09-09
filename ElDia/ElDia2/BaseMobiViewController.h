@@ -50,4 +50,6 @@
 -(void)zoomToFit;
 
 -(void)setBackgroundColor:(UIView*)view;
+
++ (void) trackClick:(NSString*)_url;
 @end

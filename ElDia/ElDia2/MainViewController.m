@@ -216,8 +216,11 @@ NSLock *menuLock;
             data=[self.mScreenManager getCartelera:self.currentUrl useCache:useCache error:&err];
           }
       else{
-      data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
-        [ConfigHelper configure];
+        data=[self.mScreenManager getSection:self.currentUrl useCache:useCache error:&err];
+//        NSLog(@" ------------------------------------- ");
+//        NSLog(@"MainViewController::loadUrl [%@]", self.currentUrl);
+        if([self.currentUrl isEqualToString:@"section://main"])
+          [ConfigHelper configure];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -595,9 +598,10 @@ bool showUpdatedAt = NO;
     
       [app_delegate.navigationController pushViewController:myNoticiaViewController animated:YES];
     
-      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
+//      NSLog(@" call load noticia: %@ ; section: %@", [url absoluteString], self.currentUrl);
       [self.myNoticiaViewController loadNoticia:url section:self.currentUrl];
     
+      [BaseMobiViewController trackClick:[url absoluteString]];
       return NO;
     }
   }
@@ -605,6 +609,7 @@ bool showUpdatedAt = NO;
     if (UIWebViewNavigationTypeLinkClicked == navigationType && [[url scheme]isEqualToString:@"section"])
     {
       [app_delegate loadSectionNews:url];
+      [BaseMobiViewController trackClick:[url absoluteString]];
       return NO;
     }
     else
@@ -617,7 +622,7 @@ bool showUpdatedAt = NO;
 //        NSLog(@" main clicked: %@", url);
         [self setCurrentUrl:[url absoluteString]];
         [self loadUrlAndLoading:[url absoluteString] useCache:YES];
-        
+        [BaseMobiViewController trackClick:[url absoluteString]];
         return NO;
       }
   }

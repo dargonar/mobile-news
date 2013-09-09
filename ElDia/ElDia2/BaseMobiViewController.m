@@ -12,6 +12,9 @@
 #import "DiskCache.h"
 #import "iToast.h"
 #import "GAI.h"
+#import "GAIFields.h"
+#import "ConfigHelper.h"
+#import "URLParser.h"
 
 #import "MainViewController.h"
 #import "ClasificadosViewController.h"
@@ -144,8 +147,7 @@ BOOL mIsIpad=NO;
   
 }
 -(void)initAdMob{
-  
-  if([app_delegate isAdMob]==NO)
+  if([ConfigHelper isAdmobConfigured]==NO)
     return;
   
   if(([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]] || [[self classForCoder] isSubclassOfClass:[MainViewController class]] || [[self classForCoder] isSubclassOfClass:[ClasificadosViewController class]] )==NO)
@@ -156,8 +158,8 @@ BOOL mIsIpad=NO;
   bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     
   // Specify the ad's "unit identifier". This is your AdMob Publisher ID.
-  bannerView_.adUnitID = [app_delegate getAdMobPublisherId];
-    
+  bannerView_.adUnitID = [ConfigHelper getAdMobId];
+
   // Let the runtime know which UIViewController to restore after taking
   // the user wherever the ad goes and add it to the view hierarchy.
   bannerView_.rootViewController = self;
@@ -204,7 +206,7 @@ BOOL mIsIpad=NO;
 // No se utiliza mas.
  -(BOOL)initAd{
   
-  if([app_delegate isAdMob])
+  if([ConfigHelper isAdmobConfigured])
     return NO;
   //728x90  / 468x60 | 320x50 
   self.adUIImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320,50)];
@@ -263,7 +265,7 @@ NSString* click_url =@"";
 -(void)positionateAd:(UIDeviceOrientation) deviceOrientation screen:(NSString*)screen{
   
   //AdMob
-  if([app_delegate isAdMob])
+  if([ConfigHelper isAdmobConfigured])
   {
     [self positionateAdView:deviceOrientation screen:screen view:bannerView_ ];
     return;
@@ -377,27 +379,63 @@ NSString* click_url =@"";
 }
 
 /*****/
-- (void) setCurrentUrl:(id)_url
-{
+- (void) setCurrentUrl:(id)_url{
   self->currentUrl = _url;
+//  [BaseMobiViewController trackClick:_url];
+}
+
++ (void) trackClick:(NSString*)_url
+{
   
-  //self.trackedViewName = _url; //@"About Screen";
   
-  NSArray * tracking_codes = [app_delegate getGATrackingCodes];
+  NSArray * tracking_codes = [ConfigHelper getGATrackingCodes];
   
   if (tracking_codes==nil)
     return;
-  
+
+  //al 1er tracking code le mandamos la url interna (section://main), al resto le extirpamos el param de qs url (q es la del diario)
+  // SCREEN_NAME , HIT_TYPE,  APP_ID.
+  NSString *screen_name = [[_url componentsSeparatedByString:@"?"] objectAtIndex:0];
+  NSString *hit_type =  [[[_url componentsSeparatedByString:@"://"] objectAtIndex:0] stringByAppendingString:@"://"];
+  NSString *app_id = [AppDelegate getBundleId];
+  URLParser *parser = [[URLParser alloc] initWithURLString:_url];
+  NSString *url = [parser valueForVariable:@"url"];//[_url valueForKey:@"url"];
+  parser=nil;
+  if(url==nil || [url isEqualToString:@""])
+    url = screen_name;
+
+  NSLog(@"----------------------------");
+  NSLog(@"BaseMobiViewController:: _url:[%@] screen_name:[%@] hit_type:[%@] app_id:[%@] url:[%@] ",
+          _url, screen_name, hit_type, app_id, url);
+        
+  id<GAITracker> tracker1 = [[GAI sharedInstance]
+                             //trackerWithTrackingId:@"UA-32663760-1"
+                             trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:0]
+                             ];
+ [tracker1 set:kGAIScreenName value:screen_name];
+  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                          hit_type, kGAIHitType,
+                          screen_name, kGAIScreenName,
+                          app_id, kGAIAppId,
+                          nil];
+  [tracker1 send:params];
+
   //NSLog(@" tracking code [%@]", (NSString*)[tracking_codes objectAtIndex:0]);
   // Send a screen view to the first property.
-  id tracker1 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:0]];
-  [tracker1 sendView:[_url absoluteString]];
-  
+
   if([tracking_codes count]==1)
     return;
+  
   // Send another screen view to the second property.
-  id tracker2 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:1]];
-  [tracker2 sendView:[_url absoluteString]];
+  id<GAITracker> tracker2 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:1]];
+  [tracker2 set:kGAIScreenName value:url];
+  NSDictionary *params2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          hit_type, kGAIHitType,
+                          url, kGAIScreenName,
+                          app_id, kGAIAppId,
+                          nil];
+  [tracker2 send:params2];
+
 }
 
 -(void)showMessage:(NSString*)message isError:(BOOL)isError{
@@ -470,14 +508,12 @@ NSString* click_url =@"";
   if(self.currentUrl != url)
     return;
   
-//  __block NSString *jsString  = [NSString stringWithFormat:@"update_image('%@');"
-//                                 , mobi_image.local_uri];
   __block NSString *jsString  = [NSString stringWithFormat:@"update_all_images();"];
 
-  NSLog(@"*************************************");
-  NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
-  NSLog(@"BaseMobi::onImageDownloaded() [%@]", jsString);
-  NSLog(@"*************************************");
+//  NSLog(@"*************************************");
+//  NSLog(@"onImageDownloaded: %@ -> %@", url, mobi_image.local_uri);
+//  NSLog(@"BaseMobi::onImageDownloaded() [%@]", jsString);
+//  NSLog(@"*************************************");
   
   dispatch_async(dispatch_get_main_queue(), ^{
     //[_UIWebView stringByEvaluatingJavaScriptFromString:jsString];
@@ -495,21 +531,28 @@ NSString* click_url =@"";
   if([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]])
   {
     if ([self secondaryUIWebView]==nil){
+      NSLog(@"BaseMobi::zoomToFitBig  [self secondaryUIWebView]==nil] >> NOTHING DONE");
       return;
     }
     
-    if ([[self secondaryUIWebView] isLoading]){
+    /*
+     if ([[self secondaryUIWebView] isLoading]){
+      NSLog(@"BaseMobi::zoomToFitBig  [self secondaryUIWebView] isLoading] >> NOTHING DONE");
       return;
     }
+     */
     
     if ([[self secondaryUIWebView] respondsToSelector:@selector(scrollView)])
     {
       float zoom=[self secondaryUIWebView].bounds.size.width/600.0;
       if([app_delegate isLandscape]==NO)
         zoom=1.0;
+      NSLog(@"BaseMobi::zoomToFitBig  [[self secondaryUIWebView] ZOOMEANDO]");
       NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
       [[self secondaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
     }
+    else
+      NSLog(@"BaseMobi::zoomToFitBig  [[self secondaryUIWebView] respondsToSelector:@selector(scrollView)]");
     
     return;
   }
