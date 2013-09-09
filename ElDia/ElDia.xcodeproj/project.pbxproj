@@ -28,6 +28,8 @@
 		788B0E2217CD12D800B553AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2117CD12D800B553AA /* AudioToolbox.framework */; };
 		788B0E2417CD169C00B553AA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2317CD169C00B553AA /* AdSupport.framework */; };
 		788B0E2617CD17FC00B553AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788B0E2517CD17FC00B553AA /* StoreKit.framework */; };
+		788B9D1617DE7EB00067E173 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */; };
+		788B9D1717DE7EB00067E173 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 788B9D1517DE7EB00067E173 /* Icon~ipad.png */; };
 		78E38A7917D10530000E95D7 /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
 		78E38A7A17D10530000E95D7 /* YoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEEC0C116236C030037F329 /* YoutubeViewController.m */; };
 		78E38A7B17D10530000E95D7 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
@@ -1314,6 +1316,8 @@
 		788B0E2117CD12D800B553AA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		788B0E2317CD169C00B553AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
+		788B9D1517DE7EB00067E173 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
 		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E4249817D6520300A9E776 /* ico_audio_castellanos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_castellanos.png; sourceTree = "<group>"; };
 		78E4249917D6520300A9E776 /* ico_audio_ecosdiarios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_ecosdiarios.png; sourceTree = "<group>"; };
@@ -2308,6 +2312,8 @@
 				CEB0462417BC4903001E5E4F /* font_size_icon_16@2x.png */,
 				CEB0462517BC4903001E5E4F /* font_size_icon_24.png */,
 				CEB0462617BC4903001E5E4F /* font_size_icon_24@2x.png */,
+				788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */,
+				788B9D1517DE7EB00067E173 /* Icon~ipad.png */,
 				CEB0462717BC4903001E5E4F /* Icon.png */,
 				CEB0462817BC4903001E5E4F /* Icon@2x.png */,
 				CEB0462A17BC4903001E5E4F /* Icon@2x_ipad.png */,
@@ -3394,6 +3400,8 @@
 				78F6336317D7C85E0039DD70 /* facebook@2x.png in Resources */,
 				78F6336417D7C85E0039DD70 /* twitter.png in Resources */,
 				78F6336517D7C85E0039DD70 /* twitter@2x.png in Resources */,
+				788B9D1617DE7EB00067E173 /* Icon@2x~ipad.png in Resources */,
+				788B9D1717DE7EB00067E173 /* Icon~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
