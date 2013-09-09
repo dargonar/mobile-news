@@ -551,9 +551,10 @@ UIActionSheet* actionSheet;
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
   if (webView.tag==MAIN_VIEW_TAG) {
     [self onLoading:NO];
-    [self zoomToFit];
     [self changeFontSize:0];
   }
+  [self zoomToFit];
+  
 }
 
 
