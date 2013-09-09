@@ -723,7 +723,6 @@ CLASIFICADOS
 
 /* -------------------------------------------------------------------------------- */
 /* BEGIN CASTELLANOS ---------------------- */
-.castellanos #index .nota_principal .seccion{	color:#e5e7e9;}
 .castellanos #clasificados .columna .encabezado .rubro,
   .castellanos #clasificados .columna .encabezado .titulo,
   .castellanos #clasificados .columna .encabezado .calendario:hover,
@@ -744,6 +743,9 @@ CLASIFICADOS
 .castellanos .media_link .ico_video, .castellanos .media_link .ico_audio, .castellanos .media_link .ico_galeria , .castellanos .media_link .ico_plus {
   background-color:#002d58;
 }
+.castellanos #index .nota_principal .seccion{	color:#e5e7e9;}
+.castellanos #index .nota_principal .seccion,  
+  .castellanos label.seccion{text-transform:uppercase;}
 
 /* END CASTELLANOS ------------------------ */
 /* ---------------------------------------- */
