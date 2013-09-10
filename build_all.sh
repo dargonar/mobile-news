@@ -16,6 +16,7 @@ do
   
   cp $IMAGES/$id/*.png ElDia/images/
   cp $IMAGES/$id/Icon~ipad.png ElDia/Icon~ipad.png
+  cp $IMAGES/$id/Icon.png ElDia/Icon.png
   
   cd ElDia/
   
