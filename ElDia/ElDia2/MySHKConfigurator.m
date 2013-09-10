@@ -10,17 +10,68 @@
 
 @implementation MySHKConfigurator
 
+-(NSDictionary*)getAppConfig:(NSString*)appid{
+  if([appid isEqualToString:@"com.diventi.castellanos"])
+    return [[NSDictionary alloc]initWithObjectsAndKeys:
+          @"Diario Castellanos Móvil", @"appName"
+          @"http://www.diariocastellanos.net", @"appUrl"
+          @"709185402429723", , @"facebookAppId"
+          @"3d4d7fca91702e85da511d0f4680bb72", @"facebookAppSecret"
+          @"castellanosmobile", @"facebookLocalAppId"
+          @"o1A4RJcsbs2jChH8hsLg", @"twitterConsumerKey"
+          @"quxfgf9XhzCbSwWQvy9lInGYp8iu8Ve3nKsffzIg", @"twitterSecret"
+          @"http://www.diariocastellanos.net/twitter", @"twitterCallbackUrl"
+          @"castellanosmobile", @"twitterUsername", nil];
+  
+  if([appid isEqualToString:@"com.diventi.eldia"])
+    return [[NSDictionary alloc]initWithObjectsAndKeys:
+          @"El Día Móvil", @"appName"
+          @"http://www.eldia.com.ar", @"appUrl"
+          @"200298223439703", , @"facebookAppId"
+          @"", @"facebookAppSecret"
+          @"eldiamobile", @"facebookLocalAppId"
+          @"jkPcehgUmSBdRBvOvz9aQ", @"twitterConsumerKey"
+          @"4woY6QydnCcmKBsQNooNgQyN1aAi7aBXTBvoMnKexA", @"twitterSecret"
+          @"http://www.eldia.com.ar/rss/twitter", @"twitterCallbackUrl"
+          @"eldialp", @"twitterUsername", nil];
+  
+  if([appid isEqualToString:@"com.diventi.ecosdiarios"])
+    return [[NSDictionary alloc]initWithObjectsAndKeys:
+          @"EcosDiarios Móvil", @"appName"
+          @"http://www.ecosdiariosweb.com.ar/", @"appUrl"
+          @"523187204416055", , @"facebookAppId"
+          @"", @"facebookAppSecret"
+          @"ecosdiariosmobile", @"facebookLocalAppId"
+          @"hC7SOapbwsOeGpcloDKvRw", @"twitterConsumerKey"
+          @"eebDeVazK5krzN8R5mxTGUUJsivESywjXBsMOdKdc", @"twitterSecret"
+          @"http://www.ecosdiariosweb.com.ar/rss/twitter", @"twitterCallbackUrl"
+          @"ecosdiariosmobile", @"twitterUsername", nil];
+          
+  if([appid isEqualToString:@"com.diventi.pregon"])
+    return [[NSDictionary alloc]initWithObjectsAndKeys:
+          @"Diario Pergón Móvil", @"appName"
+          @"http://www.pregon.com.ar/", @"appUrl"
+          @"209045622595288", , @"facebookAppId"
+          @"", @"facebookAppSecret"
+          @"pregonmobile", @"facebookLocalAppId"
+          @"MzOy4SP9bZkBUYNwspfNrw", @"twitterConsumerKey"
+          @"Q1ju6BPonXKFluNO4Ki5lKgUArbapgfv94i9yf49Yi4", @"twitterSecret"
+          @"http://www.pregon.com.ar/rss/twitter", @"twitterCallbackUrl"
+          @"pregonmobile", @"twitterUsername", nil];
+            
+}
+
 /*
  App Description
  ---------------
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"El Dia Movil";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"appName"] ;//@"El Dia Movil";
 }
 
 - (NSString*)appURL {
-	return @"http://www.eldia.com.ar";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"appUrl"] ; @"http://www.eldia.com.ar";
 }
 
 /*
@@ -57,11 +108,11 @@
 //
 //    Your CFBundleURLSchemes entry: fb555lite
 - (NSString*)facebookAppId {
-	return @"200298223439703"; //fb200298223439703eldiamobile
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"facebookAppId"] ;//@"200298223439703"; //fb200298223439703eldiamobile
 }
 
 - (NSString*)facebookLocalAppId {
-	return @"eldiamobile";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"facebookLocalAppId"] ;// @"eldiamobile";
 }
 
 //Change if your app needs some special Facebook permissions only. In most cases you can leave it as it is.
@@ -104,15 +155,15 @@
 }
 
 - (NSString*)twitterConsumerKey {
-	return @"jkPcehgUmSBdRBvOvz9aQ";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"twitterConsumerKey"] ;//return @"jkPcehgUmSBdRBvOvz9aQ";
 }
 
 - (NSString*)twitterSecret {
-	return @"4woY6QydnCcmKBsQNooNgQyN1aAi7aBXTBvoMnKexA";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"twitterSecret"] ;//return @"4woY6QydnCcmKBsQNooNgQyN1aAi7aBXTBvoMnKexA";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
-	return @"http://www.eldia.com.ar/rss/twitter";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"twitterCallbackUrl"] ;//return @"http://www.eldia.com.ar/rss/twitter";
 }
 // To use xAuth, set to 1
 - (NSNumber*)twitterUseXAuth {
@@ -120,7 +171,7 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-	return @"eldialp";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectforKey:@"twitterUsername"] ;//return @"eldialp";
 }
 // Evernote - http://www.evernote.com/about/developer/api/
 /*	You need to set to sandbox until you get approved by evernote. If you use sandbox, you can use it with special sandbox user account only. You can create it here: https://sandbox.evernote.com/Registration.action
