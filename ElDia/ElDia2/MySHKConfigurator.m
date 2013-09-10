@@ -73,7 +73,7 @@
 }
 
 - (NSString*)appURL {
-	return [[self getAppConfig:[AppDelegate getBundleId]]objectForKey:@"appUrl"] ; @"http://www.eldia.com.ar";
+	return [[self getAppConfig:[AppDelegate getBundleId]]objectForKey:@"appUrl"] ; //@"http://www.eldia.com.ar";
 }
 
 /*

@@ -831,6 +831,8 @@ BOOL justLoaded = YES;
   
   [self positionateAdNoticiaScreen:deviceOrientation];
   
+  if([[self pageControl]isHidden])
+    pageControlHeigth=0;
   
   if (UIDeviceOrientationIsLandscape(deviceOrientation) && (forzar || !isLandscapeView ))
   {
@@ -854,7 +856,6 @@ int pageControlHeigth = 36;
   NSInteger  width=self.view.frame.size.width;
   NSInteger  height=self.view.frame.size.height;
   // x y width height
-  
   if([app_delegate isiPad])
   {
     self.mainUIWebView.frame=CGRectMake(width/2, 44, width/2, height-44-[self adHeight] - pageControlHeigth);
