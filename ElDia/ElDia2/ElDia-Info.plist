@@ -8,6 +8,16 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon~ipad.png</string>
+		<string>Default-Portrait~ipad.png</string>
+		<string>Default-Portrait@2x~ipad.png</string>
+		<string>Icon@2x_ipad.png</string>
+		<string>Default@2x.png</string>
+	</array>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
@@ -16,7 +26,7 @@
 			<array>
 				<string>Icon.png</string>
 				<string>Icon@2x.png</string>
-				<string>Icon_ipad.png</string>
+				<string>Icon~ipad.png</string>
 				<string>Default-Portrait~ipad.png</string>
 				<string>Default-Portrait@2x~ipad.png</string>
 				<string>Icon@2x_ipad.png</string>
