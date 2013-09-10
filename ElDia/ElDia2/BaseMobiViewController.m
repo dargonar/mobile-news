@@ -530,10 +530,6 @@ NSString* click_url =@"";
 
   if([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]])
   {
-    if ([self secondaryUIWebView]==nil){
-      NSLog(@"BaseMobi::zoomToFitBig  [self secondaryUIWebView]==nil] >> NOTHING DONE");
-      return;
-    }
     
     /*
      if ([[self secondaryUIWebView] isLoading]){
@@ -542,18 +538,37 @@ NSString* click_url =@"";
     }
      */
     
-    if ([[self secondaryUIWebView] respondsToSelector:@selector(scrollView)])
-    {
-      float zoom=[self secondaryUIWebView].bounds.size.width/600.0;
-      if([app_delegate isLandscape]==NO)
-        zoom=1.0;
-      NSLog(@"BaseMobi::zoomToFitBig  [[self secondaryUIWebView] ZOOMEANDO]");
-      NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
-      [[self secondaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+    if ([self secondaryUIWebView]!=nil && [[self secondaryUIWebView] isLoading]==NO){
+      if ([[self secondaryUIWebView] respondsToSelector:@selector(scrollView)])
+      {
+        float zoom=[self secondaryUIWebView].bounds.size.width/600.0;
+        if([app_delegate isLandscape]==NO)
+        {
+          zoom=1.0;
+        }
+        NSLog(@"BaseMobi::zoomToFitBig  [[self secondaryUIWebView] ZOOMEANDO]");
+        NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
+        [[self secondaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
     }
     else
       NSLog(@"BaseMobi::zoomToFitBig  [[self secondaryUIWebView] respondsToSelector:@selector(scrollView)]");
+    }
     
+    if ([self primaryUIWebView]!=nil && [[self primaryUIWebView] isLoading]==NO)
+    {
+      NSString *jsCommand = @"addClass(document.body, 'body660');";
+      if([app_delegate isLandscape]==NO)
+        jsCommand = @"removeClass(document.body, 'body660');";
+      
+      [[self primaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+      
+      //float zoom=[self primaryUIWebView].bounds.size.width/600.0;
+      float zoom=1020.0/600.0;
+      if([app_delegate isLandscape]==NO)
+        zoom=1.0;
+      jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = %f;",zoom];
+      [[self primaryUIWebView] stringByEvaluatingJavaScriptFromString:jsCommand];
+    }
     return;
   }
   
