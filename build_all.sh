@@ -15,6 +15,7 @@ do
   sc=${schemes[$j]}
   
   cp $IMAGES/$id/*.png ElDia/images/
+  cp $IMAGES/$id/Icon~ipad.png ElDia/Icon~ipad.png
   
   cd ElDia/
   
