@@ -175,6 +175,7 @@
 						<string key="NSFrame">{{142, 212}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -941,7 +942,7 @@
 			<string key="Default.png">{320, 480}</string>
 			<string key="bg.png">{320, 44}</string>
 			<string key="list.png">{24, 24}</string>
-			<string key="logi.png">{149, 23}</string>
+			<string key="logi.png">{189, 46}</string>
 			<string key="offline.png">{36, 36}</string>
 			<string key="refresh.png">{36, 36}</string>
 			<string key="warning.hueco.256x256.png">{247, 217}</string>

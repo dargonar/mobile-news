@@ -1584,7 +1584,7 @@
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
 		78A378C217DF8EE1002211A6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		78DFE9A5181573970029AD7D /* LaReforma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LaReforma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		78DFE9A5181573970029AD7D /* LaReforma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaReforma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DFE9A6181573980029AD7D /* LaReforma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LaReforma-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/LaReforma-Info.plist"; sourceTree = "<absolute>"; };
 		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E4249817D6520300A9E776 /* ico_audio_castellanos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_castellanos.png; sourceTree = "<group>"; };
@@ -4495,8 +4495,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4505,8 +4505,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4569,8 +4569,8 @@
 		78DFE9A2181573970029AD7D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -4590,9 +4590,9 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "LaReforma";
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PRODUCT_NAME = LaReforma;
+				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -4602,7 +4602,7 @@
 		78DFE9A3181573970029AD7D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -4622,8 +4622,8 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "LaReforma";
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PRODUCT_NAME = LaReforma;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -4633,7 +4633,7 @@
 		78DFE9A4181573970029AD7D /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -4653,8 +4653,8 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "LaReforma";
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PRODUCT_NAME = LaReforma;
+				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -4957,8 +4957,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4973,8 +4973,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4991,8 +4991,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -5001,8 +5001,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
