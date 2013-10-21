@@ -89,12 +89,13 @@ BOOL mIsIpad=NO;
                                   [UIColor colorWithRed:255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
                                   [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
-                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon"
-                                  , nil];
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.lareforma.pregon",
+                                  nil];
 
 }
 
- 
+
 
 -(void)setColor:(UIView*)obj{
   NSDictionary *colors = [self getAppColours];
