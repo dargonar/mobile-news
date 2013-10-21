@@ -1584,8 +1584,8 @@
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
 		78A378C217DF8EE1002211A6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		78DFE9A5181573970029AD7D /* ElDia copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ElDia copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		78DFE9A6181573980029AD7D /* ElDia copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ElDia copy-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/ElDia copy-Info.plist"; sourceTree = "<absolute>"; };
+		78DFE9A5181573970029AD7D /* LaReforma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LaReforma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		78DFE9A6181573980029AD7D /* LaReforma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LaReforma-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/LaReforma-Info.plist"; sourceTree = "<absolute>"; };
 		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E4249817D6520300A9E776 /* ico_audio_castellanos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_castellanos.png; sourceTree = "<group>"; };
 		78E4249917D6520300A9E776 /* ico_audio_ecosdiarios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_ecosdiarios.png; sourceTree = "<group>"; };
@@ -2473,7 +2473,7 @@
 				CE87663417D4FAA300D282AA /* Castellanos-Info.plist */,
 				CE87663517D4FAA300D282AA /* Pregon-Info.plist */,
 				CE87663617D4FAA300D282AA /* EcosDiarios-Info.plist */,
-				78DFE9A6181573980029AD7D /* ElDia copy-Info.plist */,
+				78DFE9A6181573980029AD7D /* LaReforma-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2485,7 +2485,7 @@
 				78E38B7F17D10530000E95D7 /* Castellanos.app */,
 				CE87661117D4FA5E00D282AA /* Pregon.app */,
 				CE87674517D4FAC600D282AA /* EcosDiarios.app */,
-				78DFE9A5181573970029AD7D /* ElDia copy.app */,
+				78DFE9A5181573970029AD7D /* LaReforma.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2837,7 +2837,7 @@
 			);
 			name = LaReforma;
 			productName = ElDia2;
-			productReference = 78DFE9A5181573970029AD7D /* ElDia copy.app */;
+			productReference = 78DFE9A5181573970029AD7D /* LaReforma.app */;
 			productType = "com.apple.product-type.application";
 		};
 		78E38A7317D10530000E95D7 /* Castellanos */ = {
@@ -4581,7 +4581,7 @@
 					"$(SRCROOT)/libs",
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
-				INFOPLIST_FILE = "ElDia copy-Info.plist";
+				INFOPLIST_FILE = "LaReforma-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4590,7 +4590,7 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = "LaReforma";
 				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4613,7 +4613,7 @@
 					"$(SRCROOT)/libs",
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
-				INFOPLIST_FILE = "ElDia copy-Info.plist";
+				INFOPLIST_FILE = "LaReforma-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4622,7 +4622,7 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = "LaReforma";
 				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
@@ -4644,7 +4644,7 @@
 					"$(SRCROOT)/libs",
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
-				INFOPLIST_FILE = "ElDia copy-Info.plist";
+				INFOPLIST_FILE = "LaReforma-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4653,7 +4653,7 @@
 					"\"$(SRCROOT)/libs/admob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "ElDia copy";
+				PRODUCT_NAME = "LaReforma";
 				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
