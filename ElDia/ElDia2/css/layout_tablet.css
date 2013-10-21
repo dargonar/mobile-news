@@ -806,6 +806,33 @@ CLASIFICADOS
 /* ---------------------------------------- */
 /* ---------------------------------------- */
 
+/* -------------------------------------------------------------------------------- */
+/* BEGIN ECOS --------------------------- */
+.lareforma #clasificados .columna .encabezado .rubro,
+  .lareforma #clasificados .columna .encabezado .titulo,
+  /*.ecosdiarios #clasificados .columna .encabezado .calendario:hover,*/
+  .lareforma .seccion,
+  .lareforma #index .menu li .selected,
+  .lareforma #index .menu li a:active,
+  .lareforma #landscape .menu li a:active ,
+  .lareforma #landscape .menu li .selected ,
+  .lareforma #menu li a:active,
+  .lareforma #menu li.selected ,
+  .lareforma #menu li a.seccion:hover,
+  .lareforma #menu li a.seccion:active ,
+  .lareforma #clasificados .fecha ,
+  .lareforma #index .nota_principal .seccion  {	color:#1065b0;}
+.lareforma .media_link .ico_video {  background-image:url(../img/ico_video_lareforma.png) !important;}
+.lareforma .media_link .ico_plus {	background-image:url(../img/ico_plus_lareforma.png) !important;}
+.lareforma .media_link .ico_audio {	background-image:url(../img/ico_audio_lareforma.png) !important;}
+.lareforma .media_link .ico_galeria {  background-image:url(../img/ico_galeria_lareforma.png) !important;}
+.lareforma .media_link .ico_video, .ecosdiarios .media_link .ico_audio, .ecosdiarios .media_link .ico_galeria , .ecosdiarios .media_link .ico_plus {
+  background-color:#1065b0;
+}
+/* END ECOS ----------------------------- */
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
 
 body.body660 {width:660px!important;}
 body.body660  #index .nota_abierta .fila .imagen{margin-left:0px!important; margin-right:16px!important; float:left;}
