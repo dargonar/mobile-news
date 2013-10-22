@@ -32,6 +32,14 @@
 		78A378C317DF8EE2002211A6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78A378C217DF8EE1002211A6 /* Icon.png */; };
 		78A378E517DF932F002211A6 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC906117DED1C100DDC69B /* Icon~ipad.png */; };
 		78A378E617DFBCFF002211A6 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 78FC906117DED1C100DDC69B /* Icon~ipad.png */; };
+		78CDCBEB1815E98E00963DE7 /* ico_audio_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE71815E98E00963DE7 /* ico_audio_lareforma.png */; };
+		78CDCBEC1815E98E00963DE7 /* ico_galeria_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE81815E98E00963DE7 /* ico_galeria_lareforma.png */; };
+		78CDCBED1815E98E00963DE7 /* ico_plus_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */; };
+		78CDCBEE1815E98E00963DE7 /* ico_video_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBEA1815E98E00963DE7 /* ico_video_lareforma.png */; };
+		78CDCBEF1815E9C000963DE7 /* ico_audio_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE71815E98E00963DE7 /* ico_audio_lareforma.png */; };
+		78CDCBF01815E9C300963DE7 /* ico_galeria_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE81815E98E00963DE7 /* ico_galeria_lareforma.png */; };
+		78CDCBF11815E9C700963DE7 /* ico_plus_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */; };
+		78CDCBF21815E9CA00963DE7 /* ico_video_lareforma.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CDCBEA1815E98E00963DE7 /* ico_video_lareforma.png */; };
 		78DFE8A5181573970029AD7D /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5D11A5163E3158002E34F5 /* URLParser.m */; };
 		78DFE8A6181573970029AD7D /* YoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEEC0C116236C030037F329 /* YoutubeViewController.m */; };
 		78DFE8A7181573970029AD7D /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4A198161F6B9F0072EAB4 /* HCYoutubeParser.m */; };
@@ -1584,6 +1592,10 @@
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		788B9D1417DE7EB00067E173 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
 		78A378C217DF8EE1002211A6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		78CDCBE71815E98E00963DE7 /* ico_audio_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_lareforma.png; sourceTree = "<group>"; };
+		78CDCBE81815E98E00963DE7 /* ico_galeria_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_galeria_lareforma.png; sourceTree = "<group>"; };
+		78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus_lareforma.png; sourceTree = "<group>"; };
+		78CDCBEA1815E98E00963DE7 /* ico_video_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_lareforma.png; sourceTree = "<group>"; };
 		78DFE9A5181573970029AD7D /* LaReforma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaReforma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DFE9A6181573980029AD7D /* LaReforma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LaReforma-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/LaReforma-Info.plist"; sourceTree = "<absolute>"; };
 		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2424,6 +2436,10 @@
 		CE83715B16128D9800FC8269 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				78CDCBE71815E98E00963DE7 /* ico_audio_lareforma.png */,
+				78CDCBE81815E98E00963DE7 /* ico_galeria_lareforma.png */,
+				78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */,
+				78CDCBEA1815E98E00963DE7 /* ico_video_lareforma.png */,
 				78E4249817D6520300A9E776 /* ico_audio_castellanos.png */,
 				78E4249917D6520300A9E776 /* ico_audio_ecosdiarios.png */,
 				78E4249A17D6520300A9E776 /* ico_audio_pregon.png */,
@@ -3262,6 +3278,10 @@
 				78DFE93C181573970029AD7D /* xsltwin32config.h.in in Resources */,
 				78DFE93D181573970029AD7D /* layout.css in Resources */,
 				78DFE93E181573970029AD7D /* ajax_loader.gif in Resources */,
+				78CDCBEF1815E9C000963DE7 /* ico_audio_lareforma.png in Resources */,
+				78CDCBF01815E9C300963DE7 /* ico_galeria_lareforma.png in Resources */,
+				78CDCBF11815E9C700963DE7 /* ico_plus_lareforma.png in Resources */,
+				78CDCBF21815E9CA00963DE7 /* ico_video_lareforma.png in Resources */,
 				78DFE93F181573970029AD7D /* ico_audio.png in Resources */,
 				78DFE940181573970029AD7D /* ico_audio_black.png in Resources */,
 				78DFE941181573970029AD7D /* ico_audio_blue.png in Resources */,
@@ -3871,6 +3891,10 @@
 				78F6336517D7C85E0039DD70 /* twitter@2x.png in Resources */,
 				788B9D1617DE7EB00067E173 /* Icon@2x~ipad.png in Resources */,
 				78A378E617DFBCFF002211A6 /* Icon~ipad.png in Resources */,
+				78CDCBEB1815E98E00963DE7 /* ico_audio_lareforma.png in Resources */,
+				78CDCBEC1815E98E00963DE7 /* ico_galeria_lareforma.png in Resources */,
+				78CDCBED1815E98E00963DE7 /* ico_plus_lareforma.png in Resources */,
+				78CDCBEE1815E98E00963DE7 /* ico_video_lareforma.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
