@@ -12,6 +12,21 @@
 @implementation MySHKConfigurator
 
 -(NSDictionary*)getAppConfig:(NSString*)appid{
+  
+  
+  
+  if([appid isEqualToString:@"com.diventi.lareforma"])
+    return [[NSDictionary alloc]initWithObjectsAndKeys:
+            @"Diario La Reforma Movil", @"appName",
+            @"http://www.diariolareforma.com.ar", @"appUrl",
+            @"711079425587274", @"facebookAppId",
+            @"9583b1b4bf59683985a2be4bdf4926f7", @"facebookAppSecret",
+            @"lareformamobile", @"facebookLocalAppId",
+            @"1WZ5b4xLJqcz35Cd70GZ8w", @"twitterConsumerKey",
+            @"ZTcv8bjlOanVobGoseHCEAYVXWSpaUIframqduNy1A", @"twitterSecret",
+            @"http://www.diariolareforma.com.ar", @"twitterCallbackUrl",
+            @"lareformamobile", @"twitterUsername", nil];
+  
   if([appid isEqualToString:@"com.diventi.castellanos"])
     return [[NSDictionary alloc]initWithObjectsAndKeys:
           @"Diario Castellanos Movil", @"appName",

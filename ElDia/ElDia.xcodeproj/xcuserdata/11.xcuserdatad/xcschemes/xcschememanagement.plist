@@ -14,15 +14,15 @@
 			<key>orderHint</key>
 			<integer>38</integer>
 		</dict>
-		<key>LaReforma.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>39</integer>
-		</dict>
 		<key>ElDia.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>36</integer>
+		</dict>
+		<key>LaReforma.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>39</integer>
 		</dict>
 		<key>Pregon.xcscheme</key>
 		<dict>
