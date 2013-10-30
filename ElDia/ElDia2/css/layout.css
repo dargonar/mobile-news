@@ -521,6 +521,13 @@ CLASIFICADOS
 	padding:0px 0px 0px 0px;
 
 }
+.cartelera_item{
+  border-bottom:#ccc solid 1px;
+	margin:10px;
+  font-size:1.05em;
+}
+.cartelera_item p.carte_title{font-size:1.5em; line-height:1em;margin-bottom:10px;}
+.cartelera_item p.carte_desc{font-size:1.1em; line-height:1em;}
 
 #clasificados .columna .aviso {
   color:#333;
@@ -565,6 +572,13 @@ CLASIFICADOS
 }
 
 #clasificados .columna .encabezado .rubro {
+	color:#0066cc;
+	font-size:30px;
+	line-height:30px;
+	margin-bottom:5px;
+}
+
+#clasificados .columna  .rubroex {
 	color:#0066cc;
 	font-size:30px;
 	line-height:30px;

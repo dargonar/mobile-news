@@ -602,6 +602,14 @@ CLASIFICADOS
 #clasificados .hora { color:#666;}
 #clasificados .clear { clear:both; margin-bottom:10px;}
 
+.cartelera_item{
+  border-bottom:#ccc solid 1px;
+	margin:10px;
+  font-size:1.05em;
+}
+.cartelera_item p.carte_title{font-size:1.5em; line-height:1em;}
+.cartelera_item p.carte_desc{font-size:1.1em; line-height:1em;}
+
 #clasificados .columna {
 	/*width:240px;*/
   /*width:240px;*/
@@ -627,7 +635,7 @@ CLASIFICADOS
 }
 
 #clasificados .columna .aviso.clasi p, #clasificados .columna .aviso.fune p{ font-size:1.5em;}
-
+#clasificados .columna .aviso.clasi span.right {float:right; color:#0066cc;}
 #clasificados .columna .encabezado {
 	border-bottom:#ccc solid 1px;
 	margin:10px;
