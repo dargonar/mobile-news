@@ -13,10 +13,12 @@
 
 #import "GAITrackedViewController.h"
 #import "GADBannerView.h"
+#import "GAIDictionaryBuilder.h"
 
 #define MAIN_VIEW_TAG    0x6969
 
-@interface BaseMobiViewController : GAITrackedViewController<GADBannerViewDelegate>{
+//@interface BaseMobiViewController : GAITrackedViewController<GADBannerViewDelegate>{
+@interface BaseMobiViewController : UIViewController<GADBannerViewDelegate>{
   ScreenManager   *mScreenManager;
   AdManager *mAdManager;
   GADBannerView *bannerView_;

@@ -74,7 +74,7 @@ NSLog(@"ConfigHelper::configure data_received:[%@]", dartu);
     }
     google_analytics=[google_analytics stringByAppendingString:[ga objectAtIndex:i]];
   }
-  [ConfigHelper setSettingValue:@"admob" value:admob];
+  [ConfigHelper setSettingValue:@"ad_mob" value:admob];
   [ConfigHelper setSettingValue:@"google_analytics" value:google_analytics];
 }
 
@@ -91,7 +91,7 @@ NSLog(@"ConfigHelper::configure data_received:[%@]", dartu);
 
 +(NSString *)getAdMobId{
   
-  NSString* adMobId=(NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"admob"];
+  NSString* adMobId=(NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"ad_mob"];
   if(adMobId==nil)
     return nil;
   return adMobId;

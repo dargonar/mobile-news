@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>36</integer>
 		</dict>
+		<key>ElNorte.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>40</integer>
+		</dict>
 		<key>LaReforma.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7841644717CE203100F9B5FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>788AD35C182918B100B59CCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

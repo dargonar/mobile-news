@@ -410,16 +410,20 @@ NSString* click_url =@"";
           _url, screen_name, hit_type, app_id, url);
         
   id<GAITracker> tracker1 = [[GAI sharedInstance]
-                             //trackerWithTrackingId:@"UA-32663760-1"
                              trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:0]
                              ];
  [tracker1 set:kGAIScreenName value:screen_name];
-  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+  /*NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                           hit_type, kGAIHitType,
                           screen_name, kGAIScreenName,
                           app_id, kGAIAppId,
-                          nil];
-  [tracker1 send:params];
+                          nil];*/
+  //  [tracker1 send:params];
+//  [tracker1 send:[[GAIDictionaryBuilder createAppView] build]];
+  [tracker1 send:[[GAIDictionaryBuilder  createEventWithCategory:@"ui_action"     // Event category (required)
+                                                        action:@"button_press"  // Event action (required)
+                                                         label:url          // Event label
+                                                         value:nil] build]];    // Event value
 
   //NSLog(@" tracking code [%@]", (NSString*)[tracking_codes objectAtIndex:0]);
   // Send a screen view to the first property.
@@ -428,14 +432,21 @@ NSString* click_url =@"";
     return;
   
   // Send another screen view to the second property.
-  id<GAITracker> tracker2 = [[GAI sharedInstance] trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:1]];
+  id<GAITracker> tracker2 = [[GAI sharedInstance]
+                             trackerWithTrackingId:(NSString*)[tracking_codes objectAtIndex:1]];
   [tracker2 set:kGAIScreenName value:url];
-  NSDictionary *params2 = [NSDictionary dictionaryWithObjectsAndKeys:
+  /*NSDictionary *params2 = [NSDictionary dictionaryWithObjectsAndKeys:
                           hit_type, kGAIHitType,
                           url, kGAIScreenName,
                           app_id, kGAIAppId,
-                          nil];
-  [tracker2 send:params2];
+                          nil];*/
+  //[tracker2 send:params2];
+  [tracker2 send:[[GAIDictionaryBuilder  createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"button_press"  // Event action (required)
+                                                           label:screen_name          // Event label
+                                                           value:nil] build]];    // Event value
+
+  
 
 }
 

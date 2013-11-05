@@ -118,7 +118,7 @@ NSLock *menuLock;
 
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
-
+  [BaseMobiViewController trackClick:self.currentUrl];
   /*
   NSString* url = [self.currentUrl copy];
   
