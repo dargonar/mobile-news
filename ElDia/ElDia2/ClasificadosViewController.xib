@@ -273,6 +273,7 @@
 						<reference key="NSNextKeyView" ref="185095541"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<int key="IBUITag">6969</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">0</int>
 						<object class="NSColor" key="IBUIColor">
@@ -536,7 +537,7 @@
 			<string key="br_prev_icon_24.png">{24, 24}</string>
 			<string key="font_size_icon_16.png">{36, 36}</string>
 			<string key="font_size_icon_24.png">{36, 36}</string>
-			<string key="logi.png">{149, 23}</string>
+			<string key="logi.png">{195, 46}</string>
 			<string key="offline.png">{36, 36}</string>
 			<string key="share.png">{32, 32}</string>
 		</dictionary>

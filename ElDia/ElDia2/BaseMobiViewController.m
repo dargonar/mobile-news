@@ -79,7 +79,9 @@ BOOL mIsIpad=NO;
           [UIColor colorWithRed:14.0/255.0 green:36.0/255.0 blue:64.0/255.0 alpha:1.0] , @"com.diventi.castellanos",
           [UIColor colorWithRed:12.0/255.0 green:118.0/255.0 blue:217.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
           [UIColor colorWithRed:47.0/255.0 green:112.0/255.0 blue:180.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
-          [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon"
+          [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon",
+          [UIColor colorWithRed:37.0/255.0 green:113.0/255.0 blue:153.0/255.0 alpha:1.0] , @"com.diventi.lareforma",
+          [UIColor colorWithRed:0.0/255.0 green:136.0/255.0 blue:205.0/255.0 alpha:1.0] , @"com.diventi.elnorte"
           , nil];
   
 }
@@ -90,7 +92,8 @@ BOOL mIsIpad=NO;
                                   [UIColor colorWithRed:252.0/255.0 green:252.0/255.0 blue:252.0/255.0 alpha:1.0] , @"com.diventi.ecosdiarios",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon",
-                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.lareforma.pregon",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.diventi.lareforma",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.diventi.elnorte",
                                   nil];
 
 }
@@ -118,15 +121,18 @@ BOOL mIsIpad=NO;
 -(void)colorizeGUIObjects{
 
   NSDictionary *colors = [self getAppColours];
+  NSDictionary *bgcolors = [self getBGColours];
    for(UIView *subView in [self.view subviews]){
     
     if([[subView classForCoder] isSubclassOfClass:[UIActivityIndicatorView class]]==NO)
       continue;
 
     NSLog(@"colorizing: [%@] [%@]", [AppDelegate getBundleId], (UIColor*)[colors objectForKey:[AppDelegate getBundleId]]);
-          
-    [((UIActivityIndicatorView*)subView) setColor:(UIColor*)[colors objectForKey:[AppDelegate getBundleId]]];
-  }
+
+     if(subView.tag!=6969)
+      [((UIActivityIndicatorView*)subView) setColor:(UIColor*)[colors objectForKey:[AppDelegate getBundleId]]];
+     else
+       [((UIActivityIndicatorView*)subView) setColor:(UIColor*)[bgcolors objectForKey:[AppDelegate getBundleId]]];  }
   
   if([[self classForCoder] isSubclassOfClass:[NoticiaViewController class]])
   {
@@ -142,9 +148,6 @@ BOOL mIsIpad=NO;
   
   if([[self classForCoder] isSubclassOfClass:[ClasificadosViewController class]])
   {}
-
-
-  
   
 }
 -(void)initAdMob{

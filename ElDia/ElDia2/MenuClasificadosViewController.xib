@@ -171,6 +171,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<int key="IBUITag">6969</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">0</int>
 						<object class="NSColor" key="IBUIColor">
@@ -355,7 +356,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="bg.png">{320, 44}</string>
 			<string key="br_prev_icon_24.png">{24, 24}</string>
-			<string key="logi.png">{149, 23}</string>
+			<string key="logi.png">{195, 46}</string>
 			<string key="offline.png">{36, 36}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
