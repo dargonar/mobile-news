@@ -19,6 +19,14 @@
 		785463F116B1DA8C008F027F /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 785463F016B1DA8C008F027F /* TapDetectingWindow.m */; };
 		788517AF174A550200CF7DCF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788517AE174A550200CF7DCF /* AdManager.m */; };
 		7888385416AEF85B00517A5F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7888385316AEF85A00517A5F /* Base64.m */; };
+		788A3410182ACE2300B9D7A3 /* ico_audio_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340C182ACE2300B9D7A3 /* ico_audio_elnorte.png */; };
+		788A3411182ACE2300B9D7A3 /* ico_galeria_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340D182ACE2300B9D7A3 /* ico_galeria_elnorte.png */; };
+		788A3412182ACE2300B9D7A3 /* ico_plus_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340E182ACE2300B9D7A3 /* ico_plus_elnorte.png */; };
+		788A3413182ACE2300B9D7A3 /* ico_video_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340F182ACE2300B9D7A3 /* ico_video_elnorte.png */; };
+		788A3414182ACE2B00B9D7A3 /* ico_audio_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340C182ACE2300B9D7A3 /* ico_audio_elnorte.png */; };
+		788A3415182ACE2E00B9D7A3 /* ico_galeria_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340D182ACE2300B9D7A3 /* ico_galeria_elnorte.png */; };
+		788A3416182ACE3100B9D7A3 /* ico_plus_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340E182ACE2300B9D7A3 /* ico_plus_elnorte.png */; };
+		788A3417182ACE3300B9D7A3 /* ico_video_elnorte.png in Resources */ = {isa = PBXBuildFile; fileRef = 788A340F182ACE2300B9D7A3 /* ico_video_elnorte.png */; };
 		788A606717DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
 		788A606817DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
 		788A606917DA68BF008A0ADD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */; };
@@ -1844,6 +1852,10 @@
 		788517AE174A550200CF7DCF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
 		7888385216AEF85A00517A5F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		7888385316AEF85A00517A5F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		788A340C182ACE2300B9D7A3 /* ico_audio_elnorte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_elnorte.png; sourceTree = "<group>"; };
+		788A340D182ACE2300B9D7A3 /* ico_galeria_elnorte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_galeria_elnorte.png; sourceTree = "<group>"; };
+		788A340E182ACE2300B9D7A3 /* ico_plus_elnorte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus_elnorte.png; sourceTree = "<group>"; };
+		788A340F182ACE2300B9D7A3 /* ico_video_elnorte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_elnorte.png; sourceTree = "<group>"; };
 		788A603117DA55EF008A0ADD /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		788A603217DA55EF008A0ADD /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		788A603317DA55EF008A0ADD /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -2739,6 +2751,10 @@
 		CE83715B16128D9800FC8269 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				788A340C182ACE2300B9D7A3 /* ico_audio_elnorte.png */,
+				788A340D182ACE2300B9D7A3 /* ico_galeria_elnorte.png */,
+				788A340E182ACE2300B9D7A3 /* ico_plus_elnorte.png */,
+				788A340F182ACE2300B9D7A3 /* ico_video_elnorte.png */,
 				78CDCBE71815E98E00963DE7 /* ico_audio_lareforma.png */,
 				78CDCBE81815E98E00963DE7 /* ico_galeria_lareforma.png */,
 				78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */,
@@ -3636,6 +3652,10 @@
 				788AD41A182918B100B59CCA /* iVersion.bundle in Resources */,
 				788AD41B182918B100B59CCA /* versions.plist in Resources */,
 				788AD41C182918B100B59CCA /* ico_plus.png in Resources */,
+				788A3414182ACE2B00B9D7A3 /* ico_audio_elnorte.png in Resources */,
+				788A3415182ACE2E00B9D7A3 /* ico_galeria_elnorte.png in Resources */,
+				788A3417182ACE3300B9D7A3 /* ico_video_elnorte.png in Resources */,
+				788A3416182ACE3100B9D7A3 /* ico_plus_elnorte.png in Resources */,
 				788AD41D182918B100B59CCA /* align_just_icon_24.png in Resources */,
 				788AD41E182918B100B59CCA /* bg.png in Resources */,
 				788AD41F182918B100B59CCA /* bg@2x.png in Resources */,
@@ -4364,6 +4384,10 @@
 				78CDCBEC1815E98E00963DE7 /* ico_galeria_lareforma.png in Resources */,
 				78CDCBED1815E98E00963DE7 /* ico_plus_lareforma.png in Resources */,
 				78CDCBEE1815E98E00963DE7 /* ico_video_lareforma.png in Resources */,
+				788A3410182ACE2300B9D7A3 /* ico_audio_elnorte.png in Resources */,
+				788A3411182ACE2300B9D7A3 /* ico_galeria_elnorte.png in Resources */,
+				788A3412182ACE2300B9D7A3 /* ico_plus_elnorte.png in Resources */,
+				788A3413182ACE2300B9D7A3 /* ico_video_elnorte.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5115,7 +5139,7 @@
 		788AAF4A1756638100780534 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5136,7 +5160,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5391,7 +5415,8 @@
 		78E38B7D17D10530000E95D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5412,7 +5437,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Castellanos;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5486,7 +5512,8 @@
 		CE87660F17D4FA5E00D282AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5507,7 +5534,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Pregon;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5548,8 +5576,8 @@
 		CE87674217D4FAC600D282AA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5570,8 +5598,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = EcosDiarios;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5581,7 +5609,8 @@
 		CE87674317D4FAC600D282AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5602,7 +5631,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = EcosDiarios;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5706,8 +5736,8 @@
 		CE8E72A415EBEDB9007E6F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5728,8 +5758,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5739,7 +5769,8 @@
 		CE8E72A515EBEDB9007E6F09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5760,7 +5791,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "ED19C830-9A84-454B-980A-414708DEDB02";
+				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
