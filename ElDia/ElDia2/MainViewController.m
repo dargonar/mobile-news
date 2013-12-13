@@ -78,7 +78,6 @@ NSLock *menuLock;
   
   // 1 Vemos si tenemos cacheada la pantalla y la mostramos.
   //   No importa que tan vieja sea.
-  
   if([self.mScreenManager sectionExists:mainUrl])
   {
     NSError *err;
@@ -86,7 +85,7 @@ NSLock *menuLock;
     [self setHTML:data url:mainUrl webView:self.mainUIWebView];
     [self loadMenu:YES];
     splashOn=NO;
-    return;
+    //return; 
   }
   
   NSDate * date = [self getDate:mainUrl];
