@@ -62,16 +62,16 @@ BOOL mIsIpad=NO;
                                                name:@"com.diventi.mobipaper.image_downloaded" 
                                              object:nil];
   [self colorizeGUIObjects];
-  [self initAdMob];
+  //[self initAdMob];
 }
 
-/*
+
  - (void)viewWillAppear:(BOOL)animated {
  [super viewWillAppear:animated];
  //[self positionateAd];
-  
+  [self initAdMob];
  }
-*/
+
 
 
 -(NSDictionary*)getBGColours{
@@ -475,7 +475,7 @@ NSString* click_url =@"";
     return YES;
   NSTimeInterval t= [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceDate:date];
   if(t > (60*60*2))
-    //if(t > 1)
+  //if(t > 1)
     return YES;
   
   return NO;
