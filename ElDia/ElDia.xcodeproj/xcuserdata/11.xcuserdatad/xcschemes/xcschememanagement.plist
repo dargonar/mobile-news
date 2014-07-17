@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>36</integer>
 		</dict>
+		<key>ElNorte copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>41</integer>
+		</dict>
 		<key>ElNorte.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -58,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>78B8880517D1512200CE7EED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78D3524919780B8A003C8D1D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

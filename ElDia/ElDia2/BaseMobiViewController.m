@@ -81,7 +81,8 @@ BOOL mIsIpad=NO;
           [UIColor colorWithRed:47.0/255.0 green:112.0/255.0 blue:180.0/255.0 alpha:1.0] ,  @"com.diventi.eldia",
           [UIColor colorWithRed:205.0/255.0 green:33.0/255.0 blue:44.0/255.0 alpha:1.0] , @"com.diventi.pregon",
           [UIColor colorWithRed:37.0/255.0 green:113.0/255.0 blue:153.0/255.0 alpha:1.0] , @"com.diventi.lareforma",
-          [UIColor colorWithRed:0.0/255.0 green:136.0/255.0 blue:205.0/255.0 alpha:1.0] , @"com.diventi.elnorte"
+          [UIColor colorWithRed:0.0/255.0 green:136.0/255.0 blue:205.0/255.0 alpha:1.0] , @"com.diventi.elnorte",
+          [UIColor colorWithRed:174.0/255.0 green:10.0/255.0 blue:23.0/255.0 alpha:1.0] , @"com.diventi.puertonegocios"
           , nil];
   
 }
@@ -94,6 +95,7 @@ BOOL mIsIpad=NO;
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] , @"com.diventi.pregon",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.diventi.lareforma",
                                   [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.diventi.elnorte",
+                                  [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] ,   @"com.diventi.puertonegocios",
                                   nil];
 
 }
