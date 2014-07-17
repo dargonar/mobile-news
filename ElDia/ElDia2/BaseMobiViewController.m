@@ -103,10 +103,14 @@ BOOL mIsIpad=NO;
 
 
 -(void)setColor:(UIView*)obj{
-  NSDictionary *colors = [self getAppColours];
+  NSDictionary *colors = [self getBGColours];
   UIColor* colorio = ((UIColor*)[colors objectForKey:[AppDelegate getBundleId]]);
+  
+  NSDictionary *colors2 = [self getAppColours];
+  UIColor* colorio2 = ((UIColor*)[colors2 objectForKey:[AppDelegate getBundleId]]);
   if([[obj classForCoder] isSubclassOfClass:[UIActivityIndicatorView class]])
-    [((UIActivityIndicatorView*)obj) setColor:colorio];
+    //[((UIActivityIndicatorView*)obj) setColor:colorio];
+    [((UIActivityIndicatorView*)obj) setColor:colorio2];
   
   if([[obj classForCoder] isSubclassOfClass:[UILabel class]])
     [((UILabel*)obj) setTextColor:colorio];

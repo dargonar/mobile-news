@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "333"
-         endingLineNumber = "333"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
          landmarkName = "-positionateAdView:screen:view:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "343"
-         endingLineNumber = "343"
+         startingLineNumber = "347"
+         endingLineNumber = "347"
          landmarkName = "-positionateAdView:screen:view:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "317"
-         endingLineNumber = "317"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
          landmarkName = "-positionateAd:screen:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1072,11 +1072,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "318"
-         endingLineNumber = "318"
+         startingLineNumber = "322"
+         endingLineNumber = "322"
          landmarkName = "@implementation BaseMobiViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1085,11 +1085,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "298"
-         endingLineNumber = "298"
+         startingLineNumber = "302"
+         endingLineNumber = "302"
          landmarkName = "-positionateAd:screen:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1111,11 +1111,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "281"
-         endingLineNumber = "281"
+         startingLineNumber = "285"
+         endingLineNumber = "285"
          landmarkName = "-positionateAd:screen:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1176,11 +1176,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "276"
-         endingLineNumber = "276"
+         startingLineNumber = "280"
+         endingLineNumber = "280"
          landmarkName = "-positionateAd:screen:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1371,11 +1371,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "464"
-         endingLineNumber = "464"
+         startingLineNumber = "468"
+         endingLineNumber = "468"
          landmarkName = "-showMessage:isError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1397,11 +1397,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "523"
-         endingLineNumber = "523"
+         startingLineNumber = "527"
+         endingLineNumber = "527"
          landmarkName = "-onImageDownloaded:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1410,11 +1410,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "533"
-         endingLineNumber = "533"
+         startingLineNumber = "537"
+         endingLineNumber = "537"
          landmarkName = "-onImageDownloaded:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1423,11 +1423,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "477"
-         endingLineNumber = "477"
+         startingLineNumber = "481"
+         endingLineNumber = "481"
          landmarkName = "-isOld:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1436,11 +1436,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "471"
-         endingLineNumber = "471"
+         startingLineNumber = "475"
+         endingLineNumber = "475"
          landmarkName = "-configureToast"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1449,11 +1449,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "473"
-         endingLineNumber = "473"
+         startingLineNumber = "477"
+         endingLineNumber = "477"
          landmarkName = "-configureToast"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1969,11 +1969,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "483"
-         endingLineNumber = "483"
+         startingLineNumber = "487"
+         endingLineNumber = "487"
          landmarkName = "-isOld:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1982,11 +1982,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "503"
-         endingLineNumber = "503"
+         startingLineNumber = "507"
+         endingLineNumber = "507"
          landmarkName = "-setHTML:url:webView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1995,11 +1995,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "501"
-         endingLineNumber = "501"
+         startingLineNumber = "505"
+         endingLineNumber = "505"
          landmarkName = "-setHTML:url:webView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2073,11 +2073,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "356"
-         endingLineNumber = "356"
+         startingLineNumber = "360"
+         endingLineNumber = "360"
          landmarkName = "-positionateAdView:screen:view:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2125,11 +2125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
          landmarkName = "-initAdMob"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2177,11 +2177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "399"
-         endingLineNumber = "399"
+         startingLineNumber = "403"
+         endingLineNumber = "403"
          landmarkName = "+trackClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2203,11 +2203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "167"
-         endingLineNumber = "167"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "-initAdMob"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2294,11 +2294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "216"
-         endingLineNumber = "216"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
          landmarkName = "-initAd"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2307,11 +2307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "218"
-         endingLineNumber = "218"
+         startingLineNumber = "222"
+         endingLineNumber = "222"
          landmarkName = "-initAd"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2320,11 +2320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "420"
-         endingLineNumber = "420"
+         startingLineNumber = "424"
+         endingLineNumber = "424"
          landmarkName = "+trackClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2333,11 +2333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
          landmarkName = "-initAdMob"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2359,11 +2359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ElDia2/BaseMobiViewController.m"
-         timestampString = "427298870.2033"
+         timestampString = "427318257.815366"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "478"
-         endingLineNumber = "478"
+         startingLineNumber = "482"
+         endingLineNumber = "482"
          landmarkName = "-isOld:"
          landmarkType = "5">
       </FileBreakpoint>
