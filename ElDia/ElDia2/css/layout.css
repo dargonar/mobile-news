@@ -759,8 +759,8 @@ CLASIFICADOS
 /* ---------------------------------------- */
 
 /* ---------------------------------------- */
-.puertonegocios #clasificados .columna .encabezado .rubro, .elnorte #clasificados .columna .encabezado .titulo ,
-.puertonegocios #listado li a .seccion , .elnorte  #nota .seccion {  color:#ae0a17!important;}
+.puertonegocios #clasificados .columna .encabezado .rubro, .puertonegocios #clasificados .columna .encabezado .titulo ,
+.puertonegocios #listado li a .seccion , .puertonegocios  #nota .seccion {  color:#ae0a17!important;}
 .puertonegocios .media_link .ico_video {
   background-image:url(../img/ico_video_puertonegocios.png) !important;
 }

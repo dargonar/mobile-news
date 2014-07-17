@@ -625,6 +625,14 @@ bool showUpdatedAt = NO;
         return NO;
       }
   }
+  
+  if (UIWebViewNavigationTypeLinkClicked == navigationType
+      && [[url scheme]isEqualToString:@"http"])
+  {
+    [[UIApplication sharedApplication] openURL:url];
+    return NO;
+  }
+  
   return YES;
   
 }
