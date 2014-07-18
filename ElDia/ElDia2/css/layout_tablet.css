@@ -868,5 +868,35 @@ CLASIFICADOS
 /* ---------------------------------------- */
 /* ---------------------------------------- */
 
+
+/* -------------------------------------------------------------------------------- */
+.puertonegocios #clasificados .columna .encabezado .rubro,
+  .puertonegocios #clasificados .columna .encabezado .titulo,
+  /*.puertonegocios #clasificados .columna .encabezado .calendario:hover,*/
+  .puertonegocios .seccion,
+  .puertonegocios #index .menu li .selected,
+  .puertonegocios #index .menu li a:active,
+  .puertonegocios #landscape .menu li a:active ,
+  .puertonegocios #landscape .menu li .selected ,
+  .puertonegocios #menu li a:active,
+  .puertonegocios #menu li.selected ,
+  .puertonegocios #menu li a.seccion:hover,
+  .puertonegocios #menu li a.seccion:active ,
+  .puertonegocios #clasificados .fecha ,
+  .puertonegocios #index .nota_principal .seccion  { color:#386b98;}
+.puertonegocios .media_link .ico_video {  background-image:url(../img/ico_video_puertonegocios.png) !important;}
+.puertonegocios .media_link .ico_plus {  background-image:url(../img/ico_plus_puertonegocios.png) !important;}
+.puertonegocios .media_link .ico_audio { background-image:url(../img/ico_audio_puertonegocios.png) !important;}
+.puertonegocios .media_link .ico_galeria {  background-image:url(../img/ico_galeria_puertonegocios.png) !important;}
+.puertonegocios .media_link .ico_video
+  , .puertonegocios .media_link .ico_audio
+  , .puertonegocios .media_link .ico_galeria 
+  , .puertonegocios .media_link .ico_plus {
+  background-color:#ae0a17;
+  /*#d90000*/
+}
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
 body.body660 {width:660px!important;}
 body.body660  #index .nota_abierta .fila .imagen{margin-left:0px!important; margin-right:16px!important; float:left;}

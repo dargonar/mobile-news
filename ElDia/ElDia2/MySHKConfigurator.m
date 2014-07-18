@@ -17,11 +17,11 @@
     return [[NSDictionary alloc]initWithObjectsAndKeys:
             @"Puerto Negocios Movil", @"appName",
             @"http://puertonegocios.com/", @"appUrl",
-            @"1434528786769756", @"facebookAppId",
-            @"59618e511dc14fd4d7f82e35b23f4624", @"facebookAppSecret",
+            @"783329105020548", @"facebookAppId",
+            @"8752a431b93b5730f9ddc4d06bb96d66", @"facebookAppSecret",
             @"puertonegociosid", @"facebookLocalAppId",
-            @"YjHPlTigi3tG2XYI76uyA", @"twitterConsumerKey",
-            @"7IZmdgEP1AwH02UnXVRDj28gCSZgrzdm0W4JKE2QgM", @"twitterSecret",
+            @"2tnf8xTDDqKioKBvEyDvnLfyl", @"twitterConsumerKey",
+            @"9uQhxsuIv5k83g1WZh304SkQDqC0MksIOFOCi6AYxmFKZ5g6pK", @"twitterSecret",
             @"http://www.puertonegocios.com", @"twitterCallbackUrl",
             @"puertonegociosmobile", @"twitterUsername", nil];
   
