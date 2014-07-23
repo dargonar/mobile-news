@@ -24,9 +24,9 @@
 #import "ZipWriteStream.h"
 #import "ZipReadStream.h"
 
-//NSString * const SERVICE_URL = @"http://www.diariosmoviles.com.ar/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
+NSString * const SERVICE_URL = @"http://www.diariosmoviles.com.ar/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
-NSString * const SERVICE_URL= @"http://192.168.1.109:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
+//NSString * const SERVICE_URL= @"http://192.168.1.109:8090/ws/screen?appid=%@&size=%@&ptls=%@&url=%@";
 
 @implementation ScreenManager
 
