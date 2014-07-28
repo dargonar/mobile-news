@@ -74,12 +74,12 @@
   
   [self invalidatePageIndicators];
   // Do any additional setup after loading the view from its nib.
-//  [self addGestureRecognizers];
+
   if([[AppDelegate getBundleId]isEqualToString:@"com.diventi.eldia"]){
-    [self twitterBtn].enabled = YES;
-    [self twitterBtn].hidden = NO;
-    UIImage *_image = [UIImage imageNamed: @"facebook.png"];
-    [[self shareBtn] setImage:_image forState:UIControlStateNormal];
+    [self twitterBtn].enabled = YES; // ahora es refresh de noticia
+    [self twitterBtn].hidden = NO; // ahora es refresh de noticia
+    //UIImage *_image = [UIImage imageNamed: @"facebook.png"]; // hacko
+    //[[self shareBtn] setImage:_image forState:UIControlStateNormal]; // hacko
   }
 }
 
@@ -246,6 +246,11 @@
 }
 
 - (IBAction) twitterBtnClick: (id)param{
+    
+  //NSString* url = [self.noticia_url copy];
+  NSString*url=[self currentUrl];
+  [self loadUrl:url useCache:NO];
+  /*
   NSURL *url = [NSURL URLWithString:self.noticia_url];
   
   SHKItem *item = [SHKItem URL:url
@@ -253,6 +258,7 @@
                    contentType:SHKURLContentTypeWebpage];
   
   [SHKTwitter shareItem:item];
+  */
   return;
   
 }
@@ -260,39 +266,36 @@
 UIActionSheet* actionSheet;
 - (IBAction) btnShareClick: (id)param{
   
-  if(![Utils areWeConnectedToInternet])
-  {
-    [self showMessage:@"No hay conexión de red.\nInténtelo más tarde." isError:YES];
-    return;
-  }
+    if(![Utils areWeConnectedToInternet])
+    {
+      [self showMessage:@"No hay conexión de red.\nInténtelo más tarde." isError:YES];
+      return;
+    }
   
-  if (actionSheet) {
-    [actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
-    actionSheet = nil;
-    return;
-  }
+    if (actionSheet) {
+      [actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+      actionSheet = nil;
+      return;
+    }
   
-  //NSURL *url = [NSURL URLWithString:[Utils stringByDecodingURLFormat:self.noticia_url]];
-  NSURL *url = [NSURL URLWithString:self.noticia_url];
+    NSURL *url = [NSURL URLWithString:self.noticia_url];
   
-  SHKItem *item = [SHKItem URL:url
+    SHKItem *item = [SHKItem URL:url
                         title:[[NSString alloc] initWithFormat:@"%@", self.noticia_title]
                         contentType:SHKURLContentTypeWebpage];
   
-  if([[AppDelegate getBundleId]isEqualToString:@"com.diventi.eldia"])
-  {
-    [SHKFacebook shareItem:item];
-    return;
-  }
-	// Get the ShareKit action sheet
-	//SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-  actionSheet = [SHKActionSheet actionSheetForItem:item];
+    if([[AppDelegate getBundleId]isEqualToString:@"com.diventi.eldia"])
+    {
+      //[SHKFacebook shareItem:item];
+      //return;
+    }
+    actionSheet = [SHKActionSheet actionSheetForItem:item];
 
 	// Display the action sheet
-	if([app_delegate isiPad])
-    [actionSheet showFromRect:shareBtn.frame inView:self.view animated:YES];
-  else
-    [actionSheet showFromToolbar:self.navigationController.toolbar];
+    if([app_delegate isiPad])
+        [actionSheet showFromRect:shareBtn.frame inView:self.view animated:YES];
+    else
+        [actionSheet showFromToolbar:self.navigationController.toolbar];
   
 }
 

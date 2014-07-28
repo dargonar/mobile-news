@@ -11,6 +11,28 @@
 		602230D6163B64B50091D201 /* functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 602230D4163B61CB0091D201 /* functions.js */; };
 		6050EF2016388B0F00DE98ED /* ScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050EF1F16388B0F00DE98ED /* ScreenManager.m */; };
 		605C9A981639D6F100CBD806 /* ErrorBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605C9A971639D6F100CBD806 /* ErrorBuilder.m */; };
+		6E8E8CDF19830825003C0D4D /* ElNorte copy-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E8E8CDD1982F8E5003C0D4D /* ElNorte copy-Info.plist */; };
+		6EAA75491986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754A1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754B1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754C1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754D1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754E1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA754F1986209A000FCC0D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75461986209A000FCC0D /* Icon-76.png */; };
+		6EAA75501986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75511986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75521986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75531986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75541986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75551986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75561986209A000FCC0D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75471986209A000FCC0D /* Icon-120.png */; };
+		6EAA75571986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA75581986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA75591986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA755A1986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA755B1986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA755C1986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
+		6EAA755D1986209A000FCC0D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA75481986209A000FCC0D /* Icon-152.png */; };
 		7801CCEF169CEB32009E2539 /* layout_tablet.css in Resources */ = {isa = PBXBuildFile; fileRef = 7801CCEE169CEB32009E2539 /* layout_tablet.css */; };
 		780499371651DFD30062C457 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499361651DFD30062C457 /* CoreLocation.framework */; };
 		780499391651DFED0062C457 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 780499381651DFED0062C457 /* MapKit.framework */; };
@@ -336,7 +358,7 @@
 		78D3526F19780B8A003C8D1D /* variables.c in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC3115ED5B8A00EC8210 /* variables.c */; };
 		78D3527019780B8A003C8D1D /* xslt.c in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC3515ED5B8A00EC8210 /* xslt.c */; };
 		78D3527119780B8A003C8D1D /* xsltlocale.c in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC3C15ED5B8A00EC8210 /* xsltlocale.c */; };
-		78D3527219780B8A003C8D1D /* xsltutils.c in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC3F15ED5B8A00EC8210 /* xsltutils.c */; };
+		78D3527219780B8A003C8D1D /* xsltutils.c in Sources */ = {isa = PBXBuildFile; fileRef = CE16EC3F15ED5B8A00EC8210 /* xsltutils.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		78D3527319780B8A003C8D1D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8E5ACA15F051FA00E047BB /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		78D3527419780B8A003C8D1D /* FGalleryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799215F7FA88009AA708 /* FGalleryPhoto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		78D3527519780B8A003C8D1D /* FGalleryPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78799415F7FA88009AA708 /* FGalleryPhotoView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -2120,6 +2142,10 @@
 		6050EF1F16388B0F00DE98ED /* ScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenManager.m; sourceTree = "<group>"; };
 		605C9A961639D6F100CBD806 /* ErrorBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorBuilder.h; sourceTree = "<group>"; };
 		605C9A971639D6F100CBD806 /* ErrorBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorBuilder.m; sourceTree = "<group>"; };
+		6E8E8CDD1982F8E5003C0D4D /* ElNorte copy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ElNorte copy-Info.plist"; sourceTree = "<group>"; };
+		6EAA75461986209A000FCC0D /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		6EAA75471986209A000FCC0D /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
+		6EAA75481986209A000FCC0D /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
 		7801CCEE169CEB32009E2539 /* layout_tablet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = layout_tablet.css; sourceTree = "<group>"; };
 		780499361651DFD30062C457 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		780499381651DFED0062C457 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -2146,7 +2172,7 @@
 		788A606617DA68BF008A0ADD /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		788A74F7176823E50084B60F /* ico_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus.png; sourceTree = "<group>"; };
 		788AD465182918B100B59CCA /* ElNorte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElNorte.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		788AD466182918B100B59CCA /* ElNorte-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ElNorte-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/ElNorte-Info.plist"; sourceTree = "<absolute>"; };
+		788AD466182918B100B59CCA /* ElNorte-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ElNorte-Info.plist"; path = "/Users/pablo/Documents/diariosmoviles/ymobipaper/ElDia/ElNorte-Info.plist"; sourceTree = "<absolute>"; };
 		788B0E2117CD12D800B553AA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		788B0E2317CD169C00B553AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		788B0E2517CD17FC00B553AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -2157,13 +2183,12 @@
 		78CDCBE91815E98E00963DE7 /* ico_plus_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus_lareforma.png; sourceTree = "<group>"; };
 		78CDCBEA1815E98E00963DE7 /* ico_video_lareforma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_lareforma.png; sourceTree = "<group>"; };
 		78D3535619780B8A003C8D1D /* Puerto Negocios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Puerto Negocios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		78D3535719780B8A003C8D1D /* ElNorte copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ElNorte copy-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/ElNorte copy-Info.plist"; sourceTree = "<absolute>"; };
 		78D35379197886AE003C8D1D /* ico_audio_puertonegocios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_puertonegocios.png; sourceTree = "<group>"; };
 		78D3537A197886AE003C8D1D /* ico_galeria_puertonegocios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_galeria_puertonegocios.png; sourceTree = "<group>"; };
 		78D3537B197886AE003C8D1D /* ico_plus_puertonegocios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_plus_puertonegocios.png; sourceTree = "<group>"; };
 		78D3537C197886AE003C8D1D /* ico_video_puertonegocios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_video_puertonegocios.png; sourceTree = "<group>"; };
 		78DFE9A5181573970029AD7D /* LaReforma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaReforma.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		78DFE9A6181573980029AD7D /* LaReforma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LaReforma-Info.plist"; path = "/Users/11/Documents/ymobipaper/ElDia/LaReforma-Info.plist"; sourceTree = "<absolute>"; };
+		78DFE9A6181573980029AD7D /* LaReforma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LaReforma-Info.plist"; sourceTree = SOURCE_ROOT; };
 		78E38B7F17D10530000E95D7 /* Castellanos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Castellanos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E4249817D6520300A9E776 /* ico_audio_castellanos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_castellanos.png; sourceTree = "<group>"; };
 		78E4249917D6520300A9E776 /* ico_audio_ecosdiarios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_audio_ecosdiarios.png; sourceTree = "<group>"; };
@@ -3133,7 +3158,7 @@
 				CE87663617D4FAA300D282AA /* EcosDiarios-Info.plist */,
 				78DFE9A6181573980029AD7D /* LaReforma-Info.plist */,
 				788AD466182918B100B59CCA /* ElNorte-Info.plist */,
-				78D3535719780B8A003C8D1D /* ElNorte copy-Info.plist */,
+				6E8E8CDD1982F8E5003C0D4D /* ElNorte copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3255,6 +3280,9 @@
 		CEB0460A17BC4903001E5E4F /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6EAA75461986209A000FCC0D /* Icon-76.png */,
+				6EAA75471986209A000FCC0D /* Icon-120.png */,
+				6EAA75481986209A000FCC0D /* Icon-152.png */,
 				CEB0460B17BC4903001E5E4F /* align_just_icon_24.png */,
 				CEB0460C17BC4903001E5E4F /* bg.png */,
 				CEB0460D17BC4903001E5E4F /* bg@2x.png */,
@@ -3643,6 +3671,14 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Lion User";
+				TargetAttributes = {
+					78D3524919780B8A003C8D1D = {
+						DevelopmentTeam = D984K38G29;
+					};
+					CE8E727515EBEDB8007E6F09 = {
+						DevelopmentTeam = D984K38G29;
+					};
+				};
 			};
 			buildConfigurationList = CE8E727015EBEDB8007E6F09 /* Build configuration list for PBXProject "ElDia" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3962,6 +3998,7 @@
 				788AD3F7182918B100B59CCA /* xsltlocale.lo in Resources */,
 				788AD3F8182918B100B59CCA /* xsltutils.lo in Resources */,
 				788AD3F9182918B100B59CCA /* xsltwin32config.h.in in Resources */,
+				6EAA75551986209A000FCC0D /* Icon-120.png in Resources */,
 				788AD3FA182918B100B59CCA /* layout.css in Resources */,
 				788AD3FB182918B100B59CCA /* ajax_loader.gif in Resources */,
 				788AD3FC182918B100B59CCA /* ico_audio_lareforma.png in Resources */,
@@ -3985,8 +4022,10 @@
 				788AD40E182918B100B59CCA /* MainViewController_iPad.xib in Resources */,
 				788AD40F182918B100B59CCA /* NoticiaViewController_iPad.xib in Resources */,
 				788AD410182918B100B59CCA /* MenuViewController_iPad.xib in Resources */,
+				6EAA754E1986209A000FCC0D /* Icon-76.png in Resources */,
 				788AD411182918B100B59CCA /* YoutubeViewController_iPad.xib in Resources */,
 				788AD412182918B100B59CCA /* loading_indicator_big_blue.gif in Resources */,
+				6EAA755C1986209A000FCC0D /* Icon-152.png in Resources */,
 				788AD413182918B100B59CCA /* loading_indicator_big.gif in Resources */,
 				788AD414182918B100B59CCA /* functions.js in Resources */,
 				788AD415182918B100B59CCA /* loading_indicator_small_blue.gif in Resources */,
@@ -4078,6 +4117,7 @@
 			files = (
 				78D352C519780B8A003C8D1D /* ShareKit.bundle in Resources */,
 				78D352C619780B8A003C8D1D /* ad.js in Resources */,
+				6E8E8CDF19830825003C0D4D /* ElNorte copy-Info.plist in Resources */,
 				78D352C719780B8A003C8D1D /* layout_tablet.css in Resources */,
 				78D352C819780B8A003C8D1D /* YoutubeViewController.xib in Resources */,
 				78D352C919780B8A003C8D1D /* InfoPlist.strings in Resources */,
@@ -4131,6 +4171,7 @@
 				78D35382197886C1003C8D1D /* ico_galeria_puertonegocios.png in Resources */,
 				78D35383197886DB003C8D1D /* ico_plus_puertonegocios.png in Resources */,
 				78D35384197886DF003C8D1D /* ico_video_puertonegocios.png in Resources */,
+				6EAA75561986209A000FCC0D /* Icon-120.png in Resources */,
 				78D352F819780B8A003C8D1D /* ico_video_black.png in Resources */,
 				78D352F919780B8A003C8D1D /* ico_video_blue.png in Resources */,
 				78D352FA19780B8A003C8D1D /* img_listado.png in Resources */,
@@ -4178,6 +4219,7 @@
 				78D3532419780B8A003C8D1D /* Icon@2x.png in Resources */,
 				78D3532519780B8A003C8D1D /* Icon@2x_ipad.png in Resources */,
 				78D3532619780B8A003C8D1D /* Icon_ipad.png in Resources */,
+				6EAA755D1986209A000FCC0D /* Icon-152.png in Resources */,
 				78D3532719780B8A003C8D1D /* list.png in Resources */,
 				78D3532819780B8A003C8D1D /* list@2x.png in Resources */,
 				78D3532919780B8A003C8D1D /* menu_bg.png in Resources */,
@@ -4218,6 +4260,7 @@
 				78D3534C19780B8A003C8D1D /* facebook.png in Resources */,
 				78D3534D19780B8A003C8D1D /* facebook@2x.png in Resources */,
 				78D3534E19780B8A003C8D1D /* twitter.png in Resources */,
+				6EAA754F1986209A000FCC0D /* Icon-76.png in Resources */,
 				78D3534F19780B8A003C8D1D /* twitter@2x.png in Resources */,
 				78D3535019780B8A003C8D1D /* Icon@2x~ipad.png in Resources */,
 				78D3535119780B8A003C8D1D /* Icon~ipad.png in Resources */,
@@ -4314,12 +4357,14 @@
 				78DFE96A181573970029AD7D /* Default@2x.png in Resources */,
 				78DFE96B181573970029AD7D /* Default_ipad.png in Resources */,
 				78DFE96C181573970029AD7D /* Default_ipad@2x.png in Resources */,
+				6EAA75541986209A000FCC0D /* Icon-120.png in Resources */,
 				78DFE96D181573970029AD7D /* font_size_icon_16.png in Resources */,
 				78DFE96E181573970029AD7D /* font_size_icon_16@2x.png in Resources */,
 				78DFE96F181573970029AD7D /* font_size_icon_24.png in Resources */,
 				78DFE970181573970029AD7D /* font_size_icon_24@2x.png in Resources */,
 				78DFE971181573970029AD7D /* Icon.png in Resources */,
 				78DFE972181573970029AD7D /* Icon@2x.png in Resources */,
+				6EAA755B1986209A000FCC0D /* Icon-152.png in Resources */,
 				78DFE973181573970029AD7D /* Icon@2x_ipad.png in Resources */,
 				78DFE974181573970029AD7D /* Icon_ipad.png in Resources */,
 				78DFE975181573970029AD7D /* list.png in Resources */,
@@ -4347,6 +4392,7 @@
 				78DFE98B181573970029AD7D /* EcosDiarios-Info.plist in Resources */,
 				78DFE98C181573970029AD7D /* ico_audio_castellanos.png in Resources */,
 				78DFE98D181573970029AD7D /* ico_audio_ecosdiarios.png in Resources */,
+				6EAA754D1986209A000FCC0D /* Icon-76.png in Resources */,
 				78DFE98E181573970029AD7D /* ico_audio_pregon.png in Resources */,
 				78DFE98F181573970029AD7D /* ico_galeria_castellanos.png in Resources */,
 				78DFE990181573970029AD7D /* ico_galeria_ecosdiarios.png in Resources */,
@@ -4385,8 +4431,10 @@
 				78E38B0517D10530000E95D7 /* documents.lo in Resources */,
 				78E38B0617D10530000E95D7 /* extensions.lo in Resources */,
 				78E38B0717D10530000E95D7 /* extra.lo in Resources */,
+				6EAA75581986209A000FCC0D /* Icon-152.png in Resources */,
 				78E38B0817D10530000E95D7 /* functions.lo in Resources */,
 				78E38B0917D10530000E95D7 /* imports.lo in Resources */,
+				6EAA754A1986209A000FCC0D /* Icon-76.png in Resources */,
 				78E38B0A17D10530000E95D7 /* keys.lo in Resources */,
 				78E38B0B17D10530000E95D7 /* libxslt.3 in Resources */,
 				78E38B0C17D10530000E95D7 /* libxslt.la in Resources */,
@@ -4476,6 +4524,7 @@
 				78E38B6B17D10530000E95D7 /* offline.png in Resources */,
 				78E38B6C17D10530000E95D7 /* offline@2x.png in Resources */,
 				78E38B6D17D10530000E95D7 /* photo-gallery-left.png in Resources */,
+				6EAA75511986209A000FCC0D /* Icon-120.png in Resources */,
 				78E38B6E17D10530000E95D7 /* photo-gallery-left@2x.png in Resources */,
 				78E38B6F17D10530000E95D7 /* photo-gallery-right.png in Resources */,
 				78E38B7017D10530000E95D7 /* photo-gallery-right@2x.png in Resources */,
@@ -4509,8 +4558,10 @@
 				CE87659817D4FA5E00D282AA /* documents.lo in Resources */,
 				CE87659917D4FA5E00D282AA /* extensions.lo in Resources */,
 				CE87659A17D4FA5E00D282AA /* extra.lo in Resources */,
+				6EAA75591986209A000FCC0D /* Icon-152.png in Resources */,
 				CE87659B17D4FA5E00D282AA /* functions.lo in Resources */,
 				CE87659C17D4FA5E00D282AA /* imports.lo in Resources */,
+				6EAA754B1986209A000FCC0D /* Icon-76.png in Resources */,
 				CE87659D17D4FA5E00D282AA /* keys.lo in Resources */,
 				CE87659E17D4FA5E00D282AA /* libxslt.3 in Resources */,
 				CE87659F17D4FA5E00D282AA /* libxslt.la in Resources */,
@@ -4600,6 +4651,7 @@
 				CE87660117D4FA5E00D282AA /* photo-gallery-left@2x.png in Resources */,
 				CE87660217D4FA5E00D282AA /* photo-gallery-right.png in Resources */,
 				CE87660317D4FA5E00D282AA /* photo-gallery-right@2x.png in Resources */,
+				6EAA75521986209A000FCC0D /* Icon-120.png in Resources */,
 				CE87660417D4FA5E00D282AA /* redo.png in Resources */,
 				CE87660517D4FA5E00D282AA /* redo@2x.png in Resources */,
 				CE87660617D4FA5E00D282AA /* refresh.png in Resources */,
@@ -4633,8 +4685,10 @@
 				CE8766CC17D4FAC600D282AA /* documents.lo in Resources */,
 				CE8766CD17D4FAC600D282AA /* extensions.lo in Resources */,
 				CE8766CE17D4FAC600D282AA /* extra.lo in Resources */,
+				6EAA755A1986209A000FCC0D /* Icon-152.png in Resources */,
 				CE8766CF17D4FAC600D282AA /* functions.lo in Resources */,
 				CE8766D017D4FAC600D282AA /* imports.lo in Resources */,
+				6EAA754C1986209A000FCC0D /* Icon-76.png in Resources */,
 				CE8766D117D4FAC600D282AA /* keys.lo in Resources */,
 				CE8766D217D4FAC600D282AA /* libxslt.3 in Resources */,
 				CE8766D317D4FAC600D282AA /* libxslt.la in Resources */,
@@ -4724,6 +4778,7 @@
 				CE87673217D4FAC600D282AA /* offline.png in Resources */,
 				CE87673317D4FAC600D282AA /* offline@2x.png in Resources */,
 				CE87673417D4FAC600D282AA /* photo-gallery-left.png in Resources */,
+				6EAA75531986209A000FCC0D /* Icon-120.png in Resources */,
 				CE87673517D4FAC600D282AA /* photo-gallery-left@2x.png in Resources */,
 				CE87673617D4FAC600D282AA /* photo-gallery-right.png in Resources */,
 				CE87673717D4FAC600D282AA /* photo-gallery-right@2x.png in Resources */,
@@ -4753,6 +4808,7 @@
 				CE7A826415EC220F0061F481 /* NoticiaViewController.xib in Resources */,
 				CE7A826915EC221F0061F481 /* MenuViewController.xib in Resources */,
 				CE16EC4515ED5B8A00EC8210 /* attributes.lo in Resources */,
+				6EAA75571986209A000FCC0D /* Icon-152.png in Resources */,
 				CE16EC4715ED5B8A00EC8210 /* attrvt.lo in Resources */,
 				CE16EC4915ED5B8A00EC8210 /* documents.lo in Resources */,
 				CE16EC4B15ED5B8A00EC8210 /* extensions.lo in Resources */,
@@ -4783,6 +4839,7 @@
 				CE83717416128D9800FC8269 /* ico_audio.png in Resources */,
 				CE83717516128D9800FC8269 /* ico_audio_black.png in Resources */,
 				CE83717616128D9800FC8269 /* ico_audio_blue.png in Resources */,
+				6EAA75491986209A000FCC0D /* Icon-76.png in Resources */,
 				CE83717716128D9800FC8269 /* ico_audio_white.png in Resources */,
 				CE83717816128D9800FC8269 /* ico_galeria.png in Resources */,
 				CE83717916128D9800FC8269 /* ico_gallery_black.png in Resources */,
@@ -4855,6 +4912,7 @@
 				78197F9217D13E1C00A2196A /* logo.png in Resources */,
 				78197F9317D13E1C00A2196A /* logo@2x.png in Resources */,
 				CE87663717D4FAA300D282AA /* Castellanos-Info.plist in Resources */,
+				6EAA75501986209A000FCC0D /* Icon-120.png in Resources */,
 				CE87663817D4FAA300D282AA /* Pregon-Info.plist in Resources */,
 				CE87663917D4FAA300D282AA /* EcosDiarios-Info.plist in Resources */,
 				78E424A417D6520300A9E776 /* ico_audio_castellanos.png in Resources */,
@@ -5733,7 +5791,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
@@ -5747,6 +5805,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5758,7 +5817,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5767,7 +5826,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5812,7 +5871,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElNorte-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5821,8 +5880,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElNorte;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5832,7 +5891,7 @@
 		788AD463182918B100B59CCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5844,7 +5903,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElNorte-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5853,7 +5912,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElNorte;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5875,7 +5934,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElNorte-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5884,7 +5943,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElNorte;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5907,7 +5966,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "PuertoNegocios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5916,8 +5975,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Puerto Negocios";
-				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5928,6 +5987,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5939,7 +5999,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "PuertoNegocios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5948,7 +6008,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Puerto Negocios";
-				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -5959,6 +6019,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -5970,7 +6031,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "PuertoNegocios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -5979,7 +6040,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Puerto Negocios";
-				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6002,7 +6063,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "LaReforma-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6011,8 +6072,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LaReforma;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6022,7 +6083,7 @@
 		78DFE9A3181573970029AD7D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -6034,7 +6095,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "LaReforma-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6043,7 +6104,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LaReforma;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6065,7 +6126,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "LaReforma-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6074,7 +6135,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LaReforma;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6097,7 +6158,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Castellanos-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6106,8 +6167,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Castellanos;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6117,8 +6178,8 @@
 		78E38B7D17D10530000E95D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -6130,7 +6191,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Castellanos-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6139,8 +6200,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Castellanos;
-				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6162,7 +6223,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Castellanos-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6171,7 +6232,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Castellanos;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6194,7 +6255,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Pregon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6203,8 +6264,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Pregon;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6214,8 +6275,8 @@
 		CE87660F17D4FA5E00D282AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/frameworks\"",
@@ -6227,7 +6288,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Pregon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6236,8 +6297,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Pregon;
-				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6259,7 +6320,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Pregon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6268,7 +6329,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Pregon;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6300,8 +6361,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = EcosDiarios;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6311,7 +6372,7 @@
 		CE87674317D4FAC600D282AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6333,8 +6394,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = EcosDiarios;
-				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6365,7 +6426,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = EcosDiarios;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;
@@ -6398,7 +6459,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
 				SDKROOT = iphoneos;
@@ -6425,7 +6486,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFD11069-3982-4BB1-824D-FFB555EFAAF2";
@@ -6436,6 +6497,39 @@
 			name = Release;
 		};
 		CE8E72A415EBEDB9007E6F09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/libs",
+					"$(SDK_ROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
+					"\"$(SRCROOT)/libs\"",
+					"\"$(SRCROOT)/libs/admob\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = ElDia;
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE8E72A515EBEDB9007E6F09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Pablo Tutino (5S9BR59F98)";
@@ -6451,7 +6545,7 @@
 					"$(SDK_ROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
@@ -6460,41 +6554,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B475BA2A-32FB-474A-A11D-4B5DC296BB7C";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		CE8E72A515EBEDB9007E6F09 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DIVENTI SRL (D984K38G29)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ElDia2/ElDia-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs",
-					"$(SDK_ROOT)/usr/include/libxml2",
-				);
-				INFOPLIST_FILE = "ElDia2/ElDia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/libs/GoogleAnalyticsLib\"",
-					"\"$(SRCROOT)/libs\"",
-					"\"$(SRCROOT)/libs/admob\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = ElDia;
-				PROVISIONING_PROFILE = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "957F2988-5FCE-4FE3-93D2-AC6BA0F89AD1";
+				PROVISIONING_PROFILE = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F1654C3D-BB2A-46B0-BC37-06CCF143CA1B";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../Submodules/**";
 				WRAPPER_EXTENSION = app;

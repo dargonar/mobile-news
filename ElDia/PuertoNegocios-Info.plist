@@ -24,6 +24,28 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Icon-120</string>
+				<string>Icon.png</string>
+				<string>Icon@2x.png</string>
+				<string>Icon~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Portrait@2x~ipad.png</string>
+				<string>Icon@2x_ipad.png</string>
+				<string>Default@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon-152</string>
+				<string>Icon-76</string>
+				<string>Icon-120</string>
 				<string>Icon.png</string>
 				<string>Icon@2x.png</string>
 				<string>Icon~ipad.png</string>
@@ -45,7 +67,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.2</string>
+	<string>1.4.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -60,7 +82,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.4.2</string>
+	<string>1.4.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIPrerenderedIcon</key>

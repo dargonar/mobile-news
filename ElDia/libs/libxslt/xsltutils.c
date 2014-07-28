@@ -1755,11 +1755,11 @@ xsltSaveResultToString(xmlChar **doc_txt_ptr, int * doc_txt_len,
 	return(-1);
     xsltSaveResultTo(buf, result, style);
     if (buf->conv != NULL) {
-	*doc_txt_len = buf->conv->use;
-	*doc_txt_ptr = xmlStrndup(buf->conv->content, *doc_txt_len);
+	//HACKO//*doc_txt_len = buf->conv->use;
+	//HACKO//*doc_txt_ptr = xmlStrndup(buf->conv->content, *doc_txt_len);
     } else {
-	*doc_txt_len = buf->buffer->use;
-	*doc_txt_ptr = xmlStrndup(buf->buffer->content, *doc_txt_len);
+	//HACKO//*doc_txt_len = buf->buffer->use;
+	//HACKO//*doc_txt_ptr = xmlStrndup(buf->buffer->content, *doc_txt_len);
     }
     (void)xmlOutputBufferClose(buf);
     return 0;	
